@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "verified_on": "2026-11-08",
+  "defaults": {
+    "primary_track": "PRF",
+    "pf_role": "Agente de Polícia Federal",
+    "foreign_language": "ingles",
+    "excluded_languages": [
+      "espanhol"
+    ]
+  },
+  "tracks": {
+    "PRF": {
+      "role": "Policial Rodoviário Federal",
+      "reference": "PRF_2021",
+      "program_locator": "24.2.1, blocos I, II e III",
+      "scope": "Preparação pelo programa histórico de 2021, conferindo retificações e atualização do conteúdo; só Inglês dentre as línguas alternativas."
+    },
+    "PF_AGENTE": {
+      "role": "Agente de Polícia Federal",
+      "reference": "PF_2025_CONSOLIDADO",
+      "program_locator": "23.2.1, Cargo 16, blocos I, II e III",
+      "scope": "Somente Agente; Penal e Processo Penal são roteados separadamente embora tenham cabeçalho conjunto. Não incluir Arquivologia, Biologia ou conhecimentos de outros cargos."
+    }
+  },
+  "subjects": [
+    {
+      "id": "portugues",
+      "label": "Língua Portuguesa",
+      "skill_path": "../portugues-cebraspe-qualidade/SKILL.md",
+      "tracks": [
+        "PRF",
+        "PF_AGENTE"
+      ]
+    },
+    {
+      "id": "rlm",
+      "label": "Raciocínio Lógico-Matemático",
+      "skill_path": "../raciocinio-logico-matematico-prf/SKILL.md",
+      "tracks": [
+        "PRF"
+      ]
+    },
+    {
+      "id": "logica",
+      "label": "Raciocínio Lógico",
+      "skill_path": "../raciocinio-logico-pf/SKILL.md",
+      "tracks": [
+        "PF_AGENTE"
+      ]
+    },
+    {
+      "id": "informatica",
+      "label": "Informática",
+      "skill_path": "../informatica-policiais/SKILL.md",
+      "tracks": [
+        "PRF",
+        "PF_AGENTE"
+      ]
+    },
+    {
+      "id": "fisica",
+      "label": "Física",
+      "skill_path": "../fisica-prf/SKILL.md",
+      "tracks": [
+        "PRF"
+      ]
+    },
+    {
+      "id": "etica",
+      "label": "Ética e Cidadania",
+      "skill_path": "../etica-cidadania-prf/SKILL.md",
+      "tracks": [
+        "PRF"
+      ]
+    },
+    {
+      "id": "geopolitica",
+      "label": "Geopolítica",
+      "skill_path": "../geopolitica-prf/SKILL.md",
+      "tracks": [
+        "PRF"
+      ]
+    },
+    {
+      "id": "ingles",
+      "label": "Inglês",
+      "skill_path": "../ingles-policiais/SKILL.md",
+      "tracks": [
+        "PRF"
+      ]
+    },
+    {
+      "id": "transito",
+      "label": "Legislação de Trânsito",
+      "skill_path": "../legislacao-transito-cebraspe/SKILL.md",
+      "tracks": [
+        "PRF"
+      ]
+    },
+    {
+      "id": "administrativo",
+      "label": "Direito Administrativo",
+      "skill_path": "../direito-administrativo-cebraspe/SKILL.md",
+      "tracks": [
+        "PRF",
+        "PF_AGENTE"
+      ]
+    },
+    {
+      "id": "constitucional",
+      "label": "Direito Constitucional",
+      "skill_path": "../direito-constitucional-cebraspe/SKILL.md",
+      "tracks": [
+        "PRF",
+        "PF_AGENTE"
+      ]
+    },
+    {
+      "id": "penal",
+      "label": "Direito Penal",
+      "skill_path": "../direito-penal-cebraspe/SKILL.md",
+      "tracks": [
+        "PRF",
+        "PF_AGENTE"
+      ]
+    },
+    {
+      "id": "processual_penal",
+      "label": "Direito Processual Penal",
+      "skill_path": "../direito-processual-penal-cebraspe/SKILL.md",
+      "tracks": [
+        "PRF",
+        "PF_AGENTE"
+      ]
+    },
+    {
+      "id": "direitos_humanos",
+      "label": "Direitos Humanos",
+      "skill_path": "../direitos-humanos-cebraspe/SKILL.md",
+      "tracks": [
+        "PRF",
+        "PF_AGENTE"
+      ]
+    },
+    {
+      "id": "legislacao_especial",
+      "label": "Legislação Especial",
+      "skill_path": "../legislacao-penal-especial-cebraspe/SKILL.md",
+      "tracks": [
+        "PRF",
+        "PF_AGENTE"
+      ]
+    },
+    {
+      "id": "estatistica",
+      "label": "Estatística",
+      "skill_path": "../estatistica-pf/SKILL.md",
+      "tracks": [
+        "PF_AGENTE"
+      ]
+    },
+    {
+      "id": "contabilidade",
+      "label": "Contabilidade Geral",
+      "skill_path": "../contabilidade-geral-pf/SKILL.md",
+      "tracks": [
+        "PF_AGENTE"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+# Dependências da suíte pytest; não são exigidas para criar cartões inline.
+pytest>=8.4,<10
+genanki>=0.13,<0.14
+pymupdf>=1.24
+rapidfuzz>=3.0
+PyYAML>=6.0
+# O teste de roundtrip de coleção requer também anki==26.9.3
+# (requirements-optional.txt). Sem ele, esse teste é explicitamente ignorado.

@@ -1,0 +1,7 @@
+pymupdf>=1.24
+rapidfuzz>=3.0
+genanki>=0.13.0
+zstandard>=0.23; python_version < "3.14"
+# Revisão conservadora de backup; versão testada, API interna pode mudar.
+anki==26.9.3
+

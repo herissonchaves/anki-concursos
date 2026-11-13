@@ -1,0 +1,172 @@
+#!/usr/bin/env python3
+"""Validate already audited Anki TSVs and package them. Never generate content.
+
+Requires existing pedagogical audit reports; does not manufacture them or claim
+quality merely because tests pass. Optional .apkg depends on genanki.
+"""
+from __future__ import annotations
+import argparse
+import csv
+import json
+import hashlib
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
+import zipfile
+
+REQUIRED_REPORTS=('selecao_e_fontes.txt','economia_de_revisao.txt','auditoria_pedagogica.txt')
+
+
+def tsv_rows(path):
+    with Path(path).open('r',encoding='utf-8-sig',newline='') as source:
+        for n,line in enumerate(csv.reader(source,delimiter='\t',quoting=csv.QUOTE_NONE),1):
+            if not line: continue
+            if len(line)!=3:
+                raise ValueError(f'{path.name}, linha {n}: esperados 3 campos')
+            if n==1 and line[0].strip().lower() in ('frente','texto'):
+                continue
+            yield line
+
+
+def deck_id(deck_name):
+    if deck_name == 'Anki-Concursos':
+        return 1987052180  # Preserve legacy default deck identity.
+    return 1_000_000_000 + int.from_bytes(hashlib.sha256(('anki-concursos:deck:'+deck_name).encode('utf-8')).digest()[:4], 'big')
+
+
+def generate_apkg(ce,cloze,out,deck_name):
+    try:import genanki
+    except ImportError as e:
+        raise RuntimeError('Exportação .apkg indisponível: instale genanki; ZIP/TSV não exigem essa biblioteca') from e
+    basic=genanki.Model(1987052101,'Anki-Concursos - C/E',fields=[{'name':'Frente'},{'name':'Verso'}],
+           templates=[{'name':'C/E','qfmt':'{{Frente}}','afmt':'{{FrontSide}}<hr id="answer">{{Verso}}'}])
+    clz=genanki.Model(1987052102,'Anki-Concursos - Cloze',fields=[{'name':'Texto'},{'name':'Extra'}],
+           templates=[{'name':'Cloze','qfmt':'{{cloze:Texto}}','afmt':'{{cloze:Texto}}<hr id="answer">{{Extra}}'}],
+           model_type=genanki.Model.CLOZE)
+    deck=genanki.Deck(deck_id(deck_name),deck_name)
+    for front,back,tags in tsv_rows(ce):
+        deck.add_note(genanki.Note(model=basic,fields=[front,back],tags=tags.split(),guid=genanki.guid_for(front,'C/E')))
+    for text,extra,tags in tsv_rows(cloze):
+        deck.add_note(genanki.Note(model=clz,fields=[text,extra],tags=tags.split(),guid=genanki.guid_for(text,'Cloze')))
+    genanki.Package(deck).write_to_file(str(out))
+    with zipfile.ZipFile(out) as z:
+        if z.testzip() is not None:raise ValueError('Falha de integridade .apkg')
+
+
+def validation_args(profile='mixed', exception_reason='', balance_exception='', max_cards=None):
+    if profile not in {'mixed', 'focused'}:
+        raise ValueError('Perfil desconhecido')
+    if profile == 'focused' and not exception_reason.strip():
+        raise ValueError('Perfil focado requer justificativa')
+    if profile == 'mixed' and exception_reason.strip():
+        raise ValueError('Justificativa de perfil exige focused')
+    args = ['--new', '--profile', profile]
+    if exception_reason.strip(): args += ['--exception-reason', exception_reason.strip()]
+    if balance_exception.strip(): args += ['--balance-exception', balance_exception.strip()]
+    if max_cards is not None: args += ['--max-cards', str(max_cards)]
+    return args
+
+
+def add_validation_options(parser):
+    parser.add_argument('--profile', choices=('mixed', 'focused'), default='mixed')
+    parser.add_argument('--exception-reason', default='')
+    parser.add_argument('--balance-exception', default='')
+    parser.add_argument('--max-cards', type=int)
+
+
+def check_recovery(validator, package):
+    review = validator.with_name('validar_revisao_pedagogica.py')
+    if not review.is_file():
+        raise RuntimeError('Verificador de revisão de recuperação indisponível: exportação bloqueada')
+    result = subprocess.run([sys.executable, '-X', 'utf8', str(review), str(package)],
+                            capture_output=True, encoding='utf-8')
+    if result.returncode:
+        raise ValueError('Revisão de recuperação reprovada: '+(result.stdout+result.stderr)[-4000:])
+
+
+def export(ce,cloze,reports_dir,output,apkg=None,deck='Anki-Concursos',profile='mixed',exception_reason='',balance_exception='',max_cards=None):
+    policy_args=validation_args(profile,exception_reason,balance_exception,max_cards)
+    ce,cloze,reports_dir,output=map(Path,(ce,cloze,reports_dir,output))
+    if output.suffix.lower()!='.zip':raise ValueError('Saída deve ser .zip')
+    if not ce.is_file() or not cloze.is_file():raise ValueError('Ambos TSVs são obrigatórios, mesmo quando um formato estiver vazio')
+    if not reports_dir.is_dir():raise ValueError('Diretório de relatórios de auditoria não encontrado')
+    for name in REQUIRED_REPORTS:
+        if not (reports_dir/name).is_file() or (reports_dir/name).stat().st_size==0:
+            raise ValueError(f'Relatório obrigatório ausente ou vazio: {name}; não fabricar auditoria')
+    if (reports_dir/'triagem_previa_pdf.txt').is_file() and (reports_dir/'triagem_previa_pdf.txt').stat().st_size==0:
+        raise ValueError('Triagem de PDF vazia')
+    validator=Path(__file__).resolve().parents[2]/'gerar-revisao-anki'/'scripts'/'validar_anki.py'
+    if not validator.is_file():
+        raise RuntimeError('Validador central validar_anki.py indisponível: exportação bloqueada')
+    with tempfile.TemporaryDirectory(prefix='anki_export_') as tmp:
+        root=Path(tmp)
+        shutil.copy2(ce,root/'anki_certo_errado.tsv')
+        shutil.copy2(cloze,root/'anki_cloze.tsv')
+        (root/'relatorios').mkdir()
+        for src in reports_dir.iterdir():
+            if not src.is_file() or (src.suffix not in {'.txt', '.tsv'} and src.name not in {'calibracao_cebraspe.json', 'revisao_recuperacao.json'}):
+                continue
+            shutil.copy2(src,root/'relatorios'/src.name)
+        (root/'LEIA-ME.txt').write_text('Anki-Concursos - extraia o ZIP. Importe C/E como Básico sem cartão inverso e Cloze como Cloze. Mapeie colunas 1/2 aos campos e 3 a Tags; separador TAB, UTF-8 e HTML permitido. Ignore TSV vazio. Confira a prévia e as opções de duplicatas antes de importar.\nUse APKG OU TSV, não ambos. Alterar frente pode gerar nova nota; não há garantia de preservar histórico em reimportações. Faça backup antes de substituir notas existentes.\nO ZIP é tecnicamente validado, mas não certifica exatidão pedagógica nem importação no aplicativo.\n',encoding='utf-8')
+        check=subprocess.run([sys.executable,'-X','utf8',str(validator),str(root)]+policy_args,capture_output=True,encoding='utf-8')
+        if check.returncode!=0:
+            raise ValueError('Validador central REPROVOU a exportação: '+(check.stderr or check.stdout)[-1400:])
+        # Este exportador sempre valida notas novas (--new). D novos exigem
+        # calibração; a leitura de coleções antigas usa os fluxos de análise.
+        calibration = validator.with_name('validar_calibracao_cebraspe.py')
+        has_calibration = (root/'relatorios'/'calibracao_cebraspe.json').is_file()
+        has_hard = any('Tipo_Desafiadora_Cebraspe' in row[2].split() for row in tsv_rows(ce))
+        check_calibration = has_hard or has_calibration
+        if check_calibration:
+            if not calibration.is_file():
+                raise RuntimeError('Verificador de calibração indisponível')
+            result = subprocess.run([sys.executable,'-X','utf8',str(calibration),str(root)],capture_output=True,encoding='utf-8')
+            if result.returncode:
+                raise ValueError('Registro de calibração reprovado: '+(result.stdout+result.stderr)[-1400:])
+        check_recovery(validator, root)
+        (root/'relatorios'/'politica_validacao.json').write_text(json.dumps({'profile':profile,'exception_reason':exception_reason,'balance_exception':balance_exception,'max_cards':max_cards},ensure_ascii=False,indent=2),encoding='utf-8')
+        # Add no raw .colpkg, sources, notebooks, scan images or personal data.
+        output.parent.mkdir(parents=True,exist_ok=True)
+        tmpzip=root/'package.zip'
+        with zipfile.ZipFile(tmpzip,'w',zipfile.ZIP_DEFLATED) as zout:
+            for candidate in sorted(root.rglob('*')):
+                if candidate.is_file() and candidate!=tmpzip:
+                    zout.write(candidate,candidate.relative_to(root).as_posix())
+        with zipfile.ZipFile(tmpzip) as z:
+            if z.testzip() is not None:raise ValueError('Erro CRC no ZIP')
+        # Zip output must also pass original validation.
+        check=subprocess.run([sys.executable,'-X','utf8',str(validator),str(tmpzip)]+policy_args,capture_output=True,encoding='utf-8')
+        if check.returncode!=0:
+            raise ValueError('ZIP reprovado pelo validador: '+(check.stderr or check.stdout)[-1400:])
+        if check_calibration:
+            result = subprocess.run([sys.executable,'-X','utf8',str(calibration),str(tmpzip)],capture_output=True,encoding='utf-8')
+            if result.returncode:
+                raise ValueError('Registro de calibração do ZIP reprovado: '+(result.stdout+result.stderr)[-1400:])
+        check_recovery(validator, tmpzip)
+        shutil.copy2(tmpzip,output)
+    if apkg:
+        apkg=Path(apkg)
+        if apkg.suffix.lower()!='.apkg':raise ValueError('Exportação Anki deve terminar com .apkg')
+        apkg.parent.mkdir(parents=True,exist_ok=True)
+        generate_apkg(ce,cloze,apkg,deck)
+    return {'zip':str(output),'ce':sum(1 for _ in tsv_rows(ce)),'cloze':sum(1 for _ in tsv_rows(cloze)),'apkg':str(apkg) if apkg else None,'validador_executado':True}
+
+
+def main(argv=None):
+    p=argparse.ArgumentParser(description='Validar e exportar ZIP e opcional .apkg sem alterar coleção existente')
+    p.add_argument('--ce',type=Path,required=True)
+    p.add_argument('--cloze',type=Path,required=True)
+    p.add_argument('--relatorios',type=Path,required=True)
+    p.add_argument('-o','--saida',type=Path,required=True)
+    p.add_argument('--apkg',type=Path)
+    p.add_argument('--baralho',default='Anki-Concursos')
+    add_validation_options(p)
+    a=p.parse_args(argv)
+    print(json.dumps(export(a.ce,a.cloze,a.relatorios,a.saida,a.apkg,a.baralho,a.profile,a.exception_reason,a.balance_exception,a.max_cards),ensure_ascii=False))
+    return 0
+
+if __name__=='__main__':
+    try:sys.exit(main())
+    except Exception as exc:print(f'ERRO: {exc}',file=sys.stderr);sys.exit(1)

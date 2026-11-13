@@ -1,0 +1,53 @@
+# Modo estratégico C/E — 2.8.3
+
+Aplicar ao criar, reescrever substantivamente ou auditar cartões D, em qualquer disciplina. Esta é a referência operacional da calibração. O núcleo governa princípios; a matriz continua sendo a única fonte de proporções. Não impor estas exigências retroativamente como condição de leitura de uma coleção.
+
+## Identidade e decisão de formato
+
+“Modo estratégico”, “desafiador” e “C/E aplicado” designam D. “Modo rápido” designa R; “omissão de palavras” designa Cloze. Preservar tags existentes. Separar três decisões: semelhança com operações da banca, complexidade editorial e utilidade para recuperação no Anki. A banca também cobra reconhecimento direto; esse alvo pode ser R. Não transformar definição em D acrescentando personagens, jargão ou texto longo.
+
+D exige aplicar, inferir ou discriminar a partir de um elemento decisivo: fato, relação, condição, escopo, dado, construção linguística ou hipótese do modelo. Narrativa não é obrigatória. Uma frase pode bastar; duas a quatro frases são orientação flexível. Perguntar: o que o aluno precisa analisar além de lembrar o rótulo? Se nada, reclassificar R ou reformular.
+
+## Linguagem didática e contexto sem reduzir o raciocínio — 2.8.3
+
+Aplicar a todo D novo, inclusive inline, por PDF e no caderno de erros, e às reformulações solicitadas. O usuário não é formado em Direito. Tornar a leitura acessível sem transformar o desafio em mera lembrança de uma definição.
+
+1. **Planejar o raciocínio antes da redação:** identificar a regra a recuperar, o fato decisivo, a confusão plausível e a inferência necessária. Preservar essa operação ao simplificar o texto. Não retirar condição, exceção, relação causal ou distinção que decide a resposta.
+2. **Contextualizar com função:** preferir situação-problema curta e plausível, explicitando quem faz o quê e as circunstâncias relevantes. Em outras disciplinas, o contexto pode ser um texto, dado, condição ou hipótese suficiente para aplicar o conceito. Não exigir historinha artificial; nomes, cenários e detalhes sem efeito na solução não tornam uma definição desafiadora.
+3. **Usar português direto:** frases bem encadeadas, sujeitos claros e palavras comuns; evitar latinismos, nominalizações, duplas negativas e termos rebuscados dispensáveis. Preservar termos técnicos cobrados em prova e explicar seu significado em linguagem comum no verso. Na frente, esclarecer apenas pré-requisitos que não revelem o alvo ou a solução; se a definição for justamente o objeto da recuperação, não fornecê-la como pista.
+4. **Manter uma decisão real:** exigir que o aluno aplique a regra aos fatos, distinga conceitos próximos, examine condição/exceção ou avalie uma conclusão. Não entregar na frente o enquadramento decisivo, a regra resolutiva ou a inferência pronta para tornar o texto “didático”. Isso não proíbe fornecer premissas quando analisá-las for o alvo.
+5. **Escrever verso explicativo:** após o gabarito, apresentar a regra em palavras simples, apontar o fato decisivo e explicar como ele leva à conclusão. No Errado, localizar o erro e dar a formulação correta; no Certo, justificar a aplicação. Explicar o termo indispensável no ponto de uso. Artigo, rótulo técnico, repetição do enunciado ou “é assim porque a lei diz” não substituem a explicação. Manter extensão proporcional, sem aula longa obrigatória.
+6. **Revisar em dois eixos independentes:** (a) alguém sem graduação jurídica entende a situação e o julgamento? (b) ainda precisa recuperar conhecimento e raciocinar para decidir? Aprovar D apenas se ambos passarem. Se a simplificação eliminar a operação, reconstruir o desafio; se a dificuldade depender só de vocabulário, reescrever. Reclassificar como R somente quando o alvo for realmente memória direta, nunca para evitar a revisão.
+7. **Registrar evidência breve:** na revisão por ID, indicar a operação preservada e o dado contextual que a exige; na explicação, conferir a ligação regra → fato → conclusão. Trata-se de revisão editorial, não prova de dificuldade psicométrica ou equivalência com uma prova oficial.
+
+## Pesquisa e comparação por família
+
+1. Delimitar assunto e concurso/cargo. Ler a seção aplicável de [atlas-multidisciplinar-cebraspe.md](atlas-multidisciplinar-cebraspe.md). Português mantém sua especialização obrigatória e as três referências.
+2. Após analisar e selecionar os conteúdos, e antes de redigir os cartões desafiadores, pesquisar efetivamente na internet questões anteriores de concursos da CESPE/Cebraspe no formato Certo/Errado sobre esses conteúdos. A consulta ao atlas ou à memória do modelo não substitui essa pesquisa na tarefa atual. Pesquisar por assunto ou grupo de alvos, combinando o conteúdo com CESPE/Cebraspe e Certo/Errado. Qconcursos, Gran e outros bancos auxiliam na descoberta; priorizar caderno e gabarito definitivo oficiais. Abrir e ler o enunciado, comando e contexto completos, inclusive texto-base, figura ou tabela necessária. Confirmar a banca e o formato; questões de outras bancas, múltipla escolha e simulados autorais de cursos não substituem a referência real CESPE/Cebraspe C/E exigida.
+3. Registrar concurso, cargo, ano do edital/prova, caderno, item, URL, data da consulta, operação observada e situação do gabarito. Uma referência pode cobrir vários IDs da mesma família, com vínculo explícito; não repetir buscas desnecessariamente. Uma questão não demonstra recorrência.
+4. Separar referência de FORMA de fundamento de CONTEÚDO. É possível observar uma operação sem gabarito confirmado, declarando esse limite. Item anulado/controvertido não fundamenta aprovação inequívoca. Em Direito verificar fonte primária vigente; em Informática identificar versão/documentação quando isso decide a resposta. Prova histórica não certifica regra atual.
+5. Para cada cartão D, usar as questões reais localizadas como inspiração e referência de construção: identificar o conteúdo cobrado, a operação de raciocínio, o dado decisivo e a confusão plausível, e reconstruí-los em situação e redação autorais. Vincular o ID do cartão às questões consultadas e explicar brevemente o que orientou sua criação. Uma referência pode sustentar vários cartões quando a relação de conteúdo e operação estiver demonstrada; mera coincidência de disciplina não basta. Preservar a pertinência ao concurso-alvo ao usar referência de outro cargo.
+6. Se não localizar referência real acessível sobre o alvo após buscas pertinentes e tentativa de fontes alternativas, informar a pendência de referência e criar cartões desafiadores autorais assim mesmo para cobrir esse conteúdo. Registrar esses IDs como `inspiracao_geral`, sem referência específica acessível; não inventar questões, URLs, pesquisa realizada ou equivalência comprovada à banca. Essa exceção dispensa apenas a referência de questão real: manter pesquisa e verificação do conteúdo, pertinência ao concurso, raciocínio de aplicação, clareza, autoria, gabarito fundamentado e auditoria individual. A ausência de questão acessível, por si só, não impede aprovação ou exportação após essas verificações. Se o próprio conteúdo ou gabarito não puder ser verificado, explicitar essa pendência distinta e não apresentar o cartão como final verificado. Referência sem gabarito confirmado pode orientar a forma com a limitação explícita, mas o gabarito autoral exige fundamento de conteúdo verificado.
+7. Manter as referências e o vínculo por ID no relatório ou, em entrega pequena inline, em síntese separada. Não sobrecarregar a frente com metadados. A pesquisa fornece inspiração verificável; não transforma os cartões autorais em questões oficiais nem comprova dificuldade equivalente.
+
+## Construção autoral
+
+Definir antes da frente: alvo, solução, regra, dado decisivo, operação e erro plausível. Reutilizar a operação intelectual observada; reconstruir situação, dados, texto e encadeamento. Trocar nomes, números ou sinônimos mantendo a estrutura peculiar de uma questão não basta. Não copiar trechos de textos-base ou incorporar bancos privados ao plugin.
+
+Manter um julgamento nuclear. Pode conter conclusão e justificativa, ou proposições relacionadas, quando o alvo for a relação entre elas. Conferir separadamente a verdade de cada parte e a validade da ligação. Não juntar teses independentes. Expressões absolutas podem ser tecnicamente necessárias; revisar sua distribuição para que não virem pistas automáticas de Errado. Em novos lotes, exigir 50% Certo e 50% Errado nos D, separadamente dos R, conforme a matriz vigente.
+
+## Conferência semântica de cada candidato
+
+Resolver a frente em segunda passagem antes de reler o verso preparado; isso é autorevisão, não cegamento nem avaliador independente. Procurar leitura concorrente e contraexemplo. Em lógica, usar valorações/premissas; em cálculo, recomputar condições e unidades; em Português, G/S/C conforme comando; em Direito/Informática, confrontar condição e escopo com a fonte atual.
+
+No Errado, identificar a falha decisiva e formular a correção. No Certo, mostrar por que a conclusão decorre dos dados e por que a confusão concorrente falha. Verso econômico, sem gabarito tautológico. Comparar redundância por operação, não só texto. Registrar APROVAR, REFORMULAR, RECLASSIFICAR R, FUNDIR ou REJEITAR. Depois de alterar frente ou verso, refazer a conferência e atualizar o registro.
+
+## Registro proporcional e exportação
+
+Poucos cartões inline: guardar o mapa por ID durante o trabalho e entregar síntese de fontes, operação e limites; não produzir arquivo apenas para burocracia. Em exportações com D novos, preencher `relatorios/calibracao_cebraspe.json` conforme [registro-calibracao-cebraspe.md](registro-calibracao-cebraspe.md). Referências podem ser compartilhadas por família; cada D tem sua própria solução e revisão.
+
+Rodar `scripts/validar_calibracao_cebraspe.py DIRETORIO_OU_ZIP` antes da entrega e depois de qualquer mudança; além do validador central e lint. O exportador preserva o JSON. Falhas no registro exigem correção; não preencher campos fictícios para passar. Este script checa cobertura, vínculo e completude declarada, NÃO verifica se a fonte foi lida, se a solução é verdadeira ou se o item imita bem a banca. Um JSON válido nunca dispensa revisão semântica.
+
+## Avaliação repetível das saídas
+
+Usar [avaliacao-modo-estrategico.md](avaliacao-modo-estrategico.md). Avaliar todos os D do lote por critério, registrar candidato inicial, falha, revisão e decisão. Em avaliações do plugin, separar referências usadas para construir das reservadas para comparar; não reescrever os modelos do benchmark e chamar isso de teste de transferência. Informar denominador, seleção e identidade do revisor. Não inventar nota global, percentual de fidelidade ou dificuldade psicométrica.
