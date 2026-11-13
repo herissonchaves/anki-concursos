@@ -61,6 +61,19 @@ Escolha conteúdos centrais, recorrentes quando houver evidência de incidência
 
 ## Recuperação e formatos
 
+Antes da redação, registre no relatório existente o alvo (resposta e condição
+decisiva, quando houver), a operação a recuperar e a utilidade para o cargo.
+Compare candidatos pela resposta, condição, operação e direção de recuperação.
+Quando exigirem a mesma recuperação, retenha a frente mais clara e registre o
+ID mantido e o motivo do descarte. Dois formatos sobre o mesmo conceito podem
+ficar quando cada frente exigir uma operação útil distinta.
+
+Planeje C/E por modo e os vínculos Cloze → D ainda na seleção. Anote qual
+omissão cada D exige aplicar para chegar ao gabarito. Se o único complemento
+disponível for um espelho ou uma aplicação artificial, retire o candidato
+que depende dele, replaneje o conjunto e registre o alvo que ficou descoberto.
+Após qualquer corte, reconfira a paridade em R e D e a cobertura das lacunas.
+
 Para linguagem pedagógica e revisão de coleções, aplicar
 `revisao-integral-e-linguagem.md`: explicar termos necessários, testar resposta
 única e preservar identidade/histórico. Revisão integral exige leitura semântica
@@ -77,6 +90,14 @@ Frente autossuficiente, sem gabarito, sem referência necessária ao PDF, sem du
 Prazos, datas e números relevantes para PRF e demais concursos devem virar Cloze somente após passar pelo filtro rigoroso de `protocolo_cloze_cientifico.md`: relevância para o alvo, necessidade de memória exata, benefício de recuperação, fonte/contexto precisos e carga proporcional. Não transformar automaticamente todo dado numérico em cartão.
 
 ## Feedback econômico
+
+Na conferência por ID, resolva a frente isoladamente antes de ler o verso.
+Em R, verifique se há um único julgamento e se o verso ensina seu fundamento.
+Em D, teste uma mudança plausível no dado, condição ou análise decisiva e
+registre como ela afetaria a solução. Em C, tente preencher a lacuna com um
+termo concorrente e confira se o contexto determina o alvo, aceitando
+equivalentes legítimos. O Extra deve explicar o conceito ou esclarecer uma
+confusão provável. Use os campos e evidências da auditoria existente.
 C/E: iniciar com `✅ Certo<br><br>` ou `❌ Errado<br><br>`, seguido da regra e do motivo decisivo. Em Errado, explicitar a formulação correta. Cloze: Extra curto obrigatório que explica o conceito omitido, sem apenas repetir a resposta ou trazer comentário genérico. Dica `💡 Memorize:` é opcional, apenas quando acrescenta contraste ou mnemônico correto. Não obrigar slogan, tamanho mínimo ou segunda explicação redundante. Fonte e data de verificação no relatório por ID; incluir no verso quando necessárias ao entendimento ou à validade temporal.
 
 ## Revisão de qualidade

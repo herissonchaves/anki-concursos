@@ -15,6 +15,10 @@ Nenhuma nota de revisão derivada de PDF nasce antes do inventário e seleção 
 
 Classificar: **A** prioritário, **B** seletivo, **C** estudar na teoria ou por questões sem cartão. Antes de escrever, preencher `relatorios/triagem_previa_pdf.txt`: ID, página real, A/B/C, valor, operação, formato preferido, decisão e backup se disponível.
 
+Use os campos de alvo, valor e decisão para aplicar a comparação de recuperação
+do núcleo. Registre o candidato mantido quando houver duplicidade e o tópico
+que ficou descoberto quando a composição do lote impedir uma inclusão útil.
+
 ## Escolha pelo alvo cognitivo
 
 | Alvo | Modalidade | Rejeição |

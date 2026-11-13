@@ -15,6 +15,9 @@ Leia páginas realmente acessíveis e registre limites de OCR. Classifique alvo,
 
 ## Relevância para o concurso — 2.4.2
 
+Na triagem, aplique a comparação de alvos da seção “Recuperação e formatos”
+do núcleo e use o registro existente para justificar a seleção e os descartes.
+
 Antes de selecionar ou aprovar cartões, aplicar a seção “Relevância para PRF e outros concursos” do núcleo pedagógico. Pesquisar editais, retificações, provas e gabaritos oficiais; vincular cada alvo ao concurso/cargo e registrar evidência, utilidade esperada e decisão. Exatidão do conteúdo não basta. Busca por tema pode cobrir vários IDs com vínculo explícito; não presumir recorrência, utilidade universal ou ganho de desempenho. Evidência insuficiente fica pendente.
 
 ## Avaliação de candidatos Cloze — 2.8

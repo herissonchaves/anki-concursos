@@ -20,6 +20,10 @@ Leia primeiro `references/nucleo-pedagogico.md`, política comum de todos os flu
 Aplique `references/revisao-integral-e-linguagem.md` para os critérios de linguagem
 simples, lacunas determinadas, siglas e contexto doutrinário, inclusive em geração.
 
+Na seleção e composição, aplique “Recuperação e formatos” do núcleo. Na
+segunda conferência, aplique os testes de R, D e C da seção “Feedback econômico”
+e registre a evidência nos relatórios já previstos por ID.
+
 1. Identifique pedido, material acessível, disciplina, prioridade e teto. Aproveite contexto disponível. Pergunte apenas se faltar informação que impeça a tarefa; na revisão por PDF o backup é opcional; no caderno de erros, usar prints e comparar backup quando disponível; sua ausência não impede concluir os cartões. Estatísticas são opcionais.
 2. Leia fontes e selecione alvos A/B/C antes de redigir. Leia obrigatoriamente `references/protocolo_cloze_cientifico.md` nesta etapa, antes de escolher formatos, inclusive quando a conclusão puder ser zero Cloze. Para PDF, carregue `references/triagem_previa_pdf.md`; para backup, use `../analisar-colecao-anki/SKILL.md` em leitura somente. Compare operações cognitivas, não só palavras.
 3. Para qualquer D (modo estratégico), leia `references/protocolo-modo-estrategico.md` e a seção disciplinar de `references/atlas-multidisciplinar-cebraspe.md`; siga a rubrica de `references/avaliacao-modo-estrategico.md`. Carregue especializações somente quando aplicáveis: Português → `../portugues-cebraspe-qualidade/SKILL.md`; Direito → `references/radar-juridico-atualizacao.md` e fontes primárias atuais; imagens úteis → `references/protocolo_imagens_reais_anki.md`.

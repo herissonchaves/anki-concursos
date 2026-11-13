@@ -11,6 +11,11 @@ Quando o alvo for PRF ou PF, inclusive o foco padrão PRF deste usuário, ler `.
 
 Leia `../gerar-revisao-anki/references/nucleo-pedagogico.md` primeiro.
 
+Na auditoria de cartões novos, aplique a comparação de recuperação e os
+testes de frente e feedback do núcleo. Reconfira paridade e cobertura Cloze
+depois de reformulações ou descartes e use a auditoria por ID para indicar
+qual candidato foi mantido e por quê.
+
 Para coleções ou problemas de linguagem, aplique
 `../gerar-revisao-anki/references/revisao-integral-e-linguagem.md`.
 Registre cobertura por ID e vista; auditoria estrutural não é revisão integral.
