@@ -156,7 +156,7 @@ def test_zero_cloze_and_cloze_with_challenges_and_d_only(package):
     write_review(ce, cl, rep)
     do_export(package)
     cl.write_text('',encoding='utf-8');write_calibration(ce,rep);write_review(ce,cl,rep)
-    assert not json.loads((rep/'revisao_recuperacao.json').read_text())['cartoes']
+    assert not json.loads((rep/'revisao_recuperacao.json').read_text(encoding='utf-8'))['cartoes']
     do_export(package)
 
 

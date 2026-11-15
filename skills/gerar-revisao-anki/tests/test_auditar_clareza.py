@@ -51,7 +51,7 @@ class LintTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'report.tsv'
             module.save_report([],p)
-            self.assertIn('decisao_humana',p.read_text())
+            self.assertIn('decisao_humana',p.read_text(encoding='utf-8'))
 
 if __name__=='__main__':unittest.main()
 

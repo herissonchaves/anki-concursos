@@ -85,7 +85,7 @@ class PolicyTests(unittest.TestCase):
         result=subprocess.run([sys.executable,'-X','utf8',str(validator),str(self.out)],capture_output=True,text=True,encoding='utf-8')
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
     def test_visual_focused_and_limit(self):
-        self.rows([True,False]); self.ce.write_text(self.ce.read_text().replace('Proposição','<img src="test.png"> Proposição'),encoding='utf-8')
+        self.rows([True,False]); self.ce.write_text(self.ce.read_text(encoding='utf-8').replace('Proposição','<img src="test.png"> Proposição'),encoding='utf-8')
         media=self.root/'media';media.mkdir()
         import base64
         (media/'test.png').write_bytes(base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aRZkAAAAASUVORK5CYII='))
