@@ -29,6 +29,19 @@ Para conteúdo de PRF ou Agente da Polícia Federal, use
 selecionar as especializações por disciplina. Considere o concurso indicado
 no pedido. Na ausência de outro alvo explícito, a prioridade do projeto é PRF.
 
+## Testes
+
+As suítes de `automacao-anki-python` e `gerar-revisao-anki` são configuradas
+no `pyproject.toml` da raiz. Rode, de qualquer pasta do projeto:
+
+```bash
+uv run --python 3.13 --with-requirements skills/automacao-anki-python/requirements-dev.txt pytest
+```
+
+Use Python 3.12 ou 3.13. No 3.15 o PyYAML, dependência do `genanki`, ainda
+não instala no Windows sem o compilador C++. Os testes que precisam do pacote
+`anki` (`requirements-optional.txt`) são ignorados quando ele não está presente.
+
 ## Git local
 
 - Consulte o Git local sempre que precisar recuperar decisões, comparar versões ou entender mudanças. Hérisson já autorizou consultas ao histórico, ao estado e aos diffs desse repositório.

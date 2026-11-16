@@ -1,0 +1,18 @@
+# Configuração única dos testes do Anki-Concursos.
+# Rode a partir de qualquer pasta do projeto:
+#   uv run --python 3.13 --with-requirements skills/automacao-anki-python/requirements-dev.txt pytest
+# Python testado: 3.12 e 3.13. No 3.15 o PyYAML (dependência do genanki)
+# ainda não tem wheel para Windows e exige o compilador C++ da Microsoft.
+
+[tool.pytest.ini_options]
+testpaths = [
+    "skills/automacao-anki-python/tests",
+    "skills/gerar-revisao-anki/tests",
+]
+# Scripts e fixtures compartilhados entre as duas suítes.
+pythonpath = [
+    "skills/automacao-anki-python/scripts",
+    "skills/gerar-revisao-anki/scripts",
+    "skills/gerar-revisao-anki/tests",
+]
+addopts = "-q"

@@ -12,7 +12,6 @@ sys.path.insert(0,str(SCRIPTS))
 from exportar_anki import export, generate_apkg, deck_id, tsv_rows
 from exportar_anki_visual import export as export_visual, COLS
 from anki_utils import open_colpkg
-sys.path.insert(0,str(SCRIPTS.parents[1]/'gerar-revisao-anki/tests'))
 from calibration_fixture import write_calibration
 from recovery_fixture import write_review
 VPATH=SCRIPTS.parents[1]/'gerar-revisao-anki'/'scripts'

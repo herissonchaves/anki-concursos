@@ -1,6 +1,6 @@
 """Real exporter gates: format requirements and uncapped quick cards."""
 import pytest
-from test_regressions_21 import sample, export, export_visual  # adiciona as fixtures ao sys.path
+from test_regressions_21 import sample, export, export_visual
 from recovery_fixture import write_review
 
 @pytest.mark.parametrize('missing', ['quick','hard'])
