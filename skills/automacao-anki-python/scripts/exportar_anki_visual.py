@@ -13,12 +13,20 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
-import shutil
 import sys
 import tempfile
 import zipfile
 
-from exportar_anki import export as export_text, tsv_rows, deck_id, validation_args, add_validation_options, check_recovery
+from exportar_anki import (
+    add_validation_options,
+    check_recovery,
+    deck_id,
+    export as export_text,
+    publish_packages,
+    tsv_rows,
+    validate_package_paths,
+    validation_args,
+)
 
 COLS = ('arquivo', 'cartao_id', 'pagina_origem', 'arquivo_url', 'autor',
         'licenca', 'data_consulta', 'motivo_educacional', 'status')
@@ -141,15 +149,14 @@ def make_apkg(ce, cloze, output: Path, deck: str, image_files: dict[str, Path]):
 
 def export(ce, cloze, reports, midia, output, apkg=None, deck='Anki-Concursos',profile='mixed',exception_reason='',balance_exception='',max_cards=None):
     ce, cloze, reports, midia, output = map(Path, (ce, cloze, reports, midia, output))
-    if output.suffix.lower()!='.zip':
-        raise ValueError('Saída ZIP inválida')
+    apkg = Path(apkg) if apkg else None
+    validate_package_paths(output, apkg)
     policy_args = validation_args(profile,exception_reason,balance_exception,max_cards)
     image_files, hashes = inspect_images(ce, cloze, midia, reports)
     with tempfile.TemporaryDirectory(prefix='anki_visual_') as tmp:
         base = Path(tmp) / 'base.zip'
         candidate = Path(tmp) / 'visual.zip'
         export_text(ce,cloze,reports,base,deck=deck,profile=profile,exception_reason=exception_reason,balance_exception=balance_exception,max_cards=max_cards)
-        output.parent.mkdir(parents=True,exist_ok=True)
         with zipfile.ZipFile(base) as zi, zipfile.ZipFile(candidate, 'w', zipfile.ZIP_DEFLATED) as zo:
             for name in zi.namelist():
                 if name == 'LEIA-ME.txt':
@@ -183,11 +190,19 @@ def export(ce, cloze, reports, midia, output, apkg=None, deck='Anki-Concursos',p
             if chk.returncode:
                 raise ValueError('Calibração do ZIP visual reprovada: '+(chk.stdout+chk.stderr)[-1200:])
         check_recovery(validator, candidate)
-        shutil.copy2(candidate, output)
-    if apkg:
-        if Path(apkg).suffix.lower() != '.apkg':
-            raise ValueError('Nome de APKG inválido')
-        make_apkg(ce,cloze,Path(apkg),deck,image_files)
+        packages = []
+        if apkg is not None:
+            package_apkg = Path(tmp) / 'visual.apkg'
+            with zipfile.ZipFile(candidate) as archive:
+                package_ce = Path(archive.extract('anki_certo_errado.tsv', tmp))
+                package_cloze = Path(archive.extract('anki_cloze.tsv', tmp))
+                package_images = {
+                    name: Path(archive.extract(f'midia/{name}', tmp)) for name in image_files
+                }
+            make_apkg(package_ce, package_cloze, package_apkg, deck, package_images)
+            packages.append((package_apkg, apkg))
+        packages.append((candidate, output))
+        publish_packages(packages)
     return {'zip':str(output),'apkg':str(apkg) if apkg else None,
             'imagens':len(image_files),'sha256':hashes,'midia_verificada':True,
             'auditoria_de_licenca_manual':True}

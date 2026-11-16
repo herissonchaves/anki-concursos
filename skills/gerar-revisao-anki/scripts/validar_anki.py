@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Anki-Concursos v2.5: estrutura, contagem, perfis e equilíbrio dos rápidos.
+"""Anki-Concursos: estrutura, contagem, perfis e paridade por tipo C/E.
 
 Verificação sintática; não substitui auditoria semântica, fontes ou provas.
 Limite do usuário deve ser checado na geração; quando fornecido ao CLI, --max-cards
@@ -211,12 +211,12 @@ def validate_type_distribution(body: bytes, errors: list[str], require_types: bo
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('path', help='Diretório ou ZIP exportado para Anki')
-    p.add_argument('--new', action='store_true', help='Lote novo: tags e equilíbrio; perfil mixed exige R/D, sem limite de rápidos')
+    p.add_argument('--new', action='store_true', help='Lote novo com tags obrigatórias e paridade exata por tipo C/E; mixed exige R e D')
     p.add_argument('--max-cards', type=int, help='Teto explícito de CARTÕES efetivos do usuário')
     p.add_argument('--require-r-le-d', action='store_true', help='Opção legada sem efeito: rápidos não têm limite de proporção')
     p.add_argument('--profile', choices=('mixed', 'focused'), default='mixed')
     p.add_argument('--exception-reason', default='', help='Justificativa obrigatória do perfil focado')
-    p.add_argument('--balance-exception', default='', help='Motivo concreto para não impor 50/50')
+    p.add_argument('--balance-exception', default='', help=argparse.SUPPRESS)
     args = p.parse_args()
     source = Path(args.path)
     errors: list[str] = []
@@ -281,7 +281,7 @@ def main() -> int:
         for error in errors: print(' -', error)
         return 1
     if args.new:
-        print(f'Perfil={args.profile}; motivo={args.exception_reason.strip() or "padrão"}; exceção equilíbrio={args.balance_exception.strip() or "nenhuma"}')
+        print(f'Perfil={args.profile}; motivo={args.exception_reason.strip() or "padrão"}')
     print('APROVADO NA AUDITORIA ESTÁTICA — não substitui avaliação pedagógica')
     print('Notas:', ', '.join(f'{k}={v}' for k, v in counts.items()))
     print('Modalidades:', ', '.join(f'{k}={v}' for k, v in dist.items()))

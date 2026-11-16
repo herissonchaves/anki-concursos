@@ -6,6 +6,8 @@ import sqlite3
 import sys
 import zipfile
 import pytest
+import exportar_anki
+import exportar_anki_visual
 
 SCRIPTS=Path(__file__).resolve().parents[1]/'scripts'
 sys.path.insert(0,str(SCRIPTS))
@@ -82,8 +84,7 @@ def test_deck_identity_and_apkg_counts(tmp_path):
         assert conn.execute('select count(*) from cards').fetchone()[0]==6
         assert conn.execute('select distinct did from cards').fetchall()==[(deck_id('Fisica'),)]
 
-def test_visual_manifest_and_apkg_media_survive(tmp_path):
-    pytest.importorskip('genanki')
+def visual_sample(tmp_path):
     import base64,csv
     ce,cl,rep=sample(tmp_path,'<img src="fixture.png"> A figura serve apenas a teste estrutural.')
     media=tmp_path/'media';media.mkdir()
@@ -93,6 +94,48 @@ def test_visual_manifest_and_apkg_media_survive(tmp_path):
     with (rep/'fontes_visuais.tsv').open('w',encoding='utf-8',newline='') as f:
         w=csv.writer(f,delimiter='\t');w.writerow(COLS)
         w.writerow(['fixture.png','TEST-1','https://example.org/test','https://example.org/test.png','fixture','teste-sintetico','2026-11-01','teste apenas','aprovada'])
+    return ce, cl, rep, media, blob
+
+
+@pytest.mark.parametrize('visual', [False, True], ids=['textual', 'visual'])
+def test_invalid_apkg_path_does_not_publish_zip(tmp_path, visual):
+    if visual:
+        ce, cl, rep, media, _ = visual_sample(tmp_path)
+        exporter, inputs = export_visual, (ce, cl, rep, media)
+    else:
+        exporter, inputs = export, sample(tmp_path)
+    out = tmp_path / 'out.zip'
+    with pytest.raises(ValueError, match=r'\.apkg'):
+        exporter(*inputs, out, tmp_path / 'wrong.ext')
+    assert not out.exists()
+
+
+@pytest.mark.parametrize('visual', [False, True], ids=['textual', 'visual'])
+def test_apkg_failure_preserves_existing_packages(tmp_path, monkeypatch, visual):
+    def fail_apkg(ce, cloze, destination, *args):
+        destination.write_bytes(b'partial APKG')
+        raise RuntimeError('Falha simulada na geração do APKG')
+
+    if visual:
+        ce, cl, rep, media, _ = visual_sample(tmp_path)
+        exporter, inputs = export_visual, (ce, cl, rep, media)
+        monkeypatch.setattr(exportar_anki_visual, 'make_apkg', fail_apkg)
+    else:
+        exporter, inputs = export, sample(tmp_path)
+        monkeypatch.setattr(exportar_anki, 'generate_apkg', fail_apkg)
+    out = tmp_path / 'out.zip'
+    apkg = tmp_path / 'out.apkg'
+    out.write_bytes(b'previous ZIP')
+    apkg.write_bytes(b'previous APKG')
+    with pytest.raises(RuntimeError, match='Falha simulada'):
+        exporter(*inputs, out, apkg)
+    assert out.read_bytes() == b'previous ZIP'
+    assert apkg.read_bytes() == b'previous APKG'
+
+
+def test_visual_manifest_and_apkg_media_survive(tmp_path):
+    pytest.importorskip('genanki')
+    ce, cl, rep, media, blob = visual_sample(tmp_path)
     out=tmp_path/'visual.zip';apkg=tmp_path/'visual.apkg'
     export_visual(ce,cl,rep,media,out,apkg,'Visual teste')
     with zipfile.ZipFile(out) as z:

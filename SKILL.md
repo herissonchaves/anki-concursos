@@ -32,15 +32,17 @@ no pedido. Na ausência de outro alvo explícito, a prioridade do projeto é PRF
 ## Testes
 
 As suítes de `automacao-anki-python` e `gerar-revisao-anki` são configuradas
-no `pyproject.toml` da raiz. Rode, de qualquer pasta do projeto:
+no `pyproject.toml`. Rode o comando na raiz do repositório.
 
 ```bash
 uv run --python 3.13 --with-requirements skills/automacao-anki-python/requirements-dev.txt pytest
 ```
 
-Use Python 3.12 ou 3.13. No 3.15 o PyYAML, dependência do `genanki`, ainda
-não instala no Windows sem o compilador C++. Os testes que precisam do pacote
-`anki` (`requirements-optional.txt`) são ignorados quando ele não está presente.
+Use Python 3.12 ou 3.13 para a suíte padrão. Para cobrir backups modernos e a ida
+e volta da coleção nessas versões, inclua também
+[`requirements-optional.txt`](skills/automacao-anki-python/requirements-optional.txt)
+com outro `--with-requirements`. Os testes que dependem de `zstandard` ou
+`anki` são pulados quando a biblioteca correspondente está ausente.
 
 ## Git local
 

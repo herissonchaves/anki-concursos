@@ -6,6 +6,7 @@ quality merely because tests pass. Optional .apkg depends on genanki.
 """
 from __future__ import annotations
 import argparse
+from contextlib import ExitStack
 import csv
 import json
 import hashlib
@@ -62,9 +63,10 @@ def validation_args(profile='mixed', exception_reason='', balance_exception='', 
         raise ValueError('Perfil focado requer justificativa')
     if profile == 'mixed' and exception_reason.strip():
         raise ValueError('Justificativa de perfil exige focused')
+    if balance_exception.strip():
+        raise ValueError('Lotes novos exigem 50/50 por modo; --balance-exception não é permitido')
     args = ['--new', '--profile', profile]
     if exception_reason.strip(): args += ['--exception-reason', exception_reason.strip()]
-    if balance_exception.strip(): args += ['--balance-exception', balance_exception.strip()]
     if max_cards is not None: args += ['--max-cards', str(max_cards)]
     return args
 
@@ -72,7 +74,7 @@ def validation_args(profile='mixed', exception_reason='', balance_exception='', 
 def add_validation_options(parser):
     parser.add_argument('--profile', choices=('mixed', 'focused'), default='mixed')
     parser.add_argument('--exception-reason', default='')
-    parser.add_argument('--balance-exception', default='')
+    parser.add_argument('--balance-exception', default='', help=argparse.SUPPRESS)
     parser.add_argument('--max-cards', type=int)
 
 
@@ -86,10 +88,36 @@ def check_recovery(validator, package):
         raise ValueError('Revisão de recuperação reprovada: '+(result.stdout+result.stderr)[-4000:])
 
 
+def validate_package_paths(output: Path, apkg: Path | None):
+    if output.suffix.lower() != '.zip':
+        raise ValueError('Saída deve ser .zip')
+    if apkg is not None and apkg.suffix.lower() != '.apkg':
+        raise ValueError('Exportação Anki deve terminar com .apkg')
+    for destination in (output, apkg):
+        if destination is not None and destination.is_dir():
+            raise ValueError(f'O destino da exportação é um diretório: {destination}')
+
+
+def publish_packages(packages: list[tuple[Path, Path]]):
+    with ExitStack() as stack:
+        staged = []
+        for source, destination in packages:
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            # Stage on the destination filesystem so replacement is atomic per file.
+            folder = Path(stack.enter_context(tempfile.TemporaryDirectory(
+                prefix='.anki_export_', dir=destination.parent)))
+            candidate = folder / destination.name
+            shutil.copy2(source, candidate)
+            staged.append((candidate, destination))
+        for candidate, destination in staged:
+            candidate.replace(destination)
+
+
 def export(ce,cloze,reports_dir,output,apkg=None,deck='Anki-Concursos',profile='mixed',exception_reason='',balance_exception='',max_cards=None):
     policy_args=validation_args(profile,exception_reason,balance_exception,max_cards)
     ce,cloze,reports_dir,output=map(Path,(ce,cloze,reports_dir,output))
-    if output.suffix.lower()!='.zip':raise ValueError('Saída deve ser .zip')
+    apkg = Path(apkg) if apkg else None
+    validate_package_paths(output, apkg)
     if not ce.is_file() or not cloze.is_file():raise ValueError('Ambos TSVs são obrigatórios, mesmo quando um formato estiver vazio')
     if not reports_dir.is_dir():raise ValueError('Diretório de relatórios de auditoria não encontrado')
     for name in REQUIRED_REPORTS:
@@ -102,8 +130,10 @@ def export(ce,cloze,reports_dir,output,apkg=None,deck='Anki-Concursos',profile='
         raise RuntimeError('Validador central validar_anki.py indisponível: exportação bloqueada')
     with tempfile.TemporaryDirectory(prefix='anki_export_') as tmp:
         root=Path(tmp)
-        shutil.copy2(ce,root/'anki_certo_errado.tsv')
-        shutil.copy2(cloze,root/'anki_cloze.tsv')
+        package_ce = root / 'anki_certo_errado.tsv'
+        package_cloze = root / 'anki_cloze.tsv'
+        shutil.copy2(ce, package_ce)
+        shutil.copy2(cloze, package_cloze)
         (root/'relatorios').mkdir()
         for src in reports_dir.iterdir():
             if not src.is_file() or (src.suffix not in {'.txt', '.tsv'} and src.name not in {'calibracao_cebraspe.json', 'revisao_recuperacao.json'}):
@@ -117,7 +147,7 @@ def export(ce,cloze,reports_dir,output,apkg=None,deck='Anki-Concursos',profile='
         # calibração; a leitura de coleções antigas usa os fluxos de análise.
         calibration = validator.with_name('validar_calibracao_cebraspe.py')
         has_calibration = (root/'relatorios'/'calibracao_cebraspe.json').is_file()
-        has_hard = any('Tipo_Desafiadora_Cebraspe' in row[2].split() for row in tsv_rows(ce))
+        has_hard = any('Tipo_Desafiadora_Cebraspe' in row[2].split() for row in tsv_rows(package_ce))
         check_calibration = has_hard or has_calibration
         if check_calibration:
             if not calibration.is_file():
@@ -128,7 +158,6 @@ def export(ce,cloze,reports_dir,output,apkg=None,deck='Anki-Concursos',profile='
         check_recovery(validator, root)
         (root/'relatorios'/'politica_validacao.json').write_text(json.dumps({'profile':profile,'exception_reason':exception_reason,'balance_exception':balance_exception,'max_cards':max_cards},ensure_ascii=False,indent=2),encoding='utf-8')
         # Add no raw .colpkg, sources, notebooks, scan images or personal data.
-        output.parent.mkdir(parents=True,exist_ok=True)
         tmpzip=root/'package.zip'
         with zipfile.ZipFile(tmpzip,'w',zipfile.ZIP_DEFLATED) as zout:
             for candidate in sorted(root.rglob('*')):
@@ -145,13 +174,16 @@ def export(ce,cloze,reports_dir,output,apkg=None,deck='Anki-Concursos',profile='
             if result.returncode:
                 raise ValueError('Registro de calibração do ZIP reprovado: '+(result.stdout+result.stderr)[-1400:])
         check_recovery(validator, tmpzip)
-        shutil.copy2(tmpzip,output)
-    if apkg:
-        apkg=Path(apkg)
-        if apkg.suffix.lower()!='.apkg':raise ValueError('Exportação Anki deve terminar com .apkg')
-        apkg.parent.mkdir(parents=True,exist_ok=True)
-        generate_apkg(ce,cloze,apkg,deck)
-    return {'zip':str(output),'ce':sum(1 for _ in tsv_rows(ce)),'cloze':sum(1 for _ in tsv_rows(cloze)),'apkg':str(apkg) if apkg else None,'validador_executado':True}
+        ce_count = sum(1 for _ in tsv_rows(package_ce))
+        cloze_count = sum(1 for _ in tsv_rows(package_cloze))
+        packages = []
+        if apkg is not None:
+            package_apkg = root / 'package.apkg'
+            generate_apkg(package_ce, package_cloze, package_apkg, deck)
+            packages.append((package_apkg, apkg))
+        packages.append((tmpzip, output))
+        publish_packages(packages)
+    return {'zip':str(output),'ce':ce_count,'cloze':cloze_count,'apkg':str(apkg) if apkg else None,'validador_executado':True}
 
 
 def main(argv=None):

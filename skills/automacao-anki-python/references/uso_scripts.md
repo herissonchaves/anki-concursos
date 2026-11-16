@@ -47,20 +47,19 @@ python3 skills/automacao-anki-python/scripts/exportar_anki_visual.py \
 
 Sem `genanki`, omitir `--apkg` e importar o ZIP por TSV + cópia manual dos arquivos dentro de `midia/` para `collection.media`, sem subpastas, habilitando «Permitir HTML nos campos». Com `.apkg`, imagens locais acompanham o pacote. **Não** usar diretamente URL `https://` no atributo `src` dos cartões.
 
+Ao solicitar ZIP e APKG juntos, os exportadores preparam e validam os dois arquivos antes de gravá-los nos destinos finais. Se a geração do APKG falhar, corrija a causa ou execute novamente sem `--apkg` para gerar só o ZIP.
+
 `fontes_visuais.tsv` deve conter cabeçalho `arquivo\tcartao_id\tpagina_origem\tarquivo_url\tautor\tlicenca\tdata_consulta\tmotivo_educacional\tstatus` com ao menos uma linha por arquivo. O validador verifica declaração/presença, mas a veracidade da licença/adequação visual exige revisão humana. Falhar com referência a arquivo ausente, arquivo extra não referenciado, formato inválido ou manifesto faltante.
 
 Os relatórios clássicos continuam obrigatórios (`selecao_e_fontes.txt`, `economia_de_revisao.txt`, `auditoria_pedagogica.txt`); PDF acrescenta cobertura/triagem; Direito o radar; erros o diagnóstico; backup a análise legível. CLI não inventa relatórios de auditoria ou dados de `.colpkg`. `--apkg` cria um arquivo; a importação pode adicionar ou atualizar notas conforme identidade e opções do Anki. Não prometer preservação do histórico sem verificar a correspondência.
 
 ## Perfis de exportação — 2.5
 
-Os dois exportadores aceitam `--profile focused --exception-reason "pedido ou limite concreto"` e `--max-cards N`. Consultar a matriz antes de usá-los; o padrão misto exige R/D e 50/50 exato em cada modo C/E, separadamente, com quantidades pares. Revalidar usando os mesmos parâmetros. A política efetiva fica em `relatorios/politica_validacao.json`. Não reutilizar exceções automaticamente.
+Use os parâmetros de perfil, justificativa e teto definidos na [matriz de quantidades](../../gerar-revisao-anki/references/matriz_tipos_quantidades.md) tanto na exportação quanto na revalidação. A política efetiva fica em `relatorios/politica_validacao.json`.
 
 ## Calibração Cebraspe — 2.7
 
 Em novas exportações que contenham D, executar também `../../gerar-revisao-anki/scripts/validar_calibracao_cebraspe.py DIRETORIO_OU_ZIP`, usando o caminho completo. O diretório deve conter `anki_certo_errado.tsv` e `relatorios/calibracao_cebraspe.json`. Consultar `../../gerar-revisao-anki/references/registro-calibracao-cebraspe.md`. O script retorna 0 para registro consistente ou lote sem D, 1 para falhas documentais e 2 para erro de leitura. Não certifica conteúdo nem consulta às fontes. Exportadores preservam esse JSON; checar novamente o ZIP final. Não aplicar esta exigência retroativamente a auditorias de coleções.
-
-O argumento legado `--balance-exception` não é aceito para lotes novos: o validador exige paridade exata por modo.
-
 ## Notas novas — barreira adicional 2.14
 
 `validar_anki.py` não basta para liberar exportação. Os exportadores exigem também `relatorios/revisao_recuperacao.json`, conforme `../../gerar-revisao-anki/references/registro-revisao-recuperacao.md`. Diagnóstico: `python -X utf8 CAMINHO_COMPLETO/validar_revisao_pedagogica.py DIRETORIO --listar-sinais`. Ele lista hashes e sinais, sem criar aprovação. Verificação: o mesmo comando sem `--listar-sinais`, no diretório e no ZIP final. Resolver sinais por correção ou exceção editorial específica, atualizar hashes após edição e manter a calibração de D. Não aplicar o novo esquema retroativamente a backups existentes.

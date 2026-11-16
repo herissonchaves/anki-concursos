@@ -34,7 +34,3 @@ Em notas Cloze novas, aplicar o protocolo Cloze: usar uma ou mais marcações `{
 ## Transferência para D — 2.7
 
 Nos novos D, seguir `../gerar-revisao-anki/references/protocolo-modo-estrategico.md`. Extrair a operação do erro e construir outra situação/raciocínio, sem paráfrase superficial do item. Comparar com referência C/E pertinente e registrar por novo ID o detalhe decisivo e a confusão trabalhada; não inferir causa psicológica do erro. Aplicar a rubrica e, em exportações, o registro documental de calibração.
-
-## Paridade C/E obrigatória — 2.8.2
-
-Em toda criação de cartões C/E, exigir 50% Certo e 50% Errado separadamente nos rápidos e nos desafiadores. Planejar totais pares, conferir também entregas inline e não compensar um modo com o outro. Aplicar a matriz vigente para quantidades ímpares; Cloze e revisão de cartões existentes não entram nessa contagem.

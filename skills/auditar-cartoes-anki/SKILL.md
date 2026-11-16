@@ -12,7 +12,8 @@ Quando o alvo for PRF ou PF, inclusive o foco padrão PRF deste usuário, ler `.
 Leia `../gerar-revisao-anki/references/nucleo-pedagogico.md` primeiro.
 
 Na auditoria de cartões novos, aplique a comparação de recuperação e os
-testes de frente e feedback do núcleo. Reconfira paridade e cobertura Cloze
+testes de frente e feedback do núcleo. Reconfira a paridade pela
+[matriz de quantidades](../gerar-revisao-anki/references/matriz_tipos_quantidades.md) e a cobertura Cloze
 depois de reformulações ou descartes e use a auditoria por ID para indicar
 qual candidato foi mantido e por quê.
 
@@ -39,10 +40,6 @@ Sem coleção/lote fornecido, limitar a conclusão às instruções e evidência
 ## Avaliação de candidatos Cloze — 2.8
 
 Ler `../gerar-revisao-anki/references/protocolo_cloze_cientifico.md` antes de avaliar a escolha de formatos, inclusive uma conclusão de zero Cloze. Conferir candidatos conceituais, relações e condições, além dos numéricos; comparar alvo, operação e direção de recuperação com as frentes existentes. Menção apenas no verso ou coincidência de tema não comprova duplicidade. Exigir motivos concretos de seleção/descarte, sem impor cotas e sem gerar ou alterar cartões fora do pedido. Usar `../gerar-revisao-anki/references/avaliacao-cloze-2.8.md` quando auditar essa política.
-
-## Paridade C/E obrigatória — 2.8.2
-
-Em toda criação de cartões C/E, exigir 50% Certo e 50% Errado separadamente nos rápidos e nos desafiadores. Planejar totais pares, conferir também entregas inline e não compensar um modo com o outro. Aplicar a matriz vigente para quantidades ímpares; Cloze e revisão de cartões existentes não entram nessa contagem.
 
 ## Exportações novas e revisão verificável — 2.14
 
