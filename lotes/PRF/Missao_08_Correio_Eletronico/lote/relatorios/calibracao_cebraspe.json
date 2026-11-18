@@ -1,0 +1,752 @@
+{
+ "schema_version": 1,
+ "referencias": [
+  {
+   "id": "MPTO24_99",
+   "concurso": "MPTO — VI Concurso, Edital nº 1/2024 (aplicação 3/3/2024)",
+   "cargo": "Técnico Ministerial Especializado — Fotografia (cargo 16)",
+   "ano": 2024,
+   "caderno": "952_MP_TO_016_01",
+   "item": "99",
+   "url": "https://cdn.cebraspe.org.br/concursos/MP_TO_24_SERVIDOR/arquivos/952_MP_TO_016_01.PDF",
+   "consulta": "2026-11-18",
+   "operacao_observada": "Atribui funções trocadas aos protocolos (SMTP para receber, POP para enviar); exige reconhecer a função de cada protocolo.",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/MP_TO_24_SERVIDOR/arquivos/GAB_DEFINITIVO_952_MP_TO_016_01.PDF"
+  },
+  {
+   "id": "EMBRAPA24_65",
+   "concurso": "EMBRAPA — Edital 2024 (aplicação 23/3/2025)",
+   "cargo": "Técnico — Gestão da Informação — Tecnologia da Informação",
+   "ano": 2024,
+   "caderno": "043_EMBRAPA_001_01",
+   "item": "65",
+   "url": "https://cdn.cebraspe.org.br/concursos/EMBRAPA_24/arquivos/043_EMBRAPA_001_01.pdf",
+   "consulta": "2026-11-18",
+   "operacao_observada": "Situação de firewall que deve permitir envio de correio eletrônico; exige associar o serviço à porta/protocolo (TCP 25) — Certo.",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/EMBRAPA_24/arquivos/GAB_DEFINITIVO_043_EMBRAPA_001_01.pdf"
+  },
+  {
+   "id": "ANP22_26",
+   "concurso": "ANP — Processo Seletivo Simplificado, Edital nº 1/2022 (aplicação 9/10/2022)",
+   "cargo": "Conhecimentos gerais para todas as atividades de nível superior",
+   "ano": 2022,
+   "caderno": "725_ANP_CG1_01",
+   "item": "26",
+   "url": "https://cdn.cebraspe.org.br/concursos/ANP_22_PSS/arquivos/725_ANP_CG1_01.PDF",
+   "consulta": "2026-11-18",
+   "operacao_observada": "Confunde o efeito de Encaminhar com Responder a todos no Outlook; exige saber a quem cada comando envia — Errado.",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/ANP_22_PSS/arquivos/GAB_DEFINITIVO_725_ANP_CG1_01.PDF"
+  },
+  {
+   "id": "CAU23_20",
+   "concurso": "CAU/BR — Edital nº 1/2023 (aplicação 21/1/2024)",
+   "cargo": "Conhecimentos básicos para os empregos 2 e 5 a 8",
+   "ano": 2023,
+   "caderno": "921_CAU_BR_CB3_01",
+   "item": "20",
+   "url": "https://cdn.cebraspe.org.br/concursos/CAU_BR_23/arquivos/921_CAU_BR_CB3_01.PDF",
+   "consulta": "2026-11-18",
+   "operacao_observada": "Atribui à opção Inserir Assinatura do Outlook o efeito de assinatura digital com criptografia; exige distinguir assinatura de texto de assinatura digital — Errado.",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/CAU_BR_23/arquivos/GAB_DEFINITIVO_921_CAU_BR_CB3_01.PDF"
+  }
+ ],
+ "cartoes": [
+  {
+   "id": "D01",
+   "linha": 25,
+   "sha256": "2f077f9df298443ec6aae4f89e73a563eed0127aa6fa86b541ca23c70aa03efd",
+   "gabarito": "C",
+   "alvo": "Identificar MSA e MDA pelas ações descritas.",
+   "operacao_autoral": "Mapear ações concretas (autenticar/aceitar; depositar) aos papéis da arquitetura.",
+   "regra": "MSA aceita e autentica a submissão; MDA entrega na caixa postal (RFC 5598; RFC 6409).",
+   "dado_decisivo": "As ações \"confere o login e aceita\" e \"coloca na caixa postal\".",
+   "solucao": "Autenticar e aceitar = MSA; depositar na caixa = MDA; logo Certo.",
+   "erro_plausivel": "Chamar de MTA quem aceita a mensagem ou quem entrega, por ser \"servidor\".",
+   "leitura_concorrente": "Testei a leitura de que o servidor de A seria MTA: ele também repassa, mas a ação descrita (conferir login e aceitar) é a de submissão; conclusão mantida.",
+   "originalidade": "Situação autoral com dois provedores e ações concretas; não há item Cebraspe localizado com essa estrutura.",
+   "fontes_conteudo": [
+    "https://www.rfc-editor.org/rfc/rfc5598",
+    "https://www.rfc-editor.org/rfc/rfc6409"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido com RFC 5598 (papéis) e RFC 6409 (autenticação no MSA)."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Ações descritas sem ambiguidade; cada uma corresponde a um papel único."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige associar ações a papéis, não lembrar definição isolada."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe específico localizado; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário e redação autorais."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Verso explica os quatro papéis e o dado decisivo."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Frases curtas, quem faz o quê explícito; siglas expandidas no verso."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre lacunas MSA e MDA do Cloze C01."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E sobre MSA/MDA foi localizado nas buscas em cadernos oficiais (MPTO 2024, EMBRAPA 2024, ANP 2022, CAU/BR 2023, PCDF 2024, PF 2018, PRF 2021); construção baseada no conteúdo das RFCs."
+  },
+  {
+   "id": "D02",
+   "linha": 17,
+   "sha256": "804f12b87ef0a2472d65ac325f7d235ac20ab4dc53ab2ad837a7af41daf0a953",
+   "gabarito": "E",
+   "alvo": "Distinguir MUA de MTA.",
+   "operacao_autoral": "Classificar o papel do aplicativo do destinatário a partir da ação (ler a caixa por IMAP).",
+   "regra": "MUA é o agente do usuário; MTA repassa entre servidores (RFC 5598).",
+   "dado_decisivo": "Aplicativo do celular lendo a caixa postal por IMAP.",
+   "solucao": "Ler a caixa = MUA; repasse entre servidores = MTA; a frase atribui MTA ao aplicativo, logo Errado.",
+   "erro_plausivel": "Achar que \"retirar do servidor\" é transferência (MTA).",
+   "leitura_concorrente": "Testei se algum aplicativo pode ser MTA: um cliente não faz repasse entre servidores; a justificativa \"retira do servidor\" não caracteriza MTA.",
+   "originalidade": "Situação autoral que completa a de D01 do lado do destinatário.",
+   "fontes_conteudo": [
+    "https://www.rfc-editor.org/rfc/rfc5598"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido com RFC 5598: MUA atua para o usuário; MTA repassa um \"salto\"."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Um só papel possível para o aplicativo; justificativa testada."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige distinguir papéis pela ação; a frase traz justificativa plausível a julgar."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe específico localizado; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Redação e situação autorais."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Verso localiza o erro na justificativa e dá a correção."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem direta; siglas explicadas no verso."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre lacunas MUA e MTA do Cloze C01."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E sobre MUA/MTA foi localizado nas buscas em cadernos oficiais; construção baseada na RFC 5598."
+  },
+  {
+   "id": "D03",
+   "linha": 1,
+   "sha256": "a9768b3c7eab422d9e50c5218a6a537a79f0af4867e2c7716377a0f6ee42b783",
+   "gabarito": "E",
+   "alvo": "Associar o repasse entre servidores ao SMTP/porta 25.",
+   "operacao_autoral": "Avaliar se uma regra de firewall permite um serviço, identificando protocolo e porta.",
+   "regra": "Repasse entre servidores usa SMTP na porta 25 (RFC 5321; RFC 6409).",
+   "dado_decisivo": "Só 80 e 443 liberadas; repasse direto a outros domínios.",
+   "solucao": "Repasse exige 25; 25 bloqueada; justificativa (HTTPS) falsa; logo Errado.",
+   "erro_plausivel": "Achar que todo serviço da internet passa por HTTPS.",
+   "leitura_concorrente": "Considerei relay por um provedor externo via HTTPS (API): a frente diz \"diretamente aos servidores de outros domínios\", o que exige SMTP.",
+   "originalidade": "Inspirado na operação do item 65 (EMBRAPA): firewall × porta do serviço de e-mail; situação, portas liberadas e conclusão reconstruídas.",
+   "fontes_conteudo": [
+    "https://www.rfc-editor.org/rfc/rfc5321",
+    "https://www.rfc-editor.org/rfc/rfc6409"
+   ],
+   "referencias": [
+    "EMBRAPA24_65"
+   ],
+   "fidelidade": "comparada",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido com RFC 5321 (porta 25) e RFC 6409 (repasse na 25)."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "\"Diretamente\" afasta intermediários; só uma conclusão."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Aplica conhecimento de porta a uma regra de firewall."
+    },
+    "comparacao": {
+     "resultado": "PASSA",
+     "evidencia": "Compara com EMBRAPA 2024, item 65 (gabarito definitivo C)."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário inverso e com justificativa, não paráfrase do item."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Verso aponta a porta correta e a consequência."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Termos \"firewall\" e \"porta\" usados em contexto simples; verso explica."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre a lacuna do Cloze C02."
+    }
+   },
+   "comparacao": "Mesma operação (identificar porta exigida pelo envio de e-mail sob regra de firewall), com gabarito invertido e justificativa a julgar."
+  },
+  {
+   "id": "D04",
+   "linha": 7,
+   "sha256": "dbda0a558eb5c3071443ffc7bd41377ce6509af98f7bdddbe9a73d2eff237474",
+   "gabarito": "C",
+   "alvo": "Portas 110 (POP3) e 143 (IMAP) aplicadas.",
+   "operacao_autoral": "Deduzir o efeito de bloqueio/liberação de portas sobre cada protocolo.",
+   "regra": "POP3 = 110; IMAP = 143 (RFC 1939; RFC 9051).",
+   "dado_decisivo": "110 bloqueada, 143 liberada, servidores nas portas padrão sem TLS.",
+   "solucao": "IMAP via 143 funciona; POP3 via 110 falha; logo Certo.",
+   "erro_plausivel": "Inverter as portas dos dois protocolos.",
+   "leitura_concorrente": "Considerei portas TLS (993/995): a frente fixa \"sem TLS, nas portas padrão\", eliminando essa leitura.",
+   "originalidade": "Mesma família operacional do item EMBRAPA 65 (porta × serviço sob firewall), aplicada a protocolos de recebimento; redação autoral.",
+   "fontes_conteudo": [
+    "https://www.rfc-editor.org/rfc/rfc1939",
+    "https://www.rfc-editor.org/rfc/rfc9051"
+   ],
+   "referencias": [
+    "EMBRAPA24_65"
+   ],
+   "fidelidade": "comparada",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido: RFC 1939 (110) e RFC 9051 (143)."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Hipóteses explícitas (sem TLS, portas padrão)."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Dedução sobre duas configurações a partir das portas."
+    },
+    "comparacao": {
+     "resultado": "PASSA",
+     "evidencia": "Compara com EMBRAPA 2024, item 65."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Situação nova, com dois protocolos."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Verso associa cada porta e conclui."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Curto e direto; termos técnicos mínimos."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre as duas lacunas do Cloze C03."
+    }
+   },
+   "comparacao": "Transfere a operação porta → serviço do item 65 para POP3/IMAP; gabarito próprio conferido nas RFCs."
+  },
+  {
+   "id": "D05",
+   "linha": 3,
+   "sha256": "0f6df5bbe86cc4e5a68de15d5b6ed816e1cd3723a0631107d8800a45b9892e6b",
+   "gabarito": "C",
+   "alvo": "Funções separadas de IMAP (receber) e SMTP (enviar).",
+   "operacao_autoral": "Inferir a consequência da falha de um protocolo sobre envio e leitura.",
+   "regra": "SMTP envia; IMAP acessa a caixa (RFC 5321; RFC 9051).",
+   "dado_decisivo": "SMTP fora do ar, IMAP funcionando.",
+   "solucao": "Leitura depende de IMAP (ok); envio depende de SMTP (falha); logo Certo.",
+   "erro_plausivel": "Supor que o servidor de entrada também envia, ou trocar os papéis.",
+   "leitura_concorrente": "Considerei envio via webmail do provedor: a frente trata do Thunderbird configurado com SMTP; o webmail não está em jogo.",
+   "originalidade": "Inspirado na operação do item 99 (MPTO 2024): papéis trocados dos protocolos; aqui o aluno aplica os papéis a uma falha concreta.",
+   "fontes_conteudo": [
+    "https://www.rfc-editor.org/rfc/rfc5321",
+    "https://www.rfc-editor.org/rfc/rfc9051"
+   ],
+   "referencias": [
+    "MPTO24_99"
+   ],
+   "fidelidade": "comparada",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido nas RFCs 5321 e 9051."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Falha isolada e configuração explícita."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige inferir efeito, não só lembrar função."
+    },
+    "comparacao": {
+     "resultado": "PASSA",
+     "evidencia": "Compara com MPTO 2024, item 99 (gabarito definitivo E)."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Situação nova, sem reutilizar texto do item."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Verso explica cada função e o erro comum."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Situação cotidiana, sem jargão desnecessário."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Aplica R01/R02/R03 a um caso."
+    }
+   },
+   "comparacao": "O item 99 cobra a função de cada protocolo; este D exige aplicar essa função para prever consequência de falha."
+  },
+  {
+   "id": "D06",
+   "linha": 16,
+   "sha256": "f8e2d3fbb4b554f909764c25bbb46efafcb39529fdae61a36f6258b25a85f318",
+   "gabarito": "E",
+   "alvo": "Limite da sincronização do IMAP diante da remoção feita pelo POP3.",
+   "operacao_autoral": "Combinar o comportamento de dois protocolos na mesma conta para prever o resultado.",
+   "regra": "POP3 baixa e, no modo padrão, remove do servidor; IMAP trabalha sobre o que está no servidor (RFC 1939; RFC 9051).",
+   "dado_decisivo": "POP3 no modo que apaga do servidor; IMAP configurado depois.",
+   "solucao": "Mensagens saíram do servidor antes; IMAP não as encontra; justificativa não salva a conclusão; logo Errado.",
+   "erro_plausivel": "Achar que \"sincronizar\" recupera dados de outro aparelho.",
+   "leitura_concorrente": "Considerei a opção \"deixar cópia no servidor\": a frente fixa o modo que apaga, eliminando essa leitura.",
+   "originalidade": "Situação autoral; o material cita itens de outras bancas (AOCP) sobre POP3/IMAP, não usados como referência Cebraspe.",
+   "fontes_conteudo": [
+    "https://www.rfc-editor.org/rfc/rfc1939",
+    "https://www.rfc-editor.org/rfc/rfc9051"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido nas RFCs 1939 e 9051."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Modo do POP3 explicitado; ordem dos fatos clara."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Combina dois comportamentos para chegar à conclusão."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial específico confirmado; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário autoral."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Verso explica por que a sincronização não alcança as mensagens."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem cotidiana; termos POP3/IMAP explicados no verso."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Transfere R03/R04 a um caso de uso real."
+    }
+   },
+   "limitacao": "Os itens sobre POP3 × IMAP localizados com gabarito eram de outras bancas (AOCP/UFOB) ou de bancos sem caderno oficial; nenhum item Cebraspe C/E oficial específico foi confirmado."
+  },
+  {
+   "id": "D07",
+   "linha": 24,
+   "sha256": "52cc674247eb22d4623f032482762bf60876cd31fd8875e8551350853e913ef6",
+   "gabarito": "C",
+   "alvo": "Aplicar visibilidade de Para/Cc/Cco.",
+   "operacao_autoral": "Prever o que cada destinatário vê conforme o campo usado.",
+   "regra": "Para e Cc visíveis; Bcc não revelado aos demais (RFC 5322, 3.6.3).",
+   "dado_decisivo": "Chefia em Cc; candidatos em Cco.",
+   "solucao": "Chefia visível (Cc); candidatos ocultos entre si (Cco); logo Certo.",
+   "erro_plausivel": "Achar que quem está em Cco não vê ninguém, ou que Cc também oculta.",
+   "leitura_concorrente": "Considerei implementações em que a cópia do Bcc mostra a linha Bcc (RFC 5322, método 2); por isso a frente usa \"em regra\"; nos clientes usuais (Outlook, Gmail) cada Cco não vê os outros.",
+   "originalidade": "Situação autoral de uso legítimo do Cco com contraste Cc.",
+   "fontes_conteudo": [
+    "https://www.rfc-editor.org/rfc/rfc5322#section-3.6.3"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido com RFC 5322, 3.6.3."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "\"Em regra\" delimita a variação de implementação registrada na RFC."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige combinar dois campos para prever a visibilidade."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial confirmado; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário autoral, diferente do exemplo da festa do material."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Verso explica campo por campo."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Situação simples, sem jargão."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Aplica R07/R08 a uma decisão prática."
+    }
+   },
+   "limitacao": "Itens Cebraspe sobre Cco localizados apenas em bancos não oficiais, sem caderno/gabarito oficial confirmado nesta tarefa."
+  },
+  {
+   "id": "D08",
+   "linha": 10,
+   "sha256": "6f681e7a5df03ce787b92c6c876ac2e7181bf9d63975701d8f6a3f0d8becbe8e",
+   "gabarito": "E",
+   "alvo": "Alcance de Responder a todos com destinatário em Cco.",
+   "operacao_autoral": "Combinar a regra do Cco com a do comando de resposta.",
+   "regra": "Responder a todos = remetente + Para + Cc (Microsoft); Bcc não revelado (RFC 5322).",
+   "dado_decisivo": "Davi em Cco; Bruno responde a todos.",
+   "solucao": "Bruno não vê Davi; resposta vai a Lia e Caio; logo Errado.",
+   "erro_plausivel": "Achar que \"todos\" inclui quem estava oculto.",
+   "leitura_concorrente": "Considerei Davi usando Responder a todos (caso diferente e controverso em comentários): a frente trata da resposta de Bruno, que não conhece Davi.",
+   "originalidade": "Inspirado no item 26 (ANP 2022), que cobra o efeito de um comando de resposta/encaminhamento sobre os destinatários; situação reconstruída com Cco.",
+   "fontes_conteudo": [
+    "https://support.microsoft.com/en-au/outlook/reply-to-or-forward-an-email-message",
+    "https://www.rfc-editor.org/rfc/rfc5322#section-3.6.3"
+   ],
+   "referencias": [
+    "ANP22_26"
+   ],
+   "fidelidade": "comparada",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido com Microsoft (Responder a todos) e RFC 5322 (Bcc)."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Papéis e campos explícitos; caso de Davi responder excluído."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Combina duas regras."
+    },
+    "comparacao": {
+     "resultado": "PASSA",
+     "evidencia": "Compara com ANP 2022, item 26 (gabarito definitivo E)."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Situação autoral com quatro pessoas."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Verso explica por que Davi fica de fora."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Nomes curtos e campos entre parênteses facilitam a leitura."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Aplica R07/R09."
+    }
+   },
+   "comparacao": "Mesma operação (a quem o comando envia), acrescida do dado decisivo Cco."
+  },
+  {
+   "id": "D09",
+   "linha": 6,
+   "sha256": "a977ef37669879d1fdc3db6ab579656c65d77a7883cbaa9d405a1051db5cb028",
+   "gabarito": "E",
+   "alvo": "Escolher o comando que leva o anexo a um novo destinatário.",
+   "operacao_autoral": "Decidir entre comandos pela consequência sobre o anexo.",
+   "regra": "Encaminhar inclui anexos; responder não (Microsoft Support).",
+   "dado_decisivo": "Joana não estava na conversa; arquivo anexado no original.",
+   "solucao": "Responder a todos não leva o anexo; Encaminhar leva; a frase inverte; logo Errado.",
+   "erro_plausivel": "Inverter o comportamento dos comandos quanto aos anexos.",
+   "leitura_concorrente": "Considerei a opção de anexar manualmente na resposta: a frente fala de envio \"automático\", que não ocorre ao responder.",
+   "originalidade": "Inspirado no item 26 (ANP 2022) sobre o comando Encaminhar no Outlook; aqui o alvo é o anexo, em situação autoral.",
+   "fontes_conteudo": [
+    "https://support.microsoft.com/en-au/outlook/reply-to-or-forward-an-email-message"
+   ],
+   "referencias": [
+    "ANP22_26"
+   ],
+   "fidelidade": "comparada",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido com a página da Microsoft sobre responder/encaminhar."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Comandos e objetivo explícitos; uma conclusão."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige escolher comando pela consequência."
+    },
+    "comparacao": {
+     "resultado": "PASSA",
+     "evidencia": "Compara com ANP 2022, item 26."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Situação nova (anexo e terceira pessoa)."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Verso explica o motivo e a ação correta."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem de escritório, sem termos técnicos."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Aplica R10 a uma decisão."
+    }
+   },
+   "comparacao": "Mesma ferramenta e família (efeito de Encaminhar × responder), com dado decisivo diferente (anexo)."
+  },
+  {
+   "id": "D10",
+   "linha": 4,
+   "sha256": "74733bbcf52955709ee44b7f77c0312c0f65ab253412640c0477622230b16537",
+   "gabarito": "E",
+   "alvo": "Distinguir assinatura de texto de assinatura digital.",
+   "operacao_autoral": "Avaliar se um recurso atende a um requisito de segurança (autenticidade e integridade).",
+   "regra": "Assinatura digital usa ID digital e garante autenticidade e integridade; assinatura comum não (Microsoft).",
+   "dado_decisivo": "Assinatura configurada com nome, cargo e telefone.",
+   "solucao": "Bloco de texto não comprova autoria nem integridade; logo Errado.",
+   "erro_plausivel": "Confundir o nome \"assinatura\" do Outlook com assinatura digital.",
+   "leitura_concorrente": "Considerei se a assinatura de texto poderia conter um certificado: a frente descreve apenas nome, cargo e telefone.",
+   "originalidade": "Inspirado no item 20 (CAU/BR 2023), que confunde Inserir Assinatura com assinatura digital; situação reconstruída a partir do requisito.",
+   "fontes_conteudo": [
+    "https://support.microsoft.com/en-us/office/secure-messages-by-using-a-digital-signature-in-outlook-549ca2f1-a68f-4366-85fa-b3f4b5856fc6"
+   ],
+   "referencias": [
+    "CAU23_20"
+   ],
+   "fidelidade": "comparada",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido com a página da Microsoft sobre assinatura digital."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Objetivo e configuração explícitos."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige confrontar requisito e recurso."
+    },
+    "comparacao": {
+     "resultado": "PASSA",
+     "evidencia": "Compara com CAU/BR 2023, item 20 (gabarito definitivo E)."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Redação autoral orientada ao requisito."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Verso explica a diferença e a solução correta."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Termos autenticidade/integridade traduzidos em \"quem enviou\" e \"não alterado\"."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Liga a parte \"Assinatura\" do corpo do e-mail (PDF) à segurança."
+    }
+   },
+   "comparacao": "Mesma distinção, partindo de um objetivo de segurança em vez do nome do menu."
+  },
+  {
+   "id": "D11",
+   "linha": 21,
+   "sha256": "58214f3074055987ef16aa9a1dff7b815204740898df5e004d75b4f3b13275c2",
+   "gabarito": "C",
+   "alvo": "Origem da criptografia no envio (TLS) e seu alcance.",
+   "operacao_autoral": "Julgar o efeito de uma configuração de segurança sobre o trecho de rede.",
+   "regra": "STARTTLS na 587 e TLS implícito na 465 protegem a submissão (RFC 8314).",
+   "dado_decisivo": "Cliente configurado com 587+STARTTLS ou 465+TLS.",
+   "solucao": "Ambas as opções cifram a conexão de submissão; SMTP puro não cifra; logo Certo.",
+   "erro_plausivel": "Achar que a criptografia é do SMTP ou que vale de ponta a ponta.",
+   "leitura_concorrente": "Considerei falha na negociação STARTTLS: a frente assume a configuração escolhida funcionando; a afirmação limita-se ao trecho cliente → servidor.",
+   "originalidade": "Situação autoral; o material traz item inédito do próprio curso sobre SMTP e criptografia, não usado como referência Cebraspe.",
+   "fontes_conteudo": [
+    "https://www.rfc-editor.org/rfc/rfc8314"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido com RFC 8314, seções 3.1–3.3."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Trecho delimitado (cliente → servidor de envio)."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Aplica a regra a uma configuração concreta e separa conexão de conteúdo."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial localizado; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Redação autoral."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Verso explica os dois modos e o limite."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Siglas explicadas no verso em palavras simples."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Aplica R12 e prepara itens de segurança."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre STARTTLS/TLS implícito no e-mail foi localizado nas buscas desta tarefa."
+  },
+  {
+   "id": "D12",
+   "linha": 19,
+   "sha256": "edfd021c54157d6e7d562524d437aaa11230cb1344cee2c6f65caecb9dd6f277",
+   "gabarito": "C",
+   "alvo": "Divisão de tarefas no webmail (HTTPS no navegador; SMTP nos servidores).",
+   "operacao_autoral": "Inferir se o envio funciona dada a regra de firewall e a forma de acesso.",
+   "regra": "Webmail usa HTTP/HTTPS entre navegador e provedor; o repasse SMTP ocorre entre servidores (RFC 5598; RFC 5321).",
+   "dado_decisivo": "Só 80/443 liberadas no computador; acesso por webmail.",
+   "solucao": "Navegador usa 443 (liberada); SMTP sai dos servidores do provedor; logo Certo.",
+   "erro_plausivel": "Achar que o computador do usuário precisa da porta 25 também no webmail.",
+   "leitura_concorrente": "Considerei bloqueio no lado do provedor: a frente restringe o firewall ao computador do usuário.",
+   "originalidade": "Contraponto autoral ao D03, inspirado na mesma família do item 65 (EMBRAPA): o serviço de e-mail exige SMTP, mas no webmail quem usa SMTP é o provedor.",
+   "fontes_conteudo": [
+    "https://www.rfc-editor.org/rfc/rfc5598",
+    "https://www.rfc-editor.org/rfc/rfc5321"
+   ],
+   "referencias": [
+    "EMBRAPA24_65"
+   ],
+   "fidelidade": "comparada",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido com RFC 5598 (MUA web) e RFC 5321 (repasse SMTP)."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Firewall no computador e acesso via navegador explícitos."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige localizar onde cada protocolo opera."
+    },
+    "comparacao": {
+     "resultado": "PASSA",
+     "evidencia": "Compara com EMBRAPA 2024, item 65."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Situação autoral, contraste com D03."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Verso explica a divisão de tarefas e o contraste com cliente instalado."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem direta, portas explicadas."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre a lacuna do Cloze C02 e aplica R05."
+    }
+   },
+   "comparacao": "Mesma operação (porta necessária ao envio sob firewall), com a variável decisiva \"forma de acesso\"."
+  }
+ ]
+}

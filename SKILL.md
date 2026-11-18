@@ -57,4 +57,14 @@ com outro `--with-requirements`. Os testes que dependem de `zstandard` ou
 - Rotina: `git status` antes de editar; `git log --oneline -- ARQUIVO` e `git show` para entender uma regra antes de mudá-la; `git diff` e testes depois de editar scripts ou regras cobertas pelos testes.
 - Adicione arquivos pelo nome, sem `git add -A` às cegas. Um commit por mudança coerente, com mensagem em português no imperativo que diga o quê e por quê. Não use `--no-verify`.
 - Também exigem autorização própria: `reset --hard`, `rebase`, `commit --amend` de commit existente, `checkout --`/`restore` que descarte trabalho, apagar ou trocar de branch e alterar remotos. Para mudanças grandes ou experimentais, sugira uma branch nova.
-- Nunca versione PDFs ou materiais de cursos (direitos autorais e marcas-d'água com dados pessoais), lotes de cartões do usuário, `.colpkg`/`.apkg`/`collection.*`, `.venv/`, `uv.lock` e caches. Se aparecerem no `git status`, proponha incluí-los no `.gitignore`. Lotes de estudo ficam na pasta do material, fora do repositório, salvo pedido contrário.
+- Nunca versione PDFs ou materiais de cursos (direitos autorais e marcas-d'água com dados pessoais), `.colpkg`/`.apkg`/`collection.*`, pacotes `.zip` exportados, `.venv/`, `uv.lock` e caches. Se aparecerem no `git status`, proponha incluí-los no `.gitignore`.
+
+## Onde salvar os lotes gerados
+
+Todo arquivo gerado pelas skills (TSVs, relatórios, ZIP e o script que montou o lote) fica **dentro deste repositório**, em `lotes/<CONCURSO>/<Missao_NN_Tema>/`, por exemplo `lotes/PRF/Missao_08_Correio_Eletronico/`. Não grave lotes na pasta do material de estudo.
+
+- `lote/`: `anki_certo_errado.tsv`, `anki_cloze.tsv` e `relatorios/` (é o diretório passado ao exportador).
+- `fonte/`: script gerador e decisões sobre os sinais do lint, para refazer hashes após uma edição.
+- `<CONCURSO>_<Tema>.zip`: pacote final validado, ignorado pelo Git porque se regenera a partir de `lote/`.
+- Use outro concurso no lugar de `PRF` quando o alvo for outro (por exemplo `lotes/PF_Agente/`). Antes de versionar, confira que nenhum arquivo do lote contém dados pessoais copiados do material, como nome ou CPF das marcas-d'água.
+- Versione `lote/` e `fonte/` no commit da geração, para manter o histórico dos cartões.

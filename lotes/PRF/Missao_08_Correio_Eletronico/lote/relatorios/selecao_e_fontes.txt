@@ -1,0 +1,53 @@
+SELEÇÃO E FONTES — lote Correio Eletrônico (PRF, Missão 08)
+Data das consultas: 18/11/2026. Perfil: misto (R + D + Cloze). Teto: não informado pelo usuário; menor conjunto suficiente.
+
+1. PERTINÊNCIA AO CONCURSO
+- PRF 2021 — Edital nº 1 (18/01/2021), item 24.2.1, NOÇÕES DE INFORMÁTICA: "1 Conceito de internet e intranet. 2 ... 2.1 Ferramentas e aplicativos comerciais de navegação, de correio eletrônico...". Lido em https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/ED_1_PRF_2021_ABERTURA.PDF (p. 38 do PDF). Referência histórica: não foi localizado edital PRF mais recente nesta tarefa; não presumir o conteúdo do próximo edital.
+- Prova PRF 2021 (caderno 578_PRF_001_01): nenhum item de Informática sobre e-mail foi encontrado; há só um item de redação oficial sobre e-mail institucional (fora deste lote). Uma prova não prova ausência de cobrança futura.
+- Outros concursos (transferência, conforme pedido do usuário): o tema aparece em provas Cebraspe de MPTO 2024, EMBRAPA 2024, ANP 2022, CAU/BR 2023 e PCDF 2024 (itens abaixo). Isso mostra cobrança em diferentes cargos, sem medir frequência.
+
+2. REFERÊNCIAS CEBRASPE C/E CONSULTADAS (caderno e gabarito oficiais abertos)
+REF | concurso / cargo | item | gabarito definitivo | operação observada | IDs ligados
+MPTO24_99 | MPTO 2024, Técnico Ministerial — Fotografia, caderno 952_MP_TO_016_01 | 99 | E | funções de SMTP e POP trocadas | D05 (e base de R01/R02)
+EMBRAPA24_65 | EMBRAPA (edital 2024, aplicação 2025), Técnico — TI, caderno 043_EMBRAPA_001_01 | 65 | C | firewall deve permitir e-mail → porta TCP 25 | D03, D04, D12 (e C02)
+ANP22_26 | ANP PSS 2022, conhecimentos gerais nível superior, caderno 725_ANP_CG1_01 | 26 | E | Encaminhar confundido com Responder a todos | D08, D09 (e R09/R10)
+CAU23_20 | CAU/BR 2023, conhecimentos básicos, caderno 921_CAU_BR_CB3_01 | 20 | E | Inserir Assinatura ≠ assinatura digital | D10
+Apoio sem vínculo de D: PCDF 2024, caderno 021_PCDF_003_01, item 71 (C, com justificativa oficial): SMTP/POP3 na camada de aplicação do TCP/IP; CAU/BR 2023 item 19 (C): anexar arquivo do OneDrive no Outlook; ANP 2022 item 27 (C): backup .pst no Outlook; MPTO 2024 item 97 (C): abas no Thunderbird.
+Itens citados pelo PDF e não confirmados em caderno oficial nesta tarefa: PF 2018 (símbolo @, "preposição no"), STM/2024 (SMTP × POP), Telebras 2015 (webmail), CODEVASF 2021 (POP3). Não foram usados como referência de calibração.
+D com inspiração geral (sem item Cebraspe específico localizado): D01, D02 (papéis MUA/MSA/MTA/MDA), D06 (POP3 × IMAP na mesma conta), D07 (Cco), D11 (STARTTLS/TLS).
+
+3. FONTES DE CONTEÚDO (lidas nesta tarefa)
+- RFC 5321 (SMTP): https://www.rfc-editor.org/rfc/rfc5321 — objetivo (1.1), relaying, porta 25 (4.5.4.2). IDs: R01, R02, R12, C02, D03, D05, D12.
+- RFC 6409 (submissão): https://www.rfc-editor.org/rfc/rfc6409 — porta 587, MSA exige autenticação, repasse na 25. IDs: R01, C01, C02, D01, D03.
+- RFC 1939 (POP3): https://www.rfc-editor.org/rfc/rfc1939 — porta 110, estados, exclusão em UPDATE. IDs: R02, R04, C03, D04, D06.
+- RFC 9051 (IMAP4rev2): https://www.rfc-editor.org/rfc/rfc9051 — pastas remotas como locais, ressincronização, portas 143/993. IDs: R03, C03, D04, D05, D06.
+- RFC 5598 (arquitetura do e-mail): https://www.rfc-editor.org/rfc/rfc5598 — MUA, MSA, MTA, MDA; armazenar e repassar. IDs: R05, R06, R14, C01, D01, D02, D12.
+- RFC 8314 (TLS no e-mail): https://www.rfc-editor.org/rfc/rfc8314 — 465/993/995 com TLS implícito; STARTTLS na 587. IDs: R12, C03, D11.
+- RFC 5322 (formato da mensagem), 3.6.3: https://www.rfc-editor.org/rfc/rfc5322#section-3.6.3 — To, Cc, Bcc; endereço parte-local@domínio. IDs: R07, R08, R11, D07, D08.
+- Microsoft, remetentes bloqueados: https://support.microsoft.com/en-us/office/block-or-allow-junk-email-settings-48c9f6f7-2309-4f95-9a4d-de987e880e46 — vão para Lixo Eletrônico. ID: R13.
+- Microsoft, responder/encaminhar (Outlook clássico): https://support.microsoft.com/en-au/outlook/reply-to-or-forward-an-email-message — alcance de Responder a todos; anexos só no Encaminhar. IDs: R09, R10, D08, D09.
+- Microsoft, assinatura digital: https://support.microsoft.com/en-us/office/secure-messages-by-using-a-digital-signature-in-outlook-549ca2f1-a68f-4366-85fa-b3f4b5856fc6 — ID digital; autenticidade e integridade; diferente da assinatura comum. ID: D10.
+- Ajuda do Gmail, outros clientes: https://support.google.com/mail/answer/7126229?hl=pt-BR — Gmail em Outlook/Thunderbird; IMAP sempre ativo. IDs: R05, R06.
+
+4. COBERTURA DO PDF (tópico → páginas → IDs → situação)
+Introdução/assíncrono → p. 4 → R14 → coberto (histórico excluído: T16)
+Formas de acesso, webmail, cliente → p. 5–6, 9, 23 → R05, R06, D12 → coberto
+Bloqueio de remetente → p. 5 → R13 → coberto
+Protocolos SMTP/POP3/IMAP → p. 6–7 → R01–R04, D05, D06 → coberto
+Variantes seguras → p. 6, 20 → R12, D11 → coberto
+Portas → p. 7 → C02, C03, D03, D04 → coberto
+Estados do POP3 → p. 7 → — → excluído (T15)
+Tráfego da mensagem MUA/MSA/MTA/MDA → p. 8 → C01, D01, D02 → coberto
+Endereço de e-mail → p. 10 → R11 → coberto (afirmação sobre EUA excluída: T17)
+Senha/2FA/phishing → p. 11 → — → excluído para lote de Segurança (T18)
+Pastas e marcadores → p. 12–13 → — → excluído (T19, T20)
+Cabeçalho Cc/Cco/Bcc → p. 14–15 → R07, R08, D07, D08 → coberto
+Corpo, anexos, assinatura → p. 15 → D10 → parcial (formatos excluídos: T21)
+Responder/Responder a todos/Encaminhar → p. 16, 22 → R09, R10, D08, D09 → coberto
+Questões → p. 17–23 → referências → usadas para localizar temas
+
+5. CORREÇÕES DO MATERIAL ORIGINAL
+- p. 8: "MAS (Mail Submission Agent)" é erro de digitação; o correto é MSA.
+- p. 7: na RFC 1939, "Transação" é a fase em que o cliente envia comandos (listar, baixar, marcar para exclusão), não o "estabelecimento de conexão"; a exclusão das mensagens marcadas ocorre em "Atualização", após QUIT.
+- p. 9: "IMAP: acesso apenas com conexão" é simplificação; o IMAP prevê clientes off-line que ressincronizam.
+- p. 10: "terminar no ramo = registrado nos EUA" não é regra confiável.

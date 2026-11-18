@@ -1,0 +1,424 @@
+{
+ "schema_version": 1,
+ "sha256_lote": "fb9dec54ccdf8dcda4cf80c492bbc17ac08f8e01f61f7449a9d6ef2fbfae33f4",
+ "revisor": "Claude (assistente de IA, modelo Opus 5.5) — mesmo agente que redigiu os cartões",
+ "tipo_revisao": "autorevisao",
+ "cartoes": [
+  {
+   "id": "anki_certo_errado.tsv:11",
+   "sha256": "6df9a51d3687965ede0e9ad49a203022d89ecfe7087aa288cb04d3c3e2050df0",
+   "alvo": "Função do SMTP: envio/transferência de mensagens (submissão e repasse entre servidores).",
+   "solucao": "Certo: RFC 5321 define o SMTP para transferir mensagens e descreve o repasse entre servidores; a RFC 6409 usa SMTP também na submissão pelo cliente.",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc5321",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 5321, seção 1.1 (objetivo: transferir mensagens) e 4.5.4.2 (porta 25 registrada na IANA); relaying entre servidores"
+    },
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc6409",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 6409, seção 3.1 (porta 587 para submissão), 4.3 (MSA exige autenticação) e resumo (repasse continua na porta 25)"
+    }
+   ],
+   "alternativa_concorrente": "Testei a leitura \"SMTP também recebe\": o servidor de destino recebe a mensagem de outro servidor por SMTP, mas o usuário lê a caixa por POP3/IMAP; a frase fala só de envio, então continua Certa.",
+   "recuperacao": "Exige recuperar a função do protocolo a partir do nome; a frente não diz que POP3/IMAP recebem.",
+   "feedback": "Verso separa envio (SMTP) de leitura (POP3/IMAP) e dá mnemônico do próprio material.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:9",
+   "sha256": "a74a3835cff6688fbfe22168fb97af9544531d2f800043591da24f9490bfe7af",
+   "alvo": "Função do POP3: recebimento (download) de mensagens, não envio.",
+   "solucao": "Errado: RFC 1939 define o POP3 para o cliente acessar a caixa postal e recuperar mensagens; envio é SMTP.",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc1939",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 1939, seções 3–6: porta TCP 110; estados AUTHORIZATION/TRANSACTION/UPDATE; POP3 não se destina a manipular extensamente a caixa no servidor"
+    },
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc5321",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 5321, seção 1.1 (objetivo: transferir mensagens) e 4.5.4.2 (porta 25 registrada na IANA); relaying entre servidores"
+    }
+   ],
+   "alternativa_concorrente": "Considerei clientes que usam POP3 e SMTP na mesma conta: ainda assim cada protocolo tem papel próprio; não há envio por POP3.",
+   "recuperacao": "Recupera a direção (receber × enviar) do POP3; a frente não oferece pista do papel correto.",
+   "feedback": "Verso corrige a troca de funções, erro explorado em item real (MPTO 2024, item 99).",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:12",
+   "sha256": "e80578dfd8aa510027d8531a91ab58fdb9e38e58bffb6d6a046d1df1967f359d",
+   "alvo": "Característica do IMAP: armazenamento no servidor e sincronização entre dispositivos.",
+   "solucao": "Certo: RFC 9051 descreve a manipulação de caixas remotas equivalente a pastas locais e a ressincronização de clientes.",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc9051",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 9051 (IMAP4rev2), resumo: manipular caixas remotas de modo equivalente a pastas locais, com ressincronização; seção 2.1: portas 143 e 993"
+    }
+   ],
+   "alternativa_concorrente": "Testei \"IMAP só funciona on-line\": a RFC prevê clientes off-line que ressincronizam, mas isso não afeta a afirmação, que trata de onde ficam as mensagens.",
+   "recuperacao": "Exige lembrar a propriedade distintiva do IMAP diante do POP3.",
+   "feedback": "Verso explica o porquê da sincronização e contrasta com POP3.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:2",
+   "sha256": "d529d1467cde41a7a35f137dca713bffe179ed68a431e2581169932df394b274",
+   "alvo": "Comportamento padrão do POP3: download para o dispositivo local, em regra com remoção do servidor.",
+   "solucao": "Errado: RFC 1939 trata o POP3 como recuperação da caixa postal, sem manipulação extensa no servidor; exclusão das marcadas ocorre no estado UPDATE.",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc1939",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 1939, seções 3–6: porta TCP 110; estados AUTHORIZATION/TRANSACTION/UPDATE; POP3 não se destina a manipular extensamente a caixa no servidor"
+    }
+   ],
+   "alternativa_concorrente": "Considerei a opção \"deixar cópia no servidor\": ela existe, mas não torna a frase certa, porque a mensagem ainda é copiada para o computador.",
+   "recuperacao": "Recupera o local de armazenamento no POP3; não repete a frente do R03 (que trata do IMAP).",
+   "feedback": "Verso corrige e indica a exceção (cópia no servidor) para evitar absolutismo.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:22",
+   "sha256": "82a1fe3d9d8a34319dbb464b5cc42d78e97ca5428cd1c33d44460e894f2f9eb0",
+   "alvo": "Webmail: acesso pelo navegador, sem instalar cliente.",
+   "solucao": "Certo: na RFC 5598 o MUA pode ser uma interface web; o Gmail é usado no navegador e, opcionalmente, em clientes.",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc5598",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 5598, seção 4: papéis MUA, MSA, MTA e MDA e ordem autor → MSA → MTAs → MDA → MUA do destinatário (store-and-forward)"
+    },
+    {
+     "url": "https://support.google.com/mail/answer/7126229?hl=pt-BR",
+     "consulta": "2026-11-18",
+     "trecho": "Ajuda do Gmail: é possível adicionar o Gmail a clientes como Outlook, Apple Mail e Thunderbird; acesso IMAP sempre ativado"
+    }
+   ],
+   "alternativa_concorrente": "Considerei a necessidade de \"plugin\" ou aplicativo: webmail não exige; aplicativo móvel é forma alternativa de acesso, não requisito.",
+   "recuperacao": "Recupera a característica definidora do webmail.",
+   "feedback": "Verso explica quem faz cada parte (navegador × provedor).",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:8",
+   "sha256": "d633786783f1bb952adc5cd8f9c269f8391c0eb862381bd73978c321710dc25e",
+   "alvo": "Distinguir cliente de e-mail instalado de webmail.",
+   "solucao": "Errado: a Ajuda do Gmail cita Outlook e Thunderbird como clientes aos quais se adiciona a conta; não são páginas web.",
+   "fontes": [
+    {
+     "url": "https://support.google.com/mail/answer/7126229?hl=pt-BR",
+     "consulta": "2026-11-18",
+     "trecho": "Ajuda do Gmail: é possível adicionar o Gmail a clientes como Outlook, Apple Mail e Thunderbird; acesso IMAP sempre ativado"
+    },
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc5598",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 5598, seção 4: papéis MUA, MSA, MTA e MDA e ordem autor → MSA → MTAs → MDA → MUA do destinatário (store-and-forward)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei o Outlook na web (Outlook.com), que é webmail; por isso a frente especifica \"instalado no computador\".",
+   "recuperacao": "Exige classificar exemplos conhecidos; a frente não informa a categoria correta.",
+   "feedback": "Verso dá o critério (instalado × navegador) e exemplos de cada lado.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:5",
+   "sha256": "3c0b565d835524c20f5770af7ff93c98f0c3186f78c41ac54b464f26edbc229e",
+   "alvo": "Efeito do campo Cco/Bcc.",
+   "solucao": "Certo: RFC 5322, 3.6.3 — Bcc contém endereços que não devem ser revelados aos outros destinatários.",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc5322#section-3.6.3",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 5322, seção 3.6.3: To (destinatários principais), Cc (outros destinatários) e Bcc (endereços não revelados aos demais destinatários)"
+    }
+   ],
+   "alternativa_concorrente": "Testei \"Cco oculta o remetente\": não oculta; a frase não afirma isso, então segue Certa.",
+   "recuperacao": "Recupera o efeito do campo a partir de seu nome.",
+   "feedback": "Verso explica o sinônimo Bcc, que a banca usa como pegadinha.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:20",
+   "sha256": "676117ef98199119262ff52aec450a7739a20d273c60e6d3596b8aabe6606cde",
+   "alvo": "Cc é cópia visível (contraste com Cco).",
+   "solucao": "Errado: RFC 5322 descreve o Cc como lista de outros destinatários, sem ocultação; ocultação é do Bcc.",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc5322#section-3.6.3",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 5322, seção 3.6.3: To (destinatários principais), Cc (outros destinatários) e Bcc (endereços não revelados aos demais destinatários)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei clientes que exibem resumo de destinatários: não altera a regra do campo Cc.",
+   "recuperacao": "Contraste direto entre Cc e Cco, confusão comum de nomenclatura.",
+   "feedback": "Verso corrige com a regra dos dois campos.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:14",
+   "sha256": "35f2411abd5adf8c4ae570aa82e62549f51d78b004aba16a90b65d0bdf83e7f1",
+   "alvo": "Alcance do comando Responder a todos.",
+   "solucao": "Certo: a Microsoft define Responder a todos como resposta ao remetente e a todos nas linhas Para e Cc.",
+   "fontes": [
+    {
+     "url": "https://support.microsoft.com/en-au/outlook/reply-to-or-forward-an-email-message",
+     "consulta": "2026-11-18",
+     "trecho": "Microsoft Support (Outlook clássico): Responder só ao remetente; Responder a todos inclui Para e Cc; anexos não vão na resposta; ao encaminhar, os anexos originais são incluídos"
+    }
+   ],
+   "alternativa_concorrente": "Considerei o Cco: não é incluído; a frase lista só Para e Cc, coerente com a fonte.",
+   "recuperacao": "Recupera o alcance exato do comando.",
+   "feedback": "Verso diferencia os três comandos e cita o caso do Cco.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:23",
+   "sha256": "9ab105395a449861d4939b42164d66e216823598be3aa8137a61a7051caffa7f",
+   "alvo": "Encaminhar mantém anexos; responder não.",
+   "solucao": "Errado: a Microsoft informa que anexos da mensagem original são incluídos automaticamente ao encaminhar.",
+   "fontes": [
+    {
+     "url": "https://support.microsoft.com/en-au/outlook/reply-to-or-forward-an-email-message",
+     "consulta": "2026-11-18",
+     "trecho": "Microsoft Support (Outlook clássico): Responder só ao remetente; Responder a todos inclui Para e Cc; anexos não vão na resposta; ao encaminhar, os anexos originais são incluídos"
+    }
+   ],
+   "alternativa_concorrente": "Considerei que o usuário pode remover o anexo manualmente antes de encaminhar: isso é escolha do usuário, não comportamento do comando.",
+   "recuperacao": "Recupera a regra dos anexos por comando.",
+   "feedback": "Verso explica o motivo de responder não incluir anexos.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:13",
+   "sha256": "0a28c2e117814b84d4037cbd674b6d20d034666bd7ae2ec9fc2e1fa930577d32",
+   "alvo": "Estrutura do endereço de e-mail: parte local @ domínio.",
+   "solucao": "Certo: na RFC 5322 o endereço (addr-spec) é parte local + \"@\" + domínio.",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc5322#section-3.6.3",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 5322, seção 3.6.3: To (destinatários principais), Cc (outros destinatários) e Bcc (endereços não revelados aos demais destinatários)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei endereço com dois @: inválido; não afeta o exemplo.",
+   "recuperacao": "Exige reconhecer as duas partes do endereço e a função do @.",
+   "feedback": "Verso nomeia as partes e explica a leitura \"em\", cobrada em item da PF 2018 citado no material.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:26",
+   "sha256": "f50fa0f824c0dd32691dd3d3497b07f27d1f616e241ad1e7faa748d3778d23b9",
+   "alvo": "SMTP não cifra por padrão; segurança vem de TLS ou S/MIME/PGP.",
+   "solucao": "Errado: a RFC 8314 trata o TLS como camada adicionada (STARTTLS ou TLS implícito) aos protocolos de e-mail.",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc8314",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 8314, seções 3.1–3.3: TLS implícito nas portas 465 (submissão), 993 (IMAP) e 995 (POP3); STARTTLS na 587"
+    },
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc5321",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 5321, seção 1.1 (objetivo: transferir mensagens) e 4.5.4.2 (porta 25 registrada na IANA); relaying entre servidores"
+    }
+   ],
+   "alternativa_concorrente": "Considerei provedores que forçam TLS: é configuração adicional, não propriedade do SMTP \"por si só\".",
+   "recuperacao": "Recupera a ausência de criptografia nativa.",
+   "feedback": "Verso aponta as camadas que fornecem a proteção.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:18",
+   "sha256": "717ec15410cc793115ce15c64b39c4b26c9d0130de341c053dfd82fa0600504d",
+   "alvo": "Efeito do bloqueio de remetente no Outlook.",
+   "solucao": "Errado: a Microsoft informa que mensagens de remetentes bloqueados vão direto para Lixo Eletrônico.",
+   "fontes": [
+    {
+     "url": "https://support.microsoft.com/en-us/office/block-or-allow-junk-email-settings-48c9f6f7-2309-4f95-9a4d-de987e880e46",
+     "consulta": "2026-11-18",
+     "trecho": "Microsoft Support, Blocked Senders: mensagens de remetentes bloqueados vão direto para a pasta Lixo Eletrônico"
+    }
+   ],
+   "alternativa_concorrente": "Considerei bloqueio feito pelo administrador do servidor (regras de transporte): é outro mecanismo; a frente trata da opção do usuário.",
+   "recuperacao": "Recupera o efeito real do bloqueio, apontado no material como já cobrado.",
+   "feedback": "Verso corrige com a pasta de destino.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:15",
+   "sha256": "26c8050fae60bdff91a4bf1392b78f59bf5db50e667d911d6daacea0c20d4610",
+   "alvo": "Caráter assíncrono (armazenar e repassar) do e-mail.",
+   "solucao": "Certo: a RFC 5598 descreve o e-mail como serviço de armazenar e repassar (store-and-forward), com entrega na caixa postal.",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc5598",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 5598, seção 4: papéis MUA, MSA, MTA e MDA e ordem autor → MSA → MTAs → MDA → MUA do destinatário (store-and-forward)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei entrega quase instantânea em serviços modernos: rapidez não muda o caráter assíncrono.",
+   "recuperacao": "Recupera o significado de assíncrono aplicado ao e-mail.",
+   "feedback": "Verso define o termo e dá contraexemplo síncrono.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_cloze.tsv:1",
+   "sha256": "cda0349d2081e97065ae949d54cf8a8b4e9a2323ea95cd3d13dd8501f2c3367a",
+   "alvo": "Papéis MUA, MSA, MTA e MDA na ordem do percurso.",
+   "solucao": "Lacunas: MUA, MSA, MTA, MDA (sigla basta). RFC 5598 define os papéis e a ordem; RFC 6409 atribui ao MSA a autenticação.",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc5598",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 5598, seção 4: papéis MUA, MSA, MTA e MDA e ordem autor → MSA → MTAs → MDA → MUA do destinatário (store-and-forward)"
+    },
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc6409",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 6409, seção 3.1 (porta 587 para submissão), 4.3 (MSA exige autenticação) e resumo (repasse continua na porta 25)"
+    }
+   ],
+   "alternativa_concorrente": "Testei trocar MTA por MDA na etapa 3: a descrição \"de servidor em servidor\" só cabe no MTA; \"coloca na caixa postal\" só cabe no MDA.",
+   "recuperacao": "As descrições funcionais determinam cada sigla sem revelá-la; as quatro formam um único percurso coerente.",
+   "feedback": "Extra decodifica cada letra (User/Submission/Transfer/Delivery) e liga às portas e protocolos.",
+   "desafiadores_por_lacuna": {
+    "1": [
+     "anki_certo_errado.tsv:17"
+    ],
+    "2": [
+     "anki_certo_errado.tsv:25"
+    ],
+    "3": [
+     "anki_certo_errado.tsv:17"
+    ],
+    "4": [
+     "anki_certo_errado.tsv:25"
+    ]
+   },
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_cloze.tsv:2",
+   "sha256": "a4c23cd3e539d1f4c1291237d4689b173a72c7fa239077dd289dad7f227e7462",
+   "alvo": "Porta padrão do SMTP no repasse entre servidores.",
+   "solucao": "Lacuna: 25. RFC 5321, 4.5.4.2 (porta 25 registrada na IANA); RFC 6409 confirma que o repasse continua na 25 e a submissão usa 587.",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc5321",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 5321, seção 1.1 (objetivo: transferir mensagens) e 4.5.4.2 (porta 25 registrada na IANA); relaying entre servidores"
+    },
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc6409",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 6409, seção 3.1 (porta 587 para submissão), 4.3 (MSA exige autenticação) e resumo (repasse continua na porta 25)"
+    }
+   ],
+   "alternativa_concorrente": "Testei 587 e 465: são de submissão pelo usuário, não de repasse entre servidores; a frente especifica \"entre servidores\".",
+   "recuperacao": "Contexto \"entre servidores\" determina 25 e afasta 587/465.",
+   "feedback": "Extra separa repasse de submissão e lista portas confundíveis.",
+   "desafiadores_por_lacuna": {
+    "1": [
+     "anki_certo_errado.tsv:1",
+     "anki_certo_errado.tsv:19"
+    ]
+   },
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_cloze.tsv:3",
+   "sha256": "8dcddc0a43321c1826c216b0c8c1721fcdf25a8187fdc0915a3bef73f407f53d",
+   "alvo": "Portas padrão de POP3 e IMAP.",
+   "solucao": "Lacunas: 110 (RFC 1939) e 143 (RFC 9051, 2.1).",
+   "fontes": [
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc1939",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 1939, seções 3–6: porta TCP 110; estados AUTHORIZATION/TRANSACTION/UPDATE; POP3 não se destina a manipular extensamente a caixa no servidor"
+    },
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc9051",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 9051 (IMAP4rev2), resumo: manipular caixas remotas de modo equivalente a pastas locais, com ressincronização; seção 2.1: portas 143 e 993"
+    },
+    {
+     "url": "https://www.rfc-editor.org/rfc/rfc8314",
+     "consulta": "2026-11-18",
+     "trecho": "RFC 8314, seções 3.1–3.3: TLS implícito nas portas 465 (submissão), 993 (IMAP) e 995 (POP3); STARTTLS na 587"
+    }
+   ],
+   "alternativa_concorrente": "Testei 995/993: são as portas com TLS implícito; a frente pede \"sem TLS\".",
+   "recuperacao": "Recupera o par de portas que o material apresenta na tabela POP3 × IMAP.",
+   "feedback": "Extra acrescenta as portas seguras para evitar confusão.",
+   "desafiadores_por_lacuna": {
+    "1": [
+     "anki_certo_errado.tsv:7"
+    ],
+    "2": [
+     "anki_certo_errado.tsv:7"
+    ]
+   },
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  }
+ ],
+ "sinais": [
+  {
+   "sinal_id": "c24587b86f1a53c22843d0b4e41abc99c8d79e32a5805bf7d1795a912ca6ffbe",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "D05: as três frases trazem dados indispensáveis à inferência — qual protocolo está em cada função (entrada IMAP, saída SMTP), qual servidor falhou e qual continuou ativo. Sem a configuração, o aluno não teria como deduzir que a leitura continua e o envio falha."
+  },
+  {
+   "sinal_id": "deaba2615ff296834c1a63d66e0c5dd765e81b2fc5ad77131cd31c24dd6e2f0a",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "D10: 'automaticamente' descreve como a assinatura de texto é inserida (recurso real do Outlook), não qualifica a conclusão julgada. O erro decisivo é confundir assinatura de texto com assinatura digital, e a palavra não indica o gabarito."
+  },
+  {
+   "sinal_id": "d5d581b7c9a80d42bac0194a7228c10ab4c77039c03483a668e1c1d2b9d3c126",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R03: a frente já foi condensada de 39 para 29 palavras; cinco delas são a expansão da sigla IMAP, mantida porque o usuário pode não conhecê-la, e o parêntese (ler, mover, apagar) concretiza o que significa sincronizar. Continua sendo um julgamento único e direto."
+  },
+  {
+   "sinal_id": "f83488d6d6240994321cc813c9efb12bb4452559952fa5480359c9c83a2cd59c",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "D06: a ordem dos fatos é o dado decisivo — POP3 configurado antes, no modo que apaga do servidor, e IMAP depois. Cortar o modo do POP3 abriria a leitura concorrente ('deixar cópia no servidor') e tornaria o gabarito indeterminado."
+  },
+  {
+   "sinal_id": "3fb9dbde69b444d435edf69de612ba8daa1cfb441ed212ea837c600e35c37eef",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "D12: a regra do firewall (somente 80/443), a forma de acesso (webmail) e a justificativa a julgar são necessárias para o contraste com D03. A justificativa faz parte do julgamento, porque o aluno precisa verificar onde o SMTP opera."
+  },
+  {
+   "sinal_id": "6920fecd94273fb1a39eb4fcb9b063c3e570401d69418a2780f3eaabbfd58c7a",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "D11: as duas configurações (587+STARTTLS e 465+TLS implícito) e a ressalva 'o SMTP, por si só, não prevê criptografia' delimitam o trecho protegido. Sem elas, o item ficaria ambíguo entre cifrar a conexão e cifrar o conteúdo de ponta a ponta."
+  },
+  {
+   "sinal_id": "29cd7c6c22c9237961c42dab0998d516ed4ff3d72d3ca4552bf8111e45146237",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "D01: a frente foi reduzida de 75 para 61 palavras. A narrativa de dois provedores é necessária porque o aluno precisa associar cada ação concreta (conferir login, repassar, depositar na caixa) a um papel; sem as ações, o item viraria definição direta das siglas."
+  }
+ ]
+}
