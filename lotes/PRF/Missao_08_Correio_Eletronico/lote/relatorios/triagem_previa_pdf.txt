@@ -9,9 +9,9 @@ ID | página | prioridade | alvo / valor | operação | formato | decisão
 T01 | 6–7 | A | SMTP = envio (cliente→servidor e entre servidores) | memória de função | R | R01; aplicado em D05
 T02 | 6–7 | A | POP3 = recebimento/download | memória de função | R | R02, R04; aplicado em D06
 T03 | 6–7 | A | IMAP = mensagens no servidor, sincronização | memória de propriedade | R | R03; aplicado em D06, D05
-T04 | 7 | B | Portas 110 (POP3) e 143 (IMAP) | memória exata | Cloze | C03 + D04 (filtro numérico: tabela do PDF + item EMBRAPA de porta × serviço)
-T05 | 7–8 | B | Porta 25 do SMTP (dado ausente no PDF, acrescentado por pesquisa) | memória exata | Cloze | C02 + D03, D12
-T06 | 8 | B | MUA/MSA/MTA/MDA (PDF grafa "MAS" por engano na p. 8) | memória de papéis | Cloze | C01 + D01, D02
+T04 | 7 | B | Portas 110 (POP3) e 143 (IMAP) | memória exata | Cloze | C06 (110) e C07 (143), uma nota por porta + D04 (filtro numérico: tabela do PDF + item EMBRAPA de porta × serviço)
+T05 | 7–8 | B | Porta 25 do SMTP (dado ausente no PDF, acrescentado por pesquisa) | memória exata | Cloze | C05 + D03, D12
+T06 | 8 | B | MUA/MSA/MTA/MDA (PDF grafa "MAS" por engano na p. 8) | memória de papéis | Cloze | C01 (MUA), C02 (MSA), C03 (MTA), C04 (MDA), uma nota por agente + D01, D02
 T07 | 5, 9, 23 | A | Webmail × cliente instalado | distinção | R/D | R05, R06, D12
 T08 | 5 | A | Bloquear remetente no Outlook → Lixo Eletrônico | memória (cobrada, segundo o PDF) | R | R13
 T09 | 14–15 | A | Cc × Cco/Bcc | distinção + aplicação | R/D | R07, R08, D07
@@ -30,4 +30,4 @@ T21 | 15 | C | Formatos do corpo (TXT, RTF, HTML) e prioridade | — | não cria
 T22 | 9 | C | "Webmail usa diretamente HTTP" e "IMAP só funciona on-line" (tabelas do PDF) | — | não criar | simplificações imprecisas: IMAP prevê clientes off-line com ressincronização (RFC 9051); a parte correta (navegador usa HTTP/HTTPS) entrou em R05/D12
 T23 | 17–23 | — | Questões do material | referência | — | usadas como mapa de temas; itens Cebraspe citados foram conferidos em cadernos oficiais quando localizados (ver selecao_e_fontes.txt)
 
-Candidatos Cloze examinados: portas (C02, C03: aprovados); papéis MUA/MSA/MTA/MDA (C01: aprovado); estados do POP3 (rejeitado, T15); significado das siglas SMTP/POP/IMAP (rejeitado: R01–R03 já recuperam a função, e a expansão da sigla não é o conhecimento útil); campo Cco (rejeitado como Cloze: a frente entregaria "oculta" pelo próprio nome do campo; virou R/D).
+Candidatos Cloze examinados: portas (C05, C06, C07: aprovados, uma omissão por nota); papéis MUA/MSA/MTA/MDA (C01–C04: aprovados, uma nota por agente, pois não formam mnemônico); estados do POP3 (rejeitado, T15); significado das siglas SMTP/POP/IMAP (rejeitado: R01–R03 já recuperam a função, e a expansão da sigla não é o conhecimento útil); campo Cco (rejeitado como Cloze: a frente entregaria "oculta" pelo próprio nome do campo; virou R/D).

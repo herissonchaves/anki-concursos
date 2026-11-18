@@ -1,16 +1,11 @@
-[
- {"sinal_id": "c24587b86f1a53c22843d0b4e41abc99c8d79e32a5805bf7d1795a912ca6ffbe", "decisao": "EXCECAO_JUSTIFICADA",
-  "motivo": "D05: as três frases trazem dados indispensáveis à inferência — qual protocolo está em cada função (entrada IMAP, saída SMTP), qual servidor falhou e qual continuou ativo. Sem a configuração, o aluno não teria como deduzir que a leitura continua e o envio falha."},
- {"sinal_id": "deaba2615ff296834c1a63d66e0c5dd765e81b2fc5ad77131cd31c24dd6e2f0a", "decisao": "EXCECAO_JUSTIFICADA",
-  "motivo": "D10: 'automaticamente' descreve como a assinatura de texto é inserida (recurso real do Outlook), não qualifica a conclusão julgada. O erro decisivo é confundir assinatura de texto com assinatura digital, e a palavra não indica o gabarito."},
- {"sinal_id": "d5d581b7c9a80d42bac0194a7228c10ab4c77039c03483a668e1c1d2b9d3c126", "decisao": "EXCECAO_JUSTIFICADA",
-  "motivo": "R03: a frente já foi condensada de 39 para 29 palavras; cinco delas são a expansão da sigla IMAP, mantida porque o usuário pode não conhecê-la, e o parêntese (ler, mover, apagar) concretiza o que significa sincronizar. Continua sendo um julgamento único e direto."},
- {"sinal_id": "f83488d6d6240994321cc813c9efb12bb4452559952fa5480359c9c83a2cd59c", "decisao": "EXCECAO_JUSTIFICADA",
-  "motivo": "D06: a ordem dos fatos é o dado decisivo — POP3 configurado antes, no modo que apaga do servidor, e IMAP depois. Cortar o modo do POP3 abriria a leitura concorrente ('deixar cópia no servidor') e tornaria o gabarito indeterminado."},
- {"sinal_id": "3fb9dbde69b444d435edf69de612ba8daa1cfb441ed212ea837c600e35c37eef", "decisao": "EXCECAO_JUSTIFICADA",
-  "motivo": "D12: a regra do firewall (somente 80/443), a forma de acesso (webmail) e a justificativa a julgar são necessárias para o contraste com D03. A justificativa faz parte do julgamento, porque o aluno precisa verificar onde o SMTP opera."},
- {"sinal_id": "6920fecd94273fb1a39eb4fcb9b063c3e570401d69418a2780f3eaabbfd58c7a", "decisao": "EXCECAO_JUSTIFICADA",
-  "motivo": "D11: as duas configurações (587+STARTTLS e 465+TLS implícito) e a ressalva 'o SMTP, por si só, não prevê criptografia' delimitam o trecho protegido. Sem elas, o item ficaria ambíguo entre cifrar a conexão e cifrar o conteúdo de ponta a ponta."},
- {"sinal_id": "29cd7c6c22c9237961c42dab0998d516ed4ff3d72d3ca4552bf8111e45146237", "decisao": "EXCECAO_JUSTIFICADA",
-  "motivo": "D01: a frente foi reduzida de 75 para 61 palavras. A narrativa de dois provedores é necessária porque o aluno precisa associar cada ação concreta (conferir login, repassar, depositar na caixa) a um papel; sem as ações, o item viraria definição direta das siglas."}
-]
+{
+ "_como_usar": "Chave = ID editorial do cartão + '|' + código do sinal. O gerador só aplica a justificativa se o sinal atual existir; sinal novo fica pendente e bloqueia a exportação.",
+ "D05|FRENTE_DESAFIADORA_EXTENSA": "D05: as três frases trazem dados indispensáveis à inferência — qual protocolo está em cada função (entrada IMAP, saída SMTP), qual servidor falhou e qual continuou ativo. Sem a configuração, o aluno não teria como deduzir que a leitura continua e o envio falha.",
+ "D10|ABSOLUTO_PISTA_POSSIVEL": "D10: 'automaticamente' descreve como a assinatura de texto é inserida (recurso real do Outlook), não qualifica a conclusão julgada. O erro decisivo é confundir assinatura de texto com assinatura digital, e a palavra não indica o gabarito.",
+ "R03|FRENTE_RAPIDA_EXTENSA": "R03: 29 palavras, das quais cinco são a expansão da sigla IMAP, mantida porque o usuário pode não conhecê-la; o parêntese (ler, mover, apagar) concretiza o que significa sincronizar. Continua sendo um julgamento único e direto.",
+ "D06|FRENTE_DESAFIADORA_EXTENSA": "D06: a ordem dos fatos é o dado decisivo — POP3 configurado antes, no modo que apaga do servidor, e IMAP depois. Cortar o modo do POP3 abriria a leitura concorrente ('deixar cópia no servidor') e tornaria o gabarito indeterminado.",
+ "D12|FRENTE_DESAFIADORA_EXTENSA": "D12: a regra do firewall (somente 80/443), a forma de acesso (webmail) e a justificativa a julgar são necessárias para o contraste com D03. A justificativa faz parte do julgamento, porque o aluno precisa verificar onde o SMTP opera.",
+ "D11|FRENTE_DESAFIADORA_EXTENSA": "D11: as duas configurações (587+STARTTLS e 465+TLS implícito) e a ressalva 'o SMTP, por si só, não prevê criptografia' delimitam o trecho protegido. Sem elas, o item ficaria ambíguo entre cifrar a conexão e cifrar o conteúdo de ponta a ponta.",
+ "D01|FRENTE_DESAFIADORA_EXTENSA": "D01: 61 palavras. A narrativa de dois provedores é necessária porque o aluno precisa associar cada ação concreta (conferir login, repassar, depositar na caixa) a um papel; sem as ações, o item viraria definição direta das siglas.",
+ "C07|SEMELHANCA_LEXICAL": "C07 × C06: as duas notas têm a mesma estrutura de propósito (porta padrão de um protocolo sem TLS), mas recuperam fatos diferentes — 143 para IMAP e 110 para POP3. Pela regra 2.15 de uma omissão por nota, o antigo par virou duas notas paralelas; o protocolo nomeado em cada frente determina a resposta, então não há duplicidade cognitiva."
+}

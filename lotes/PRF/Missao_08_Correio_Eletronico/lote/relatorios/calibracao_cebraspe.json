@@ -58,7 +58,7 @@
   {
    "id": "D01",
    "linha": 25,
-   "sha256": "2f077f9df298443ec6aae4f89e73a563eed0127aa6fa86b541ca23c70aa03efd",
+   "sha256": "b9aad451160a95b0dba04e92395d77c36087b965e6c1e8765fb5e7d5caec079f",
    "gabarito": "C",
    "alvo": "Identificar MSA e MDA pelas ações descritas.",
    "operacao_autoral": "Mapear ações concretas (autenticar/aceitar; depositar) aos papéis da arquitetura.",
@@ -99,7 +99,7 @@
     },
     "feedback": {
      "resultado": "PASSA",
-     "evidencia": "Verso explica os quatro papéis e o dado decisivo."
+     "evidencia": "Verso traz a regra dos quatro papéis, o dado decisivo no bloco \"No caso\", o fluxo visual e o Memorize."
     },
     "linguagem_didatica": {
      "resultado": "PASSA",
@@ -107,7 +107,7 @@
     },
     "utilidade": {
      "resultado": "PASSA",
-     "evidencia": "Cobre lacunas MSA e MDA do Cloze C01."
+     "evidencia": "Cobre as notas Cloze do MSA (C02) e do MDA (C04)."
     }
    },
    "limitacao": "Nenhum item CESPE/Cebraspe C/E sobre MSA/MDA foi localizado nas buscas em cadernos oficiais (MPTO 2024, EMBRAPA 2024, ANP 2022, CAU/BR 2023, PCDF 2024, PF 2018, PRF 2021); construção baseada no conteúdo das RFCs."
@@ -115,7 +115,7 @@
   {
    "id": "D02",
    "linha": 17,
-   "sha256": "804f12b87ef0a2472d65ac325f7d235ac20ab4dc53ab2ad837a7af41daf0a953",
+   "sha256": "ec96f5b7502f9bd5ad42bca1abcabf729af344c20b45527810c259f6eb323cc5",
    "gabarito": "E",
    "alvo": "Distinguir MUA de MTA.",
    "operacao_autoral": "Classificar o papel do aplicativo do destinatário a partir da ação (ler a caixa por IMAP).",
@@ -155,7 +155,7 @@
     },
     "feedback": {
      "resultado": "PASSA",
-     "evidencia": "Verso localiza o erro na justificativa e dá a correção."
+     "evidencia": "Bloco de erro localiza a falha na justificativa; fluxo visual; Memorize com a formulação correta."
     },
     "linguagem_didatica": {
      "resultado": "PASSA",
@@ -163,7 +163,7 @@
     },
     "utilidade": {
      "resultado": "PASSA",
-     "evidencia": "Cobre lacunas MUA e MTA do Cloze C01."
+     "evidencia": "Cobre as notas Cloze do MUA (C01) e do MTA (C03)."
     }
    },
    "limitacao": "Nenhum item CESPE/Cebraspe C/E sobre MUA/MTA foi localizado nas buscas em cadernos oficiais; construção baseada na RFC 5598."
@@ -171,7 +171,7 @@
   {
    "id": "D03",
    "linha": 1,
-   "sha256": "a9768b3c7eab422d9e50c5218a6a537a79f0af4867e2c7716377a0f6ee42b783",
+   "sha256": "9f9e2d5d8c83fa20b5b5b2853550e27dd87344bd303e6366dc923bf2241a58d5",
    "gabarito": "E",
    "alvo": "Associar o repasse entre servidores ao SMTP/porta 25.",
    "operacao_autoral": "Avaliar se uma regra de firewall permite um serviço, identificando protocolo e porta.",
@@ -214,7 +214,7 @@
     },
     "feedback": {
      "resultado": "PASSA",
-     "evidencia": "Verso aponta a porta correta e a consequência."
+     "evidencia": "Erro localizado na justificativa, consequência explicada, tabela de portas e Memorize."
     },
     "linguagem_didatica": {
      "resultado": "PASSA",
@@ -222,7 +222,7 @@
     },
     "utilidade": {
      "resultado": "PASSA",
-     "evidencia": "Cobre a lacuna do Cloze C02."
+     "evidencia": "Cobre a nota Cloze C05 (porta 25)."
     }
    },
    "comparacao": "Mesma operação (identificar porta exigida pelo envio de e-mail sob regra de firewall), com gabarito invertido e justificativa a julgar."
@@ -230,7 +230,7 @@
   {
    "id": "D04",
    "linha": 7,
-   "sha256": "dbda0a558eb5c3071443ffc7bd41377ce6509af98f7bdddbe9a73d2eff237474",
+   "sha256": "1443fa7cc3aa391d5463f0326b140cdcd1991b7f0b942292c97d2d3727a38bd1",
    "gabarito": "C",
    "alvo": "Portas 110 (POP3) e 143 (IMAP) aplicadas.",
    "operacao_autoral": "Deduzir o efeito de bloqueio/liberação de portas sobre cada protocolo.",
@@ -273,7 +273,7 @@
     },
     "feedback": {
      "resultado": "PASSA",
-     "evidencia": "Verso associa cada porta e conclui."
+     "evidencia": "Regra, aplicação ao caso, tabela de resultado e Memorize."
     },
     "linguagem_didatica": {
      "resultado": "PASSA",
@@ -281,7 +281,7 @@
     },
     "utilidade": {
      "resultado": "PASSA",
-     "evidencia": "Cobre as duas lacunas do Cloze C03."
+     "evidencia": "Cobre as notas Cloze C06 (110) e C07 (143)."
     }
    },
    "comparacao": "Transfere a operação porta → serviço do item 65 para POP3/IMAP; gabarito próprio conferido nas RFCs."
@@ -289,7 +289,7 @@
   {
    "id": "D05",
    "linha": 3,
-   "sha256": "0f6df5bbe86cc4e5a68de15d5b6ed816e1cd3723a0631107d8800a45b9892e6b",
+   "sha256": "62b84c59928973a40cf862c356414c2c29d388ebb952099955ece6b19571581d",
    "gabarito": "C",
    "alvo": "Funções separadas de IMAP (receber) e SMTP (enviar).",
    "operacao_autoral": "Inferir a consequência da falha de um protocolo sobre envio e leitura.",
@@ -332,7 +332,7 @@
     },
     "feedback": {
      "resultado": "PASSA",
-     "evidencia": "Verso explica cada função e o erro comum."
+     "evidencia": "Regra, aplicação, confusão concorrente, tabela e Memorize."
     },
     "linguagem_didatica": {
      "resultado": "PASSA",
@@ -348,7 +348,7 @@
   {
    "id": "D06",
    "linha": 16,
-   "sha256": "f8e2d3fbb4b554f909764c25bbb46efafcb39529fdae61a36f6258b25a85f318",
+   "sha256": "314589556f89edc676282a19efde4c22f09f4bd07bead302a6a4f0b89d9f6dbc",
    "gabarito": "E",
    "alvo": "Limite da sincronização do IMAP diante da remoção feita pelo POP3.",
    "operacao_autoral": "Combinar o comportamento de dois protocolos na mesma conta para prever o resultado.",
@@ -389,7 +389,7 @@
     },
     "feedback": {
      "resultado": "PASSA",
-     "evidencia": "Verso explica por que a sincronização não alcança as mensagens."
+     "evidencia": "Erro localizado com fluxo visual do que aconteceu e Memorize."
     },
     "linguagem_didatica": {
      "resultado": "PASSA",
@@ -405,7 +405,7 @@
   {
    "id": "D07",
    "linha": 24,
-   "sha256": "52cc674247eb22d4623f032482762bf60876cd31fd8875e8551350853e913ef6",
+   "sha256": "baa91780d55a402964e051f7d3d0d43980929386506a4e9b8b3de863e4f599f5",
    "gabarito": "C",
    "alvo": "Aplicar visibilidade de Para/Cc/Cco.",
    "operacao_autoral": "Prever o que cada destinatário vê conforme o campo usado.",
@@ -445,7 +445,7 @@
     },
     "feedback": {
      "resultado": "PASSA",
-     "evidencia": "Verso explica campo por campo."
+     "evidencia": "Regra, aplicação ao caso, tabela de visibilidade e Memorize."
     },
     "linguagem_didatica": {
      "resultado": "PASSA",
@@ -461,7 +461,7 @@
   {
    "id": "D08",
    "linha": 10,
-   "sha256": "6f681e7a5df03ce787b92c6c876ac2e7181bf9d63975701d8f6a3f0d8becbe8e",
+   "sha256": "7d806ac7180673330ef8ce0790e2a764f596a2b7fc16a837fb826f53b6d34937",
    "gabarito": "E",
    "alvo": "Alcance de Responder a todos com destinatário em Cco.",
    "operacao_autoral": "Combinar a regra do Cco com a do comando de resposta.",
@@ -504,7 +504,7 @@
     },
     "feedback": {
      "resultado": "PASSA",
-     "evidencia": "Verso explica por que Davi fica de fora."
+     "evidencia": "Erro localizado, tabela pessoa a pessoa e Memorize com a formulação correta."
     },
     "linguagem_didatica": {
      "resultado": "PASSA",
@@ -520,7 +520,7 @@
   {
    "id": "D09",
    "linha": 6,
-   "sha256": "a977ef37669879d1fdc3db6ab579656c65d77a7883cbaa9d405a1051db5cb028",
+   "sha256": "526296d2aa9062bed2a02aa82105e556aa8db0f7efe329f7785f6e4fe947b3dc",
    "gabarito": "E",
    "alvo": "Escolher o comando que leva o anexo a um novo destinatário.",
    "operacao_autoral": "Decidir entre comandos pela consequência sobre o anexo.",
@@ -528,7 +528,7 @@
    "dado_decisivo": "Joana não estava na conversa; arquivo anexado no original.",
    "solucao": "Responder a todos não leva o anexo; Encaminhar leva; a frase inverte; logo Errado.",
    "erro_plausivel": "Inverter o comportamento dos comandos quanto aos anexos.",
-   "leitura_concorrente": "Considerei a opção de anexar manualmente na resposta: a frente fala de envio \"automático\", que não ocorre ao responder.",
+   "leitura_concorrente": "Considerei a opção de anexar manualmente na resposta: a frente fala do anexo original indo junto, o que não ocorre ao responder.",
    "originalidade": "Inspirado no item 26 (ANP 2022) sobre o comando Encaminhar no Outlook; aqui o alvo é o anexo, em situação autoral.",
    "fontes_conteudo": [
     "https://support.microsoft.com/en-au/outlook/reply-to-or-forward-an-email-message"
@@ -562,7 +562,7 @@
     },
     "feedback": {
      "resultado": "PASSA",
-     "evidencia": "Verso explica o motivo e a ação correta."
+     "evidencia": "Regra, erro com a ação correta, tabela de comandos e Memorize."
     },
     "linguagem_didatica": {
      "resultado": "PASSA",
@@ -578,7 +578,7 @@
   {
    "id": "D10",
    "linha": 4,
-   "sha256": "74733bbcf52955709ee44b7f77c0312c0f65ab253412640c0477622230b16537",
+   "sha256": "e400c2ad911c03d6ef76c935a0e54531cf4d645c19379078d77c0c1fa40c2aaf",
    "gabarito": "E",
    "alvo": "Distinguir assinatura de texto de assinatura digital.",
    "operacao_autoral": "Avaliar se um recurso atende a um requisito de segurança (autenticidade e integridade).",
@@ -620,7 +620,7 @@
     },
     "feedback": {
      "resultado": "PASSA",
-     "evidencia": "Verso explica a diferença e a solução correta."
+     "evidencia": "Regra, erro, tabela comparativa e Memorize com a solução correta."
     },
     "linguagem_didatica": {
      "resultado": "PASSA",
@@ -628,7 +628,7 @@
     },
     "utilidade": {
      "resultado": "PASSA",
-     "evidencia": "Liga a parte \"Assinatura\" do corpo do e-mail (PDF) à segurança."
+     "evidencia": "Liga a parte \"Assinatura\" do corpo do e-mail à segurança."
     }
    },
    "comparacao": "Mesma distinção, partindo de um objetivo de segurança em vez do nome do menu."
@@ -636,7 +636,7 @@
   {
    "id": "D11",
    "linha": 21,
-   "sha256": "58214f3074055987ef16aa9a1dff7b815204740898df5e004d75b4f3b13275c2",
+   "sha256": "efa8d4054500dabcf426064cdbe499fdc7f5c4fe7bcc4cd39bbe3888762c1868",
    "gabarito": "C",
    "alvo": "Origem da criptografia no envio (TLS) e seu alcance.",
    "operacao_autoral": "Julgar o efeito de uma configuração de segurança sobre o trecho de rede.",
@@ -676,7 +676,7 @@
     },
     "feedback": {
      "resultado": "PASSA",
-     "evidencia": "Verso explica os dois modos e o limite."
+     "evidencia": "Regra, aplicação aos dois modos, limite, tabela e Memorize."
     },
     "linguagem_didatica": {
      "resultado": "PASSA",
@@ -692,7 +692,7 @@
   {
    "id": "D12",
    "linha": 19,
-   "sha256": "edfd021c54157d6e7d562524d437aaa11230cb1344cee2c6f65caecb9dd6f277",
+   "sha256": "0a8eee56a4dec9f3f4a1d8a9b00848071bc205c79e1026166db5552f92458ea9",
    "gabarito": "C",
    "alvo": "Divisão de tarefas no webmail (HTTPS no navegador; SMTP nos servidores).",
    "operacao_autoral": "Inferir se o envio funciona dada a regra de firewall e a forma de acesso.",
@@ -735,7 +735,7 @@
     },
     "feedback": {
      "resultado": "PASSA",
-     "evidencia": "Verso explica a divisão de tarefas e o contraste com cliente instalado."
+     "evidencia": "Regra, aplicação, contraste com cliente instalado, fluxo visual e Memorize."
     },
     "linguagem_didatica": {
      "resultado": "PASSA",
@@ -743,7 +743,7 @@
     },
     "utilidade": {
      "resultado": "PASSA",
-     "evidencia": "Cobre a lacuna do Cloze C02 e aplica R05."
+     "evidencia": "Cobre a nota Cloze C05 (porta 25) e aplica R05."
     }
    },
    "comparacao": "Mesma operação (porta necessária ao envio sob firewall), com a variável decisiva \"forma de acesso\"."

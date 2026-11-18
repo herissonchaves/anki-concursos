@@ -28,9 +28,15 @@ D09 (CE:6) | E | APROVAR | absoluto "automaticamente" retirado da frente
 D10 (CE:4) | E | APROVAR | comparada a CAU/BR 2023, item 20
 D11 (CE:21) | C | APROVAR | limite (conexão × conteúdo) explicado no verso
 D12 (CE:19) | C | APROVAR | contraste com D03
-C01 (CZ:1) | — | APROVAR | 4 lacunas c1 de um percurso coerente; aceitar só a sigla; coberta por D01 (MSA, MDA) e D02 (MUA, MTA)
-C02 (CZ:2) | — | APROVAR | coberta por D03 e D12
-C03 (CZ:3) | — | APROVAR | coberta por D04
+C01 (CZ:1) | — | APROVAR | MUA; aceitar só a sigla; coberta por D02
+C02 (CZ:2) | — | APROVAR | MSA; coberta por D01
+C03 (CZ:3) | — | APROVAR | MTA; coberta por D02
+C04 (CZ:4) | — | APROVAR | MDA; coberta por D01
+C05 (CZ:5) | — | APROVAR | porta 25; coberta por D03 e D12
+C06 (CZ:6) | — | APROVAR | porta 110; coberta por D04
+C07 (CZ:7) | — | APROVAR | porta 143; coberta por D04; semelhança lexical com C06 justificada (fatos distintos)
 
 Lint (auditar_clareza via validar_revisao_pedagogica.py): 13 sinais na primeira versão. Corrigidos 6 (absolutos em R04, R10, R12, D09; frentes de R01, D07). Reduzidos e justificados 2 (R03, D01). Justificados 5 (D05, D06, D10, D11, D12), com motivo específico em revisao_recuperacao.json.
 Limites: não houve revisor independente, importação no Anki nem medida de aprendizagem. A verificação dos scripts é estrutural e documental.
+
+Versão 2 (padrão visual 2.15), mesma data: versos e Extras reescritos em blocos HTML (📌 Regra, 🔎 No caso, ⚠️ Onde está o erro, ✔️ Por que está certo, 🗺️ Esquema, 💡 Memorize) com scripts/html_anki.py; frentes mantidas. Cada verso termina com Memorize, que resume a explicação e, no Errado, traz a formulação correta (substitui o antigo 'Correção:'). Conferi de novo, cartão a cartão, que o conteúdo de cada bloco corresponde à solução registrada e que os esquemas (tabelas de protocolos, POP3 × IMAP, campos, comandos, portas, TLS, assinatura; fluxos do percurso, do endereço e do webmail) não acrescentam afirmação sem fonte. Lint da versão 2: 8 sinais, todos justificados (os 7 de frente da versão 1, cujas frentes não mudaram, e a semelhança C06 × C07). Prévia renderizada conferida no navegador do aplicativo, em largura de celular, nos temas claro e escuro; a renderização no próprio Anki não foi testada.

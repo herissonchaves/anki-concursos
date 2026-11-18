@@ -1,4 +1,5 @@
 SELEÇÃO E FONTES — lote Correio Eletrônico (PRF, Missão 08)
+Versão 2 (padrão visual 2.15): versos em HTML com blocos e esquemas, Memorize final e Cloze com uma omissão por nota. Conteúdo, fontes e gabaritos da versão 1 foram mantidos.
 Data das consultas: 18/11/2026. Perfil: misto (R + D + Cloze). Teto: não informado pelo usuário; menor conjunto suficiente.
 
 1. PERTINÊNCIA AO CONCURSO
@@ -9,7 +10,7 @@ Data das consultas: 18/11/2026. Perfil: misto (R + D + Cloze). Teto: não inform
 2. REFERÊNCIAS CEBRASPE C/E CONSULTADAS (caderno e gabarito oficiais abertos)
 REF | concurso / cargo | item | gabarito definitivo | operação observada | IDs ligados
 MPTO24_99 | MPTO 2024, Técnico Ministerial — Fotografia, caderno 952_MP_TO_016_01 | 99 | E | funções de SMTP e POP trocadas | D05 (e base de R01/R02)
-EMBRAPA24_65 | EMBRAPA (edital 2024, aplicação 2025), Técnico — TI, caderno 043_EMBRAPA_001_01 | 65 | C | firewall deve permitir e-mail → porta TCP 25 | D03, D04, D12 (e C02)
+EMBRAPA24_65 | EMBRAPA (edital 2024, aplicação 2025), Técnico — TI, caderno 043_EMBRAPA_001_01 | 65 | C | firewall deve permitir e-mail → porta TCP 25 | D03, D04, D12 (e C05)
 ANP22_26 | ANP PSS 2022, conhecimentos gerais nível superior, caderno 725_ANP_CG1_01 | 26 | E | Encaminhar confundido com Responder a todos | D08, D09 (e R09/R10)
 CAU23_20 | CAU/BR 2023, conhecimentos básicos, caderno 921_CAU_BR_CB3_01 | 20 | E | Inserir Assinatura ≠ assinatura digital | D10
 Apoio sem vínculo de D: PCDF 2024, caderno 021_PCDF_003_01, item 71 (C, com justificativa oficial): SMTP/POP3 na camada de aplicação do TCP/IP; CAU/BR 2023 item 19 (C): anexar arquivo do OneDrive no Outlook; ANP 2022 item 27 (C): backup .pst no Outlook; MPTO 2024 item 97 (C): abas no Thunderbird.
@@ -17,12 +18,12 @@ Itens citados pelo PDF e não confirmados em caderno oficial nesta tarefa: PF 20
 D com inspiração geral (sem item Cebraspe específico localizado): D01, D02 (papéis MUA/MSA/MTA/MDA), D06 (POP3 × IMAP na mesma conta), D07 (Cco), D11 (STARTTLS/TLS).
 
 3. FONTES DE CONTEÚDO (lidas nesta tarefa)
-- RFC 5321 (SMTP): https://www.rfc-editor.org/rfc/rfc5321 — objetivo (1.1), relaying, porta 25 (4.5.4.2). IDs: R01, R02, R12, C02, D03, D05, D12.
-- RFC 6409 (submissão): https://www.rfc-editor.org/rfc/rfc6409 — porta 587, MSA exige autenticação, repasse na 25. IDs: R01, C01, C02, D01, D03.
-- RFC 1939 (POP3): https://www.rfc-editor.org/rfc/rfc1939 — porta 110, estados, exclusão em UPDATE. IDs: R02, R04, C03, D04, D06.
-- RFC 9051 (IMAP4rev2): https://www.rfc-editor.org/rfc/rfc9051 — pastas remotas como locais, ressincronização, portas 143/993. IDs: R03, C03, D04, D05, D06.
-- RFC 5598 (arquitetura do e-mail): https://www.rfc-editor.org/rfc/rfc5598 — MUA, MSA, MTA, MDA; armazenar e repassar. IDs: R05, R06, R14, C01, D01, D02, D12.
-- RFC 8314 (TLS no e-mail): https://www.rfc-editor.org/rfc/rfc8314 — 465/993/995 com TLS implícito; STARTTLS na 587. IDs: R12, C03, D11.
+- RFC 5321 (SMTP): https://www.rfc-editor.org/rfc/rfc5321 — objetivo (1.1), relaying, porta 25 (4.5.4.2). IDs: R01, R02, R12, C03, C05, D03, D05, D12.
+- RFC 6409 (submissão): https://www.rfc-editor.org/rfc/rfc6409 — porta 587, MSA exige autenticação, repasse na 25. IDs: R01, C02, C05, D01, D03.
+- RFC 1939 (POP3): https://www.rfc-editor.org/rfc/rfc1939 — porta 110, estados, exclusão em UPDATE. IDs: R02, R04, C06, D04, D06.
+- RFC 9051 (IMAP4rev2): https://www.rfc-editor.org/rfc/rfc9051 — pastas remotas como locais, ressincronização, portas 143/993. IDs: R03, C07, D04, D05, D06.
+- RFC 5598 (arquitetura do e-mail): https://www.rfc-editor.org/rfc/rfc5598 — MUA, MSA, MTA, MDA; armazenar e repassar. IDs: R05, R06, R14, C01–C04, D01, D02, D12.
+- RFC 8314 (TLS no e-mail): https://www.rfc-editor.org/rfc/rfc8314 — 465/993/995 com TLS implícito; STARTTLS na 587. IDs: R12, C06, C07, D11.
 - RFC 5322 (formato da mensagem), 3.6.3: https://www.rfc-editor.org/rfc/rfc5322#section-3.6.3 — To, Cc, Bcc; endereço parte-local@domínio. IDs: R07, R08, R11, D07, D08.
 - Microsoft, remetentes bloqueados: https://support.microsoft.com/en-us/office/block-or-allow-junk-email-settings-48c9f6f7-2309-4f95-9a4d-de987e880e46 — vão para Lixo Eletrônico. ID: R13.
 - Microsoft, responder/encaminhar (Outlook clássico): https://support.microsoft.com/en-au/outlook/reply-to-or-forward-an-email-message — alcance de Responder a todos; anexos só no Encaminhar. IDs: R09, R10, D08, D09.
@@ -35,9 +36,9 @@ Formas de acesso, webmail, cliente → p. 5–6, 9, 23 → R05, R06, D12 → cob
 Bloqueio de remetente → p. 5 → R13 → coberto
 Protocolos SMTP/POP3/IMAP → p. 6–7 → R01–R04, D05, D06 → coberto
 Variantes seguras → p. 6, 20 → R12, D11 → coberto
-Portas → p. 7 → C02, C03, D03, D04 → coberto
+Portas → p. 7 → C05, C06, C07, D03, D04 → coberto
 Estados do POP3 → p. 7 → — → excluído (T15)
-Tráfego da mensagem MUA/MSA/MTA/MDA → p. 8 → C01, D01, D02 → coberto
+Tráfego da mensagem MUA/MSA/MTA/MDA → p. 8 → C01–C04, D01, D02 → coberto
 Endereço de e-mail → p. 10 → R11 → coberto (afirmação sobre EUA excluída: T17)
 Senha/2FA/phishing → p. 11 → — → excluído para lote de Segurança (T18)
 Pastas e marcadores → p. 12–13 → — → excluído (T19, T20)

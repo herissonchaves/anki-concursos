@@ -1,15 +1,16 @@
 ECONOMIA DE REVISÃO
-Contagem: 26 notas C/E (14 R + 12 D) + 3 notas Cloze (1 cartão cada) = 29 notas, 29 cartões.
+Contagem: 26 notas C/E (14 R + 12 D) + 7 notas Cloze (1 cartão cada) = 33 notas, 33 cartões.
+Versão 2: as 3 notas Cloze da versão 1 tinham várias omissões sem ser mnemônico; pela regra 2.15 viraram 7 notas de omissão única (4 agentes + 3 portas). A carga sobe 4 cartões, mas cada um recupera um único fato.
 Gabaritos: R = 7 Certo / 7 Errado; D = 6 Certo / 6 Errado. Cloze fora da contagem C/E. Ordem embaralhada (semente fixa), sem alternância previsível.
 Sem backup da coleção: duplicidade conferida só dentro do lote.
 
 Decisões para evitar revisões redundantes:
 - R01 (SMTP envia) e R02 (POP3 não envia) cobrem direções diferentes; D05 aplica ambas a uma falha, em vez de criar um terceiro R sobre funções.
-- R03 (IMAP) e R04 (POP3) testam o protocolo oposto cada um; D06 combina os dois numa situação. Não foi criado Cloze de siglas.
+- R03 (IMAP) e R04 (POP3) testam o protocolo oposto cada um; D06 combina os dois numa situação. Não foi criado Cloze para a expansão das siglas SMTP/POP/IMAP; os Cloze C01–C04 recuperam o agente (MUA, MSA, MTA, MDA) a partir da função descrita, e não o significado das letras.
 - R07/R08 (Cco × Cc) e D07/D08 (aplicação): o D08 acrescenta o comando Responder a todos, operação distinta.
 - R09/R10 (comandos) e D09 (escolher o comando pelo anexo): a decisão de D09 não é exigida pelos R.
 - D03 e D12 usam o mesmo firewall de propósito: o contraste servidor × webmail é o alvo; D04 usa outro dado (portas de recebimento).
-- Portas: apenas 25, 110 e 143 (C02, C03). As portas 587/465/993/995 aparecem só no Extra/verso, sem cartão próprio, para não multiplicar dados numéricos.
+- Portas: apenas 25, 110 e 143 (C05, C06, C07). As portas 587/465/993/995 aparecem só no Extra/verso, sem cartão próprio, para não multiplicar dados numéricos.
 - Excluídos por baixo valor ou risco (triagem T15–T22): estados do POP3, histórico, pastas, marcadores, formatos do corpo, regra imprecisa sobre domínios dos EUA.
 
 Carga: sem dados de uso, não há estimativa de minutos diários. Recomenda-se observar o tempo real e os erros nas duas primeiras semanas.
