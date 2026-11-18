@@ -42,6 +42,20 @@ def fixture():
     return row, dict(schema_version=1, referencias=[ref], cartoes=[record])
 
 
+def fixture_v2():
+    """Schema 2: referência Cebraspe C/E e questão de outra banca, ambas fictícias."""
+    row, data = fixture()
+    data['schema_version'] = 2
+    data['referencias'][0].update(banca='Cebraspe', formato='certo_errado')
+    data['referencias'].append(dict(
+        id='REF-FGV', concurso='FICTICIO 2', cargo='Teste', ano=2022, caderno='Fixture B', item='7',
+        url='https://example.test/prova-fgv', consulta='2026-11-03',
+        operacao_observada='Múltipla escolha sintética sobre contraposição', banca='FGV',
+        formato='multipla_escolha', gabarito_status='definitivo', gabarito_url='https://example.test/gab-fgv'))
+    data['cartoes'][0]['referencias'] = ['REF-TESTE', 'REF-FGV']
+    return row, data
+
+
 def evaluate(row, data):
     return check.validate(('\t'.join(row)+'\n').encode(), json.dumps(data).encode())
 
@@ -177,6 +191,43 @@ class CalibrationTest(unittest.TestCase):
             ce.write_text('\t'.join(row)+'\n'+'\t'.join(wrong)+'\n', encoding='utf-8')
             with self.assertRaisesRegex(ValueError, 'calibração'):
                 exporter.export(ce, cloze, reports, base/'stale.zip', profile='focused', exception_reason='Teste sintético D')
+
+    def test_v2_complete_record(self):
+        self.assertEqual(evaluate(*fixture_v2()), [])
+
+    def test_v2_references_require_bank_and_format(self):
+        for key in ('banca', 'formato'):
+            row, data = fixture_v2()
+            del data['referencias'][1][key]
+            self.assertTrue(any(key in e for e in evaluate(row, data)), key)
+
+    def test_v2_compared_needs_cebraspe_true_false_reference(self):
+        row, data = fixture_v2()
+        data['cartoes'][0]['referencias'] = ['REF-FGV']
+        self.assertTrue(any('CESPE/Cebraspe Certo/Errado' in e for e in evaluate(row, data)))
+        row, data = fixture_v2()
+        data['referencias'][0]['formato'] = 'multipla_escolha'
+        self.assertTrue(any('CESPE/Cebraspe Certo/Errado' in e for e in evaluate(row, data)))
+
+    def test_v2_other_banks_linked_or_pending(self):
+        row, data = fixture_v2()
+        data['cartoes'][0]['referencias'] = ['REF-TESTE']
+        self.assertTrue(any('outra banca' in e for e in evaluate(row, data)))
+        data['cartoes'][0]['outras_bancas_pendencia'] = 'Buscas por FGV/FCC/Vunesp sobre o tema sem item acessível.'
+        self.assertEqual(evaluate(row, data), [])
+
+    def test_v2_general_inspiration_may_use_other_bank_only(self):
+        row, data = fixture_v2()
+        card = data['cartoes'][0]
+        card.update(fidelidade='inspiracao_geral', referencias=['REF-FGV'],
+                    limitacao='Nenhum item Cebraspe C/E acessível sobre o alvo.')
+        card['rubrica']['comparacao']['resultado'] = 'PENDENTE'
+        self.assertEqual(evaluate(row, data), [])
+
+    def test_v1_remains_accepted_without_bank_fields(self):
+        row, data = fixture()
+        self.assertEqual(data['schema_version'], 1)
+        self.assertEqual(evaluate(row, data), [])
 
 
 if __name__ == '__main__':

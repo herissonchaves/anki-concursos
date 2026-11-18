@@ -3,6 +3,11 @@
 
 Uso: python validar_calibracao_cebraspe.py DIRETORIO_OU_ZIP
 Não altera arquivos, coleção, gabaritos ou tags.
+
+schema_version 2 (lotes a partir da 2.16) exige `banca` e `formato` em cada
+referência, referência CESPE/Cebraspe Certo/Errado nos D comparados e, em todo
+D, uma questão de outra banca vinculada ou `outras_bancas_pendencia`.
+schema_version 1 continua aceito para lotes anteriores.
 """
 from __future__ import annotations
 import argparse
@@ -21,6 +26,7 @@ HARD = 'Tipo_Desafiadora_Cebraspe'
 CRITERIA = ('correcao', 'determinacao', 'operacao_d', 'comparacao', 'autoria', 'feedback', 'linguagem_didatica', 'utilidade')
 ANALYSIS = ('alvo', 'operacao_autoral', 'regra', 'dado_decisivo', 'solucao',
             'erro_plausivel', 'leitura_concorrente', 'originalidade')
+FORMATS = ('certo_errado', 'multipla_escolha')
 LIMIT = 20_000_000
 
 
@@ -36,6 +42,11 @@ def url(value):
         return parsed.scheme in ('https', 'http') and bool(parsed.netloc) and not parsed.username and not parsed.password
     except ValueError:
         return False
+
+
+def cebraspe(ref):
+    banca = ref.get('banca')
+    return isinstance(banca, str) and bool(re.search(r'cespe|cebraspe', banca, re.IGNORECASE))
 
 
 def fingerprint(row):
@@ -66,8 +77,9 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
         data = json.loads(report.decode('utf-8'))
     except (ValueError, UnicodeError):
         return errors + ['Registro JSON inválido']
-    if not isinstance(data, dict) or type(data.get('schema_version')) is not int or data['schema_version'] != 1:
-        return errors + ['schema_version deve ser 1']
+    if not isinstance(data, dict) or type(data.get('schema_version')) is not int or data['schema_version'] not in (1, 2):
+        return errors + ['schema_version deve ser 1 (legado) ou 2']
+    v2 = data['schema_version'] == 2
     refs, records = data.get('referencias'), data.get('cartoes')
     if not isinstance(refs, list) or not isinstance(records, list):
         return errors + ['referencias e cartoes devem ser listas']
@@ -80,9 +92,11 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
         if ident in ref_map:
             errors.append(f'Referência duplicada: {ident}')
         ref_map[ident] = ref
-        for key in ('concurso', 'cargo', 'caderno', 'item', 'operacao_observada'):
+        for key in ('concurso', 'cargo', 'caderno', 'item', 'operacao_observada') + (('banca',) if v2 else ()):
             if not filled(ref.get(key)):
                 errors.append(f'{ident}: {key} ausente')
+        if v2 and ref.get('formato') not in FORMATS:
+            errors.append(f'{ident}: formato deve ser certo_errado ou multipla_escolha')
         if type(ref.get('ano')) is not int or not 1900 <= ref['ano'] <= 2100:
             errors.append(f'{ident}: ano inválido')
         if not url(ref.get('url')):
@@ -141,9 +155,15 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
             elif ref_map[key].get('gabarito_status') == 'anulado':
                 errors.append(f'{ident}: referência anulada não sustenta aprovação; registrar fora do conjunto de apoio')
         fidelity = record.get('fidelidade')
+        known = [ref_map[key] for key in linked if key in ref_map]
+        if v2:
+            if not any(not cebraspe(ref) for ref in known) and not filled(record.get('outras_bancas_pendencia')):
+                errors.append(f'{ident}: vincular questão de outra banca ou registrar outras_bancas_pendencia com as buscas feitas')
         if fidelity == 'comparada':
             if not linked or not filled(record.get('comparacao')):
                 errors.append(f'{ident}: comparação exige referência e justificativa')
+            elif v2 and not any(cebraspe(ref) and ref.get('formato') == 'certo_errado' for ref in known):
+                errors.append(f'{ident}: comparada exige referência CESPE/Cebraspe Certo/Errado; outra banca não basta')
         elif fidelity == 'inspiracao_geral':
             if not filled(record.get('limitacao')):
                 errors.append(f'{ident}: inspiração geral exige limitação')

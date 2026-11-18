@@ -33,4 +33,4 @@ Em notas Cloze novas, aplicar o protocolo Cloze: usar uma única marcação `{{c
 
 ## Transferência para D — 2.7
 
-Nos novos D, seguir `../gerar-revisao-anki/references/protocolo-modo-estrategico.md`. Extrair a operação do erro e construir outra situação/raciocínio, sem paráfrase superficial do item. Comparar com referência C/E pertinente e registrar por novo ID o detalhe decisivo e a confusão trabalhada; não inferir causa psicológica do erro. Aplicar a rubrica e, em exportações, o registro documental de calibração.
+Nos novos D, seguir `../gerar-revisao-anki/references/protocolo-modo-estrategico.md`. Antes de redigir cada D novo, cumprir a pesquisa obrigatória de questões anteriores (Cebraspe C/E primeiro; depois outras bancas) da seção “Pesquisa e comparação por família” do protocolo estratégico. Extrair a operação do erro e construir outra situação/raciocínio, sem paráfrase superficial do item. Comparar com referência C/E pertinente e registrar por novo ID o detalhe decisivo e a confusão trabalhada; não inferir causa psicológica do erro. Aplicar a rubrica e, em exportações, o registro documental de calibração.

@@ -33,7 +33,7 @@ Em notas Cloze novas, aplicar o protocolo Cloze: usar uma única marcação `{{c
 
 ## Auditoria do modo estratégico — 2.7
 
-Para D, ler `../gerar-revisao-anki/references/protocolo-modo-estrategico.md`, a seção pertinente do atlas multidisciplinar e `../gerar-revisao-anki/references/avaliacao-modo-estrategico.md`. Avaliar separadamente correção, determinação, operação, comparação, autoria, feedback e utilidade. Registrar falhas por ID; definição direta pode exigir RECLASSIFICAR R. Não tratar cenário, extensão ou tag como prova de desafio. Em conclusão com fundamento, avaliar a verdade das partes e o nexo.
+Para D, ler `../gerar-revisao-anki/references/protocolo-modo-estrategico.md`, a seção pertinente do atlas multidisciplinar e `../gerar-revisao-anki/references/avaliacao-modo-estrategico.md`. Avaliar separadamente correção, determinação, operação, comparação, autoria, feedback e utilidade. Em D novos, conferir se houve a pesquisa de questões Cebraspe C/E e de outras bancas, com referências reais vinculadas ou pendências registradas. Registrar falhas por ID; definição direta pode exigir RECLASSIFICAR R. Não tratar cenário, extensão ou tag como prova de desafio. Em conclusão com fundamento, avaliar a verdade das partes e o nexo.
 
 Sem coleção/lote fornecido, limitar a conclusão às instruções e evidências efetivamente examinadas. Para exportação de D novos, conferir o registro de calibração; sua consistência não substitui auditoria semântica. Não fabricar registros antigos nem editar coleção por implicação.
 
