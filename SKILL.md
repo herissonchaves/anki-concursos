@@ -6,6 +6,10 @@ description: Skill principal do Anki-Concursos. Encaminha pedidos de criação, 
 # Anki-Concursos
 
 O repositório de referência fica em `D:\NextCloud - Arquivos\IA Agents\Anki-Concursos`.
+Neste computador Windows, a cópia sincronizada fica em
+`C:\Users\Herisson.DESKTOP-EHB23TA\Nextcloud\IA Agents\Anki-Concursos`. Uma skill
+de entrada instalada no Claude (`~/.claude/skills/anki-concursos/SKILL.md`) aponta
+para este arquivo; mantenha as duas coerentes ao mudar o roteamento ou o Git.
 
 ## Escolha do fluxo
 
@@ -50,3 +54,7 @@ com outro `--with-requirements`. Os testes que dependem de `zstandard` ou
 - Após concluir e verificar alterações importantes do projeto, salve-as em commits locais com mensagens que descrevam a mudança. A preferência vale para as tarefas futuras desse repositório, mesmo quando o pedido não mencionar commits.
 - Confira o estado e o diff antes de preparar o commit. Inclua somente mudanças da tarefa ou expressamente autorizadas. Preserve trabalho alheio e deixe backups privados do Anki, credenciais e arquivos temporários fora dos commits.
 - Confira o commit e informe seu identificador no fechamento. A autorização cobre commits locais. Envio a remotos ou reescrita de histórico exige autorização própria.
+- Rotina: `git status` antes de editar; `git log --oneline -- ARQUIVO` e `git show` para entender uma regra antes de mudá-la; `git diff` e testes depois de editar scripts ou regras cobertas pelos testes.
+- Adicione arquivos pelo nome, sem `git add -A` às cegas. Um commit por mudança coerente, com mensagem em português no imperativo que diga o quê e por quê. Não use `--no-verify`.
+- Também exigem autorização própria: `reset --hard`, `rebase`, `commit --amend` de commit existente, `checkout --`/`restore` que descarte trabalho, apagar ou trocar de branch e alterar remotos. Para mudanças grandes ou experimentais, sugira uma branch nova.
+- Nunca versione PDFs ou materiais de cursos (direitos autorais e marcas-d'água com dados pessoais), lotes de cartões do usuário, `.colpkg`/`.apkg`/`collection.*`, `.venv/`, `uv.lock` e caches. Se aparecerem no `git status`, proponha incluí-los no `.gitignore`. Lotes de estudo ficam na pasta do material, fora do repositório, salvo pedido contrário.
