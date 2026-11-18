@@ -11,3 +11,6 @@ lotes/**/*.apkg
 *.colpkg
 # Prévia visual dos cards: regenerada pelo fonte/gerar_lote.py de cada lote
 lotes/**/previa_cards.html
+
+# Pacotes para outras plataformas (ex.: ChatGPT), regeneráveis a partir de skills/
+dist/
