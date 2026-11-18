@@ -3,9 +3,15 @@ name: gerar-revisao-anki
 description: Cria cartões Anki C/E e Cloze com recuperação ativa, feedback corretivo, seleção econômica e validação de exportação, nos fluxos revisão por PDF e caderno de erros, com rápidos, desafiadores e Cloze.
 ---
 
-# Geração Anki — 2.12.1
+# Geração Anki — 2.15
 
-Ao criar Cloze, aplicar `references/protocolo_cloze_cientifico.md` antes da escolha dos formatos. Em notas Cloze novas, aplicar o protocolo Cloze: usar uma ou mais marcações `{{c1::…}}` para um alvo de recuperação coerente, separar alvos independentes e explicar cada omissão no Extra. Para mnemônicos, deixar visíveis o tema e as letras ou pistas do próprio mnemônico. Associar a cada novo Cloze desafiadores C/E do mesmo lote que cubram todas as lacunas. Preservar os índices e o histórico de notas existentes.
+## Visual em HTML, Memorize e Cloze de omissão única — 2.15
+
+- **Visual:** todo cartão novo usa HTML compatível com o Anki, montado com `scripts/html_anki.py` conforme `references/protocolo_visual_html_anki.md`: blocos coloridos (📌 Regra, 🔎 No caso, ⚠️ Onde está o erro, ✔️ Por que está certo), esquemas visuais (tabela comparativa, fluxo) quando mostrarem melhor a relação, estilos inline, fundos translúcidos legíveis no modo noturno e nada de script, CSS externo ou mídia remota. O visual organiza o texto; não troca precisão por enfeite.
+- **Verso:** o antigo rótulo “Correção:” foi substituído pelo bloco final obrigatório **💡 Memorize**, com o resumo da explicação do verso em uma ou duas frases. No Errado, o Memorize traz a formulação correta; no Certo, a ideia central. O mesmo vale para o Extra do Cloze.
+- **Cloze:** uma única omissão `{{c1::…}}` por nota. Mais de uma omissão somente em nota de mnemônico, com a tag `Mnemonico`; pares, listas e etapas viram notas separadas. `validar_anki.py --new` reprova o descumprimento.
+
+Ao criar Cloze, aplicar `references/protocolo_cloze_cientifico.md` antes da escolha dos formatos. Em notas Cloze novas, aplicar o protocolo Cloze: usar uma única marcação `{{c1::…}}` por nota; mais de uma omissão somente em nota de mnemônico, com a tag `Mnemonico`; separar alvos independentes em notas próprias e explicar a omissão no Extra. Para mnemônicos, deixar visíveis o tema e as letras ou pistas do próprio mnemônico. Associar a cada novo Cloze desafiadores C/E do mesmo lote que cubram todas as lacunas. Preservar os índices e o histórico de notas existentes.
 
 ## Perfil policial e especializações — 2.12
 
@@ -28,7 +34,7 @@ e registre a evidência nos relatórios já previstos por ID.
 2. Leia fontes e selecione alvos A/B/C antes de redigir. Leia obrigatoriamente `references/protocolo_cloze_cientifico.md` nesta etapa, antes de escolher formatos, inclusive quando a conclusão puder ser zero Cloze. Para PDF, carregue `references/triagem_previa_pdf.md`; para backup, use `../analisar-colecao-anki/SKILL.md` em leitura somente. Compare operações cognitivas, não só palavras.
 3. Para qualquer D (modo estratégico), leia `references/protocolo-modo-estrategico.md` e a seção disciplinar de `references/atlas-multidisciplinar-cebraspe.md`; siga a rubrica de `references/avaliacao-modo-estrategico.md`. Carregue especializações somente quando aplicáveis: Português → `../portugues-cebraspe-qualidade/SKILL.md`; Direito → `references/radar-juridico-atualizacao.md` e fontes primárias atuais; imagens úteis → `references/protocolo_imagens_reais_anki.md`.
 4. Leia obrigatoriamente `references/matriz_tipos_quantidades.md`; para PDF, também `references/cobertura-pdf.md`. Escolha perfil misto ou focado conforme a matriz, respeite o equilíbrio separado dos rápidos e dos desafiadores e registre exceções concretas; inclua Cloze somente quando adequado. Defina resposta e fundamento antes da frente. Em lote grande, faça piloto interno proporcional. Aplique os critérios individuais do núcleo, reformule e confira de novo cada solução/vista.
-5. Entregue inline quando forem poucos cartões e não houver pedido de arquivo. Para exportar, leia `../automacao-anki-python/SKILL.md`. TSVs UTF-8 sem BOM, sem cabeçalho, exatamente três campos: Frente/Verso/Tags ou Texto/Extra/Tags. Tags de C/E: exatamente uma entre `Tipo_Revisao_Rapida` e `Tipo_Desafiadora_Cebraspe`; D também recebe `Estilo_Cebraspe`. Cloze não recebe essas tags.
+5. Entregue inline quando forem poucos cartões e não houver pedido de arquivo. Monte frentes, versos e Extras com `scripts/html_anki.py` (protocolo visual 2.15). Para exportar, leia `../automacao-anki-python/SKILL.md`. TSVs UTF-8 sem BOM, sem cabeçalho, exatamente três campos: Frente/Verso/Tags ou Texto/Extra/Tags. Tags de C/E: exatamente uma entre `Tipo_Revisao_Rapida` e `Tipo_Desafiadora_Cebraspe`; D também recebe `Estilo_Cebraspe`. Cloze não recebe essas tags.
 6. Em exportações com D novos, preencher `relatorios/calibracao_cebraspe.json` conforme `references/registro-calibracao-cebraspe.md` e executar `scripts/validar_calibracao_cebraspe.py` no diretório e no ZIP final. Não entregar como final com falha documental ou revisão semântica pendente. O exportador bloqueia D novos sem registro e exige linguagem_didatica aprovada com evidência específica; o resultado do script continua sem certificar a verdade do gabarito. Rode `scripts/validar_anki.py --new PACOTE.zip` com os mesmos parâmetros de perfil e teto aplicados na exportação, conforme a [matriz de quantidades](references/matriz_tipos_quantidades.md). `scripts/validar_gabaritos_rapidos.py PACOTE.zip` detalha contagens e `scripts/auditar_clareza.py PACOTE.zip` sinaliza riscos para revisão semântica. Conte também em entregas inline. Use os validadores TSV no diretório ou ZIP do lote.
 7. Relate notas/cartões efetivos, fontes, principais decisões e verificações feitas. Arquivos de exportação incluem seleção/fontes, economia e auditoria por ID. Não apresentar a própria revisão como avaliação independente. A conferência semântica pelo agente deve ser declarada como tal. Não alegar importação no Anki sem realizá-la.
 
@@ -48,7 +54,7 @@ Antes de selecionar ou aprovar cartões, aplicar a seção “Relevância para P
 
 ## Lacunas e desafiadores associados
 
-Em notas Cloze novas, aplicar o protocolo Cloze: usar uma ou mais marcações `{{c1::…}}` para um alvo de recuperação coerente, separar alvos independentes e explicar cada omissão no Extra. Para mnemônicos, deixar visíveis o tema e as letras ou pistas do próprio mnemônico. Associar a cada novo Cloze desafiadores C/E do mesmo lote que cubram todas as lacunas. Preservar os índices e o histórico de notas existentes.
+Em notas Cloze novas, aplicar o protocolo Cloze: usar uma única marcação `{{c1::…}}` por nota; mais de uma omissão somente em nota de mnemônico, com a tag `Mnemonico`; separar alvos independentes em notas próprias e explicar a omissão no Extra. Para mnemônicos, deixar visíveis o tema e as letras ou pistas do próprio mnemônico. Associar a cada novo Cloze desafiadores C/E do mesmo lote que cubram todas as lacunas. Preservar os índices e o histórico de notas existentes.
 
 ## Pesquisa de questões reais e cobertura autoral — 2.9.3
 

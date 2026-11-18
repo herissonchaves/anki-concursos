@@ -9,7 +9,7 @@ Todo Cloze novo deve servir à memorização de um **conceito importante para o 
 
 Preferir definição, função, propriedade distintiva ou relação curta que permita recordar o conceito sem resolver um caso. Omitir o termo completo quando tiver várias palavras; não cortar uma expressão técnica nem impor uma palavra como tamanho máximo. Uma frase curta pode ser a resposta se expressar uma única ideia central e determinada. Manter visíveis o contexto e as condições, sem expor a resposta, iniciais reveladoras fora de um exercício mnemônico ou uma lista que permita acertar por eliminação.
 
-Cada nota nova reúne uma ou mais lacunas c1 de um alvo de recuperação coerente. Usar o Extra para explicar cada termo, condição ou relação omitida. Evitar parágrafos, justificativas inteiras e dados periféricos.
+**Uma omissão por nota — 2.15.** Cada nota Cloze nova tem **exatamente uma** marcação `{{c1::…}}`, que oculta um único alvo de recuperação. **Mais de uma omissão só é permitida em nota de mnemônico** (as letras ou pistas do auxílio ficam visíveis e cada termo vira uma marcação c1), e essa nota recebe obrigatoriamente a tag `Mnemonico`. Listas, pares (por exemplo, duas portas), etapas de um processo e condições complementares que não formem mnemônico viram notas separadas, uma por alvo, ou outro formato (R/D). O validador `validar_anki.py --new` reprova nota nova com várias omissões sem a tag `Mnemonico`. Usar o Extra para explicar o termo omitido. Evitar parágrafos, justificativas inteiras e dados periféricos.
 
 Antes de aprovar: **o que é importante memorizar? A parte omitida é precisamente esse conhecimento? O contexto determina a resposta sem entregá-la? O Extra ensina o conceito?** Se falhar, reformular, escolher outro formato ou não criar. Importância e correção exigem auditoria de conteúdo; sintaxe válida não as comprova.
 
@@ -51,7 +51,7 @@ Se falhar, REFORMULAR ou MUDAR FORMATO; descartar apenas conteúdo sem utilidade
 
 ## Agrupamento, mnemônicos e desafiadores
 
-- Usar `{{c1::resposta}}` para cada omissão, com uma palavra, expressão ou frase curta por marcação. Repetir c1 somente quando recuperar as partes juntas fizer sentido, como as condições complementares de uma regra ou os termos de um mnemônico. Cada nota nova gera um cartão, com todas as respostas ocultas ao mesmo tempo na frente. Separar alvos independentes em notas próprias. Evitar colocar uma lista inteira em uma única lacuna.
+- Usar uma única `{{c1::resposta}}` por nota, com uma palavra, expressão ou frase curta. Repetir c1 **somente em mnemônico** (tag `Mnemonico`); condições complementares de uma regra, pares e listas viram notas próprias. Cada nota nova gera um cartão. Evitar colocar uma lista inteira em uma única lacuna.
 - Em um mnemônico cujo alvo seja recuperar os termos, mostrar o assunto e manter as letras ou pistas que compõem o auxílio. Omitir cada termo separadamente. Exemplo de estrutura: `P {{c1::romulgada}}<br>E {{c1::scrita}}`. A inicial pode ficar fora da lacuna como na referência do usuário, ou anteceder o termo completo. Conferir que a pista ainda exige lembrar o termo e que a leitura após revelar a resposta fica correta.
 - No Extra, explicar cada resposta, seu papel e sua relação com a pista e com o conjunto. Para mnemônicos, desenvolver o significado de cada termo e mostrar como usar a associação para lembrar o conteúdo.
 - Planejar pelo menos um D do mesmo lote para cada novo Cloze, com cobertura de todas as omissões. Um D pode cobrir várias lacunas quando os conceitos são necessários à solução de um único julgamento; distribuir entre vários D quando cada conceito exigir uma decisão própria. Menção no enunciado, coincidência de assunto e repetição literal não bastam.
@@ -77,9 +77,9 @@ Regressões editoriais: prazo normativo central com hipótese e termo inicial co
 
 Usar `{{c1::resposta}}` ou `{{c1::resposta::categoria útil}}`. Dica opcional não pode entregar a resposta. Frente autossuficiente, sem depender do PDF ou Extra; preservar condições, unidades e alcance.
 
-Para notas novas, `--new` permite uma ou mais marcações com índice c1, sempre contando um cartão por nota. A leitura de notas antigas conta os índices distintos. Conferir editorialmente a coerência do conjunto, a determinação das respostas, o Extra e a cobertura substantiva pelos desafiadores.
+Para notas novas, `--new` exige índice c1 e aceita mais de uma marcação somente com a tag `Mnemonico`, sempre contando um cartão por nota. A leitura de notas antigas conta os índices distintos. Conferir editorialmente a coerência do conjunto, a determinação das respostas, o Extra e a cobertura substantiva pelos desafiadores.
 
-Extra obrigatório e específico para cada omissão. Conferir significado, distinção e exemplos, quando necessários, sem slogan obrigatório. Comparar redundância pelo alvo e operação.
+Extra obrigatório e específico para a omissão (em mnemônico, para cada termo), montado conforme `protocolo_visual_html_anki.md` e terminando no bloco `💡 Memorize` com o resumo da explicação. Conferir significado, distinção e exemplos, quando necessários, sem slogan obrigatório. Comparar redundância pelo alvo e operação.
 
 ## Coleção existente
 
@@ -89,6 +89,8 @@ Avaliar se as lacunas conjuntas formam um alvo coerente. Recomendar divisão qua
 
 1. APROVAR: “A passagem do estado sólido diretamente ao gasoso é {{c1::sublimação}}.” Conceito delimitado e termo completo.
 2. REFORMULAR: “Os três estados físicos clássicos da matéria são {{c1::sólido, líquido e gasoso}}.” Criar três notas com uma propriedade distintiva e um Extra específico para cada estado.
+11. REFORMULAR: “POP3 → {{c1::110}}; IMAP → {{c1::143}}.” Par sem mnemônico: criar duas notas, uma por porta.
+12. APROVAR como mnemônico: assunto visível, letras como pistas e cada termo em c1, com tag `Mnemonico` e Extra que explica cada termo.
 3. REFORMULAR: “Sólido, líquido e {{c1::gasoso}} são estados físicos clássicos.” Evitar eliminação pela lista; contextualizar a propriedade distintiva do estado gasoso e explicar esse estado no Extra.
 4. REJEITAR como Cloze: “As etapas são lembradas pela sigla {{c1::ABCDE}}.” Recupera o auxílio, não as etapas; delimitar e recuperar as etapas relevantes.
 5. REFORMULAR: “A letra T do mnemônico significa {{c1::tempo}}.” Identificar o assunto e mostrar a relação dos termos para que a letra oriente a recuperação de um conteúdo determinado.
@@ -100,4 +102,4 @@ Avaliar se as lacunas conjuntas formam um alvo coerente. Recomendar divisão qua
 
 Critérios editoriais, não prova experimental. Scripts verificam sintaxe e sinais; aprovação técnica não certifica adequação semântica nem superioridade universal de Cloze.
 
-Regressões obrigatórias: alvos independentes em notas distintas; expressão de várias palavras e múltiplas lacunas c1 coerentes permitidas; cada lacuna explicada no Extra e coberta por D; c1/c2 reprovado em nota nova; coleção antiga contada por índices distintos.
+Regressões obrigatórias: alvos independentes em notas distintas; expressão de várias palavras permitida; múltiplas lacunas c1 só em nota com tag `Mnemonico`; cada lacuna explicada no Extra e coberta por D; c1/c2 reprovado em nota nova; coleção antiga contada por índices distintos.

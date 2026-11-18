@@ -20,6 +20,10 @@ _balance_module = importlib.util.module_from_spec(_balance_spec)
 _balance_spec.loader.exec_module(_balance_module)
 contar_rapidos = _balance_module.contar_rapidos
 contar_modos = _balance_module.contar_modos
+_html_spec = importlib.util.spec_from_file_location('anki_html', Path(__file__).with_name('html_anki.py'))
+_html_module = importlib.util.module_from_spec(_html_spec)
+_html_spec.loader.exec_module(_html_module)
+problemas_html = _html_module.problemas_html
 from pathlib import Path
 
 REQUIRED = (
@@ -31,6 +35,9 @@ REQUIRED = (
 CLOZE_ANY = re.compile(r'\{\{c([1-9]\d*)::([^{}]*?)\}\}')
 HTML_TAG = re.compile(r'<[^>]*>')
 QUICK = 'Tipo_Revisao_Rapida'
+MNEMONIC = 'Mnemonico'
+# Riscos de segurança reprovados em qualquer pacote, novo ou antigo.
+UNSAFE_HTML = re.compile(r'<\s*(?:script|iframe|object|embed)\b|\son[a-z]+\s*=|javascript\s*:', re.I)
 HARD = 'Tipo_Desafiadora_Cebraspe'
 BAD_META = [
     r'\b(?:segundo|conforme|de acordo com|como consta (?:em|no|na)|como visto (?:em|no|na))\s+'
@@ -149,6 +156,8 @@ def verify_tsvo(name: str, body: bytes, errors: list[str]) -> int:
                 if match:
                     errors.append(f'{name}:{i} {field}: menção à fonte proibida ({match.group()!r})')
                     break
+        if UNSAFE_HTML.search(front + back):
+            errors.append(f'{name}:{i}: HTML inseguro (script, iframe, evento on... ou javascript:)')
         if EXPL_LABEL_RE.search(folded(back)):
             errors.append(f'{name}:{i}: rótulo explicativo proibido')
         if not re.fullmatch(r'[A-Za-zÀ-ÖØ-öø-ÿ0-9_ \-]+', tags):
@@ -185,7 +194,26 @@ def validate_new_cloze(body: bytes, errors: list[str]) -> None:
             continue
         matches = list(CLOZE_ANY.finditer(fields[0]))
         if not matches or any(match.group(1) != '1' for match in matches):
-            errors.append(f'anki_cloze.tsv:{number}: nota nova requer uma ou mais omissões, todas com índice c1')
+            errors.append(f'anki_cloze.tsv:{number}: nota nova requer omissão com índice c1')
+        elif len(matches) > 1 and MNEMONIC not in fields[2].split():
+            errors.append(f'anki_cloze.tsv:{number}: nota nova com {len(matches)} omissões; '
+                          f'mais de uma omissão só em mnemônico (tag {MNEMONIC})')
+
+
+def validate_new_html(items: dict[str, bytes], errors: list[str]) -> None:
+    """Notas novas: HTML compatível com o Anki (protocolo_visual_html_anki.md)."""
+    for name in ('anki_certo_errado.tsv', 'anki_cloze.tsv'):
+        try:
+            text = items.get(name, b'').decode('utf-8')
+        except UnicodeDecodeError:
+            continue
+        for number, row in enumerate(text.splitlines(), 1):
+            fields = row.split('	')
+            if len(fields) != 3:
+                continue
+            for label, value in (('frente/texto', fields[0]), ('verso/extra', fields[1])):
+                for problem in problemas_html(value):
+                    errors.append(f'{name}:{number} {label}: {problem}')
 
 
 def validate_type_distribution(body: bytes, errors: list[str], require_types: bool = False, require_ratio: bool = False) -> dict[str, int]:
@@ -260,6 +288,7 @@ def main() -> int:
     cloze = count_cloze_cards(items.get('anki_cloze.tsv', b''))
     if args.new:
         validate_new_cloze(items.get('anki_cloze.tsv', b''), errors)
+        validate_new_html(items, errors)
         _, balance_errors = contar_modos(items.get('anki_certo_errado.tsv', b''), strict_balance=True)
         if args.balance_exception.strip():
             errors.append('Lotes novos exigem 50/50 por modo; --balance-exception não é permitido')

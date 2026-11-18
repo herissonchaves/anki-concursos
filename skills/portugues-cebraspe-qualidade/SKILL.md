@@ -35,7 +35,7 @@ Não alegar leitura não realizada. Diferenciar textos de teoria, comentários e
 ## C/E rápidos e Cloze
 
 - **Rápido:** reconhecer regra linguística central de modo preciso e quase imediato (p. ex. função sintática ou contraste entre estruturas), sem transformar em pegadinha difícil por artifício.
-- **Cloze:** selecionar conceitos linguísticos importantes e manter o contexto que determina a resposta. Em notas Cloze novas, aplicar o protocolo Cloze: usar uma ou mais marcações `{{c1::…}}` para um alvo de recuperação coerente, separar alvos independentes e explicar cada omissão no Extra. Para mnemônicos, deixar visíveis o tema e as letras ou pistas do próprio mnemônico. Associar a cada novo Cloze desafiadores C/E do mesmo lote que cubram todas as lacunas. Preservar os índices e o histórico de notas existentes. Rejeitar ambiguidades, respostas visíveis, omissões secundárias e duplicatas cognitivas.
+- **Cloze:** selecionar conceitos linguísticos importantes e manter o contexto que determina a resposta. Em notas Cloze novas, aplicar o protocolo Cloze: usar uma única marcação `{{c1::…}}` por nota; mais de uma omissão somente em nota de mnemônico, com a tag `Mnemonico`; separar alvos independentes em notas próprias e explicar a omissão no Extra. Para mnemônicos, deixar visíveis o tema e as letras ou pistas do próprio mnemônico. Associar a cada novo Cloze desafiadores C/E do mesmo lote que cubram todas as lacunas. Preservar os índices e o histórico de notas existentes. Rejeitar ambiguidades, respostas visíveis, omissões secundárias e duplicatas cognitivas.
 
 ## Formato, qualidade e entrega
 
