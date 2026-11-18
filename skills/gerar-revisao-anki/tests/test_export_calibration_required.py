@@ -21,7 +21,7 @@ class ExportCalibrationRequiredTests(unittest.TestCase):
         self.ce=self.root/'ce.tsv'; self.cl=self.root/'cl.tsv'
         self.reports=self.root/'reports'; self.reports.mkdir()
         self.out=self.root/'out.zip'
-        self.ce.write_text('Condição sintética A.\t✅ Certo<br><br>Fundamento sintético A.\tTipo_Desafiadora_Cebraspe Estilo_Cebraspe\nCondição sintética B.\t❌ Errado<br><br>Correção sintética B.\tTipo_Desafiadora_Cebraspe Estilo_Cebraspe\n',encoding='utf-8')
+        self.ce.write_text('Condição sintética A.\t✅ Certo<br><br>Fundamento sintético A. 💡 Memorize: resumo sintético.\tTipo_Desafiadora_Cebraspe Estilo_Cebraspe\nCondição sintética B.\t❌ Errado<br><br>Correção sintética B. 💡 Memorize: resumo sintético.\tTipo_Desafiadora_Cebraspe Estilo_Cebraspe\n',encoding='utf-8')
         self.cl.write_text('',encoding='utf-8')
         for name in exportar_anki.REQUIRED_REPORTS:
             (self.reports/name).write_text('Fixture de teste, sem auditoria real de conteúdo.',encoding='utf-8')

@@ -216,6 +216,35 @@ def validate_new_html(items: dict[str, bytes], errors: list[str]) -> None:
                     errors.append(f'{name}:{number} {label}: {problem}')
 
 
+MEMORIZE = '💡 Memorize'
+# Títulos dos demais blocos do protocolo visual; nenhum pode vir depois do Memorize.
+OTHER_BLOCKS = ('📌 Regra', '🔎 No caso', '⚠️ Onde está o erro', '✔️ Por que está certo', '🗺️ Esquema')
+
+
+def validate_new_memorize(items: dict[str, bytes], errors: list[str]) -> None:
+    """Notas novas: verso C/E e Extra Cloze terminam no bloco 💡 Memorize preenchido."""
+    for name in ('anki_certo_errado.tsv', 'anki_cloze.tsv'):
+        try:
+            text = items.get(name, b'').decode('utf-8')
+        except UnicodeDecodeError:
+            continue
+        label = 'verso' if name == 'anki_certo_errado.tsv' else 'extra'
+        for number, row in enumerate(text.splitlines(), 1):
+            fields = row.split('	')
+            if len(fields) != 3:
+                continue
+            back = fields[1]
+            position = back.rfind(MEMORIZE)
+            if position < 0:
+                errors.append(f'{name}:{number} {label}: falta o bloco final {MEMORIZE} (resumo da explicação)')
+                continue
+            tail = back[position + len(MEMORIZE):]
+            if any(title in tail for title in OTHER_BLOCKS):
+                errors.append(f'{name}:{number} {label}: {MEMORIZE} deve ser o último bloco')
+            if not html.unescape(HTML_TAG.sub('', tail)).strip():
+                errors.append(f'{name}:{number} {label}: {MEMORIZE} sem resumo')
+
+
 def validate_type_distribution(body: bytes, errors: list[str], require_types: bool = False, require_ratio: bool = False) -> dict[str, int]:
     try:
         text = body.decode('utf-8')
@@ -289,6 +318,7 @@ def main() -> int:
     if args.new:
         validate_new_cloze(items.get('anki_cloze.tsv', b''), errors)
         validate_new_html(items, errors)
+        validate_new_memorize(items, errors)
         _, balance_errors = contar_modos(items.get('anki_certo_errado.tsv', b''), strict_balance=True)
         if args.balance_exception.strip():
             errors.append('Lotes novos exigem 50/50 por modo; --balance-exception não é permitido')

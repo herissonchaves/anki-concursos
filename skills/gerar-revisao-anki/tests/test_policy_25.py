@@ -25,9 +25,9 @@ class PolicyTests(unittest.TestCase):
     def rows(self, quick, hard=0):
         lines=[]
         for i,good in enumerate(quick):
-            lines.append(f'Proposição sintética {i}.\t'+('✅ Certo' if good else '❌ Errado')+'<br><br>Motivo sintético.\tTipo_Revisao_Rapida')
+            lines.append(f'Proposição sintética {i}.\t'+('✅ Certo' if good else '❌ Errado')+'<br><br>Motivo sintético. 💡 Memorize: resumo sintético.\tTipo_Revisao_Rapida')
         for i in range(hard):
-            lines.append(f'Aplicação sintética {i}.\t'+('✅ Certo' if i % 2 == 0 else '❌ Errado')+'<br><br>Motivo sintético.\tTipo_Desafiadora_Cebraspe Estilo_Cebraspe')
+            lines.append(f'Aplicação sintética {i}.\t'+('✅ Certo' if i % 2 == 0 else '❌ Errado')+'<br><br>Motivo sintético. 💡 Memorize: resumo sintético.\tTipo_Desafiadora_Cebraspe Estilo_Cebraspe')
         self.ce.write_text('\n'.join(lines)+ ('\n' if lines else ''),encoding='utf-8')
         write_calibration(self.ce,self.reports)
     def run_export(self,**kw):
@@ -52,7 +52,7 @@ class PolicyTests(unittest.TestCase):
             self.assertEqual(policy['max_cards'],2)
     def test_cloze_and_challenges_real_card_count(self):
         self.rows([], 2)
-        self.cl.write_text('Alfa {{c1::beta}} e {{c1::gama}}.\tConceitos beta e gama.\tTeste Mnemonico\n',
+        self.cl.write_text('Alfa {{c1::beta}} e {{c1::gama}}.\tConceitos beta e gama. 💡 Memorize: resumo sintético.\tTeste Mnemonico\n',
                            encoding='utf-8')
         with self.assertRaisesRegex(ValueError,'Teto'):
             self.run_export(profile='focused', exception_reason='Cloze com desafiadores', max_cards=2)

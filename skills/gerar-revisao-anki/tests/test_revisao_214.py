@@ -15,8 +15,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'automacao-anki-python/scripts'))
 import exportar_anki as exporter
 
-CE = ('Uma conjunção exige duas proposições verdadeiras para ser verdadeira.\t✅ Certo<br><br>Uma conjunção só é verdadeira se ambas as proposições componentes forem verdadeiras.\tTipo_Revisao_Rapida\n'
-      'O número inteiro 2 é ímpar.\t❌ Errado<br><br>O inteiro 2 é par, porque pode ser dividido por 2 sem deixar resto na divisão.\tTipo_Revisao_Rapida\n')
+CE = ('Uma conjunção exige duas proposições verdadeiras para ser verdadeira.\t✅ Certo<br><br>Uma conjunção só é verdadeira se ambas as proposições componentes forem verdadeiras. 💡 Memorize: resumo sintético.\tTipo_Revisao_Rapida\n'
+      'O número inteiro 2 é ímpar.\t❌ Errado<br><br>O inteiro 2 é par, porque pode ser dividido por 2 sem deixar resto na divisão. 💡 Memorize: resumo sintético.\tTipo_Revisao_Rapida\n')
 D = CE.replace('Tipo_Revisao_Rapida', 'Tipo_Desafiadora_Cebraspe Estilo_Cebraspe')
 
 
@@ -107,7 +107,7 @@ def test_exposed_cloze_blocks_until_specific_exception_or_correction(package):
     ce,cl,rep,out=package
     ce.write_text(D, encoding='utf-8')
     write_calibration(ce, rep)
-    cl.write_text('A sublimação é a mudança de sólido para gás chamada de {{c1::sublimação}}.\tEssa mudança leva diretamente do sólido ao gás, sem passagem pelo estado líquido.\tTeste\n',encoding='utf-8')
+    cl.write_text('A sublimação é a mudança de sólido para gás chamada de {{c1::sublimação}}.\tEssa mudança leva diretamente do sólido ao gás, sem passagem pelo estado líquido. 💡 Memorize: resumo sintético.\tTeste\n',encoding='utf-8')
     target=write_review(ce,cl,rep)
     data=json.loads(target.read_text(encoding='utf-8'))
     items = {check.FILES[0]: ce.read_bytes(), check.FILES[1]: cl.read_bytes()}
@@ -125,7 +125,7 @@ def test_exposed_cloze_blocks_until_specific_exception_or_correction(package):
         target.write_text(json.dumps(data),encoding='utf-8')
         with pytest.raises(ValueError,match='EXCECAO_JUSTIFICADA'): do_export(package)
     # A correção precisa estar nos TSVs e requer nova revisão, sem resolução obsoleta.
-    cl.write_text('A passagem direta do sólido para o gás é {{c1::sublimação}}.\tEssa mudança ocorre sem passar pelo estado líquido, ao contrário da fusão.\tTeste\n',encoding='utf-8')
+    cl.write_text('A passagem direta do sólido para o gás é {{c1::sublimação}}.\tEssa mudança ocorre sem passar pelo estado líquido, ao contrário da fusão. 💡 Memorize: resumo sintético.\tTeste\n',encoding='utf-8')
     write_review(ce,cl,rep);do_export(package)
     assert out.exists()
 
@@ -147,7 +147,7 @@ def test_zero_cloze_and_cloze_with_challenges_and_d_only(package):
     ce,cl,rep,out=package
     do_export(package)
     ce.write_text('',encoding='utf-8')
-    cl.write_text('A passagem direta do sólido ao gás é {{c1::sublimação}}.\tEssa passagem não apresenta a fase líquida intermediária e difere da fusão.\tTeste\n',encoding='utf-8')
+    cl.write_text('A passagem direta do sólido ao gás é {{c1::sublimação}}.\tEssa passagem não apresenta a fase líquida intermediária e difere da fusão. 💡 Memorize: resumo sintético.\tTeste\n',encoding='utf-8')
     write_review(ce, cl, rep)
     with pytest.raises(ValueError, match='requer IDs de C/E desafiadores'):
         do_export(package)

@@ -23,7 +23,7 @@ check = load(ROOT / 'scripts/validar_calibracao_cebraspe.py', 'calibracao')
 
 def fixture():
     row = ['Considere P implica Q e Q falso. Nessas condições, P é falso.',
-           '✅ Certo<br><br>Se P fosse verdadeiro, Q teria de ser verdadeiro. Isso contradiz a premissa de Q falso.',
+           '✅ Certo<br><br>Se P fosse verdadeiro, Q teria de ser verdadeiro. Isso contradiz a premissa de Q falso. 💡 Memorize: resumo sintético.',
            'Tipo_Desafiadora_Cebraspe Estilo_Cebraspe Logica']
     ref = dict(id='REF-TESTE', concurso='FICTICIO', cargo='Teste', ano=2021,
                caderno='Fixture', item='1', url='https://example.test/prova',
@@ -141,7 +141,7 @@ class CalibrationTest(unittest.TestCase):
     def test_semantic_limit_false_answer_can_pass_complete_record(self):
         row, data = fixture()
         row[0] = 'Se P então Q. Q é verdadeiro. Portanto P é verdadeiro.'
-        row[1] = '✅ Certo<br><br>A ocorrência do consequente comprova a ocorrência do antecedente.'
+        row[1] = '✅ Certo<br><br>A ocorrência do consequente comprova a ocorrência do antecedente. 💡 Memorize: resumo sintético.'
         data['cartoes'][0]['sha256'] = check.fingerprint(row)
         # Contraexemplo formal: ambas as premissas verdadeiras e conclusão falsa.
         p_value, q_value = False, True
@@ -162,7 +162,7 @@ class CalibrationTest(unittest.TestCase):
         row, data = fixture()
         # O exportador aplica 50/50 também ao perfil focado: dois D, C e E.
         wrong = ['Considere P implica Q e Q falso. Nessas condições, P é verdadeiro.',
-                 '❌ Errado<br><br>Se P fosse verdadeiro, a implicação exigiria Q verdadeiro, contrariando a premissa.',
+                 '❌ Errado<br><br>Se P fosse verdadeiro, a implicação exigiria Q verdadeiro, contrariando a premissa. 💡 Memorize: resumo sintético.',
                  row[2]]
         wrong_record = copy.deepcopy(data['cartoes'][0])
         wrong_record.update(id='D02', linha=2, sha256=check.fingerprint(wrong), gabarito='E',

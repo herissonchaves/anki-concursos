@@ -83,3 +83,32 @@ def test_unsafe_html_rejected_even_outside_new_batches():
     found = []
     v.verify_tsvo('anki_certo_errado.tsv', 'Frente <script>x</script>.\t✅ Certo<br><br>Motivo.\tTag\n'.encode(), found)
     assert any('HTML inseguro' in e for e in found)
+
+
+def memorize_errors(ce_back='', cloze_extra=None):
+    items = {'anki_certo_errado.tsv': f'Frente.\t{ce_back}\tTipo_Revisao_Rapida\n'.encode() if ce_back else b'',
+             'anki_cloze.tsv': f'Texto {{{{c1::alvo}}}}.\t{cloze_extra}\tTag\n'.encode() if cloze_extra else b''}
+    found = []
+    v.validate_new_memorize(items, found)
+    return found
+
+
+def test_new_notes_require_final_memorize_block():
+    good = h.verso_ce('C', [h.regra('Regra curta.')], 'Resumo da explicação.')
+    assert memorize_errors(good) == []
+    assert memorize_errors(cloze_extra=h.extra_cloze([h.regra('Regra.')], 'Resumo.')) == []
+    missing = memorize_errors('✅ Certo<br><br>Motivo sem resumo final.')
+    assert missing and 'anki_certo_errado.tsv:1 verso' in missing[0] and 'Memorize' in missing[0]
+    assert memorize_errors(cloze_extra='Extra sem resumo.')[0].startswith('anki_cloze.tsv:1 extra')
+
+
+def test_memorize_must_be_last_and_filled():
+    late = '✅ Certo<br><br>' + h.memorize('Resumo.') + h.regra('Regra depois do resumo.')
+    assert any('último bloco' in e for e in memorize_errors(late))
+    assert any('sem resumo' in e for e in memorize_errors('✅ Certo<br><br>Motivo. 💡 Memorize<div> </div>'))
+
+
+def test_memorize_not_required_for_existing_collections():
+    found = []
+    count = v.verify_tsvo('anki_certo_errado.tsv', 'Frente antiga.\t✅ Certo<br><br>Motivo antigo.\tTag\n'.encode(), found)
+    assert count == 1 and found == []
