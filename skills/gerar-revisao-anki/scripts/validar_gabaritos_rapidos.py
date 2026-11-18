@@ -5,7 +5,7 @@ Uso: python3 validar_gabaritos_rapidos.py pacote.zip
      python3 validar_gabaritos_rapidos.py anki_certo_errado.tsv
      python3 validar_gabaritos_rapidos.py pasta_do_pacote/
 
-Integra a norma gabaritos_rapidos_50_50.md. Verifica *contagens*, não a
+Integra a norma de equilíbrio de references/matriz_tipos_quantidades.md. Verifica *contagens*, não a
 verdade jurídica, histórica ou científica das proposições.
 """
 from __future__ import annotations

@@ -1,12 +1,12 @@
 > Política comum: [nucleo-pedagogico.md](nucleo-pedagogico.md). Distribuição, equilíbrio e exceções: [matriz_tipos_quantidades.md](matriz_tipos_quantidades.md). Este documento complementa essas regras.
 
-## Perfil PRF e Agente PF — 2.12
+## Perfil PRF e Agente PF
 
 Antes da triagem, carregar `../../perfil-carreiras-policiais/SKILL.md` e seu registro de disciplinas quando o alvo for PRF/PF. Reusar o perfil já resolvido nesta tarefa. As skills são instruções lidas pelo agente, não serviços ou subagentes. Inglês é a opção configurada para PRF; Espanhol está excluído. Outros cargos PF não herdam a matriz de Agente.
 
 ## ROTEAMENTO OBRIGATÓRIO: conteúdo de Língua Portuguesa
 
-PRIMEIRO identificar disciplina. Sempre que o usuário mencionar Língua Portuguesa OU pedir cartões sobre gramática, pronome, verbo, análise sintática, concordância, regência, crase, pontuação, coesão, semântica, reescrita, tipologia ou interpretação de texto: **encaminhar antes de elaborar/avaliar os cartões** para `../../portugues-cebraspe-qualidade/SKILL.md` e seus três arquivos `references/atlas_operacoes_cebraspe_portugues.md`, `references/roteiro_auditoria_e_modelos.md` e `references/evidencias_e_limitacoes.md`. A obrigação abrange revisão, caderno de erros, melhoria e auditoria de Português, não apenas criação explícita de C/E. Aplicar conjuntamente o pipeline geral; **o especializado não relaxa formatação, backup, atualização de Direito ou auditoria**. No relatório registrar `ROTEAMENTO=portugues-cebraspe-qualidade`, além de evidência de aplicação a cada ID. Se roteamento não foi comprovadamente executado, não alegar que foi.
+PRIMEIRO identificar disciplina. Sempre que o usuário mencionar Língua Portuguesa OU pedir cartões sobre gramática, pronome, verbo, análise sintática, concordância, regência, crase, pontuação, coesão, semântica, reescrita, tipologia ou interpretação de texto: **encaminhar antes de elaborar/avaliar os cartões** para `../../portugues-cebraspe-qualidade/SKILL.md` e seus três arquivos `../../portugues-cebraspe-qualidade/references/atlas_operacoes_cebraspe_portugues.md`, `../../portugues-cebraspe-qualidade/references/roteiro_auditoria_e_modelos.md` e `../../portugues-cebraspe-qualidade/references/evidencias_e_limitacoes.md`. A obrigação abrange revisão, caderno de erros, melhoria e auditoria de Português, não apenas criação explícita de C/E. Aplicar conjuntamente o pipeline geral; **o especializado não relaxa formatação, backup, atualização de Direito ou auditoria**. No relatório registrar `ROTEAMENTO=portugues-cebraspe-qualidade`, além de evidência de aplicação a cada ID. Se roteamento não foi comprovadamente executado, não alegar que foi.
 
 ## Seleção da rota pela intenção
 
@@ -25,7 +25,7 @@ PRIMEIRO identificar disciplina. Sempre que o usuário mencionar Língua Portugu
 1. Skills são instruções especializadas, **não agentes autônomos**. Não inventar invocação de uma ferramenta de execução que não existe.
 2. Português => sempre especialização; misto => Português apenas onde pertinente; não Português => fluxo normal. Não atribuir ao formato C/E a banca real de provas da FCC.
 3. PDF + `.colpkg`: comparar backup acessível antes de gerar. PDFs só: triagem A/B/C antes de escrever. Prints de erros sem resposta marcada não revelam erro real. Lote existente só com pedido de auditoria não autoriza recriar.
-4. O núcleo é a política comum; a matriz é a fonte única de composição e exceções. `pipeline_qualidade_obrigatorio.md` e `regras-cartoes.md` são atalhos, não regras superiores. `triagem_previa_pdf.md` precede qualquer geração a partir de material. Especialização acrescenta critérios linguísticos e matriz G/S/C.
+4. O núcleo é a política comum; a matriz é a fonte única de composição e exceções. `pipeline_qualidade_obrigatorio.md` é atalho, não regra superior. `triagem_previa_pdf.md` precede qualquer geração a partir de material. Especialização acrescenta critérios linguísticos e matriz G/S/C.
 5. Não inventar leitura, teste, pesquisa, desempenho, gabarito de banca ou arquivo ZIP. Cada item exige primeira crítica e segunda conferência da solução.
 6. Para automação, consultar `../../automacao-anki-python/SKILL.md`; scripts não comprovam nível cognitivo, e nenhuma ação deve editar backup original.
 

@@ -14,7 +14,7 @@ A suíte deve cobrir: bloqueio de D novos sem calibração; rubrica incompleta o
 
 As fixtures de calibração dentro de `tests/` contêm fontes fictícias e não podem gerar relatórios de produção. Testes documentais deliberadamente aceitam exemplos semanticamente errados para demonstrar os limites do verificador. Uma suíte verde não é aprovação pedagógica.
 
-Após testes, aplicar a avaliação editorial multidisciplinar em `../../gerar-revisao-anki/references/avaliacao-pedagogica-multidisciplinar.md`. Registrar contagens, exceções, falhas, correções e limites. Não publicar “tudo aprovado” quando apenas um subconjunto foi executado.
+Após testes, aplicar a avaliação editorial multidisciplinar em `../../gerar-revisao-anki/references/avaliacao-pedagogica-multidisciplinar.md`. Para o piloto editorial com fontes reais exigido em atualizações do gerador, usar como modelo `../../gerar-revisao-anki/references/piloto-editorial-prf.md`. Registrar contagens, exceções, falhas, correções e limites. Não publicar “tudo aprovado” quando apenas um subconjunto foi executado.
 
 ## Regressões 2.14
 

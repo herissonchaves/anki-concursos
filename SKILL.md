@@ -1,15 +1,17 @@
 ---
 name: anki-concursos
-description: Skill principal do Anki-Concursos. Encaminha pedidos de criação, seleção, auditoria e melhoria de flashcards para concursos, análise de backups e orientação de estudo no Anki. Define o fluxo de Git local do projeto.
+description: Skill principal do Anki-Concursos. Use para criar, selecionar, auditar ou melhorar flashcards Anki de concursos (PRF por padrão, Agente PF e outros quando pedidos) em Certo/Errado estilo Cebraspe e Cloze, exportados em TSV; para caderno de erros, análise de backup .colpkg e orientação de estudo no Anki/FSRS. Encaminha à skill especializada e define o Git local e onde salvar os lotes.
 ---
 
 # Anki-Concursos
 
 O repositório de referência fica em `D:\NextCloud - Arquivos\IA Agents\Anki-Concursos`.
 Neste computador Windows, a cópia sincronizada fica em
-`C:\Users\Herisson.DESKTOP-EHB23TA\Nextcloud\IA Agents\Anki-Concursos`. Uma skill
+`C:\Users\Herisson.DESKTOP-EHB23TA\Nextcloud\IA Agents\Anki-Concursos`. A skill
 de entrada instalada no Claude (`~/.claude/skills/anki-concursos/SKILL.md`) aponta
-para este arquivo; mantenha as duas coerentes ao mudar o roteamento ou o Git.
+para este arquivo. Sua fonte versionada é
+[`instalacao/anki-concursos/SKILL.md`](instalacao/anki-concursos/SKILL.md): ao mudar
+o roteamento ou o perfil, edite a fonte e copie-a para a pasta instalada.
 
 ## Escolha do fluxo
 
@@ -27,6 +29,10 @@ são relativos à raiz do projeto.
 | Inspecionar um backup | [analisar-colecao-anki](skills/analisar-colecao-anki/SKILL.md) |
 | Extrair material ou validar e exportar arquivos | [automacao-anki-python](skills/automacao-anki-python/SKILL.md) |
 | Orientar rotina, carga de revisão e FSRS | [orientar-estudo-anki](skills/orientar-estudo-anki/SKILL.md) |
+
+Para os portões de cada rota, o roteamento obrigatório de Língua Portuguesa e os
+casos de regressão do roteamento, veja
+[orquestracao_multi_skill.md](skills/gerar-revisao-anki/references/orquestracao_multi_skill.md).
 
 Para conteúdo de PRF ou Agente da Polícia Federal, use
 [perfil-carreiras-policiais](skills/perfil-carreiras-policiais/SKILL.md) para

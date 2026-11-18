@@ -5,7 +5,7 @@
 ## Revisar e devolver coleção existente — 2.2
 
 `analisar_colpkg.py` agora lê bancos `collection.anki21b` sem usar o stub legado.
-Requer Python 3.14+ ou `zstandard`. O limite de descompressão é 512 MiB. A
+Requer `zstandard` (Python 3.12/3.13, versões testadas; ver `../requirements-optional.txt`) ou o `compression.zstd` do Python 3.14+. O limite de descompressão é 512 MiB. A
 collation usada na inspeção é aproximação somente de leitura; não reconstruir
 índices com ela. Para edição, o fluxo abaixo usa o mecanismo oficial do Anki.
 

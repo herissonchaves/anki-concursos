@@ -65,7 +65,7 @@ Antes de escrever qualquer cartão: elaborar para cada conceito candidato uma ma
 - **Muita carga de revisão:** reduzir cartões de baixo retorno, evitar duplicação, priorizar reformulações e poucos casos robustos, sem estabelecer cotas arbitrárias; comunicar o trade-off.
 - **Regra desatualizada:** confirmar texto legal e precedentes oficiais atuais antes de declarar erro, sugerir ajuste do cartão e registrar a fonte; o backup não é fonte jurídica.
 
-Aplicar conjuntamente `references/calibracao-cebraspe-e-portugues.md`: enunciados C/E autorais com situações-problema pertinentes, escrita clara sem juridiquês supérfluo, dificuldade por raciocínio (regras, exceções e consequências) e **verso didático com correção objetiva + motivo decisivo + dica curta e fiel**. Não apresentar detalhe irrelevante sobre métricas de Anki no verso. Obedecer à formatação, às duas quebras, à regra sem `Explicação:` e às restrições Cloze.
+Aplicar conjuntamente `calibracao-cebraspe-e-portugues.md`: enunciados C/E autorais com situações-problema pertinentes, escrita clara sem juridiquês supérfluo, dificuldade por raciocínio (regras, exceções e consequências) e **verso didático com correção objetiva + motivo decisivo + dica curta e fiel**. Não apresentar detalhe irrelevante sobre métricas de Anki no verso. Obedecer à formatação, às duas quebras, à regra sem `Explicação:` e às restrições Cloze.
 
 Se o diagnóstico encontrar apenas duplicatas e temas plenamente cobertos, **é válido produzir zero novos cartões** e apresentar propostas de reescrita ou estratégia de estudo. Não criar notas para mostrar produtividade.
 
