@@ -3,22 +3,22 @@
 Uso (na raiz do repositório):
   python -X utf8 lotes/PRF/Missao_08_Correio_Eletronico/fonte/gerar_lote.py
 
-Escreve lote/ (TSVs + relatorios/*.json) e previa_cards.html. Os relatórios .txt
-são escritos à mão e ficam em lote/relatorios/.
+Este arquivo guarda só o conteúdo (fontes, referências, esquemas e cartões); a
+montagem dos TSVs, dos registros JSON e da prévia fica em
+skills/gerar-revisao-anki/scripts/montar_lote.py. Os relatórios .txt são escritos
+à mão e ficam em lote/relatorios/. Lote anterior à 2.16: calibração no schema 1.
 """
-import html as _html, json, random, sys
+import sys
 from pathlib import Path
 
 PASTA = Path(__file__).resolve().parents[1]
 RAIZ = PASTA.parents[2]
-OUT = PASTA / 'lote'
 sys.path.insert(0, str(RAIZ / 'skills' / 'gerar-revisao-anki' / 'scripts'))
-from validar_revisao_pedagogica import batch_hash, fingerprint  # funções oficiais do projeto
-from html_anki import (verso_ce, extra_cloze, regra, caso, erro, certo, esquema, tabela, fluxo, frente)
+from html_anki import regra, caso, erro, certo, esquema, tabela, fluxo
+from montar_lote import Lote, rubrica as rub
 
 HOJE = '2026-11-18'
 BASE = 'Informatica Correio_Eletronico PRF Missao_08'
-R_TAG, D_TAG = 'Tipo_Revisao_Rapida', 'Tipo_Desafiadora_Cebraspe Estilo_Cebraspe'
 
 # ---------------------------------------------------------------- esquemas reutilizados
 T_PROTOCOLOS = tabela(['Protocolo', 'Função', 'Porta padrão'], [
@@ -68,8 +68,6 @@ F = {
  'ms_digsig': ('https://support.microsoft.com/en-us/office/secure-messages-by-using-a-digital-signature-in-outlook-549ca2f1-a68f-4366-85fa-b3f4b5856fc6', 'Microsoft Support: assinatura digital vem do ID digital (certificado), garante autenticidade e integridade e não é a mesma coisa que a assinatura de texto comum'),
  'gmail_clients': ('https://support.google.com/mail/answer/7126229?hl=pt-BR', 'Ajuda do Gmail: é possível adicionar o Gmail a clientes como Outlook, Apple Mail e Thunderbird; acesso IMAP sempre ativado'),
 }
-def fontes(*keys): return [{'url': F[k][0], 'consulta': HOJE, 'trecho': F[k][1]} for k in keys]
-def urls(*keys): return [F[k][0] for k in keys]
 
 REFS = [
  dict(id='MPTO24_99', concurso='MPTO — VI Concurso, Edital nº 1/2024 (aplicação 3/3/2024)', cargo='Técnico Ministerial Especializado — Fotografia (cargo 16)', ano=2024,
@@ -280,11 +278,6 @@ CZ = [
 ]
 
 # ---------------------------------------------------------------- desafiadores (D)
-def rub(c, de, op, cmp, au, fb, ling, ut):
-    k = ('correcao','determinacao','operacao_d','comparacao','autoria','feedback','linguagem_didatica','utilidade')
-    return {key: {'resultado': ('PENDENTE' if (key == 'comparacao' and val.startswith('PENDENTE')) else 'PASSA'),
-                  'evidencia': val.replace('PENDENTE: ', '')} for key, val in zip(k, (c, de, op, cmp, au, fb, ling, ut))}
-
 D = [
  dict(k='D01', g='C', tags='Arquitetura_Email',
   f='Paula, do provedor A, envia um e-mail a Rui, do provedor B. Um servidor de A confere o login de Paula e aceita a mensagem; ela é repassada até B, onde outro componente a coloca na caixa postal de Rui. O componente que conferiu o login é o MSA, e o que colocou a mensagem na caixa postal é o MDA.',
@@ -448,95 +441,6 @@ D = [
 ]
 
 # ---------------------------------------------------------------- montagem
-def row_r(x): return [x['f'], verso_ce(x['g'], x['b'], x['m']), f"{BASE} {x['tags']} {R_TAG}"]
-def row_d(x): return [frente(x['f']), verso_ce(x['g'], x['b'], x['m']), f"{BASE} {x['tags']} {D_TAG}"]
-def row_c(x): return [frente(x['t']), extra_cloze(x['b'], x['m']), f"{BASE} {x['tags']}"]
-
-for x in CZ:
-    assert x['t'].count('{{c1::') == 1, x['k']  # 2.15: uma omissão por nota (sem mnemônicos neste lote)
-
-ce_items = [('R', x) for x in R] + [('D', x) for x in D]
-random.Random(808).shuffle(ce_items)
-ce_rows, line_of = [], {}
-for n, (kind, x) in enumerate(ce_items, 1):
-    ce_rows.append(row_r(x) if kind == 'R' else row_d(x)); line_of[x['k']] = n
-cz_rows = [row_c(x) for x in CZ]
-
-OUT.mkdir(parents=True, exist_ok=True); (OUT / 'relatorios').mkdir(exist_ok=True)
-def write_tsv(name, rows):
-    data = ('\n'.join('\t'.join(r) for r in rows) + '\n').encode('utf-8')
-    (OUT / name).write_bytes(data); return data
-items = {'anki_certo_errado.tsv': write_tsv('anki_certo_errado.tsv', ce_rows),
-         'anki_cloze.tsv': write_tsv('anki_cloze.tsv', cz_rows)}
-
-cal = {'schema_version': 1, 'referencias': REFS, 'cartoes': []}
-for x in D:
-    n = line_of[x['k']]; row = ce_rows[n - 1]
-    rec = dict(id=x['k'], linha=n, sha256=fingerprint(row), gabarito=x['g'], alvo=x['alvo'], operacao_autoral=x['op'],
-               regra=x['regra'], dado_decisivo=x['dado'], solucao=x['solucao'], erro_plausivel=x['erro'],
-               leitura_concorrente=x['conc'], originalidade=x['orig'], fontes_conteudo=urls(*x['fx']), referencias=x['refs'],
-               fidelidade=x['fid'], segunda_conferencia=True, decisao='APROVAR', rubrica=x['rb'])
-    rec['comparacao' if x['fid'] == 'comparada' else 'limitacao'] = x['cmp'] if x['fid'] == 'comparada' else x['lim']
-    cal['cartoes'].append(rec)
-(OUT / 'relatorios' / 'calibracao_cebraspe.json').write_text(json.dumps(cal, ensure_ascii=False, indent=1), encoding='utf-8')
-
-def rid(k): return f'anki_certo_errado.tsv:{line_of[k]}'
-rev = {'schema_version': 1, 'sha256_lote': batch_hash(items),
-       'revisor': 'Claude (assistente de IA, modelo Opus 5.5) — mesmo agente que redigiu os cartões',
-       'tipo_revisao': 'autorevisao', 'cartoes': [], 'sinais': []}
-for x in R:
-    row = ce_rows[line_of[x['k']] - 1]
-    rev['cartoes'].append(dict(id=rid(x['k']), sha256=fingerprint(row), alvo=x['alvo'], solucao=x['sol'], fontes=fontes(*x['fx']),
-        alternativa_concorrente=x['alt'], recuperacao=x['rec'], feedback=x['fb'], segunda_conferencia=True, decisao='APROVAR'))
-for i, x in enumerate(CZ, 1):
-    rev['cartoes'].append(dict(id=f'anki_cloze.tsv:{i}', sha256=fingerprint(cz_rows[i - 1]), alvo=x['alvo'], solucao=x['sol'], fontes=fontes(*x['fx']),
-        alternativa_concorrente=x['alt'], recuperacao=x['rec'], feedback=x['fb'],
-        desafiadores_por_lacuna={g: [rid(k) for k in ks] for g, ks in x['cob'].items()}, segunda_conferencia=True, decisao='APROVAR'))
-from validar_revisao_pedagogica import signals as _sinais_atuais
-editorial = {f'anki_certo_errado.tsv:{n}': k for k, n in line_of.items()}
-editorial.update({f'anki_cloze.tsv:{i}': x['k'] for i, x in enumerate(CZ, 1)})
-motivos = json.loads(Path(__file__).with_name('sinais_resolvidos.json').read_text(encoding='utf-8'))
-pendentes = []
-for s in _sinais_atuais(items):
-    chave = f"{editorial.get(s['id'], s['id'])}|{s['sinal']}"
-    if chave in motivos:
-        rev['sinais'].append({'sinal_id': s['sinal_id'], 'decisao': 'EXCECAO_JUSTIFICADA', 'motivo': motivos[chave]})
-    else:
-        pendentes.append(chave)
-if pendentes:
-    print('SINAIS PENDENTES (corrigir ou justificar em sinais_resolvidos.json):', ', '.join(pendentes))
-(OUT / 'relatorios' / 'revisao_recuperacao.json').write_text(json.dumps(rev, ensure_ascii=False, indent=1), encoding='utf-8')
-
-# ---------------------------------------------------------------- prévia visual (não vai para o Anki)
-import re
-def cloze_view(texto, revelar):
-    return re.sub(r'\{\{c1::(.*?)\}\}', (lambda m: f'<span class="cloze">{m[1]}</span>') if revelar else
-                  (lambda m: '<span class="cloze">[...]</span>'), texto)
-cards = []
-for (kind, x), row in zip(ce_items, ce_rows):
-    cards.append((x['k'], row[0], row[1], row[2]))
-for x, row in zip(CZ, cz_rows):
-    cards.append((x['k'], cloze_view(row[0], False), cloze_view(row[0], True) + '<hr id="answer">' + row[1], row[2]))
-pares = ''.join(
-    f'<section><h2>{k} <small>{_html.escape(t)}</small></h2><div class="lado"><div class="card">{fr}</div>'
-    f'<div class="card">{(fr + "<hr id=answer>" + vs) if not k.startswith("C") else vs}</div></div></section>'
-    for k, fr, vs, t in cards)
-previa = ('<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-          '<title>Prévia dos cards — Correio Eletrônico</title><style>'
-          'body{font-family:system-ui,sans-serif;margin:0;padding:16px;background:#eceff1;color:#222}'
-          'body.noite{background:#1e1e1e;color:#ddd} h1{font-size:18px} h2{font-size:14px;margin:18px 0 6px} small{opacity:.6;font-weight:normal}'
-          '.lado{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}'
-          '.card{font-family:arial;font-size:20px;text-align:center;background:white;color:black;padding:14px;border-radius:8px;max-width:520px}'
-          'body.noite .card{background:#2f2f31;color:#e8e8e8} .cloze{font-weight:bold;color:blue} body.noite .cloze{color:#6ea8ff}'
-          'button{padding:6px 12px;margin-bottom:8px}</style>'
-          '<h1>Prévia dos cards (frente | verso) — imita o modelo Básico/Cloze padrão do Anki</h1>'
-          '<button onclick="document.body.classList.toggle(\'noite\')">Alternar modo noturno</button>'
-          + pares + '</html>')
-(PASTA / 'previa_cards.html').write_text(previa, encoding='utf-8')
-
-mapa = {x['k']: rid(x['k']) for x in R + D}
-mapa.update({x['k']: f'anki_cloze.tsv:{i}' for i, x in enumerate(CZ, 1)})
-print(json.dumps(mapa, ensure_ascii=False))
-print('R', len(R), 'C/E', sum(x['g'] == 'C' for x in R), sum(x['g'] == 'E' for x in R))
-print('D', len(D), 'C/E', sum(x['g'] == 'C' for x in D), sum(x['g'] == 'E' for x in D))
-print('Cloze notas', len(CZ))
+Lote(PASTA, BASE, F, HOJE, REFS, R, D, CZ, semente=808, schema_calibracao=1,
+     revisor='Claude (assistente de IA, modelo Opus 5.5) — mesmo agente que redigiu os cartões',
+     titulo_previa='Prévia dos cards — Correio Eletrônico').gerar()
