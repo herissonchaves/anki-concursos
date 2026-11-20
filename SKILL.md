@@ -67,7 +67,7 @@ com outro `--with-requirements`. Os testes que dependem de `zstandard` ou
 
 ## Onde salvar os lotes gerados
 
-Todo arquivo gerado pelas skills (TSVs, relatórios, ZIP e o script que montou o lote) fica **dentro deste repositório**, em `lotes/<CONCURSO>/<Missao_NN_Tema>/`, por exemplo `lotes/PRF/Missao_08_Correio_Eletronico/`. Não grave lotes na pasta do material de estudo.
+Todo arquivo gerado pelas skills (TSVs, relatórios, ZIP e o script que montou o lote) fica **dentro deste repositório**, em `lotes/<CONCURSO>/<Missao_NN_Tema>/`, por exemplo `lotes/PRF/Missao_09_Navegadores/`. Não grave lotes na pasta do material de estudo.
 
 - `lote/`: `anki_certo_errado.tsv`, `anki_cloze.tsv` e `relatorios/` (é o diretório passado ao exportador).
 - `fonte/`: script gerador e decisões sobre os sinais do lint, para refazer hashes após uma edição.
