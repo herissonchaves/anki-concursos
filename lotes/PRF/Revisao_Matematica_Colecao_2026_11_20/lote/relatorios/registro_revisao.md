@@ -78,3 +78,20 @@ porcentagem ainda são novos (sem revisões).
   F_D02 (crescimento e leitura de incrementos).
 - Importação por GUID: [manual do Anki, arquivos de texto](https://docs.ankiweb.net/importing/text-files.html)
   — cabeçalho `#guid column`, atualização no lugar, baralho e agenda preservados.
+
+## Coleção substituta (pedido de 20/11/2026)
+
+A pedido, foi gerado também um `.colpkg` em que as 47 notas antigas de Matemática foram
+**removidas** e as versões revisadas entraram como **notas novas** (novos GUIDs, cartões
+novos, sem histórico nem suspensão), no mesmo baralho e com as mesmas tags. Script:
+`fonte/gerar_colecao.py` (biblioteca oficial `anki` 26.9.3, em cópia temporária; o backup
+original não é alterado). O pacote fica fora do Git.
+
+Conferência automática no pacote reimportado: 455 notas e 455 cartões; todas as demais
+408 notas e seus cartões idênticos campo a campo (IDs, agenda, suspensões, baralho);
+baralhos, opções de baralho, tipos de nota, modelos e configuração iguais (exceto
+`nextPos`, a posição do próximo cartão novo); as 15 mídias com o mesmo hash; os 47
+cartões novos no baralho Matemática, sem revisões, com o conteúdo igual ao dos TSVs e
+renderizando pelo mecanismo do Anki. As 3.110 linhas do histórico continuam no banco: o
+Anki não apaga o histórico de cartões removidos, ele só deixa de aparecer em algum cartão.
+Teste na interface gráfica do desktop não realizado.
