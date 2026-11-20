@@ -8,11 +8,13 @@
 testpaths = [
     "skills/automacao-anki-python/tests",
     "skills/gerar-revisao-anki/tests",
+    "skills/referencias-questoes/tests",
 ]
-# Scripts e fixtures compartilhados entre as duas suítes.
+# Scripts e fixtures compartilhados entre as suítes.
 pythonpath = [
     "skills/automacao-anki-python/scripts",
     "skills/gerar-revisao-anki/scripts",
     "skills/gerar-revisao-anki/tests",
+    "skills/referencias-questoes/scripts",
 ]
 addopts = "-q"
