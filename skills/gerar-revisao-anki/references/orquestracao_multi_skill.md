@@ -12,12 +12,13 @@ PRIMEIRO identificar disciplina. Sempre que o usuário mencionar Língua Portugu
 
 | Pedido | Rota principal | Portões obrigatórios |
 | --- | --- | --- |
-| Crie revisão do PDF / C/E e Cloze | `gerar-revisao-anki` | Ler -> triagem -> backup se disponível -> gerar -> crítica -> revalidar -> exportar; + **especialização para Português** |
+| Crie revisão do PDF / C/E e Cloze | `gerar-revisao-anki` | Ler -> triagem -> backup se disponível -> banco `referencias/` (questões do anexo + busca) -> gerar -> crítica -> revalidar -> exportar; + **especialização para Português** |
 | Quais tópicos merecem Anki? | `selecionar-conteudos-pdf-anki` | Mapa A/B/C, sem inventar cartão; + **especialização para Português** |
-| Gere caderno de erros | `caderno-erros-anki` | Verificar erro marcado -> diagnosticar -> novo item -> auditoria; + **especialização para Português** |
+| Gere caderno de erros | `caderno-erros-anki` | Verificar erro marcado -> salvar a questão no banco `referencias/` -> diagnosticar -> novo item -> auditoria; + **especialização para Português** |
 | Analise `.colpkg` | `analisar-colecao-anki` | Diagnóstico somente leitura; sem gerar cartões |
 | Não entendi / melhore um card | `melhorar-cartoes-anki` | Reescrever -> crítica -> revalidar; + **especialização para Português** |
 | Audite cartões / ZIP | `auditar-cartoes-anki` | Analisar lote real; reprovar os que falham; + **especialização para Português** |
+| Consultar ou salvar questões de concursos de referência | `referencias-questoes` | `assuntos` -> `buscar` -> `mostrar`; salvar só o item oficial com `nova`; `indexar` sem erros |
 | Tarefa de extração, deduplicação, exportação | `automacao-anki-python` | Usar scripts somente quando disponíveis; não equivalem a validação pedagógica |
 
 ## Prioridades

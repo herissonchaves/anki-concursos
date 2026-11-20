@@ -47,8 +47,9 @@ no pedido. Na ausência de outro alvo explícito, a prioridade do projeto é PRF
 
 ## Testes
 
-As suítes de `automacao-anki-python` e `gerar-revisao-anki` são configuradas
-no `pyproject.toml`. Rode o comando na raiz do repositório.
+As suítes de `automacao-anki-python`, `gerar-revisao-anki` e `referencias-questoes`
+(scripts do banco e checagem de que os caminhos citados nas instruções existem)
+são configuradas no `pyproject.toml`. Rode o comando na raiz do repositório.
 
 ```bash
 uv run --python 3.13 --with-requirements skills/automacao-anki-python/requirements-dev.txt pytest
