@@ -7,7 +7,7 @@ description: Seleciona conteúdos de PDF úteis para memorização e aplicação
 
 Leia `../gerar-revisao-anki/references/nucleo-pedagogico.md` primeiro.
 
-Leia páginas realmente acessíveis e registre limites de OCR. Classifique alvo, página, prioridade A/B/C, operação, possível duplicidade e custo. Não prometer incidência sem evidência. Escolha R/D/C pelo alvo, não por proporções. Compare com backup acessível somente em leitura. Para Português leia `../portugues-cebraspe-qualidade/SKILL.md`. Não converter teoria incompreendida ou conteúdo periférico automaticamente. Entregue seleção e estimativa de cartões efetivos; só prossiga à geração se o pedido a incluir.
+Leia páginas realmente acessíveis e registre limites de OCR. Classifique alvo, página, prioridade A/B/C, operação, possível duplicidade e custo. Não prometer incidência sem evidência. Escolha R/D/C pelo alvo, não por proporções. Compare com backup acessível somente em leitura. Para Português leia `../portugues-cebraspe-qualidade/SKILL.md`. Não converter teoria incompreendida ou conteúdo periférico automaticamente. Liste também as questões de concursos que o PDF contiver (página, banca, ano, assunto), salve-as no banco `referencias/` conforme `../referencias-questoes/SKILL.md` (`origem: anexo_usuario`) e indique as do banco já existentes para os alvos selecionados. Entregue seleção e estimativa de cartões efetivos; só prossiga à geração se o pedido a incluir.
 
 ## Regras comuns
 

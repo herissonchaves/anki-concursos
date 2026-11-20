@@ -27,6 +27,7 @@ está o repositório.
 | Explicar ou reformular cartões | `skills/melhorar-cartoes-anki/SKILL.md` |
 | Inspecionar backup `.colpkg` (somente leitura) | `skills/analisar-colecao-anki/SKILL.md` |
 | Extrair PDF, validar e exportar TSV/ZIP/APKG | `skills/automacao-anki-python/SKILL.md` |
+| Questões de concursos de referência (banco `referencias/`) | `skills/referencias-questoes/SKILL.md` |
 | Rotina, carga de revisão, botões, FSRS | `skills/orientar-estudo-anki/SKILL.md` |
 
 Para PRF ou Agente PF, leia também `skills/perfil-carreiras-policiais/SKILL.md` e a
@@ -42,6 +43,9 @@ especialização da disciplina indicada em `skills/perfil-carreiras-policiais/re
   com o 💡 Memorize no fim do verso.
 - Antes de criar desafiadores, sempre pesquisar questões anteriores Cebraspe C/E e de
   outras bancas e usá-las como inspiração.
+- Em todo card autoral, reaproveitar as questões de concursos do arquivo enviado e do
+  banco `referencias/` (busca por script, sem abrir arquivos) e salvar ali, em
+  Markdown padronizado, toda questão lida no anexo ou na internet.
 - Entrega preferida: **arquivos TSV** importáveis no Anki, salvos em `lotes/` dentro
   do repositório.
 

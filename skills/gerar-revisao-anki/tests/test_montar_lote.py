@@ -122,3 +122,36 @@ def test_multiple_omissions_require_mnemonic_tag(tmp_path):
         gerado.montar_linhas()
     gerado.CZ[0]['tags'] = 'Fisica Mnemonico'
     gerado.montar_linhas()
+
+
+def test_referencias_do_banco_por_id_e_registro_de_uso(tmp_path):
+    """IDs do banco referencias/ viram referências da calibração e registram o uso."""
+    import sys
+    sys.path.insert(0, str(m.SCRIPTS_REFERENCIAS))
+    import referencias as banco_mod
+
+    banco = tmp_path / 'referencias'
+    ids = {}
+    for chave, ref in (('CEB', REFS[0]), ('FGV', REFS[1])):
+        dados = {k: v for k, v in ref.items() if k != 'id'}
+        dados.update(orgao=f'Órgão {chave}', disciplina='fisica', assunto='dinamica', subassuntos=['segunda_lei'],
+                     palavras_chave=['força'], gabarito='C' if chave == 'CEB' else 'A', origem='pesquisa_internet',
+                     fonte_descoberta='Fixture sintética', concursos_alvo=['PRF'], enunciado=f'Item sintético {chave}.',
+                     alternativas={'A': 'x', 'B': 'y'} if chave == 'FGV' else None)
+        status, questao, msgs = banco_mod.nova(dados, banco)
+        assert status == 'criada', msgs
+        ids[chave] = questao.id
+
+    pasta = tmp_path / 'lote_banco'
+    (pasta / 'fonte').mkdir(parents=True)
+    gerado = lote(pasta, banco_referencias=banco)
+    gerado.refs = gerado._resolver_refs([ids['CEB'], ids['FGV']])
+    for x in gerado.D:
+        x['refs'] = [ids['CEB'], ids['FGV']]
+    gerado.gerar(imprimir=False)
+    items, calibracao, _ = ler(pasta)
+    registro = json.loads(calibracao)
+    assert [r['id'] for r in registro['referencias']] == [ids['CEB'], ids['FGV']]
+    assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
+    usos = banco_mod.localizar([ids['CEB']], banco)[0].meta['usado_em']
+    assert usos == ['lote_banco#D01,D02']

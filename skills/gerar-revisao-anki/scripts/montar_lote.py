@@ -19,6 +19,11 @@ Convenção dos dicionários de cartão (chaves curtas):
 - Cloze: `t` (texto com uma omissão {{c1::…}}; várias só com a tag Mnemonico),
   `alvo`, `sol`, `alt`, `rec`, `fb`, `cob` ({'1': ['D04']}: D que cobrem cada lacuna).
 
+`referencias`: dicts no formato da calibração ou, de preferência, IDs (str) do banco
+`referencias/` (skills/referencias-questoes), que viram dicts por `referencias.calibracao`.
+Ao gerar, o uso de cada ID do banco citado em `refs` de qualquer cartão é registrado no
+`usado_em` da questão (`registrar_uso=False` desliga).
+
 `fontes`: {chave: (url, trecho verificado)}. Os relatórios .txt continuam
 escritos à mão em `lote/relatorios/`. Revisão pelo próprio agente é autorevisão;
 os registros gerados não certificam conteúdo.
@@ -33,6 +38,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+SCRIPTS_REFERENCIAS = Path(__file__).resolve().parents[2] / 'referencias-questoes' / 'scripts'
 from html_anki import extra_cloze, frente, verso_ce  # noqa: E402
 from validar_revisao_pedagogica import batch_hash, fingerprint, signals  # noqa: E402
 
@@ -58,11 +64,46 @@ def cloze_view(texto: str, revelar: bool) -> str:
 
 class Lote:
     def __init__(self, pasta, base_tags, fontes, hoje, referencias, R, D, CZ, semente,
-                 schema_calibracao=2, revisor=REVISOR_PADRAO, titulo_previa='Prévia dos cards'):
+                 schema_calibracao=2, revisor=REVISOR_PADRAO, titulo_previa='Prévia dos cards',
+                 banco_referencias=None, registrar_uso=True):
         self.pasta, self.out = Path(pasta), Path(pasta) / 'lote'
-        self.base, self.F, self.hoje, self.refs = base_tags, fontes, hoje, referencias
+        self.base, self.F, self.hoje = base_tags, fontes, hoje
         self.R, self.D, self.CZ, self.semente = R, D, CZ, semente
         self.schema, self.revisor, self.titulo = schema_calibracao, revisor, titulo_previa
+        self.banco, self.registrar = banco_referencias, registrar_uso
+        self.refs = self._resolver_refs(referencias)
+
+    # ------------------------------------------------------------ banco de referências
+    @staticmethod
+    def _modulo_referencias():
+        if str(SCRIPTS_REFERENCIAS) not in sys.path:
+            sys.path.insert(0, str(SCRIPTS_REFERENCIAS))
+        import referencias
+        return referencias
+
+    def _resolver_refs(self, referencias):
+        """Troca IDs do banco pelos dicts da calibração; guarda os IDs para registrar o uso."""
+        self.ids_banco = [r for r in referencias if isinstance(r, str)]
+        if not self.ids_banco:
+            return list(referencias)
+        do_banco = {r['id']: r for r in self._modulo_referencias().calibracao(*self.ids_banco, raiz=self.banco)}
+        return [do_banco[r] if isinstance(r, str) else r for r in referencias]
+
+    def rotulo_lote(self):
+        try:
+            return self.pasta.resolve().relative_to(Path(__file__).resolve().parents[3] / 'lotes').as_posix()
+        except ValueError:
+            return self.pasta.name
+
+    def registrar_usos(self):
+        if not (self.registrar and self.ids_banco):
+            return
+        ref = self._modulo_referencias()
+        for ident in self.ids_banco:
+            cartoes = [x['k'] for x in self.R + self.D + self.CZ if ident in x.get('refs', ())]
+            if cartoes:
+                ref.registrar_uso(ident, self.rotulo_lote(), cartoes, self.banco)
+        ref.indexar(self.banco)
 
     # ------------------------------------------------------------ fontes
     def fontes(self, *keys):
@@ -191,6 +232,7 @@ class Lote:
         self.registro_calibracao()
         self.registro_revisao(sinais_resolvidos or self.pasta / 'fonte' / 'sinais_resolvidos.json')
         self.gerar_previa()
+        self.registrar_usos()
         mapa = {x['k']: self.rid(x['k']) for x in self.R + self.D}
         mapa.update({x['k']: f'anki_cloze.tsv:{i}' for i, x in enumerate(self.CZ, 1)})
         if imprimir:
