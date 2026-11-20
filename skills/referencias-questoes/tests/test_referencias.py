@@ -117,3 +117,14 @@ def test_frontmatter_ida_e_volta():
             'usado_em': []}
     lido, corpo = ref.ler_documento(ref.escrever_documento(meta, '## Enunciado\n\ntexto'))
     assert lido == meta and corpo.startswith('## Enunciado')
+
+
+def test_indice_percebe_edicao_no_mesmo_instante(banco):
+    """Edição com o mesmo mtime do índice (mesmo tique do relógio) ainda reindexa."""
+    import os
+    _, a, _ = ref.nova(q(9, 'Item para registrar uso.'), banco)
+    ref.indexar(banco)
+    instante = (banco / 'indice.tsv').stat().st_mtime_ns
+    ref.registrar_uso(a.id, 'PRF/Missao_10_Y', ['R01'], banco)
+    os.utime(a.caminho, ns=(instante, instante))
+    assert ref.buscar(banco, nao_usadas=True) == []

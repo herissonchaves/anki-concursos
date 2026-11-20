@@ -14,3 +14,6 @@ lotes/**/previa_cards.html
 
 # Pacotes para outras plataformas (ex.: ChatGPT), regeneráveis a partir de skills/
 dist/
+
+# Assinatura local do índice do banco de referências (muda a cada máquina)
+referencias/.estado_indice

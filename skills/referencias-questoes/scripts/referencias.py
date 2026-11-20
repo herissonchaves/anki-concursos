@@ -180,6 +180,19 @@ def arquivos(raiz=None):
     return sorted((raiz_banco(raiz) / 'questoes').rglob('*.md'))
 
 
+ESTADO = '.estado_indice'  # assinatura local dos arquivos indexados (não versionada)
+
+
+def assinatura(raiz=None) -> str:
+    """Resumo de caminho, mtime (ns) e tamanho de cada questão: muda a cada edição."""
+    base = raiz_banco(raiz)
+    partes = []
+    for p in arquivos(raiz):
+        st = p.stat()
+        partes.append(f'{p.relative_to(base).as_posix()}|{st.st_mtime_ns}|{st.st_size}')
+    return hashlib.sha256('\n'.join(partes).encode('utf-8')).hexdigest()
+
+
 def ler_questao(caminho: Path) -> Questao:
     meta, corpo = ler_documento(caminho.read_text(encoding='utf-8'))
     return Questao(meta, corpo, caminho)
@@ -330,6 +343,7 @@ def indexar(raiz=None, atualizar_hash=False) -> tuple[int, list[str], list[str]]
             f.write('\t'.join(_celula(linha[c]) for c in COLUNAS) + '\n')
     with open(base / 'assuntos.md', 'w', encoding='utf-8', newline='\n') as f:
         f.write(arvore_assuntos(linhas))
+    (base / ESTADO).write_text(assinatura(raiz), encoding='utf-8')
     return len(linhas), erros, avisos
 
 
@@ -358,8 +372,9 @@ def ler_indice(raiz=None, reindexar=True) -> list[dict]:
     indice = base / 'indice.tsv'
     fontes = arquivos(raiz)
     linhas = indice.read_text(encoding='utf-8').splitlines() if indice.exists() else []
-    desatualizado = (not linhas or len(linhas) - 1 != len(fontes)
-                     or any(p.stat().st_mtime > indice.stat().st_mtime for p in fontes))
+    estado = base / ESTADO
+    gravado = estado.read_text(encoding='utf-8').strip() if estado.exists() else ''
+    desatualizado = not linhas or gravado != assinatura(raiz)
     if reindexar and desatualizado and (fontes or indice.exists()):
         _, erros, _ = indexar(raiz)
         for e in erros:
