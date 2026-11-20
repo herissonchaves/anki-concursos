@@ -13,6 +13,12 @@ Para melhorar e devolver uma coleção existente, siga
 em cópia temporária pela biblioteca oficial do Anki, preserva cartões/histórico
 e exporta `.colpkg`; não use o exportador de notas novas para substituir coleção.
 
+**Destino dos arquivos:** todo arquivo que o usuário vai importar (ZIP, APKG, `.colpkg`,
+cópias dos TSVs, TSVs de atualização) é gravado em `output/<CONCURSO>_<Tema>/` na raiz do
+repositório, fora do Git; relatórios, TSVs de origem e scripts ficam em `lotes/`. O usuário
+esvazia `output/` após importar: nunca use essa pasta como fonte. Regra completa em
+"Onde salvar os lotes gerados" no `SKILL.md` da raiz.
+
 Leia `references/uso_scripts.md` e use scripts existentes. Extração não equivale a OCR nem leitura visual; análise de backup não mede aprendizagem por si só. Similaridade textual não autoriza remoção. Gere apenas arquivos a partir de cartões semanticamente auditados conforme `../gerar-revisao-anki/references/auditoria-conteudo-gabaritos.md`; uma saída aprovada dos scripts não certifica gabarito. Não fabrique relatórios.
 
 Para exportação textual, use `scripts/exportar_anki.py`. Os campos chegam em HTML montado por `../gerar-revisao-anki/scripts/html_anki.py` (protocolo visual); o validador central reprova HTML inseguro e, em notas novas, tags desbalanceadas e Cloze com várias omissões sem a tag `Mnemonico`. Com imagens locais autênticas e manifesto, siga o protocolo visual e use `scripts/exportar_anki_visual.py`. Ambos executam o validador central com `--new`. A [matriz de quantidades](../gerar-revisao-anki/references/matriz_tipos_quantidades.md) define composição, paridade e parâmetros de perfil, justificativa e teto. Use os mesmos parâmetros no exportador e na revalidação. Rode o lint de clareza e revise os avisos semanticamente. Forneça um TSV vazio para cada modalidade ausente. Use caminhos completos dos scripts e inclua evidências nos relatórios.

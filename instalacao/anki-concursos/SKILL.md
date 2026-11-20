@@ -48,8 +48,11 @@ especialização da disciplina indicada em `skills/perfil-carreiras-policiais/re
 - Em todo card autoral, reaproveitar as questões de concursos do arquivo enviado e do
   banco `referencias/` (busca por script, sem abrir arquivos) e salvar ali, em
   Markdown padronizado, toda questão lida no anexo ou na internet.
-- Entrega preferida: **arquivos TSV** importáveis no Anki, salvos em `lotes/` dentro
-  do repositório.
+- Entrega preferida: **arquivos TSV** importáveis no Anki. O histórico do lote fica em
+  `lotes/` (versionado); os arquivos para importar (TSV, ZIP, APKG, `.colpkg`) vão para
+  `output/<CONCURSO>_<Tema>/` na raiz do repositório, pasta fora do Git que Hérisson
+  esvazia depois de importar. Detalhes em "Onde salvar os lotes gerados" no `SKILL.md`
+  da raiz.
 
 ## Git
 

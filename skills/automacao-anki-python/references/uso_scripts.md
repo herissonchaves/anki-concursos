@@ -18,7 +18,7 @@ O script confere a cobertura declarada, não certifica que a leitura foi feita.
 Executar com `anki==26.9.3` (versão de API testada):
 
 ```text
-python revisar_colpkg.py original.colpkg plano.json revisado.colpkg --report verificacao.json
+python revisar_colpkg.py original.colpkg plano.json output/PRF_Tema/revisado.colpkg --report verificacao.json
 ```
 
 O fluxo importa em pasta temporária, aplica somente campos, renderiza cada cartão,
@@ -26,7 +26,7 @@ exporta pelo Anki, reimporta para conferir mídia e exige igualdade exata de
 cartões e histórico. Preserva IDs, GUIDs, modelos e tags; não altera índices
 Cloze. Nunca recebe caminho de perfil ativo. Caminhos de saída devem ser novos.
 `verificacao.json` contém textos privados: entregar só ao usuário, nunca embutir
-no plugin. Há API interna encapsulada na importação; falhar se versão incompatível.
+no plugin nem versionar. O `.colpkg` revisado vai para `output/`, fora do Git. Há API interna encapsulada na importação; falhar se versão incompatível.
 
 Explicar que importar `.colpkg` substitui a coleção do perfil. Recomendar perfil
 separado para conferir. Distinguir teste do backend e teste da interface desktop.
@@ -41,8 +41,8 @@ python3 skills/automacao-anki-python/scripts/exportar_anki_visual.py \
   --cloze trabalho/anki_cloze.tsv \
   --relatorios trabalho/relatorios \
   --midia trabalho/midia \
-  -o trabalho/anki_visual.zip \
-  --apkg trabalho/anki_visual.apkg
+  -o output/PRF_Tema/anki_visual.zip \
+  --apkg output/PRF_Tema/anki_visual.apkg
 ```
 
 Sem `genanki`, omitir `--apkg` e importar o ZIP por TSV + cópia manual dos arquivos dentro de `midia/` para `collection.media`, sem subpastas, habilitando «Permitir HTML nos campos». Com `.apkg`, imagens locais acompanham o pacote. **Não** usar diretamente URL `https://` no atributo `src` dos cartões.

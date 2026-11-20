@@ -5,7 +5,7 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
-**Versão 2.18.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.19.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
@@ -80,13 +80,20 @@ com outro `--with-requirements`. Os testes que dependem de `zstandard` ou
 
 ## Onde salvar os lotes gerados
 
-Todo arquivo gerado pelas skills (TSVs, relatórios, ZIP e o script que montou o lote) fica **dentro deste repositório**, em `lotes/<CONCURSO>/<Missao_NN_Tema>/`, por exemplo `lotes/PRF/Missao_09_Navegadores/`. Não grave lotes na pasta do material de estudo.
+Todo arquivo gerado pelas skills fica **dentro deste repositório**, em dois lugares. Não grave lotes nem entregáveis na pasta do material de estudo, na Área de Trabalho ou em outro local.
+
+**Histórico versionado:** `lotes/<CONCURSO>/<Missao_NN_Tema>/`, por exemplo `lotes/PRF/Missao_09_Navegadores/`.
 
 - `lote/`: `anki_certo_errado.tsv`, `anki_cloze.tsv` e `relatorios/` (é o diretório passado ao exportador).
 - `fonte/`: script gerador e decisões sobre os sinais do lint, para refazer hashes após uma edição.
-- `<CONCURSO>_<Tema>.zip`: pacote final validado, ignorado pelo Git porque se regenera a partir de `lote/`.
 - Use outro concurso no lugar de `PRF` quando o alvo for outro (por exemplo `lotes/PF_Agente/`). Antes de versionar, confira que nenhum arquivo do lote contém dados pessoais copiados do material, como nome ou CPF das marcas-d'água.
 - Versione `lote/` e `fonte/` no commit da geração, para manter o histórico dos cartões, junto com as questões novas ou o `usado_em` atualizado em `referencias/`.
+
+**Entregáveis para importar:** `output/<CONCURSO>_<Tema>/` na raiz do repositório, por exemplo `output/PRF_Navegadores/`. A pasta `output/` é ignorada pelo Git.
+
+- Recebe tudo o que Hérisson vai importar no Anki: cópias dos TSVs do lote, o ZIP/APKG do exportador (`-o output/...` e `--apkg output/...`), `.colpkg` gerados e TSVs de atualização de notas existentes. Relatórios e scripts não entram: ficam em `lotes/`.
+- Hérisson apaga os arquivos de `output/` depois de importar. Nunca use `output/` como fonte nem conte com o que estava lá: regenere a partir de `lotes/` ou do backup. Pasta vazia ou ausente é o estado normal; crie-a quando for gravar.
+- Não apague nem sobrescreva entregáveis que ainda estejam em `output/`; use subpasta ou nome novo. No fechamento, informe o caminho completo dos arquivos a importar.
 
 ## Banco de questões de referência
 
