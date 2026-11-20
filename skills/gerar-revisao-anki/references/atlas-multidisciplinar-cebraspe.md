@@ -1,4 +1,4 @@
-# Atlas de operações C/E por disciplina — 2.7
+# Atlas de operações C/E por disciplina
 
 Repertório inicial observado em uma amostra intencional, consultada em 03/11/2026. Não mede frequência, não é corpus representativo e não certifica conteúdos históricos como atuais. Reconsultar referências pertinentes ao novo lote e buscar outras quando necessário. Usar com [protocolo-modo-estrategico.md](protocolo-modo-estrategico.md), sem quotas de mecanismos.
 

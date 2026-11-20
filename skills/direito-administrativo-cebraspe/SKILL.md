@@ -21,6 +21,6 @@ Ler `../direito-cebraspe-qualidade/SKILL.md` e aplicar integralmente. Abrange pr
 
 **Contraexemplos de auditoria:** sanção disciplinar chamada de poder de polícia sem justificativa; responsabilidade automaticamente atribuída ao agente por ato estatal; sanção/competência retirada de diploma não aplicável; usar fato irrelevante só para disfarçar definição. Reprovar ambiguidades, simplificações com exceção ignorada e linguagem que dependa de formação jurídica.
 
-## Recorte por cargo — 2.12
+## Recorte por cargo
 
 Esta skill é reutilizada pelo `perfil-carreiras-policiais` para PRF e Agente PF. Aplicar somente os itens confirmados do programa do cargo; exemplos deste módulo não são lista automática do edital. Usar as escolhas já resolvidas pelo perfil, sem reiniciá-lo. Em Agente, respeitar o recorte de noções e não importar profundidade ou matérias de Delegado/Perito. O pedido atual pode selecionar outro cargo com programa próprio verificado.

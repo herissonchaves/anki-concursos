@@ -15,6 +15,6 @@ Português claro, sintaxe natural e termos jurídicos obrigatórios preservados.
 
 Para gramática, coesão, interpretação, reescritura ou pontuação, seguir `../../portugues-cebraspe-qualidade/SKILL.md` e suas três referências antes de redigir ou auditar. Em desafiadoras de reescrita, registrar **G/S/C** (gramaticalidade, sentido e coesão), referentes, escopo e interpretação concorrente; não assumir que texto gramatical conserva sentido. Rápidas podem testar definição linguística central sem precisar de cenário artificial.
 
-## Procedimento verificável — 2.7
+## Procedimento verificável
 
 Aplicar `protocolo-modo-estrategico.md`, `atlas-multidisciplinar-cebraspe.md` e `avaliacao-modo-estrategico.md`. Eles operacionalizam a comparação por família, conferência por ID, autoria e registro documental. Preservar a matriz para proporções; não confundir frase curta, reconhecimento direto e dificuldade.

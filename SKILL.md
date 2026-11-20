@@ -5,6 +5,11 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
+**Versão 2.17.** É o único número de versão do projeto: os demais `SKILL.md` e
+documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
+fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
+(`git log -- ARQUIVO`).
+
 O repositório de referência fica em `D:\NextCloud - Arquivos\IA Agents\Anki-Concursos`.
 Neste computador Windows, a cópia sincronizada fica em
 `C:\Users\Herisson.DESKTOP-EHB23TA\Nextcloud\IA Agents\Anki-Concursos`. A skill

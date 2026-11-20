@@ -1,6 +1,6 @@
 > Política comum: [nucleo-pedagogico.md](nucleo-pedagogico.md). Distribuição, equilíbrio e exceções: [matriz_tipos_quantidades.md](matriz_tipos_quantidades.md). Este documento complementa essas regras.
 
-# Triagem obrigatória antes da escrita — PDF, v1.6.0
+# Triagem obrigatória antes da escrita — PDF
 
 Nenhuma nota de revisão derivada de PDF nasce antes do inventário e seleção de alvos. Aplicar `../SKILL.md`, `matriz_tipos_quantidades.md`, `filtro-economia-revisao.md`, `cobertura-pdf.md` e `protocolo_cloze_cientifico.md`.
 
@@ -27,10 +27,10 @@ que ficou descoberto quando a composição do lote impedir uma inclusão útil.
 | Exceção, condição, consequência ou integração de fatos | C/E desafiador | apenas jogo de palavras, sem raciocínio real |
 | Conceito importante cujo termo, expressão ou frase curta central precisa ser memorizado | Cloze em qualquer posição; uma única lacuna c1 por nota (várias só em mnemônico, tag `Mnemonico`), com cobertura por desafiadores; dados numéricos só após filtro específico | palavra secundária, adivinhação contextual, frase vaga, redundância ou alto custo |
 
-## Relevância para o concurso — 2.4.2
+## Relevância para o concurso
 
 Antes de selecionar ou aprovar cartões, aplicar a seção “Relevância para PRF e outros concursos” do núcleo pedagógico. Pesquisar editais, retificações, provas e gabaritos oficiais; vincular cada alvo ao concurso/cargo e registrar evidência, utilidade esperada e decisão. Exatidão do conteúdo não basta. Busca por tema pode cobrir vários IDs com vínculo explícito; não presumir recorrência, utilidade universal ou ganho de desempenho. Evidência insuficiente fica pendente.
 
-## Candidatos Cloze antes de concluir a triagem — 2.8
+## Candidatos Cloze antes de concluir a triagem
 
 Aplicar a seleção ativa e a deduplicação por operação de `protocolo_cloze_cientifico.md`. Examinar conceitos, relações e condições prioritários além de números. Incorporar ao registro de triagem a resposta/equivalentes, operação comparada e motivo da decisão para cada candidato plausível. Se concluir zero Cloze, sustentar essa conclusão com os alvos efetivamente examinados; presença do assunto em versos ou em C/E não prova cobertura da recuperação produtiva.

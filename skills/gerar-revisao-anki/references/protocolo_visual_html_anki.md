@@ -1,4 +1,4 @@
-# Protocolo visual em HTML para cartões Anki — 2.15
+# Protocolo visual em HTML para cartões Anki
 
 O usuário aprende muito com esquemas visuais. Todo cartão novo usa HTML compatível com o Anki para organizar o verso (C/E) e o Extra (Cloze) em blocos coloridos, tabelas e fluxos. A forma serve ao conteúdo: um esquema só entra quando mostra uma relação (comparação, sequência, causa, classificação) melhor que o texto corrido. Não reduzir a qualidade ou a precisão do texto para caber no visual.
 

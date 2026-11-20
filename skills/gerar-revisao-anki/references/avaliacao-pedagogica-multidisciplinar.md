@@ -1,4 +1,4 @@
-# Avaliação pedagógica multidisciplinar — 2.13
+# Avaliação pedagógica multidisciplinar
 
 Usar ao avaliar ou atualizar o gerador; não impor um benchmark completo em cada pedido de poucos cartões. O núcleo continua definindo a produção normal.
 
@@ -37,6 +37,6 @@ Usar ao avaliar ou atualizar o gerador; não impor um benchmark completo em cada
 
 As decisões desse quadro são critérios de revisão, não um programa que interpreta qualquer texto. Casos positivos também precisam de fundamento e pertinência; não aprovar por parecerem semelhantes a um exemplo.
 
-## Evidências mínimas na atualização — 2.14
+## Evidências mínimas na atualização
 
 Além da suíte de código, realizar um piloto editorial delimitado com fontes reais, distribuído pelos formatos e por disciplinas pertinentes ao escopo. Registrar o plano antes de redigir, os candidatos iniciais, solução rederivada, fonte/seção, decisão por critério e texto final ou referência ao candidato inalterado. Conservar rejeições e correções, sem inventá-las para simular auditoria. Não usar fontes `example.test`, metadados de fixtures ou notas privadas como benchmark de produção. Autorevisão é permitida e deve ser identificada. Revisão independente e transferência com alunos são resultados separados: registrar não executados quando ausentes. Não alegar nível psicométrico, qualidade consistente de todas as gerações ou superioridade apenas com seis/dez casos ou testes verdes. Entregar a evidência do piloto junto ao resultado da atualização; não inserir o baralho do piloto automaticamente na coleção nem no pacote instalado.

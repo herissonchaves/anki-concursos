@@ -18,7 +18,7 @@ Ler `../direito-cebraspe-qualidade/SKILL.md` e aplicar integralmente. A matéria
 
 **Reprovação rápida:** texto diz "todo crime relacionado a drogas" ou "qualquer agente público" sem delimitar elementos; mistura lei geral e lei especial; utiliza lei revogada; escolhe pena sem provar tipificação; afirma que um julgamento pendente já alterou o texto legal. Em dúvida, deixar PENDENTE e explicar a lacuna.
 
-## Recorte por cargo — 2.12
+## Recorte por cargo
 
 Esta skill é reutilizada pelo `perfil-carreiras-policiais` para PRF e Agente PF. Aplicar somente os itens confirmados do programa do cargo; exemplos deste módulo não são lista automática do edital. Usar as escolhas já resolvidas pelo perfil, sem reiniciá-lo. Em Agente, respeitar o recorte de noções e não importar profundidade ou matérias de Delegado/Perito. O pedido atual pode selecionar outro cargo com programa próprio verificado.
 

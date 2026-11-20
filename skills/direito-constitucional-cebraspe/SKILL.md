@@ -23,6 +23,6 @@ Ler `../direito-cebraspe-qualidade/SKILL.md` e aplicar integralmente. Ativar em 
 
 Perguntar: qual titular? qual autoridade/ente? qual instrumento? qual requisito que muda o resultado? qual alcance temporal/territorial? A conclusão ainda seria correta com a exceção? Se a frente não oferece circunstâncias suficientes, REFORMULAR; se só troca nomes dos remédios, R ou Cloze. Não criar erro fictício para equilibrar C/E.
 
-## Recorte por cargo — 2.12
+## Recorte por cargo
 
 Esta skill é reutilizada pelo `perfil-carreiras-policiais` para PRF e Agente PF. Aplicar somente os itens confirmados do programa do cargo; exemplos deste módulo não são lista automática do edital. Usar as escolhas já resolvidas pelo perfil, sem reiniciá-lo. Em Agente, respeitar o recorte de noções e não importar profundidade ou matérias de Delegado/Perito. O pedido atual pode selecionar outro cargo com programa próprio verificado.

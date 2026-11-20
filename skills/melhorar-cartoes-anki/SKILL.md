@@ -18,7 +18,7 @@ Diagnostique o problema antes de reescrever: compreensão, contexto, pista, ambi
 - **Perfil e especializações:** quando o alvo for PRF ou PF (inclusive o foco padrão PRF), aplicar a seção “Perfil de carreira” do núcleo e `../perfil-carreiras-policiais/SKILL.md`, uma vez por tarefa, carregando só as disciplinas pertinentes. Outro cargo ou concurso explícito prevalece.
 - **Cloze:** antes de criar, reformular, aprovar ou avaliar omissões (inclusive uma conclusão de zero Cloze), ler `../gerar-revisao-anki/references/protocolo_cloze_cientifico.md`. Nota nova tem uma única omissão `{{c1::…}}` (várias só com a tag `Mnemonico`), e cada lacuna é coberta por D do mesmo lote. Preservar índices e histórico de notas existentes.
 - **Pesquisa:** cartões criados ou reescritos substantivamente seguem a seção “Pesquisa na internet obrigatória” do núcleo. Todo D novo segue também a pesquisa de questões anteriores (Cebraspe C/E primeiro; depois outras bancas) de `../gerar-revisao-anki/references/protocolo-modo-estrategico.md`.
-- **Visual 2.15:** cartões novos ou reformulados são montados com `../gerar-revisao-anki/scripts/html_anki.py`, conforme `../gerar-revisao-anki/references/protocolo_visual_html_anki.md`, com o bloco final 💡 Memorize.
+- **Visual:** cartões novos ou reformulados são montados com `../gerar-revisao-anki/scripts/html_anki.py`, conforme `../gerar-revisao-anki/references/protocolo_visual_html_anki.md`, com o bloco final 💡 Memorize.
 
 ## Reformulação estratégica
 

@@ -1,4 +1,4 @@
-# Modo estratégico C/E — 2.8.3
+# Modo estratégico C/E
 
 Aplicar ao criar, reescrever substantivamente ou auditar cartões D, em qualquer disciplina. Esta é a referência operacional da calibração. O núcleo governa princípios; a matriz continua sendo a única fonte de proporções. Não impor estas exigências retroativamente como condição de leitura de uma coleção.
 
@@ -8,7 +8,7 @@ Aplicar ao criar, reescrever substantivamente ou auditar cartões D, em qualquer
 
 D exige aplicar, inferir ou discriminar a partir de um elemento decisivo: fato, relação, condição, escopo, dado, construção linguística ou hipótese do modelo. Narrativa não é obrigatória. Uma frase pode bastar; duas a quatro frases são orientação flexível. Perguntar: o que o aluno precisa analisar além de lembrar o rótulo? Se nada, reclassificar R ou reformular.
 
-## Linguagem didática e contexto sem reduzir o raciocínio — 2.8.3
+## Linguagem didática e contexto sem reduzir o raciocínio
 
 Aplicar a todo D novo, inclusive inline, por PDF e no caderno de erros, e às reformulações solicitadas. O usuário não é formado em Direito. Tornar a leitura acessível sem transformar o desafio em mera lembrança de uma definição.
 

@@ -1,4 +1,4 @@
-# Auditoria do conteúdo e do gabarito — 2.12.1
+# Auditoria do conteúdo e do gabarito
 
 Aplicar a cada cartão novo ou reescrito substantivamente, em todas as disciplinas e formatos, antes de aprovar. Esta conferência é feita pelo agente; scripts estruturais e campos “APROVAR/PASSA” não certificam sua realização nem a verdade do conteúdo.
 

@@ -1,4 +1,4 @@
-# Avaliação editorial da seleção Cloze — 2.8
+# Avaliação editorial da seleção Cloze
 
 Estes casos sintéticos avaliam decisões de seleção, não comprovam aprendizagem nem substituem validação de conteúdo. Ao modificar esta política, confrontar as instruções com cada cenário e registrar o resultado real; não tratar a mera existência desta tabela como teste executado.
 
@@ -17,7 +17,7 @@ Estes casos sintéticos avaliam decisões de seleção, não comprovam aprendiza
 | Converter R novo em C deixa os R restantes desequilibrados | Reavaliar seleção e restabelecer 50/50 exato no modo afetado | Inverter verdade, mudar tags ou acrescentar duplicatas |
 | Fonte necessária não pôde ser verificada | Marcar pendência e limite da entrega | Justificar zero como ausência comprovada de alvo |
 
-Casos adicionais da política 2.12.1:
+Casos adicionais:
 
 - Conceito permanece visível e lacuna esconde palavra secundária sem utilidade: REFORMULAR para recuperar o conhecimento central.
 - Expressão técnica importante com várias palavras: omitir o termo completo em um único c1.

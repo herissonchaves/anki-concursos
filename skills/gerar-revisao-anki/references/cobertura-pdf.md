@@ -1,4 +1,4 @@
-# Revisão autossuficiente por PDF — 2.3
+# Revisão autossuficiente por PDF
 
 Objetivo: após estudo inicial, revisar o conteúdo coberto apenas no Anki, sem reabrir o PDF para entender cartões. Não prometer substituir compreensão inicial, exercícios extensos ou trechos ilegíveis.
 

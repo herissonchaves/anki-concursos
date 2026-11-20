@@ -1,4 +1,4 @@
-# Distribuição, equilíbrio e exceções — 2.5
+# Distribuição, equilíbrio e exceções
 
 Esta é a fonte única das regras de quantidade, formatos, proporções e respectivos parâmetros. O núcleo define os critérios gerais; os demais documentos remetem a esta matriz. Pedido explícito do usuário prevalece sobre o padrão.
 
@@ -44,6 +44,6 @@ Modo estratégico é o tipo D. Aplicar `protocolo-modo-estrategico.md`, seu atla
 - Entregas inline seguem as mesmas decisões, sem criar ZIP só para contar. Informar R/D/notas Cloze/cartões Cloze/total, exceções quando existirem e verificações efetivamente feitas.
 - Arquivos TSV de modalidade ausente ficam vazios; não inserir cartões fictícios. Relatórios podem ser curtos, mas devem conter evidências reais e decisões específicas.
 
-## Seleção antes da contagem — 2.8
+## Seleção antes da contagem
 
 Ler `protocolo_cloze_cientifico.md` e avaliar candidatos de memória, inclusive conceituais, antes de fechar R/D/C. Zero Cloze requer as evidências previstas no protocolo, não uma exclusão global por assunto ou pela existência de números no backup. Ao substituir um R novo por C, recalcular o equilíbrio C/E separadamente em R e D restantes. Não adicionar notas artificiais ou mudar rótulos para satisfazer proporções; replanejar a seleção sem dispensar a paridade. Ganho distinto pode justificar C e D do mesmo tema, mas diferença de formato, isoladamente, não justifica duplicar revisões.

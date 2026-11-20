@@ -1,4 +1,4 @@
-# Revisão de recuperação e resolução de alertas — 2.14
+# Revisão de recuperação e resolução de alertas
 
 Aplicar a exportações de notas NOVAS R/D/C. Não exigir registros retroativos para ler ou auditar uma coleção existente. Poucos cartões inline recebem a mesma revisão semântica com síntese proporcional; não criar ZIP/JSON apenas para formalizar uma resposta no chat.
 

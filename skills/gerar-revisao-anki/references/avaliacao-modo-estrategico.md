@@ -1,4 +1,4 @@
-# Avaliação repetível do modo estratégico — 2.7
+# Avaliação repetível do modo estratégico
 
 Usar em todo lote D, proporcionalmente, e em mudanças do plugin. A avaliação é editorial e pode ser feita pelo mesmo agente; identificá-la como autorevisão. Teste automatizado não julga conteúdo.
 
@@ -44,7 +44,7 @@ Estes são estímulos de teste, não cartões aprovados nem itens oficiais. Não
 
 Em cada nova versão, confrontar esses casos com o protocolo, registrar resultados reais e falhas remanescentes. Testes de código devem demonstrar também seus limites: uma solução falsa com metadados completos pode passar pelo verificador documental. Nunca anunciar que ele passou a detectar erros conceituais em geral.
 
-## Regressão editorial de clareza e desafio — 2.8.3
+## Regressão editorial de clareza e desafio
 
 Aplicar junto à rubrica; estímulos sintéticos, sem alegação de conteúdo jurídico verificado.
 
@@ -58,6 +58,6 @@ Aplicar junto à rubrica; estímulos sintéticos, sem alegação de conteúdo ju
 | D06 | Verso cita apenas artigo ou classificação | Reformular com explicação da regra e de sua aplicação ao fato decisivo. |
 | D07 | Simplificação remove condição que decide a resposta | Repor a condição e resolver novamente; clareza não autoriza mudar o conteúdo. |
 
-## Avaliação do conjunto — 2.13
+## Avaliação do conjunto
 
 Para comparar versões ou avaliar a geração em várias disciplinas e formatos, aplicar `avaliacao-pedagogica-multidisciplinar.md`. Os casos fixos servem à regressão e não substituem material reservado nem resultados de uso.

@@ -18,6 +18,6 @@ Ler `../direito-cebraspe-qualidade/SKILL.md` e aplicar integralmente. Ativar em 
 
 Verificar texto oficial do tratado/documento, status internacional e nacional, eventual reserva e entendimento oficial pertinente. Separar norma vinculante, decisão jurisdicional, recomendação, declaração e diretriz; não presumir igual força normativa. Não afirmar que qualquer ato estatal é legítimo/ilegítimo sem fatos decisivos. O verso deve explicar por que o fato ativa a proteção ou a exceção, com linguagem acessível e fonte datada.
 
-## Recorte por cargo — 2.12
+## Recorte por cargo
 
 Esta skill é reutilizada pelo `perfil-carreiras-policiais` para PRF e Agente PF. Aplicar somente os itens confirmados do programa do cargo; exemplos deste módulo não são lista automática do edital. Usar as escolhas já resolvidas pelo perfil, sem reiniciá-lo. Em Agente, respeitar o recorte de noções e não importar profundidade ou matérias de Delegado/Perito. O pedido atual pode selecionar outro cargo com programa próprio verificado.

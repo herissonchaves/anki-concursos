@@ -3,7 +3,7 @@ name: direito-cebraspe-qualidade
 description: "Protocolo transversal obrigatório para selecionar, criar, melhorar e auditar cartões Anki de Direito para concursos PRF e Agente PF/Cebraspe. Aciona as especializações Constitucional, Administrativo, Penal, Processual Penal, Direitos Humanos, legislação especial e trânsito; aplica fontes oficiais, vigência, casos práticos e linguagem didática."
 ---
 
-# Direito no Anki — protocolo transversal 1.0
+# Direito no Anki — protocolo transversal
 
 ## Ativação e hierarquia
 

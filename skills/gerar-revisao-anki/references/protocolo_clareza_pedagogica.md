@@ -1,6 +1,6 @@
 > Política comum: [nucleo-pedagogico.md](nucleo-pedagogico.md). Distribuição, equilíbrio e exceções: [matriz_tipos_quantidades.md](matriz_tipos_quantidades.md). Este documento complementa essas regras.
 
-# Protocolo de clareza, dificuldade genuína e economia — Anki-Concursos 2.0.0
+# Protocolo de clareza, dificuldade genuína e economia
 
 **Norma eliminatória**, aplicável à geração por PDF/resumo, caderno de erros, melhoria e auditoria de lotes de qualquer tamanho. Complementa o núcleo, sem alterar a matriz de distribuição ou suas exceções. Ser juridicamente correto e estruturalmente válido é NECESSÁRIO, mas NÃO SUFICIENTE. Nenhuma etiqueta de dificuldade garante qualidade.
 

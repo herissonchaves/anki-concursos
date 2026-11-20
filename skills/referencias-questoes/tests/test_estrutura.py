@@ -50,3 +50,15 @@ def test_copia_instalada_da_skill_de_entrada_esta_igual():
 def test_banco_de_referencias_do_repositorio_valido():
     _, erros, _ = ref.validar(REPO / 'referencias')
     assert erros == []
+
+
+def test_versao_unica_no_skill_da_raiz():
+    """Só o SKILL.md da raiz declara versão; títulos dos demais documentos ficam sem número."""
+    import re as _re
+    assert _re.search(r'\*\*Versão \d+\.\d+\.\*\*', (REPO / 'SKILL.md').read_text(encoding='utf-8'))
+    versionados = []
+    for doc in DOCS:
+        for linha in doc.read_text(encoding='utf-8').splitlines():
+            if linha.startswith('#') and _re.search(r'\bv?\d+\.\d+(\.\d+)?\s*$', linha):
+                versionados.append(f'{doc.relative_to(REPO)}: {linha}')
+    assert versionados == []

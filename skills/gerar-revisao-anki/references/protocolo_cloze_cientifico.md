@@ -1,19 +1,19 @@
-# Cloze: escolher o alvo antes de omitir — 2.8
+# Cloze: escolher o alvo antes de omitir
 
 Leia `nucleo-pedagogico.md`. Uma frase gramatical com lacuna não é, por isso, um bom cartão. Cloze é condicional, sem cota mínima. Aplicar este protocolo na geração, caderno de erros, melhoria e auditoria.
 
 
-## Cloze para memorizar conceitos importantes — 2.12.1
+## Cloze para memorizar conceitos importantes
 
 Todo Cloze novo deve servir à memorização de um **conceito importante para o conteúdo e o concurso estudados**. Selecionar primeiro o conceito e, depois, omitir a **palavra, expressão ou frase curta importante que precisa ser lembrada**. A lacuna recupera o núcleo do conhecimento, não uma palavra secundária escolhida só para completar a frase.
 
 Preferir definição, função, propriedade distintiva ou relação curta que permita recordar o conceito sem resolver um caso. Omitir o termo completo quando tiver várias palavras; não cortar uma expressão técnica nem impor uma palavra como tamanho máximo. Uma frase curta pode ser a resposta se expressar uma única ideia central e determinada. Manter visíveis o contexto e as condições, sem expor a resposta, iniciais reveladoras fora de um exercício mnemônico ou uma lista que permita acertar por eliminação.
 
-**Uma omissão por nota — 2.15.** Cada nota Cloze nova tem **exatamente uma** marcação `{{c1::…}}`, que oculta um único alvo de recuperação. **Mais de uma omissão só é permitida em nota de mnemônico** (as letras ou pistas do auxílio ficam visíveis e cada termo vira uma marcação c1), e essa nota recebe obrigatoriamente a tag `Mnemonico`. Listas, pares (por exemplo, duas portas), etapas de um processo e condições complementares que não formem mnemônico viram notas separadas, uma por alvo, ou outro formato (R/D). O validador `validar_anki.py --new` reprova nota nova com várias omissões sem a tag `Mnemonico`. Usar o Extra para explicar o termo omitido. Evitar parágrafos, justificativas inteiras e dados periféricos.
+**Uma omissão por nota.** Cada nota Cloze nova tem **exatamente uma** marcação `{{c1::…}}`, que oculta um único alvo de recuperação. **Mais de uma omissão só é permitida em nota de mnemônico** (as letras ou pistas do auxílio ficam visíveis e cada termo vira uma marcação c1), e essa nota recebe obrigatoriamente a tag `Mnemonico`. Listas, pares (por exemplo, duas portas), etapas de um processo e condições complementares que não formem mnemônico viram notas separadas, uma por alvo, ou outro formato (R/D). O validador `validar_anki.py --new` reprova nota nova com várias omissões sem a tag `Mnemonico`. Usar o Extra para explicar o termo omitido. Evitar parágrafos, justificativas inteiras e dados periféricos.
 
 Antes de aprovar: **o que é importante memorizar? A parte omitida é precisamente esse conhecimento? O contexto determina a resposta sem entregá-la? O Extra ensina o conceito?** Se falhar, reformular, escolher outro formato ou não criar. Importância e correção exigem auditoria de conteúdo; sintaxe válida não as comprova.
 
-## Seleção ativa de candidatos e decisão de zero Cloze — 2.8
+## Seleção ativa de candidatos e decisão de zero Cloze
 
 Ler este protocolo ANTES de decidir a composição do lote, inclusive quando nenhum Cloze será criado. Não restringir a busca a prazos, números e listas. Na triagem dos alvos prioritários, examinar também conceitos definidos por propriedades distintivas, classificações, relações e condições curtas cuja recuperação de memória tenha utilidade demonstrada. Não transformar todo termo técnico em candidato aprovado; não há quantidade mínima de candidatos ou Clozes.
 
@@ -34,7 +34,7 @@ Zero continua permitido, sem cota mínima. A conclusão precisa decorrer da aval
 
 “Os números já existem no backup”, “o assunto já aparece em C/E” e “o conteúdo está nos versos” não bastam para eliminar todos os Clozes. Antes da entrega, revisar decisões globais desse tipo e conferir se conceitos, relações e condições prioritários foram considerados. Não criar lacunas só para evitar zero nem afirmar benefício de aprendizagem comprovado pela própria avaliação editorial.
 
-Casos de decisão para revisão desta política: `avaliacao-cloze-2.8.md`.
+Casos de decisão para revisão desta política: `avaliacao-cloze.md`.
 
 ## Portão de adequação obrigatório
 

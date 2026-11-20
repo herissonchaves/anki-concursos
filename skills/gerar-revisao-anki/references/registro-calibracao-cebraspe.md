@@ -1,10 +1,10 @@
-# Registro documental de calibração — 2.16
+# Registro documental de calibração
 
 Para exportações com D novos, salvar `relatorios/calibracao_cebraspe.json` em UTF-8 sem BOM. Em entregas inline, registrar as mesmas decisões de modo proporcional, sem exigir JSON. Auditoria de coleção antiga não exige fabricação retroativa deste arquivo.
 
 O arquivo complementa os três relatórios existentes e pode referenciá-los; não duplicar longos textos. Incluir somente cartões D finais aprovados. Candidatos rejeitados e fontes anuladas podem ficar no relatório pedagógico, separados das referências de apoio. Compartilhar referências por família é permitido. Cada cartão precisa de análise própria.
 
-Contrato JSON. Lotes novos usam a **versão 2**; a versão 1 continua aceita apenas para lotes anteriores à 2.16.
+Contrato JSON. Lotes novos usam a **versão 2**; a versão 1 continua aceita apenas para lotes legados, gerados antes da exigência de questões de outras bancas (versão 2.16 do projeto).
 
 - Raiz: `schema_version: 2` (ou `1` em lote legado), `referencias: [...]`, `cartoes: [...]`.
 - Cada referência: `id` (o ID da questão no banco `referencias/`; `montar_lote.py` e `referencias.py calibracao` geram a referência completa a partir dele), `banca` (por exemplo `Cebraspe`, `FGV`, `FCC`), `formato` (`certo_errado` ou `multipla_escolha`), `concurso`, `cargo`, `ano` inteiro, `caderno`, `item` como string, `url`, `consulta` YYYY-MM-DD, `operacao_observada`, `gabarito_status` (`definitivo`, `justificativa_oficial`, `nao_verificado` ou `anulado`). Para os dois primeiros, `gabarito_url` obrigatório. A própria URL do caderno comentado pode ser usada. Diferenciar edital/prova no campo concurso/caderno quando necessário. Não inventar cargo ou gabarito não localizado.

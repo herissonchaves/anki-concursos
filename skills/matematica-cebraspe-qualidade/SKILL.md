@@ -3,7 +3,7 @@ name: matematica-cebraspe-qualidade
 description: "Protocolo especializado para selecionar, criar, melhorar e auditar cartões Anki de Matemática, Raciocínio Lógico-Matemático, Estatística e interpretação quantitativa para concursos, especialmente PRF/Cebraspe. Usar nos modos rápido, desafiador C/E e Cloze, em PDFs, cadernos de erros e coleções."
 ---
 
-# Matemática para Anki e PRF — protocolo especializado 1.0
+# Matemática para Anki e PRF — protocolo especializado
 
 ## Quando e como ativar
 

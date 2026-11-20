@@ -1,4 +1,4 @@
-# Revisão integral e linguagem pedagógica — 2.2
+# Revisão integral e linguagem pedagógica
 
 ## Escopo e cobertura verificável
 

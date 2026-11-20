@@ -1,6 +1,6 @@
-# Política pedagógica comum — 2.5
+# Política pedagógica comum
 
-## Perfil de carreira — 2.12
+## Perfil de carreira
 
 Para selecionar, gerar, reformular ou auditar conteúdo no foco PRF/PF, ler `../../perfil-carreiras-policiais/SKILL.md` e as especializações que ele indicar. PRF é a prioridade padrão; PF significa Agente nesta configuração. A escolha de língua para PRF é Inglês, sem Espanhol. A solicitação atual pode escolher outro alvo. Perfil e especializações se resolvem uma vez por tarefa: este núcleo continua sendo a política comum e não inicia um ciclo de releitura.
 
@@ -18,7 +18,7 @@ Para um ou poucos cartões, entregar cartão(s), explicação breve e fontes per
 
 Dificuldade deve vir de aplicar conhecimento, não de jargão ou ambiguidade. Após C/E, orientar quando útil que o aluno recupere mentalmente o motivo antes de revelar o verso; acerto por palpite não comprova domínio. Se ele não compreendeu, explicar o pré-requisito e só então memorizar. Cartões recorrentes exigem diagnóstico antes de aumentar o lote. Não prometer aprovação ou um plugin infalível.
 
-## Perfil do usuário: sem formação em Direito — 2.4.3
+## Perfil do usuário: sem formação em Direito
 
 O usuário Hérisson não é formado em Direito. Aplicar esse perfil à criação, explicação, melhoria e auditoria de cartões jurídicos em todos os fluxos, inclusive revisão por PDF e caderno de erros. Não pressupor graduação jurídica, domínio de vocabulário técnico ou familiaridade com classificações doutrinárias. Isso não significa ausência de conhecimentos adquiridos nos estudos: aproveitar o que o usuário demonstrar compreender.
 
@@ -29,7 +29,7 @@ O usuário Hérisson não é formado em Direito. Aplicar esse perfil à criaçã
 - Na auditoria, verificar se o cartão pode ser entendido sem formação jurídica e sem consulta a outro cartão. Reformular jargão não explicado e pré-requisitos ocultos; manter um alvo por cartão e feedback econômico.
 - Não repetir a informação pessoal sobre a formação do usuário nos enunciados, versos ou arquivos de estudo: ela orienta a redação.
 
-## Relevância para PRF e outros concursos: pesquisa obrigatória por alvo — 2.4.2
+## Relevância para PRF e outros concursos: pesquisa obrigatória por alvo
 
 Antes de aprovar qualquer cartão, pesquisar na internet se o conhecimento e a operação exigidos contribuem para o concurso-alvo. Verificar separadamente: (a) exatidão do conteúdo; (b) pertinência ao concurso; (c) utilidade de recuperá-lo em um cartão. Conteúdo correto e presença da disciplina no edital não bastam para justificar qualquer detalhe.
 
@@ -42,7 +42,7 @@ Antes de aprovar qualquer cartão, pesquisar na internet se o conhecimento e a o
 7. No relatório, incluir: ID | concurso/cargo/edição | alvo/operação | tópico do programa | questão oficial, se encontrada | fonte/link/data | evidência ou inferência | utilidade esperada | prioridade/decisão. Na entrega inline, apresentar síntese legível com fontes e vínculos por ID ou grupo. Não sobrecarregar as frentes com metadados.
 8. Se não for possível pesquisar/verificar, seguir o tratamento de indisponibilidade da pesquisa obrigatória: declarar pendência, não chamar o cartão de validado para o concurso. Pesquisa sustenta pertinência e utilidade esperada, não demonstra que aquele cartão individual melhorará memória, desempenho ou aprovação; avaliar benefício real com dados de uso e questões inéditas quando disponíveis.
 
-## Pesquisa na internet obrigatória — 2.4.1
+## Pesquisa na internet obrigatória
 
 Sempre realizar buscas reais na internet para apoiar a criação de cartões, em todas as disciplinas e formatos, inclusive quando houver PDF, resumo, print ou backup fornecido. Aplicar também à reescrita substantiva de conteúdo. Memória do modelo, material anexado e links antigos não substituem a consulta nesta tarefa.
 
@@ -118,7 +118,7 @@ Backup em leitura somente. Não importar, sincronizar, excluir, suspender ou alt
 
 Fundamentação consultada em 01/11/2026: [experimento de recuperação ativa de Roediger e Karpicke](https://pubmed.ncbi.nlm.nih.gov/16507066/); [regras práticas de formulação do SuperMemo](https://www.supermemo.com/en/blog/twenty-rules-of-formulating-knowledge); [manual do Anki](https://docs.ankiweb.net/manual/studying). O experimento apoia recuperação ativa em retenção posterior; não valida este plugin nem uma proporção específica de formatos. As regras de formulação são orientação prática, não ensaio clínico ou prova universal.
 
-## Modo estratégico — 2.7
+## Modo estratégico
 
 Modo estratégico = D/desafiador/aplicado; rápido = R; omissão de palavras = Cloze. Para D, aplicar [protocolo-modo-estrategico.md](protocolo-modo-estrategico.md), atlas disciplinar e rubrica ali vinculados. Comparação com a banca, complexidade editorial e utilidade de revisão são decisões separadas. Referências por família e análise por ID devem ser verificáveis; preservam-se todas as regras de relevância, pesquisa, fontes e equilíbrio de gabaritos da matriz vigente.
 
@@ -126,6 +126,6 @@ Um julgamento pode conter conclusão e justificativa relacionadas; conferir amba
 
 Novos D exportados levam registro de calibração vinculado por hash ao conteúdo revisado. Não exigir esse artefato retroativamente de coleções existentes nem nas entregas inline; nesses casos manter a análise proporcional por ID. Atualizações substantivas exigem nova conferência.
 
-## Evidência da revisão e tratamento de alertas — 2.14
+## Evidência da revisão e tratamento de alertas
 
 Em notas novas exportadas, aplicar `registro-revisao-recuperacao.md`: evidências individuais de solução/fonte, alternativa concorrente, recuperação e feedback para R/C, com hash do conteúdo, e resolução específica dos sinais de clareza em R/D/C. D preserva sua rubrica de calibração, sem duplicá-la. Um sinal pode ser falso positivo: avaliar e justificar, sem cortar contexto ou trocar palavras apenas para silenciar o script. Resposta exposta e demais problemas reais devem ser corrigidos; não fabricar justificativa. A aprovação estrutural/documental não certifica a revisão semântica nem a qualidade das fontes. O registro é proporcional, não impõe arquivos a poucos cartões inline e não se aplica retroativamente à leitura de coleções. Em atualização do gerador, executar também piloto editorial com fontes reais e guardar os candidatos; declarar autoria da revisão e limites, sem alegar teste independente ou ganho de aprendizagem não medidos.

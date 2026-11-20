@@ -1,8 +1,8 @@
 > Política comum: [núcleo](../../gerar-revisao-anki/references/nucleo-pedagogico.md). Composição e exceções: [matriz](../../gerar-revisao-anki/references/matriz_tipos_quantidades.md).
 
-# Scripts Anki — v1.7.0
+# Scripts Anki
 
-## Revisar e devolver coleção existente — 2.2
+## Revisar e devolver coleção existente
 
 `analisar_colpkg.py` agora lê bancos `collection.anki21b` sem usar o stub legado.
 Requer `zstandard` (Python 3.12/3.13, versões testadas; ver `../requirements-optional.txt`) ou o `compression.zstd` do Python 3.14+. O limite de descompressão é 512 MiB. A
@@ -53,13 +53,13 @@ Ao solicitar ZIP e APKG juntos, os exportadores preparam e validam os dois arqui
 
 Os relatórios clássicos continuam obrigatórios (`selecao_e_fontes.txt`, `economia_de_revisao.txt`, `auditoria_pedagogica.txt`); PDF acrescenta cobertura/triagem; Direito o radar; erros o diagnóstico; backup a análise legível. CLI não inventa relatórios de auditoria ou dados de `.colpkg`. `--apkg` cria um arquivo; a importação pode adicionar ou atualizar notas conforme identidade e opções do Anki. Não prometer preservação do histórico sem verificar a correspondência.
 
-## Perfis de exportação — 2.5
+## Perfis de exportação
 
 Use os parâmetros de perfil, justificativa e teto definidos na [matriz de quantidades](../../gerar-revisao-anki/references/matriz_tipos_quantidades.md) tanto na exportação quanto na revalidação. A política efetiva fica em `relatorios/politica_validacao.json`.
 
-## Calibração Cebraspe — 2.7
+## Calibração Cebraspe
 
 Em novas exportações que contenham D, executar também `../../gerar-revisao-anki/scripts/validar_calibracao_cebraspe.py DIRETORIO_OU_ZIP`, usando o caminho completo. O diretório deve conter `anki_certo_errado.tsv` e `relatorios/calibracao_cebraspe.json`. Consultar `../../gerar-revisao-anki/references/registro-calibracao-cebraspe.md`. O script retorna 0 para registro consistente ou lote sem D, 1 para falhas documentais e 2 para erro de leitura. Não certifica conteúdo nem consulta às fontes. Exportadores preservam esse JSON; checar novamente o ZIP final. Não aplicar esta exigência retroativamente a auditorias de coleções.
-## Notas novas — barreira adicional 2.14
+## Notas novas — barreira adicional
 
 `validar_anki.py` não basta para liberar exportação. Os exportadores exigem também `relatorios/revisao_recuperacao.json`, conforme `../../gerar-revisao-anki/references/registro-revisao-recuperacao.md`. Diagnóstico: `python -X utf8 CAMINHO_COMPLETO/validar_revisao_pedagogica.py DIRETORIO --listar-sinais`. Ele lista hashes e sinais, sem criar aprovação. Verificação: o mesmo comando sem `--listar-sinais`, no diretório e no ZIP final. Resolver sinais por correção ou exceção editorial específica, atualizar hashes após edição e manter a calibração de D. Não aplicar o novo esquema retroativamente a backups existentes.

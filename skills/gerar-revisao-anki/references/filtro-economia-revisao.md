@@ -1,6 +1,6 @@
 > Política comum: [nucleo-pedagogico.md](nucleo-pedagogico.md). Distribuição, equilíbrio e exceções: [matriz_tipos_quantidades.md](matriz_tipos_quantidades.md). Este documento complementa essas regras.
 
-# Economia de revisão e retenção — v1.6.0
+# Economia de revisão e retenção
 
 1. Priorizar A essencial; B apenas quando risco é material; C fora do Anki. Incidência da banca só quando verificada; registrar premissas.
 2. Excluir fatos periféricos, definições redundantes, frases fáceis de adivinhar, listas longas e conceitos melhores para resolução de questões.

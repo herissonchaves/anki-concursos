@@ -25,6 +25,6 @@ Verificar CP e leis especiais atuais, dispositivos, resultado, causa de aumento,
 
 Reprovar cartão cujo verso apenas diz "o crime é formal" sem explicar o fato que decide; cuja frente revela o nome da teoria; ou que confunde existência do crime e possibilidade de punir. Os testes são **de coerência e fonte**, não certificação independente.
 
-## Recorte por cargo — 2.12
+## Recorte por cargo
 
 Esta skill é reutilizada pelo `perfil-carreiras-policiais` para PRF e Agente PF. Aplicar somente os itens confirmados do programa do cargo; exemplos deste módulo não são lista automática do edital. Usar as escolhas já resolvidas pelo perfil, sem reiniciá-lo. Em Agente, respeitar o recorte de noções e não importar profundidade ou matérias de Delegado/Perito. O pedido atual pode selecionar outro cargo com programa próprio verificado.

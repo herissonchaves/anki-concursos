@@ -125,7 +125,7 @@ class Lote:
     def montar_linhas(self):
         for x in self.CZ:
             if MNEMONICO not in x['tags'].split():
-                assert x['t'].count('{{c1::') == 1, f"{x['k']}: uma omissão por nota (2.15)"
+                assert x['t'].count('{{c1::') == 1, f"{x['k']}: uma omissão por nota (várias só com a tag Mnemonico)"
         self.ce_items = [('R', x) for x in self.R] + [('D', x) for x in self.D]
         random.Random(self.semente).shuffle(self.ce_items)
         self.ce_rows, self.line_of = [], {}

@@ -1,4 +1,4 @@
-# Testes de desenvolvimento — 2.13
+# Testes de desenvolvimento
 
 Executar somente em cópia do pacote e com fixtures sintéticas. Não usar perfil ativo do Anki ou backup privado como fixture. Manter bibliotecas e saídas fora do pacote do plugin.
 
@@ -16,6 +16,6 @@ As fixtures de calibração dentro de `tests/` contêm fontes fictícias e não 
 
 Após testes, aplicar a avaliação editorial multidisciplinar em `../../gerar-revisao-anki/references/avaliacao-pedagogica-multidisciplinar.md`. Para o piloto editorial com fontes reais exigido em atualizações do gerador, usar como modelo `../../gerar-revisao-anki/references/piloto-editorial-prf.md`. Registrar contagens, exceções, falhas, correções e limites. Não publicar “tudo aprovado” quando apenas um subconjunto foi executado.
 
-## Regressões 2.14
+## Regressões das barreiras de revisão
 
 Incluir `test_revisao_214.py`: falta de revisão R/C, fontes/solução incompletas, hashes obsoletos após alteração de cada campo, resposta Cloze exposta com alerta pendente, exceção justificada, correção real com nova revisão, contagens zero por formato, JSON inválido, diretório e ZIP final. Verificar também exportador visual e preservação de mídia/histórico na suíte anterior. Helpers `recovery_fixture.py` e `calibration_fixture.py` são sintéticos e exclusivos de testes, sem certificação de conteúdo. Um controle negativo com declaração falsa completa deve continuar demonstrando que o esquema não entende a solução. Executar piloto separado com fontes reais, guardar candidatos e declarar autorevisão quando não houver revisor independente. Não converter fixtures no piloto.

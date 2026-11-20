@@ -1,6 +1,6 @@
 > Política comum: [nucleo-pedagogico.md](nucleo-pedagogico.md). Distribuição, equilíbrio e exceções: [matriz_tipos_quantidades.md](matriz_tipos_quantidades.md). Este documento complementa essas regras.
 
-# Casos de regressão pedagógica — Anki-Concursos v2.0.0
+# Casos de regressão pedagógica
 
 Rodar como inspeção de linguagem e de operação mental por responsável pelo lote. **Não confundir com testes automatizados executáveis**; a validade jurídica deve ser checada em fonte primária vigente.
 
@@ -17,6 +17,6 @@ Rodar como inspeção de linguagem e de operação mental por responsável pelo 
 
 Critérios de aceite: 100% das frentes compreensíveis sem gabarito, todos D com inferência registrada, todos versos explicativos, nenhum candidato redundante sem justificativa, nem relatórios de testes fictícios. Essa verificação é humana; o script `auditar_clareza.py` apenas sinaliza riscos.
 
-## Regressões do modo estratégico — 2.7
+## Regressões do modo estratégico
 
 Aplicar também `avaliacao-modo-estrategico.md` (E01–E12). Para checagens de código, usar `../tests/test_calibracao_cebraspe.py`. Os testes documentais devem preservar o limite conhecido: definição rotulada D ou solução falsa com registro completo podem passar. A rubrica semântica deve reclassificar/rejeitar esses casos; não anunciar que o script resolve o problema conceitual.

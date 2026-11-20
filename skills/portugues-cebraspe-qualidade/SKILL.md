@@ -6,7 +6,7 @@ description: Protocolo especializado obrigatório de Língua Portuguesa para ger
 Leia primeiro `../gerar-revisao-anki/references/nucleo-pedagogico.md`. Seus critérios comuns valem também para Português.
 
 
-# Engenharia especializada de Português — Anki-Concursos v1.6.0
+# Engenharia especializada de Português
 
 Aplicar o núcleo comum; para geração usar `../gerar-revisao-anki/SKILL.md`. Ler `../gerar-revisao-anki/references/protocolo_cloze_cientifico.md` antes de selecionar formatos, inclusive quando a conclusão puder ser zero Cloze.
 
@@ -41,6 +41,6 @@ Não alegar leitura não realizada. Diferenciar textos de teoria, comentários e
 
 Frente sem resposta ou metarreferência ao PDF; C/E com verso `✅ Certo<br><br>fundamento` ou `❌ Errado<br><br>fundamento e correção`; dica mnemônica opcional. Tags `Lingua_Portuguesa`, assunto e exatamente uma tag de modalidade C/E (`Tipo_Revisao_Rapida` OU `Tipo_Desafiadora_Cebraspe`), mais `Estilo_Cebraspe` nos desafiadores. Cloze sem tags C/E e com Extra útil. Sem imagens.
 
-## Integração do modo estratégico — 2.7
+## Integração do modo estratégico
 
 Para D, aplicar também `../gerar-revisao-anki/references/protocolo-modo-estrategico.md` e sua rubrica. O atlas de Português e G/S/C permanecem obrigatórios. Avaliar dificuldade editorial sem confundi-la com estilo da banca; modelos internos não demonstram nível psicométrico. Uma conclusão e sua justificativa podem integrar um julgamento nuclear quando relacionadas. Exportações de D novos incluem o registro de calibração, sem expor metadados na frente.

@@ -21,6 +21,6 @@ Ler `../direito-cebraspe-qualidade/SKILL.md` e aplicar integralmente. Não mistu
 
 Rejeitar card em que "flagrante", "preventiva", "temporária", "busca", "representação" ou "denúncia" aparecem sem os requisitos que distinguem os institutos. Distinguir validade da prova, admissibilidade e valor probatório. Para uma investigação hipotética, não inventar datas ou pressupostos ausentes. Conferir CPP, atos normativos e precedentes oficiais em vez de confiar no gabarito de PDF desatualizado. Havendo alteração legislativa, explicar mudança, vigência e possível regime de transição.
 
-## Recorte por cargo — 2.12
+## Recorte por cargo
 
 Esta skill é reutilizada pelo `perfil-carreiras-policiais` para PRF e Agente PF. Aplicar somente os itens confirmados do programa do cargo; exemplos deste módulo não são lista automática do edital. Usar as escolhas já resolvidas pelo perfil, sem reiniciá-lo. Em Agente, respeitar o recorte de noções e não importar profundidade ou matérias de Delegado/Perito. O pedido atual pode selecionar outro cargo com programa próprio verificado.
