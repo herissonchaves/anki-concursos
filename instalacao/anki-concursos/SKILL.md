@@ -43,6 +43,8 @@ especialização da disciplina indicada em `skills/perfil-carreiras-policiais/re
   com o 💡 Memorize no fim do verso.
 - Antes de criar desafiadores, sempre pesquisar questões anteriores Cebraspe C/E e de
   outras bancas e usá-las como inspiração.
+- Para rápidos e Cloze, pesquisar na internet o que é importante do tema; no Cloze,
+  pesquisar também mnemônicos e conferi-los contra a fonte primária.
 - Em todo card autoral, reaproveitar as questões de concursos do arquivo enviado e do
   banco `referencias/` (busca por script, sem abrir arquivos) e salvar ali, em
   Markdown padronizado, toda questão lida no anexo ou na internet.

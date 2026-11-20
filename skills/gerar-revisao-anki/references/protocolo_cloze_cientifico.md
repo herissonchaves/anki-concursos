@@ -49,11 +49,21 @@ Registrar no relatório por nota/vista: alvo de memória, relevância, por que a
 
 Se falhar, REFORMULAR ou MUDAR FORMATO; descartar apenas conteúdo sem utilidade ou redundante. Omissão curta e resposta única não bastam para aprovar.
 
+## Mnemônicos pesquisados
+
+Ao criar Cloze, pesquisar na internet mnemônicos já usados para o conteúdo (termos como “mnemônico”, “macete” ou “decoreba” com o assunto e o concurso), em páginas de professores, cursos e materiais de estudo, e ler a página que o explica.
+
+1. **Conferir a correção:** cada letra ou pista deve corresponder a um termo correto, completo e atual segundo a fonte primária (lei, documentação, norma). Mnemônico que omite item, inclui item errado ou reflete regra revogada é rejeitado ou corrigido e declarado como adaptação.
+2. **Avaliar a utilidade:** o mnemônico deve ser curto, fácil de lembrar e levar a um alvo que mereça memorização exata (lista, sequência, elementos de um conceito). Não forçar mnemônico em conteúdo que se aprende melhor por compreensão.
+3. **Usar:** em nota de mnemônico (tag `Mnemonico`, assunto e pistas visíveis, cada termo em c1) ou como dica no Extra ou no 💡 Memorize de um R/Cloze. Não copiar a explicação do curso: o Extra é redigido com palavras próprias.
+4. **Registrar:** colocar a URL de onde veio o mnemônico entre as `fontes` da nota e citar no relatório de seleção se ele foi usado como encontrado, adaptado ou rejeitado (com o motivo). Sem mnemônico confiável, criar um autoral identificado como tal ou não usar mnemônico; nunca atribuir a um professor ou curso um mnemônico inventado.
+
 ## Agrupamento, mnemônicos e desafiadores
 
 - Usar uma única `{{c1::resposta}}` por nota, com uma palavra, expressão ou frase curta. Repetir c1 **somente em mnemônico** (tag `Mnemonico`); condições complementares de uma regra, pares e listas viram notas próprias. Cada nota nova gera um cartão. Evitar colocar uma lista inteira em uma única lacuna.
 - Em um mnemônico cujo alvo seja recuperar os termos, mostrar o assunto e manter as letras ou pistas que compõem o auxílio. Omitir cada termo separadamente. Exemplo de estrutura: `P {{c1::romulgada}}<br>E {{c1::scrita}}`. A inicial pode ficar fora da lacuna como na referência do usuário, ou anteceder o termo completo. Conferir que a pista ainda exige lembrar o termo e que a leitura após revelar a resposta fica correta.
 - No Extra, explicar cada resposta, seu papel e sua relação com a pista e com o conjunto. Para mnemônicos, desenvolver o significado de cada termo e mostrar como usar a associação para lembrar o conteúdo.
+- Ao preparar Cloze, pesquisar mnemônicos na internet (seção “Mnemônicos pesquisados” abaixo) antes de criar um autoral.
 - Planejar pelo menos um D do mesmo lote para cada novo Cloze, com cobertura de todas as omissões. Um D pode cobrir várias lacunas quando os conceitos são necessários à solução de um único julgamento; distribuir entre vários D quando cada conceito exigir uma decisão própria. Menção no enunciado, coincidência de assunto e repetição literal não bastam.
 - Aplicar a rubrica de D, a verificação de fontes e a paridade da matriz. Conferir a cobertura após cortes e reordenações. Em exportações, registrar o vínculo por lacuna conforme `registro-revisao-recuperacao.md`. Em entregas inline, indicar quais D cobrem cada lacuna junto aos cartões.
 

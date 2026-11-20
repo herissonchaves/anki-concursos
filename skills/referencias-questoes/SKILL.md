@@ -45,8 +45,10 @@ python -X utf8 skills/referencias-questoes/scripts/referencias.py COMANDO
    (Cebraspe C/E primeiro, depois outras bancas), conforme
    `../gerar-revisao-anki/references/protocolo-modo-estrategico.md`. Toda questão lida
    por inteiro e pertinente vai para o banco com `nova` e `origem: pesquisa_internet`,
-   mesmo que acabe não vinculada a um cartão. Para R e Cloze, a pesquisa na internet
-   de questões é opcional; a de conteúdo continua obrigatória.
+   mesmo que acabe não vinculada a um cartão. Para R e Cloze, pesquisar questões na
+   internet não é obrigatório, mas é recomendado quando ajudar a ver o que se cobra
+   (salve as lidas aqui também); a pesquisa de conteúdo continua obrigatória e, no
+   Cloze, inclui mnemônicos.
 4. **Vínculo.** No `gerar_lote.py`, passe os IDs do banco em `referencias` do
    `Lote(...)`; o `montar_lote.py` monta as referências da calibração e registra o uso
    (`usado_em`) ao gerar. Em entregas inline, cite os IDs na síntese de fontes.
