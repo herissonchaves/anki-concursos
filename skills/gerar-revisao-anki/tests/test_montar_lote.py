@@ -75,6 +75,25 @@ def test_generated_batch_passes_documentary_validators(tmp_path):
     assert (tmp_path / 'previa_cards.html').is_file()
 
 
+def test_metadados_curtos_2_24_passam(tmp_path, monkeypatch):
+    """R/Cloze sem alt/rec/fb, Cloze sem sol e D com rubrica curta passam nos validadores."""
+    curto = {k: v for k, v in REVISAO.items() if k in ('alvo', 'sol', 'fx')}
+    monkeypatch.setitem(globals(), 'REVISAO', curto)
+    rb = m.rubrica('Correção sintética', 'Determinação sintética', 'Operação sintética', 'Comparação sintética',
+                   linguagem_didatica='Linguagem sintética')
+    orig_d = d
+    monkeypatch.setitem(globals(), 'd', lambda *a, **kw: orig_d(*a, **{'rb': rb, **kw}))
+    final = gerar_resolvido(tmp_path)
+    items, calibracao, revisao = ler(tmp_path)
+    assert final.pendentes == []
+    assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
+    assert rev.validate(items, revisao) == []
+    registro = json.loads(revisao)['cartoes']
+    assert all('alternativa_concorrente' not in x for x in registro)
+    with pytest.raises(ValueError, match='linguagem_didatica'):
+        m.rubrica('a', 'b', 'c', 'd')
+
+
 def test_tsvs_are_utf8_without_bom_and_lf(tmp_path):
     gerar_resolvido(tmp_path)
     items, _, _ = ler(tmp_path)

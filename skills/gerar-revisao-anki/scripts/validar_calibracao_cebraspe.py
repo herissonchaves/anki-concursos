@@ -24,6 +24,8 @@ REPORT = 'relatorios/calibracao_cebraspe.json'
 CE = 'anki_certo_errado.tsv'
 HARD = 'Tipo_Desafiadora_Cebraspe'
 CRITERIA = ('correcao', 'determinacao', 'operacao_d', 'comparacao', 'autoria', 'feedback', 'linguagem_didatica', 'utilidade')
+# Desde a 2.24 (economia de tokens), estes passam com resultado PASSA mesmo sem texto de evidência.
+CRITERIA_SEM_EVIDENCIA = ('autoria', 'feedback', 'utilidade')
 ANALYSIS = ('alvo', 'operacao_autoral', 'regra', 'dado_decisivo', 'solucao',
             'erro_plausivel', 'leitura_concorrente', 'originalidade')
 FORMATS = ('certo_errado', 'multipla_escolha')
@@ -199,7 +201,10 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
         for criterion in CRITERIA:
             entry = rubric.get(criterion) if isinstance(rubric, dict) else None
             allowed = ('PASSA', 'PENDENTE') if criterion == 'comparacao' and fidelity == 'inspiracao_geral' else ('PASSA',)
-            if not isinstance(entry, dict) or entry.get('resultado') not in allowed or not filled(entry.get('evidencia')):
+            evidencia_ok = filled(entry.get('evidencia')) if isinstance(entry, dict) else False
+            if criterion in CRITERIA_SEM_EVIDENCIA and isinstance(entry, dict) and entry.get('evidencia', '') == '':
+                evidencia_ok = True
+            if not isinstance(entry, dict) or entry.get('resultado') not in allowed or not evidencia_ok:
                 errors.append(f'{ident}: rubrica {criterion} incompleta ou não aprovada')
     for line in sorted(set(cards) - seen):
         errors.append(f'linha {line}: D sem revisão registrada')

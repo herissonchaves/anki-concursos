@@ -48,13 +48,24 @@ def test_missing_review_blocks_even_with_nonempty_text_reports(package):
     assert not out.exists() and ce.read_bytes()==before
 
 
-@pytest.mark.parametrize('key', ['alvo','solucao','alternativa_concorrente','recuperacao','feedback','fontes','segunda_conferencia','decisao','sha256'])
+@pytest.mark.parametrize('key', ['alvo','solucao','fontes','segunda_conferencia','decisao','sha256'])
 def test_required_per_card_evidence(package,key):
     ce,cl,rep,out=package
     items={check.FILES[0]:ce.read_bytes(),check.FILES[1]:cl.read_bytes()}
     data=make_review(items)
     del data['cartoes'][0][key]
     assert evaluate(items,data)
+
+
+@pytest.mark.parametrize('key', ['alternativa_concorrente','recuperacao','feedback'])
+def test_optional_evidence_may_be_omitted_but_not_blank(package,key):
+    ce,cl,rep,out=package
+    items={check.FILES[0]:ce.read_bytes(),check.FILES[1]:cl.read_bytes()}
+    data=make_review(items)
+    del data['cartoes'][0][key]
+    assert evaluate(items,data)==[]
+    data['cartoes'][0][key]=' '
+    assert any('declarado vazio' in x for x in evaluate(items,data))
 
 
 @pytest.mark.parametrize('field', range(3))

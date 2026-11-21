@@ -122,6 +122,17 @@ class CalibrationTest(unittest.TestCase):
         data['cartoes'][0]['rubrica']['correcao']['resultado'] = 'FALHA'
         self.assertTrue(evaluate(row, data))
 
+    def test_short_rubric_evidence_optional_only_for_secondary_criteria(self):
+        row, data = fixture()
+        for key in ('autoria', 'feedback', 'utilidade'):
+            data['cartoes'][0]['rubrica'][key]['evidencia'] = ''
+        self.assertEqual(evaluate(row, data), [])
+        data['cartoes'][0]['rubrica']['utilidade']['resultado'] = 'FALHA'
+        self.assertTrue(evaluate(row, data))
+        row, data = fixture()
+        data['cartoes'][0]['rubrica']['correcao']['evidencia'] = ''
+        self.assertTrue(any('correcao' in e for e in evaluate(row, data)))
+
     def test_language_and_didactics_required(self):
         row, data = fixture()
         del data['cartoes'][0]['rubrica']['linguagem_didatica']

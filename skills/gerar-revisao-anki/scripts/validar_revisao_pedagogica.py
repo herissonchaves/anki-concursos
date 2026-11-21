@@ -144,9 +144,13 @@ def validate(items, report):
             validate_cloze_coverage(row, record.get('desafiadores_por_lacuna'), challenges, errors)
         if record.get('sha256') != fingerprint([row['front'], row['back'], row['tags']]):
             errors.append(f'{ident}: SHA256 divergente')
-        for key in ('alvo', 'solucao', 'alternativa_concorrente', 'recuperacao', 'feedback'):
+        for key in ('alvo', 'solucao'):
             if not nonblank(record.get(key)):
                 errors.append(f'{ident}: {key} requer evidência específica')
+        # Opcionais desde a 2.24 (economia de tokens): registrados só quando houver algo a dizer.
+        for key in ('alternativa_concorrente', 'recuperacao', 'feedback'):
+            if key in record and not nonblank(record.get(key)):
+                errors.append(f'{ident}: {key} declarado vazio; omita o campo ou escreva a evidência')
         sources = record.get('fontes')
         if not isinstance(sources, list) or not sources or not all(valid_source(value) for value in sources):
             errors.append(f'{ident}: fontes requer URL, consulta ISO e trecho/localizador efetivamente conferido')

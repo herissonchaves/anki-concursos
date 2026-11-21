@@ -40,18 +40,17 @@ R = [  # rápidos: um alvo, frase curta; 50% C / 50% E
   f='Frente: uma afirmação direta, sem pista do gabarito.',
   b=[regra('Regra em linguagem simples, com o termo técnico explicado.')],
   m='Memorize: a ideia central em uma frase.',
-  alvo='O que deve ser lembrado.', fx=('lei',),
-  sol='Certo: fundamento conferido na fonte.', alt='Leitura concorrente testada e por que não muda o gabarito.',
-  rec='Por que a frente exige o alvo sem entregá-lo.', fb='O que o verso explica e qual confusão corrige.'),
+  alvo='O que deve ser lembrado.', fx=('lei',), sol='Certo: fundamento conferido na fonte.'),
+  # Opcionais (2.24), só quando houver algo real a registrar: alt='leitura concorrente encontrada',
+  # rec='por que a frente exige o alvo', fb='confusão que o verso corrige'.
 ]
 
 CZ = [  # uma omissão {{c1::...}} por nota (várias só com a tag Mnemonico); cada lacuna coberta por um D
  dict(k='C01', tags='Topico',
   t='Contexto suficiente e o termo central {{c1::omitido}}.',
   b=[regra('Extra: explica o termo omitido.')], m='Memorize do Extra.',
-  alvo='Termo a recuperar.', fx=('lei',), sol='Lacuna: omitido (equivalentes aceitos).',
-  alt='Termo concorrente testado.', rec='O contexto determina a resposta sem revelá-la.', fb='O que o Extra ensina.',
-  cob={'1': ['D01']}),
+  alvo='Termo a recuperar.', fx=('lei',), cob={'1': ['D01']}),
+  # sol é tirada das lacunas; escreva sol= só para equivalentes aceitos. alt/rec/fb: opcionais.
 ]
 
 D = [  # desafiadores: caso curto com dado decisivo; 50% C / 50% E
@@ -65,9 +64,10 @@ D = [  # desafiadores: caso curto com dado decisivo; 50% C / 50% E
   fx=('lei',), fid='comparada', cmp='Vínculo com a operação da questão Cebraspe.',
   # sem Cebraspe C/E com prova: fid='inspiracao_geral', lim='Buscas feitas e o que faltou.'
   # sem questão de outra banca em refs: obp=OBP
+  # Rubrica curta (2.24): os 4 primeiros critérios e linguagem_didatica com evidência; autoria,
+  # feedback e utilidade só com observação (autoria='...').
   rb=rub('correção: fonte conferida', 'determinação: condições explícitas', 'operação D: o que exige além de lembrar',
-         'comparação: questão e operação (ou PENDENTE: ...)', 'autoria: o que foi reconstruído',
-         'feedback: regra, aplicação e erro', 'linguagem: termos explicados, frente clara', 'utilidade: alvo e cobertura')),
+         'comparação: questão e operação (ou PENDENTE: ...)', linguagem_didatica='termos explicados, frente clara')),
 ]
 
 # Cobertura do PDF por prioridade para o concurso-alvo (obrigatória em revisão de PDF): inventário de

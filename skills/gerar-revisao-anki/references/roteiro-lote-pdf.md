@@ -44,8 +44,9 @@ Nunca copie nome/CPF da marca-d'água para arquivo versionado.
    e salve com `nova` **todas** as questões do PDF (viram card se o conteúdo for Alta ou Média). Regra revogada:
    `vigencia: desatualizada` + `vigencia_nota`.
 2. Banco: `assuntos` → `buscar -d DISC -t TERMO [--com-url] [--vigentes] [--nao-usadas]` → `mostrar`.
-3. Internet (obrigatória para D; recomendada para R/Cloze): Cebraspe C/E primeiro (caderno e
-   gabarito oficiais no CDN), depois outras bancas. Salve no banco **toda questão que virar
+3. Internet, **questões** (obrigatória para todo D; para R/Cloze, só quando o banco não tiver
+   questão do assunto que mostre o que se cobra): Cebraspe C/E primeiro (caderno e gabarito
+   oficiais no CDN), depois outras bancas. Salve no banco **toda questão que virar
    referência de cartão** e todo item Cebraspe C/E oficial do tema; as demais lidas podem ficar só
    em `selecao_e_fontes.txt` (banca, ano, item, URL). Sites de questões costumam bloquear robôs:
    prefira PDFs oficiais.
@@ -58,7 +59,8 @@ checagem rápida de alterações desde `verificado_em` (lei nova, STF, notícia 
 `F = {'chave': 'ID#Art. N'}` no gerador. Com novidade, prazo vencido ou dispositivo fora do arquivo:
 pesquisa real, como abaixo, e atualização do arquivo.
 
-Fora do reuso, pesquisa real na internet para todo cartão. Direito: fonte primária vigente (Planalto, STF, STJ),
+Internet, **conteúdo** (obrigatória para todo cartão, R, D ou Cloze): fora do reuso, pesquisa real
+na fonte; com reuso válido, só a checagem rápida acima. Direito: fonte primária vigente (Planalto, STF, STJ),
 redação atual, alterações dos últimos anos e decisões de inconstitucionalidade; `radar_juridico.txt`
 com status (vigente, vacatio, julgado, pendente). Corrija o PDF quando estiver desatualizado e
 avise no verso. Cloze: pesquise mnemônicos; sem fonte confiável, use dica **autoral identificada**.
@@ -97,10 +99,13 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
   card nem nota da coleção ou se Baixa tiver card, e põe as tags `Pagina_NN`. Questão sem prova oficial
   vai para `referencias_sem_prova` (inspiração e outra banca; nunca fidelidade comparada).
 - D: `fid='comparada'` só com Cebraspe C/E oficial em `refs`; senão `inspiracao_geral` + `lim`.
-  Sem questão de outra banca em `refs`: `obp` com as buscas. Rubrica de 8 critérios com evidência
-  própria; `comparacao` pode ser `PENDENTE: ...` só na inspiração geral.
-- Resolva cada frente de novo antes de reler o verso; procure leitura concorrente; registre
-  `alt`/`conc`. Revisão do próprio agente = autorevisão (declarar).
+  Sem questão de outra banca em `refs`: `obp` com as buscas. Rubrica curta: correção,
+  determinação, operação, comparação e `linguagem_didatica` com evidência própria; autoria, feedback
+  e utilidade só com observação. `comparacao` pode ser `PENDENTE: ...` só na inspiração geral.
+- Resolva cada frente de novo antes de reler o verso e procure leitura concorrente. Registre `conc`
+  em todo D; nos R e Cloze, `alt`/`rec`/`fb` só quando houver algo real (leitura concorrente
+  achada, pista, confusão corrigida). Metadados não aparecem no card: escreva-os curtos. Revisão do
+  próprio agente = autorevisão (declarar).
 - Rode o gerador; para cada sinal pendente impresso, corrija o cartão ou justifique em
   `fonte/sinais_resolvidos.json` com motivo específico.
 

@@ -62,8 +62,16 @@ CRITERIOS = ('correcao', 'determinacao', 'operacao_d', 'comparacao', 'autoria', 
 REVISOR_PADRAO = 'Claude (assistente de IA) — mesmo agente que redigiu os cartões'
 
 
-def rubrica(correcao, determinacao, operacao_d, comparacao, autoria, feedback, linguagem_didatica, utilidade):
-    """Rubrica de calibração; comece `comparacao` com 'PENDENTE: ' para registrá-la pendente."""
+def rubrica(correcao, determinacao, operacao_d, comparacao, autoria='', feedback='', linguagem_didatica='',
+            utilidade=''):
+    """Rubrica de calibração; comece `comparacao` com 'PENDENTE: ' para registrá-la pendente.
+
+    Desde a 2.24, `autoria`, `feedback` e `utilidade` podem ficar vazios (PASSA sem texto); escreva-os só
+    quando houver observação. `linguagem_didatica` continua obrigatória: passe-a por nome, ex.
+    `rub(c, d, o, cmp, linguagem_didatica='...')`.
+    """
+    if not str(linguagem_didatica).strip():
+        raise ValueError('rubrica: linguagem_didatica exige evidência específica')
     valores = (correcao, determinacao, operacao_d, comparacao, autoria, feedback, linguagem_didatica, utilidade)
     return {chave: {'resultado': 'PENDENTE' if (chave == 'comparacao' and valor.startswith('PENDENTE')) else 'PASSA',
                     'evidencia': valor.replace('PENDENTE: ', '')} for chave, valor in zip(CRITERIOS, valores)}
@@ -318,18 +326,28 @@ class Lote:
             self._json('calibracao_cebraspe.json', cal)
         return cal
 
+    @staticmethod
+    def _lacunas(texto):
+        """Solução de um Cloze tirada das próprias lacunas (o autor não precisa reescrevê-la)."""
+        respostas = re.findall(r'\{\{c\d+::(.*?)(?:::[^{}]*)?\}\}', texto, flags=re.S)
+        return 'Lacuna: ' + '; '.join(respostas) if respostas else ''
+
     def registro_revisao(self, sinais_resolvidos):
         rev = {'schema_version': 1, 'sha256_lote': batch_hash(self.items), 'revisor': self.revisor,
                'tipo_revisao': 'autorevisao', 'cartoes': [], 'sinais': []}
+        def opcionais(x):  # alt/rec/fb: só quando o autor escreveu (2.24)
+            return {chave: x[curto] for curto, chave in (('alt', 'alternativa_concorrente'), ('rec', 'recuperacao'),
+                                                         ('fb', 'feedback')) if str(x.get(curto, '')).strip()}
+
         for x in self.R:
             rev['cartoes'].append(dict(
                 id=self.rid(x['k']), sha256=fingerprint(self.ce_rows[self.line_of[x['k']] - 1]), alvo=x['alvo'],
-                solucao=x['sol'], fontes=self.fontes(*x['fx']), alternativa_concorrente=x['alt'], recuperacao=x['rec'],
-                feedback=x['fb'], segunda_conferencia=True, decisao='APROVAR'))
+                solucao=x['sol'], fontes=self.fontes(*x['fx']), **opcionais(x),
+                segunda_conferencia=True, decisao='APROVAR'))
         for i, x in enumerate(self.CZ, 1):
             rev['cartoes'].append(dict(
-                id=f'anki_cloze.tsv:{i}', sha256=fingerprint(self.cz_rows[i - 1]), alvo=x['alvo'], solucao=x['sol'],
-                fontes=self.fontes(*x['fx']), alternativa_concorrente=x['alt'], recuperacao=x['rec'], feedback=x['fb'],
+                id=f'anki_cloze.tsv:{i}', sha256=fingerprint(self.cz_rows[i - 1]), alvo=x['alvo'],
+                solucao=x.get('sol') or self._lacunas(x['t']), fontes=self.fontes(*x['fx']), **opcionais(x),
                 desafiadores_por_lacuna={g: [self.rid(k) for k in ks] for g, ks in x['cob'].items()},
                 segunda_conferencia=True, decisao='APROVAR'))
         editorial = {f'anki_certo_errado.tsv:{n}': k for k, n in self.line_of.items()}
