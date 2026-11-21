@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
-"""Banco de questões de concursos de referência (`referencias/` na raiz do repositório).
+"""Banco de referências (`referencias/` na raiz do repositório): questões, editais,
+conteúdos verificados, notícias e prioridades por concurso.
 
-Cada questão é um Markdown com frontmatter padronizado em
-`referencias/questoes/<disciplina>/<assunto>/<id>.md`. O índice `indice.tsv` e a
-árvore `assuntos.md` são gerados por este script e permitem localizar questões sem
-abrir os arquivos. Só a biblioteca padrão é usada.
+Cada item é um Markdown com frontmatter padronizado (campo `tipo`), na pasta do tipo:
+`questoes/<disciplina>/<assunto>/`, `editais/<assunto>/`, `conteudos/<disciplina>/<assunto>/`,
+`noticias/<disciplina>/<assunto>/` e `prioridades/<concurso>/<disciplina>/`. O índice único
+`indice.tsv` e a árvore `assuntos.md` são gerados por este script e permitem localizar
+qualquer item sem abrir os arquivos. Só a biblioteca padrão é usada.
 
 Comandos (rode na raiz do repositório):
 
   python -X utf8 skills/referencias-questoes/scripts/referencias.py assuntos
-  ... buscar -d informatica -a correio_eletronico -t smtp [--corpo] [-n 20]
-  ... mostrar ID [ID ...] [--analise] [--meta]
+  ... buscar [--tipo conteudo] -d informatica -a correio_eletronico -t smtp [--recentes 90] [-n 20]
+  ... mostrar ID [ID ...] [--analise] [--meta] [--secao "Legislação de Trânsito"]
+  ... fonte ID                      ((url, trecho) de um conteúdo para o F do gerar_lote.py)
   ... nova QUESTOES.json            (ou "-" para ler da entrada padrão)
   ... usar ID [ID ...] --lote PRF/Missao_09_Tema --cartoes D01,D02
   ... calibracao ID [ID ...]        (JSON para calibracao_cebraspe.json v2)
@@ -50,8 +53,36 @@ FORMATOS = {'certo_errado', 'multipla_escolha'}
 STATUS = {'definitivo', 'justificativa_oficial', 'nao_verificado', 'anulado'}
 ORIGENS = {'anexo_usuario', 'pesquisa_internet', 'caderno_erros'}
 GABARITOS = {'certo_errado': {'C', 'E', 'anulada'}, 'multipla_escolha': {'A', 'B', 'C', 'D', 'E', 'anulada'}}
-COLUNAS = ('id', 'disciplina', 'assunto', 'subassuntos', 'banca', 'formato', 'ano', 'gabarito', 'status',
-           'orgao', 'cargo', 'alvos', 'usos', 'palavras', 'arquivo', 'vigencia', 'tem_url')
+COLUNAS = ('id', 'tipo', 'titulo', 'disciplina', 'assunto', 'subassuntos', 'banca', 'formato', 'ano', 'gabarito',
+           'status', 'orgao', 'cargo', 'alvos', 'usos', 'palavras', 'arquivo', 'vigencia', 'tem_url', 'data')
+
+# ------------------------------------------------------------------ tipos além de questão
+PASTAS = {'questao': 'questoes', 'edital': 'editais', 'conteudo': 'conteudos', 'noticia': 'noticias',
+          'prioridade': 'prioridades'}
+EXTRAS = {
+    'edital': ('orgao', 'banca', 'cargo', 'ano', 'edicao', 'status', 'retificacoes'),
+    'conteudo': ('norma', 'dispositivos', 'situacao', 'verificado_em'),
+    'noticia': ('data_evento', 'status', 'efeito', 'normas_afetadas'),
+    'prioridade': ('concurso', 'prioridade', 'incidencia', 'evidencias'),
+}
+LISTAS_DOC = {'subassuntos', 'palavras_chave', 'concursos_alvo', 'usado_em', 'retificacoes', 'dispositivos',
+              'normas_afetadas', 'evidencias'}
+LISTAS_VAZIAS = {'usado_em', 'retificacoes', 'evidencias'}
+ENUMS = {('edital', 'status'): {'vigente', 'historico', 'previsto'},
+         ('conteudo', 'situacao'): {'vigente', 'alterado', 'revogado'},
+         ('noticia', 'status'): {'confirmada', 'pendente'},
+         ('prioridade', 'prioridade'): {'alta', 'media', 'baixa'}}
+DATAS_DOC = ('consulta', 'verificado_em', 'data_evento')
+
+
+def campos_doc(tipo: str) -> tuple:
+    return (('id', 'tipo', 'titulo', 'disciplina', 'assunto', 'subassuntos', 'palavras_chave', 'concursos_alvo')
+            + EXTRAS[tipo] + ('url', 'fonte_descoberta', 'consulta', 'vigencia', 'vigencia_nota', 'usado_em', 'hash'))
+
+
+def campos_de(meta: dict) -> tuple:
+    tipo = meta.get('tipo', 'questao')
+    return CAMPOS if tipo == 'questao' else campos_doc(tipo)
 SNAKE = re.compile(r'^[a-z0-9]+(?:_[a-z0-9]+)*$')
 DATA = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 SEGURO = re.compile(r'^[A-Za-z0-9_./-]*[A-Za-z_./-][A-Za-z0-9_./-]*$')
@@ -143,7 +174,7 @@ def ler_documento(texto: str) -> tuple[dict, str]:
 
 
 def escrever_documento(meta: dict, corpo: str) -> str:
-    linhas = [f'{c}: {_escrever_valor(meta[c])}' for c in CAMPOS if c in meta]
+    linhas = [f'{c}: {_escrever_valor(meta[c])}' for c in campos_de(meta) if c in meta]
     return '---\n' + '\n'.join(linhas) + '\n---\n' + corpo.rstrip('\n') + '\n'
 
 
@@ -169,7 +200,13 @@ class Questao:
     def id(self):
         return self.meta.get('id', self.caminho.stem)
 
+    @property
+    def tipo(self):
+        return self.meta.get('tipo', 'questao')
+
     def hash_corpo(self):
+        if self.tipo != 'questao':
+            return calcular_hash(self.meta.get('titulo', ''), self.meta.get('url', ''))
         s = secoes(self.corpo)
         return calcular_hash(s.get('enunciado', ''), s.get('alternativas', ''))
 
@@ -180,7 +217,8 @@ class Questao:
 
 
 def arquivos(raiz=None):
-    return sorted((raiz_banco(raiz) / 'questoes').rglob('*.md'))
+    base = raiz_banco(raiz)
+    return sorted(p for pasta in PASTAS.values() for p in (base / pasta).rglob('*.md'))
 
 
 ESTADO = '.estado_indice'  # assinatura local dos arquivos indexados (não versionada)
@@ -224,6 +262,8 @@ def _url_ok(valor) -> bool:
 
 
 def validar_questao(q: Questao, raiz=None) -> tuple[list[str], list[str]]:
+    if q.tipo != 'questao':
+        return validar_documento(q, raiz)
     m, erros, avisos = q.meta, [], []
     p = f'{q.caminho.name}'
     for campo in CAMPOS:
@@ -328,16 +368,23 @@ def _celula(valor) -> str:
 
 def linha_indice(q: Questao, raiz=None) -> dict:
     m = q.meta
-    return {'id': q.id, 'disciplina': m['disciplina'], 'assunto': m['assunto'], 'subassuntos': m['subassuntos'],
-            'banca': m['banca'], 'formato': m['formato'], 'ano': m['ano'], 'gabarito': m['gabarito'],
-            'status': m['gabarito_status'], 'orgao': m['orgao'], 'cargo': m['cargo'],
-            'alvos': m['concursos_alvo'], 'usos': len(m['usado_em']), 'palavras': m['palavras_chave'],
-            'arquivo': q.caminho.relative_to(raiz_banco(raiz)).as_posix(), 'vigencia': m.get('vigencia', 'atual'),
-            'tem_url': 'sim' if _url_ok(m.get('url')) else 'nao'}
+    comum = {'id': q.id, 'tipo': q.tipo, 'disciplina': m['disciplina'], 'assunto': m['assunto'],
+             'subassuntos': m['subassuntos'], 'alvos': m['concursos_alvo'], 'usos': len(m['usado_em']),
+             'palavras': m['palavras_chave'], 'arquivo': q.caminho.relative_to(raiz_banco(raiz)).as_posix(),
+             'vigencia': m.get('vigencia', 'atual'), 'tem_url': 'sim' if _url_ok(m.get('url')) else 'nao'}
+    if q.tipo == 'questao':
+        return {**comum, 'titulo': f'{m["banca"]} {m["ano"]} — {m["orgao"]} — item {m["item"]}',
+                'banca': m['banca'], 'formato': m['formato'], 'ano': m['ano'], 'gabarito': m['gabarito'],
+                'status': m['gabarito_status'], 'orgao': m['orgao'], 'cargo': m['cargo'], 'data': m['consulta']}
+    status = {'edital': 'status', 'conteudo': 'situacao', 'noticia': 'status', 'prioridade': 'prioridade'}[q.tipo]
+    data = {'conteudo': 'verificado_em', 'noticia': 'data_evento'}.get(q.tipo, 'consulta')
+    return {**comum, 'titulo': m['titulo'], 'banca': m.get('banca', ''), 'formato': '', 'ano': m.get('ano', 0),
+            'gabarito': '', 'status': m[status], 'orgao': m.get('orgao', m.get('concurso', '')),
+            'cargo': m.get('cargo', m.get('norma', '')), 'data': m[data]}
 
 
 def _ordem(linha):
-    return (linha['disciplina'], linha['assunto'], -int(linha['ano']), linha['id'])
+    return (linha['disciplina'], linha['assunto'], linha['tipo'], -int(linha['ano'] or 0), linha['id'])
 
 
 def indexar(raiz=None, atualizar_hash=False) -> tuple[int, list[str], list[str]]:
@@ -363,20 +410,24 @@ def indexar(raiz=None, atualizar_hash=False) -> tuple[int, list[str], list[str]]
 def arvore_assuntos(linhas) -> str:
     saida = ['# Assuntos do banco de referências', '',
              'Gerado por `referencias.py indexar`; não editar à mão. '
-             f'Total: {len(linhas)} questões. Formato: assunto (n): subassuntos · bancas.', '']
+             f'Total: {len(linhas)} itens. Formato: assunto (n): subassuntos · bancas das questões · tipos '
+             '(questao, edital, conteudo, noticia, prioridade).', '']
     discs = {}
     for l in linhas:
         discs.setdefault(l['disciplina'], {}).setdefault(l['assunto'], []).append(l)
     for disc, assuntos in sorted(discs.items()):
         saida.append(f'- **{disc}** ({sum(len(v) for v in assuntos.values())})')
         for assunto, itens in sorted(assuntos.items()):
-            subs, bancas = {}, {}
+            subs, bancas, tipos = {}, {}, {}
             for l in itens:
                 for s in l['subassuntos']:
                     subs[s] = subs.get(s, 0) + 1
-                bancas[l['banca']] = bancas.get(l['banca'], 0) + 1
+                if l['tipo'] == 'questao':
+                    bancas[l['banca']] = bancas.get(l['banca'], 0) + 1
+                tipos[l['tipo']] = tipos.get(l['tipo'], 0) + 1
             fmt = lambda d: ', '.join(f'{k} {v}' for k, v in sorted(d.items(), key=lambda kv: (-kv[1], kv[0])))
-            saida.append(f'  - {assunto} ({len(itens)}): {fmt(subs)} · {fmt(bancas)}')
+            extra = f' · {fmt(bancas)}' if bancas else ''
+            saida.append(f'  - {assunto} ({len(itens)}): {fmt(subs)}{extra} · tipos: {fmt(tipos)}')
     return '\n'.join(saida) + '\n'
 
 
@@ -404,7 +455,7 @@ def ler_indice(raiz=None, reindexar=True) -> list[dict]:
         reg = dict(zip(cab, linha.split('\t')))
         for c in ('subassuntos', 'alvos', 'palavras'):
             reg[c] = [v for v in reg.get(c, '').split(';') if v]
-        reg['ano'], reg['usos'] = int(reg['ano']), int(reg['usos'])
+        reg['ano'], reg['usos'] = int(reg['ano'] or 0), int(reg['usos'])
         reg.setdefault('vigencia', 'atual')
         reg.setdefault('tem_url', 'sim')
         saida.append(reg)
@@ -413,11 +464,21 @@ def ler_indice(raiz=None, reindexar=True) -> list[dict]:
 
 # ------------------------------------------------------------------ consultas
 def buscar(raiz=None, disciplina=None, assunto=None, termos=(), banca=None, formato=None, ano_min=None,
-           alvo=None, nao_usadas=False, corpo=False, vigentes=False, com_url=False) -> list[dict]:
+           alvo=None, nao_usadas=False, corpo=False, vigentes=False, com_url=False, tipo=None,
+           recentes=None) -> list[dict]:
     base = raiz_banco(raiz)
     termos = [normalizar(t) for t in termos if normalizar(t)]
+    hoje = _dt.date.today()
     saida = []
     for reg in ler_indice(raiz):
+        if tipo and reg['tipo'] != tipo:
+            continue
+        if recentes is not None:
+            try:
+                if (hoje - _dt.date.fromisoformat(reg['data'])).days > recentes:
+                    continue
+            except ValueError:
+                continue
         if vigentes and reg['vigencia'] != 'atual':
             continue
         if com_url and reg['tem_url'] != 'sim':
@@ -437,8 +498,8 @@ def buscar(raiz=None, disciplina=None, assunto=None, termos=(), banca=None, form
         if nao_usadas and reg['usos']:
             continue
         if termos:
-            alvo_txt = normalizar(' '.join([reg['id'], reg['assunto'], *reg['subassuntos'], *reg['palavras'],
-                                            reg['orgao'], reg['cargo'], reg['banca']]).replace('_', ' '))
+            alvo_txt = normalizar(' '.join([reg['id'], reg['titulo'], reg['assunto'], *reg['subassuntos'],
+                                            *reg['palavras'], reg['orgao'], reg['cargo'], reg['banca']]).replace('_', ' '))
             if corpo:
                 alvo_txt += ' ' + normalizar(ler_questao(base / reg['arquivo']).corpo)
             if not all(t in alvo_txt for t in termos):
@@ -456,14 +517,17 @@ def localizar(ids, raiz=None) -> list[Questao]:
             continue
         achados = [p for p in arquivos(raiz) if p.stem == i]
         if not achados:
-            raise ErroBanco(f'questão {i!r} não encontrada no banco ({base})')
+            raise ErroBanco(f'item {i!r} não encontrado no banco ({base})')
         saida.append(ler_questao(achados[0]))
     return saida
 
 
 def tem_prova(ident, raiz=None) -> bool:
     """True se a questão tem url da prova (pode entrar na calibração)."""
-    return _url_ok(localizar([ident], raiz)[0].meta.get('url'))
+    q = localizar([ident], raiz)[0]
+    if q.tipo != 'questao':
+        raise ErroBanco(f'{ident}: é {q.tipo}, não questão; use-o em fontes, não em refs de calibração')
+    return _url_ok(q.meta.get('url'))
 
 
 def sem_prova(*ids, raiz=None) -> list[dict]:
@@ -486,6 +550,8 @@ def calibracao(*ids, raiz=None) -> list[dict]:
     refs = []
     for q in localizar(ids, raiz):
         m = q.meta
+        if q.tipo != 'questao':
+            raise ErroBanco(f'{q.id}: é {q.tipo}; só questões entram na calibração')
         if m.get('vigencia') == 'desatualizada':
             print(f'aviso: {q.id} está desatualizada ({m.get("vigencia_nota")}); use só como modelo de forma',
                   file=sys.stderr)
@@ -552,6 +618,8 @@ def nova(dados: dict, raiz=None, gravar=True) -> tuple[str, Questao | None, list
     `texto_base`, `alternativas` (dict letra→texto ou lista) e `analise`.
     """
     d = dict(dados)
+    if d.get('tipo', 'questao') != 'questao':
+        return nova_documento(d, raiz, gravar)
     if not str(d.get('enunciado', '')).strip():
         return 'invalida', None, ['enunciado ausente']
     d.setdefault('usado_em', [])
@@ -579,8 +647,137 @@ def nova(dados: dict, raiz=None, gravar=True) -> tuple[str, Questao | None, list
     return 'criada', q, avisos
 
 
+# ------------------------------------------------------------------ editais, conteúdos, notícias e prioridades
+def pasta_documento(meta: dict, raiz=None) -> Path:
+    base, tipo = raiz_banco(raiz), meta['tipo']
+    if tipo == 'edital':
+        return base / 'editais' / str(meta['assunto'])
+    if tipo == 'prioridade':
+        return base / 'prioridades' / slug(meta['concurso']).replace('-', '_') / str(meta['disciplina'])
+    return base / PASTAS[tipo] / str(meta['disciplina']) / str(meta['assunto'])
+
+
+def validar_documento(q: Questao, raiz=None) -> tuple[list[str], list[str]]:
+    m, erros, avisos, p = q.meta, [], [], q.caminho.name
+    if m.get('tipo') not in EXTRAS:
+        return [f'{p}: tipo deve ser um de {sorted(PASTAS)}'], []
+    campos = campos_doc(m['tipo'])
+    for campo in campos:
+        if campo in OPCIONAIS and campo not in m:
+            continue
+        valor = m.get(campo)
+        if campo in LISTAS_DOC:
+            if not isinstance(valor, list):
+                erros.append(f'{p}: {campo} deve ser lista [..]')
+            elif campo not in LISTAS_VAZIAS and not [v for v in valor if str(v).strip()]:
+                erros.append(f'{p}: {campo} vazio')
+        elif valor is None or str(valor).strip() == '':
+            erros.append(f'{p}: {campo} ausente ou vazio')
+    extras = set(m) - set(campos)
+    if extras:
+        erros.append(f'{p}: campos desconhecidos {sorted(extras)}')
+    if erros:
+        return erros, avisos
+    if m['id'] != q.caminho.stem:
+        erros.append(f'{p}: id {m["id"]!r} difere do nome do arquivo')
+    for (tipo, campo), valores in ENUMS.items():
+        if m['tipo'] == tipo and m[campo] not in valores:
+            erros.append(f'{p}: {campo} deve ser um de {sorted(valores)}')
+    for campo in DATAS_DOC:
+        if campo in m and not DATA.match(str(m[campo])):
+            erros.append(f'{p}: {campo} deve ser AAAA-MM-DD')
+    if m['tipo'] == 'edital' and (not isinstance(m['ano'], int) or not 1980 <= m['ano'] <= _dt.date.today().year + 2):
+        erros.append(f'{p}: ano deve ser inteiro')
+    if m.get('vigencia', 'atual') not in VIGENCIAS:
+        erros.append(f'{p}: vigencia deve ser atual ou desatualizada')
+    elif m.get('vigencia') == 'desatualizada' and not str(m.get('vigencia_nota', '')).strip():
+        erros.append(f'{p}: vigencia desatualizada exige vigencia_nota')
+    for campo in ('disciplina', 'assunto'):
+        if not SNAKE.match(str(m[campo])):
+            erros.append(f'{p}: {campo} deve ser snake_case sem acentos')
+    if not _url_ok(m['url']):
+        erros.append(f'{p}: url da fonte obrigatória (http/https)')
+    if q.caminho.resolve() != (pasta_documento(m, raiz) / q.caminho.name).resolve():
+        erros.append(f'{p}: deveria estar em {pasta_documento(m, raiz).relative_to(raiz_banco(raiz)).as_posix()}/')
+    if not re.search(r'^## ', q.corpo, re.M):
+        erros.append(f'{p}: corpo precisa de ao menos uma seção "## ..."')
+    if m['hash'] != q.hash_corpo():
+        erros.append(f'{p}: hash desatualizado (titulo/url mudaram); rode indexar --atualizar-hash')
+    if RASCUNHO in q.corpo:
+        erros.append(f'{p}: rascunho não revisado (marcador {RASCUNHO})')
+    for padrao, nome in DADOS_PESSOAIS:
+        if padrao.search(q.corpo):
+            erros.append(f'{p}: possível dado pessoal ({nome}) no texto; remova antes de salvar')
+    return erros, avisos
+
+
+def nova_documento(d: dict, raiz=None, gravar=True) -> tuple[str, Questao | None, list[str]]:
+    """Cria edital, conteúdo, notícia ou prioridade. Chaves: os campos do tipo (exceto id e hash) + `corpo`
+    (Markdown com seções "## ..."). Duplicata = mesmo título e url."""
+    corpo = str(d.pop('corpo', '')).strip()
+    if not corpo:
+        return 'invalida', None, ['corpo ausente']
+    d.setdefault('usado_em', [])
+    d.setdefault('consulta', _dt.date.today().isoformat())
+    for chave in LISTAS_VAZIAS & set(EXTRAS.get(d['tipo'], ())):
+        d.setdefault(chave, [])
+    h = calcular_hash(d.get('titulo', ''), d.get('url', ''))
+    for q in carregar(raiz)[0]:
+        if q.meta.get('hash') == h and q.tipo == d['tipo']:
+            return 'duplicada', q, [f'já existe como {q.id}']
+    meta = {c: d[c] for c in campos_doc(d['tipo']) if c in d} if d['tipo'] in EXTRAS else dict(d)
+    base = '-'.join([d['tipo']] + slug(d.get('titulo', '')).split('-')[:7])  # curto e legível
+    existentes = {x.stem for x in arquivos(raiz)}
+    meta.update(hash=h, id=base if base not in existentes else f'{base}-{h[:4]}')
+    if d['tipo'] not in EXTRAS:
+        return 'invalida', None, [f'tipo deve ser um de {sorted(PASTAS)}']
+    q = Questao(meta, f'# {meta.get("titulo", "")}\n\n{corpo}\n', pasta_documento(meta, raiz) / f'{meta["id"]}.md')
+    erros, avisos = validar_documento(q, raiz)
+    if erros:
+        return 'invalida', None, erros
+    if gravar:
+        q.salvar()
+    return 'criada', q, avisos
+
+
+def trecho_secao(corpo: str, nome: str) -> str:
+    """Seção "## ..." cujo título começa com `nome` (sem acento/caixa), até a próxima de mesmo nível."""
+    alvo, saida, dentro = normalizar(nome), [], False
+    for linha in corpo.split('\n'):
+        if linha.startswith('## '):
+            dentro = normalizar(linha[3:]).startswith(alvo)
+        if dentro:
+            saida.append(linha)
+    return '\n'.join(saida).strip() or f'(seção "{nome}" não encontrada)'
+
+
+def fonte(ident, raiz=None) -> tuple[str, str]:
+    """(url, trecho) de um conteúdo (ou notícia/edital) do banco, para o dicionário F do gerar_lote.py.
+    `ID#seção` cita só a seção "## ..." que começa com aquele nome (ex.: "conteudo-ctb-...#Art. 67-C")."""
+    ident, _, secao = str(ident).partition('#')
+    q = localizar([ident], raiz)[0]
+    m = q.meta
+    if secao:
+        titulo = trecho_secao(q.corpo, secao).split('\n')[0]
+        if not titulo.startswith('## '):
+            raise ErroBanco(f'{ident}: seção {secao!r} não encontrada')
+        base = m.get('norma', m['titulo'])
+        data = m.get('verificado_em', m['consulta'])
+        return m['url'], f'{base} — {titulo[3:]} — verificado em {data} (banco {q.id})'
+    if q.tipo == 'conteudo':
+        return m['url'], (f'{m["norma"]}: {", ".join(m["dispositivos"])} — verificado em {m["verificado_em"]} '
+                          f'({m["situacao"]}; banco {q.id})')
+    if q.tipo == 'questao':
+        raise ErroBanco(f'{ident}: questão vai em refs, não em fontes')
+    return m['url'], f'{m["titulo"]} (banco {q.id}, consulta {m["consulta"]})'
+
+
 # ------------------------------------------------------------------ CLI
 def _linha_busca(r: dict) -> str:
+    if r.get('tipo', 'questao') != 'questao':
+        return (f'{r["id"]} | {r["tipo"]} | {r["titulo"][:70]} | {r["disciplina"]}/{r["assunto"]} | '
+                f'{r["status"]} | {r["data"]} | usos={r["usos"]}'
+                + (' | DESATUALIZADA' if r.get('vigencia', 'atual') != 'atual' else ''))
     gab = {'certo_errado': 'CE', 'multipla_escolha': 'ME'}.get(r['formato'], r['formato'])
     marcas = ('' if r.get('tem_url', 'sim') == 'sim' else ' | sem prova') + \
              (' | DESATUALIZADA' if r.get('vigencia', 'atual') != 'atual' else '')
@@ -588,8 +785,20 @@ def _linha_busca(r: dict) -> str:
             f'{",".join(r["subassuntos"])} | usos={r["usos"]}{marcas}')
 
 
-def _imprimir_questao(q: Questao, analise=False, meta=False):
+def _imprimir_questao(q: Questao, analise=False, meta=False, secao=None):
     m = q.meta
+    if q.tipo != 'questao':
+        rotulo = {'conteudo': f'verificado em {m.get("verificado_em")}, {m.get("situacao")}',
+                  'noticia': f'{m.get("data_evento")}, {m.get("status")}', 'edital': f'{m.get("status")}',
+                  'prioridade': f'prioridade {m.get("prioridade")}'}[q.tipo]
+        print(f'### {q.id} — {q.tipo}: {m["titulo"]} ({rotulo})')
+        if m.get('vigencia') == 'desatualizada':
+            print(f'ATENÇÃO — DESATUALIZADA: {m.get("vigencia_nota")}')
+        if meta:
+            print(escrever_documento(m, '').strip())
+        print(trecho_secao(q.corpo, secao) if secao else q.corpo.strip())
+        print()
+        return
     print(f'### {q.id} — {m["banca"]} {m["ano"]}, {m["orgao"]}, {m["cargo"]}, item {m["item"]} '
           f'({m["formato"]}, gabarito {m["gabarito"]}, {m["gabarito_status"]})')
     if m.get('vigencia') == 'desatualizada':
@@ -626,12 +835,17 @@ def main(argv=None) -> int:
     b.add_argument('--corpo', action='store_true', help='procura os termos também no texto das questões')
     b.add_argument('--vigentes', action='store_true', help='omite questões marcadas como desatualizadas')
     b.add_argument('--com-url', action='store_true', help='só questões com prova oficial (servem à calibração)')
+    b.add_argument('--tipo', choices=sorted(PASTAS), help='questao, edital, conteudo, noticia ou prioridade')
+    b.add_argument('--recentes', type=int, help='só itens com data (verificação, evento ou consulta) de até N dias')
     b.add_argument('--ids', action='store_true', help='imprime só os IDs')
     b.add_argument('-n', '--limite', type=int, default=20)
     mo = sub.add_parser('mostrar', help='imprime o texto das questões')
     mo.add_argument('ids', nargs='+')
     mo.add_argument('--analise', action='store_true')
     mo.add_argument('--meta', action='store_true')
+    mo.add_argument('--secao', help='imprime só a seção "## ..." que começa com este texto (editais longos)')
+    fo = sub.add_parser('fonte', help='(url, trecho) de um conteúdo verificado, para o F do gerar_lote.py')
+    fo.add_argument('id')
     nv = sub.add_parser('nova', help='cria questões a partir de JSON (objeto ou lista)')
     nv.add_argument('json', help='arquivo .json ou "-" para a entrada padrão')
     nv.add_argument('--simular', action='store_true', help='valida sem gravar')
@@ -656,20 +870,22 @@ def main(argv=None) -> int:
     raiz = a.raiz
 
     try:
-        if a.cmd == 'assuntos':
+        if a.cmd == 'fonte':
+            print(json.dumps(fonte(a.id, raiz), ensure_ascii=False))
+        elif a.cmd == 'assuntos':
             ler_indice(raiz)
             caminho = raiz_banco(raiz) / 'assuntos.md'
             print(caminho.read_text(encoding='utf-8') if caminho.exists() else 'Banco vazio.')
         elif a.cmd == 'buscar':
             res = buscar(raiz, a.disciplina, a.assunto, a.termo, a.banca, a.formato, a.ano_min, a.alvo,
-                         a.nao_usadas, a.corpo, a.vigentes, a.com_url)
+                         a.nao_usadas, a.corpo, a.vigentes, a.com_url, a.tipo, a.recentes)
             for r in res[:a.limite]:
                 print(r['id'] if a.ids else _linha_busca(r))
             if not a.ids:
-                print(f'-- {len(res)} questão(ões){f"; mostrando {a.limite}" if len(res) > a.limite else ""}')
+                print(f'-- {len(res)} item(ns){f"; mostrando {a.limite}" if len(res) > a.limite else ""}')
         elif a.cmd == 'mostrar':
             for q in localizar(a.ids, raiz):
-                _imprimir_questao(q, a.analise, a.meta)
+                _imprimir_questao(q, a.analise, a.meta, a.secao)
         elif a.cmd == 'nova':
             texto = sys.stdin.read() if a.json == '-' else Path(a.json).read_text(encoding='utf-8-sig')
             dados = json.loads(texto)
@@ -709,7 +925,7 @@ def main(argv=None) -> int:
                 print(f'aviso: {msg}')
             for msg in erros:
                 print(f'ERRO: {msg}')
-            print(f'{n} questão(ões) válida(s); {len(erros)} erro(s); {len(avisos)} aviso(s)')
+            print(f'{n} item(ns) válido(s); {len(erros)} erro(s); {len(avisos)} aviso(s)')
             return 1 if erros else 0
     except ErroBanco as exc:
         print(f'ERRO: {exc}', file=sys.stderr)

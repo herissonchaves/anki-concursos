@@ -36,7 +36,7 @@ Texto que não é conteúdo de estudo usa `excluir='nao_conteudo: motivo'`. Falh
 se Baixa tiver card ou se um card não cobrir nenhuma unidade Alta/Média. Grava
 `cobertura_pdf.json` e põe em cada card as tags `Pagina_NN` das páginas que ele cobre.
 
-`fontes`: {chave: (url, trecho verificado)}. Os relatórios .txt continuam
+`fontes`: {chave: (url, trecho verificado)} ou {chave: "<id de conteúdo do banco>"}, convertido por `referencias.fonte`. Os relatórios .txt continuam
 escritos à mão em `lote/relatorios/`. Revisão pelo próprio agente é autorevisão;
 os registros gerados não certificam conteúdo.
 """
@@ -84,6 +84,11 @@ class Lote:
         self.schema, self.revisor, self.titulo = schema_calibracao, revisor, titulo_previa
         self.banco, self.registrar = banco_referencias, registrar_uso
         self.cobertura = cobertura
+        # chave de fonte -> ID de conteúdo do banco ("ID" ou "ID#seção"); o uso é registrado no conteúdo
+        self.conteudos = {k: v.partition('#')[0] for k, v in self.F.items() if isinstance(v, str)}
+        if self.conteudos:
+            ref = self._modulo_referencias()
+            self.F = {k: (ref.fonte(v, self.banco) if isinstance(v, str) else v) for k, v in self.F.items()}
         self.refs = self._resolver_refs(referencias)
 
     # ------------------------------------------------------------ cobertura do PDF por prioridade
@@ -209,12 +214,19 @@ class Lote:
             return self.pasta.name
 
     def registrar_usos(self):
-        if not self.registrar or (not self.ids_banco and self.banco is None):
+        if not self.registrar or (not self.ids_banco and not self.conteudos and self.banco is None):
             return
         ref = self._modulo_referencias()
         lote, usados = self.rotulo_lote(), set()
+        cards = self.R + self.D + self.CZ
         for ident in self.ids_banco:
-            cartoes = [x['k'] for x in self.R + self.D + self.CZ if ident in x.get('refs', ())]
+            cartoes = [x['k'] for x in cards if ident in x.get('refs', ())]
+            if cartoes:
+                ref.registrar_uso(ident, lote, cartoes, self.banco)
+                usados.add(ident)
+        for ident in sorted(set(self.conteudos.values())):
+            chaves = {k for k, v in self.conteudos.items() if v == ident}
+            cartoes = [x['k'] for x in cards if chaves & set(x.get('fx', ()))]
             if cartoes:
                 ref.registrar_uso(ident, lote, cartoes, self.banco)
                 usados.add(ident)

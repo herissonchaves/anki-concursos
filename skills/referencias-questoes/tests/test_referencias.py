@@ -186,3 +186,66 @@ def test_importar_extrai_questoes_de_texto(tmp_path):
     assert itens[0]['ano'] == 2020 and itens[1]['orgao'] == 'Prefeitura de Teste'
     assert itens[0]['operacao_observada'] == 'REVISAR' and itens[0]['origem'] == 'anexo_usuario'
     assert 'CPF' not in json.dumps(itens, ensure_ascii=False)
+
+
+DOC = dict(disciplina='transito', assunto='motorista_profissional', subassuntos=['descanso'],
+           palavras_chave=['67-c'], concursos_alvo=['PRF'], url='https://example.test/lei',
+           fonte_descoberta='Fonte sintética', consulta='2026-11-21')
+
+
+def test_conteudo_noticia_edital_prioridade_criados_validados_e_indexados(banco):
+    conteudo = dict(DOC, tipo='conteudo', titulo='Lei sintética, art. 1', norma='Lei sintética', dispositivos=['art. 1'],
+                    situacao='vigente', verificado_em=_hoje(), corpo='## Art. 1\n\nTexto sintético verificado.')
+    noticia = dict(DOC, tipo='noticia', titulo='Decisão sintética', data_evento='2026-01-02', status='confirmada',
+                   efeito='Muda o gabarito sintético', normas_afetadas=['Lei sintética, art. 1'], corpo='## Resumo\n\nFato sintético.')
+    edital = dict(DOC, tipo='edital', titulo='Edital sintético 2026', disciplina='geral', assunto='concurso_ficticio',
+                  orgao='Órgão fictício', banca='Banca fictícia', cargo='Cargo fictício', ano=2026, edicao='Edital nº 1/2026',
+                  status='historico', corpo='## Legislação de Trânsito\n\n1 Lei sintética.\n\n## Informática\n\n1 Redes.')
+    prioridade = dict(DOC, tipo='prioridade', titulo='PRF — motorista profissional (sintético)', concurso='PRF',
+                      prioridade='alta', incidencia='nao_medida', evidencias=[], corpo='## Subtemas\n\n- Alta: descanso.')
+    ids = {}
+    for d in (conteudo, noticia, edital, prioridade):
+        status, q, msgs = ref.nova(dict(d), banco)
+        assert status == 'criada', msgs
+        ids[d['tipo']] = q.id
+    assert (banco / 'conteudos' / 'transito' / 'motorista_profissional' / f'{ids["conteudo"]}.md').exists()
+    assert (banco / 'editais' / 'concurso_ficticio' / f'{ids["edital"]}.md').exists()
+    assert (banco / 'prioridades' / 'prf' / 'transito' / f'{ids["prioridade"]}.md').exists()
+    n, erros, _ = ref.indexar(banco)
+    assert (n, erros) == (4, [])
+    assert [r['id'] for r in ref.buscar(banco, tipo='conteudo', recentes=90)] == [ids['conteudo']]
+    assert [r['tipo'] for r in ref.buscar(banco, termos=['67-c'], tipo='noticia')] == ['noticia']
+    assert 'tipos:' in (banco / 'assuntos.md').read_text(encoding='utf-8')
+    url, trecho = ref.fonte(ids['conteudo'], banco)
+    assert url == 'https://example.test/lei' and 'verificado em' in trecho and ids['conteudo'] in trecho
+    _, trecho_art = ref.fonte(ids['conteudo'] + '#Art. 1', banco)
+    assert trecho_art.startswith('Lei sintética — Art. 1 — verificado em')
+    with pytest.raises(ref.ErroBanco):
+        ref.fonte(ids['conteudo'] + '#Art. 99', banco)
+    assert ref.nova(dict(conteudo), banco)[0] == 'duplicada'
+    with pytest.raises(ref.ErroBanco):
+        ref.calibracao(ids['conteudo'], raiz=banco)
+
+
+def test_mostrar_secao_de_edital(banco, capsys):
+    edital = dict(DOC, tipo='edital', titulo='Edital sintético B', disciplina='geral', assunto='concurso_b', orgao='Órgão',
+                  banca='Banca', cargo='Cargo', ano=2025, edicao='Edital nº 2', status='vigente',
+                  corpo='## Legislação de Trânsito\n\nItem de trânsito.\n\n## Informática\n\nItem de informática.')
+    _, q, _ = ref.nova(edital, banco)
+    assert ref.main(['--raiz', str(banco), 'mostrar', q.id, '--secao', 'legislacao de transito']) == 0
+    saida = capsys.readouterr().out
+    assert 'Item de trânsito.' in saida and 'Item de informática.' not in saida
+
+
+def test_documento_invalido_aponta_problemas(banco):
+    ruim = dict(DOC, tipo='conteudo', titulo='Sem seção', norma='Lei', dispositivos=['art. 1'], situacao='em_vigor',
+                verificado_em='21/11/2026', corpo='Texto sem seção.')
+    status, _, msgs = ref.nova(ruim, banco)
+    assert status == 'invalida'
+    texto = ' '.join(msgs)
+    assert 'situacao' in texto and 'verificado_em' in texto and 'seção' in texto
+
+
+def _hoje():
+    import datetime
+    return datetime.date.today().isoformat()

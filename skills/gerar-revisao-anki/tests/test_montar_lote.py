@@ -290,3 +290,27 @@ def test_uso_de_card_retirado_sai_do_banco(tmp_path):
     segundo = lote(pasta, banco_referencias=banco)
     segundo.gerar(imprimir=False)
     assert banco_mod.localizar([questao.id], banco)[0].meta['usado_em'] == []
+
+
+def test_fontes_aceitam_id_de_conteudo_do_banco(tmp_path):
+    import sys, datetime
+    sys.path.insert(0, str(m.SCRIPTS_REFERENCIAS))
+    import referencias as banco_mod
+    banco = tmp_path / 'referencias'
+    status, q, msgs = banco_mod.nova(dict(tipo='conteudo', titulo='SI sintético', disciplina='fisica', assunto='dinamica',
+                                         subassuntos=['unidades'], palavras_chave=['newton'], concursos_alvo=['PRF'],
+                                         url='https://example.test/si', fonte_descoberta='Fixture', norma='SI sintético',
+                                         dispositivos=['força'], situacao='vigente',
+                                         verificado_em=datetime.date.today().isoformat(), corpo='## Força\n\nNewton.'), banco)
+    assert status == 'criada', msgs
+    gerado = lote(tmp_path / 'lote_fonte', banco_referencias=banco)
+    gerado.F = {'si': q.id}
+    novo = m.Lote(tmp_path / 'lote_fonte', 'Teste', {'si': q.id}, HOJE, REFS, gerado.R, gerado.D, gerado.CZ, semente=1,
+                  banco_referencias=banco)
+    assert novo.F['si'][0] == 'https://example.test/si' and q.id in novo.F['si'][1]
+    secao = m.Lote(tmp_path / 'lote_secao', 'Teste', {'si': q.id + '#Força'}, HOJE, REFS, gerado.R, gerado.D, gerado.CZ,
+                   semente=1, banco_referencias=banco)
+    assert 'Força' in secao.F['si'][1] and q.id in secao.F['si'][1]
+    secao.gerar(imprimir=False)  # todos os cartões da fixture citam a fonte 'si'
+    usos = banco_mod.localizar([q.id], banco)[0].meta['usado_em']
+    assert len(usos) == 1 and usos[0].startswith('lote_secao#') and 'R01' in usos[0]

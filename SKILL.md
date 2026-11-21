@@ -5,7 +5,7 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
-**Versão 2.22.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.23.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
@@ -33,7 +33,7 @@ são relativos à raiz do projeto.
 | Explicar ou reformular cartões existentes | [melhorar-cartoes-anki](skills/melhorar-cartoes-anki/SKILL.md) |
 | Inspecionar um backup | [analisar-colecao-anki](skills/analisar-colecao-anki/SKILL.md) |
 | Extrair material ou validar e exportar arquivos | [automacao-anki-python](skills/automacao-anki-python/SKILL.md) |
-| Consultar, salvar ou vincular questões de concursos de referência | [referencias-questoes](skills/referencias-questoes/SKILL.md) |
+| Consultar, salvar ou vincular referências (questões, editais, conteúdos verificados, notícias, prioridades) | [referencias-questoes](skills/referencias-questoes/SKILL.md) |
 | Orientar rotina, carga de revisão e FSRS | [orientar-estudo-anki](skills/orientar-estudo-anki/SKILL.md) |
 
 Para os portões de cada rota, o roteamento obrigatório de Língua Portuguesa e os
@@ -43,8 +43,11 @@ casos de regressão do roteamento, veja
 Toda criação de cartões autorais (R, D, Cloze e caderno de erros) usa também
 [referencias-questoes](skills/referencias-questoes/SKILL.md): reaproveita as questões
 de concursos do arquivo enviado (extraídas com `referencias.py importar`) e do banco
-`referencias/`, e salva ali, em Markdown padronizado, as questões que viram referência de
-cartão e os itens Cebraspe C/E oficiais do tema; as demais lidas são opcionais.
+`referencias/`, que guarda também os editais dos concursos-alvo, conteúdos verificados
+(reuso por até 90 dias com checagem rápida de alterações, no lugar de reler a fonte),
+notícias (leis novas, decisões) e prioridades por assunto (o que mais cai, contado). O banco
+é consultado antes de pesquisar, e tudo o que for pesquisado num pedido é salvo ali ao final,
+em Markdown padronizado e no mesmo índice.
 
 Para lote a partir de PDF, o caminho de menor custo é o
 [roteiro curto](skills/gerar-revisao-anki/references/roteiro-lote-pdf.md): resume as regras
@@ -87,7 +90,7 @@ com outro `--with-requirements`. Os testes que dependem de `zstandard` ou
 - Rotina: `git status` antes de editar; `git log --oneline -- ARQUIVO` e `git show` para entender uma regra antes de mudá-la; `git diff` e testes depois de editar scripts ou regras cobertas pelos testes.
 - Adicione arquivos pelo nome, sem `git add -A` às cegas. Um commit por mudança coerente, com mensagem em português no imperativo que diga o quê e por quê. Não use `--no-verify`.
 - Também exigem autorização própria: `reset --hard`, `rebase`, `commit --amend` de commit existente, `checkout --`/`restore` que descarte trabalho, apagar ou trocar de branch e alterar remotos. Para mudanças grandes ou experimentais, sugira uma branch nova.
-- Versione `referencias/` (banco de questões) só com o item oficial da banca: enunciado, alternativas, gabarito, fonte e metadados. Nunca comentários ou resoluções de cursos e sites de questões, nem dados pessoais de marcas-d'água; rode `referencias.py validar` antes do commit.
+- Versione `referencias/` (banco de referências); nas questões, só o item oficial da banca: enunciado, alternativas, gabarito, fonte e metadados. Nunca comentários ou resoluções de cursos e sites de questões, nem dados pessoais de marcas-d'água; rode `referencias.py validar` antes do commit.
 - Nunca versione PDFs ou materiais de cursos (direitos autorais e marcas-d'água com dados pessoais), `.colpkg`/`.apkg`/`collection.*`, pacotes `.zip` exportados, `.venv/`, `uv.lock` e caches. Se aparecerem no `git status`, proponha incluí-los no `.gitignore`.
 
 ## Onde salvar os lotes gerados
@@ -107,10 +110,10 @@ Todo arquivo gerado pelas skills fica **dentro deste repositório**, em dois lug
 - Hérisson apaga os arquivos de `output/` depois de importar. Nunca use `output/` como fonte nem conte com o que estava lá: regenere a partir de `lotes/` ou do backup. Pasta vazia ou ausente é o estado normal; crie-a quando for gravar.
 - Não apague nem sobrescreva entregáveis que ainda estejam em `output/`; use subpasta ou nome novo. No fechamento, informe o caminho completo dos arquivos a importar.
 
-## Banco de questões de referência
+## Banco de referências
 
-`referencias/questoes/<disciplina>/<assunto>/<id>.md` guarda as questões de concursos
-usadas como referência ou inspiração; `referencias/assuntos.md` e
-`referencias/indice.tsv` são gerados por
-`skills/referencias-questoes/scripts/referencias.py`, que busca e mostra questões sem
-abrir os arquivos. Formato e fluxo em [referencias-questoes](skills/referencias-questoes/SKILL.md).
+`referencias/` guarda, um arquivo Markdown por item, questões (`questoes/`), editais
+(`editais/`), conteúdos verificados (`conteudos/`), notícias (`noticias/`) e prioridades
+por concurso (`prioridades/`); `referencias/assuntos.md` e `referencias/indice.tsv` (com
+coluna `tipo`) são gerados por `skills/referencias-questoes/scripts/referencias.py`, que
+busca e mostra itens (ou só uma seção) sem abrir os arquivos. Formato e fluxo em [referencias-questoes](skills/referencias-questoes/SKILL.md).

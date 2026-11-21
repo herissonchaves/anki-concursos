@@ -62,21 +62,23 @@ T_TEMPOS = tabela(['Regra (art. 67-C)', 'Cargas', 'Coletivo de passageiros'], [
 
 # ---------------------------------------------------------------- fontes
 CTB = 'https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm'
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from complemento import NG, MP, AX  # noqa: E402
 F = {
- 'ctb29': (CTB, 'CTB, art. 29, III (a: rodovia; b: rotatória; c: direita do condutor), IV (faixas da direita e da esquerda) e IX (ultrapassagem pela esquerda, exceto se o da frente sinaliza entrar à esquerda); texto compilado do Planalto'),
- 'ctb29vii': (CTB, 'CTB, art. 29, VII, alíneas a–f (redação da Lei 14.071/2020; alínea c pela Lei 14.440/2022) e VIII (utilidade pública: livre parada e estacionamento no local, sinalizados)'),
- 'ctb30_33': (CTB, 'CTB, arts. 30 (quem é ultrapassado vai para a direita sem acelerar), 31 (coletivo parado: reduzir e atenção redobrada ou parar), 32 ("nos trechos em curvas e em aclives sem visibilidade suficiente", passagens de nível, pontes e viadutos, travessias; salvo sinalização) e 33 (interseções)'),
- 'ctb37': (CTB, 'CTB, art. 37: em via com acostamento, sem local apropriado, aguardar no acostamento, à direita, para cruzar a pista'),
- 'ctb40': (CTB, 'CTB, art. 40, I (luz baixa à noite e de dia em túneis, chuva, neblina, cerração), II (luz alta em via não iluminada, exceto ao cruzar ou seguir), III (troca intermitente só para ultrapassagem ou risco), § 2º (faróis de dia em rodovia de pista simples fora do perímetro urbano, sem DRL; Lei 14.071/2020)'),
- 'ctb41': (CTB, 'CTB, art. 41: buzina em toque breve, I (advertências para evitar sinistros, redação da Lei 14.599/2023) e II (fora das áreas urbanas, avisar que vai ultrapassar)'),
- 'ctb44a': (CTB, 'CTB, art. 44-A (Lei 14.071/2020): conversão à direita no vermelho livre onde houver sinalização indicativa que a permita, observados os arts. 44, 45 e 70'),
- 'ctb49': (CTB, 'CTB, art. 49 e parágrafo único: embarque e desembarque do lado da calçada, exceto para o condutor'),
- 'ctb57_58': (CTB, 'CTB, art. 57, parágrafo único ("deverão circular pela faixa adjacente à da direita"), art. 58, parágrafo único (contrafluxo de bicicletas só em trecho com ciclofaixa) e Anexo I (ciclomotor: até 50 cm3 ou 4 kW, até 50 km/h)'),
- 'ctb_anexo': (CTB, 'CTB, Anexo I: "ESTRADA - via rural não pavimentada"; rodovia, via rural pavimentada (lida em resumo do texto compilado)'),
- 'ctb64': (CTB, 'CTB, art. 64 (redação da Lei 14.071/2020): menores de 10 anos que não atingiram 1,45 m no banco traseiro, em dispositivo de retenção adequado; parágrafo único: CONTRAN regula exceções'),
- 'ctb67a': (CTB, 'CTB, art. 67-A, I e II (Lei 13.103/2015): o capítulo vale para motoristas profissionais de transporte rodoviário coletivo de passageiros e de cargas'),
- 'ctb67c': (CTB, 'CTB, art. 67-C: caput (5 h 30 ininterruptas), § 1º (30 min dentro de cada 6 h, carga, fracionável), § 1º-A (30 min a cada 4 h, passageiros), § 2º (elevação justificada e registrada até local seguro), § 3º (11 h em 24 h; "Vide ADI 5322"), § 8º (CONTRAN define as situações: indisponibilidade de pontos de parada e de descanso na rota ou exaurimento das vagas; Lei 14.599/2023)'),
- 'ctb67e': (CTB, 'CTB, art. 67-E: caput (motorista controla e registra o tempo), § 1º-A (sem penalidade na exceção do 67-C § 8º), § 2º (registrador, diário de bordo, papeleta ou ficha, meios eletrônicos), § 3º (funciona independente do condutor), § 4º (guarda, preservação e exatidão: responsabilidade do motorista)'),
+ 'ctb29': NG + 'Art. 29',
+ 'ctb29vii': NG + 'Art. 29',
+ 'ctb30_33': NG + 'Arts. 30 a 39',
+ 'ctb37': NG + 'Arts. 30 a 39',
+ 'ctb40': NG + 'Art. 40',
+ 'ctb41': NG + 'Art. 41',
+ 'ctb44a': NG + 'Arts. 42 a 48',
+ 'ctb49': NG + 'Art. 49',
+ 'ctb57_58': NG + 'Arts. 54 a 59',
+ 'ctb_anexo': AX + 'Estrada e rodovia',
+ 'ctb64': NG + 'Art. 64',
+ 'ctb67a': MP + 'Art. 67-A',
+ 'ctb67c': MP + 'Art. 67-C',
+ 'ctb67e': MP + 'Art. 67-E',
  'adi5322': ('https://legis.senado.leg.br/norma/37370238', 'Acórdão da ADI 5.322 (STF, plenário virtual concluído em 30/6/2023; ata publicada em 12/7/2023): item (k) declara inconstitucional a expressão "que podem ser fracionadas, usufruídas no veículo e coincidir com os intervalos mencionados no § 1º, observadas no primeiro período 8 (oito) horas ininterruptas de descanso" do § 3º do art. 67-C do CTB; embargos: efeitos ex nunc desde 12/7/2023'),
  'stf_noticia': ('https://noticias.stf.jus.br/?p=58525', 'Notícia do STF de 5/7/2023: invalidados os dispositivos que admitiam a redução do descanso mínimo por fracionamento e sua coincidência com as paradas obrigatórias'),
  'prf21': ('https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF', 'Prova PRF 2021 (Cebraspe), itens 77–79 sobre fiscalização do tempo de direção e descanso; gabarito definitivo 77 C, 78 E, 79 E'),

@@ -6,15 +6,19 @@ Fonte de todos os dispositivos: CTB compilado do Planalto, lido em 21/11/2026.
 from html_anki import regra, erro, certo, caso, esquema, tabela
 
 CTB = 'https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm'
+# conteúdos verificados do banco referencias/ (2.23): 'ID#seção' vira (url, trecho) e registra o uso
+NG = 'conteudo-ctb-normas-gerais-de-circulacao-e-conduta#'
+MP = 'conteudo-ctb-conducao-por-motoristas-profissionais-arts-67#'
+AX = 'conteudo-ctb-anexo-i-conceitos-e-definicoes-usados#'
 F_NOVAS = {
- 'ctb26_28': (CTB, 'CTB, arts. 26 (I: abster-se de ato que constitua perigo ou obstáculo; II: não obstruir nem tornar perigoso o trânsito atirando, depositando ou abandonando objetos), 27 (equipamentos obrigatórios e combustível suficiente) e 28 (domínio do veículo a todo momento)'),
- 'ctb29b': (CTB, 'CTB, art. 29, I (lado direito, exceções sinalizadas), II (distância de segurança lateral e frontal, considerando velocidade e condições), V (passeios e acostamentos só para entrar ou sair de imóveis ou áreas de estacionamento), VI (batedores), VII, d (prioridade com velocidade reduzida), X e XI (checklist e conduta na ultrapassagem), XII (trilhos)'),
- 'ctb201': (CTB, 'CTB, art. 201: deixar de guardar a distância lateral de um metro e cinquenta centímetros ao passar ou ultrapassar bicicleta — infração média'),
- 'ctb30_39': (CTB, 'CTB, arts. 30, parágrafo único (fila de veículos lentos), 33 (sem ultrapassagem nas interseções e proximidades), 34 (manobra sem perigo), 35 e parágrafo único ("Entende-se por deslocamento lateral a transposição de faixas, movimentos de conversão à direita, à esquerda e retornos"), 36 (lote lindeiro), 38 (I, II e parágrafo único) e 39 (retorno em vias urbanas)'),
- 'ctb40b': (CTB, 'CTB, art. 40, I, a e b (luz baixa à noite e, de dia, em túneis e sob chuva, neblina ou cerração), § 1º (coletivos em faixa própria e motocicletas, motonetas e ciclomotores: luz baixa dia e noite; Lei 14.071/2020), V (pisca-alerta), VI (luz de placa), VII (luzes de posição)'),
- 'ctb42_48': (CTB, 'CTB, arts. 42 (frear bruscamente só por segurança), 43 (velocidade; I, II e III), 44 (prudência especial no cruzamento), 46 (sinalização de advertência na imobilização de emergência), 47 (parada onde é proibido estacionar; carga e descarga "é considerada estacionamento") e 48 (posição no sentido do fluxo, paralela e junto à guia)'),
- 'ctb50_53': (CTB, 'CTB, arts. 50 (faixas laterais de domínio), 51 (sinalização das vias de condomínio às expensas do condomínio), 52 (tração animal pela direita, junto à guia ou ao acostamento) e 53 (animais só com guia; rebanhos em grupos)'),
- 'ctb54_59': (CTB, 'CTB, arts. 54 (condutor de moto: capacete com viseira ou óculos protetores, duas mãos no guidom, vestuário), 55 (passageiro: capacete, carro lateral ou assento suplementar atrás do condutor, vestuário), 57 (ciclomotor; proibido em vias de trânsito rápido e calçadas urbanas), 58 (bicicleta nos bordos, mesmo sentido, preferência sobre automotores), 59 (passeio só com autorização e sinalização); Anexo I (ciclomotor até 50 km/h)'),
+ 'ctb26_28': NG + 'Arts. 26 a 28',
+ 'ctb29b': NG + 'Art. 29',
+ 'ctb201': NG + 'Art. 201',
+ 'ctb30_39': NG + 'Arts. 30 a 39',
+ 'ctb40b': NG + 'Art. 40',
+ 'ctb42_48': NG + 'Arts. 42 a 48',
+ 'ctb50_53': NG + 'Arts. 50 a 53',
+ 'ctb54_59': NG + 'Arts. 54 a 59',
  'ctb65_67': (CTB, 'CTB, arts. 65 (cinto obrigatório para condutor e passageiros em todas as vias, salvo situações regulamentadas pelo CONTRAN) e 67 (provas desportivas: prévia permissão; I–IV; parágrafo único: a autoridade com circunscrição arbitra os valores mínimos da caução e do seguro)'),
  'ctb67ce': (CTB, 'CTB, art. 67-C, § 4º (tempo de direção: só o período efetivamente ao volante, entre origem e destino) e § 5º (início de viagem; partidas dos dias seguintes são continuação); art. 67-E, § 2º (registrador instantâneo e/ou diário de bordo, papeleta ou ficha de trabalho externo, ou meios eletrônicos)'),
  'ctb68_105': (CTB, 'CTB, arts. 68, § 1º (ciclista desmontado empurrando a bicicleta equipara-se ao pedestre), 70 (prioridade na faixa, exceto nos locais com semáforo; parágrafo único) e 105, II (registrador obrigatório: escolares, passageiros com mais de dez lugares e carga com PBT acima de 4.536 kg)'),

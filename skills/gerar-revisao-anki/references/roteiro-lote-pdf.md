@@ -28,8 +28,12 @@ Nunca copie nome/CPF da marca-d'água para arquivo versionado.
 - Disciplina → especialização (`../../perfil-carreiras-policiais/references/disciplinas.json`);
   Direito e trânsito: `../../direito-cebraspe-qualidade/SKILL.md` + skill do ramo; Português:
   `../../portugues-cebraspe-qualidade/SKILL.md` (obrigatório).
-- Edital: item do programa (PRF 2021 é referência histórica). Coleção: buscar os termos centrais
-  (somente leitura) e excluir alvos já cobertos.
+- **Banco primeiro** (`../../referencias-questoes/SKILL.md`, fluxo): `referencias.py buscar --tipo
+  prioridade --alvo PRF -a ASSUNTO` (a triagem parte da prioridade salva e reavalia só o novo);
+  `buscar --tipo edital --alvo PRF` + `mostrar ID --secao "<disciplina>"` para o item do programa (PRF
+  2021 é referência histórica; na internet, só busca rápida por edital novo ou retificação);
+  `buscar --tipo conteudo -a ASSUNTO --recentes 90` e `buscar --tipo noticia -a ASSUNTO`.
+- Coleção: buscar os termos centrais (somente leitura) e excluir alvos já cobertos.
 
 ## 3. Questões: anexo, banco, internet
 
@@ -46,7 +50,13 @@ Nunca copie nome/CPF da marca-d'água para arquivo versionado.
 
 ## 4. Conteúdo e atualização
 
-Pesquisa real na internet para todo cartão. Direito: fonte primária vigente (Planalto, STF, STJ),
+**Reuso do banco:** conteúdo `vigente` verificado há até 90 dias substitui a releitura, com uma
+checagem rápida de alterações desde `verificado_em` (lei nova, STF, notícia no banco); registre
+"conteúdo do banco <ID>, verificado em <data>; checagem em <hoje> sem novidade" e use
+`F = {'chave': 'ID#Art. N'}` no gerador. Com novidade, prazo vencido ou dispositivo fora do arquivo:
+pesquisa real, como abaixo, e atualização do arquivo.
+
+Fora do reuso, pesquisa real na internet para todo cartão. Direito: fonte primária vigente (Planalto, STF, STJ),
 redação atual, alterações dos últimos anos e decisões de inconstitucionalidade; `radar_juridico.txt`
 com status (vigente, vacatio, julgado, pendente). Corrija o PDF quando estiver desatualizado e
 avise no verso. Cloze: pesquise mnemônicos; sem fonte confiável, use dica **autoral identificada**.
@@ -93,8 +103,12 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
 
 ## 8. Relatórios, exportação e commit
 
-- `lote/relatorios/`: `triagem_previa_pdf.txt`, `selecao_e_fontes.txt` (pertinência, questões do
-  banco por ID, fontes, mnemônicos, comparação dos D, cobertura), `economia_de_revisao.txt`,
+- **Salvar no banco tudo o que foi pesquisado neste pedido** (obrigatório): edital/retificação →
+  `edital`; fonte primária lida → `conteudo` (novo ou atualizado); alteração legal ou decisão →
+  `noticia` (+ `vigencia_nota` no que ela afeta); triagem → `prioridade` (cria ou atualiza); questões
+  conforme a seção 3. `nova` + `indexar`. Pesquisa feita e não salva é falha do fluxo.
+- `lote/relatorios/`: `triagem_previa_pdf.txt`, `selecao_e_fontes.txt` (pertinência, itens do
+  banco usados e **IDs criados ou atualizados neste pedido**, fontes, mnemônicos, comparação dos D, cobertura), `economia_de_revisao.txt`,
   `auditoria_pedagogica.txt` (ID, linha, gabarito, decisão) e, em Direito, `radar_juridico.txt`.
 - Exportar e revalidar em uma chamada (grava em `output/`, sem sobrescrever; confere também a
   cobertura do PDF com `scripts/validar_cobertura_pdf.py`):
