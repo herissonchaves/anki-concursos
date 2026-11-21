@@ -42,8 +42,8 @@ class PolicyTests(unittest.TestCase):
         self.rows([True])
         with self.assertRaises(ValueError): self.run_export()
         with self.assertRaises(ValueError): self.run_export(profile='focused')
-        with self.assertRaisesRegex(ValueError,'50%'):
-            self.run_export(profile='focused',exception_reason='Usuário pediu um cartão',max_cards=1)
+        self.run_export(profile='focused',exception_reason='Usuário pediu um cartão',max_cards=1)
+        self.out.unlink()
         self.rows([True,False])
         self.run_export(profile='focused',exception_reason='Par útil de rápidos',max_cards=2)
         with zipfile.ZipFile(self.out) as z:
@@ -72,6 +72,9 @@ class PolicyTests(unittest.TestCase):
         self.rows([],2); self.run_export(profile='focused',exception_reason='Par de desafios')
     def test_odd_balance(self):
         self.rows([True,False,True],3)
+        self.run_export()  # diferença de 1 em total ímpar é aceita (2.24)
+        self.out.unlink()
+        self.rows([True,True,True],2)
         with self.assertRaisesRegex(ValueError,'50%'): self.run_export()
     def test_old_collection_not_rebalanced(self):
         self.rows([True,True])

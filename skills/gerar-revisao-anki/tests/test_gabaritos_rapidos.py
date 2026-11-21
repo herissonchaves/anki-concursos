@@ -32,11 +32,11 @@ class QuickBalanceTests(unittest.TestCase):
         _, e = self.contar([True] * 7 + [False] * 3)
         self.assertTrue(any('Distribuição incorreta' in s for s in e), e)
 
-    def test_odd_one_difference_rejected(self):
+    def test_odd_one_difference_accepted(self):
         r, e = self.contar([True] * 3 + [False] * 2)
         self.assertEqual(r['rapidos'], 5)
         self.assertTrue(r['excecao_impar'])
-        self.assertTrue(e)
+        self.assertFalse(e)
 
     def test_odd_three_difference_rejected(self):
         _, e = self.contar([True] * 4 + [False])

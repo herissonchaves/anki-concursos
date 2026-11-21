@@ -50,8 +50,10 @@ def contar_rapidos(conteudo: bytes, strict_balance: bool = False, tag: str = TAG
             erros.append(f'Linha {i}: cartão C/E sem gabarito ✅ Certo ou ❌ Errado padronizado no início do verso')
 
     r = certos + errados
-    if strict_balance and r and certos != errados:
-        erros.append(f'Distribuição incorreta ({tag}): Certo={certos}, Errado={errados}; com R={r}, exigido 50% Certo e 50% Errado exatos')
+    # 2.24: total par exige 50/50 exato; total ímpar aceita diferença de 1 (não criar card só para equilibrar).
+    if strict_balance and r and abs(certos - errados) > 1:
+        erros.append(f'Distribuição incorreta ({tag}): Certo={certos}, Errado={errados}; com R={r}, exigido 50% Certo '
+                     'e 50% Errado (diferença máxima de 1 quando o total for ímpar)')
     retorno = {'rapidos': r, 'certos': certos, 'errados': errados,
                'percentual_certos': round(100 * certos / r, 1) if r else 0.0,
                'percentual_errados': round(100 * errados / r, 1) if r else 0.0,

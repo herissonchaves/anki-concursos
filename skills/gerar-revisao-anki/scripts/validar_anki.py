@@ -268,7 +268,7 @@ def validate_type_distribution(body: bytes, errors: list[str], require_types: bo
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('path', help='Diretório ou ZIP exportado para Anki')
-    p.add_argument('--new', action='store_true', help='Lote novo com tags obrigatórias e paridade exata por tipo C/E; mixed exige R e D')
+    p.add_argument('--new', action='store_true', help='Lote novo com tags obrigatórias e paridade C/E por tipo (diferença máxima de 1 em total ímpar); mixed exige R e D')
     p.add_argument('--max-cards', type=int, help='Teto explícito de CARTÕES efetivos do usuário')
     p.add_argument('--require-r-le-d', action='store_true', help='Opção legada sem efeito: rápidos não têm limite de proporção')
     p.add_argument('--profile', choices=('mixed', 'focused'), default='mixed')

@@ -77,7 +77,7 @@ avise no verso. Cloze: pesquise mnemônicos; sem fonte confiável, use dica **au
   (aplicar, distinguir, exceção); definição disfarçada vira R. Cloze: uma omissão `{{c1::…}}` por
   nota (várias só com tag `Mnemonico`), conceito/número que precisa ser lembrado; números só se
   relevantes e verificados; cada lacuna coberta por um D (`cob`).
-- **Exatamente 50% Certo e 50% Errado em R e, separadamente, em D** (totais pares). Errados com um
+- **50% Certo e 50% Errado em R e, separadamente, em D**; em total ímpar, diferença de 1 (não crie card só para equilibrar). Errados com um
   erro central plausível; sem absolutos como pista; ordem embaralhada pelo montador.
 - Não repetir o mesmo fato nos três formatos; teto pedido conta todos os cartões.
 

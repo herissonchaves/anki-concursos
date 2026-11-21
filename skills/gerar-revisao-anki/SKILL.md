@@ -25,7 +25,7 @@ concurso explícito prevalece e exige programa próprio.
 - **Cloze:** uma omissão `{{c1::…}}` por nota (várias só em nota de mnemônico, tag `Mnemonico`);
   cada lacuna coberta por um D do mesmo lote. Antes de escolher formatos, inclusive para concluir
   zero Cloze, leia `references/protocolo_cloze_cientifico.md`.
-- Exatamente 50% Certo e 50% Errado nos R e, separadamente, nos D; composição e teto em
+- 50% Certo e 50% Errado nos R e, separadamente, nos D (total ímpar: diferença de 1); composição e teto em
   `references/matriz_tipos_quantidades.md`. Não repetir o mesmo fato nos três formatos.
 
 ## Passos (fora do roteiro de PDF)

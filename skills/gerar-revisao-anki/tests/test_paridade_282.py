@@ -14,10 +14,12 @@ class ParidadeTests(unittest.TestCase):
         self.assertTrue(self.check([True,False],[True,True]))
     def test_focused_balanced(self):
         self.assertFalse(self.check([],[True,False]))
-    def test_odd_hard_rejected(self):
-        self.assertTrue(self.check([],[True,False,True]))
-    def test_one_new_rejected(self):
-        self.assertTrue(self.check([True],[]))
+    def test_odd_hard_one_difference_accepted(self):
+        self.assertFalse(self.check([],[True,False,True]))
+    def test_odd_hard_three_difference_rejected(self):
+        self.assertTrue(self.check([],[True,True,True]))
+    def test_one_new_accepted(self):
+        self.assertFalse(self.check([True],[]))
     def test_empty_modes(self):
         self.assertFalse(self.check([],[]))
 if __name__=='__main__':

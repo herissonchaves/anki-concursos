@@ -14,7 +14,7 @@ Estes casos sintéticos avaliam decisões de seleção, não comprovam aprendiza
 | Uma lacuna contém quatro conceitos | Reprovar; selecionar e separar alvos úteis em notas independentes | Confundir uma marcação com um conceito |
 | Relação conceitual curta, importante, sem número e sem pista | Avaliar como candidato legítimo | Reservar Cloze exclusivamente a valores |
 | Texto contém muitos termos técnicos de baixo valor | Descartar os periféricos | Converter automaticamente todos os termos |
-| Converter R novo em C deixa os R restantes desequilibrados | Reavaliar seleção e restabelecer 50/50 exato no modo afetado | Inverter verdade, mudar tags ou acrescentar duplicatas |
+| Converter R novo em C deixa os R restantes desequilibrados | Reavaliar seleção e restabelecer 50/50 no modo afetado (diferença máxima de 1 em total ímpar) | Inverter verdade, mudar tags ou acrescentar duplicatas |
 | Fonte necessária não pôde ser verificada | Marcar pendência e limite da entrega | Justificar zero como ausência comprovada de alvo |
 
 Casos adicionais:
