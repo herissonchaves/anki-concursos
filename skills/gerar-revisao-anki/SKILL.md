@@ -20,7 +20,7 @@ Na seleção e composição, aplique “Recuperação e formatos” do núcleo. 
 segunda conferência, aplique os testes de R, D e C da seção “Feedback econômico”
 e registre a evidência nos relatórios já previstos por ID.
 
-**Cards de revisão de PDF anexado cobrem todo o conteúdo do PDF e todo o conteúdo das questões de concursos que ele contém** (`references/cobertura-pdf.md`: ao menos um card por unidade, mesmo com nota parecida na coleção; A/B/C só escolhem o formato; o montador bloqueia lote incompleto e marca cada card com as tags `Pagina_NN`).
+**Cards de revisão de PDF anexado cobrem todo conteúdo de prioridade Alta ou Média para o concurso-alvo**, do PDF e das questões de concursos nele (`references/cobertura-pdf.md`): inventário completo com prioridade e motivo; Baixa não vira card; nota da coleção que já exige a mesma recuperação cobre a unidade; o montador bloqueia lote incompleto e marca cada card com as tags `Pagina_NN`. Não usar tags de prioridade nos cards.
 
 **Lote exportado a partir de PDF: comece por `references/roteiro-lote-pdf.md`.** Ele resume
 as regras obrigatórias dos passos abaixo, com os comandos (texto limpo do PDF, importação das

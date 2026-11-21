@@ -50,7 +50,7 @@ def modelos(genanki):
 
 
 def check_coverage(validator, target):
-    """Lote de PDF (com relatorios/cobertura_pdf.json): exige cobertura total; demais lotes passam."""
+    """Lote de PDF (com relatorios/cobertura_pdf.json): exige a cobertura por prioridade (Alta e Média); demais lotes passam."""
     target = Path(target)
     if target.is_dir():
         present = (target/'relatorios'/'cobertura_pdf.json').is_file()

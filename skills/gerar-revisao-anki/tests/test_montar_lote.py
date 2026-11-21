@@ -194,9 +194,11 @@ def test_questao_sem_prova_vai_para_referencias_sem_prova(tmp_path):
 
 
 COBERTURA = [
-    dict(u='U01', pag='3', conteudo='Unidade de força no SI (sintético)', cartoes=['R01', 'R02', 'C01']),
-    dict(u='U02', pag='4-5', conteudo='Segunda lei de Newton (sintético)', cartoes=['D01', 'D02']),
+    dict(u='U01', pag='3', p='alta', conteudo='Unidade de força no SI (sintético)', cartoes=['R01', 'R02', 'C01']),
+    dict(u='U02', pag='4-5', p='media', conteudo='Segunda lei de Newton (sintético)', cartoes=['D01', 'D02']),
     dict(u='U03', pag='1', conteudo='Sumário', excluir='nao_conteudo: sumário'),
+    dict(u='U04', pag='6', p='baixa', conteudo='Curiosidade histórica (sintético)', motivo='Periférico para o cargo'),
+    dict(u='U05', pag='7', p='media', conteudo='Definição já na coleção (sintético)', colecao=['1234567890']),
 ]
 
 
@@ -212,16 +214,23 @@ def test_cobertura_total_gera_tags_de_pagina_e_passa_no_validador(tmp_path):
     registro = json.loads((tmp_path / 'lote' / 'relatorios' / 'cobertura_pdf.json').read_text(encoding='utf-8'))
     assert registro['unidades'][1]['pag'] == [4, 5]
     assert cob.validar(cob.ler(tmp_path / 'lote')) == []
+    assert registro['unidades'][3]['p'] == 'baixa' and registro['unidades'][3]['cartoes'] == []
+    assert b'Prioridade_' not in items['anki_certo_errado.tsv']
     assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
     assert rev.validate(items, revisao) == []
 
 
 @pytest.mark.parametrize('mudanca, esperado', [
-    (lambda c: c[0].update(cartoes=[]), 'sem card'),
-    (lambda c: c[1].update(cartoes=['D01']), 'D02: card sem unidade'),
+    (lambda c: c[0].update(cartoes=[]), 'sem card nem nota da coleção'),
+    (lambda c: c[1].update(cartoes=['D01']), 'D02: card sem unidade Alta ou Média'),
     (lambda c: c[0].update(cartoes=['R01', 'R02', 'C01', 'R99']), 'R99 não existe'),
-    (lambda c: c.append(dict(u='Q01', pag='9', questao='questao-x', cartoes=['D01'])), 'questao-x precisa estar nos refs'),
-    (lambda c: c[2].update(excluir='curiosidade'), 'só texto que não é conteúdo'),
+    (lambda c: c.append(dict(u='Q01', pag='9', p='alta', questao='questao-x', cartoes=['D01'])), 'questao-x precisa estar nos refs'),
+    (lambda c: c[2].update(excluir='curiosidade'), 'excluir é só para texto que não é conteúdo'),
+    (lambda c: c[3].update(cartoes=['R01']), 'prioridade baixa não vira card'),
+    (lambda c: c[3].pop('motivo'), 'prioridade baixa exige motivo'),
+    (lambda c: c[4].pop('colecao'), 'sem card nem nota da coleção'),
+    (lambda c: c[1].pop('p'), 'p deve ser alta, media ou baixa'),
+    (lambda c: c[1].update(p='baixa', motivo='x'), 'prioridade baixa não vira card'),
 ])
 def test_cobertura_incompleta_falha(tmp_path, mudanca, esperado):
     cobertura = [dict(u) for u in COBERTURA]
@@ -258,3 +267,26 @@ def test_modelos_do_exportador_usam_o_css_padrao():
     assert clz.css == estilo_anki.CSS_CLOZE and '.cloze' in clz.css
     assert (basic.model_id, basic.name) == estilo_anki.MODELO_CE
     assert (clz.model_id, clz.name) == estilo_anki.MODELO_CLOZE
+
+
+def test_uso_de_card_retirado_sai_do_banco(tmp_path):
+    """Questão que deixou de estar nos refs do lote perde o registro de uso daquele lote."""
+    import sys
+    sys.path.insert(0, str(m.SCRIPTS_REFERENCIAS))
+    import referencias as banco_mod
+    banco = tmp_path / 'referencias'
+    dados = {k: v for k, v in REFS[0].items() if k != 'id'}
+    dados.update(orgao='Órgão X', disciplina='fisica', assunto='dinamica', subassuntos=['segunda_lei'],
+                 palavras_chave=['força'], gabarito='C', origem='pesquisa_internet', fonte_descoberta='Fixture',
+                 concursos_alvo=['PRF'], enunciado='Item sintético para uso.')
+    _, questao, _ = banco_mod.nova(dados, banco)
+    pasta = tmp_path / 'lote_uso'
+    (pasta / 'fonte').mkdir(parents=True)
+    primeiro = lote(pasta, banco_referencias=banco)
+    primeiro.R[0]['refs'] = [questao.id]
+    primeiro.refs = primeiro._resolver_refs(REFS)
+    primeiro.gerar(imprimir=False)
+    assert banco_mod.localizar([questao.id], banco)[0].meta['usado_em'] == ['lote_uso#R01']
+    segundo = lote(pasta, banco_referencias=banco)
+    segundo.gerar(imprimir=False)
+    assert banco_mod.localizar([questao.id], banco)[0].meta['usado_em'] == []

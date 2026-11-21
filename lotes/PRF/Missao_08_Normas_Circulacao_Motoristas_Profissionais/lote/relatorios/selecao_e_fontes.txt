@@ -40,3 +40,11 @@ Tópicos A cobertos: todos (ver triagem). Não convertidos (C): arts. 26–28, 4
 - Formatação: o .apkg passa a levar o CSS padrão de estilo_anki.py (Arial 20 px, igual aos tipos Basic/Cloze da coleção, onde estão os cards de Informática). O tipo de nota "Anki-Concursos - C/E" já existente na coleção não tem CSS: ver a orientação na entrega.
 - D15, D16 e D18: inspiração geral, sem questão Cebraspe nem de outra banca sobre o alvo (outras_bancas_pendencia). D17: inspiração geral com a questão Vunesp 2022 do PDF (outra banca, sem prova oficial localizada).
 
+8. VERSÃO 2.22 — COBERTURA POR PRIORIDADE PARA A PRF (21/11/2026)
+- A cobertura total da seção 7 foi substituída: inventário de todo o PDF e das 15 questões com prioridade para a PRF (38 Alta, 27 Média, 11 Baixa); Alta e Média com card ou nota da coleção; Baixa sem card, com motivo (triagem_previa_pdf.txt).
+- Saíram por prioridade Baixa: R23 (capítulos do CTB), R24 (art. 26), R25 (art. 27), R26 (art. 28), R27 (art. 29, I), R35 (trilhos), R36 (fila de lentos), R44 (luz de placa), R45 (luzes de posição), R55 (condomínio), R56 (faixas laterais de domínio), R57 (tração animal), R58 (animais), R66 e R67 (provas desportivas).
+- Saíram por já estarem na coleção com a mesma recuperação: D17 (nota 1792883029820) e R53 (nota 1792883029821).
+- Entrou D19 (cinto no banco traseiro em via urbana, art. 65), para manter 50/50 nos D com um alvo de prioridade Alta que só tinha o R65.
+- Sem tags de prioridade nos cards; as tags Pagina_NN continuam.
+- Questões do PDF: a 08 (Vunesp 2022) fica coberta pela nota 1792883029820 da coleção; as demais seguem nos refs dos cards.
+

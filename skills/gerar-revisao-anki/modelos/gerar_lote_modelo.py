@@ -70,12 +70,15 @@ D = [  # desafiadores: caso curto com dado decisivo; 50% C / 50% E
          'feedback: regra, aplicação e erro', 'linguagem: termos explicados, frente clara', 'utilidade: alvo e cobertura')),
 ]
 
-# Cobertura total do PDF (obrigatória em revisão de PDF): toda unidade de conteúdo e toda questão do
-# PDF com ao menos um card. O montador falha se faltar card e põe as tags Pagina_NN nos cards.
+# Cobertura do PDF por prioridade para o concurso-alvo (obrigatória em revisão de PDF): inventário de
+# todo o PDF e de suas questões. Alta/Média: card do lote ou nota da coleção (colecao=[IDs]);
+# Baixa: sem card, com motivo. O montador falha se faltar card e põe as tags Pagina_NN nos cards.
 COBERTURA = [
- dict(u='U01', pag='5', conteudo='Regra X do art. Y', cartoes=['R01', 'C01']),
- dict(u='U02', pag='6-7', conteudo='Exceção Z', cartoes=['D01']),
- dict(u='Q01', pag='17', questao=Q_CEB, conteudo='Questão 01 do PDF', cartoes=['D01']),
+ dict(u='U01', pag='5', p='alta', conteudo='Regra X do art. Y', cartoes=['R01', 'C01']),
+ dict(u='U02', pag='6-7', p='media', conteudo='Exceção Z', cartoes=['D01']),
+ dict(u='U03', pag='8', p='media', conteudo='Definição W', colecao=['1792883029812']),
+ dict(u='U04', pag='9', p='baixa', conteudo='Detalhe administrativo V', motivo='Periférico para o cargo; sem questão localizada'),
+ dict(u='Q01', pag='17', p='alta', questao=Q_CEB, conteudo='Questão 01 do PDF', cartoes=['D01']),
  dict(u='N01', pag='1-3', conteudo='Capa, apresentação e sumário', excluir='nao_conteudo: capa e sumário'),
 ]
 

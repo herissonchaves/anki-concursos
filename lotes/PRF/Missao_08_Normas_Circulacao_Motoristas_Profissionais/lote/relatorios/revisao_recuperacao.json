@@ -1,11 +1,11 @@
 {
  "schema_version": 1,
- "sha256_lote": "4aaedb584a4446adcd0c9f0d73fbcc55912f777932b16131f12bc3f8bdfbf8ad",
+ "sha256_lote": "606cb6187fe663bab973aa6171abf779db014673ce2e2c12b2a19e985b46790a",
  "revisor": "Claude (assistente de IA, modelo Opus 5.5) — mesmo agente que redigiu os cartões",
  "tipo_revisao": "autorevisao",
  "cartoes": [
   {
-   "id": "anki_certo_errado.tsv:77",
+   "id": "anki_certo_errado.tsv:67",
    "sha256": "625f20373976201e1f8071c3c4c2a7af72c342e263726f42ffd5d6b07eddd4dd",
    "alvo": "Preferência na rotatória não sinalizada (art. 29, III, b).",
    "solucao": "Certo: art. 29, III, b — na rotatória, preferência de quem estiver circulando por ela.",
@@ -23,7 +23,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:71",
+   "id": "anki_certo_errado.tsv:35",
    "sha256": "46c257c4d90d2f2946f6d0c6c206a5cf0993758e8175f910da3a922fc4747b6b",
    "alvo": "Regra residual de preferência: direita do condutor (art. 29, III, c).",
    "solucao": "Errado: art. 29, III, c — nos demais casos, preferência do que vier pela direita do condutor (cobrado na afirmativa II da questão IDCAP 2026, item 43).",
@@ -41,7 +41,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:11",
+   "id": "anki_certo_errado.tsv:30",
    "sha256": "a99b216e0d661084a832cacfb9e78f7b7ff1dbf89495b868c6d655d6017e2925",
    "alvo": "Destinação das faixas (art. 29, IV).",
    "solucao": "Certo: art. 29, IV. Alvo cobrado nas questões do PDF (Cebraspe PRF/CFP 2015 e São Luís 2017, salvas no banco).",
@@ -59,7 +59,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:16",
+   "id": "anki_certo_errado.tsv:25",
    "sha256": "034b263b10c56f918dac8bb12a9cd8aa36096dfad8af24e62d2f648ce451aa49",
    "alvo": "Exceção da ultrapassagem pela direita (art. 29, IX).",
    "solucao": "Errado: art. 29, IX — exceção apenas quando o veículo a ser ultrapassado sinaliza entrar à esquerda.",
@@ -77,7 +77,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:58",
+   "id": "anki_certo_errado.tsv:45",
    "sha256": "1d4ff0a13f56c9e7246abbcc5c7ac1f6887b49dd422ddc8385969de49bb6e3d8",
    "alvo": "Dever de quem é ultrapassado (art. 30).",
    "solucao": "Certo: art. 30, I. A ideia de \"acelerar quando outro sinaliza a ultrapassagem\" aparece como errada no item Cebraspe TRF1 2017 do PDF.",
@@ -95,7 +95,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:55",
+   "id": "anki_certo_errado.tsv:43",
    "sha256": "c1bacf42c646077b758da850b3755c58a0d6a281345e5168ddf21713511e9e04",
    "alvo": "Locais proibidos para ultrapassar e a exceção da sinalização (art. 32).",
    "solucao": "Errado: art. 32, parte final — \"exceto quando houver sinalização permitindo a ultrapassagem\".",
@@ -113,7 +113,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:13",
+   "id": "anki_certo_errado.tsv:62",
    "sha256": "f5e37454eb8dbd0028917b99e5e6edbc936c598b473472b5d3cf367a989f8ed7",
    "alvo": "Identificação exigida para o livre estacionamento (art. 29, VII, f).",
    "solucao": "Certo: art. 29, VII, f — livre estacionamento quando identificados por iluminação intermitente; a alínea e exige também o alarme sonoro para circulação e parada.",
@@ -131,7 +131,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:34",
+   "id": "anki_certo_errado.tsv:5",
    "sha256": "f8a42d624bf9f9041bdb93c305844d74dc2861333c10fd462b21df9e840dfee5",
    "alvo": "Dever dos condutores diante de veículo de emergência (art. 29, VII, a).",
    "solucao": "Errado: art. 29, VII, a.",
@@ -149,7 +149,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:28",
+   "id": "anki_certo_errado.tsv:18",
    "sha256": "29d777650b668602efd5d1fca0a71f23b3b131d3553abb039b2ea98cf9e4552e",
    "alvo": "Prerrogativas dos veículos de utilidade pública (art. 29, VIII).",
    "solucao": "Errado: art. 29, VIII — livre parada e estacionamento no local, desde que sinalizados.",
@@ -167,7 +167,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:49",
+   "id": "anki_certo_errado.tsv:37",
    "sha256": "43608e4250339d7332d25df3224718d622e5ade4dd09e8bdfc8d3a032053e26a",
    "alvo": "Uso da luz alta (art. 40, II).",
    "solucao": "Certo: art. 40, II.",
@@ -185,7 +185,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:76",
+   "id": "anki_certo_errado.tsv:66",
    "sha256": "7144aa88cbd6cae3800a2393db00fa5767dda09aa1243a1b7d71a8cb2da26ae9",
    "alvo": "Farol aceso de dia em rodovia (art. 40, § 2º).",
    "solucao": "Certo: art. 40, § 2º (incluído pela Lei 14.071/2020).",
@@ -203,7 +203,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:15",
+   "id": "anki_certo_errado.tsv:8",
    "sha256": "020768dfda1cbb685db9b9f9e889fc5bab30bd636c8f312d6a8329b28b96593e",
    "alvo": "Hipóteses de uso da buzina (art. 41).",
    "solucao": "Certo: art. 41, II.",
@@ -221,7 +221,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:73",
+   "id": "anki_certo_errado.tsv:29",
    "sha256": "e744a966fbbd775cb3a5729bee7d73381a6fd7f4e4d367329fd5e95973d1fd35",
    "alvo": "Conversão à direita no vermelho (art. 44-A).",
    "solucao": "Errado: art. 44-A — livre onde houver sinalização indicativa que permita.",
@@ -239,7 +239,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:89",
+   "id": "anki_certo_errado.tsv:74",
    "sha256": "090733e9944acd885269916a9316134f52311e44e1a8062ced86058ee834e02d",
    "alvo": "Lado de embarque e desembarque (art. 49, parágrafo único).",
    "solucao": "Certo: art. 49, parágrafo único.",
@@ -257,7 +257,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:75",
+   "id": "anki_certo_errado.tsv:65",
    "sha256": "1c7ae5aab0ed708baf2c4223efb5436ba8345c521e4047a8688c29e09d693fc9",
    "alvo": "Condição para o contrafluxo de bicicletas (art. 58, parágrafo único).",
    "solucao": "Errado: art. 58, parágrafo único — \"desde que dotado o trecho com ciclofaixa\" (alternativa C, incorreta, do item Cebraspe 2020 de Barra dos Coqueiros, salvo no banco a partir do PDF).",
@@ -275,7 +275,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:94",
+   "id": "anki_certo_errado.tsv:78",
    "sha256": "e1df847b784f70d1a52549768f6056318388998c8424b9db2dba1b9b9c899cba",
    "alvo": "Retorno em via com acostamento (art. 37).",
    "solucao": "Certo: art. 37.",
@@ -293,7 +293,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:29",
+   "id": "anki_certo_errado.tsv:51",
    "sha256": "07cac2e6a5fd77f9fc424ed8db4ccd17b0dae5cad53ea9b54fcf8915b56ade9f",
    "alvo": "Alcance do capítulo III-A (art. 67-A).",
    "solucao": "Errado: art. 67-A, I e II.",
@@ -311,7 +311,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:8",
+   "id": "anki_certo_errado.tsv:27",
    "sha256": "b84d9fb3b262104f7834ca3cee60658575c2113e340d6861774f6f4e0bc43bec",
    "alvo": "Pausa de 30 min na carga (art. 67-C, § 1º).",
    "solucao": "Certo: art. 67-C, § 1º (sem marcação de inconstitucionalidade no Planalto; a ADI 5.322 atingiu o § 3º).",
@@ -334,7 +334,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:52",
+   "id": "anki_certo_errado.tsv:40",
    "sha256": "aa43aad83327a22c28c8e171b951c95aa9501480316b3f8a118177698e9bc3a2",
    "alvo": "Efeito da ADI 5.322 sobre o art. 67-C, § 3º.",
    "solucao": "Errado: o STF declarou inconstitucional a expressão do fracionamento (item k do dispositivo); restou a obrigação de 11 h em 24 h.",
@@ -362,7 +362,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:44",
+   "id": "anki_certo_errado.tsv:36",
    "sha256": "d3f6e35abd34f07611d359c8fca4f5123bc8754fbe1f8b42261b98a358439eb4",
    "alvo": "Responsável pelos registros (art. 67-E, § 4º).",
    "solucao": "Errado: art. 67-E, § 4º. Mesmo alvo do item 79 da PRF 2021 (gabarito definitivo E), com redação autoral.",
@@ -385,7 +385,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:4",
+   "id": "anki_certo_errado.tsv:54",
    "sha256": "333ea8141a8b5bf9758a6fdb35ca0a3ac088e143ee8059dc8935716f41817500",
    "alvo": "Independência do registrador (art. 67-E, § 3º).",
    "solucao": "Certo: art. 67-E, § 3º.",
@@ -408,7 +408,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:56",
+   "id": "anki_certo_errado.tsv:44",
    "sha256": "dd83b62384f5a6134f39a4c26f53f8d48a0a50a45a95a111a6f868278d4b8342",
    "alvo": "Hipóteses da troca intermitente de luzes (art. 40, III).",
    "solucao": "Errado: art. 40, III — só para indicar intenção de ultrapassar ou risco à segurança no sentido contrário.",
@@ -426,97 +426,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:17",
-   "sha256": "43d6c30594610ff8f3aa935bea4ef347e60c9aa3be69dda960b1a2f37c742169",
-   "alvo": "Localização dos dois capítulos estudados no CTB",
-   "solucao": "Certo: arts. 67-A a 67-E formam o Capítulo III-A, após o Capítulo III (normas gerais).",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, art. 67-A, I e II (Lei 13.103/2015): o capítulo vale para motoristas profissionais de transporte rodoviário coletivo de passageiros e de cargas"
-    }
-   ],
-   "alternativa_concorrente": "Considerei o Capítulo IV (pedestres e não motorizados): vem depois e não trata de motorista profissional.",
-   "recuperacao": "A frente exige lembrar a regra (Localização dos dois capítulos estudados no CTB) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:42",
-   "sha256": "13e09cf1dea3e29356fc8b784b3b413c81b7d5b0227d2708a51c01b2abc78e77",
-   "alvo": "Art. 26: proibição de atirar ou abandonar objetos",
-   "solucao": "Errado: o art. 26 proíbe o ato que possa causar perigo ou obstáculo; não exige acidente.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, arts. 26 (I: abster-se de ato que constitua perigo ou obstáculo; II: não obstruir nem tornar perigoso o trânsito atirando, depositando ou abandonando objetos), 27 (equipamentos obrigatórios e combustível suficiente) e 28 (domínio do veículo a todo momento)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei objetos inofensivos: a regra fala em ato que possa constituir perigo ou obstáculo, o que inclui lixo arremessado pela janela.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 26: proibição de atirar ou abandonar objetos) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; erro localizado; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:62",
-   "sha256": "b808e4adb3f9eb7d13d2602c148c73fedfaff1b6466547437ebb41d317d1378c",
-   "alvo": "Art. 27: verificação antes de circular",
-   "solucao": "Certo: art. 27.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, arts. 26 (I: abster-se de ato que constitua perigo ou obstáculo; II: não obstruir nem tornar perigoso o trânsito atirando, depositando ou abandonando objetos), 27 (equipamentos obrigatórios e combustível suficiente) e 28 (domínio do veículo a todo momento)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei a ideia de que só a pane seca é infração: o dever de verificar é anterior à circulação.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 27: verificação antes de circular) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:37",
-   "sha256": "35216633b6e185b116bc86f4564de669f8ea0b34f0a8bd6ca6422c03e8538f08",
-   "alvo": "Art. 28: domínio do veículo",
-   "solucao": "Errado: o art. 28 não distingue tipo de via (\"a todo momento\").",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, arts. 26 (I: abster-se de ato que constitua perigo ou obstáculo; II: não obstruir nem tornar perigoso o trânsito atirando, depositando ou abandonando objetos), 27 (equipamentos obrigatórios e combustível suficiente) e 28 (domínio do veículo a todo momento)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei regras próprias de rodovia: velocidade e farol variam; o dever de domínio, não.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 28: domínio do veículo) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; erro localizado; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:68",
-   "sha256": "04ae76132f0aa7cfb0d3441633004d26a09ee5529e22543728dd81677c039cea",
-   "alvo": "Art. 29, I: lado de circulação",
-   "solucao": "Certo: art. 29, I.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, art. 29, I (lado direito, exceções sinalizadas), II (distância de segurança lateral e frontal, considerando velocidade e condições), V (passeios e acostamentos só para entrar ou sair de imóveis ou áreas de estacionamento), VI (batedores), VII, d (prioridade com velocidade reduzida), X e XI (checklist e conduta na ultrapassagem), XII (trilhos)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei a faixa da esquerda para ultrapassagem: é uso de faixas no mesmo sentido, não o lado de circulação da via.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 29, I: lado de circulação) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:39",
+   "id": "anki_certo_errado.tsv:50",
    "sha256": "d213e645a4b3bcfdce88137c5f2cb2402aac5f8c8da84055e419bc9ca0d28d1c",
    "alvo": "Art. 29, II: distância de segurança sem valor fixo",
    "solucao": "Errado: a lei não fixa metragem para a distância frontal.",
@@ -534,7 +444,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:88",
+   "id": "anki_certo_errado.tsv:34",
    "sha256": "86b30367ff745e618d280243ae913ffd9c9da9ada665894126f8d81b8d62033f",
    "alvo": "Distância lateral de 1,50 m da bicicleta",
    "solucao": "Certo: art. 201.",
@@ -552,7 +462,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:50",
+   "id": "anki_certo_errado.tsv:48",
    "sha256": "c7d0aedc0cf11696b52fcccc8f5af6f23b0fd9cdaf332c0fa5d83ea9acd4eb0b",
    "alvo": "Art. 29, V: uso do acostamento",
    "solucao": "Errado: congestionamento não está entre as hipóteses do art. 29, V.",
@@ -570,7 +480,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:78",
+   "id": "anki_certo_errado.tsv:52",
    "sha256": "4e3c7a78ab935a9317a753745273fb2e646d31924ebb8ea5919963b31f2cf838",
    "alvo": "Art. 29, VI: batedores",
    "solucao": "Certo: art. 29, VI.",
@@ -588,7 +498,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:35",
+   "id": "anki_certo_errado.tsv:15",
    "sha256": "85126ae243573c1ccc20ae46852c2a89a0e8a60b64e24ca33c2418d6cbe3133b",
    "alvo": "Art. 29, VII, d",
    "solucao": "Errado: a alínea d exige velocidade reduzida.",
@@ -606,7 +516,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:66",
+   "id": "anki_certo_errado.tsv:1",
    "sha256": "553d6000bd86f39f9f1582cb37961dab0e83468fc08389f284e150972dbdf3ad",
    "alvo": "Art. 29, X: checklist antes de ultrapassar",
    "solucao": "Certo: art. 29, X, a.",
@@ -624,7 +534,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:20",
+   "id": "anki_certo_errado.tsv:73",
    "sha256": "20dd3e481bee9fc72a6600582a62688cde1dc864a74066efe4d8935900b49a25",
    "alvo": "Art. 29, XI: conduta durante e após a ultrapassagem",
    "solucao": "Certo: art. 29, XI, c.",
@@ -642,43 +552,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:53",
-   "sha256": "4751fe151d825bd5fb1254c74f549f53e48cccc5acf8f200c04e6cf6229129fa",
-   "alvo": "Art. 29, XII",
-   "solucao": "Errado: art. 29, XII.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, art. 29, I (lado direito, exceções sinalizadas), II (distância de segurança lateral e frontal, considerando velocidade e condições), V (passeios e acostamentos só para entrar ou sair de imóveis ou áreas de estacionamento), VI (batedores), VII, d (prioridade com velocidade reduzida), X e XI (checklist e conduta na ultrapassagem), XII (trilhos)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei a regra da direita: não se aplica ao veículo sobre trilhos, que tem preferência própria.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 29, XII) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; erro localizado; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:54",
-   "sha256": "b161296df5860781cce5f44dc8e8fc1b81b1c230188c7a575b5c304756482032",
-   "alvo": "Art. 30, parágrafo único",
-   "solucao": "Certo: art. 30, parágrafo único.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, arts. 30, parágrafo único (fila de veículos lentos), 33 (sem ultrapassagem nas interseções e proximidades), 34 (manobra sem perigo), 35 e parágrafo único (\"Entende-se por deslocamento lateral a transposição de faixas, movimentos de conversão à direita, à esquerda e retornos\"), 36 (lote lindeiro), 38 (I, II e parágrafo único) e 39 (retorno em vias urbanas)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei a distância de segurança geral (art. 29, II): aqui a finalidade específica é permitir a intercalação.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 30, parágrafo único) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:74",
+   "id": "anki_certo_errado.tsv:38",
    "sha256": "8e7901682985bd56e02b3ac05dbdbd4ccd226b00fda2d41a4f42d40458972461",
    "alvo": "Art. 33",
    "solucao": "Errado: art. 33 (proibição sem condicionante).",
@@ -696,7 +570,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:7",
+   "id": "anki_certo_errado.tsv:68",
    "sha256": "2c2aa02ef1876cb6e054fd064762e8608eb3c249f3de563f7f23d3e465f50f50",
    "alvo": "Art. 34",
    "solucao": "Certo: art. 34.",
@@ -714,7 +588,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:33",
+   "id": "anki_certo_errado.tsv:56",
    "sha256": "a2787b70bf6b79c4c3d87c3a3faf3e7044ded93bbf00bf7c8c41d504372c5c3c",
    "alvo": "Art. 36: lote lindeiro",
    "solucao": "Errado: art. 36.",
@@ -732,7 +606,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:30",
+   "id": "anki_certo_errado.tsv:47",
    "sha256": "c34eae52f2ac55be27e0dd73fb03820382589b7a032ee70f8702bfb2d75cc707",
    "alvo": "Art. 38, parágrafo único",
    "solucao": "Certo: art. 38, parágrafo único.",
@@ -750,7 +624,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:93",
+   "id": "anki_certo_errado.tsv:33",
    "sha256": "954cb36fe70ab03e00ff746a65ef79c6ce6a3cd9f5e23a6d4273b048d0210e08",
    "alvo": "Art. 39: retorno em vias urbanas",
    "solucao": "Errado: o art. 39 admite três hipóteses.",
@@ -768,7 +642,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:48",
+   "id": "anki_certo_errado.tsv:41",
    "sha256": "cf49982e09b931ff8d3c5e456b12accefd03fae1f658f6f41009010067719a78",
    "alvo": "Art. 40, I, b",
    "solucao": "Certo: art. 40, I, b.",
@@ -786,7 +660,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:18",
+   "id": "anki_certo_errado.tsv:42",
    "sha256": "a43a30bff8e90182a10fba9f48f7f62c7b96c61379af1c01a14905f06ee6c0de",
    "alvo": "Art. 40, § 1º",
    "solucao": "Errado: art. 40, § 1º.",
@@ -799,42 +673,6 @@
    ],
    "alternativa_concorrente": "Considerei motos com DRL: o § 1º não abre exceção para as motocicletas.",
    "recuperacao": "A frente exige lembrar a regra (Art. 40, § 1º) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; erro localizado; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:12",
-   "sha256": "95fda232be6d118c8bd05b9f5ab04aa13d1ae3c3540aabbf7dc671760d49be0b",
-   "alvo": "Art. 40, VI",
-   "solucao": "Certo: art. 40, VI.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, art. 40, I, a e b (luz baixa à noite e, de dia, em túneis e sob chuva, neblina ou cerração), § 1º (coletivos em faixa própria e motocicletas, motonetas e ciclomotores: luz baixa dia e noite; Lei 14.071/2020), V (pisca-alerta), VI (luz de placa), VII (luzes de posição)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei o veículo estacionado: a regra fala do veículo em circulação.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 40, VI) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:65",
-   "sha256": "777e6057f4ce1e5a55239253d7cfd6c977c7990c9f37fadb0dc0c06c06dc8b6b",
-   "alvo": "Art. 40, VII",
-   "solucao": "Errado: art. 40, VII.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, art. 40, I, a e b (luz baixa à noite e, de dia, em túneis e sob chuva, neblina ou cerração), § 1º (coletivos em faixa própria e motocicletas, motonetas e ciclomotores: luz baixa dia e noite; Lei 14.071/2020), V (pisca-alerta), VI (luz de placa), VII (luzes de posição)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei o pisca-alerta: é para imobilização ou emergência; aqui a lei pede as luzes de posição.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 40, VII) sem trazer a resposta.",
    "feedback": "Regra em linguagem simples; erro localizado; Memorize com a formulação a guardar.",
    "segunda_conferencia": true,
    "decisao": "APROVAR"
@@ -858,7 +696,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:57",
+   "id": "anki_certo_errado.tsv:32",
    "sha256": "7a7853cf77eca42a16ce0be62db3f647cf6cc5ce10a2fa003a2ff787c5a021ad",
    "alvo": "Art. 42",
    "solucao": "Errado: art. 42 ressalva as razões de segurança.",
@@ -876,7 +714,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:61",
+   "id": "anki_certo_errado.tsv:28",
    "sha256": "6030486f3c19ee0bcbdcdac5718f3a425adcb21edb3ffa291eb3910d4c66bdfc",
    "alvo": "Art. 43, I",
    "solucao": "Certo: art. 43, I.",
@@ -894,7 +732,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:14",
+   "id": "anki_certo_errado.tsv:39",
    "sha256": "1a01480892815c843043dc073d19917bb71d062074502aca1d0cf7f89efd4f39",
    "alvo": "Art. 43, II e III",
    "solucao": "Errado: art. 43, III.",
@@ -912,7 +750,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:40",
+   "id": "anki_certo_errado.tsv:77",
    "sha256": "fc8ecef40716973d04ff886d804b24a6aae68315311771b3780cc49fcf3037be",
    "alvo": "Art. 44",
    "solucao": "Certo: art. 44 (cobrado no item Cebraspe TRF1 2017 do PDF).",
@@ -930,7 +768,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:67",
+   "id": "anki_certo_errado.tsv:22",
    "sha256": "3d21a956c21a825d9bba0d49471083443072ed35afab57418e6515a7d5c244ed",
    "alvo": "Art. 46",
    "solucao": "Errado: art. 46 não restringe ao período noturno.",
@@ -948,7 +786,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:63",
+   "id": "anki_certo_errado.tsv:7",
    "sha256": "870d150dd8b960e99bc123cf465b29edba12da724d57b5832a354451e3ad3f48",
    "alvo": "Art. 47",
    "solucao": "Certo: art. 47 (alternativa B do item Cebraspe São Luís 2017 do PDF).",
@@ -966,25 +804,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:32",
-   "sha256": "a4e82e8373b6edeb1c381ed1817b8b980b02b1e36e5a91ddc1789dd2b519cda5",
-   "alvo": "Art. 47, parágrafo único",
-   "solucao": "Errado: art. 47, parágrafo único.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, arts. 42 (frear bruscamente só por segurança), 43 (velocidade; I, II e III), 44 (prudência especial no cruzamento), 46 (sinalização de advertência na imobilização de emergência), 47 (parada onde é proibido estacionar; carga e descarga \"é considerada estacionamento\") e 48 (posição no sentido do fluxo, paralela e junto à guia)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei a definição de parada (Anexo I): limita-se a embarque ou desembarque de passageiros.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 47, parágrafo único) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; erro localizado; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:84",
+   "id": "anki_certo_errado.tsv:57",
    "sha256": "714ea5488cada0bfda37be6102f30a61d0df0240dfbc4eec2affbdc3d2d040d4",
    "alvo": "Art. 48",
    "solucao": "Certo: art. 48.",
@@ -1002,84 +822,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:38",
-   "sha256": "813a1803451eeda6f0e38e920aea47159c2de939dc4f09e701520e185238769b",
-   "alvo": "Art. 51",
-   "solucao": "Errado: art. 51.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, arts. 50 (faixas laterais de domínio), 51 (sinalização das vias de condomínio às expensas do condomínio), 52 (tração animal pela direita, junto à guia ou ao acostamento) e 53 (animais só com guia; rebanhos em grupos)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei que o órgão não participa: ele aprova os projetos, mas não arca com a sinalização.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 51) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; erro localizado; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:1",
-   "sha256": "6edb026de2223613513306a6f0dd2bd9dd8e5bdb27ba6dea3fa45985ce4b1464",
-   "alvo": "Art. 50",
-   "solucao": "Certo: art. 50.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, arts. 50 (faixas laterais de domínio), 51 (sinalização das vias de condomínio às expensas do condomínio), 52 (tração animal pela direita, junto à guia ou ao acostamento) e 53 (animais só com guia; rebanhos em grupos)"
-    },
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, Anexo I: TARA, LOGRADOURO PÚBLICO, FAIXAS DE DOMÍNIO (\"superfície lindeira às vias rurais, delimitada por lei específica\"), FAIXAS DE TRÂNSITO, PARADA, ESTACIONAMENTO"
-    }
-   ],
-   "alternativa_concorrente": "Considerei o CONTRAN: o art. 50 atribui ao órgão com circunscrição sobre a via.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 50) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:79",
-   "sha256": "721d9c97e518bb2582709513aace46ef0304cf802c93be8823e2abd6339df7ce",
-   "alvo": "Art. 52",
-   "solucao": "Errado: art. 52.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, arts. 50 (faixas laterais de domínio), 51 (sinalização das vias de condomínio às expensas do condomínio), 52 (tração animal pela direita, junto à guia ou ao acostamento) e 53 (animais só com guia; rebanhos em grupos)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei faixa especial para eles: se houver, usam-na; a frente fala do centro da pista.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 52) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; erro localizado; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:72",
-   "sha256": "1f921121bfc12a7504510ca9a3cb7a55933f5b51c57d290cfa24b5be956a1486",
-   "alvo": "Art. 53",
-   "solucao": "Certo: art. 53.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, arts. 50 (faixas laterais de domínio), 51 (sinalização das vias de condomínio às expensas do condomínio), 52 (tração animal pela direita, junto à guia ou ao acostamento) e 53 (animais só com guia; rebanhos em grupos)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei animal sozinho: também exige guia (\"isolados ou em grupos\").",
-   "recuperacao": "A frente exige lembrar a regra (Art. 53) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:23",
+   "id": "anki_certo_errado.tsv:6",
    "sha256": "511ed035d9db527112324657794d0d17cc80b17ecf2fcaec0f968470239460a2",
    "alvo": "Art. 54",
    "solucao": "Errado: art. 54, II.",
@@ -1097,7 +840,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:5",
+   "id": "anki_certo_errado.tsv:3",
    "sha256": "f3fd65fb6240e66081725a1f1a199e4654b419c461ae11244cc1ae307947a4b4",
    "alvo": "Art. 55",
    "solucao": "Certo: art. 55.",
@@ -1115,7 +858,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:41",
+   "id": "anki_certo_errado.tsv:17",
    "sha256": "9304be6e0aaa4df781615baa72432d71bc52f0da7ff8bc20d989c77c5bea2652",
    "alvo": "Art. 57: proibições do ciclomotor",
    "solucao": "Errado: art. 57.",
@@ -1133,7 +876,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:9",
+   "id": "anki_certo_errado.tsv:10",
    "sha256": "c1f0f5ae2fa806a7f586ebdcabff48ffcb853c24e5e762bfc26f2e3d27f70f75",
    "alvo": "Conceito de ciclomotor",
    "solucao": "Certo: Anexo I (redação da Lei 14.071/2020).",
@@ -1151,7 +894,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:81",
+   "id": "anki_certo_errado.tsv:19",
    "sha256": "d06cf7dc29affa0fc49c12d42a3db6489011bb3b57ff3678cd1bf78307b2b4ae",
    "alvo": "Art. 58, caput",
    "solucao": "Errado: art. 58.",
@@ -1169,7 +912,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:47",
+   "id": "anki_certo_errado.tsv:49",
    "sha256": "f9a10c2f0a374269b2513b94ade67831806cf687c92903569570e9b450a637b4",
    "alvo": "Art. 59",
    "solucao": "Certo: art. 59.",
@@ -1187,7 +930,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:92",
+   "id": "anki_certo_errado.tsv:23",
    "sha256": "cf3c4e2549aac7ef971eda57b51ea6032b5324f03e5d967786100132f8e82b90",
    "alvo": "Art. 65: cinto de segurança",
    "solucao": "Errado: art. 65.",
@@ -1205,43 +948,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:91",
-   "sha256": "c9244e0f65dbb47f21bf76857deb0cda9a9ecd20158b3f881163fafea7e369fe",
-   "alvo": "Art. 67, caput",
-   "solucao": "Certo: art. 67, caput.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, arts. 65 (cinto obrigatório para condutor e passageiros em todas as vias, salvo situações regulamentadas pelo CONTRAN) e 67 (provas desportivas: prévia permissão; I–IV; parágrafo único: a autoridade com circunscrição arbitra os valores mínimos da caução e do seguro)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei só a autorização da confederação: é requisito adicional; não substitui a permissão de trânsito.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 67, caput) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:26",
-   "sha256": "86a4d022387c9a17fa4e400ea18311c347a69ecb3ee55af8fe359e42efd898be",
-   "alvo": "Art. 67, parágrafo único",
-   "solucao": "Errado: art. 67, parágrafo único.",
-   "fontes": [
-    {
-     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-     "consulta": "2026-11-21",
-     "trecho": "CTB, arts. 65 (cinto obrigatório para condutor e passageiros em todas as vias, salvo situações regulamentadas pelo CONTRAN) e 67 (provas desportivas: prévia permissão; I–IV; parágrafo único: a autoridade com circunscrição arbitra os valores mínimos da caução e do seguro)"
-    }
-   ],
-   "alternativa_concorrente": "Considerei a confederação desportiva: ela autoriza a prova, não fixa valores.",
-   "recuperacao": "A frente exige lembrar a regra (Art. 67, parágrafo único) sem trazer a resposta.",
-   "feedback": "Regra em linguagem simples; erro localizado; Memorize com a formulação a guardar.",
-   "segunda_conferencia": true,
-   "decisao": "APROVAR"
-  },
-  {
-   "id": "anki_certo_errado.tsv:2",
+   "id": "anki_certo_errado.tsv:21",
    "sha256": "d54d75496f2250ea24d45f043bc106a214b25d8f0404809d93a74fb7131a40cd",
    "alvo": "Art. 67-C, § 4º",
    "solucao": "Certo: art. 67-C, § 4º.",
@@ -1259,7 +966,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:59",
+   "id": "anki_certo_errado.tsv:63",
    "sha256": "7d18128d447b16dafa55196fd19119586dbfdc64f3c5ac44ed161e2dc5941f1f",
    "alvo": "Art. 67-C, § 5º",
    "solucao": "Errado: art. 67-C, § 5º.",
@@ -1277,7 +984,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:51",
+   "id": "anki_certo_errado.tsv:71",
    "sha256": "c8f2c359f03ebc3561317b5c0567194c4c19ddcf1311c376c764252a983dbcc6",
    "alvo": "Art. 67-E, § 2º",
    "solucao": "Certo: art. 67-E, § 2º (mesmo alvo do item 77 da PRF 2021, gabarito C).",
@@ -1300,7 +1007,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:82",
+   "id": "anki_certo_errado.tsv:13",
    "sha256": "f93e1a466e416bb9de9f776063700fe407f6077ef120d027fe9747453b949d7a",
    "alvo": "Faixa de domínio × faixa de trânsito",
    "solucao": "Errado: a frase traz a definição de faixa de trânsito (item IBEST 2023 do PDF).",
@@ -1318,7 +1025,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:85",
+   "id": "anki_certo_errado.tsv:9",
    "sha256": "d34cdfcb361fb6880d2819e587ec43bfe27adff124d41348b15e46a56de823c4",
    "alvo": "Conceito de tara",
    "solucao": "Certo: Anexo I (alternativa E do item Vunesp 2023 do PDF).",
@@ -1336,7 +1043,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:31",
+   "id": "anki_certo_errado.tsv:69",
    "sha256": "a0179dd1325a53cac65661a64b71684bbf2e9c51563ac1fec480cfe61d072a57",
    "alvo": "Conceito de logradouro público",
    "solucao": "Errado: Anexo I (item SOCIESC 2011 do PDF).",
@@ -1354,7 +1061,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:83",
+   "id": "anki_certo_errado.tsv:58",
    "sha256": "de8976b8b8f59ef532f1dc0407a7a3dcc5b915c6575c66864226fbec88dd47d2",
    "alvo": "Art. 70",
    "solucao": "Errado: art. 70 (alternativa A, incorreta, do item Cebraspe Barra dos Coqueiros 2020 do PDF).",
@@ -1372,7 +1079,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:10",
+   "id": "anki_certo_errado.tsv:31",
    "sha256": "bb4fe06d5f6790f952552cbdf9b98df95747299139f54bf49409b70017157164",
    "alvo": "Art. 68, § 1º",
    "solucao": "Certo: art. 68, § 1º (a alternativa B do item Barra dos Coqueiros 2020 dizia \"mesmo montado\", o que é errado).",
@@ -1390,7 +1097,7 @@
    "decisao": "APROVAR"
   },
   {
-   "id": "anki_certo_errado.tsv:80",
+   "id": "anki_certo_errado.tsv:12",
    "sha256": "d1c4fe02cbbac5a0c7dc61cf40f2227afdfc43b206ebfb449ea5cd507218d36f",
    "alvo": "Art. 105, II",
    "solucao": "Errado: art. 105, II.",
@@ -1424,7 +1131,7 @@
    "feedback": "Extra explica as duas condições cumulativas e o dispositivo.",
    "desafiadores_por_lacuna": {
     "1": [
-     "anki_certo_errado.tsv:3"
+     "anki_certo_errado.tsv:59"
     ]
    },
    "segunda_conferencia": true,
@@ -1452,8 +1159,8 @@
    "feedback": "Extra liga o limite às pausas de 30 min, mostra a tabela e traz a dica autoral.",
    "desafiadores_por_lacuna": {
     "1": [
-     "anki_certo_errado.tsv:22",
-     "anki_certo_errado.tsv:45"
+     "anki_certo_errado.tsv:16",
+     "anki_certo_errado.tsv:53"
     ]
    },
    "segunda_conferencia": true,
@@ -1476,7 +1183,7 @@
    "feedback": "Extra contrasta as duas categorias com a tabela.",
    "desafiadores_por_lacuna": {
     "1": [
-     "anki_certo_errado.tsv:24"
+     "anki_certo_errado.tsv:72"
     ]
    },
    "segunda_conferencia": true,
@@ -1504,7 +1211,7 @@
    "feedback": "Extra explica o que restou após a ADI.",
    "desafiadores_por_lacuna": {
     "1": [
-     "anki_certo_errado.tsv:27"
+     "anki_certo_errado.tsv:61"
     ]
    },
    "segunda_conferencia": true,
@@ -1527,7 +1234,7 @@
    "feedback": "Extra explica o termo e o dever de sinalizar.",
    "desafiadores_por_lacuna": {
     "1": [
-     "anki_certo_errado.tsv:60"
+     "anki_certo_errado.tsv:4"
     ]
    },
    "segunda_conferencia": true,
@@ -1536,77 +1243,77 @@
  ],
  "sinais": [
   {
-   "sinal_id": "745336f5a02c5d96790554aea3650295d9bb24c8748b09fc97bf41be46838c99",
-   "decisao": "EXCECAO_JUSTIFICADA",
-   "motivo": "R68: 'apenas' reproduz o art. 67-C, § 4º ('apenas o período em que o condutor estiver efetivamente ao volante'), que é o próprio alvo; gabarito Certo, então o absoluto não indica Errado."
-  },
-  {
-   "sinal_id": "10712eafcd515d5a557092ae9135052f093702195872aff347168dca6086239c",
-   "decisao": "EXCECAO_JUSTIFICADA",
-   "motivo": "D10: idade, altura, assento, ausência de dispositivo e tipo de veículo (carro de passeio comum, que afasta as exceções do CONTRAN) são todos necessários para aplicar as duas condições e as duas exigências do art. 64."
-  },
-  {
-   "sinal_id": "04b5e0f83cf7d1ac26df24c0490440c12993927799b9535a0d854cfdf53607eb",
-   "decisao": "EXCECAO_JUSTIFICADA",
-   "motivo": "D10: 'apenas' descreve o fato (só o cinto comum, sem cadeirinha), que é o dado decisivo; não qualifica a conclusão julgada e o gabarito é Certo."
-  },
-  {
-   "sinal_id": "63bee1a466e5bc3a10719fffe0d3a645a93717c600d177e7bc8c006d09b11174",
-   "decisao": "EXCECAO_JUSTIFICADA",
-   "motivo": "R21: 'qualquer interferência' segue o art. 67-E, § 3º ('independente de qualquer interferência do condutor'); gabarito Certo."
-  },
-  {
-   "sinal_id": "cb01df1a68f1b83a4b79126e51be3d8c358bdc0bb56061f7dd06cdff949bd256",
-   "decisao": "EXCECAO_JUSTIFICADA",
-   "motivo": "R38: 'qualquer manobra' segue o art. 34 (o dever vale para toda manobra); gabarito Certo e o absoluto é o conteúdo da regra, não pista."
-  },
-  {
-   "sinal_id": "131c4359ea7593a388617dc67c49db988924c43450295455a61dd06e91fa906d",
-   "decisao": "EXCECAO_JUSTIFICADA",
-   "motivo": "R03: a ressalva 'sem faixa especial para eles' é condição do art. 29, IV, e evita a leitura concorrente da faixa exclusiva; continua um único julgamento direto."
-  },
-  {
-   "sinal_id": "cc0947050d2d27804232bc0dcd14c6311575f1b390cc135c165c1f6de95462d0",
-   "decisao": "EXCECAO_JUSTIFICADA",
-   "motivo": "R07: 'apenas pela iluminação intermitente' é o dado que diferencia a alínea f (estacionamento) da alínea e (circulação e parada); gabarito Certo."
-  },
-  {
-   "sinal_id": "acfef7e4df37de4542399830a6ec3a5758bd69240017563faaeb3b474595e808",
-   "decisao": "EXCECAO_JUSTIFICADA",
-   "motivo": "R09: o exemplo (rede elétrica) explica o termo 'utilidade pública' para quem não o conhece, sem revelar a prerrogativa correta."
-  },
-  {
-   "sinal_id": "5955f62844138fc9487720a7f836c426ea4cc5e9a25515a6186001f9d5445c38",
+   "sinal_id": "ff209c095f289129051f8ef672aac996ecadb091608d57904d81504a4cac4049",
    "decisao": "EXCECAO_JUSTIFICADA",
    "motivo": "R08: sirene, luz e serviço de urgência são as condições da alínea a; o alvo é a direção do deslocamento. Um único julgamento."
   },
   {
-   "sinal_id": "4c176a6b029c075bc1837ae4caf7c90c2a8f81c2619744d773455d390796604c",
+   "sinal_id": "2ea3312809adeb1f02a8842114beac4cb7f7414ce325a38212b380bff7f58fe3",
    "decisao": "EXCECAO_JUSTIFICADA",
-   "motivo": "D14: cada requisito da exceção do art. 67-C, § 2º (situação excepcional, registro, tempo necessário, segurança) precisa estar na frente para o aluno conferi-los; cortar qualquer um torna o gabarito indeterminado."
+   "motivo": "R09: o exemplo (rede elétrica) explica o termo 'utilidade pública' para quem não o conhece, sem revelar a prerrogativa correta."
   },
   {
-   "sinal_id": "aa932ac4f21867da0a6c1e753173b9c24d366b233540c8424082166b0c0d1abc",
+   "sinal_id": "80bdd6b978bb185883e34fbbf809248355cf07ec4e4cbe03f19c7aaf3bf5919e",
    "decisao": "EXCECAO_JUSTIFICADA",
-   "motivo": "R19: a frente precisa trazer a redação antiga (fracionamento com 8 h ininterruptas) para que o aluno julgue o efeito da ADI 5.322; é um único julgamento sobre a decisão."
+   "motivo": "R68: 'apenas' reproduz o art. 67-C, § 4º ('apenas o período em que o condutor estiver efetivamente ao volante'), que é o próprio alvo; gabarito Certo, então o absoluto não indica Errado."
   },
   {
-   "sinal_id": "8c6938eab02fa6741995921c2cd33546620aa5e5ed8013155d74cd43d4c7e84a",
-   "decisao": "EXCECAO_JUSTIFICADA",
-   "motivo": "R05: a faixa em que o condutor está (esquerda) decide a conduta do art. 30; sem ela a regra seria outra (manter a faixa). Um único julgamento."
-  },
-  {
-   "sinal_id": "8ea7cd35fb925d2c05027768d7a9ae73a3a35aa9dc0ce83c2e02a4676a737abd",
+   "sinal_id": "a707b037a55df563b23f51f7910c590ed2793cf8d2f8898ee8bfeb750513abb4",
    "decisao": "EXCECAO_JUSTIFICADA",
    "motivo": "R13: 'qualquer cruzamento' é o próprio erro central (modelo liberado salvo proibição × liberado só com sinalização permissiva); retirar o termo eliminaria o alvo."
   },
   {
-   "sinal_id": "a675f9f85f89fb900827846bd385f7b1aab952d1365ef78e132c21fb18c9111a",
+   "sinal_id": "5b572b1d9392ccf8c9d0f1d900998c27813cd6ce2ee73226470d157fdf51a815",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R03: a ressalva 'sem faixa especial para eles' é condição do art. 29, IV, e evita a leitura concorrente da faixa exclusiva; continua um único julgamento direto."
+  },
+  {
+   "sinal_id": "0a63d559c23e78549bee6e9c19e3f92386d1e3cd408137fe5157d375592c6291",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R19: a frente precisa trazer a redação antiga (fracionamento com 8 h ininterruptas) para que o aluno julgue o efeito da ADI 5.322; é um único julgamento sobre a decisão."
+  },
+  {
+   "sinal_id": "c0020e3b25283dfef962af2b28ba686aed21dc732e541b2ef746715c2e7a5fa9",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R05: a faixa em que o condutor está (esquerda) decide a conduta do art. 30; sem ela a regra seria outra (manter a faixa). Um único julgamento."
+  },
+  {
+   "sinal_id": "91538ae8fba7878326f939ca3ad01a152a97629814503330236ca561841610cd",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "D14: cada requisito da exceção do art. 67-C, § 2º (situação excepcional, registro, tempo necessário, segurança) precisa estar na frente para o aluno conferi-los; cortar qualquer um torna o gabarito indeterminado."
+  },
+  {
+   "sinal_id": "63defabfa19be20fd07a18078535faa9c109bc03251b7182808b175cfeb6ae81",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R21: 'qualquer interferência' segue o art. 67-E, § 3º ('independente de qualquer interferência do condutor'); gabarito Certo."
+  },
+  {
+   "sinal_id": "8a3de7474aec00a7b15ba55bed278019e4b532e6349ee9d422155e66fc45185a",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "D10: idade, altura, assento, ausência de dispositivo e tipo de veículo (carro de passeio comum, que afasta as exceções do CONTRAN) são todos necessários para aplicar as duas condições e as duas exigências do art. 64."
+  },
+  {
+   "sinal_id": "8ac6b737de82a8e736000aa83293629dcc750598796a6d43e846ea2b58605fb1",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "D10: 'apenas' descreve o fato (só o cinto comum, sem cadeirinha), que é o dado decisivo; não qualifica a conclusão julgada e o gabarito é Certo."
+  },
+  {
+   "sinal_id": "d1419c9d3b27df911f1ed462e317fcef00da49f41bcbcb64acb20432fbcceabf",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R07: 'apenas pela iluminação intermitente' é o dado que diferencia a alínea f (estacionamento) da alínea e (circulação e parada); gabarito Certo."
+  },
+  {
+   "sinal_id": "3262ff9a34857b61fa188924debd871eb18f4ddbc37c3644d8e50f3e0afdf813",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R38: 'qualquer manobra' segue o art. 34 (o dever vale para toda manobra); gabarito Certo e o absoluto é o conteúdo da regra, não pista."
+  },
+  {
+   "sinal_id": "23ba3809903a3eceaf2b6c1565368ca7597e31b06054bfee0e684cd8dacd36b9",
    "decisao": "EXCECAO_JUSTIFICADA",
    "motivo": "R14: 'sempre' reproduz a regra legal do art. 49, parágrafo único, e a exceção do condutor aparece na própria frase; gabarito Certo, então o absoluto não sinaliza Errado."
   },
   {
-   "sinal_id": "9f693dd3271607695cfc3c5168f9683913274431fd9cd0cc2389b92150d742d8",
+   "sinal_id": "8c249f67b1430c2b6100b92fac9854896fb67e825c1bb636ccff8caa79a7ada5",
    "decisao": "EXCECAO_JUSTIFICADA",
    "motivo": "R16: 'com acostamento' e 'sem local apropriado' são as duas condições do art. 37; sem elas a conduta seria outra."
   }

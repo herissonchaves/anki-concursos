@@ -1,86 +1,88 @@
-TRIAGEM PRÉVIA DO PDF — inventário de cobertura total (versão 2.21)
+TRIAGEM PRÉVIA DO PDF — inventário com prioridade para a PRF (versão 2.22)
 Material: LET020002 — Normas Gerais de Circulação e Conduta / Condução de Veículos por Motoristas Profissionais (Projeto Missão, Missão 08), 25 páginas.
 Leitura: texto extraído com PyMuPDF (extrair_pdf.py, texto limpo), sem OCR; 25/25 páginas com texto; p. 10 e 15 conferidas como imagem.
-Regra aplicada: cobertura total (cobertura-pdf.md). Todo conteúdo do PDF e todo conteúdo das 15 questões do PDF têm ao menos um card; só capa, apresentação e sumário ficaram de fora (não são conteúdo de estudo). Notas parecidas da coleção (parada × estacionamento, rodovia) não contaram como cobertura.
-O mesmo inventário é o bloco COBERTURA do gerador; o montar_lote.py bloqueia unidade sem card e grava relatorios/cobertura_pdf.json; cada card leva as tags Pagina_NN.
+Regra aplicada (cobertura-pdf.md, 2.22): inventário de todo o PDF e das 15 questões; Alta e Média com ao menos um card ou nota da coleção que já exija a mesma recuperação; Baixa sem card, com motivo.
+Unidades: 38 Alta, 27 Média, 11 Baixa (e 1 exclusão de capa e sumário). Coleção consultada em cópia somente leitura (baralho "Legislação de Trânsito").
 Concurso-alvo: PRF. Edital de referência: PRF 2021, Legislação de Trânsito, item 1 (CTB e alterações) — referência histórica.
-Prioridade A/B/C indica só o formato: A em geral R + D (ou Cloze + D); B e C em geral um R curto.
 
-Unidade | página(s) | conteúdo | cards
-N01 | 1-3 | Capa, apresentação do material, aviso de direitos autorais e sumário | — nao_conteudo: capa, apresentação e sumário
-U01 | 4 | Capítulos do CTB: III (normas gerais) e III-A (motoristas profissionais) | R23
-U02 | 5 | Art. 26: abster-se de perigo ou obstáculo; não atirar ou abandonar objetos | R24
-U03 | 5 | Art. 27: equipamentos obrigatórios e combustível suficiente | R25
-U04 | 5 | Art. 28: domínio do veículo a todo momento | R26
-U05 | 6 | Art. 29, I: circulação pela direita, exceções sinalizadas | R27
-U06 | 6 | Art. 29, II: distância de segurança lateral e frontal, sem valor fixo | R28
-U07 | 6 | Distância lateral de 1,50 m ao ultrapassar bicicleta | R29
-U08 | 6 | Art. 29, III: preferência em local não sinalizado (rodovia, rotatória, direita) | R01, R02, D01, D02
-U09 | 6 | Art. 29, IV: faixas da direita (lentos) e da esquerda (ultrapassagem) | R03, D03
-U10 | 7 | Art. 29, V: passeios e acostamentos só para entrar ou sair de imóveis | R30
-U11 | 7 | Art. 29, VI: batedores | R31
-U12 | 7 | Art. 29, VII e disposições: prerrogativas e identificação dos veículos de emergência; deveres de condutores e pedestres | R07, R08, D06, D07
-U13 | 7 | Art. 29, VII, d: prioridade com velocidade reduzida | R32
-U14 | 8 | Art. 29, VIII: utilidade pública | R09
-U15 | 8 | Art. 29, IX: ultrapassagem pela esquerda e exceção | R04
-U16 | 8 | Art. 29, X e XI: quadro antes e durante a ultrapassagem | R33, R34, D18
-U17 | 8 | Art. 29, XII: trilhos | R35
-U18 | 9 | Art. 30: quem é ultrapassado; parágrafo único: fila de lentos | R05, R36
-U19 | 9 | Art. 31: coletivo parado (e a curiosidade dos ônibus escolares nos EUA, usada como contraste) | D04
-U20 | 9 | Art. 32: locais proibidos em pista única de mão dupla | R06, D05
-U21 | 9 | Art. 33: interseções | R37
-U22 | 10 | Art. 34: certificar-se de que a manobra é segura | R38
-U23 | 10 | Art. 35: sinalizar deslocamento lateral; definição | C05, D15
-U24 | 10 | Art. 36: lote lindeiro | R39
-U25 | 10 | Art. 37: retorno em via com acostamento | R16
-U26 | 10 | Art. 38: posição antes de entrar à direita ou à esquerda; ceder passagem | R40, D16
-U27 | 10 | Art. 39: retorno em vias urbanas | R41
-U28 | 10 | Faróis: luz baixa (noite; túnel, chuva, neblina) e luz alta (vias não iluminadas) | R10, R42, D08
-U29 | 10 | Troca intermitente de luz baixa e alta | R22
-U30 | 11 | Art. 40, § 1º: coletivos em faixa própria e motocicletas com luz baixa dia e noite | R43
-U31 | 11 | Art. 40, § 2º: faróis de dia em rodovia de pista simples (Lei 14.071/2020) | R11, D09
-U32 | 11 | Luz de placa e luzes de posição | R44, R45
-U33 | 11 | Pisca-alerta | R46
-U34 | 11 | Buzina | R12
-U35 | 11 | Art. 42: frear bruscamente | R47
-U36 | 11 | Art. 43: velocidade (I a III) | R48, R49
-U37 | 11 | Art. 44: prudência no cruzamento | R50
-U38 | 12 | Art. 44-A: conversão à direita no vermelho (e a regra dos EUA, usada como erro) | R13
-U39 | 12 | Art. 46: sinalização de advertência na imobilização de emergência | R51
-U40 | 12 | Art. 47: parada onde é proibido estacionar; carga e descarga é estacionamento | R52, R53, D17
-U41 | 12 | Art. 48: posição no sentido do fluxo, junto à guia | R54
-U42 | 12 | Art. 49: portas e lado do embarque | R14
-U43 | 12 | Arts. 50 e 51: faixas laterais de domínio; vias de condomínio | R56, R55
-U44 | 12 | Arts. 52 e 53: tração animal; animais e rebanhos | R57, R58
-U45 | 13 | Arts. 54 e 55: condutor e passageiro de motocicleta | R59, R60
-U46 | 13 | Art. 57: ciclomotor (direita, proibições, faixa adjacente) e conceito | R61, R62, D03
-U47 | 13 | Art. 58: bicicletas nos bordos, mesmo sentido, preferência; contrafluxo com ciclofaixa | R63, R15
-U48 | 13 | Art. 59: bicicleta no passeio | R64
-U49 | 14 | Art. 64: crianças menores de 10 anos e 1,45 m | C01, D10
-U50 | 14 | Art. 65: cinto de segurança | R65
-U51 | 14 | Art. 67: provas desportivas, requisitos e valores mínimos | R66, R67
-U52 | 14-15 | Art. 67-A: motoristas profissionais alcançados (não inclui aplicativo) | R17
-U53 | 15 | Art. 67-C, caput: 5 h 30 ininterruptas | C02
-U54 | 15 | Art. 67-C, § 1º: carga, 30 min dentro de cada 6 h, fracionável (situações 01 e 02) | R18, D11
-U55 | 16 | Art. 67-C, § 1º-A: passageiros, 30 min a cada 4 h | C03, D12
-U56 | 16 | Art. 67-C, §§ 2º e 8º: elevação do tempo até local seguro; CONTRAN define as situações (Lei 14.599/2023) | D14
-U57 | 16 | Art. 67-C, § 3º: 11 h de descanso; ADI 5.322 | R19, C04, D13
-U58 | 16 | Art. 67-C, §§ 4º e 5º: tempo de direção e início de viagem | R68, R69
-U59 | 16 | Art. 67-E: meios de registro, independência do equipamento, responsabilidade do motorista | R70, R21, R20
-Q01 | 17, 20 | Questão 01 (IBEST 2023): lado da ultrapassagem | R04
-Q02 | 17, 20 | Questão 02 (Cebraspe PRF/CFP 2015): faixa da direita | R03
-Q03 | 17, 20 | Questão 03 (Cebraspe TRF1 2017): cruzamento e quem é ultrapassado | R05, R50
-Q04 | 17, 20-21 | Questão 04 (IBEST 2023): faixa de domínio × faixa de trânsito | R71
-Q05 | 17, 21 | Questão 05 (Vunesp 2023): tara | R72
-Q06 | 17, 21 | Questão 06 (SOCIESC 2011): logradouro público | R73
-Q07 | 17-18, 21-22 | Questão 07 (Cebraspe São Luís 2017): parada onde é proibido estacionar | R52
-Q08 | 18, 22 | Questão 08 (Vunesp 2022): parada × estacionamento | D17
-Q09 | 18, 22 | Questão 09 (Cebraspe São Luís 2017): retorno pelo acostamento | R16
-Q10 | 18, 23 | Questão 10 (Cebraspe São Luís 2017): faixa da esquerda | R03
-Q11 | 18, 23 | Questão 11 (Cebraspe MPU 2015): faixa exclusiva de ônibus | D03
-Q12 | 18, 24 | Questão 12 (Cebraspe Petrobras 2023): 4 h 30 + 30 min na carga | D11, D12, R18
-Q13 | 19, 24 | Questão 13 (Cebraspe Barra dos Coqueiros 2020): pedestre e semáforo, ciclista desmontado, contrafluxo, 5 h 30, registrador | R74, R75, R15, C02, R76
-Q14 | 19, 24-25 | Questão 14 (Instituto Darwin 2023): 11 h de descanso | C04
-Q15 | 19, 25 | Questão 15 (Cesgranrio 2023): 5 h 30 | C02
+Unidade | página(s) | prioridade | conteúdo | cards / nota da coleção / motivo
+N01 | 1-3 | — | Capa, apresentação do material, aviso de direitos autorais e sumário | nao_conteudo: capa, apresentação e sumário
+U01 | 4 | baixa | Capítulos do CTB: III (normas gerais) e III-A (motoristas profissionais) | sem card — Baixa para a PRF: estrutura do código, sem cobrança localizada
+U02 | 5 | baixa | Art. 26: abster-se de perigo ou obstáculo; não atirar ou abandonar objetos | sem card — Baixa para a PRF: dever genérico de bom senso, sem questão localizada
+U03 | 5 | baixa | Art. 27: equipamentos obrigatórios e combustível suficiente | sem card — Baixa para a PRF: bom senso; sem questão localizada
+U04 | 5 | baixa | Art. 28: domínio do veículo a todo momento | sem card — Baixa para a PRF: princípio genérico, sem decisão a treinar
+U05 | 6 | baixa | Art. 29, I: circulação pela direita, exceções sinalizadas | sem card — Baixa para a PRF: regra elementar, sem questão localizada
+U06 | 6 | media | Art. 29, II: distância de segurança lateral e frontal, sem valor fixo | R28
+U07 | 6 | alta | Distância lateral de 1,50 m ao ultrapassar bicicleta (art. 201) | R29
+U08 | 6 | alta | Art. 29, III: preferência em local não sinalizado (rodovia, rotatória, direita) | R01, R02, D01, D02
+U09 | 6 | alta | Art. 29, IV: faixas da direita (lentos) e da esquerda (ultrapassagem) | R03, D03
+U10 | 7 | alta | Art. 29, V: passeios e acostamentos só para entrar ou sair de imóveis | R30
+U11 | 7 | media | Art. 29, VI: batedores | R31
+U12 | 7 | alta | Art. 29, VII e disposições: prerrogativas e identificação dos veículos de emergência; deveres de condutores e pedestres | R07, R08, D06, D07
+U13 | 7 | media | Art. 29, VII, d: prioridade com velocidade reduzida | R32
+U14 | 8 | media | Art. 29, VIII: utilidade pública | R09
+U15 | 8 | alta | Art. 29, IX: ultrapassagem pela esquerda e exceção | R04
+U16 | 8 | alta | Art. 29, X e XI: quadro antes e durante a ultrapassagem | R33, R34, D18
+U17 | 8 | baixa | Art. 29, XII: trilhos | sem card — Baixa para a PRF: veículo sobre trilhos é raro nas rodovias federais; sem questão localizada
+U18 | 9 | alta | Art. 30: quem é ultrapassado vai para a direita sem acelerar | R05
+U18B | 9 | baixa | Art. 30, parágrafo único: fila de veículos lentos | sem card — Baixa para a PRF: detalhe de conduta sem questão localizada
+U19 | 9 | media | Art. 31: coletivo parado (e a curiosidade dos ônibus escolares nos EUA, usada como contraste) | D04
+U20 | 9 | alta | Art. 32: locais proibidos em pista única de mão dupla | R06, D05
+U21 | 9 | alta | Art. 33: interseções | R37
+U22 | 10 | media | Art. 34: certificar-se de que a manobra é segura | R38
+U23 | 10 | media | Art. 35: sinalizar deslocamento lateral; definição | C05, D15
+U24 | 10 | media | Art. 36: lote lindeiro | R39
+U25 | 10 | alta | Art. 37: retorno em via com acostamento | R16
+U26 | 10 | media | Art. 38: posição antes de entrar à direita ou à esquerda; ceder passagem | R40, D16
+U27 | 10 | media | Art. 39: retorno em vias urbanas | R41
+U28 | 10 | alta | Faróis: luz baixa (noite; túnel, chuva, neblina) e luz alta (vias não iluminadas) | R10, R42, D08
+U29 | 10 | media | Troca intermitente de luz baixa e alta | R22
+U30 | 11 | alta | Art. 40, § 1º: coletivos em faixa própria e motocicletas com luz baixa dia e noite | R43
+U31 | 11 | alta | Art. 40, § 2º: faróis de dia em rodovia de pista simples (Lei 14.071/2020) | R11, D09
+U32 | 11 | baixa | Luz de placa e luzes de posição | sem card — Baixa para a PRF: detalhe de equipamento, sem questão localizada
+U33 | 11 | media | Pisca-alerta | R46
+U34 | 11 | media | Buzina | R12
+U35 | 11 | media | Art. 42: frear bruscamente | R47
+U36 | 11 | media | Art. 43: velocidade (I a III) | R48, R49
+U37 | 11 | alta | Art. 44: prudência no cruzamento | R50
+U38 | 12 | media | Art. 44-A: conversão à direita no vermelho (e a regra dos EUA, usada como erro) | R13
+U39 | 12 | media | Art. 46: sinalização de advertência na imobilização de emergência | R51
+U40 | 12 | alta | Art. 47: parada onde é proibido estacionar | R52
+U40B | 12 | media | Art. 47, parágrafo único: carga e descarga é estacionamento | coleção: 1792883029821
+U41 | 12 | media | Art. 48: posição no sentido do fluxo, junto à guia | R54
+U42 | 12 | media | Art. 49: portas e lado do embarque | R14
+U43 | 12 | baixa | Arts. 50 e 51: faixas laterais de domínio; vias de condomínio | sem card — Baixa para a PRF: regras administrativas do órgão com circunscrição, sem questão localizada
+U44 | 12 | baixa | Arts. 52 e 53: tração animal; animais e rebanhos | sem card — Baixa para a PRF: situação rara nas rodovias federais, sem questão localizada
+U45 | 13 | alta | Arts. 54 e 55: condutor e passageiro de motocicleta | R59, R60
+U46 | 13 | media | Art. 57: ciclomotor (direita, proibições, faixa adjacente) e conceito | R61, R62, D03
+U47 | 13 | media | Art. 58: bicicletas nos bordos, mesmo sentido, preferência; contrafluxo com ciclofaixa | R63, R15
+U48 | 13 | media | Art. 59: bicicleta no passeio | R64
+U49 | 14 | alta | Art. 64: crianças menores de 10 anos e 1,45 m | C01, D10
+U50 | 14 | alta | Art. 65: cinto de segurança | R65, D19
+U51 | 14 | baixa | Art. 67: provas desportivas, requisitos e valores mínimos | sem card — Baixa para a PRF: autorização administrativa, sem questão localizada
+U52 | 14-15 | alta | Art. 67-A: motoristas profissionais alcançados (não inclui aplicativo) | R17
+U53 | 15 | alta | Art. 67-C, caput: 5 h 30 ininterruptas | C02
+U54 | 15 | alta | Art. 67-C, § 1º: carga, 30 min dentro de cada 6 h, fracionável (situações 01 e 02) | R18, D11
+U55 | 16 | alta | Art. 67-C, § 1º-A: passageiros, 30 min a cada 4 h | C03, D12
+U56 | 16 | alta | Art. 67-C, §§ 2º e 8º: elevação do tempo até local seguro; CONTRAN define as situações (Lei 14.599/2023) | D14
+U57 | 16 | alta | Art. 67-C, § 3º: 11 h de descanso; ADI 5.322 | R19, C04, D13
+U58 | 16 | alta | Art. 67-C, §§ 4º e 5º: tempo de direção e início de viagem | R68, R69
+U59 | 16 | alta | Art. 67-E: meios de registro, independência do equipamento, responsabilidade do motorista | R70, R21, R20
+Q01 | 17, 20 | alta | Questão 01 (IBEST 2023): lado da ultrapassagem | R04
+Q02 | 17, 20 | alta | Questão 02 (Cebraspe PRF/CFP 2015): faixa da direita | R03
+Q03 | 17, 20 | alta | Questão 03 (Cebraspe TRF1 2017): cruzamento e quem é ultrapassado | R05, R50
+Q04 | 17, 20-21 | media | Questão 04 (IBEST 2023): faixa de domínio × faixa de trânsito | R71
+Q05 | 17, 21 | media | Questão 05 (Vunesp 2023): tara | R72
+Q06 | 17, 21 | media | Questão 06 (SOCIESC 2011): logradouro público | R73
+Q07 | 17-18, 21-22 | alta | Questão 07 (Cebraspe São Luís 2017): parada onde é proibido estacionar | R52
+Q08 | 18, 22 | media | Questão 08 (Vunesp 2022): parada × estacionamento após o desembarque | coleção: 1792883029820
+Q09 | 18, 22 | alta | Questão 09 (Cebraspe São Luís 2017): retorno pelo acostamento | R16
+Q10 | 18, 23 | alta | Questão 10 (Cebraspe São Luís 2017): faixa da esquerda | R03
+Q11 | 18, 23 | alta | Questão 11 (Cebraspe MPU 2015): faixa exclusiva de ônibus | D03
+Q12 | 18, 24 | alta | Questão 12 (Cebraspe Petrobras 2023): 4 h 30 + 30 min na carga | D11, D12, R18
+Q13 | 19, 24 | alta | Questão 13 (Cebraspe Barra dos Coqueiros 2020): pedestre e semáforo, ciclista desmontado, contrafluxo, 5 h 30, registrador | R74, R75, R15, C02, R76
+Q14 | 19, 24-25 | alta | Questão 14 (Instituto Darwin 2023): 11 h de descanso | C04
+Q15 | 19, 25 | alta | Questão 15 (Cesgranrio 2023): 5 h 30 | C02
 
-Cloze: C01 (1,45 m), C02 (5 h 30), C03 (4 h), C04 (11 h) e C05 (deslocamento lateral, termo definido no art. 35), cada um coberto por um D. Demais números (1,50 m, 4.536 kg, 50 km/h, 10 lugares) ficaram em R, para não exigir um D por lacuna.
+Cloze: C01 (1,45 m), C02 (5 h 30), C03 (4 h), C04 (11 h) e C05 (deslocamento lateral), cada um coberto por um D.
+Coleção (mesma recuperação, sem card novo): 1792883029820 cobre a espera após o desembarque como estacionamento (questão 08); 1792883029821 cobre carga e descarga × parada (art. 47, parágrafo único). R52 (art. 47, caput) e D02 (preferência com rodovia × estrada) exigem outra operação e ficaram.

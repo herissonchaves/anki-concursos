@@ -1,107 +1,91 @@
 AUDITORIA PEDAGÓGICA POR ID — autorevisão (mesmo agente que redigiu; não é avaliação independente)
 Procedimento: cada frente foi resolvida de novo antes de reler o verso, confrontada com o CTB compilado (Planalto, lido em 20 e 21/11/2026) ou com o acórdão da ADI 5.322 e testada contra leitura concorrente (campos alt/conc). Detalhes em revisao_recuperacao.json (R/C) e calibracao_cebraspe.json (D). Linha TSV entre parênteses.
-Versão 2.21: R23–R76, C05 e D15–D18 acrescentados para a cobertura total; os 40 cards anteriores mantêm o texto (mudaram só as tags, com as páginas).
+Versão 2.22: saíram do lote os cards de conteúdo de prioridade Baixa (R23, R24, R25, R26, R27, R35, R36, R44, R45, R55, R56, R57, R58, R66, R67) e os que repetiam nota da coleção (R53, D17); entrou o D19 (cinto, art. 65) para manter 50/50 nos desafiadores com um alvo de prioridade Alta.
 
 ID (linha) | gab. | decisão | alvo
-R01 (CE:77) | C | APROVAR | Preferência na rotatória não sinalizada (art. 29, III, b).
-R02 (CE:71) | E | APROVAR | Regra residual de preferência: direita do condutor (art. 29, III, c).
-R03 (CE:11) | C | APROVAR | Destinação das faixas (art. 29, IV).
-R04 (CE:16) | E | APROVAR | Exceção da ultrapassagem pela direita (art. 29, IX).
-R05 (CE:58) | C | APROVAR | Dever de quem é ultrapassado (art. 30).
-R06 (CE:55) | E | APROVAR | Locais proibidos para ultrapassar e a exceção da sinalização (art. 32).
-R07 (CE:13) | C | APROVAR | Identificação exigida para o livre estacionamento (art. 29, VII, f).
-R08 (CE:34) | E | APROVAR | Dever dos condutores diante de veículo de emergência (art. 29, VII, a).
-R09 (CE:28) | E | APROVAR | Prerrogativas dos veículos de utilidade pública (art. 29, VIII).
-R10 (CE:49) | C | APROVAR | Uso da luz alta (art. 40, II).
-R11 (CE:76) | C | APROVAR | Farol aceso de dia em rodovia (art. 40, § 2º).
-R12 (CE:15) | C | APROVAR | Hipóteses de uso da buzina (art. 41).
-R13 (CE:73) | E | APROVAR | Conversão à direita no vermelho (art. 44-A).
-R14 (CE:89) | C | APROVAR | Lado de embarque e desembarque (art. 49, parágrafo único).
-R15 (CE:75) | E | APROVAR | Condição para o contrafluxo de bicicletas (art. 58, parágrafo único).
-R16 (CE:94) | C | APROVAR | Retorno em via com acostamento (art. 37).
-R17 (CE:29) | E | APROVAR | Alcance do capítulo III-A (art. 67-A).
-R18 (CE:8) | C | APROVAR | Pausa de 30 min na carga (art. 67-C, § 1º).
-R19 (CE:52) | E | APROVAR | Efeito da ADI 5.322 sobre o art. 67-C, § 3º.
-R20 (CE:44) | E | APROVAR | Responsável pelos registros (art. 67-E, § 4º).
-R21 (CE:4) | C | APROVAR | Independência do registrador (art. 67-E, § 3º).
-R22 (CE:56) | E | APROVAR | Hipóteses da troca intermitente de luzes (art. 40, III).
-R23 (CE:17) | C | APROVAR | Localização dos dois capítulos estudados no CTB
-R24 (CE:42) | E | APROVAR | Art. 26: proibição de atirar ou abandonar objetos
-R25 (CE:62) | C | APROVAR | Art. 27: verificação antes de circular
-R26 (CE:37) | E | APROVAR | Art. 28: domínio do veículo
-R27 (CE:68) | C | APROVAR | Art. 29, I: lado de circulação
-R28 (CE:39) | E | APROVAR | Art. 29, II: distância de segurança sem valor fixo
-R29 (CE:88) | C | APROVAR | Distância lateral de 1,50 m da bicicleta
-R30 (CE:50) | E | APROVAR | Art. 29, V: uso do acostamento
-R31 (CE:78) | C | APROVAR | Art. 29, VI: batedores
-R32 (CE:35) | E | APROVAR | Art. 29, VII, d
-R33 (CE:66) | C | APROVAR | Art. 29, X: checklist antes de ultrapassar
-R34 (CE:20) | C | APROVAR | Art. 29, XI: conduta durante e após a ultrapassagem
-R35 (CE:53) | E | APROVAR | Art. 29, XII
-R36 (CE:54) | C | APROVAR | Art. 30, parágrafo único
-R37 (CE:74) | E | APROVAR | Art. 33
-R38 (CE:7) | C | APROVAR | Art. 34
-R39 (CE:33) | E | APROVAR | Art. 36: lote lindeiro
-R40 (CE:30) | C | APROVAR | Art. 38, parágrafo único
-R41 (CE:93) | E | APROVAR | Art. 39: retorno em vias urbanas
-R42 (CE:48) | C | APROVAR | Art. 40, I, b
-R43 (CE:18) | E | APROVAR | Art. 40, § 1º
-R44 (CE:12) | C | APROVAR | Art. 40, VI
-R45 (CE:65) | E | APROVAR | Art. 40, VII
+R01 (CE:67) | C | APROVAR | Preferência na rotatória não sinalizada (art. 29, III, b).
+R02 (CE:35) | E | APROVAR | Regra residual de preferência: direita do condutor (art. 29, III, c).
+R03 (CE:30) | C | APROVAR | Destinação das faixas (art. 29, IV).
+R04 (CE:25) | E | APROVAR | Exceção da ultrapassagem pela direita (art. 29, IX).
+R05 (CE:45) | C | APROVAR | Dever de quem é ultrapassado (art. 30).
+R06 (CE:43) | E | APROVAR | Locais proibidos para ultrapassar e a exceção da sinalização (art. 32).
+R07 (CE:62) | C | APROVAR | Identificação exigida para o livre estacionamento (art. 29, VII, f).
+R08 (CE:5) | E | APROVAR | Dever dos condutores diante de veículo de emergência (art. 29, VII, a).
+R09 (CE:18) | E | APROVAR | Prerrogativas dos veículos de utilidade pública (art. 29, VIII).
+R10 (CE:37) | C | APROVAR | Uso da luz alta (art. 40, II).
+R11 (CE:66) | C | APROVAR | Farol aceso de dia em rodovia (art. 40, § 2º).
+R12 (CE:8) | C | APROVAR | Hipóteses de uso da buzina (art. 41).
+R13 (CE:29) | E | APROVAR | Conversão à direita no vermelho (art. 44-A).
+R14 (CE:74) | C | APROVAR | Lado de embarque e desembarque (art. 49, parágrafo único).
+R15 (CE:65) | E | APROVAR | Condição para o contrafluxo de bicicletas (art. 58, parágrafo único).
+R16 (CE:78) | C | APROVAR | Retorno em via com acostamento (art. 37).
+R17 (CE:51) | E | APROVAR | Alcance do capítulo III-A (art. 67-A).
+R18 (CE:27) | C | APROVAR | Pausa de 30 min na carga (art. 67-C, § 1º).
+R19 (CE:40) | E | APROVAR | Efeito da ADI 5.322 sobre o art. 67-C, § 3º.
+R20 (CE:36) | E | APROVAR | Responsável pelos registros (art. 67-E, § 4º).
+R21 (CE:54) | C | APROVAR | Independência do registrador (art. 67-E, § 3º).
+R22 (CE:44) | E | APROVAR | Hipóteses da troca intermitente de luzes (art. 40, III).
+R28 (CE:50) | E | APROVAR | Art. 29, II: distância de segurança sem valor fixo
+R29 (CE:34) | C | APROVAR | Distância lateral de 1,50 m da bicicleta
+R30 (CE:48) | E | APROVAR | Art. 29, V: uso do acostamento
+R31 (CE:52) | C | APROVAR | Art. 29, VI: batedores
+R32 (CE:15) | E | APROVAR | Art. 29, VII, d
+R33 (CE:1) | C | APROVAR | Art. 29, X: checklist antes de ultrapassar
+R34 (CE:73) | C | APROVAR | Art. 29, XI: conduta durante e após a ultrapassagem
+R37 (CE:38) | E | APROVAR | Art. 33
+R38 (CE:68) | C | APROVAR | Art. 34
+R39 (CE:56) | E | APROVAR | Art. 36: lote lindeiro
+R40 (CE:47) | C | APROVAR | Art. 38, parágrafo único
+R41 (CE:33) | E | APROVAR | Art. 39: retorno em vias urbanas
+R42 (CE:41) | C | APROVAR | Art. 40, I, b
+R43 (CE:42) | E | APROVAR | Art. 40, § 1º
 R46 (CE:64) | C | APROVAR | Art. 40, V
-R47 (CE:57) | E | APROVAR | Art. 42
-R48 (CE:61) | C | APROVAR | Art. 43, I
-R49 (CE:14) | E | APROVAR | Art. 43, II e III
-R50 (CE:40) | C | APROVAR | Art. 44
-R51 (CE:67) | E | APROVAR | Art. 46
-R52 (CE:63) | C | APROVAR | Art. 47
-R53 (CE:32) | E | APROVAR | Art. 47, parágrafo único
-R54 (CE:84) | C | APROVAR | Art. 48
-R55 (CE:38) | E | APROVAR | Art. 51
-R56 (CE:1) | C | APROVAR | Art. 50
-R57 (CE:79) | E | APROVAR | Art. 52
-R58 (CE:72) | C | APROVAR | Art. 53
-R59 (CE:23) | E | APROVAR | Art. 54
-R60 (CE:5) | C | APROVAR | Art. 55
-R61 (CE:41) | E | APROVAR | Art. 57: proibições do ciclomotor
-R62 (CE:9) | C | APROVAR | Conceito de ciclomotor
-R63 (CE:81) | E | APROVAR | Art. 58, caput
-R64 (CE:47) | C | APROVAR | Art. 59
-R65 (CE:92) | E | APROVAR | Art. 65: cinto de segurança
-R66 (CE:91) | C | APROVAR | Art. 67, caput
-R67 (CE:26) | E | APROVAR | Art. 67, parágrafo único
-R68 (CE:2) | C | APROVAR | Art. 67-C, § 4º
-R69 (CE:59) | E | APROVAR | Art. 67-C, § 5º
-R70 (CE:51) | C | APROVAR | Art. 67-E, § 2º
-R71 (CE:82) | E | APROVAR | Faixa de domínio × faixa de trânsito
-R72 (CE:85) | C | APROVAR | Conceito de tara
-R73 (CE:31) | E | APROVAR | Conceito de logradouro público
-R74 (CE:83) | E | APROVAR | Art. 70
-R75 (CE:10) | C | APROVAR | Art. 68, § 1º
-R76 (CE:80) | E | APROVAR | Art. 105, II
-D01 (CE:87) | E | APROVAR | Escolher a regra de preferência aplicável na rotatória.
-D02 (CE:6) | C | APROVAR | Preferência de quem vem de rodovia (art. 29, III, a).
-D03 (CE:46) | E | APROVAR | Faixa do ciclomotor quando a da direita é exclusiva (art. 57, parágrafo único).
-D04 (CE:86) | E | APROVAR | Ultrapassagem de coletivo parado (art. 31).
-D05 (CE:70) | C | APROVAR | Condição "sem visibilidade suficiente" do aclive (art. 32).
-D06 (CE:43) | E | APROVAR | Condições das prerrogativas de emergência (art. 29, VII).
-D07 (CE:90) | C | APROVAR | Dever do pedestre diante de veículo de emergência (art. 29, VII, b).
-D08 (CE:36) | C | APROVAR | Exceção "ao segui-lo" da luz alta (art. 40, II).
-D09 (CE:19) | E | APROVAR | Alcance da regra do farol de dia (art. 40, I, b, e § 2º).
-D10 (CE:3) | C | APROVAR | Exigências cumulativas do art. 64.
-D11 (CE:22) | C | APROVAR | Fracionamento da pausa de 30 min na carga.
-D12 (CE:24) | E | APROVAR | Regra própria do coletivo de passageiros (art. 67-C, § 1º-A).
-D13 (CE:27) | E | APROVAR | Efeito da ADI 5.322 sobre o descanso diário.
-D14 (CE:45) | C | APROVAR | Exceção do art. 67-C, § 2º.
-D15 (CE:60) | E | APROVAR | Abrangência do deslocamento lateral (art. 35).
-D16 (CE:21) | C | APROVAR | Posição antes de entrar à esquerda (art. 38, II).
-D17 (CE:69) | C | APROVAR | Distinção entre parada e estacionamento.
-D18 (CE:25) | E | APROVAR | Condição do art. 29, X, b.
+R47 (CE:32) | E | APROVAR | Art. 42
+R48 (CE:28) | C | APROVAR | Art. 43, I
+R49 (CE:39) | E | APROVAR | Art. 43, II e III
+R50 (CE:77) | C | APROVAR | Art. 44
+R51 (CE:22) | E | APROVAR | Art. 46
+R52 (CE:7) | C | APROVAR | Art. 47
+R54 (CE:57) | C | APROVAR | Art. 48
+R59 (CE:6) | E | APROVAR | Art. 54
+R60 (CE:3) | C | APROVAR | Art. 55
+R61 (CE:17) | E | APROVAR | Art. 57: proibições do ciclomotor
+R62 (CE:10) | C | APROVAR | Conceito de ciclomotor
+R63 (CE:19) | E | APROVAR | Art. 58, caput
+R64 (CE:49) | C | APROVAR | Art. 59
+R65 (CE:23) | E | APROVAR | Art. 65: cinto de segurança
+R68 (CE:21) | C | APROVAR | Art. 67-C, § 4º
+R69 (CE:63) | E | APROVAR | Art. 67-C, § 5º
+R70 (CE:71) | C | APROVAR | Art. 67-E, § 2º
+R71 (CE:13) | E | APROVAR | Faixa de domínio × faixa de trânsito
+R72 (CE:9) | C | APROVAR | Conceito de tara
+R73 (CE:69) | E | APROVAR | Conceito de logradouro público
+R74 (CE:58) | E | APROVAR | Art. 70
+R75 (CE:31) | C | APROVAR | Art. 68, § 1º
+R76 (CE:12) | E | APROVAR | Art. 105, II
+D01 (CE:20) | E | APROVAR | Escolher a regra de preferência aplicável na rotatória.
+D02 (CE:2) | C | APROVAR | Preferência de quem vem de rodovia (art. 29, III, a).
+D03 (CE:70) | E | APROVAR | Faixa do ciclomotor quando a da direita é exclusiva (art. 57, parágrafo único).
+D04 (CE:11) | E | APROVAR | Ultrapassagem de coletivo parado (art. 31).
+D05 (CE:76) | C | APROVAR | Condição "sem visibilidade suficiente" do aclive (art. 32).
+D06 (CE:75) | E | APROVAR | Condições das prerrogativas de emergência (art. 29, VII).
+D07 (CE:60) | C | APROVAR | Dever do pedestre diante de veículo de emergência (art. 29, VII, b).
+D08 (CE:24) | C | APROVAR | Exceção "ao segui-lo" da luz alta (art. 40, II).
+D09 (CE:55) | E | APROVAR | Alcance da regra do farol de dia (art. 40, I, b, e § 2º).
+D10 (CE:59) | C | APROVAR | Exigências cumulativas do art. 64.
+D11 (CE:16) | C | APROVAR | Fracionamento da pausa de 30 min na carga.
+D12 (CE:72) | E | APROVAR | Regra própria do coletivo de passageiros (art. 67-C, § 1º-A).
+D13 (CE:61) | E | APROVAR | Efeito da ADI 5.322 sobre o descanso diário.
+D14 (CE:53) | C | APROVAR | Exceção do art. 67-C, § 2º.
+D15 (CE:4) | E | APROVAR | Abrangência do deslocamento lateral (art. 35).
+D16 (CE:14) | C | APROVAR | Posição antes de entrar à esquerda (art. 38, II).
+D18 (CE:26) | E | APROVAR | Condição do art. 29, X, b.
+D19 (CE:46) | C | APROVAR | Alcance do art. 65 (todos os ocupantes, todas as vias).
 C01 (CZ:1) | — | APROVAR | Altura-limite do art. 64.
 C02 (CZ:2) | — | APROVAR | Limite de direção ininterrupta (art. 67-C, caput).
 C03 (CZ:3) | — | APROVAR | Intervalo de descanso no coletivo de passageiros (art. 67-C, § 1º-A).
 C04 (CZ:4) | — | APROVAR | Descanso diário mínimo (art. 67-C, § 3º, após a ADI 5.322).
 C05 (CZ:5) | — | APROVAR | Termo do art. 35, parágrafo único.
 
-Ajustes da segunda conferência (2.21): R26, R30, R47, R59 e R74 reescritos para tirar absolutos que serviam de pista em itens Errados (R74 também para fechar a leitura do pedestre já em travessia, protegido pelo parágrafo único do art. 70); R23, R50, R52, R54, R56, R58, R63, R66 e R70 encurtados. R38 e R68 mantêm o absoluto do texto legal (justificado em fonte/sinais_resolvidos.json).
+Ajustes da segunda conferência: R30, R47, R59 e R74 reescritos (2.21) para tirar absolutos que serviam de pista em itens Errados; R38 e R68 mantêm o absoluto do texto legal (justificado em fonte/sinais_resolvidos.json). D19 conferido no art. 65 (exceções do CONTRAN afastadas pela frente: carro de passeio, passageiro sentado).
 Limites: revisão pelo próprio agente; renderização no Anki não testada (só a prévia HTML).

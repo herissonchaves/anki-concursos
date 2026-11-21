@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Confere a cobertura total de um lote feito a partir de PDF; NÃO julga a qualidade dos cards.
+"""Confere a cobertura por prioridade de um lote feito a partir de PDF; NÃO julga os cards.
 
 Uso: python validar_cobertura_pdf.py DIRETORIO_DO_LOTE_OU_ZIP
 (o diretório é a pasta `lote/`, com os TSVs e `relatorios/cobertura_pdf.json`).
 
-Falha se alguma unidade de conteúdo ou questão do PDF não tiver card, se apontar para linha
-inexistente, se algum card do lote não cobrir nenhuma unidade, ou se faltar ao card a tag
-`Pagina_NN` de uma página que ele cobre. Só texto que não é conteúdo de estudo pode ficar sem
-card (`excluir: "nao_conteudo: motivo"`). Sem `cobertura_pdf.json`, informa e retorna 0
+Cada unidade tem `p` (alta, media ou baixa). Falha se unidade Alta/Média não tiver card nem nota
+da coleção (`colecao`), se Baixa tiver card ou não tiver `motivo`, se apontar para linha
+inexistente, se algum card do lote não cobrir unidade Alta/Média, ou se faltar ao card a tag
+`Pagina_NN` de uma página que ele cobre. Texto que não é conteúdo de estudo usa
+`excluir: "nao_conteudo: motivo"`. Sem `cobertura_pdf.json`, informa e retorna 0
 (lote que não veio de PDF). Retorna 0 (ok), 1 (falha) ou 2 (erro de leitura).
 """
 from __future__ import annotations
@@ -50,8 +51,18 @@ def validar(arquivos: dict[str, bytes | None]) -> list[str]:
             if not str(un['excluir']).startswith('nao_conteudo') or cartoes:
                 erros.append(f'{u}: exclusão só para texto que não é conteúdo de estudo, sem cards')
             continue
-        if not cartoes:
-            erros.append(f'{u} (p. {un.get("pag")}): sem card')
+        p = un.get('p')
+        if p not in ('alta', 'media', 'baixa'):
+            erros.append(f'{u}: p deve ser alta, media ou baixa')
+            continue
+        if p == 'baixa':
+            if cartoes:
+                erros.append(f'{u}: prioridade baixa não vira card')
+            if not str(un.get('motivo', '')).strip():
+                erros.append(f'{u}: prioridade baixa exige motivo')
+            continue
+        if not cartoes and not un.get('colecao'):
+            erros.append(f'{u} (p. {un.get("pag")}): sem card nem nota da coleção')
         pags = un.get('pag') or []
         if not pags:
             erros.append(f'{u}: sem página')
@@ -65,7 +76,7 @@ def validar(arquivos: dict[str, bytes | None]) -> list[str]:
         for n, row in enumerate(rows, 1):
             ident = f'{nome}:{n}'
             if ident not in cobertos:
-                erros.append(f'{ident}: card sem unidade de cobertura')
+                erros.append(f'{ident}: card sem unidade Alta ou Média')
                 continue
             tags = set(row[2].split()) if len(row) == 3 else set()
             faltam = [f'Pagina_{p:02d}' for p in sorted(cobertos[ident]) if f'Pagina_{p:02d}' not in tags]
@@ -91,7 +102,7 @@ def main(argv=None) -> int:
         print('COBERTURA INCOMPLETA:\n  ' + '\n  '.join(erros))
         return 1
     n = len(json.loads(arquivos[REGISTRO].decode('utf-8'))['unidades'])
-    print(f'COBERTURA COMPLETA: {n} unidade(s) do PDF com card e tags de página. Não certifica a qualidade dos cards.')
+    print(f'COBERTURA COMPLETA: {n} unidade(s) do PDF; Alta e Média com card ou nota da coleção, Baixa registrada. Não certifica a qualidade dos cards.')
     return 0
 
 

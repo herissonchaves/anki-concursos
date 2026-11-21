@@ -22,7 +22,7 @@ fonte_descoberta: "PDF LET020002 (Projeto Missão), p. 18 e 22, questão 08; gab
 consulta: 2026-11-21
 concursos_alvo: [PRF]
 operacao_observada: "Imobilização além do embarque/desembarque caracteriza estacionamento, não parada."
-usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#D17"]
+usado_em: []
 hash: ccc3e905fba72444
 ---
 # Vunesp 2022 — Prefeitura Municipal de Morro Agudo — item nao_localizado

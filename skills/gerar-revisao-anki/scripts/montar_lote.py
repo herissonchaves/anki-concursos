@@ -27,12 +27,14 @@ outra banca, mas não sustentam fidelidade comparada. Dicts no formato da calibr
 continuam aceitos. Ao gerar, o uso de cada ID é registrado no `usado_em` da questão
 (`registrar_uso=False` desliga). Modelo pronto: `../modelos/gerar_lote_modelo.py`.
 
-`cobertura` (lote de PDF, obrigatório): lista de unidades `dict(u='U01', pag='14', conteudo='…',
-cartoes=['R01', 'D03'])` com todo o conteúdo do PDF e uma unidade por questão do PDF
-(`questao='<id do banco>'`, que precisa estar nos `refs` de algum de seus cards). Falha se faltar
-card, se um card não cobrir nenhuma unidade ou se uma questão não estiver vinculada; só texto que
-não é conteúdo de estudo usa `excluir='nao_conteudo: motivo'`. Grava `cobertura_pdf.json` e põe
-em cada card as tags `Pagina_NN` das páginas que ele cobre.
+`cobertura` (lote de PDF, obrigatório): inventário de todo o PDF e de todas as suas questões,
+uma unidade por conteúdo: `dict(u='U01', pag='14', p='alta', conteudo='…', cartoes=['R01'])`.
+`p` é a prioridade para o concurso-alvo: 'alta' e 'media' precisam de `cartoes` do lote ou de
+`colecao=[IDs de notas]` que já exigem a mesma recuperação; 'baixa' não tem card e exige `motivo`.
+Unidade de questão do PDF traz `questao='<id do banco>'` (nos `refs` de algum de seus cards).
+Texto que não é conteúdo de estudo usa `excluir='nao_conteudo: motivo'`. Falha se faltar card,
+se Baixa tiver card ou se um card não cobrir nenhuma unidade Alta/Média. Grava
+`cobertura_pdf.json` e põe em cada card as tags `Pagina_NN` das páginas que ele cobre.
 
 `fontes`: {chave: (url, trecho verificado)}. Os relatórios .txt continuam
 escritos à mão em `lote/relatorios/`. Revisão pelo próprio agente é autorevisão;
@@ -84,7 +86,9 @@ class Lote:
         self.cobertura = cobertura
         self.refs = self._resolver_refs(referencias)
 
-    # ------------------------------------------------------------ cobertura total do PDF
+    # ------------------------------------------------------------ cobertura do PDF por prioridade
+    PRIORIDADES = ('alta', 'media', 'baixa')
+
     @staticmethod
     def paginas(pag) -> list[int]:
         """'14', 14, '9-10' ou ['9', 12] -> [9, 10, 12]."""
@@ -96,9 +100,12 @@ class Lote:
         return sorted(saida)
 
     def checar_cobertura(self):
-        """Barreira da revisão de PDF: toda unidade de conteúdo e toda questão do PDF têm card.
+        """Barreira da revisão de PDF: toda unidade Alta ou Média tem card (ou nota da coleção).
 
-        Também calcula as tags Pagina_NN de cada card. Falha (SystemExit) listando os problemas.
+        Cada unidade do inventário traz `p` ('alta', 'media' ou 'baixa'). Baixa não tem card e
+        exige `motivo`; Alta/Média precisam de `cartoes` do lote ou de `colecao` (IDs de notas
+        que já exigem a mesma recuperação). Também calcula as tags Pagina_NN de cada card.
+        Falha (SystemExit) listando os problemas.
         """
         self.tags_pagina = {}
         if self.cobertura is None:
@@ -109,11 +116,21 @@ class Lote:
             u, lista = un.get('u', '?'), list(un.get('cartoes', ()))
             if un.get('excluir'):
                 if not str(un['excluir']).startswith('nao_conteudo') or lista:
-                    erros.append(f'{u}: só texto que não é conteúdo de estudo pode ficar sem card '
-                                 '(excluir="nao_conteudo: motivo", sem cartoes)')
+                    erros.append(f'{u}: excluir é só para texto que não é conteúdo de estudo '
+                                 '(excluir="nao_conteudo: motivo", sem cartoes); conteúdo periférico usa p="baixa"')
                 continue
-            if not lista:
-                erros.append(f'{u} (p. {un.get("pag")}): sem card — {un.get("conteudo", "")[:70]}')
+            p = un.get('p')
+            if p not in self.PRIORIDADES:
+                erros.append(f'{u}: p deve ser alta, media ou baixa')
+                continue
+            if p == 'baixa':
+                if lista:
+                    erros.append(f'{u}: prioridade baixa não vira card (tire {", ".join(lista)} ou reavalie a prioridade)')
+                if not str(un.get('motivo', '')).strip():
+                    erros.append(f'{u}: prioridade baixa exige motivo')
+                continue
+            if not lista and not un.get('colecao'):
+                erros.append(f'{u} (p. {un.get("pag")}, {p}): sem card nem nota da coleção — {un.get("conteudo", "")[:70]}')
             for k in lista:
                 if k not in cartoes:
                     erros.append(f'{u}: card {k} não existe no lote')
@@ -122,7 +139,7 @@ class Lote:
             except (KeyError, ValueError):
                 erros.append(f'{u}: pag ausente ou inválida')
                 continue
-            if un.get('questao') and not any(un['questao'] in cartoes[k].get('refs', ()) for k in lista if k in cartoes):
+            if lista and un.get('questao') and not any(un['questao'] in cartoes[k].get('refs', ()) for k in lista if k in cartoes):
                 erros.append(f'{u}: a questão {un["questao"]} precisa estar nos refs de algum de seus cards')
             for k in lista:
                 if k in cartoes:
@@ -130,10 +147,10 @@ class Lote:
                     self.tags_pagina.setdefault(k, set()).update(pags)
         for k in cartoes:
             if k not in cobertos:
-                erros.append(f'{k}: card sem unidade de cobertura (inclua-o em COBERTURA)')
+                erros.append(f'{k}: card sem unidade Alta ou Média (inclua-o em COBERTURA ou retire-o)')
         if erros:
-            raise SystemExit('COBERTURA INCOMPLETA — o lote de PDF precisa cobrir todo o conteúdo e todas as '
-                             'questões do PDF:\n  ' + '\n  '.join(erros))
+            raise SystemExit('COBERTURA INCOMPLETA — o lote de PDF precisa cobrir todo conteúdo Alta ou Média '
+                             'do PDF e de suas questões:\n  ' + '\n  '.join(erros))
 
     def _tags(self, x, extra=''):
         pags = ' '.join(f'Pagina_{p:02d}' for p in sorted(self.tags_pagina.get(x['k'], ())))
@@ -192,13 +209,20 @@ class Lote:
             return self.pasta.name
 
     def registrar_usos(self):
-        if not (self.registrar and self.ids_banco):
+        if not self.registrar or (not self.ids_banco and self.banco is None):
             return
         ref = self._modulo_referencias()
+        lote, usados = self.rotulo_lote(), set()
         for ident in self.ids_banco:
             cartoes = [x['k'] for x in self.R + self.D + self.CZ if ident in x.get('refs', ())]
             if cartoes:
-                ref.registrar_uso(ident, self.rotulo_lote(), cartoes, self.banco)
+                ref.registrar_uso(ident, lote, cartoes, self.banco)
+                usados.add(ident)
+        for q in ref.carregar(self.banco)[0]:  # uso deste lote que não existe mais (card retirado)
+            usos = q.meta.get('usado_em', [])
+            if q.id not in usados and any(str(u).startswith(f'{lote}#') for u in usos):
+                q.meta['usado_em'] = [u for u in usos if not str(u).startswith(f'{lote}#')]
+                q.salvar()
         ref.indexar(self.banco)
 
     # ------------------------------------------------------------ fontes

@@ -109,7 +109,7 @@
  "cartoes": [
   {
    "id": "D01",
-   "linha": 87,
+   "linha": 20,
    "sha256": "beb3d5672b5ce22e16c69a12ce06d4a52833936e8e2f42b7bf2cbd6eb473087d",
    "gabarito": "E",
    "alvo": "Escolher a regra de preferência aplicável na rotatória.",
@@ -167,7 +167,7 @@
   },
   {
    "id": "D02",
-   "linha": 6,
+   "linha": 2,
    "sha256": "45d599ac3144bf50b895036da773c361ff46edb62b6f7e45518d504dc069a131",
    "gabarito": "C",
    "alvo": "Preferência de quem vem de rodovia (art. 29, III, a).",
@@ -226,7 +226,7 @@
   },
   {
    "id": "D03",
-   "linha": 46,
+   "linha": 70,
    "sha256": "a631a6a4b822c9a0f376a8508631d15097c00d5d1cf71e1a093812498bda6a36",
    "gabarito": "E",
    "alvo": "Faixa do ciclomotor quando a da direita é exclusiva (art. 57, parágrafo único).",
@@ -287,7 +287,7 @@
   },
   {
    "id": "D04",
-   "linha": 86,
+   "linha": 11,
    "sha256": "d316c407d3feed07b3e313aff5cc970d5739861192f0ffe63fbc065993bd9623",
    "gabarito": "E",
    "alvo": "Ultrapassagem de coletivo parado (art. 31).",
@@ -344,7 +344,7 @@
   },
   {
    "id": "D05",
-   "linha": 70,
+   "linha": 76,
    "sha256": "01c84df8a4e5fd5d097ce49945e608b2ce43e4492f9abd67ab1d3a9a53e03c34",
    "gabarito": "C",
    "alvo": "Condição \"sem visibilidade suficiente\" do aclive (art. 32).",
@@ -402,7 +402,7 @@
   },
   {
    "id": "D06",
-   "linha": 43,
+   "linha": 75,
    "sha256": "91bf6b6fa6e2a46c2b53f9261dd3726cc753ca4990e624c85e570a83daed526f",
    "gabarito": "E",
    "alvo": "Condições das prerrogativas de emergência (art. 29, VII).",
@@ -460,7 +460,7 @@
   },
   {
    "id": "D07",
-   "linha": 90,
+   "linha": 60,
    "sha256": "f8a7668d1da352b427300a8666963ddbec6db7d93b988043cfd390563c20cf0a",
    "gabarito": "C",
    "alvo": "Dever do pedestre diante de veículo de emergência (art. 29, VII, b).",
@@ -518,7 +518,7 @@
   },
   {
    "id": "D08",
-   "linha": 36,
+   "linha": 24,
    "sha256": "6dd20c87c22ed4dcccdb641c2291cded52432125798229e6578bf88509f8cd0c",
    "gabarito": "C",
    "alvo": "Exceção \"ao segui-lo\" da luz alta (art. 40, II).",
@@ -575,7 +575,7 @@
   },
   {
    "id": "D09",
-   "linha": 19,
+   "linha": 55,
    "sha256": "89a06d59059ad9205e4957370479527112670f660efe3d12e428dfde0ab46b47",
    "gabarito": "E",
    "alvo": "Alcance da regra do farol de dia (art. 40, I, b, e § 2º).",
@@ -632,7 +632,7 @@
   },
   {
    "id": "D10",
-   "linha": 3,
+   "linha": 59,
    "sha256": "959572e14b55a0584218d3fb9b52bf50f1fa0475186fcd6a6f6d3547f6b03edc",
    "gabarito": "C",
    "alvo": "Exigências cumulativas do art. 64.",
@@ -690,7 +690,7 @@
   },
   {
    "id": "D11",
-   "linha": 22,
+   "linha": 16,
    "sha256": "92fff2cb2220dfbd70df035d18a2bb7e8b2eebe2ec41dc03d591ae4cc5e41fc9",
    "gabarito": "C",
    "alvo": "Fracionamento da pausa de 30 min na carga.",
@@ -754,7 +754,7 @@
   },
   {
    "id": "D12",
-   "linha": 24,
+   "linha": 72,
    "sha256": "4123ee9ccc3646812f2c0c19fc6b4aba9f11ba0756615bdf5115a2735f02d87b",
    "gabarito": "E",
    "alvo": "Regra própria do coletivo de passageiros (art. 67-C, § 1º-A).",
@@ -817,7 +817,7 @@
   },
   {
    "id": "D13",
-   "linha": 27,
+   "linha": 61,
    "sha256": "f8c6e9b2de97e0d31886d427f64b3a07c3ce0a85f6cefcc2a7b633a2231702c5",
    "gabarito": "E",
    "alvo": "Efeito da ADI 5.322 sobre o descanso diário.",
@@ -878,7 +878,7 @@
   },
   {
    "id": "D14",
-   "linha": 45,
+   "linha": 53,
    "sha256": "24169cade86eaf6607b1cffbc38e75b00e7dbdf5cf474f3b2a8c4ca27af28966",
    "gabarito": "C",
    "alvo": "Exceção do art. 67-C, § 2º.",
@@ -940,7 +940,7 @@
   },
   {
    "id": "D15",
-   "linha": 60,
+   "linha": 4,
    "sha256": "db7e09acb5bf03160650d20241f56b636d022f086c81b5907a3957fde344cbe7",
    "gabarito": "E",
    "alvo": "Abrangência do deslocamento lateral (art. 35).",
@@ -997,7 +997,7 @@
   },
   {
    "id": "D16",
-   "linha": 21,
+   "linha": 14,
    "sha256": "66d8b1497343d8f370488144648181c79abc5e31ea0c098b671f7cea42f0b87f",
    "gabarito": "C",
    "alvo": "Posição antes de entrar à esquerda (art. 38, II).",
@@ -1053,20 +1053,19 @@
    "outras_bancas_pendencia": "Buscas em 20 e 21/11/2026 por questões de outras bancas sobre o mesmo alvo (rotatória, ultrapassagem, luzes, ciclomotor, coletivo parado + CTB + FGV, Vunesp, IBFC, Quadrix): qconcursos.com e questoes.grancursosonline.com.br recusaram o acesso automatizado (HTTP 403); nas provas abertas (IDCAP 2026, IGEDUC 2025) e nas questões do PDF não havia item sobre este alvo."
   },
   {
-   "id": "D17",
-   "linha": 69,
-   "sha256": "ad80ecf0a2f3dc2d4ebd8295824b753a2615e7c3ac80d9a15357933965a09815",
+   "id": "D19",
+   "linha": 46,
+   "sha256": "251bf6c505916e6978a1400020b7b402df333007833c84c77ee647771c152b40",
    "gabarito": "C",
-   "alvo": "Distinção entre parada e estacionamento.",
-   "operacao_autoral": "Classificar a imobilização pela finalidade e pelo tempo.",
-   "regra": "CTB Anexo I (parada; estacionamento); art. 47.",
-   "dado_decisivo": "Espera pelo próximo cliente depois do desembarque.",
-   "solucao": "Finalidade e tempo de embarque esgotados; imobilização continua; logo estacionamento; Certo.",
-   "erro_plausivel": "Considerar parada qualquer imobilização na área de embarque.",
-   "leitura_concorrente": "Considerei a espera do próprio passageiro descendo com malas: ainda seria parada; a frente diz que ela já desembarcou.",
-   "originalidade": "Inspirado no item Vunesp 2022 (Morro Agudo) do PDF, com a situação e o julgamento reescritos em C/E.",
+   "alvo": "Alcance do art. 65 (todos os ocupantes, todas as vias).",
+   "operacao_autoral": "Aplicar a regra geral e afastar as falsas exceções alegadas.",
+   "regra": "CTB art. 65.",
+   "dado_decisivo": "Passageiro adulto no banco traseiro, via urbana, carro de passeio comum.",
+   "solucao": "Todos os ocupantes, todas as vias; não há exceção para banco traseiro nem via urbana; logo Certo (irregular).",
+   "erro_plausivel": "Achar que o cinto é exigido só na frente ou só em rodovia.",
+   "leitura_concorrente": "Considerei as exceções regulamentadas pelo CONTRAN (por exemplo, passageiros em pé em coletivos): a frente fixa carro de passeio comum e passageiro sentado.",
+   "originalidade": "Situação autoral a partir do art. 65 transcrito no PDF (p. 14).",
    "fontes_conteudo": [
-    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
     "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
    ],
    "referencias": [],
@@ -1076,15 +1075,15 @@
    "rubrica": {
     "correcao": {
      "resultado": "PASSA",
-     "evidencia": "Conferido no CTB compilado: Anexo I (parada; estacionamento) e art. 47."
+     "evidencia": "Conferido no CTB compilado: art. 65."
     },
     "determinacao": {
      "resultado": "PASSA",
-     "evidencia": "Determinação: desembarque concluído e espera explícitos; uma conclusão."
+     "evidencia": "Determinação: banco traseiro, via urbana e carro de passeio explícitos; uma conclusão."
     },
     "operacao_d": {
      "resultado": "PASSA",
-     "evidencia": "Operação: exige classificar a imobilização pela finalidade."
+     "evidencia": "Operação: exige afastar as exceções alegadas."
     },
     "comparacao": {
      "resultado": "PENDENTE",
@@ -1092,7 +1091,7 @@
     },
     "autoria": {
      "resultado": "PASSA",
-     "evidencia": "Autoria: cenário próprio (a espera do motorista de aplicativo, reescrita)."
+     "evidencia": "Autoria: cenário próprio (o passageiro sem cinto na avenida)."
     },
     "feedback": {
      "resultado": "PASSA",
@@ -1107,14 +1106,12 @@
      "evidencia": "Utilidade: cobre conteúdo do PDF ainda sem card de aplicação."
     }
    },
-   "referencias_sem_prova": [
-    "vunesp-2022-prefeitura-municipal-de-morro-agudo-ccc3e9"
-   ],
-   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre parada × estacionamento foi confirmado nas buscas; a referência é de outra banca, do PDF."
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre o art. 65 foi localizado nas buscas nem no banco.",
+   "outras_bancas_pendencia": "Buscas em 20 e 21/11/2026 por questões de outras bancas sobre o mesmo alvo (rotatória, ultrapassagem, luzes, ciclomotor, coletivo parado + CTB + FGV, Vunesp, IBFC, Quadrix): qconcursos.com e questoes.grancursosonline.com.br recusaram o acesso automatizado (HTTP 403); nas provas abertas (IDCAP 2026, IGEDUC 2025) e nas questões do PDF não havia item sobre este alvo."
   },
   {
    "id": "D18",
-   "linha": 25,
+   "linha": 26,
    "sha256": "b0a57296c1ca7117ad331879279be28aa63fc4dad153c051ecfffdf7e2c3b8b0",
    "gabarito": "E",
    "alvo": "Condição do art. 29, X, b.",
@@ -1209,19 +1206,6 @@
    "gabarito_status": "nao_verificado",
    "operacao_observada": "Lembrar o descanso mínimo de 11 h em 24 h.",
    "vigencia": "desatualizada"
-  },
-  {
-   "id": "vunesp-2022-prefeitura-municipal-de-morro-agudo-ccc3e9",
-   "banca": "Vunesp",
-   "formato": "multipla_escolha",
-   "ano": 2022,
-   "concurso": "Prefeitura Municipal de Morro Agudo — 2022",
-   "item": "nao_localizado",
-   "origem": "anexo_usuario",
-   "fonte_descoberta": "PDF LET020002 (Projeto Missão), p. 18 e 22, questão 08; gabarito do material",
-   "gabarito_status": "nao_verificado",
-   "operacao_observada": "Imobilização além do embarque/desembarque caracteriza estacionamento, não parada.",
-   "vigencia": "atual"
   }
  ]
 }

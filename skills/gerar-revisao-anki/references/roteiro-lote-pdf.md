@@ -35,7 +35,7 @@ Nunca copie nome/CPF da marca-d'água para arquivo versionado.
 
 1. Questões do PDF: `referencias.py importar PDF -o TMP/rasc.json -p PAGINAS -d DISC [--ruido ...]`;
    confira texto e gabarito, troque todo `REVISAR` (assunto, subassuntos, palavras-chave, operação)
-   e salve com `nova` **todas** as questões do PDF (a cobertura é total). Regra revogada:
+   e salve com `nova` **todas** as questões do PDF (viram card se o conteúdo for Alta ou Média). Regra revogada:
    `vigencia: desatualizada` + `vigencia_nota`.
 2. Banco: `assuntos` → `buscar -d DISC -t TERMO [--com-url] [--vigentes] [--nao-usadas]` → `mostrar`.
 3. Internet (obrigatória para D; recomendada para R/Cloze): Cebraspe C/E primeiro (caderno e
@@ -53,12 +53,12 @@ avise no verso. Cloze: pesquise mnemônicos; sem fonte confiável, use dica **au
 
 ## 5. Triagem e composição
 
-- **Cobertura total** (`cobertura-pdf.md`): todo conteúdo do PDF e todo conteúdo das questões do PDF
-  (inclusive alternativas e temas fora do capítulo) ganham ao menos um card; nota parecida na coleção
-  não conta. A/B/C só escolhem formato (C = R curto). Fora só texto que não é conteúdo de estudo.
-  Teto menor que a cobertura: avisar quantos cards faltam e perguntar.
-- Inventário página por página (`triagem_previa_pdf.txt`): unidade, página, A/B/C, alvo, formato e
-  card(s); o mesmo inventário vira o bloco `COBERTURA` do gerador.
+- **Cobertura por prioridade** (`cobertura-pdf.md`): inventário de todo o PDF e de todas as suas
+  questões; cada unidade é **Alta**, **Média** ou **Baixa** para o concurso-alvo (com motivo). Alta e
+  Média: ao menos um card, salvo nota da coleção que já exija a mesma recuperação (busque antes, em
+  leitura). Baixa: sem card. Teto menor que a cobertura Alta + Média: avisar e perguntar.
+- Inventário página por página (`triagem_previa_pdf.txt`): unidade, página, prioridade e motivo,
+  formato e card(s) ou nota da coleção; o mesmo inventário vira o bloco `COBERTURA` do gerador.
 - R: um alvo, frase curta, sem pegadinha. D: caso curto com dado decisivo, uma decisão real
   (aplicar, distinguir, exceção); definição disfarçada vira R. Cloze: uma omissão `{{c1::…}}` por
   nota (várias só com tag `Mnemonico`), conceito/número que precisa ser lembrado; números só se
@@ -80,7 +80,8 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
 
 - Copie `../modelos/gerar_lote_modelo.py` para `lotes/<CONCURSO>/<Missao_NN_Tema>/fonte/gerar_lote.py`.
   Cartões citam IDs do banco em `refs`; `referencias` pode ficar `[]`. Preencha `COBERTURA`
-  (`Lote(..., cobertura=COBERTURA)`): o montador falha se faltar card e põe as tags `Pagina_NN`. Questão sem prova oficial
+  (`Lote(..., cobertura=COBERTURA)`, com `p` por unidade): o montador falha se Alta/Média ficar sem
+  card nem nota da coleção ou se Baixa tiver card, e põe as tags `Pagina_NN`. Questão sem prova oficial
   vai para `referencias_sem_prova` (inspiração e outra banca; nunca fidelidade comparada).
 - D: `fid='comparada'` só com Cebraspe C/E oficial em `refs`; senão `inspiracao_geral` + `lim`.
   Sem questão de outra banca em `refs`: `obp` com as buscas. Rubrica de 8 critérios com evidência

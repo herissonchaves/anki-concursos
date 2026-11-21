@@ -5,7 +5,7 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
-**Versão 2.21.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.22.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
@@ -50,7 +50,8 @@ Para lote a partir de PDF, o caminho de menor custo é o
 [roteiro curto](skills/gerar-revisao-anki/references/roteiro-lote-pdf.md): resume as regras
 obrigatórias e os comandos (texto limpo do PDF, importação das questões, modelo do gerador e
 `finalizar_lote.py`), sem precisar abrir todas as referências. Cards de revisão de PDF anexado
-cobrem **todo** o conteúdo do PDF e das questões de concursos nele
+cobrem todo conteúdo de prioridade **Alta ou Média** para o concurso-alvo, do PDF e das questões
+de concursos nele, sem duplicar notas da coleção
 ([cobertura-pdf.md](skills/gerar-revisao-anki/references/cobertura-pdf.md)), levam as tags
 `Pagina_NN` da página de origem e seguem a formatação única de
 [estilo_anki.py](skills/gerar-revisao-anki/scripts/estilo_anki.py) (Arial 20 px, como os cards de

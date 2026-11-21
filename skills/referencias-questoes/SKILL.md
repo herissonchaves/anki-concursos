@@ -35,9 +35,9 @@ python -X utf8 skills/referencias-questoes/scripts/referencias.py COMANDO
 1. **Arquivo enviado pelo usuário.** Antes de redigir, extraia as questões de concursos
    do PDF, apostila ou lista com `importar` (prints do caderno de erros: transcreva). Revise
    o rascunho (texto, gabarito, órgão), complete os campos `REVISAR` e salve com `nova`
-   (`origem: anexo_usuario`; `caderno_erros` para prints) **todas** as questões do arquivo: na
-   revisão de PDF a cobertura é total e cada questão do anexo precisa de card que a cite em
-   `refs` (`../gerar-revisao-anki/references/cobertura-pdf.md`). Procure a prova oficial para preencher `url` e confirmar
+   (`origem: anexo_usuario`; `caderno_erros` para prints) **todas** as questões do arquivo; na
+   revisão de PDF, a questão cujo conteúdo for Alta ou Média para o concurso-alvo precisa de card
+   que a cite em `refs` (`../gerar-revisao-anki/references/cobertura-pdf.md`). Procure a prova oficial para preencher `url` e confirmar
    o gabarito quando a questão for virar referência de D comparado; senão, mantenha
    `nao_localizado` e `gabarito_status: nao_verificado`.
 2. **Banco.** Rode `assuntos` e depois `buscar` pela disciplina, assunto e termos dos

@@ -18,74 +18,65 @@
    "pag": [
     4
    ],
+   "p": "baixa",
    "conteudo": "Capítulos do CTB: III (normas gerais) e III-A (motoristas profissionais)",
-   "cartoes": [
-    "anki_certo_errado.tsv:17"
-   ],
-   "ids_editoriais": [
-    "R23"
-   ]
+   "motivo": "Baixa para a PRF: estrutura do código, sem cobrança localizada",
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "U02",
    "pag": [
     5
    ],
+   "p": "baixa",
    "conteudo": "Art. 26: abster-se de perigo ou obstáculo; não atirar ou abandonar objetos",
-   "cartoes": [
-    "anki_certo_errado.tsv:42"
-   ],
-   "ids_editoriais": [
-    "R24"
-   ]
+   "motivo": "Baixa para a PRF: dever genérico de bom senso, sem questão localizada",
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "U03",
    "pag": [
     5
    ],
+   "p": "baixa",
    "conteudo": "Art. 27: equipamentos obrigatórios e combustível suficiente",
-   "cartoes": [
-    "anki_certo_errado.tsv:62"
-   ],
-   "ids_editoriais": [
-    "R25"
-   ]
+   "motivo": "Baixa para a PRF: bom senso; sem questão localizada",
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "U04",
    "pag": [
     5
    ],
+   "p": "baixa",
    "conteudo": "Art. 28: domínio do veículo a todo momento",
-   "cartoes": [
-    "anki_certo_errado.tsv:37"
-   ],
-   "ids_editoriais": [
-    "R26"
-   ]
+   "motivo": "Baixa para a PRF: princípio genérico, sem decisão a treinar",
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "U05",
    "pag": [
     6
    ],
+   "p": "baixa",
    "conteudo": "Art. 29, I: circulação pela direita, exceções sinalizadas",
-   "cartoes": [
-    "anki_certo_errado.tsv:68"
-   ],
-   "ids_editoriais": [
-    "R27"
-   ]
+   "motivo": "Baixa para a PRF: regra elementar, sem questão localizada",
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "U06",
    "pag": [
     6
    ],
+   "p": "media",
    "conteudo": "Art. 29, II: distância de segurança lateral e frontal, sem valor fixo",
    "cartoes": [
-    "anki_certo_errado.tsv:39"
+    "anki_certo_errado.tsv:50"
    ],
    "ids_editoriais": [
     "R28"
@@ -96,9 +87,10 @@
    "pag": [
     6
    ],
-   "conteudo": "Distância lateral de 1,50 m ao ultrapassar bicicleta",
+   "p": "alta",
+   "conteudo": "Distância lateral de 1,50 m ao ultrapassar bicicleta (art. 201)",
    "cartoes": [
-    "anki_certo_errado.tsv:88"
+    "anki_certo_errado.tsv:34"
    ],
    "ids_editoriais": [
     "R29"
@@ -109,12 +101,13 @@
    "pag": [
     6
    ],
+   "p": "alta",
    "conteudo": "Art. 29, III: preferência em local não sinalizado (rodovia, rotatória, direita)",
    "cartoes": [
-    "anki_certo_errado.tsv:77",
-    "anki_certo_errado.tsv:71",
-    "anki_certo_errado.tsv:87",
-    "anki_certo_errado.tsv:6"
+    "anki_certo_errado.tsv:67",
+    "anki_certo_errado.tsv:35",
+    "anki_certo_errado.tsv:20",
+    "anki_certo_errado.tsv:2"
    ],
    "ids_editoriais": [
     "R01",
@@ -128,10 +121,11 @@
    "pag": [
     6
    ],
+   "p": "alta",
    "conteudo": "Art. 29, IV: faixas da direita (lentos) e da esquerda (ultrapassagem)",
    "cartoes": [
-    "anki_certo_errado.tsv:11",
-    "anki_certo_errado.tsv:46"
+    "anki_certo_errado.tsv:30",
+    "anki_certo_errado.tsv:70"
    ],
    "ids_editoriais": [
     "R03",
@@ -143,9 +137,10 @@
    "pag": [
     7
    ],
+   "p": "alta",
    "conteudo": "Art. 29, V: passeios e acostamentos só para entrar ou sair de imóveis",
    "cartoes": [
-    "anki_certo_errado.tsv:50"
+    "anki_certo_errado.tsv:48"
    ],
    "ids_editoriais": [
     "R30"
@@ -156,9 +151,10 @@
    "pag": [
     7
    ],
+   "p": "media",
    "conteudo": "Art. 29, VI: batedores",
    "cartoes": [
-    "anki_certo_errado.tsv:78"
+    "anki_certo_errado.tsv:52"
    ],
    "ids_editoriais": [
     "R31"
@@ -169,12 +165,13 @@
    "pag": [
     7
    ],
+   "p": "alta",
    "conteudo": "Art. 29, VII e disposições: prerrogativas e identificação dos veículos de emergência; deveres de condutores e pedestres",
    "cartoes": [
-    "anki_certo_errado.tsv:13",
-    "anki_certo_errado.tsv:34",
-    "anki_certo_errado.tsv:43",
-    "anki_certo_errado.tsv:90"
+    "anki_certo_errado.tsv:62",
+    "anki_certo_errado.tsv:5",
+    "anki_certo_errado.tsv:75",
+    "anki_certo_errado.tsv:60"
    ],
    "ids_editoriais": [
     "R07",
@@ -188,9 +185,10 @@
    "pag": [
     7
    ],
+   "p": "media",
    "conteudo": "Art. 29, VII, d: prioridade com velocidade reduzida",
    "cartoes": [
-    "anki_certo_errado.tsv:35"
+    "anki_certo_errado.tsv:15"
    ],
    "ids_editoriais": [
     "R32"
@@ -201,9 +199,10 @@
    "pag": [
     8
    ],
+   "p": "media",
    "conteudo": "Art. 29, VIII: utilidade pública",
    "cartoes": [
-    "anki_certo_errado.tsv:28"
+    "anki_certo_errado.tsv:18"
    ],
    "ids_editoriais": [
     "R09"
@@ -214,9 +213,10 @@
    "pag": [
     8
    ],
+   "p": "alta",
    "conteudo": "Art. 29, IX: ultrapassagem pela esquerda e exceção",
    "cartoes": [
-    "anki_certo_errado.tsv:16"
+    "anki_certo_errado.tsv:25"
    ],
    "ids_editoriais": [
     "R04"
@@ -227,11 +227,12 @@
    "pag": [
     8
    ],
+   "p": "alta",
    "conteudo": "Art. 29, X e XI: quadro antes e durante a ultrapassagem",
    "cartoes": [
-    "anki_certo_errado.tsv:66",
-    "anki_certo_errado.tsv:20",
-    "anki_certo_errado.tsv:25"
+    "anki_certo_errado.tsv:1",
+    "anki_certo_errado.tsv:73",
+    "anki_certo_errado.tsv:26"
    ],
    "ids_editoriais": [
     "R33",
@@ -244,37 +245,46 @@
    "pag": [
     8
    ],
+   "p": "baixa",
    "conteudo": "Art. 29, XII: trilhos",
-   "cartoes": [
-    "anki_certo_errado.tsv:53"
-   ],
-   "ids_editoriais": [
-    "R35"
-   ]
+   "motivo": "Baixa para a PRF: veículo sobre trilhos é raro nas rodovias federais; sem questão localizada",
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "U18",
    "pag": [
     9
    ],
-   "conteudo": "Art. 30: quem é ultrapassado; parágrafo único: fila de lentos",
+   "p": "alta",
+   "conteudo": "Art. 30: quem é ultrapassado vai para a direita sem acelerar",
    "cartoes": [
-    "anki_certo_errado.tsv:58",
-    "anki_certo_errado.tsv:54"
+    "anki_certo_errado.tsv:45"
    ],
    "ids_editoriais": [
-    "R05",
-    "R36"
+    "R05"
    ]
+  },
+  {
+   "u": "U18B",
+   "pag": [
+    9
+   ],
+   "p": "baixa",
+   "conteudo": "Art. 30, parágrafo único: fila de veículos lentos",
+   "motivo": "Baixa para a PRF: detalhe de conduta sem questão localizada",
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "U19",
    "pag": [
     9
    ],
+   "p": "media",
    "conteudo": "Art. 31: coletivo parado (e a curiosidade dos ônibus escolares nos EUA, usada como contraste)",
    "cartoes": [
-    "anki_certo_errado.tsv:86"
+    "anki_certo_errado.tsv:11"
    ],
    "ids_editoriais": [
     "D04"
@@ -285,10 +295,11 @@
    "pag": [
     9
    ],
+   "p": "alta",
    "conteudo": "Art. 32: locais proibidos em pista única de mão dupla",
    "cartoes": [
-    "anki_certo_errado.tsv:55",
-    "anki_certo_errado.tsv:70"
+    "anki_certo_errado.tsv:43",
+    "anki_certo_errado.tsv:76"
    ],
    "ids_editoriais": [
     "R06",
@@ -300,9 +311,10 @@
    "pag": [
     9
    ],
+   "p": "alta",
    "conteudo": "Art. 33: interseções",
    "cartoes": [
-    "anki_certo_errado.tsv:74"
+    "anki_certo_errado.tsv:38"
    ],
    "ids_editoriais": [
     "R37"
@@ -313,9 +325,10 @@
    "pag": [
     10
    ],
+   "p": "media",
    "conteudo": "Art. 34: certificar-se de que a manobra é segura",
    "cartoes": [
-    "anki_certo_errado.tsv:7"
+    "anki_certo_errado.tsv:68"
    ],
    "ids_editoriais": [
     "R38"
@@ -326,10 +339,11 @@
    "pag": [
     10
    ],
+   "p": "media",
    "conteudo": "Art. 35: sinalizar deslocamento lateral; definição",
    "cartoes": [
     "anki_cloze.tsv:5",
-    "anki_certo_errado.tsv:60"
+    "anki_certo_errado.tsv:4"
    ],
    "ids_editoriais": [
     "C05",
@@ -341,9 +355,10 @@
    "pag": [
     10
    ],
+   "p": "media",
    "conteudo": "Art. 36: lote lindeiro",
    "cartoes": [
-    "anki_certo_errado.tsv:33"
+    "anki_certo_errado.tsv:56"
    ],
    "ids_editoriais": [
     "R39"
@@ -354,9 +369,10 @@
    "pag": [
     10
    ],
+   "p": "alta",
    "conteudo": "Art. 37: retorno em via com acostamento",
    "cartoes": [
-    "anki_certo_errado.tsv:94"
+    "anki_certo_errado.tsv:78"
    ],
    "ids_editoriais": [
     "R16"
@@ -367,10 +383,11 @@
    "pag": [
     10
    ],
+   "p": "media",
    "conteudo": "Art. 38: posição antes de entrar à direita ou à esquerda; ceder passagem",
    "cartoes": [
-    "anki_certo_errado.tsv:30",
-    "anki_certo_errado.tsv:21"
+    "anki_certo_errado.tsv:47",
+    "anki_certo_errado.tsv:14"
    ],
    "ids_editoriais": [
     "R40",
@@ -382,9 +399,10 @@
    "pag": [
     10
    ],
+   "p": "media",
    "conteudo": "Art. 39: retorno em vias urbanas",
    "cartoes": [
-    "anki_certo_errado.tsv:93"
+    "anki_certo_errado.tsv:33"
    ],
    "ids_editoriais": [
     "R41"
@@ -395,11 +413,12 @@
    "pag": [
     10
    ],
+   "p": "alta",
    "conteudo": "Faróis: luz baixa (noite; túnel, chuva, neblina) e luz alta (vias não iluminadas)",
    "cartoes": [
-    "anki_certo_errado.tsv:49",
-    "anki_certo_errado.tsv:48",
-    "anki_certo_errado.tsv:36"
+    "anki_certo_errado.tsv:37",
+    "anki_certo_errado.tsv:41",
+    "anki_certo_errado.tsv:24"
    ],
    "ids_editoriais": [
     "R10",
@@ -412,9 +431,10 @@
    "pag": [
     10
    ],
+   "p": "media",
    "conteudo": "Troca intermitente de luz baixa e alta",
    "cartoes": [
-    "anki_certo_errado.tsv:56"
+    "anki_certo_errado.tsv:44"
    ],
    "ids_editoriais": [
     "R22"
@@ -425,9 +445,10 @@
    "pag": [
     11
    ],
+   "p": "alta",
    "conteudo": "Art. 40, § 1º: coletivos em faixa própria e motocicletas com luz baixa dia e noite",
    "cartoes": [
-    "anki_certo_errado.tsv:18"
+    "anki_certo_errado.tsv:42"
    ],
    "ids_editoriais": [
     "R43"
@@ -438,10 +459,11 @@
    "pag": [
     11
    ],
+   "p": "alta",
    "conteudo": "Art. 40, § 2º: faróis de dia em rodovia de pista simples (Lei 14.071/2020)",
    "cartoes": [
-    "anki_certo_errado.tsv:76",
-    "anki_certo_errado.tsv:19"
+    "anki_certo_errado.tsv:66",
+    "anki_certo_errado.tsv:55"
    ],
    "ids_editoriais": [
     "R11",
@@ -453,21 +475,18 @@
    "pag": [
     11
    ],
+   "p": "baixa",
    "conteudo": "Luz de placa e luzes de posição",
-   "cartoes": [
-    "anki_certo_errado.tsv:12",
-    "anki_certo_errado.tsv:65"
-   ],
-   "ids_editoriais": [
-    "R44",
-    "R45"
-   ]
+   "motivo": "Baixa para a PRF: detalhe de equipamento, sem questão localizada",
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "U33",
    "pag": [
     11
    ],
+   "p": "media",
    "conteudo": "Pisca-alerta",
    "cartoes": [
     "anki_certo_errado.tsv:64"
@@ -481,9 +500,10 @@
    "pag": [
     11
    ],
+   "p": "media",
    "conteudo": "Buzina",
    "cartoes": [
-    "anki_certo_errado.tsv:15"
+    "anki_certo_errado.tsv:8"
    ],
    "ids_editoriais": [
     "R12"
@@ -494,9 +514,10 @@
    "pag": [
     11
    ],
+   "p": "media",
    "conteudo": "Art. 42: frear bruscamente",
    "cartoes": [
-    "anki_certo_errado.tsv:57"
+    "anki_certo_errado.tsv:32"
    ],
    "ids_editoriais": [
     "R47"
@@ -507,10 +528,11 @@
    "pag": [
     11
    ],
+   "p": "media",
    "conteudo": "Art. 43: velocidade (I a III)",
    "cartoes": [
-    "anki_certo_errado.tsv:61",
-    "anki_certo_errado.tsv:14"
+    "anki_certo_errado.tsv:28",
+    "anki_certo_errado.tsv:39"
    ],
    "ids_editoriais": [
     "R48",
@@ -522,9 +544,10 @@
    "pag": [
     11
    ],
+   "p": "alta",
    "conteudo": "Art. 44: prudência no cruzamento",
    "cartoes": [
-    "anki_certo_errado.tsv:40"
+    "anki_certo_errado.tsv:77"
    ],
    "ids_editoriais": [
     "R50"
@@ -535,9 +558,10 @@
    "pag": [
     12
    ],
+   "p": "media",
    "conteudo": "Art. 44-A: conversão à direita no vermelho (e a regra dos EUA, usada como erro)",
    "cartoes": [
-    "anki_certo_errado.tsv:73"
+    "anki_certo_errado.tsv:29"
    ],
    "ids_editoriais": [
     "R13"
@@ -548,9 +572,10 @@
    "pag": [
     12
    ],
+   "p": "media",
    "conteudo": "Art. 46: sinalização de advertência na imobilização de emergência",
    "cartoes": [
-    "anki_certo_errado.tsv:67"
+    "anki_certo_errado.tsv:22"
    ],
    "ids_editoriais": [
     "R51"
@@ -561,26 +586,37 @@
    "pag": [
     12
    ],
-   "conteudo": "Art. 47: parada onde é proibido estacionar; carga e descarga é estacionamento",
+   "p": "alta",
+   "conteudo": "Art. 47: parada onde é proibido estacionar",
    "cartoes": [
-    "anki_certo_errado.tsv:63",
-    "anki_certo_errado.tsv:32",
-    "anki_certo_errado.tsv:69"
+    "anki_certo_errado.tsv:7"
    ],
    "ids_editoriais": [
-    "R52",
-    "R53",
-    "D17"
+    "R52"
    ]
+  },
+  {
+   "u": "U40B",
+   "pag": [
+    12
+   ],
+   "p": "media",
+   "conteudo": "Art. 47, parágrafo único: carga e descarga é estacionamento",
+   "colecao": [
+    "1792883029821"
+   ],
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "U41",
    "pag": [
     12
    ],
+   "p": "media",
    "conteudo": "Art. 48: posição no sentido do fluxo, junto à guia",
    "cartoes": [
-    "anki_certo_errado.tsv:84"
+    "anki_certo_errado.tsv:57"
    ],
    "ids_editoriais": [
     "R54"
@@ -591,9 +627,10 @@
    "pag": [
     12
    ],
+   "p": "media",
    "conteudo": "Art. 49: portas e lado do embarque",
    "cartoes": [
-    "anki_certo_errado.tsv:89"
+    "anki_certo_errado.tsv:74"
    ],
    "ids_editoriais": [
     "R14"
@@ -604,40 +641,33 @@
    "pag": [
     12
    ],
+   "p": "baixa",
    "conteudo": "Arts. 50 e 51: faixas laterais de domínio; vias de condomínio",
-   "cartoes": [
-    "anki_certo_errado.tsv:1",
-    "anki_certo_errado.tsv:38"
-   ],
-   "ids_editoriais": [
-    "R56",
-    "R55"
-   ]
+   "motivo": "Baixa para a PRF: regras administrativas do órgão com circunscrição, sem questão localizada",
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "U44",
    "pag": [
     12
    ],
+   "p": "baixa",
    "conteudo": "Arts. 52 e 53: tração animal; animais e rebanhos",
-   "cartoes": [
-    "anki_certo_errado.tsv:79",
-    "anki_certo_errado.tsv:72"
-   ],
-   "ids_editoriais": [
-    "R57",
-    "R58"
-   ]
+   "motivo": "Baixa para a PRF: situação rara nas rodovias federais, sem questão localizada",
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "U45",
    "pag": [
     13
    ],
+   "p": "alta",
    "conteudo": "Arts. 54 e 55: condutor e passageiro de motocicleta",
    "cartoes": [
-    "anki_certo_errado.tsv:23",
-    "anki_certo_errado.tsv:5"
+    "anki_certo_errado.tsv:6",
+    "anki_certo_errado.tsv:3"
    ],
    "ids_editoriais": [
     "R59",
@@ -649,11 +679,12 @@
    "pag": [
     13
    ],
+   "p": "media",
    "conteudo": "Art. 57: ciclomotor (direita, proibições, faixa adjacente) e conceito",
    "cartoes": [
-    "anki_certo_errado.tsv:41",
-    "anki_certo_errado.tsv:9",
-    "anki_certo_errado.tsv:46"
+    "anki_certo_errado.tsv:17",
+    "anki_certo_errado.tsv:10",
+    "anki_certo_errado.tsv:70"
    ],
    "ids_editoriais": [
     "R61",
@@ -666,10 +697,11 @@
    "pag": [
     13
    ],
+   "p": "media",
    "conteudo": "Art. 58: bicicletas nos bordos, mesmo sentido, preferência; contrafluxo com ciclofaixa",
    "cartoes": [
-    "anki_certo_errado.tsv:81",
-    "anki_certo_errado.tsv:75"
+    "anki_certo_errado.tsv:19",
+    "anki_certo_errado.tsv:65"
    ],
    "ids_editoriais": [
     "R63",
@@ -681,9 +713,10 @@
    "pag": [
     13
    ],
+   "p": "media",
    "conteudo": "Art. 59: bicicleta no passeio",
    "cartoes": [
-    "anki_certo_errado.tsv:47"
+    "anki_certo_errado.tsv:49"
    ],
    "ids_editoriais": [
     "R64"
@@ -694,10 +727,11 @@
    "pag": [
     14
    ],
+   "p": "alta",
    "conteudo": "Art. 64: crianças menores de 10 anos e 1,45 m",
    "cartoes": [
     "anki_cloze.tsv:1",
-    "anki_certo_errado.tsv:3"
+    "anki_certo_errado.tsv:59"
    ],
    "ids_editoriais": [
     "C01",
@@ -709,12 +743,15 @@
    "pag": [
     14
    ],
+   "p": "alta",
    "conteudo": "Art. 65: cinto de segurança",
    "cartoes": [
-    "anki_certo_errado.tsv:92"
+    "anki_certo_errado.tsv:23",
+    "anki_certo_errado.tsv:46"
    ],
    "ids_editoriais": [
-    "R65"
+    "R65",
+    "D19"
    ]
   },
   {
@@ -722,15 +759,11 @@
    "pag": [
     14
    ],
+   "p": "baixa",
    "conteudo": "Art. 67: provas desportivas, requisitos e valores mínimos",
-   "cartoes": [
-    "anki_certo_errado.tsv:91",
-    "anki_certo_errado.tsv:26"
-   ],
-   "ids_editoriais": [
-    "R66",
-    "R67"
-   ]
+   "motivo": "Baixa para a PRF: autorização administrativa, sem questão localizada",
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "U52",
@@ -738,9 +771,10 @@
     14,
     15
    ],
+   "p": "alta",
    "conteudo": "Art. 67-A: motoristas profissionais alcançados (não inclui aplicativo)",
    "cartoes": [
-    "anki_certo_errado.tsv:29"
+    "anki_certo_errado.tsv:51"
    ],
    "ids_editoriais": [
     "R17"
@@ -751,6 +785,7 @@
    "pag": [
     15
    ],
+   "p": "alta",
    "conteudo": "Art. 67-C, caput: 5 h 30 ininterruptas",
    "cartoes": [
     "anki_cloze.tsv:2"
@@ -764,10 +799,11 @@
    "pag": [
     15
    ],
+   "p": "alta",
    "conteudo": "Art. 67-C, § 1º: carga, 30 min dentro de cada 6 h, fracionável (situações 01 e 02)",
    "cartoes": [
-    "anki_certo_errado.tsv:8",
-    "anki_certo_errado.tsv:22"
+    "anki_certo_errado.tsv:27",
+    "anki_certo_errado.tsv:16"
    ],
    "ids_editoriais": [
     "R18",
@@ -779,10 +815,11 @@
    "pag": [
     16
    ],
+   "p": "alta",
    "conteudo": "Art. 67-C, § 1º-A: passageiros, 30 min a cada 4 h",
    "cartoes": [
     "anki_cloze.tsv:3",
-    "anki_certo_errado.tsv:24"
+    "anki_certo_errado.tsv:72"
    ],
    "ids_editoriais": [
     "C03",
@@ -794,9 +831,10 @@
    "pag": [
     16
    ],
+   "p": "alta",
    "conteudo": "Art. 67-C, §§ 2º e 8º: elevação do tempo até local seguro; CONTRAN define as situações (Lei 14.599/2023)",
    "cartoes": [
-    "anki_certo_errado.tsv:45"
+    "anki_certo_errado.tsv:53"
    ],
    "ids_editoriais": [
     "D14"
@@ -807,11 +845,12 @@
    "pag": [
     16
    ],
+   "p": "alta",
    "conteudo": "Art. 67-C, § 3º: 11 h de descanso; ADI 5.322",
    "cartoes": [
-    "anki_certo_errado.tsv:52",
+    "anki_certo_errado.tsv:40",
     "anki_cloze.tsv:4",
-    "anki_certo_errado.tsv:27"
+    "anki_certo_errado.tsv:61"
    ],
    "ids_editoriais": [
     "R19",
@@ -824,10 +863,11 @@
    "pag": [
     16
    ],
+   "p": "alta",
    "conteudo": "Art. 67-C, §§ 4º e 5º: tempo de direção e início de viagem",
    "cartoes": [
-    "anki_certo_errado.tsv:2",
-    "anki_certo_errado.tsv:59"
+    "anki_certo_errado.tsv:21",
+    "anki_certo_errado.tsv:63"
    ],
    "ids_editoriais": [
     "R68",
@@ -839,11 +879,12 @@
    "pag": [
     16
    ],
+   "p": "alta",
    "conteudo": "Art. 67-E: meios de registro, independência do equipamento, responsabilidade do motorista",
    "cartoes": [
-    "anki_certo_errado.tsv:51",
-    "anki_certo_errado.tsv:4",
-    "anki_certo_errado.tsv:44"
+    "anki_certo_errado.tsv:71",
+    "anki_certo_errado.tsv:54",
+    "anki_certo_errado.tsv:36"
    ],
    "ids_editoriais": [
     "R70",
@@ -857,10 +898,11 @@
     17,
     20
    ],
+   "p": "alta",
    "conteudo": "Questão 01 (IBEST 2023): lado da ultrapassagem",
    "questao": "ibest-2023-prefeitura-de-alexania-go-10d3b1",
    "cartoes": [
-    "anki_certo_errado.tsv:16"
+    "anki_certo_errado.tsv:25"
    ],
    "ids_editoriais": [
     "R04"
@@ -872,10 +914,11 @@
     17,
     20
    ],
+   "p": "alta",
    "conteudo": "Questão 02 (Cebraspe PRF/CFP 2015): faixa da direita",
    "questao": "cebraspe-2015-prf-f2c551",
    "cartoes": [
-    "anki_certo_errado.tsv:11"
+    "anki_certo_errado.tsv:30"
    ],
    "ids_editoriais": [
     "R03"
@@ -887,11 +930,12 @@
     17,
     20
    ],
+   "p": "alta",
    "conteudo": "Questão 03 (Cebraspe TRF1 2017): cruzamento e quem é ultrapassado",
    "questao": "cebraspe-2017-trf-1a-regiao-790cad",
    "cartoes": [
-    "anki_certo_errado.tsv:58",
-    "anki_certo_errado.tsv:40"
+    "anki_certo_errado.tsv:45",
+    "anki_certo_errado.tsv:77"
    ],
    "ids_editoriais": [
     "R05",
@@ -905,10 +949,11 @@
     20,
     21
    ],
+   "p": "media",
    "conteudo": "Questão 04 (IBEST 2023): faixa de domínio × faixa de trânsito",
    "questao": "ibest-2023-prefeitura-de-alexania-go-120b09",
    "cartoes": [
-    "anki_certo_errado.tsv:82"
+    "anki_certo_errado.tsv:13"
    ],
    "ids_editoriais": [
     "R71"
@@ -920,10 +965,11 @@
     17,
     21
    ],
+   "p": "media",
    "conteudo": "Questão 05 (Vunesp 2023): tara",
    "questao": "vunesp-2023-prefeitura-de-pindamonhangaba-3a4b22",
    "cartoes": [
-    "anki_certo_errado.tsv:85"
+    "anki_certo_errado.tsv:9"
    ],
    "ids_editoriais": [
     "R72"
@@ -935,10 +981,11 @@
     17,
     21
    ],
+   "p": "media",
    "conteudo": "Questão 06 (SOCIESC 2011): logradouro público",
    "questao": "sociesc-2011-agente-de-transito-a6b532",
    "cartoes": [
-    "anki_certo_errado.tsv:31"
+    "anki_certo_errado.tsv:69"
    ],
    "ids_editoriais": [
     "R73"
@@ -952,10 +999,11 @@
     21,
     22
    ],
+   "p": "alta",
    "conteudo": "Questão 07 (Cebraspe São Luís 2017): parada onde é proibido estacionar",
    "questao": "cebraspe-2017-prefeitura-de-sao-luis-ma-960aa2",
    "cartoes": [
-    "anki_certo_errado.tsv:63"
+    "anki_certo_errado.tsv:7"
    ],
    "ids_editoriais": [
     "R52"
@@ -967,14 +1015,14 @@
     18,
     22
    ],
-   "conteudo": "Questão 08 (Vunesp 2022): parada × estacionamento",
+   "p": "media",
+   "conteudo": "Questão 08 (Vunesp 2022): parada × estacionamento após o desembarque",
    "questao": "vunesp-2022-prefeitura-municipal-de-morro-agudo-ccc3e9",
-   "cartoes": [
-    "anki_certo_errado.tsv:69"
+   "colecao": [
+    "1792883029820"
    ],
-   "ids_editoriais": [
-    "D17"
-   ]
+   "cartoes": [],
+   "ids_editoriais": []
   },
   {
    "u": "Q09",
@@ -982,10 +1030,11 @@
     18,
     22
    ],
+   "p": "alta",
    "conteudo": "Questão 09 (Cebraspe São Luís 2017): retorno pelo acostamento",
    "questao": "cebraspe-2017-prefeitura-de-sao-luis-ma-7c6eb5",
    "cartoes": [
-    "anki_certo_errado.tsv:94"
+    "anki_certo_errado.tsv:78"
    ],
    "ids_editoriais": [
     "R16"
@@ -997,10 +1046,11 @@
     18,
     23
    ],
+   "p": "alta",
    "conteudo": "Questão 10 (Cebraspe São Luís 2017): faixa da esquerda",
    "questao": "cebraspe-2017-prefeitura-de-sao-luis-ma-819758",
    "cartoes": [
-    "anki_certo_errado.tsv:11"
+    "anki_certo_errado.tsv:30"
    ],
    "ids_editoriais": [
     "R03"
@@ -1012,10 +1062,11 @@
     18,
     23
    ],
+   "p": "alta",
    "conteudo": "Questão 11 (Cebraspe MPU 2015): faixa exclusiva de ônibus",
    "questao": "cebraspe-2015-mpu-cb0105",
    "cartoes": [
-    "anki_certo_errado.tsv:46"
+    "anki_certo_errado.tsv:70"
    ],
    "ids_editoriais": [
     "D03"
@@ -1027,12 +1078,13 @@
     18,
     24
    ],
+   "p": "alta",
    "conteudo": "Questão 12 (Cebraspe Petrobras 2023): 4 h 30 + 30 min na carga",
    "questao": "cebraspe-2023-petrobras-043",
    "cartoes": [
-    "anki_certo_errado.tsv:22",
-    "anki_certo_errado.tsv:24",
-    "anki_certo_errado.tsv:8"
+    "anki_certo_errado.tsv:16",
+    "anki_certo_errado.tsv:72",
+    "anki_certo_errado.tsv:27"
    ],
    "ids_editoriais": [
     "D11",
@@ -1046,14 +1098,15 @@
     19,
     24
    ],
+   "p": "alta",
    "conteudo": "Questão 13 (Cebraspe Barra dos Coqueiros 2020): pedestre e semáforo, ciclista desmontado, contrafluxo, 5 h 30, registrador",
    "questao": "cebraspe-2020-prefeitura-de-barra-dos-coqueiros-2ac49c",
    "cartoes": [
-    "anki_certo_errado.tsv:83",
-    "anki_certo_errado.tsv:10",
-    "anki_certo_errado.tsv:75",
+    "anki_certo_errado.tsv:58",
+    "anki_certo_errado.tsv:31",
+    "anki_certo_errado.tsv:65",
     "anki_cloze.tsv:2",
-    "anki_certo_errado.tsv:80"
+    "anki_certo_errado.tsv:12"
    ],
    "ids_editoriais": [
     "R74",
@@ -1070,6 +1123,7 @@
     24,
     25
    ],
+   "p": "alta",
    "conteudo": "Questão 14 (Instituto Darwin 2023): 11 h de descanso",
    "questao": "instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab",
    "cartoes": [
@@ -1085,6 +1139,7 @@
     19,
     25
    ],
+   "p": "alta",
    "conteudo": "Questão 15 (Cesgranrio 2023): 5 h 30",
    "questao": "cesgranrio-2023-transpetro-3f6c19",
    "cartoes": [
