@@ -340,11 +340,27 @@ def validar_questao(q: Questao, raiz=None) -> tuple[list[str], list[str]]:
     return erros, avisos
 
 
+IMAGENS = 'imagens'  # referencias/imagens/: figuras recortadas dos cadernos, citadas como ![[arquivo.png]]
+EMBUTIDA = re.compile(r'!\[\[([^\]|#]+)(?:[|#][^\]]*)?\]\]')
+
+
+def imagens_citadas(corpo: str) -> list[str]:
+    """Nomes das imagens embutidas no estilo Obsidian (![[arquivo.png]] ou ![[arquivo.png|legenda]])."""
+    return [m.strip() for m in EMBUTIDA.findall(corpo)]
+
+
+def validar_imagens(q: Questao, raiz=None) -> list[str]:
+    pasta = raiz_banco(raiz) / IMAGENS
+    return [f'{q.caminho.name}: imagem {nome!r} não encontrada em {IMAGENS}/'
+            for nome in imagens_citadas(q.corpo) if '/' in nome or not (pasta / nome).is_file()]
+
+
 def validar(raiz=None) -> tuple[list[Questao], list[str], list[str]]:
     questoes, erros = carregar(raiz)
     avisos, validas, por_hash, por_id = [], [], {}, {}
     for q in questoes:
         e, a = validar_questao(q, raiz)
+        e += validar_imagens(q, raiz)
         erros += e
         avisos += a
         if not e:

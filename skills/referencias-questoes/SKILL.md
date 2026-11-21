@@ -136,6 +136,12 @@ seções `## `), por exemplo:
   é escrita com palavras próprias. Simulados autorais de cursos não entram.
 - Lei, decreto e decisão judicial são de domínio público (texto literal permitido); edital
   pode ser transcrito no trecho do programa; notícia é resumo com palavras próprias e link.
+- Questão com figura (gráfico, foto, tela de programa, ícone, desenho): recorte a figura do caderno
+  oficial em PNG (tons de cinza, cerca de 130 dpi), salve em `referencias/imagens/<id-da-questão>-figN.png`
+  e embuta no estilo Obsidian, `![[<id-da-questão>-figN.png]]`, no ponto em que ela aparece: no texto-base
+  (linha `> ![[...]]`) ou depois do enunciado. Figura comum a vários itens é um arquivo só, citado em
+  todos. Ao lado, uma descrição curta entre colchetes (valores de gráfico, conteúdo da tela) para a busca
+  por texto. O `validar` recusa imagem citada que não exista em `imagens/`.
 - Remova marcas-d'água e dados pessoais (nome, CPF, e-mail); o `validar` recusa CPF, e-mail
   e “licenciado para”.
 - Não complete trechos ilegíveis nem invente gabarito, URL, data ou dispositivo: use

@@ -8,6 +8,7 @@ frontmatter padronizado:
 - `conteudos/<disciplina>/<assunto>/`: texto normativo verificado (reuso por até 90 dias, com checagem rápida);
 - `noticias/<disciplina>/<assunto>/`: alterações legais, decisões judiciais, mudanças de edital;
 - `prioridades/<concurso>/<disciplina>/`: prioridade por assunto e o que mais cai (contado).
+- `imagens/`: figuras recortadas dos cadernos oficiais, embutidas nas questões como `![[arquivo.png]]` (estilo Obsidian).
 
 Arquivos gerados (não editar à mão):
 

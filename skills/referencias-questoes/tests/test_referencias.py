@@ -249,3 +249,15 @@ def test_documento_invalido_aponta_problemas(banco):
 def _hoje():
     import datetime
     return datetime.date.today().isoformat()
+
+
+def test_imagem_embutida_precisa_existir_em_imagens(banco):
+    status, questao, msgs = ref.nova(q(9, 'Na figura, o ícone indicado abre um novo documento.\n\n![[fig-teste.png]]'), banco)
+    assert status == 'criada', msgs
+    assert ref.imagens_citadas(questao.corpo) == ['fig-teste.png']
+    _, erros, _ = ref.validar(banco)
+    assert any('fig-teste.png' in e for e in erros)
+    (banco / 'imagens').mkdir()
+    (banco / 'imagens' / 'fig-teste.png').write_bytes(b'\x89PNG\r\n\x1a\n')
+    _, erros, _ = ref.validar(banco)
+    assert erros == []
