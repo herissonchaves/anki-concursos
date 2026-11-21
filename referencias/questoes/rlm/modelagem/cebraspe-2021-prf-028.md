@@ -14,9 +14,9 @@ assunto: modelagem
 subassuntos: [porcentagem, funcao_quadratica]
 palavras_chave: [espalhamento, "equação do segundo grau", "duas raízes"]
 gabarito: E
-gabarito_status: nao_verificado
+gabarito_status: definitivo
 url: "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF"
-gabarito_url: nao_localizado
+gabarito_url: "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
 origem: pesquisa_internet
 fonte_descoberta: "Caderno oficial no CDN do Cebraspe, localizado por busca web"
 consulta: 2026-11-20
@@ -35,8 +35,8 @@ Se, em determinado instante, o espalhamento de uma notícia é igual a 16% por u
 
 ## Gabarito
 
-**Errado** — nao verificado
+**Errado** — definitivo ([gabarito oficial](https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF))
 
 ## Análise
 
-Pela resolução própria: p(1 − p) = 0,16 dá p = 0,2 ou p = 0,8; no segundo caso só 20% desconhecem. Gabarito oficial definitivo não localizado nesta consulta.
+Pela resolução própria: p(1 − p) = 0,16 dá p = 0,2 ou p = 0,8; no segundo caso só 20% desconhecem. Gabarito conferido no gabarito oficial definitivo (2026-11-21).

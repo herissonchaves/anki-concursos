@@ -14,9 +14,9 @@ assunto: sequencias
 subassuntos: [padroes, acumulado]
 palavras_chave: ["sequência", acumulado, "fiscalização", "padrão numérico"]
 gabarito: C
-gabarito_status: nao_verificado
+gabarito_status: definitivo
 url: "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF"
-gabarito_url: nao_localizado
+gabarito_url: "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
 origem: pesquisa_internet
 fonte_descoberta: "Caderno oficial no CDN do Cebraspe, localizado por busca web"
 consulta: 2026-11-20
@@ -35,8 +35,8 @@ Mais de 550 veículos terão sido fiscalizados até o fim da sétima hora de rea
 
 ## Gabarito
 
-**Certo** — nao verificado
+**Certo** — definitivo ([gabarito oficial](https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF))
 
 ## Análise
 
-Pela resolução própria: incrementos de 20, 40, 60, 80, 100, 120, 140 somam 560. Gabarito oficial definitivo não localizado nesta consulta.
+Pela resolução própria: incrementos de 20, 40, 60, 80, 100, 120, 140 somam 560. Gabarito conferido no gabarito oficial definitivo (2026-11-21).

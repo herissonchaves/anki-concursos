@@ -14,9 +14,9 @@ assunto: modelagem
 subassuntos: [porcentagem, funcao_quadratica]
 palavras_chave: [espalhamento, "notícia", "produto de percentuais", modelagem]
 gabarito: C
-gabarito_status: nao_verificado
+gabarito_status: definitivo
 url: "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF"
-gabarito_url: nao_localizado
+gabarito_url: "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
 origem: pesquisa_internet
 fonte_descoberta: "Caderno oficial no CDN do Cebraspe, localizado por busca web"
 consulta: 2026-11-20
@@ -35,8 +35,8 @@ Se, em determinado instante, 30% da população já conhece a notícia, então, 
 
 ## Gabarito
 
-**Certo** — nao verificado
+**Certo** — definitivo ([gabarito oficial](https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF))
 
 ## Análise
 
-Pela resolução própria: 0,30 × 0,70 = 0,21 = 21% > 20%. Gabarito oficial definitivo não localizado nesta consulta.
+Pela resolução própria: 0,30 × 0,70 = 0,21 = 21% > 20%. Gabarito conferido no gabarito oficial definitivo (2026-11-21).

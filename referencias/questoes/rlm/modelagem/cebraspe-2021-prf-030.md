@@ -14,9 +14,9 @@ assunto: modelagem
 subassuntos: [funcao_quadratica, monotonicidade]
 palavras_chave: [espalhamento, crescimento, "parábola"]
 gabarito: E
-gabarito_status: nao_verificado
+gabarito_status: definitivo
 url: "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF"
-gabarito_url: nao_localizado
+gabarito_url: "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
 origem: pesquisa_internet
 fonte_descoberta: "Caderno oficial no CDN do Cebraspe, localizado por busca web"
 consulta: 2026-11-20
@@ -35,8 +35,8 @@ O espalhamento de uma notícia será tanto maior quanto maior for o número de p
 
 ## Gabarito
 
-**Errado** — nao verificado
+**Errado** — definitivo ([gabarito oficial](https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF))
 
 ## Análise
 
-Pela resolução própria: a função cresce até p = 0,5 e decresce depois. Gabarito oficial definitivo não localizado nesta consulta.
+Pela resolução própria: a função cresce até p = 0,5 e decresce depois. Gabarito conferido no gabarito oficial definitivo (2026-11-21).

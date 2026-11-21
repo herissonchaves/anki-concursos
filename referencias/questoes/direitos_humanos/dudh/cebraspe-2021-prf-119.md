@@ -1,0 +1,38 @@
+---
+id: cebraspe-2021-prf-119
+tipo: questao
+banca: Cebraspe
+formato: certo_errado
+ano: 2021
+orgao: PRF
+concurso: "PRF — Concurso 2021 (Edital nº 1/2021; prova objetiva de 9/5/2021)"
+cargo: "Policial Rodoviário Federal"
+caderno: 578_PRF_001_01
+item: "119"
+disciplina: direitos_humanos
+assunto: dudh
+subassuntos: [dignidade_humana]
+palavras_chave: ["declaração universal", dignidade]
+gabarito: C
+gabarito_status: definitivo
+url: "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF"
+gabarito_url: "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
+origem: pesquisa_internet
+fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (página do concurso PRF_21), p. 6"
+consulta: 2026-11-21
+concursos_alvo: [PRF, PF_AGENTE]
+operacao_observada: "Papel da DUDH na afirmação da dignidade humana."
+usado_em: []
+hash: f4ad31f6364ee8bb
+---
+# Cebraspe 2021 — PRF — item 119
+
+## Enunciado
+
+> À luz da Constituição Federal de 1988 (CF), do Pacto de São José da Costa Rica e do entendimento do Supremo Tribunal Federal, julgue os itens que se seguem, relativos aos direitos humanos.
+
+A Declaração Universal dos Direitos Humanos, um dos primeiros instrumentos normativos gerais de direitos humanos adotados por uma organização internacional, destacou-se pelo fato de comportar a ideia de dignidade da pessoa humana como ponto de convergência da ética universal e do fundamento valorativo do sistema protetivo global dos direitos humanos.
+
+## Gabarito
+
+**Certo** — definitivo ([gabarito oficial](https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF))
