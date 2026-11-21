@@ -1,43 +1,86 @@
-TRIAGEM PRÉVIA DO PDF — feita antes da redação dos cartões
+TRIAGEM PRÉVIA DO PDF — inventário de cobertura total (versão 2.21)
 Material: LET020002 — Normas Gerais de Circulação e Conduta / Condução de Veículos por Motoristas Profissionais (Projeto Missão, Missão 08), 25 páginas.
-Leitura: texto extraído com PyMuPDF (skills/automacao-anki-python/scripts/extrair_pdf.py), sem OCR; 25/25 páginas com texto. Páginas 10 e 15 conferidas também como imagem (esquema de faróis; situações de descanso). Esquemas das p. 9 e 13 lidos pelo texto extraído e conferidos contra o CTB.
-Concurso-alvo: PRF. Edital de referência: PRF 2021 (Edital nº 1, 18/01/2021), Legislação de Trânsito, item 1 "Lei nº 9.503/1997 (Código de Trânsito Brasileiro) e suas alterações" — referência histórica, não edital vigente.
-Coleção do Anki (perfil concursos, leitura de cópia): baralho "Legislação de Trânsito" com 39 notas sobre arts. 1º a 3º, Anexo I (via, parada, estacionamento, PBT, rodovia/estrada) e velocidades (arts. 61 e 62). Nenhuma nota sobre os arts. 26 a 67-E.
-Questões do PDF: 15 (p. 17–25), todas salvas no banco referencias/ (origem anexo_usuario); ver selecao_e_fontes.txt.
+Leitura: texto extraído com PyMuPDF (extrair_pdf.py, texto limpo), sem OCR; 25/25 páginas com texto; p. 10 e 15 conferidas como imagem.
+Regra aplicada: cobertura total (cobertura-pdf.md). Todo conteúdo do PDF e todo conteúdo das 15 questões do PDF têm ao menos um card; só capa, apresentação e sumário ficaram de fora (não são conteúdo de estudo). Notas parecidas da coleção (parada × estacionamento, rodovia) não contaram como cobertura.
+O mesmo inventário é o bloco COBERTURA do gerador; o montar_lote.py bloqueia unidade sem card e grava relatorios/cobertura_pdf.json; cada card leva as tags Pagina_NN.
+Concurso-alvo: PRF. Edital de referência: PRF 2021, Legislação de Trânsito, item 1 (CTB e alterações) — referência histórica.
+Prioridade A/B/C indica só o formato: A em geral R + D (ou Cloze + D); B e C em geral um R curto.
 
-ID | página | prioridade | alvo / valor | operação | formato | decisão
-T01 | 6 | A | Preferência em local não sinalizado (rodovia, rotatória, direita) | memória + seleção de regra | R/D | R01, R02, D01, D02
-T02 | 6 | A | Destinação das faixas (art. 29, IV) | memória | R | R03 (cobrado: Cebraspe PRF/CFP 2015, São Luís 2017, MPU 2015)
-T03 | 6, 13 | A | Faixa exclusiva à direita → faixa adjacente (ciclomotor, art. 57) | aplicação | D | D03
-T04 | 8 | A | Ultrapassagem pela esquerda e exceção (art. 29, IX) | memória | R | R04 (IBEST 2023, IDCAP 2026)
-T05 | 9 | A | Quem é ultrapassado: direita, sem acelerar (art. 30) | memória | R | R05
-T06 | 9 | B | Coletivo parado embarcando (art. 31) | distinção cautela × proibição | D | D04
-T07 | 9 | A | Locais proibidos de ultrapassar e exceção (arts. 32 e 33) | memória + condição | R/D | R06 (com mnemônico autoral), D05
-T08 | 7 | A | Veículos de emergência: prerrogativas, identificação, deveres de condutores e pedestres | memória + aplicação | R/D | R07, R08, D06, D07
-T09 | 8 | B | Utilidade pública: só livre parada e estacionamento | distinção | R | R09
-T10 | 10 | A | Luz alta e exceções; troca intermitente | memória + aplicação | R/D | R10, R22, D08
-T11 | 11 | A | Farol de dia em rodovia de pista simples sem DRL (Lei 14.071/2020) | memória + alcance | R/D | R11, D09
-T12 | 11 | B | Buzina (toque breve, duas hipóteses) | memória | R | R12
-T13 | 12 | A | Conversão à direita no vermelho só com sinalização (art. 44-A) | memória | R | R13
-T14 | 12 | B | Embarque do lado da calçada (art. 49) | memória | R | R14
-T15 | 10, 22 | B | Retorno em via com acostamento (art. 37) | memória | R | R16 (Cebraspe São Luís 2017)
-T16 | 13 | B | Contrafluxo de bicicletas só com ciclofaixa (art. 58) | memória | R | R15 (Cebraspe Barra dos Coqueiros 2020)
-T17 | 14 | A | Crianças < 10 anos e < 1,45 m (art. 64) | memória exata + aplicação | Cloze/D | C01, D10
-T18 | 15 | A | Alcance do cap. III-A (coletivo de passageiros e cargas) | memória | R | R17
-T19 | 15 | A | 5 h 30 ininterruptas | memória exata | Cloze | C02 (+ D11, D14)
-T20 | 15 | A | Carga: 30 min dentro de cada 6 h, fracionável | memória + cálculo | R/D | R18, D11
-T21 | 16 | A | Passageiros: 30 min a cada 4 h | memória exata + aplicação | Cloze/D | C03, D12
-T22 | 16 | A | 11 h de descanso em 24 h; ADI 5.322 derrubou o fracionamento | atualização + aplicação | R/Cloze/D | R19, C04, D13 (o PDF ainda traz a redação antiga como válida na questão 14)
-T23 | 16 | B | Exceção: elevar o tempo até local seguro (§§ 2º e 8º) | aplicação | D | D14
-T24 | 16 | A | Registro do tempo: meios, independência do equipamento, responsabilidade do motorista | memória | R | R20, R21 (PRF 2021, itens 77 e 79)
-T25 | 5 | C | Arts. 26 a 28 (deveres gerais, combustível, domínio do veículo) | — | não criar | regras genéricas, sem operação útil além do bom senso; nenhuma questão encontrada
-T26 | 7 | C | Batedores (art. 29, VI) | — | não criar | citado só como contraste no verso de R09
-T27 | 11 | C | Luz de placa, luzes de posição, pisca-alerta | — | não criar | baixo valor; pisca-alerta sem formulação C/E inequívoca (hipótese "emergência" é aberta)
-T28 | 11 | C | Art. 42 (frear bruscamente) e art. 43 (velocidade) | — | não criar | regra de bom senso; velocidades já cobertas na coleção (arts. 61/62)
-T29 | 12 | C | Parada × estacionamento; carga e descarga = estacionamento (art. 47) | — | não criar | já coberto por 6 notas da coleção (Anexo I, parada/estacionamento)
-T30 | 12 | C | Arts. 50, 51, 52, 53 (faixas de domínio, condomínios, tração animal, animais) | — | não criar | periféricos para PRF; nenhuma questão encontrada
-T31 | 13 | C | Equipamentos de moto (art. 54/55) | — | não criar | lista simples, sem questão localizada; candidata a lote futuro se aparecer em erros
-T32 | 14 | C | Provas desportivas (art. 67) | — | não criar | baixo valor e nenhuma questão encontrada
-T33 | 21 | C | Anexo I (tara, logradouro, faixa de domínio) das questões 04–06 | — | não criar neste lote | fora do recorte do material (arts. 26–67-E); questões salvas no banco para lote de conceitos
+Unidade | página(s) | conteúdo | cards
+N01 | 1-3 | Capa, apresentação do material, aviso de direitos autorais e sumário | — nao_conteudo: capa, apresentação e sumário
+U01 | 4 | Capítulos do CTB: III (normas gerais) e III-A (motoristas profissionais) | R23
+U02 | 5 | Art. 26: abster-se de perigo ou obstáculo; não atirar ou abandonar objetos | R24
+U03 | 5 | Art. 27: equipamentos obrigatórios e combustível suficiente | R25
+U04 | 5 | Art. 28: domínio do veículo a todo momento | R26
+U05 | 6 | Art. 29, I: circulação pela direita, exceções sinalizadas | R27
+U06 | 6 | Art. 29, II: distância de segurança lateral e frontal, sem valor fixo | R28
+U07 | 6 | Distância lateral de 1,50 m ao ultrapassar bicicleta | R29
+U08 | 6 | Art. 29, III: preferência em local não sinalizado (rodovia, rotatória, direita) | R01, R02, D01, D02
+U09 | 6 | Art. 29, IV: faixas da direita (lentos) e da esquerda (ultrapassagem) | R03, D03
+U10 | 7 | Art. 29, V: passeios e acostamentos só para entrar ou sair de imóveis | R30
+U11 | 7 | Art. 29, VI: batedores | R31
+U12 | 7 | Art. 29, VII e disposições: prerrogativas e identificação dos veículos de emergência; deveres de condutores e pedestres | R07, R08, D06, D07
+U13 | 7 | Art. 29, VII, d: prioridade com velocidade reduzida | R32
+U14 | 8 | Art. 29, VIII: utilidade pública | R09
+U15 | 8 | Art. 29, IX: ultrapassagem pela esquerda e exceção | R04
+U16 | 8 | Art. 29, X e XI: quadro antes e durante a ultrapassagem | R33, R34, D18
+U17 | 8 | Art. 29, XII: trilhos | R35
+U18 | 9 | Art. 30: quem é ultrapassado; parágrafo único: fila de lentos | R05, R36
+U19 | 9 | Art. 31: coletivo parado (e a curiosidade dos ônibus escolares nos EUA, usada como contraste) | D04
+U20 | 9 | Art. 32: locais proibidos em pista única de mão dupla | R06, D05
+U21 | 9 | Art. 33: interseções | R37
+U22 | 10 | Art. 34: certificar-se de que a manobra é segura | R38
+U23 | 10 | Art. 35: sinalizar deslocamento lateral; definição | C05, D15
+U24 | 10 | Art. 36: lote lindeiro | R39
+U25 | 10 | Art. 37: retorno em via com acostamento | R16
+U26 | 10 | Art. 38: posição antes de entrar à direita ou à esquerda; ceder passagem | R40, D16
+U27 | 10 | Art. 39: retorno em vias urbanas | R41
+U28 | 10 | Faróis: luz baixa (noite; túnel, chuva, neblina) e luz alta (vias não iluminadas) | R10, R42, D08
+U29 | 10 | Troca intermitente de luz baixa e alta | R22
+U30 | 11 | Art. 40, § 1º: coletivos em faixa própria e motocicletas com luz baixa dia e noite | R43
+U31 | 11 | Art. 40, § 2º: faróis de dia em rodovia de pista simples (Lei 14.071/2020) | R11, D09
+U32 | 11 | Luz de placa e luzes de posição | R44, R45
+U33 | 11 | Pisca-alerta | R46
+U34 | 11 | Buzina | R12
+U35 | 11 | Art. 42: frear bruscamente | R47
+U36 | 11 | Art. 43: velocidade (I a III) | R48, R49
+U37 | 11 | Art. 44: prudência no cruzamento | R50
+U38 | 12 | Art. 44-A: conversão à direita no vermelho (e a regra dos EUA, usada como erro) | R13
+U39 | 12 | Art. 46: sinalização de advertência na imobilização de emergência | R51
+U40 | 12 | Art. 47: parada onde é proibido estacionar; carga e descarga é estacionamento | R52, R53, D17
+U41 | 12 | Art. 48: posição no sentido do fluxo, junto à guia | R54
+U42 | 12 | Art. 49: portas e lado do embarque | R14
+U43 | 12 | Arts. 50 e 51: faixas laterais de domínio; vias de condomínio | R56, R55
+U44 | 12 | Arts. 52 e 53: tração animal; animais e rebanhos | R57, R58
+U45 | 13 | Arts. 54 e 55: condutor e passageiro de motocicleta | R59, R60
+U46 | 13 | Art. 57: ciclomotor (direita, proibições, faixa adjacente) e conceito | R61, R62, D03
+U47 | 13 | Art. 58: bicicletas nos bordos, mesmo sentido, preferência; contrafluxo com ciclofaixa | R63, R15
+U48 | 13 | Art. 59: bicicleta no passeio | R64
+U49 | 14 | Art. 64: crianças menores de 10 anos e 1,45 m | C01, D10
+U50 | 14 | Art. 65: cinto de segurança | R65
+U51 | 14 | Art. 67: provas desportivas, requisitos e valores mínimos | R66, R67
+U52 | 14-15 | Art. 67-A: motoristas profissionais alcançados (não inclui aplicativo) | R17
+U53 | 15 | Art. 67-C, caput: 5 h 30 ininterruptas | C02
+U54 | 15 | Art. 67-C, § 1º: carga, 30 min dentro de cada 6 h, fracionável (situações 01 e 02) | R18, D11
+U55 | 16 | Art. 67-C, § 1º-A: passageiros, 30 min a cada 4 h | C03, D12
+U56 | 16 | Art. 67-C, §§ 2º e 8º: elevação do tempo até local seguro; CONTRAN define as situações (Lei 14.599/2023) | D14
+U57 | 16 | Art. 67-C, § 3º: 11 h de descanso; ADI 5.322 | R19, C04, D13
+U58 | 16 | Art. 67-C, §§ 4º e 5º: tempo de direção e início de viagem | R68, R69
+U59 | 16 | Art. 67-E: meios de registro, independência do equipamento, responsabilidade do motorista | R70, R21, R20
+Q01 | 17, 20 | Questão 01 (IBEST 2023): lado da ultrapassagem | R04
+Q02 | 17, 20 | Questão 02 (Cebraspe PRF/CFP 2015): faixa da direita | R03
+Q03 | 17, 20 | Questão 03 (Cebraspe TRF1 2017): cruzamento e quem é ultrapassado | R05, R50
+Q04 | 17, 20-21 | Questão 04 (IBEST 2023): faixa de domínio × faixa de trânsito | R71
+Q05 | 17, 21 | Questão 05 (Vunesp 2023): tara | R72
+Q06 | 17, 21 | Questão 06 (SOCIESC 2011): logradouro público | R73
+Q07 | 17-18, 21-22 | Questão 07 (Cebraspe São Luís 2017): parada onde é proibido estacionar | R52
+Q08 | 18, 22 | Questão 08 (Vunesp 2022): parada × estacionamento | D17
+Q09 | 18, 22 | Questão 09 (Cebraspe São Luís 2017): retorno pelo acostamento | R16
+Q10 | 18, 23 | Questão 10 (Cebraspe São Luís 2017): faixa da esquerda | R03
+Q11 | 18, 23 | Questão 11 (Cebraspe MPU 2015): faixa exclusiva de ônibus | D03
+Q12 | 18, 24 | Questão 12 (Cebraspe Petrobras 2023): 4 h 30 + 30 min na carga | D11, D12, R18
+Q13 | 19, 24 | Questão 13 (Cebraspe Barra dos Coqueiros 2020): pedestre e semáforo, ciclista desmontado, contrafluxo, 5 h 30, registrador | R74, R75, R15, C02, R76
+Q14 | 19, 24-25 | Questão 14 (Instituto Darwin 2023): 11 h de descanso | C04
+Q15 | 19, 25 | Questão 15 (Cesgranrio 2023): 5 h 30 | C02
 
-Candidatos Cloze examinados: 1,45 m (C01), 5 h 30 (C02), 4 h (C03), 11 h (C04) — números exigidos literalmente em questões e decisivos para aplicar a regra. Rejeitados como Cloze: 30 min / 6 h da carga (fica em R18 e no Extra, para não duplicar a tabela); lista do art. 32 (avaliada como nota de mnemônico; exigiria um D por lacuna, e a lista ficou no R06 com dica autoral); termos "rotatória/rodovia/direita" (melhor como R/D de seleção de regra do que como lacuna).
+Cloze: C01 (1,45 m), C02 (5 h 30), C03 (4 h), C04 (11 h) e C05 (deslocamento lateral, termo definido no art. 35), cada um coberto por um D. Demais números (1,50 m, 4.536 kg, 50 km/h, 10 lugares) ficaram em R, para não exigir um D por lacuna.

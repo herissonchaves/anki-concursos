@@ -4,6 +4,28 @@ O usuário aprende muito com esquemas visuais. Todo cartão novo usa HTML compat
 
 Use o helper `scripts/html_anki.py`, que monta os componentes abaixo com estilos já testados e confere a segurança do HTML (`problemas_html`). Não escreva estilos à mão em cada cartão: isso gera inconsistência.
 
+## Padrão único de formatação (todos os cards)
+
+Todos os cards novos, de qualquer disciplina ou lote, seguem **o mesmo padrão visual**, o dos cards
+de Informática da coleção do usuário, aprovado por ele:
+
+- **Base:** o CSS do tipo de nota, definido em `scripts/estilo_anki.py` e idêntico ao dos tipos
+  "Basic"/"Cloze" da coleção: Arial, **20 px**, entrelinha 1,5, centralizado, preto sobre branco (o
+  Anki inverte no modo noturno). Os exportadores (`exportar_anki.py` e `exportar_anki_visual.py`)
+  gravam esse CSS nos tipos "Anki-Concursos - C/E" e "Anki-Concursos - Cloze". Importação manual de
+  TSV vai para "Basic" (C/E) e "Cloze".
+- **Campos:** só os componentes de `scripts/html_anki.py`, sem estilos escritos à mão. Tamanhos
+  fixos: frente de R em texto puro (herda os 20 px, centralizada); frente de D e texto de Cloze com
+  `frente()` (alinhados à esquerda, entrelinha 1,5); verso e Extra no wrapper de 0,92em; títulos dos
+  blocos em negrito na cor do bloco; tabelas a 0,92em. Cores só as da `PALETA` (Regra azul, No caso
+  roxo, Erro vermelho, Certo verde, Esquema verde-azulado, Memorize laranja).
+- **Proibido** mudar fonte, tamanho ou cor por lote ou por cartão, usar `<font>`, `font-size` ou
+  `color` fora do helper, ou criar outro tipo de nota. Mudança no padrão é mudança do projeto
+  (`estilo_anki.py` e `html_anki.py`, com teste), nunca ajuste local.
+- Tipo de nota já importado sem esse CSS (lotes anteriores à versão 2.21): orientar o usuário a colar
+  o CSS de `estilo_anki.py` em Ferramentas › Gerenciar tipos de nota › tipo › Cartões › Estilo;
+  não alterar a coleção.
+
 ## Compatibilidade com o Anki (desktop, AnkiMobile, AnkiDroid, AnkiWeb)
 
 - Somente HTML com **estilos inline** (`style="..."`). O modelo Básico e o Cloze padrão não têm CSS próprio para essas classes; não depender de `class`, de `<style>` nem de CSS externo.

@@ -13,7 +13,7 @@ Nenhuma nota de revisão derivada de PDF nasce antes do inventário e seleção 
 - **Economia:** redundância com `.colpkg`, outras modalidades e revisões futuras. Contar índices Cloze como cartões, não notas.
 - **Teto:** pedido explícito é máximo TOTAL de CARTÕES; sem pedido estimar `N_ideal` fundamentado.
 
-Classificar: **A** prioritário, **B** seletivo, **C** estudar na teoria ou por questões sem cartão. Antes de escrever, preencher `relatorios/triagem_previa_pdf.txt`: ID, página real, A/B/C, valor, operação, formato preferido, decisão e backup se disponível.
+Classificar: **A** prioritário, **B** seletivo, **C** card mais econômico (em geral um R curto). Em pedido de cards de revisão de PDF a cobertura é total (`cobertura-pdf.md`): A/B/C escolhem formato e esforço, nunca "sem card"; só texto que não é conteúdo de estudo fica de fora. Toda questão de concurso do PDF também entra no inventário, com card planejado. Antes de escrever, preencher `relatorios/triagem_previa_pdf.txt`: ID, página real, A/B/C, valor, operação, formato, card(s) e backup se disponível.
 
 Use os campos de alvo, valor e decisão para aplicar a comparação de recuperação
 do núcleo. Registre o candidato mantido quando houver duplicidade e o tópico

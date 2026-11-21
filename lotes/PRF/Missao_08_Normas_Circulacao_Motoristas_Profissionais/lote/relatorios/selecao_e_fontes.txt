@@ -30,3 +30,13 @@ Item PRF 2021 nº 69 (lanternas de emergência) foi anulado: não usado.
 
 6. COBERTURA DO PDF
 Tópicos A cobertos: todos (ver triagem). Não convertidos (C): arts. 26–28, 42–43, 47, 50–55, 67, luzes de placa/posição/pisca-alerta e Anexo I das questões — motivos na triagem.
+
+7. COMPLEMENTO 2.21 — COBERTURA TOTAL, PÁGINAS E FORMATAÇÃO (21/11/2026)
+- Regra nova do projeto: cards de revisão de PDF cobrem todo o conteúdo do PDF e de suas questões (cobertura-pdf.md). Inventário em triagem_previa_pdf.txt e cobertura_pdf.json (75 unidades: 59 de conteúdo, 15 questões e 1 exclusão de capa/sumário). Acrescentados R23–R76, C05 e D15–D18 (59 cartões).
+- O card do art. 64 (D10) veio da p. 14 do PDF, que trata do transporte de crianças e, em seguida, do cinto (art. 65); o cinto, que antes não tinha card próprio, agora é o R65.
+- Todas as 15 questões do PDF estão nos refs de algum card: as 5 que faltavam ganharam R71 (faixa de domínio), R72 (tara), R73 (logradouro), R52 (art. 47) e D17 (parada × estacionamento); a questão 13 ganhou R74–R76 para as alternativas sem card (art. 70, art. 68, § 1º, art. 105, II); a questão 03 também sustenta o R50 (art. 44).
+- Fontes de conteúdo lidas no CTB compilado do Planalto (https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm), redação vigente, sem alteração de 2024–2026 nos dispositivos usados: arts. 26–28; 29 (I, II, V, VI, VII-d, X, XI, XII); 30, parágrafo único; 33–36; 38; 39; 40 (I, § 1º, V–VII); 42–44; 46–48; 50–55; 57–59; 65; 67; 67-C, §§ 4º e 5º; 67-E, § 2º; 68, § 1º; 70; 105, II; 201; Anexo I (tara, logradouro público, faixas de domínio e de trânsito, parada, estacionamento, rodovia "via rural pavimentada", ciclomotor).
+- Tags de página: cada card recebe Pagina_NN das páginas que cobre (ex.: D10 → Pagina_14; R71 → Pagina_17, Pagina_20, Pagina_21).
+- Formatação: o .apkg passa a levar o CSS padrão de estilo_anki.py (Arial 20 px, igual aos tipos Basic/Cloze da coleção, onde estão os cards de Informática). O tipo de nota "Anki-Concursos - C/E" já existente na coleção não tem CSS: ver a orientação na entrega.
+- D15, D16 e D18: inspiração geral, sem questão Cebraspe nem de outra banca sobre o alvo (outras_bancas_pendencia). D17: inspiração geral com a questão Vunesp 2022 do PDF (outra banca, sem prova oficial localizada).
+

@@ -22,6 +22,7 @@ from exportar_anki import (
     check_recovery,
     deck_id,
     export as export_text,
+    modelos,
     publish_packages,
     tsv_rows,
     validate_package_paths,
@@ -123,13 +124,7 @@ def make_apkg(ce, cloze, output: Path, deck: str, image_files: dict[str, Path]):
         import genanki
     except ImportError as exc:
         raise RuntimeError('APKG com imagem requer genanki; use ZIP/TSV + cópia manual da mídia') from exc
-    basic = genanki.Model(1987052101, 'Anki-Concursos - C/E',
-        fields=[{'name':'Frente'}, {'name':'Verso'}],
-        templates=[{'name':'C/E','qfmt':'{{Frente}}','afmt':'{{FrontSide}}<hr id="answer">{{Verso}}'}])
-    clz = genanki.Model(1987052102, 'Anki-Concursos - Cloze',
-        fields=[{'name':'Texto'}, {'name':'Extra'}],
-        templates=[{'name':'Cloze','qfmt':'{{cloze:Texto}}','afmt':'{{cloze:Texto}}<hr id="answer">{{Extra}}'}],
-        model_type=genanki.Model.CLOZE)
+    basic, clz = modelos(genanki)
     d = genanki.Deck(deck_id(deck), deck)
     for front, back, tags in tsv_rows(ce):
         d.add_note(genanki.Note(model=basic,fields=[front,back],tags=tags.split(),guid=genanki.guid_for(front,'C/E')))

@@ -22,7 +22,7 @@ fonte_descoberta: "PDF LET020002 (Projeto Missão), p. 17 e 21, questão 05; gab
 consulta: 2026-11-21
 concursos_alvo: [PRF]
 operacao_observada: "Identificar o termo do Anexo I (tara) a partir da definição literal."
-usado_em: []
+usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#R72"]
 hash: 3a4b225467c33a01
 ---
 # Vunesp 2023 — Prefeitura de Pindamonhangaba — item nao_localizado

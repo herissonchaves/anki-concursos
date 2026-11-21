@@ -22,7 +22,7 @@ fonte_descoberta: "PDF LET020002 (Projeto Missão), p. 17 e 20, questão 03; gab
 consulta: 2026-11-21
 concursos_alvo: [PRF]
 operacao_observada: "Conduta ao se aproximar de cruzamento e ao ser ultrapassado: velocidade moderada, sem acelerar."
-usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#R05"]
+usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#R05,R50"]
 hash: 790cad48c69669c3
 ---
 # Cebraspe 2017 — TRF 1ª Região — item nao_localizado

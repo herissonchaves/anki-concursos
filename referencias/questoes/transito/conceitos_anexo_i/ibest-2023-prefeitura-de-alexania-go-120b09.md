@@ -22,7 +22,7 @@ fonte_descoberta: "PDF LET020002 (Projeto Missão), p. 17 e 20–21, questão 04
 consulta: 2026-11-21
 concursos_alvo: [PRF]
 operacao_observada: "Atribui à faixa de domínio a definição de faixa de trânsito."
-usado_em: []
+usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#R71"]
 hash: 120b092371f0a2ec
 ---
 # IBEST 2023 — Prefeitura de Alexânia-GO — item nao_localizado

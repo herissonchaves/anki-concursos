@@ -191,3 +191,70 @@ def test_questao_sem_prova_vai_para_referencias_sem_prova(tmp_path):
     assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
     usos = banco_mod.localizar([questao.id], banco)[0].meta['usado_em']
     assert usos == ['lote_sem_prova#R01,D01,D02']
+
+
+COBERTURA = [
+    dict(u='U01', pag='3', conteudo='Unidade de força no SI (sintético)', cartoes=['R01', 'R02', 'C01']),
+    dict(u='U02', pag='4-5', conteudo='Segunda lei de Newton (sintético)', cartoes=['D01', 'D02']),
+    dict(u='U03', pag='1', conteudo='Sumário', excluir='nao_conteudo: sumário'),
+]
+
+
+def test_cobertura_total_gera_tags_de_pagina_e_passa_no_validador(tmp_path):
+    import validar_cobertura_pdf as cob
+    final = gerar_resolvido(tmp_path, cobertura=COBERTURA)
+    assert final.pendentes == []
+    items, calibracao, revisao = ler(tmp_path)
+    linhas_ce = items['anki_certo_errado.tsv'].decode().splitlines()
+    d01 = linhas_ce[final.line_of['D01'] - 1].split('\t')[2].split()
+    assert 'Pagina_04' in d01 and 'Pagina_05' in d01 and 'Pagina_03' not in d01
+    assert 'Pagina_03' in items['anki_cloze.tsv'].decode().split('\t')[2].split()
+    registro = json.loads((tmp_path / 'lote' / 'relatorios' / 'cobertura_pdf.json').read_text(encoding='utf-8'))
+    assert registro['unidades'][1]['pag'] == [4, 5]
+    assert cob.validar(cob.ler(tmp_path / 'lote')) == []
+    assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
+    assert rev.validate(items, revisao) == []
+
+
+@pytest.mark.parametrize('mudanca, esperado', [
+    (lambda c: c[0].update(cartoes=[]), 'sem card'),
+    (lambda c: c[1].update(cartoes=['D01']), 'D02: card sem unidade'),
+    (lambda c: c[0].update(cartoes=['R01', 'R02', 'C01', 'R99']), 'R99 não existe'),
+    (lambda c: c.append(dict(u='Q01', pag='9', questao='questao-x', cartoes=['D01'])), 'questao-x precisa estar nos refs'),
+    (lambda c: c[2].update(excluir='curiosidade'), 'só texto que não é conteúdo'),
+])
+def test_cobertura_incompleta_falha(tmp_path, mudanca, esperado):
+    cobertura = [dict(u) for u in COBERTURA]
+    mudanca(cobertura)
+    with pytest.raises(SystemExit) as falha:
+        lote(tmp_path, cobertura=cobertura).gerar(imprimir=False)
+    assert esperado in str(falha.value)
+
+
+def test_validador_de_cobertura_aponta_tag_de_pagina_ausente(tmp_path):
+    import validar_cobertura_pdf as cob
+    gerar_resolvido(tmp_path, cobertura=COBERTURA)
+    pasta = tmp_path / 'lote'
+    ce = (pasta / 'anki_certo_errado.tsv').read_text(encoding='utf-8').replace(' Pagina_03', '', 1)
+    (pasta / 'anki_certo_errado.tsv').write_text(ce, encoding='utf-8', newline='\n')
+    assert any('Pagina_03' in e for e in cob.validar(cob.ler(pasta)))
+
+
+def test_lote_sem_cobertura_nao_ganha_tags_de_pagina(tmp_path):
+    gerar_resolvido(tmp_path)
+    items, _, _ = ler(tmp_path)
+    assert b'Pagina_' not in items['anki_certo_errado.tsv']
+    assert not (tmp_path / 'lote' / 'relatorios' / 'cobertura_pdf.json').exists()
+
+
+def test_modelos_do_exportador_usam_o_css_padrao():
+    import sys as _sys
+    genanki = pytest.importorskip('genanki')
+    _sys.path.insert(0, str(Path(m.__file__).resolve().parents[2] / 'automacao-anki-python' / 'scripts'))
+    import exportar_anki
+    import estilo_anki
+    basic, clz = exportar_anki.modelos(genanki)
+    assert basic.css == estilo_anki.CSS_BASE and 'font-size: 20px' in basic.css
+    assert clz.css == estilo_anki.CSS_CLOZE and '.cloze' in clz.css
+    assert (basic.model_id, basic.name) == estilo_anki.MODELO_CE
+    assert (clz.model_id, clz.name) == estilo_anki.MODELO_CLOZE

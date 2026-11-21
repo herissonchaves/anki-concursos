@@ -37,15 +37,41 @@ def deck_id(deck_name):
     return 1_000_000_000 + int.from_bytes(hashlib.sha256(('anki-concursos:deck:'+deck_name).encode('utf-8')).digest()[:4], 'big')
 
 
+def modelos(genanki):
+    """Tipos de nota C/E e Cloze com o CSS padrão (estilo_anki.py); IDs fixos para não duplicar tipos."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'gerar-revisao-anki' / 'scripts'))
+    from estilo_anki import CSS_BASE, CSS_CLOZE, MODELO_CE, MODELO_CLOZE  # padrão único de formatação
+    basic=genanki.Model(MODELO_CE[0],MODELO_CE[1],fields=[{'name':'Frente'},{'name':'Verso'}],
+           templates=[{'name':'C/E','qfmt':'{{Frente}}','afmt':'{{FrontSide}}<hr id="answer">{{Verso}}'}],css=CSS_BASE)
+    clz=genanki.Model(MODELO_CLOZE[0],MODELO_CLOZE[1],fields=[{'name':'Texto'},{'name':'Extra'}],
+           templates=[{'name':'Cloze','qfmt':'{{cloze:Texto}}','afmt':'{{cloze:Texto}}<hr id="answer">{{Extra}}'}],
+           model_type=genanki.Model.CLOZE,css=CSS_CLOZE)
+    return basic,clz
+
+
+def check_coverage(validator, target):
+    """Lote de PDF (com relatorios/cobertura_pdf.json): exige cobertura total; demais lotes passam."""
+    target = Path(target)
+    if target.is_dir():
+        present = (target/'relatorios'/'cobertura_pdf.json').is_file()
+    else:
+        with zipfile.ZipFile(target) as z:
+            present = 'relatorios/cobertura_pdf.json' in z.namelist()
+    if not present:
+        return
+    coverage = validator.with_name('validar_cobertura_pdf.py')
+    if not coverage.is_file():
+        raise RuntimeError('Verificador de cobertura do PDF indisponível')
+    result = subprocess.run([sys.executable,'-X','utf8',str(coverage),str(target)],capture_output=True,encoding='utf-8')
+    if result.returncode:
+        raise ValueError('Cobertura do PDF reprovada: '+(result.stdout+result.stderr)[-1400:])
+
+
 def generate_apkg(ce,cloze,out,deck_name):
     try:import genanki
     except ImportError as e:
         raise RuntimeError('Exportação .apkg indisponível: instale genanki; ZIP/TSV não exigem essa biblioteca') from e
-    basic=genanki.Model(1987052101,'Anki-Concursos - C/E',fields=[{'name':'Frente'},{'name':'Verso'}],
-           templates=[{'name':'C/E','qfmt':'{{Frente}}','afmt':'{{FrontSide}}<hr id="answer">{{Verso}}'}])
-    clz=genanki.Model(1987052102,'Anki-Concursos - Cloze',fields=[{'name':'Texto'},{'name':'Extra'}],
-           templates=[{'name':'Cloze','qfmt':'{{cloze:Texto}}','afmt':'{{cloze:Texto}}<hr id="answer">{{Extra}}'}],
-           model_type=genanki.Model.CLOZE)
+    basic,clz=modelos(genanki)
     deck=genanki.Deck(deck_id(deck_name),deck_name)
     for front,back,tags in tsv_rows(ce):
         deck.add_note(genanki.Note(model=basic,fields=[front,back],tags=tags.split(),guid=genanki.guid_for(front,'C/E')))
@@ -136,7 +162,7 @@ def export(ce,cloze,reports_dir,output,apkg=None,deck='Anki-Concursos',profile='
         shutil.copy2(cloze, package_cloze)
         (root/'relatorios').mkdir()
         for src in reports_dir.iterdir():
-            if not src.is_file() or (src.suffix not in {'.txt', '.tsv'} and src.name not in {'calibracao_cebraspe.json', 'revisao_recuperacao.json'}):
+            if not src.is_file() or (src.suffix not in {'.txt', '.tsv'} and src.name not in {'calibracao_cebraspe.json', 'revisao_recuperacao.json', 'cobertura_pdf.json'}):
                 continue
             shutil.copy2(src,root/'relatorios'/src.name)
         (root/'LEIA-ME.txt').write_text('Anki-Concursos - extraia o ZIP. Importe C/E como Básico sem cartão inverso e Cloze como Cloze. Mapeie colunas 1/2 aos campos e 3 a Tags; separador TAB, UTF-8 e HTML permitido. Ignore TSV vazio. Confira a prévia e as opções de duplicatas antes de importar.\nUse APKG OU TSV, não ambos. Alterar frente pode gerar nova nota; não há garantia de preservar histórico em reimportações. Faça backup antes de substituir notas existentes.\nO ZIP é tecnicamente validado, mas não certifica exatidão pedagógica nem importação no aplicativo.\n',encoding='utf-8')
@@ -156,6 +182,7 @@ def export(ce,cloze,reports_dir,output,apkg=None,deck='Anki-Concursos',profile='
             if result.returncode:
                 raise ValueError('Registro de calibração reprovado: '+(result.stdout+result.stderr)[-1400:])
         check_recovery(validator, root)
+        check_coverage(validator, root)
         (root/'relatorios'/'politica_validacao.json').write_text(json.dumps({'profile':profile,'exception_reason':exception_reason,'balance_exception':balance_exception,'max_cards':max_cards},ensure_ascii=False,indent=2),encoding='utf-8')
         # Add no raw .colpkg, sources, notebooks, scan images or personal data.
         tmpzip=root/'package.zip'
@@ -174,6 +201,7 @@ def export(ce,cloze,reports_dir,output,apkg=None,deck='Anki-Concursos',profile='
             if result.returncode:
                 raise ValueError('Registro de calibração do ZIP reprovado: '+(result.stdout+result.stderr)[-1400:])
         check_recovery(validator, tmpzip)
+        check_coverage(validator, tmpzip)
         ce_count = sum(1 for _ in tsv_rows(package_ce))
         cloze_count = sum(1 for _ in tsv_rows(package_cloze))
         packages = []

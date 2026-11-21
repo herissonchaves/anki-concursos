@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo no CDN do Cebraspe, localizados
 consulta: 2026-11-20
 concursos_alvo: [PRF]
 operacao_observada: "Meios de fiscalização do tempo de direção e descanso: diário de bordo, papeleta ou ficha fornecidos pelo empregador."
-usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#R20,R21"]
+usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#R20,R21,R70"]
 hash: f2b2cb830b4dcf06
 ---
 # Cebraspe 2021 — PRF — item 77

@@ -20,6 +20,8 @@ Na seleção e composição, aplique “Recuperação e formatos” do núcleo. 
 segunda conferência, aplique os testes de R, D e C da seção “Feedback econômico”
 e registre a evidência nos relatórios já previstos por ID.
 
+**Cards de revisão de PDF anexado cobrem todo o conteúdo do PDF e todo o conteúdo das questões de concursos que ele contém** (`references/cobertura-pdf.md`: ao menos um card por unidade, mesmo com nota parecida na coleção; A/B/C só escolhem o formato; o montador bloqueia lote incompleto e marca cada card com as tags `Pagina_NN`).
+
 **Lote exportado a partir de PDF: comece por `references/roteiro-lote-pdf.md`.** Ele resume
 as regras obrigatórias dos passos abaixo, com os comandos (texto limpo do PDF, importação das
 questões, modelo `modelos/gerar_lote_modelo.py`, `finalizar_lote.py`), e substitui a leitura
@@ -39,7 +41,7 @@ Para orientação de rotina, FSRS, botões de resposta ou excesso de revisões, 
 
 ## Formato visual, Memorize e Cloze
 
-- **Visual:** todo cartão novo usa HTML compatível com o Anki, montado com `scripts/html_anki.py` conforme `references/protocolo_visual_html_anki.md`: blocos coloridos (📌 Regra, 🔎 No caso, ⚠️ Onde está o erro, ✔️ Por que está certo), esquemas visuais (tabela comparativa, fluxo) quando mostrarem melhor a relação, estilos inline, fundos translúcidos legíveis no modo noturno e nada de script, CSS externo ou mídia remota. O visual organiza o texto; não troca precisão por enfeite.
+- **Visual:** todo cartão novo usa HTML compatível com o Anki, montado com `scripts/html_anki.py` conforme `references/protocolo_visual_html_anki.md`: blocos coloridos (📌 Regra, 🔎 No caso, ⚠️ Onde está o erro, ✔️ Por que está certo), esquemas visuais (tabela comparativa, fluxo) quando mostrarem melhor a relação, estilos inline, fundos translúcidos legíveis no modo noturno e nada de script, CSS externo ou mídia remota. O visual organiza o texto; não troca precisão por enfeite. **Formatação única para todos os cards** (seção "Padrão único de formatação" do protocolo): CSS base de `scripts/estilo_anki.py` (Arial 20 px, como os cards de Informática) e só os componentes do helper; nunca mudar fonte, tamanho ou cor por lote.
 - **Verso:** o antigo rótulo “Correção:” foi substituído pelo bloco final obrigatório **💡 Memorize**, com o resumo da explicação do verso em uma ou duas frases. No Errado, o Memorize traz a formulação correta; no Certo, a ideia central. O mesmo vale para o Extra do Cloze. `validar_anki.py --new` reprova verso ou Extra sem o bloco final preenchido.
 - **Cloze:** uma única omissão `{{c1::…}}` por nota. Mais de uma omissão somente em nota de mnemônico, com a tag `Mnemonico`; pares, listas e etapas viram notas separadas. `validar_anki.py --new` reprova o descumprimento.
 

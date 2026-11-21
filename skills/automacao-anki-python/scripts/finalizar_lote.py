@@ -80,11 +80,13 @@ def main(argv=None) -> int:
         ('calibração', [str(GERAR / 'validar_calibracao_cebraspe.py'), zipado]),
         ('revisão de recuperação', [str(GERAR / 'validar_revisao_pedagogica.py'), zipado]),
     ]
+    if (dados / 'relatorios' / 'cobertura_pdf.json').exists():
+        checagens.append(('cobertura do PDF', [str(GERAR / 'validar_cobertura_pdf.py'), zipado]))
     falhas = 0
     for nome, args in checagens:
         codigo, saida = rodar(args)
         linhas = [l for l in saida.splitlines() if l.strip()]
-        resumo = ' | '.join(l for l in linhas if re.search(r'Notas:|Modalidades:|total_cartoes|CONSISTENTE|ERRO|FALHA', l))
+        resumo = ' | '.join(l for l in linhas if re.search(r'Notas:|Modalidades:|total_cartoes|CONSISTENTE|COBERTURA|ERRO|FALHA', l))
         print(f'{"OK " if codigo == 0 else "FALHOU"} {nome}: {resumo or (linhas[-1] if linhas else "")}')
         if codigo:
             falhas += 1

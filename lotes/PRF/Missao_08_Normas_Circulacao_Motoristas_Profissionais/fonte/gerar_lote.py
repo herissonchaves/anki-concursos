@@ -19,7 +19,7 @@ sys.path.insert(0, str(RAIZ / 'skills' / 'gerar-revisao-anki' / 'scripts'))
 from html_anki import regra, caso, erro, certo, esquema, tabela, fluxo  # noqa: E402
 from montar_lote import Lote, rubrica as rub  # noqa: E402
 
-HOJE = '2026-11-21'
+HOJE = '2026-11-21'  # complemento 2.21 conferido na mesma data
 BASE = 'PRF Legislacao_de_Transito CTB Missao_08'
 ADI = 'Atualizacao_Juridica Jurisprudencia_2023'
 
@@ -568,8 +568,17 @@ D = [
 
 
 
+# ---------------------------------------------------------------- complemento 2.21 (cobertura total do PDF)
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from complemento import F_NOVAS, R_NOVOS, CZ_NOVOS, completar_d, COBERTURA  # noqa: E402
+
+F.update(F_NOVAS)
+R = R + R_NOVOS
+CZ = CZ + CZ_NOVOS
+D = D + completar_d(rub, OBP_CIRC)
+
 # ---------------------------------------------------------------- montagem
 if __name__ == '__main__':
-    Lote(PASTA, BASE, F, HOJE, [], R, D, CZ, semente=2026,
+    Lote(PASTA, BASE, F, HOJE, [], R, D, CZ, semente=2026, cobertura=COBERTURA,
          revisor='Claude (assistente de IA, modelo Opus 5.5) — mesmo agente que redigiu os cartões',
          titulo_previa='Prévia dos cards — Normas de Circulação e Motoristas Profissionais').gerar()

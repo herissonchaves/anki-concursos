@@ -22,7 +22,7 @@ fonte_descoberta: "PDF LET020002 (Projeto Missão), p. 17–18 e 21–22, quest�
 consulta: 2026-11-21
 concursos_alvo: [PRF]
 operacao_observada: "Limite da parada onde é proibido estacionar: tempo indispensável ao embarque ou desembarque, sem interromper o trânsito."
-usado_em: []
+usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#R52"]
 hash: 960aa2f8dccc5565
 ---
 # Cebraspe 2017 — Prefeitura de São Luís-MA — item nao_localizado

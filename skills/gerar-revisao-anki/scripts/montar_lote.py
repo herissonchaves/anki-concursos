@@ -27,6 +27,13 @@ outra banca, mas não sustentam fidelidade comparada. Dicts no formato da calibr
 continuam aceitos. Ao gerar, o uso de cada ID é registrado no `usado_em` da questão
 (`registrar_uso=False` desliga). Modelo pronto: `../modelos/gerar_lote_modelo.py`.
 
+`cobertura` (lote de PDF, obrigatório): lista de unidades `dict(u='U01', pag='14', conteudo='…',
+cartoes=['R01', 'D03'])` com todo o conteúdo do PDF e uma unidade por questão do PDF
+(`questao='<id do banco>'`, que precisa estar nos `refs` de algum de seus cards). Falha se faltar
+card, se um card não cobrir nenhuma unidade ou se uma questão não estiver vinculada; só texto que
+não é conteúdo de estudo usa `excluir='nao_conteudo: motivo'`. Grava `cobertura_pdf.json` e põe
+em cada card as tags `Pagina_NN` das páginas que ele cobre.
+
 `fontes`: {chave: (url, trecho verificado)}. Os relatórios .txt continuam
 escritos à mão em `lote/relatorios/`. Revisão pelo próprio agente é autorevisão;
 os registros gerados não certificam conteúdo.
@@ -68,13 +75,84 @@ def cloze_view(texto: str, revelar: bool) -> str:
 class Lote:
     def __init__(self, pasta, base_tags, fontes, hoje, referencias, R, D, CZ, semente,
                  schema_calibracao=2, revisor=REVISOR_PADRAO, titulo_previa='Prévia dos cards',
-                 banco_referencias=None, registrar_uso=True):
+                 banco_referencias=None, registrar_uso=True, cobertura=None):
         self.pasta, self.out = Path(pasta), Path(pasta) / 'lote'
         self.base, self.F, self.hoje = base_tags, fontes, hoje
         self.R, self.D, self.CZ, self.semente = R, D, CZ, semente
         self.schema, self.revisor, self.titulo = schema_calibracao, revisor, titulo_previa
         self.banco, self.registrar = banco_referencias, registrar_uso
+        self.cobertura = cobertura
         self.refs = self._resolver_refs(referencias)
+
+    # ------------------------------------------------------------ cobertura total do PDF
+    @staticmethod
+    def paginas(pag) -> list[int]:
+        """'14', 14, '9-10' ou ['9', 12] -> [9, 10, 12]."""
+        itens = pag if isinstance(pag, (list, tuple)) else [pag]
+        saida = set()
+        for item in itens:
+            ini, _, fim = str(item).partition('-')
+            saida.update(range(int(ini), int(fim or ini) + 1))
+        return sorted(saida)
+
+    def checar_cobertura(self):
+        """Barreira da revisão de PDF: toda unidade de conteúdo e toda questão do PDF têm card.
+
+        Também calcula as tags Pagina_NN de cada card. Falha (SystemExit) listando os problemas.
+        """
+        self.tags_pagina = {}
+        if self.cobertura is None:
+            return
+        cartoes = {x['k']: x for x in self.R + self.D + self.CZ}
+        erros, cobertos = [], set()
+        for un in self.cobertura:
+            u, lista = un.get('u', '?'), list(un.get('cartoes', ()))
+            if un.get('excluir'):
+                if not str(un['excluir']).startswith('nao_conteudo') or lista:
+                    erros.append(f'{u}: só texto que não é conteúdo de estudo pode ficar sem card '
+                                 '(excluir="nao_conteudo: motivo", sem cartoes)')
+                continue
+            if not lista:
+                erros.append(f'{u} (p. {un.get("pag")}): sem card — {un.get("conteudo", "")[:70]}')
+            for k in lista:
+                if k not in cartoes:
+                    erros.append(f'{u}: card {k} não existe no lote')
+            try:
+                pags = self.paginas(un['pag'])
+            except (KeyError, ValueError):
+                erros.append(f'{u}: pag ausente ou inválida')
+                continue
+            if un.get('questao') and not any(un['questao'] in cartoes[k].get('refs', ()) for k in lista if k in cartoes):
+                erros.append(f'{u}: a questão {un["questao"]} precisa estar nos refs de algum de seus cards')
+            for k in lista:
+                if k in cartoes:
+                    cobertos.add(k)
+                    self.tags_pagina.setdefault(k, set()).update(pags)
+        for k in cartoes:
+            if k not in cobertos:
+                erros.append(f'{k}: card sem unidade de cobertura (inclua-o em COBERTURA)')
+        if erros:
+            raise SystemExit('COBERTURA INCOMPLETA — o lote de PDF precisa cobrir todo o conteúdo e todas as '
+                             'questões do PDF:\n  ' + '\n  '.join(erros))
+
+    def _tags(self, x, extra=''):
+        pags = ' '.join(f'Pagina_{p:02d}' for p in sorted(self.tags_pagina.get(x['k'], ())))
+        return ' '.join(t for t in (self.base, x['tags'], extra, pags) if t)
+
+    def registro_cobertura(self):
+        if self.cobertura is None:
+            return None
+        unidades = []
+        for un in self.cobertura:
+            reg = {k: v for k, v in un.items() if k != 'cartoes'}
+            reg['pag'] = self.paginas(un['pag'])
+            reg['cartoes'] = [self.rid(k) if k in self.line_of else f'anki_cloze.tsv:{self.cz_index[k]}'
+                              for k in un.get('cartoes', ())]
+            reg['ids_editoriais'] = list(un.get('cartoes', ()))
+            unidades.append(reg)
+        dados = {'schema_version': 1, 'unidades': unidades}
+        self._json('cobertura_pdf.json', dados)
+        return dados
 
     # ------------------------------------------------------------ banco de referências
     @staticmethod
@@ -132,15 +210,18 @@ class Lote:
 
     # ------------------------------------------------------------ linhas
     def row_r(self, x):
-        return [x['f'], verso_ce(x['g'], x['b'], x['m']), f"{self.base} {x['tags']} {R_TAG}"]
+        return [x['f'], verso_ce(x['g'], x['b'], x['m']), self._tags(x, R_TAG)]
 
     def row_d(self, x):
-        return [frente(x['f']), verso_ce(x['g'], x['b'], x['m']), f"{self.base} {x['tags']} {D_TAG}"]
+        return [frente(x['f']), verso_ce(x['g'], x['b'], x['m']), self._tags(x, D_TAG)]
 
     def row_c(self, x):
-        return [frente(x['t']), extra_cloze(x['b'], x['m']), f"{self.base} {x['tags']}"]
+        return [frente(x['t']), extra_cloze(x['b'], x['m']), self._tags(x)]
 
     def montar_linhas(self):
+        if not hasattr(self, 'tags_pagina'):
+            self.checar_cobertura()
+        self.cz_index = {x['k']: i for i, x in enumerate(self.CZ, 1)}
         for x in self.CZ:
             if MNEMONICO not in x['tags'].split():
                 assert x['t'].count('{{c1::') == 1, f"{x['k']}: uma omissão por nota (várias só com a tag Mnemonico)"
@@ -242,10 +323,10 @@ class Lote:
                   'body{font-family:system-ui,sans-serif;margin:0;padding:16px;background:#eceff1;color:#222}'
                   'body.noite{background:#1e1e1e;color:#ddd} h1{font-size:18px} h2{font-size:14px;margin:18px 0 6px} small{opacity:.6;font-weight:normal}'
                   '.lado{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}'
-                  '.card{font-family:arial;font-size:20px;text-align:center;background:white;color:black;padding:14px;border-radius:8px;max-width:520px}'
+                  '.card{font-family:arial;font-size:20px;line-height:1.5;text-align:center;background:white;color:black;padding:14px;border-radius:8px;max-width:520px}'
                   'body.noite .card{background:#2f2f31;color:#e8e8e8} .cloze{font-weight:bold;color:blue} body.noite .cloze{color:#6ea8ff}'
                   'button{padding:6px 12px;margin-bottom:8px}</style>'
-                  '<h1>Prévia dos cards (frente | verso) — imita o modelo Básico/Cloze padrão do Anki</h1>'
+                  '<h1>Prévia dos cards (frente | verso) — imita o CSS padrão dos tipos de nota (estilo_anki.py: Arial 20 px)</h1>'
                   '<button onclick="document.body.classList.toggle(\'noite\')">Alternar modo noturno</button>'
                   + pares + '</html>')
         (self.pasta / 'previa_cards.html').write_text(previa, encoding='utf-8')
@@ -255,6 +336,7 @@ class Lote:
         """Gera TSVs, registros e prévia; devolve {ID editorial: ID no TSV}."""
         self.montar_linhas()
         self.gravar_tsvs()
+        self.registro_cobertura()
         self.registro_calibracao()
         self.registro_revisao(sinais_resolvidos or self.pasta / 'fonte' / 'sinais_resolvidos.json')
         self.gerar_previa()

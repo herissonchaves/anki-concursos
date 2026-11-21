@@ -22,7 +22,7 @@ fonte_descoberta: "PDF LET020002 (Projeto Missão), p. 19 e 24, questão 13; gab
 consulta: 2026-11-21
 concursos_alvo: [PRF]
 operacao_observada: "Alternativas misturam pedestre, ciclista, contrafluxo sem ciclofaixa e o limite de 5 h 30 do motorista profissional."
-usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#R15,C02"]
+usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#R15,R74,R75,R76,C02"]
 hash: 2ac49c5ae72d2412
 ---
 # Cebraspe 2020 — Prefeitura de Barra dos Coqueiros — item nao_localizado

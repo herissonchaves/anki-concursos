@@ -109,8 +109,8 @@
  "cartoes": [
   {
    "id": "D01",
-   "linha": 11,
-   "sha256": "ed7b5c04bccc7b74de74c6c12d3b7d4c04b598890d5008edc3ab83ad064b2b79",
+   "linha": 87,
+   "sha256": "beb3d5672b5ce22e16c69a12ce06d4a52833936e8e2f42b7bf2cbd6eb473087d",
    "gabarito": "E",
    "alvo": "Escolher a regra de preferência aplicável na rotatória.",
    "operacao_autoral": "Selecionar a alínea aplicável (rotatória × demais casos) quando duas regras parecem concorrer.",
@@ -167,8 +167,8 @@
   },
   {
    "id": "D02",
-   "linha": 21,
-   "sha256": "0ae3a8b1433a0c42764318e6a1d8f399206b73df7c516d6a46946e503e5d555b",
+   "linha": 6,
+   "sha256": "45d599ac3144bf50b895036da773c361ff46edb62b6f7e45518d504dc069a131",
    "gabarito": "C",
    "alvo": "Preferência de quem vem de rodovia (art. 29, III, a).",
    "operacao_autoral": "Identificar que o caso cai na alínea a e afastar a regra da direita.",
@@ -226,8 +226,8 @@
   },
   {
    "id": "D03",
-   "linha": 14,
-   "sha256": "2a4eedd626645fbeb420ccae6f501f6bbfc3ae9f3c991fdbe02444e0ed884967",
+   "linha": 46,
+   "sha256": "a631a6a4b822c9a0f376a8508631d15097c00d5d1cf71e1a093812498bda6a36",
    "gabarito": "E",
    "alvo": "Faixa do ciclomotor quando a da direita é exclusiva (art. 57, parágrafo único).",
    "operacao_autoral": "Localizar a faixa correta a partir da configuração da via.",
@@ -287,8 +287,8 @@
   },
   {
    "id": "D04",
-   "linha": 23,
-   "sha256": "908db3753afff25b41acd422c48fe3341988b4da8325b9142dd41e67daf35a10",
+   "linha": 86,
+   "sha256": "d316c407d3feed07b3e313aff5cc970d5739861192f0ffe63fbc065993bd9623",
    "gabarito": "E",
    "alvo": "Ultrapassagem de coletivo parado (art. 31).",
    "operacao_autoral": "Distinguir proibição de ultrapassagem condicionada.",
@@ -344,8 +344,8 @@
   },
   {
    "id": "D05",
-   "linha": 4,
-   "sha256": "7b7bf6420cd5f31bcad6638a3bf420d1d7ac6978841947bde5c0a5010e7cb082",
+   "linha": 70,
+   "sha256": "01c84df8a4e5fd5d097ce49945e608b2ce43e4492f9abd67ab1d3a9a53e03c34",
    "gabarito": "C",
    "alvo": "Condição \"sem visibilidade suficiente\" do aclive (art. 32).",
    "operacao_autoral": "Verificar se o dado do caso preenche a condição da proibição.",
@@ -402,8 +402,8 @@
   },
   {
    "id": "D06",
-   "linha": 27,
-   "sha256": "9e7156c4553bd7a28e579d1fa50211abe1cb558ccf6093078d3d33bf56c22f65",
+   "linha": 43,
+   "sha256": "91bf6b6fa6e2a46c2b53f9261dd3726cc753ca4990e624c85e570a83daed526f",
    "gabarito": "E",
    "alvo": "Condições das prerrogativas de emergência (art. 29, VII).",
    "operacao_autoral": "Verificar se as condições da prerrogativa estão presentes no caso.",
@@ -460,8 +460,8 @@
   },
   {
    "id": "D07",
-   "linha": 31,
-   "sha256": "4cc75003ea1b41dacaa340e82a31a8a112a99ed2a7897ad6de2104c56784ec63",
+   "linha": 90,
+   "sha256": "f8a7668d1da352b427300a8666963ddbec6db7d93b988043cfd390563c20cf0a",
    "gabarito": "C",
    "alvo": "Dever do pedestre diante de veículo de emergência (art. 29, VII, b).",
    "operacao_autoral": "Resolver o conflito aparente entre semáforo verde e prioridade de emergência.",
@@ -518,8 +518,8 @@
   },
   {
    "id": "D08",
-   "linha": 19,
-   "sha256": "aae4740449dcb0297569628aa2cf3cf7fe04aa952eeb1ee89192b871120c4fa6",
+   "linha": 36,
+   "sha256": "6dd20c87c22ed4dcccdb641c2291cded52432125798229e6578bf88509f8cd0c",
    "gabarito": "C",
    "alvo": "Exceção \"ao segui-lo\" da luz alta (art. 40, II).",
    "operacao_autoral": "Aplicar a exceção correta ao veículo do mesmo sentido.",
@@ -575,8 +575,8 @@
   },
   {
    "id": "D09",
-   "linha": 29,
-   "sha256": "1507249f4ef9586ccf14fc935b6028b00fcead0ee2c9dad47ae7566375c5785d",
+   "linha": 19,
+   "sha256": "89a06d59059ad9205e4957370479527112670f660efe3d12e428dfde0ab46b47",
    "gabarito": "E",
    "alvo": "Alcance da regra do farol de dia (art. 40, I, b, e § 2º).",
    "operacao_autoral": "Verificar se o caso preenche alguma hipótese de farol aceso de dia.",
@@ -632,8 +632,8 @@
   },
   {
    "id": "D10",
-   "linha": 1,
-   "sha256": "3454bffd9b39c9608b7cfaec1447c5dcf6b6d8a34ed52ac6032c683e31993b88",
+   "linha": 3,
+   "sha256": "959572e14b55a0584218d3fb9b52bf50f1fa0475186fcd6a6f6d3547f6b03edc",
    "gabarito": "C",
    "alvo": "Exigências cumulativas do art. 64.",
    "operacao_autoral": "Conferir idade e altura e, depois, as duas exigências (local e dispositivo).",
@@ -690,8 +690,8 @@
   },
   {
    "id": "D11",
-   "linha": 34,
-   "sha256": "85f3277c286fb9f693a7b50e43898172903d03d49386126442a3507d4a70a0f1",
+   "linha": 22,
+   "sha256": "92fff2cb2220dfbd70df035d18a2bb7e8b2eebe2ec41dc03d591ae4cc5e41fc9",
    "gabarito": "C",
    "alvo": "Fracionamento da pausa de 30 min na carga.",
    "operacao_autoral": "Somar períodos e conferir os dois limites (5 h 30 contínuas e 30 min a cada 6 h).",
@@ -754,8 +754,8 @@
   },
   {
    "id": "D12",
-   "linha": 33,
-   "sha256": "037321a2c29785bd51c49f4c3e2442ef89c575fe6dc81fb2329a03de8592db1d",
+   "linha": 24,
+   "sha256": "4123ee9ccc3646812f2c0c19fc6b4aba9f11ba0756615bdf5115a2735f02d87b",
    "gabarito": "E",
    "alvo": "Regra própria do coletivo de passageiros (art. 67-C, § 1º-A).",
    "operacao_autoral": "Selecionar a regra da categoria e verificar o intervalo.",
@@ -817,8 +817,8 @@
   },
   {
    "id": "D13",
-   "linha": 12,
-   "sha256": "b8a02f59d9f54aac1c826017be435b075cc98087e27967b06d9cd925fc624e56",
+   "linha": 27,
+   "sha256": "f8c6e9b2de97e0d31886d427f64b3a07c3ce0a85f6cefcc2a7b633a2231702c5",
    "gabarito": "E",
    "alvo": "Efeito da ADI 5.322 sobre o descanso diário.",
    "operacao_autoral": "Distinguir a redação antiga do § 3º da regra vigente após a decisão do STF.",
@@ -878,8 +878,8 @@
   },
   {
    "id": "D14",
-   "linha": 30,
-   "sha256": "fe37f6b4f99b1b6fe49cad235a41b221f852aec80d0e341697861ce63c53f37e",
+   "linha": 45,
+   "sha256": "24169cade86eaf6607b1cffbc38e75b00e7dbdf5cf474f3b2a8c4ca27af28966",
    "gabarito": "C",
    "alvo": "Exceção do art. 67-C, § 2º.",
    "operacao_autoral": "Verificar se o caso preenche os requisitos da exceção.",
@@ -937,6 +937,237 @@
     "cesgranrio-2023-transpetro-3f6c19"
    ],
    "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre a exceção do § 2º foi localizado; o item 78 da PRF 2021 trata só do limite."
+  },
+  {
+   "id": "D15",
+   "linha": 60,
+   "sha256": "db7e09acb5bf03160650d20241f56b636d022f086c81b5907a3957fde344cbe7",
+   "gabarito": "E",
+   "alvo": "Abrangência do deslocamento lateral (art. 35).",
+   "operacao_autoral": "Classificar a manobra pela definição legal antes de concluir sobre o dever de sinalizar.",
+   "regra": "CTB art. 35 e parágrafo único.",
+   "dado_decisivo": "Retorno sem mudança de faixa.",
+   "solucao": "Retorno está na definição de deslocamento lateral; logo há dever de sinalizar; Errado.",
+   "erro_plausivel": "Achar que só trocar de faixa exige seta.",
+   "leitura_concorrente": "Considerei manobra em via sem outros veículos: a regra não depende de haver alguém por perto.",
+   "originalidade": "Situação autoral a partir do art. 35 transcrito no PDF (p. 10).",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no CTB compilado: art. 35 e parágrafo único."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Determinação: retorno sem troca de faixa fixa o dado; uma conclusão."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Operação: exige aplicar a definição legal."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Autoria: cenário próprio (a manobra e a justificativa a julgar)."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Feedback: regra, aplicação ao caso, confusão provável e Memorize."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem: frases curtas, termos explicados no verso (lindeiro, deslocamento lateral, parada)."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Utilidade: cobre conteúdo do PDF ainda sem card de aplicação."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre o art. 35 foi localizado nas buscas nem no banco.",
+   "outras_bancas_pendencia": "Buscas em 20 e 21/11/2026 por questões de outras bancas sobre o mesmo alvo (rotatória, ultrapassagem, luzes, ciclomotor, coletivo parado + CTB + FGV, Vunesp, IBFC, Quadrix): qconcursos.com e questoes.grancursosonline.com.br recusaram o acesso automatizado (HTTP 403); nas provas abertas (IDCAP 2026, IGEDUC 2025) e nas questões do PDF não havia item sobre este alvo."
+  },
+  {
+   "id": "D16",
+   "linha": 21,
+   "sha256": "66d8b1497343d8f370488144648181c79abc5e31ea0c098b671f7cea42f0b87f",
+   "gabarito": "C",
+   "alvo": "Posição antes de entrar à esquerda (art. 38, II).",
+   "operacao_autoral": "Escolher a referência certa conforme o sentido da pista.",
+   "regra": "CTB art. 38, I e II.",
+   "dado_decisivo": "Pista de mão única; saída à esquerda.",
+   "solucao": "Mão única + esquerda = bordo esquerdo; logo Certo.",
+   "erro_plausivel": "Aplicar a regra do eixo, própria da mão dupla.",
+   "leitura_concorrente": "Considerei faixa exclusiva à esquerda ou sinalização especial: a frente não traz sinalização em contrário.",
+   "originalidade": "Situação autoral a partir do art. 38 transcrito no PDF (p. 10).",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no CTB compilado: art. 38, I e II."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Determinação: mão única e saída à esquerda explícitas; uma conclusão."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Operação: exige escolher a referência pelo sentido da pista."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Autoria: cenário próprio (a avenida e a manobra)."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Feedback: regra, aplicação ao caso, confusão provável e Memorize."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem: frases curtas, termos explicados no verso (lindeiro, deslocamento lateral, parada)."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Utilidade: cobre conteúdo do PDF ainda sem card de aplicação."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre o art. 38 foi localizado nas buscas nem no banco.",
+   "outras_bancas_pendencia": "Buscas em 20 e 21/11/2026 por questões de outras bancas sobre o mesmo alvo (rotatória, ultrapassagem, luzes, ciclomotor, coletivo parado + CTB + FGV, Vunesp, IBFC, Quadrix): qconcursos.com e questoes.grancursosonline.com.br recusaram o acesso automatizado (HTTP 403); nas provas abertas (IDCAP 2026, IGEDUC 2025) e nas questões do PDF não havia item sobre este alvo."
+  },
+  {
+   "id": "D17",
+   "linha": 69,
+   "sha256": "ad80ecf0a2f3dc2d4ebd8295824b753a2615e7c3ac80d9a15357933965a09815",
+   "gabarito": "C",
+   "alvo": "Distinção entre parada e estacionamento.",
+   "operacao_autoral": "Classificar a imobilização pela finalidade e pelo tempo.",
+   "regra": "CTB Anexo I (parada; estacionamento); art. 47.",
+   "dado_decisivo": "Espera pelo próximo cliente depois do desembarque.",
+   "solucao": "Finalidade e tempo de embarque esgotados; imobilização continua; logo estacionamento; Certo.",
+   "erro_plausivel": "Considerar parada qualquer imobilização na área de embarque.",
+   "leitura_concorrente": "Considerei a espera do próprio passageiro descendo com malas: ainda seria parada; a frente diz que ela já desembarcou.",
+   "originalidade": "Inspirado no item Vunesp 2022 (Morro Agudo) do PDF, com a situação e o julgamento reescritos em C/E.",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no CTB compilado: Anexo I (parada; estacionamento) e art. 47."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Determinação: desembarque concluído e espera explícitos; uma conclusão."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Operação: exige classificar a imobilização pela finalidade."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Autoria: cenário próprio (a espera do motorista de aplicativo, reescrita)."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Feedback: regra, aplicação ao caso, confusão provável e Memorize."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem: frases curtas, termos explicados no verso (lindeiro, deslocamento lateral, parada)."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Utilidade: cobre conteúdo do PDF ainda sem card de aplicação."
+    }
+   },
+   "referencias_sem_prova": [
+    "vunesp-2022-prefeitura-municipal-de-morro-agudo-ccc3e9"
+   ],
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre parada × estacionamento foi confirmado nas buscas; a referência é de outra banca, do PDF."
+  },
+  {
+   "id": "D18",
+   "linha": 25,
+   "sha256": "b0a57296c1ca7117ad331879279be28aa63fc4dad153c051ecfffdf7e2c3b8b0",
+   "gabarito": "E",
+   "alvo": "Condição do art. 29, X, b.",
+   "operacao_autoral": "Verificar todas as condições cumulativas antes de concluir.",
+   "regra": "CTB art. 29, X, a a c.",
+   "dado_decisivo": "O veículo da frente sinalizou ultrapassagem de um terceiro.",
+   "solucao": "Condição b ausente; ultrapassagem não permitida naquele momento; Errado.",
+   "erro_plausivel": "Achar que basta a faixa contrária estar livre.",
+   "leitura_concorrente": "Considerei sinalização proibitiva ou curva: a frente fixa pista simples sem esses dados; o fato decisivo é a sinalização do carro da frente.",
+   "originalidade": "Situação autoral a partir do quadro de ultrapassagem do PDF (p. 8).",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no CTB compilado: art. 29, X."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Determinação: sinalização do carro da frente e faixa livre explícitas; uma conclusão."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Operação: exige checar condições cumulativas."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Autoria: cenário próprio (o comboio na rodovia)."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Feedback: regra, aplicação ao caso, confusão provável e Memorize."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem: frases curtas, termos explicados no verso (lindeiro, deslocamento lateral, parada)."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Utilidade: cobre conteúdo do PDF ainda sem card de aplicação."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre o art. 29, X, foi localizado nas buscas nem no banco.",
+   "outras_bancas_pendencia": "Buscas em 20 e 21/11/2026 por questões de outras bancas sobre o mesmo alvo (rotatória, ultrapassagem, luzes, ciclomotor, coletivo parado + CTB + FGV, Vunesp, IBFC, Quadrix): qconcursos.com e questoes.grancursosonline.com.br recusaram o acesso automatizado (HTTP 403); nas provas abertas (IDCAP 2026, IGEDUC 2025) e nas questões do PDF não havia item sobre este alvo."
   }
  ],
  "referencias_sem_prova": [
@@ -978,6 +1209,19 @@
    "gabarito_status": "nao_verificado",
    "operacao_observada": "Lembrar o descanso mínimo de 11 h em 24 h.",
    "vigencia": "desatualizada"
+  },
+  {
+   "id": "vunesp-2022-prefeitura-municipal-de-morro-agudo-ccc3e9",
+   "banca": "Vunesp",
+   "formato": "multipla_escolha",
+   "ano": 2022,
+   "concurso": "Prefeitura Municipal de Morro Agudo — 2022",
+   "item": "nao_localizado",
+   "origem": "anexo_usuario",
+   "fonte_descoberta": "PDF LET020002 (Projeto Missão), p. 18 e 22, questão 08; gabarito do material",
+   "gabarito_status": "nao_verificado",
+   "operacao_observada": "Imobilização além do embarque/desembarque caracteriza estacionamento, não parada.",
+   "vigencia": "atual"
   }
  ]
 }

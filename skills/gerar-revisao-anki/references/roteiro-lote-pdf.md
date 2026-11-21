@@ -35,7 +35,8 @@ Nunca copie nome/CPF da marca-d'água para arquivo versionado.
 
 1. Questões do PDF: `referencias.py importar PDF -o TMP/rasc.json -p PAGINAS -d DISC [--ruido ...]`;
    confira texto e gabarito, troque todo `REVISAR` (assunto, subassuntos, palavras-chave, operação)
-   e salve com `nova` as do recorte do lote. Regra revogada: `vigencia: desatualizada` + `vigencia_nota`.
+   e salve com `nova` **todas** as questões do PDF (a cobertura é total). Regra revogada:
+   `vigencia: desatualizada` + `vigencia_nota`.
 2. Banco: `assuntos` → `buscar -d DISC -t TERMO [--com-url] [--vigentes] [--nao-usadas]` → `mostrar`.
 3. Internet (obrigatória para D; recomendada para R/Cloze): Cebraspe C/E primeiro (caderno e
    gabarito oficiais no CDN), depois outras bancas. Salve no banco **toda questão que virar
@@ -52,8 +53,12 @@ avise no verso. Cloze: pesquise mnemônicos; sem fonte confiável, use dica **au
 
 ## 5. Triagem e composição
 
-- Inventário por página: ID, prioridade A/B/C, alvo, operação, formato, decisão e motivo dos
-  descartes (`triagem_previa_pdf.txt`). Conteúdo A não convertido vira pendência explícita.
+- **Cobertura total** (`cobertura-pdf.md`): todo conteúdo do PDF e todo conteúdo das questões do PDF
+  (inclusive alternativas e temas fora do capítulo) ganham ao menos um card; nota parecida na coleção
+  não conta. A/B/C só escolhem formato (C = R curto). Fora só texto que não é conteúdo de estudo.
+  Teto menor que a cobertura: avisar quantos cards faltam e perguntar.
+- Inventário página por página (`triagem_previa_pdf.txt`): unidade, página, A/B/C, alvo, formato e
+  card(s); o mesmo inventário vira o bloco `COBERTURA` do gerador.
 - R: um alvo, frase curta, sem pegadinha. D: caso curto com dado decisivo, uma decisão real
   (aplicar, distinguir, exceção); definição disfarçada vira R. Cloze: uma omissão `{{c1::…}}` por
   nota (várias só com tag `Mnemonico`), conceito/número que precisa ser lembrado; números só se
@@ -67,12 +72,15 @@ avise no verso. Cloze: pesquise mnemônicos; sem fonte confiável, use dica **au
 Verso C/E: `regra` → (`caso` em D) → `erro` (Errado) ou `certo` (confusão afastada) → `esquema`
 (tabela/fluxo) quando ajudar → `m` = 💡 Memorize em 1–2 frases (no Errado, a formulação correta).
 Cloze: Extra com `regra` + Memorize. Negrito só no termo-chave do verso; nada na frente que revele
-o gabarito. Frente autossuficiente, sem depender do PDF.
+o gabarito. Frente autossuficiente, sem depender do PDF. **Formatação única** (seção "Padrão único
+de formatação" de `protocolo_visual_html_anki.md`): só os componentes do helper sobre o CSS de
+`scripts/estilo_anki.py` (Arial 20 px); nunca mudar tamanho, fonte ou cor no lote.
 
 ## 7. Montagem, revisão e registros
 
 - Copie `../modelos/gerar_lote_modelo.py` para `lotes/<CONCURSO>/<Missao_NN_Tema>/fonte/gerar_lote.py`.
-  Cartões citam IDs do banco em `refs`; `referencias` pode ficar `[]`. Questão sem prova oficial
+  Cartões citam IDs do banco em `refs`; `referencias` pode ficar `[]`. Preencha `COBERTURA`
+  (`Lote(..., cobertura=COBERTURA)`): o montador falha se faltar card e põe as tags `Pagina_NN`. Questão sem prova oficial
   vai para `referencias_sem_prova` (inspiração e outra banca; nunca fidelidade comparada).
 - D: `fid='comparada'` só com Cebraspe C/E oficial em `refs`; senão `inspiracao_geral` + `lim`.
   Sem questão de outra banca em `refs`: `obp` com as buscas. Rubrica de 8 critérios com evidência
@@ -87,7 +95,8 @@ o gabarito. Frente autossuficiente, sem depender do PDF.
 - `lote/relatorios/`: `triagem_previa_pdf.txt`, `selecao_e_fontes.txt` (pertinência, questões do
   banco por ID, fontes, mnemônicos, comparação dos D, cobertura), `economia_de_revisao.txt`,
   `auditoria_pedagogica.txt` (ID, linha, gabarito, decisão) e, em Direito, `radar_juridico.txt`.
-- Exportar e revalidar em uma chamada (grava em `output/`, sem sobrescrever):
+- Exportar e revalidar em uma chamada (grava em `output/`, sem sobrescrever; confere também a
+  cobertura do PDF com `scripts/validar_cobertura_pdf.py`):
 
 ```text
 uv run --no-project --with genanki python -I -X utf8 skills/automacao-anki-python/scripts/finalizar_lote.py lotes/<CONCURSO>/<Missao_NN_Tema> --baralho "Nome do baralho"

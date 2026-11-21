@@ -1,15 +1,13 @@
 ECONOMIA DE REVISÃO
-Contagem: 36 notas C/E (22 R + 14 D) + 4 notas Cloze (1 cartão cada) = 40 notas, 40 cartões.
-Gabaritos: R = 11 Certo / 11 Errado; D = 7 Certo / 7 Errado. Cloze fora da contagem C/E. Ordem embaralhada (semente fixa), sem alternância previsível.
-Coleção consultada (cópia, leitura): nenhuma nota sobre os arts. 26–67-E; parada/estacionamento já cobertos e excluídos deste lote.
+Contagem: 94 notas C/E (76 R + 18 D) + 5 notas Cloze (1 cartão cada) = 99 cartões.
+Gabaritos: R = 38 Certo / 38 Errado; D = 9 Certo / 9 Errado. Cloze fora da contagem. Ordem embaralhada (semente fixa).
+Versão 2.21: +59 cartões para cobrir todo o PDF e as questões do PDF (antes, 40). A maior parte é R curto de um alvo (prioridade B/C), o formato mais barato de revisar.
 
 Decisões para evitar revisões redundantes:
-- R01/R02 (memória das alíneas) e D01/D02 (escolher a alínea quando a regra da direita parece valer): operações distintas.
-- R06 (lista do art. 32 e exceção) e D05 (condição "sem visibilidade"): o D testa a condição qualificadora, não repete a lista.
-- R07 (identificação para estacionar) e D06 (falta de urgência): o D acrescenta a condição do serviço de urgência.
-- R10 (luz alta) e D08 (exceção ao seguir): o D cobra só a exceção menos lembrada.
-- R11 (regra do farol de dia) e D09 (pista dupla): o D cobra o limite da regra.
-- Tempos do motorista: números em Cloze (C02 5 h 30, C03 4 h, C04 11 h); R18 fica com a pausa da carga; D11, D12, D13 e D14 aplicam cada número a uma jornada, sem repetir a memória.
-- Atualização jurídica (ADI 5.322) em três operações: R19 (o que o STF decidiu), C04 (número que restou), D13 (caso válido na regra antiga e inválido na atual).
+- Cobertura = ao menos um card por unidade, não três: só os alvos A têm R + D ou Cloze + D; o resto é um R.
+- Uma questão com várias alternativas aproveita os cards já existentes e só ganha card novo para o que faltava (Q13: R15 e C02 reaproveitados; R74, R75 e R76 novos).
+- Questões do PDF reaproveitam cards de conteúdo quando cobram o mesmo alvo (Q01→R04, Q02/Q10→R03, Q12→D11/D12/R18); ganham card próprio só quando trazem conteúdo novo (Anexo I, art. 70, 68, 105).
+- Notas da coleção sobre parada × estacionamento e rodovia não foram contadas como cobertura, por decisão do usuário; D17 e R52/R53 cobrem esses alvos com operações próprias (aplicação ao caso, art. 47).
+- Os 40 cards já entregues mantêm o texto da frente; o GUID não muda e a reimportação só acrescenta os novos e atualiza as tags.
 
-Carga: sem dados de uso, não há estimativa de minutos diários. Observar o tempo real e os erros nas duas primeiras semanas.
+Carga: sem dados de uso, não há estimativa de minutos diários. 59 cartões novos de uma vez: considere aumentar o limite de novos do baralho ou distribuir em alguns dias.
