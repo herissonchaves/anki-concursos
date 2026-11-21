@@ -46,9 +46,9 @@ concurso explícito prevalece e exige programa próprio.
    se cobra; no Cloze, pesquise mnemônicos e confira cada pista na fonte. Sem Cebraspe acessível:
    `inspiracao_geral` + limitação; sem outra banca: `outras_bancas_pendencia`. Sem pesquisa
    disponível, a entrega não é final verificada.
-4. D: `references/protocolo-modo-estrategico.md`, a seção da disciplina de
-   `references/atlas-multidisciplinar-cebraspe.md` e a rubrica de
-   `references/avaliacao-modo-estrategico.md`. Português: `../portugues-cebraspe-qualidade/SKILL.md`
+4. D: o "Resumo operacional" no topo de `references/protocolo-modo-estrategico.md`, só a seção da
+   disciplina de `references/atlas-multidisciplinar-cebraspe.md` e só a "Rubrica por cartão" de
+   `references/avaliacao-modo-estrategico.md` (o restante, em dúvida ou auditoria). Português: `../portugues-cebraspe-qualidade/SKILL.md`
    (obrigatório). Imagens: `references/protocolo_imagens_reais_anki.md`. Linguagem e lacunas:
    `references/revisao-integral-e-linguagem.md`.
 5. Defina resposta e fundamento antes da frente; resolva cada frente de novo sem olhar o verso e

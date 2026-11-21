@@ -10,7 +10,7 @@ Nenhuma nota de revisão derivada de PDF nasce antes do inventário e seleção 
 - **Valor:** importância para prova e estrutura conceitual, sem inventar frequência de banca.
 - **Alvo autônomo:** regra, definição, termo, condição, exceção ou efeito recuperável sem recorrer a PDF/chat.
 - **Distinção:** resposta unívoca; rápido não exige interpretação concorrente, desafiador exige inferência real; Cloze exige recuperação produtiva não entregue pelas pistas.
-- **Economia:** redundância com `.colpkg`, outras modalidades e revisões futuras. Contar índices Cloze como cartões, não notas.
+- **Economia:** redundância com a coleção viva (`colecao_anki.py buscar`; `.colpkg` só fora deste PC), outras modalidades e revisões futuras. Contar índices Cloze como cartões, não notas.
 - **Teto:** pedido explícito é máximo TOTAL de CARTÕES; sem pedido estimar `N_ideal` fundamentado.
 
 Classificar a prioridade para o concurso-alvo (`cobertura-pdf.md`): **Alta**, **Média** ou **Baixa** (substitui A/B/C), com motivo. Alta e Média ganham ao menos um card, salvo nota da coleção que já exija a mesma recuperação; Baixa não vira card. Toda questão de concurso do PDF também entra no inventário. Antes de escrever, preencher `relatorios/triagem_previa_pdf.txt`: ID, página real, prioridade e motivo, operação, formato, card(s) ou nota da coleção.

@@ -1,5 +1,37 @@
 # Modo estratégico C/E
 
+## Resumo operacional (basta nos casos comuns)
+
+Leia só este resumo, a seção da disciplina de `atlas-multidisciplinar-cebraspe.md` e a seção
+"Rubrica por cartão" de `avaliacao-modo-estrategico.md`. Abra o restante deste documento em dúvida,
+em auditoria de D ou ao alterar o projeto; as regras abaixo continuam valendo.
+
+1. **D é decisão, não lembrança:** aplicar, inferir ou distinguir a partir de um dado decisivo (fato,
+   condição, escopo, dado, construção linguística). Se nada além do rótulo precisa ser analisado, é R.
+   Narrativa não é obrigatória; uma a quatro frases.
+2. **Planeje antes de redigir:** regra, dado decisivo, confusão plausível, inferência, solução e erro
+   plausível. Não entregue na frente o enquadramento nem a regra que resolvem o item.
+3. **Linguagem:** português direto, termos de prova mantidos e explicados no verso; a dificuldade
+   está na decisão, não no vocabulário. Aprove só se (a) um leigo em Direito entende a situação e (b)
+   ainda precisa raciocinar para decidir.
+4. **Questões anteriores, antes de qualquer D:** banco `referencias/` primeiro
+   (`buscar -a ASSUNTO -b Cebraspe -f certo_errado`), depois internet. Cebraspe C/E é a referência de
+   forma e a única que sustenta `fid='comparada'`; outras bancas mostram o recorte cobrado e as
+   pegadinhas. Leia o item completo; simulado de curso não conta.
+5. **Autoria:** reconstrua situação, dados e texto a partir da operação observada; trocar nomes ou
+   números não basta; nunca atribua o item autoral a uma banca. Um julgamento nuclear, sem teses
+   independentes; absolutos revisados para não virarem pista.
+6. **Sem Cebraspe acessível:** `inspiracao_geral` + `lim` (o montador avisa se o banco tiver item do
+   assunto); sem outra banca: `outras_bancas_pendencia`. Nada disso dispensa conteúdo verificado,
+   pertinência e gabarito fundamentado.
+7. **Conferência:** resolva a frente de novo sem o verso, procure leitura concorrente (`conc`) e
+   contraexemplo; no Errado, a falha decisiva e a correção; no Certo, por que a confusão falha.
+   Decida APROVAR, REFORMULAR, RECLASSIFICAR R, FUNDIR ou REJEITAR.
+8. **Registro:** exportação com D exige `calibracao_cebraspe.json` (`registro-calibracao-cebraspe.md`,
+   gerado pelo `montar_lote.py`); poucos cartões inline levam só a síntese por ID.
+
+## Escopo
+
 Aplicar ao criar, reescrever substantivamente ou auditar cartões D, em qualquer disciplina. Esta é a referência operacional da calibração. O núcleo governa princípios; a matriz continua sendo a única fonte de proporções. Não impor estas exigências retroativamente como condição de leitura de uma coleção.
 
 ## Identidade e decisão de formato

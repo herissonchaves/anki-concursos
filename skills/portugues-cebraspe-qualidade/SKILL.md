@@ -19,10 +19,10 @@ Antes de selecionar, gerar, melhorar, fazer caderno de erros ou auditar Portugu�
 
 Não alegar leitura não realizada. Diferenciar textos de teoria, comentários e itens oficiais; não copiar, não parafrasear superficialmente questões originais. Origem e página aparecem apenas nos relatórios.
 
-## Seleção e backup
+## Seleção e coleção
 
 1. Mapear `tema | construção/texto | competência | risco de erro | operação | interpretação concorrente | elemento decisivo | página/fonte no relatório`.
-2. Com `.colpkg` analisar somente leitura as notas, modelos e dados de desempenho QUANDO LEGÍVEIS; verificar redundância cognitiva, não presumir histórico.
+2. Na coleção viva (`../automacao-anki-python/scripts/colecao_anki.py buscar`, `dificeis`, `desempenho`, somente leitura; fora deste PC, `.colpkg`) analisar notas e desempenho QUANDO LEGÍVEIS; verificar redundância cognitiva, não presumir histórico.
 3. Triagem A/B/C por incidência verificada, transferibilidade, importância e economia. Rápida legítima pode recuperar conceito linguístico relevante sem cenário artificial; não decorar lista periférica.
 
 ## Itens C/E desafiadores
