@@ -39,6 +39,11 @@ python -X utf8 skills/referencias-questoes/scripts/referencias.py COMANDO
 | `calibracao ID…` | JSON das referências (só questões) no formato do `calibracao_cebraspe.json` v2. |
 | `validar` / `indexar [--atualizar-hash]` | Confere o banco / regera índice e árvore. |
 
+Prova oficial inteira do Cebraspe (caderno + gabarito definitivo do CDN), figuras recortadas e recontagem
+das prioridades do concurso: `scripts/provas_oficiais.py` (`extrair`, `revisar`, `montar`, `recortar`,
+`embutir`, `prioridades`), com o passo a passo e o formato da spec em
+[provas-oficiais.md](references/provas-oficiais.md).
+
 `buscar` e `assuntos` regeneram o índice sozinhos quando um arquivo muda.
 
 ## Fluxo em todo pedido de cartões (R, D, Cloze e caderno de erros)

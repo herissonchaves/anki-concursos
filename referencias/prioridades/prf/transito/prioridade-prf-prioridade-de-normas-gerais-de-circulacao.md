@@ -40,8 +40,6 @@ hash: 803ad753bfe39436
 
 - Art. 29, II, VI, VII-d, VIII; arts. 31, 34–36, 38, 39; art. 40, III e V; arts. 41–43, 44-A, 46, 47 parágrafo único, 48, 49; arts. 57–59 (ciclomotor e bicicleta).
 
-- Nenhum.
-
 ## Baixa
 
 - Estrutura dos capítulos; arts. 26–28 e 29, I (deveres genéricos); 29, XII e 30, parágrafo único; luz de placa e de posição; arts. 50–53; art. 67 (provas desportivas). Motivo: sem cobrança localizada e pouca relação com a rodovia federal.

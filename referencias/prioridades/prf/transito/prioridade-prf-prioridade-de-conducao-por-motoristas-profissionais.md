@@ -34,14 +34,10 @@ hash: 939528f2fdaf5bb5
 
 ## Média
 
-- Nenhum subtema classificado como Média na Missão 08.
-
 - registro do tempo: 2 item(ns) em 1 prova(s) — cebraspe-2021-prf-077, cebraspe-2021-prf-079.
 - fiscalizacao: 1 item(ns) em 1 prova(s) — cebraspe-2021-prf-077.
 
 ## Baixa
-
-- Nenhum.
 
 - Nenhum.
 
