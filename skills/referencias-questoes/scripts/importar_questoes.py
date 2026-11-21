@@ -29,13 +29,18 @@ RASCUNHO = 'REVISAR'
 HEX = re.compile(r'[0-9A-F]{32}')  # hash de marca-d'água, mesmo grudado em palavras
 PESSOAL = re.compile(r'CPF|\b\d{3}\.\d{3}\.\d{3}-\d{2}\b|[\w.+-]+@[\w-]+\.[\w.]+|licenciad[oa] para', re.I)
 PAGINA = re.compile(r'P[áa]gina\s*\|\s*\d+', re.I)
-CABECALHO = re.compile(
-    r'^\s*(?P<num>\d{1,3})\s*[.)]\s*(?P<cab>[A-ZÀ-Ú][^\n]{2,160}?\b(?P<ano>(?:19|20)\d{2})\b)\s*[:.]?\s*',
+CABECALHO = re.compile(  # aceita um resto curto da faixa lateral antes do número ("I 13. FUNDATEC – …")
+    r'^\s*(?:[A-ZÀ-Ú]{1,3}\s+)?(?P<num>\d{1,3})\s*[.)]\s*(?P<cab>[A-ZÀ-Ú][^\n]{2,160}?\b(?P<ano>(?:19|20)\d{2})\b)\s*[:.]?\s*',
     re.M)
 ALTERNATIVA = re.compile(r'(?:^|\s)\(([A-E])\)\s*')
+ALTERNATIVA_SEM_PARENTESE = re.compile(r'(?:^|\s)([A-E])\)\s+')  # "A) motivação; B) ..."
 TABELA = re.compile(r'(?<!\d)(\d{1,3})\s*[.\-–)]\s*(Certo|Errado|[A-E])\b(?![a-zà-ú])')
 LINHA_TABELA = re.compile(r'^\s*\d{1,3}\s*[.\-–)]\s*(?:Certo|Errado|[A-E])\b(?![a-zà-ú])', re.M)
-COMENTADO = re.compile(r'Gabarito\s*:\s*(CERTO|ERRADO|Letra\s+[A-E]|[A-E])\b', re.I)
+COMENTADO = re.compile(r'Gabarito\s*:\s*(CERT[OA]|ERRAD[OA]|CORRET[OA]|INCORRET[OA]|Letra\s+[A-E]|[A-E])\b', re.I)
+# Fim da lista de questões: título da tabela de gabarito ou da parte comentada
+FIM_DA_LISTA = re.compile(r'^\s*(?:GABARITO\s*:?\s*(?=$|\d)|(?:\d+\s*[.)]\s*)?QUEST[ÕO]ES\s+(?:COMENTADAS|SEM\s+COMENT))', re.M | re.I)
+# Blocos de texto que o PyMuPDF põe na mesma linha: um vão largo seguido de "NN. " abre uma linha nova
+VAO_ANTES_DE_NUMERO = re.compile(r'\s{4,}(?=\d{1,3}\s*[.)]\s*[A-ZÀ-Ú])')
 TRACO = re.compile(r'\s*[–—-]+\s*')
 
 
@@ -67,22 +72,25 @@ def paginas_de(caminho: Path) -> list[tuple[int, str]]:
 def limpar(texto: str, ruido=()) -> str:
     """Tira marcas-d'água, rodapés e palavras de faixa lateral (ruido) do texto de uma página."""
     linhas = []
-    for linha in texto.splitlines():
-        if PESSOAL.search(linha):
+    for bruta in texto.splitlines():
+        if PESSOAL.search(bruta):
             continue
-        linha = PAGINA.sub(' ', HEX.sub(' ', linha))
-        if ruido and all(tok in ruido for tok in linha.split()):
-            continue  # linha só com palavras da faixa lateral
-        for palavra in ruido:
-            # Faixa lateral grudada no fim de outra palavra ("2023:TRÂNSITO") ou abrindo a linha
-            # (só palavras longas). Não remove a palavra solta no meio do texto ("Prefeitura DE", "anexo I").
-            p = re.escape(palavra)
-            linha = re.sub(rf'(?<=[^\s{re.escape(palavra[0])}]){p}(?=\s|$)', ' ', linha)
-            if len(palavra) >= 4:
-                linha = re.sub(rf'^\s*{p}\s+', '', linha)
-        linha = re.sub(r'[ \t]{2,}', ' ', linha).strip()
-        if linha:
-            linhas.append(linha)
+        for linha in VAO_ANTES_DE_NUMERO.split(PAGINA.sub(' ', HEX.sub(' ', bruta))):
+            if ruido and all(tok in ruido for tok in linha.split()):
+                continue  # linha só com palavras da faixa lateral
+            for palavra in ruido:
+                # Faixa lateral grudada no fim de outra palavra ("2023:TRÂNSITO") ou abrindo a linha
+                # (só palavras longas). Palavra solta no meio do texto só sai se for longa (6+ letras,
+                # mesma caixa: "ESQUEMATIZADA"); as curtas ficam ("Prefeitura DE", "anexo I").
+                p = re.escape(palavra)
+                linha = re.sub(rf'(?<=[^\s{re.escape(palavra[0])}]){p}(?=\s|$)', ' ', linha)
+                if len(palavra) >= 4:
+                    linha = re.sub(rf'^\s*{p}\s+', '', linha)
+                if len(palavra) >= 6:
+                    linha = re.sub(rf'(?<![\wÀ-ú]){p}(?![\wÀ-ú])', ' ', linha)
+            linha = re.sub(r'[ \t]{2,}', ' ', linha).strip()
+            if linha:
+                linhas.append(linha)
     return '\n'.join(linhas)
 
 
@@ -99,9 +107,9 @@ def _intervalo(paginas: str | None):
 # ------------------------------------------------------------------ análise
 def _gabarito_normalizado(bruto: str) -> str:
     b = bruto.strip().upper()
-    if b.startswith('CERT'):
+    if b.startswith(('CERT', 'CORRET')):
         return 'C'
-    if b.startswith('ERRAD'):
+    if b.startswith(('ERRAD', 'INCORRET')):
         return 'E'
     return b.replace('LETRA', '').strip()
 
@@ -130,7 +138,20 @@ def _titulo(texto: str) -> str:
     return ' '.join(saida)
 
 
-def extrair(caminho, paginas=None, ruido=(), disciplina=RASCUNHO, assunto=RASCUNHO, alvo='PRF') -> list[dict]:
+def _alternativas(texto: str) -> tuple[str, dict]:
+    """(enunciado, {letra: texto}). Tenta "(A)"; se não houver duas, "A)" com as letras em ordem A, B, C…"""
+    for padrao in (ALTERNATIVA, ALTERNATIVA_SEM_PARENTESE):
+        partes = padrao.split(texto)
+        letras = partes[1::2]
+        if len(letras) >= 2 and letras == [chr(ord('A') + i) for i in range(len(letras))]:
+            return partes[0].strip(), {partes[j]: partes[j + 1].strip() for j in range(1, len(partes) - 1, 2)}
+    return texto.strip(), {}
+
+
+def extrair(caminho, paginas=None, ruido=(), disciplina=RASCUNHO, assunto=RASCUNHO, alvo='PRF',
+            avisos: list | None = None) -> list[dict]:
+    """Rascunho das questões. `avisos` (lista opcional) recebe as divergências entre a tabela de
+    gabarito e o gabarito comentado; nelas fica o comentado, que costuma vir justificado."""
     caminho = Path(caminho)
     escolhidas = _intervalo(paginas)
     blocos = [(n, limpar(t, ruido)) for n, t in paginas_de(caminho) if not escolhidas or n in escolhidas]
@@ -154,8 +175,9 @@ def extrair(caminho, paginas=None, ruido=(), disciplina=RASCUNHO, assunto=RASCUN
             corpo = corpo[:gab.start()]
         if num in questoes:
             continue
-        inicio_tabela = LINHA_TABELA.search(corpo)
-        corpo = corpo[:inicio_tabela.start()] if inicio_tabela else corpo
+        for fim_lista in (LINHA_TABELA.search(corpo), FIM_DA_LISTA.search(corpo)):
+            if fim_lista:
+                corpo = corpo[:fim_lista.start()]
         questoes[num] = (m, corpo, pagina_de(m.start()))
     tabela = {}
     for linha in LINHA_TABELA.finditer(texto):  # só linhas que começam como tabela de gabarito
@@ -166,11 +188,12 @@ def extrair(caminho, paginas=None, ruido=(), disciplina=RASCUNHO, assunto=RASCUN
     rascunho = []
     hoje = _dt.date.today().isoformat()
     for num, (m, corpo, pagina) in sorted(questoes.items()):
-        partes = ALTERNATIVA.split(' '.join(corpo.split()))
-        enunciado = partes[0].strip()
-        alternativas = {partes[j]: partes[j + 1].strip() for j in range(1, len(partes) - 1, 2)}
+        enunciado, alternativas = _alternativas(' '.join(corpo.split()))
         formato = 'multipla_escolha' if len(alternativas) >= 2 else 'certo_errado'
         gabarito = comentados.get(num) or tabela.get(num) or RASCUNHO
+        if avisos is not None and num in comentados and num in tabela and comentados[num] != tabela[num]:
+            avisos.append(f'questão {num:02d}: tabela de gabarito diz {tabela[num]}, comentário diz {comentados[num]} '
+                          '(ficou o comentário; confira)')
         if formato == 'certo_errado' and gabarito not in ('C', 'E'):
             gabarito = RASCUNHO
         banca, orgao, concurso = _banca_orgao(m['cab'], m['ano'])

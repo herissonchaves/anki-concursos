@@ -40,7 +40,8 @@ concurso explícito prevalece e exige programa próprio.
    recorrência não se presume sem contagem.
 3. **Internet.** Conteúdo: pesquisa obrigatória para todo cartão criado ou reescrito (fonte primária
    vigente em Direito, `references/radar-juridico-atualizacao.md`), salvo o reuso válido do banco.
-   Questões anteriores: obrigatórias para todo D, antes de escrevê-lo — primeiro Cebraspe C/E
+   Questões anteriores: obrigatórias para todo D, antes de escrevê-lo, salvo banco suficiente (item
+   Cebraspe C/E oficial do mesmo subassunto já no banco) — primeiro Cebraspe C/E
    (modelo de forma), depois outras bancas (o que se cobra, pegadinhas); use-as como inspiração
    para itens autorais, nunca como cópia. Para R/Cloze, questões só quando o banco não mostrar o que
    se cobra; no Cloze, pesquise mnemônicos e confira cada pista na fonte. Sem Cebraspe acessível:

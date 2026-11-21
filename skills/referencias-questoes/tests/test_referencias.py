@@ -188,6 +188,46 @@ def test_importar_extrai_questoes_de_texto(tmp_path):
     assert 'CPF' not in json.dumps(itens, ensure_ascii=False)
 
 
+def test_importar_faixa_lateral_alternativas_sem_parentese_e_gabarito_divergente(tmp_path):
+    """Padrões da apostila da Missão 07 (2.29): cabeçalho colado ao fim da questão anterior,
+    resto de faixa lateral antes do número, alternativas "A)" e tabela que diverge do comentário."""
+    import importar_questoes as imp
+    texto = (
+        '01. CEBRASPE – ÓRGÃO FICTÍCIO – 2021:\n'
+        'Julgue o item. A regra sintética é relativa.ADMINISTRATIVO          02. FGV – ÓRGÃO TESTE – 2022:\n'
+        'O elemento sintético denomina-se:\n'
+        'A) motivação; B) forma; C) motivo.\n'
+        'GABARITO:\n01. C 02. B\n'
+        'QUESTÕES COMENTADAS\n'
+        'I 01. CEBRASPE – ÓRGÃO FICTÍCIO – 2021:\n'
+        'Julgue o item. A regra sintética é relativa.\n'
+        'Gabarito: Correto.\n'
+        'I 02. FGV – ÓRGÃO TESTE – 2022:\n'
+        'O elemento sintético denomina-se:\n'
+        'A) motivação; B) forma; C) motivo.\n'
+        'Gabarito: Letra C.\n')
+    arq = tmp_path / 'apostila.txt'
+    arq.write_text(texto, encoding='utf-8')
+    avisos = []
+    itens = imp.extrair(arq, ruido=['ADMINISTRATIVO'], avisos=avisos)
+    assert len(itens) == 2
+    assert itens[0]['enunciado'] == 'Julgue o item. A regra sintética é relativa.'
+    assert itens[1]['formato'] == 'multipla_escolha'
+    assert itens[1]['alternativas'] == {'A': 'motivação;', 'B': 'forma;', 'C': 'motivo.'}
+    assert [i['gabarito'] for i in itens] == ['C', 'C']
+    assert avisos == ['questão 02: tabela de gabarito diz B, comentário diz C (ficou o comentário; confira)']
+
+
+def test_importar_avisa_questao_que_ja_esta_no_banco(banco):
+    ref.nova(q(31, 'O protocolo sintético de envio de mensagens transmite também a cópia oculta ao destinatário final.',
+               texto_base='Julgue o item seguinte.'), banco)
+    rascunho = [{'enunciado': 'Julgue o item seguinte. O protocolo sintético de envio de mensagens transmite também '
+                              'a cópia oculta ao destinatário final.', 'fonte_descoberta': 'apostila.pdf, p. 3, questão 04; x'},
+                {'enunciado': 'Um enunciado sintético totalmente diferente, sem nenhuma relação com o banco.',
+                 'fonte_descoberta': 'apostila.pdf, p. 3, questão 05; x'}]
+    assert ref.possiveis_duplicatas(rascunho, banco) == [('questão 04', 'cebraspe-2024-orgao-teste-031')]
+
+
 DOC = dict(disciplina='transito', assunto='motorista_profissional', subassuntos=['descanso'],
            palavras_chave=['67-c'], concursos_alvo=['PRF'], url='https://example.test/lei',
            fonte_descoberta='Fonte sintética', consulta='2026-11-21')

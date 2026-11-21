@@ -199,6 +199,10 @@ def test_sugere_item_cebraspe_do_banco_para_d_em_inspiracao_geral(tmp_path, caps
     gerado.D[0]['refs'] = [ids['CEB'], ids['FGV']]
     gerado.D[0]['fid'] = 'comparada'
     assert gerado.sugestoes_cebraspe() == {'D02': [ids['CEB']]}
+    gerado.D[1]['sa'] = ['primeira_lei']  # subtema diferente: sem aviso (2.29)
+    assert gerado.sugestoes_cebraspe() == {}
+    gerado.D[1]['sa'] = 'segunda_lei, terceira_lei'
+    assert gerado.sugestoes_cebraspe() == {'D02': [ids['CEB']]}
 
 
 def test_questao_sem_prova_vai_para_referencias_sem_prova(tmp_path):
@@ -282,6 +286,47 @@ def test_cobertura_incompleta_falha(tmp_path, mudanca, esperado):
     with pytest.raises(SystemExit) as falha:
         lote(tmp_path, cobertura=cobertura).gerar(imprimir=False)
     assert esperado in str(falha.value)
+
+
+def test_questoes_do_pdf_viram_unidades_pelos_refs_2_29(tmp_path):
+    import validar_cobertura_pdf as cob
+    final = gerar_resolvido(tmp_path, cobertura=COBERTURA, questoes_pdf={'Q01': ('8', 'CEB')})
+    assert final.pendentes == []
+    registro = json.loads((tmp_path / 'lote' / 'relatorios' / 'cobertura_pdf.json').read_text(encoding='utf-8'))
+    q01 = [u for u in registro['unidades'] if u['u'] == 'Q01'][0]
+    assert q01['p'] == 'media' and q01['questao'] == 'CEB' and sorted(q01['ids_editoriais']) == ['D01', 'D02']
+    assert cob.validar(cob.ler(tmp_path / 'lote')) == []
+    triagem = (tmp_path / 'lote' / 'relatorios' / 'triagem_previa_pdf.txt').read_text(encoding='utf-8')
+    assert 'Q01 | 8 | media | Questão 01 do PDF [CEB]' in triagem and m.MARCA_GERADO in triagem
+
+
+def test_questao_do_pdf_sem_card_exige_unidade_declarada(tmp_path):
+    with pytest.raises(SystemExit) as falha:
+        lote(tmp_path, cobertura=[dict(u) for u in COBERTURA], questoes_pdf={'Q02': ('9', 'nao-citada')}).gerar(imprimir=False)
+    assert 'Q02 (nao-citada): nenhum card a cita' in str(falha.value)
+
+
+def test_padrao_d_completa_so_as_chaves_ausentes_e_regra_vem_da_fonte(tmp_path):
+    padrao = dict(rb=m.rubrica('c', 'd', 'o', 'cmp', linguagem_didatica='termos explicados'), orig='Caso autoral.')
+    base = lote(tmp_path)
+    D = [{k: v for k, v in x.items() if k not in ('rb', 'orig', 'regra')} for x in base.D]
+    D[1]['orig'] = 'Origem própria'
+    novo = m.Lote(tmp_path, 'Teste Fixture', F, HOJE, REFS, base.R, D, base.CZ, semente=1, padrao_d=padrao)
+    assert novo.D[0]['orig'] == 'Caso autoral.' and novo.D[1]['orig'] == 'Origem própria'
+    assert novo.D[0]['regra'] == F['si'][1] and novo.D[0]['rb'] == padrao['rb']
+
+
+def test_relatorios_gerados_e_manuscrito_preservado(tmp_path):
+    rel = tmp_path / 'lote' / 'relatorios'
+    rel.mkdir(parents=True)
+    (rel / 'economia_de_revisao.txt').write_text('Escrito à mão.', encoding='utf-8')
+    gerar_resolvido(tmp_path, cobertura=COBERTURA, relatorio={'material': 'Apostila sintética'})
+    assert (rel / 'economia_de_revisao.txt').read_text(encoding='utf-8') == 'Escrito à mão.'
+    auditoria = (rel / 'auditoria_pedagogica.txt').read_text(encoding='utf-8')
+    assert 'D01 (CE:' in auditoria and 'C01 (CZ:1) | Cloze' in auditoria
+    assert 'Material: Apostila sintética' in (rel / 'triagem_previa_pdf.txt').read_text(encoding='utf-8')
+    fontes = (rel / 'fontes_e_referencias.txt').read_text(encoding='utf-8')
+    assert '- CEB: ' in fontes and 'si: https://example.test/si' in fontes
 
 
 def test_validador_de_cobertura_aponta_tag_de_pagina_ausente(tmp_path):

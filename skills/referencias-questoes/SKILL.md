@@ -14,7 +14,7 @@ Abra só os escolhidos, com `mostrar` (e `--secao` nos longos).
 | --- | --- | --- |
 | `questao` | `questoes/<disc>/<assunto>/` | item oficial de prova (forma, calibração, `refs`) |
 | `edital` | `editais/<concurso>/` | programa do cargo por disciplina, etapas, retificações |
-| `conteudo` | `conteudos/<disc>/<assunto>/` | texto normativo verificado por dispositivo (substitui a releitura por até 90 dias) |
+| `conteudo` | `conteudos/<disc>/<assunto>/` | texto normativo verificado por dispositivo, ou doutrina lida (`norma: "Doutrina — …"`); substitui a releitura por até 90 dias |
 | `noticia` | `noticias/<disc>/<assunto>/` | lei nova, decisão judicial, mudança de edital, com o `efeito` na prova |
 | `prioridade` | `prioridades/<concurso>/<disc>/` | prioridade do assunto para o concurso, subtemas Alta/Média/Baixa, o que mais cai (contado) |
 
@@ -33,7 +33,7 @@ python -X utf8 skills/referencias-questoes/scripts/referencias.py COMANDO
 | `buscar [--tipo T] -d DISC -a ASSUNTO -t TERMO [-b BANCA] [-f certo_errado] [--alvo PRF] [--nao-usadas] [--com-url] [--vigentes] [--recentes N] [--corpo] [-n 20]` | Uma linha por item. Questões: `sem prova`, `DESATUALIZADA`. Documentos: tipo, título, status/situação/prioridade e data. `--recentes N`: conteúdos verificados (e demais documentos consultados) há até N dias. |
 | `mostrar ID [ID…] [--secao NOME] [--analise] [--meta]` | Corpo do item; `--secao` imprime só a seção `## NOME…` (ex.: a disciplina do edital, um artigo do conteúdo). |
 | `fonte ID[#SEÇÃO]` | `(url, trecho)` de um conteúdo/notícia/edital para o `F = {...}` do `gerar_lote.py`. |
-| `importar ARQ.pdf\|.json\|.txt -o TMP.json [-p 17-19] [-d DISC] [-a ASSUNTO] [--ruido PALAVRA]` | Rascunho JSON das questões do arquivo, sem marcas-d'água; campos de julgamento como `REVISAR` (o `nova` recusa). |
+| `importar ARQ.pdf\|.json\|.txt -o TMP.json [-p 17-38] [-d DISC] [-a ASSUNTO] [--ruido PALAVRA]` | Rascunho JSON das questões do arquivo, sem marcas-d'água; campos de julgamento como `REVISAR` (o `nova` recusa). **Sempre** passe as palavras da faixa lateral em `--ruido` (uma por opção) e inclua no `-p` as páginas comentadas: o gabarito comentado prevalece, e o comando avisa quando ele diverge da tabela e quando a questão já está no banco. |
 | `nova ARQ.json` (ou `-`) | Cria itens (questão ou, com `tipo`, documento); gera id e hash e recusa duplicatas. `--simular` só valida. |
 | `usar ID… --lote PRF_Tema --cartoes D01,D02` | Registra o uso no lote (substitui o registro anterior do mesmo lote). |
 | `calibracao ID…` | JSON das referências (só questões) no formato do `calibracao_cebraspe.json` v2. |
@@ -43,6 +43,13 @@ Prova oficial inteira do Cebraspe (caderno + gabarito definitivo do CDN), figura
 das prioridades do concurso: `scripts/provas_oficiais.py` (`extrair`, `revisar`, `montar`, `recortar`,
 `embutir`, `prioridades`), com o passo a passo e o formato da spec em
 [provas-oficiais.md](references/provas-oficiais.md).
+
+Itens oficiais avulsos de um tema (sem importar a prova inteira): `scripts/cebraspe_cdn.py`
+(`listar PASTA -t FILTRO`, `baixar PASTA/ARQUIVO -o DIR`, `buscar PDF -t REGEX`, `gabarito PDF`), com
+pymupdf (`uv run --no-project --with pymupdf python -I -X utf8 ...`). Ele baixa para o scratchpad e
+imprime só os itens que casam com o tema. **Nunca leia PDF com leitor de página da web ou subagente de
+busca**: eles devolvem bytes, não texto, e gastam centenas de milhares de tokens sem resultado. Peça
+permissão antes de baixar (nome, origem, tamanho).
 
 `buscar` e `assuntos` regeneram o índice sozinhos quando um arquivo muda.
 
@@ -68,13 +75,19 @@ das prioridades do concurso: `scripts/provas_oficiais.py` (`extrair`, `revisar`,
    conteúdo Alta ou Média precisa de card que a cite em `refs`
    (`../gerar-revisao-anki/references/cobertura-pdf.md`).
 4. **Internet.** A pesquisa de questões anteriores continua obrigatória para todo D
-   (Cebraspe C/E primeiro), conforme `../gerar-revisao-anki/references/protocolo-modo-estrategico.md`;
-   a de conteúdo, salvo o reuso do passo 2.
+   (Cebraspe C/E primeiro), conforme `../gerar-revisao-anki/references/protocolo-modo-estrategico.md`,
+   **salvo banco suficiente**: se o banco já tem item Cebraspe C/E com gabarito definitivo ou
+   justificativa oficial do **mesmo subassunto** do D (`buscar -a ASSUNTO -t TERMO -f certo_errado
+   --com-url`), o D o cita em `refs` com `fid='comparada'` e a busca na internet fica opcional; registre
+   em `selecao_e_fontes.txt` "banco suficiente para Dnn: ID". Sem esse item, a busca segue obrigatória.
+   A de conteúdo segue obrigatória, salvo o reuso do passo 2.
 5. **Salvar tudo o que foi pesquisado (obrigatório).** Ao final de todo pedido em que a IA
    pesquisou informação nova, ela salva o resultado no banco com `nova` (ou atualiza o arquivo
    existente) e roda `indexar`:
    - edital ou retificação → `edital` (programa por disciplina);
    - leitura de fonte primária (lei, decreto, resolução, súmula) → `conteudo`;
+   - leitura de doutrina usada como fonte de cartão (verbete, artigo, manual) → `conteudo` com
+     `norma: "Doutrina — autor, obra"`, em paráfrase própria (ver `references/formato.md`);
    - alteração legal, decisão judicial, mudança de edital → `noticia` (com `efeito`), e o
      `conteudo`/as questões afetados ganham `vigencia_nota`/`vigencia: desatualizada`;
    - triagem Alta/Média/Baixa do pedido → `prioridade` (cria ou atualiza);

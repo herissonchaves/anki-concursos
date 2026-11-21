@@ -57,7 +57,9 @@ utilidade de recuperar aquilo num cartão. Conteúdo correto e disciplina no edi
   checagem rápida de alterações e registro do ID e da data; o mesmo para `edital` (checar só edital
   novo ou retificação) e `prioridade` (reavaliar só o novo). Detalhes em
   `../../referencias-questoes/SKILL.md`.
-- **Questões anteriores:** obrigatórias para todo D (Cebraspe C/E primeiro, depois outras bancas);
+- **Questões anteriores:** obrigatórias para todo D (Cebraspe C/E primeiro, depois outras bancas),
+  salvo **banco suficiente** (item Cebraspe C/E oficial do mesmo subassunto já no banco, citado em
+  `refs` com `fid='comparada'`; ver `../../referencias-questoes/SKILL.md`, passo 4);
   para R/Cloze, quando o banco não mostrar o que se cobra. No Cloze, mnemônicos pesquisados e
   conferidos na fonte primária (`protocolo_cloze_cientifico.md`).
 - **Fontes:** primárias e oficiais primeiro (legislação consolidada, tribunais, órgãos, editais,

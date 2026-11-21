@@ -1,10 +1,10 @@
 # Assuntos do banco de referências
 
-Gerado por `referencias.py indexar`; não editar à mão. Total: 981 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
+Gerado por `referencias.py indexar`; não editar à mão. Total: 988 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
 
-- **administrativo** (110)
+- **administrativo** (117)
   - agentes_publicos (11): penalidades 4, regime_disciplinar 3, independencia_das_instancias 2, mandato_eletivo 2, provimento 2, reintegracao 2, responsabilidades 1 · Cebraspe 9 · tipos: questao 9, prioridade 2
-  - atos_administrativos (54): anulacao_revogacao 12, competencia 6, convalidacao 6, motivo 5, autotutela 4, cassacao 4, motivos_determinantes 4, presuncao_legitimidade 4, atributos 3, elementos 3, especies_negociais 3, classificacao_formacao 2, conceito 2, decadencia 2, delegacao 2, delegacao_avocacao 2, extincao 2, finalidade 2, forma 2, motivacao 2, poder_de_policia 2, abuso_de_poder 1, agente_de_fato 1, autoexecutoriedade 1, caducidade 1, classificacao_conteudo 1, classificacao_destinatarios 1, controle_judicial 1, efeitos 1, fatos_administrativos 1, imperatividade 1, invalidade 1 · Cebraspe 24, Instituto AOCP 6, FGV 5, VUNESP 5, IDECAN 3, IBFC 2, Instituto Acesso 2, Fundatec 1 · tipos: questao 48, conteudo 4, prioridade 2
+  - atos_administrativos (61): anulacao_revogacao 14, convalidacao 7, competencia 6, cassacao 5, especies_negociais 5, motivo 5, motivos_determinantes 5, presuncao_legitimidade 5, atributos 4, autotutela 4, elementos 4, extincao 4, caducidade 3, classificacao_formacao 3, autoexecutoriedade 2, classificacao_destinatarios 2, conceito 2, decadencia 2, delegacao 2, delegacao_avocacao 2, fatos_administrativos 2, finalidade 2, forma 2, imperatividade 2, motivacao 2, poder_de_policia 2, abuso_de_poder 1, agente_de_fato 1, classificacao_conteudo 1, controle_judicial 1, efeitos 1, especies 1, invalidade 1, merito 1, tipicidade 1, vinculado_discricionario 1 · Cebraspe 24, Instituto AOCP 6, FGV 5, VUNESP 5, IDECAN 3, IBFC 2, Instituto Acesso 2, Fundatec 1 · tipos: questao 48, conteudo 11, prioridade 2
   - carreira_prf (3): atribuicoes 2, promocao 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
   - controle_administracao (8): controle_judicial 5, autotutela 2, controle_externo 2, controle_interno 2 · Cebraspe 6 · tipos: questao 6, prioridade 2
   - improbidade (3): modalidades 2, sancoes 2 · Cebraspe 2 · tipos: questao 2, prioridade 1

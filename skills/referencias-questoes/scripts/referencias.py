@@ -646,6 +646,30 @@ def novo_id(d: dict, h: str, raiz=None) -> str:
     return base if base not in existentes else f'{base}-{h[:4]}'
 
 
+def _texto_comparavel(texto: str) -> str:
+    return re.sub(r'[^0-9a-zà-ú]+', '', str(texto).lower())
+
+
+def possiveis_duplicatas(itens: list[dict], raiz=None, trecho=120) -> list[tuple[str, str]]:
+    """Questões do rascunho cujo final do enunciado já aparece em alguma questão do banco.
+
+    O hash de `nova` só pega cópias exatas; aqui o comando de julgamento ("julgue o item…") e o
+    texto-base podem estar separados de outro jeito. Devolve [(rótulo do rascunho, id existente)].
+    """
+    banco = [(q.id, _texto_comparavel(q.corpo)) for q in carregar(raiz)[0] if q.tipo == 'questao']
+    saida = []
+    for i in itens:
+        alvo = _texto_comparavel(i.get('enunciado', ''))[-trecho:]
+        if len(alvo) < 40:
+            continue
+        rotulo = str(i.get('fonte_descoberta', '')).split(', ')[-1].split(';')[0] or str(i.get('enunciado', ''))[:30]
+        for ident, texto in banco:
+            if alvo in texto:
+                saida.append((rotulo, ident))
+                break
+    return saida
+
+
 def nova(dados: dict, raiz=None, gravar=True) -> tuple[str, Questao | None, list[str]]:
     """Cria uma questão a partir de um dicionário. Devolve (status, questão, mensagens).
 
@@ -945,12 +969,17 @@ def main(argv=None) -> int:
         elif a.cmd == 'importar':
             sys.path.insert(0, str(AQUI.parent))
             import importar_questoes
-            itens = importar_questoes.extrair(a.arquivo, a.paginas, a.ruido, a.disciplina, a.assunto, a.alvo)
+            avisos = []
+            itens = importar_questoes.extrair(a.arquivo, a.paginas, a.ruido, a.disciplina, a.assunto, a.alvo, avisos)
             Path(a.saida).write_text(json.dumps(itens, ensure_ascii=False, indent=1), encoding='utf-8')
             pendentes = sum(json.dumps(i, ensure_ascii=False).count(RASCUNHO) for i in itens)
             for i in itens:
                 print(f'{i["fonte_descoberta"].split(", ")[-1].split(";")[0]} | {i["banca"]} {i["ano"]} | {i["formato"]} | '
                       f'gab={i["gabarito"]} | {i["enunciado"][:70]}')
+            for rotulo, existente in possiveis_duplicatas(itens, raiz):
+                avisos.append(f'{rotulo}: parece já estar no banco como {existente} (não salve de novo; cite o ID existente)')
+            for msg in avisos:
+                print(f'aviso: {msg}')
             print(f'-- {len(itens)} questão(ões) em {a.saida}; {pendentes} campo(s) {RASCUNHO} a completar')
         elif a.cmd == 'calibracao':
             print(json.dumps(calibracao(*a.ids, raiz=raiz), ensure_ascii=False, indent=1))

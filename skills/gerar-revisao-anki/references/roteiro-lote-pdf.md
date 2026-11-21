@@ -11,6 +11,29 @@ erros) ou ao alterar o projeto. As regras continuam valendo; este roteiro não c
 Comandos na raiz do repositório. Arquivos temporários (texto do PDF, rascunhos) vão para o
 scratchpad; o lote fica em `output/<CONCURSO>_<Tema>/`.
 
+## 0. Economia de tokens (obrigatória; não muda o que vai no cartão)
+
+Medido na Missão 07 (Atos Administrativos): metade do gasto veio de subagentes lendo PDF como página
+da web, e outra fatia grande de retrabalho. Regras:
+
+- **PDF nunca por leitor de página da web nem por subagente de busca**: eles devolvem bytes, não
+  texto. PDF local: `extrair_pdf.py`; PDF oficial do Cebraspe: `cebraspe_cdn.py` (seção 3). Página HTML
+  (Planalto, STF, verbetes): navegador embutido, extraindo só o trecho com JavaScript (artigo, seção) e
+  usando `browser_batch` para navegar e extrair numa chamada.
+- **Ler o PDF uma vez só**, pelo `pdf.txt`, em trechos (Read com offset e limite), também no modo de
+  planejamento. Nada de imprimir páginas brutas com scripts improvisados.
+- **Importar as questões do jeito certo na primeira vez** (seção 3): `--ruido` com as palavras da faixa
+  lateral e as páginas comentadas no `-p`.
+- **Não imprimir arquivos grandes inteiros** (JSONs de registro, listas de 40 questões): só chaves,
+  contagens ou a linha que interessa (`head`, `grep`, `json` com campos escolhidos).
+- **Agrupar idas e voltas**: chamadas independentes em paralelo; várias correções num patch único em
+  vez de uma edição por sinal do lint; consultas ao banco num só comando. Cada ida e volta reenvia o
+  contexto inteiro, e o custo cresce no fim da sessão.
+- **Escrever os cartões direto no `gerar_lote.py`**, em blocos por tema, sem redigir todos antes no
+  raciocínio; usar `padrao_d` e `questoes_pdf` (seção 7) para não repetir metadados.
+- **Banco antes da internet, e salvar o que foi lido** (inclusive doutrina, como `conteudo`), para o
+  próximo lote do mesmo tema não refazer a busca.
+
 ## 1. Ler o PDF com poucos tokens
 
 ```text
@@ -18,8 +41,8 @@ uv run --no-project --with pymupdf python -I -X utf8 skills/automacao-anki-pytho
 ```
 
 Leia `pdf.txt` (limpo: sem hashes de marca-d'água, CPF, "Página | N"; `--ruido` tira palavras da
-faixa lateral). Veja como imagem só as páginas com tabela, esquema ou figura que decidem conteúdo.
-Nunca copie nome/CPF da marca-d'água para arquivo versionado.
+faixa lateral) em trechos. Veja como imagem só as páginas com tabela, esquema ou figura que decidem
+conteúdo. Nunca copie nome/CPF da marca-d'água para arquivo versionado.
 
 ## 2. Perfil, pertinência e coleção
 
@@ -41,17 +64,32 @@ Nunca copie nome/CPF da marca-d'água para arquivo versionado.
 
 ## 3. Questões: anexo, banco, internet
 
-1. Questões do PDF: `referencias.py importar PDF -o TMP/rasc.json -p PAGINAS -d DISC [--ruido ...]`;
-   confira texto e gabarito, troque todo `REVISAR` (assunto, subassuntos, palavras-chave, operação)
-   e salve com `nova` **todas** as questões do PDF (viram card se o conteúdo for Alta ou Média). Regra revogada:
-   `vigencia: desatualizada` + `vigencia_nota`.
+1. Questões do PDF: `referencias.py importar TMP/pdf.json -o TMP/rasc.json -p LISTA-E-COMENTADAS -d DISC
+   --ruido PALAVRA1 --ruido PALAVRA2 ...` (as palavras da faixa lateral, ex.: `DIREITO`, `ADMINISTRATIVO`,
+   `REVISÃO`, `ESQUEMATIZADA`; e as páginas da lista **e** das comentadas, que trazem o gabarito
+   justificado). Confira os avisos (gabarito da tabela × comentário; questão que já está no banco: não
+   salve de novo, cite o ID). Troque todo `REVISAR` (assunto, subassuntos, palavras-chave, operação)
+   num script curto que leia o rascunho e grave o JSON do `nova`, e salve **todas** as questões novas do
+   PDF (viram card se o conteúdo for Alta ou Média). Regra revogada: `vigencia: desatualizada` + `vigencia_nota`.
 2. Banco: `assuntos -d DISC` → `buscar -d DISC -t TERMO [--com-url] [--vigentes] [--nao-usadas]` → `mostrar`.
-3. Internet, **questões** (obrigatória para todo D; para R/Cloze, só quando o banco não tiver
-   questão do assunto que mostre o que se cobra): Cebraspe C/E primeiro (caderno e gabarito
-   oficiais no CDN), depois outras bancas. Salve no banco **toda questão que virar
-   referência de cartão** e todo item Cebraspe C/E oficial do tema; as demais lidas podem ficar só
-   em `selecao_e_fontes.txt` (banca, ano, item, URL). Sites de questões costumam bloquear robôs:
-   prefira PDFs oficiais.
+3. Internet, **questões** (obrigatória para todo D, salvo **banco suficiente**: item Cebraspe C/E com
+   prova oficial do mesmo subassunto já no banco, citado em `refs` com `fid='comparada'`; para R/Cloze,
+   só quando o banco não tiver questão do assunto que mostre o que se cobra): Cebraspe C/E primeiro,
+   depois outras bancas. Cadernos e gabaritos oficiais pelo `cebraspe_cdn.py` (pymupdf), sem abrir o
+   PDF inteiro no contexto:
+
+   ```text
+   uv run --no-project --with pymupdf python -I -X utf8 skills/referencias-questoes/scripts/cebraspe_cdn.py listar PF_18 -t "definitivo|objetiva"
+   ... cebraspe_cdn.py baixar PF_18/<CADERNO.PDF> PF_18/<GABARITO.PDF> -o TMP/cdn
+   ... cebraspe_cdn.py buscar TMP/cdn/<CADERNO.PDF> -t "revoga|convalida|motivo"
+   ... cebraspe_cdn.py gabarito TMP/cdn/<GABARITO.PDF>
+   ```
+
+   Peça permissão antes de baixar. Para achar o concurso, uma busca restrita ao domínio
+   `cdn.cebraspe.org.br` pelo tema costuma dar a pasta (ex.: `PF_18`, `tc_df_23`). Salve no banco **toda
+   questão que virar referência de cartão** e todo item Cebraspe C/E oficial do tema; as demais lidas
+   podem ficar só em `selecao_e_fontes.txt` (banca, ano, item, URL). Sites de questões costumam bloquear
+   robôs e só trazem gabarito de usuários: prefira PDFs oficiais.
 
 ## 4. Conteúdo e atualização
 
@@ -64,8 +102,10 @@ pesquisa real, como abaixo, e atualização do arquivo.
 Internet, **conteúdo** (obrigatória para todo cartão, R, D ou Cloze): fora do reuso, pesquisa real
 na fonte; com reuso válido, só a checagem rápida acima. Direito: fonte primária vigente (Planalto, STF, STJ),
 redação atual, alterações dos últimos anos e decisões de inconstitucionalidade; `radar_juridico.txt`
-com status (vigente, vacatio, julgado, pendente). Corrija o PDF quando estiver desatualizado e
-avise no verso. Cloze: pesquise mnemônicos; sem fonte confiável, use dica **autoral identificada**.
+com status (vigente, vacatio, julgado, pendente). Tema só doutrinário (sem lei): `buscar --tipo conteudo
+-a ASSUNTO` acha a doutrina já salva (`norma: "Doutrina — …"`); se faltar, leia obra aberta confiável
+(ex.: Enciclopédia Jurídica da PUC-SP) e salve-a como `conteudo`. Corrija o PDF quando estiver
+desatualizado e avise no verso. Cloze: pesquise mnemônicos; sem fonte confiável, use dica **autoral identificada**.
 
 ## 5. Triagem e composição
 
@@ -97,9 +137,15 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
 - Copie `../modelos/gerar_lote_modelo.py` para `output/<CONCURSO>_<Tema>/fonte/gerar_lote.py`
   (pasta de trabalho fora do Git; Hérisson a apaga depois de importar).
   Cartões citam IDs do banco em `refs`; `referencias` pode ficar `[]`. Preencha `COBERTURA`
-  (`Lote(..., cobertura=COBERTURA)`, com `p` por unidade): o montador falha se Alta/Média ficar sem
-  card nem nota da coleção ou se Baixa tiver card, e põe as tags `Pagina_NN`. Questão sem prova oficial
-  vai para `referencias_sem_prova` (inspiração e outra banca; nunca fidelidade comparada).
+  (`Lote(..., cobertura=COBERTURA)`, com `p` por unidade) só com as unidades de **conteúdo**, as questões
+  Baixa e as cobertas por nota da coleção; as demais questões do PDF vão em `questoes_pdf={'Q01': ('17',
+  ID), ...}` e viram unidade sozinhas (cards que as citam em `refs`, prioridade herdada). O montador
+  falha se Alta/Média ficar sem card nem nota da coleção, se Baixa tiver card ou se uma questão não for
+  citada, e põe as tags `Pagina_NN`. Questão sem prova oficial vai para `referencias_sem_prova`
+  (inspiração e outra banca; nunca fidelidade comparada).
+- `padrao_d=dict(rb=rub(...), orig='Caso autoral.', ...)` guarda os valores comuns dos D; sem `regra`, o D
+  usa o trecho da primeira fonte de `fx`. Escreva por D só o que é dele (`alvo`, `op`, `dado`, `solucao`,
+  `erro`, `conc`, `cmp`/`lim`). `sa=[subassuntos]` no D restringe o aviso de itens Cebraspe ao subtema.
 - D: `fid='comparada'` só com Cebraspe C/E oficial em `refs`; senão `inspiracao_geral` + `lim`. O
   montador avisa quando um D em inspiração geral tem item Cebraspe C/E oficial do mesmo assunto no
   banco (pelo `a='disc/assunto'`, pelos `refs` ou pelos conteúdos em `fx`): leia-o e use-o antes de
@@ -120,10 +166,14 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
   `edital`; fonte primária lida → `conteudo` (novo ou atualizado); alteração legal ou decisão →
   `noticia` (+ `vigencia_nota` no que ela afeta); triagem → `prioridade` (cria ou atualiza); questões
   conforme a seção 3. `nova` + `indexar`. Pesquisa feita e não salva é falha do fluxo.
-- `lote/relatorios/`: `triagem_previa_pdf.txt`, `selecao_e_fontes.txt` (linha
+- `lote/relatorios/`: o montador **gera** `triagem_previa_pdf.txt`, `auditoria_pedagogica.txt`,
+  `economia_de_revisao.txt` e `fontes_e_referencias.txt` (questões com e sem prova por card, fontes e
+  fidelidade dos D); o cabeçalho da triagem vem de `Lote(..., relatorio={'material': ..., 'leitura': ...,
+  'alvo': ..., 'edital': ..., 'colecao': ...})`. Escreva à mão só o `selecao_e_fontes.txt` (linha
   `Banco consultado: <comandos ou IDs>` antes de qualquer fonte da internet — o `finalizar_lote.py`
-  avisa se faltar —, pertinência, itens do banco usados e **IDs criados ou atualizados neste pedido**, fontes, mnemônicos, comparação dos D, cobertura), `economia_de_revisao.txt`,
-  `auditoria_pedagogica.txt` (ID, linha, gabarito, decisão) e, em Direito, `radar_juridico.txt`.
+  avisa se faltar —, pertinência, buscas feitas e sem resultado, "banco suficiente", mnemônicos e
+  **IDs criados ou atualizados neste pedido**) e, em Direito, `radar_juridico.txt` (status das normas e
+  divergências com o PDF).
 - Exportar e revalidar em uma chamada: grava ZIP e APKG na própria pasta, sem sobrescrever; confere
   também a cobertura do PDF e o banco (`referencias.py validar`), avisa duplicatas na coleção e a
   falta do registro do banco, e grava a linha do lote em `referencias/historico_lotes.tsv`:

@@ -36,9 +36,23 @@ Texto que não é conteúdo de estudo usa `excluir='nao_conteudo: motivo'`. Falh
 se Baixa tiver card ou se um card não cobrir nenhuma unidade Alta/Média. Grava
 `cobertura_pdf.json` e põe em cada card as tags `Pagina_NN` das páginas que ele cobre.
 
-`fontes`: {chave: (url, trecho verificado)} ou {chave: "<id de conteúdo do banco>"}, convertido por `referencias.fonte`. Os relatórios .txt continuam
-escritos à mão em `lote/relatorios/`. Revisão pelo próprio agente é autorevisão;
-os registros gerados não certificam conteúdo.
+`questoes_pdf` (2.29, opcional): {'Q01': ('17', '<id do banco>'), ...}. Cada questão do PDF que não
+estiver declarada à mão em `cobertura` vira unidade sozinha: cartoes = cards que a citam em `refs` e
+prioridade = a maior das unidades de conteúdo desses cards. Questão sem card citando-a precisa de
+unidade própria em `cobertura` (p='baixa' com motivo, ou colecao=[...]).
+
+`padrao_d` (2.29, opcional): valores comuns aos D do lote (ex.: `rb`, `orig`, `lim`), usados só quando o
+D não traz a chave. Sem `regra`, o D usa o trecho da primeira fonte de `fx`.
+
+`fontes`: {chave: (url, trecho verificado)} ou {chave: "<id de conteúdo do banco>"}, convertido por `referencias.fonte`.
+
+Relatórios (2.29): `triagem_previa_pdf.txt`, `auditoria_pedagogica.txt`, `economia_de_revisao.txt` e
+`fontes_e_referencias.txt` são gerados em `lote/relatorios/` a partir de `cobertura`, dos cartões, de `refs`
+e de `fontes` (`relatorio={'material': ..., 'leitura': ..., 'alvo': ..., 'colecao': ...}` preenche o
+cabeçalho da triagem). Um arquivo escrito à mão (sem a marca de gerado) não é sobrescrito. O
+`selecao_e_fontes.txt` continua escrito à mão, só com o que o script não sabe: pertinência, "Banco
+consultado", buscas, mnemônicos e IDs criados. Revisão pelo próprio agente é autorevisão; os registros
+gerados não certificam conteúdo.
 """
 from __future__ import annotations
 
@@ -60,6 +74,8 @@ MNEMONICO = 'Mnemonico'
 CRITERIOS = ('correcao', 'determinacao', 'operacao_d', 'comparacao', 'autoria', 'feedback',
              'linguagem_didatica', 'utilidade')
 REVISOR_PADRAO = 'Claude (assistente de IA) — mesmo agente que redigiu os cartões'
+MARCA_GERADO = 'Gerado por montar_lote.py a partir de fonte/gerar_lote.py; edite lá, não aqui.'
+NOVOS_POR_DIA = 20
 
 
 def rubrica(correcao, determinacao, operacao_d, comparacao, autoria='', feedback='', linguagem_didatica='',
@@ -85,19 +101,28 @@ def cloze_view(texto: str, revelar: bool) -> str:
 class Lote:
     def __init__(self, pasta, base_tags, fontes, hoje, referencias, R, D, CZ, semente,
                  schema_calibracao=2, revisor=REVISOR_PADRAO, titulo_previa='Prévia dos cards',
-                 banco_referencias=None, registrar_uso=True, cobertura=None):
+                 banco_referencias=None, registrar_uso=True, cobertura=None, questoes_pdf=None, padrao_d=None,
+                 relatorio=None):
         self.pasta, self.out = Path(pasta), Path(pasta) / 'lote'
         self.base, self.F, self.hoje = base_tags, fontes, hoje
-        self.R, self.D, self.CZ, self.semente = R, D, CZ, semente
+        self.R, self.CZ, self.semente = R, CZ, semente
         self.schema, self.revisor, self.titulo = schema_calibracao, revisor, titulo_previa
         self.banco, self.registrar = banco_referencias, registrar_uso
-        self.cobertura = cobertura
+        self.cobertura, self.questoes_pdf, self.relatorio = cobertura, questoes_pdf or {}, relatorio or {}
         # chave de fonte -> ID de conteúdo do banco ("ID" ou "ID#seção"); o uso é registrado no conteúdo
         self.conteudos = {k: v.partition('#')[0] for k, v in self.F.items() if isinstance(v, str)}
         if self.conteudos:
             ref = self._modulo_referencias()
             self.F = {k: (ref.fonte(v, self.banco) if isinstance(v, str) else v) for k, v in self.F.items()}
+        self.D = [self._completar_d(x, padrao_d or {}) for x in D]
         self.refs = self._resolver_refs(referencias)
+
+    def _completar_d(self, x, padrao):
+        """Valores padrão do lote nos D (só chaves ausentes); `regra` vem do trecho da 1ª fonte em `fx`."""
+        d = {**{k: v for k, v in padrao.items() if k not in x}, **x}
+        if not str(d.get('regra', '')).strip() and d.get('fx') and d['fx'][0] in self.F:
+            d['regra'] = self.F[d['fx'][0]][1]
+        return d
 
     # ------------------------------------------------------------ cobertura do PDF por prioridade
     PRIORIDADES = ('alta', 'media', 'baixa')
@@ -125,6 +150,7 @@ class Lote:
             return
         cartoes = {x['k']: x for x in self.R + self.D + self.CZ}
         erros, cobertos = [], set()
+        self.cobertura = list(self.cobertura) + self._unidades_de_questoes(cartoes, erros)
         for un in self.cobertura:
             u, lista = un.get('u', '?'), list(un.get('cartoes', ()))
             if un.get('excluir'):
@@ -164,6 +190,31 @@ class Lote:
         if erros:
             raise SystemExit('COBERTURA INCOMPLETA — o lote de PDF precisa cobrir todo conteúdo Alta ou Média '
                              'do PDF e de suas questões:\n  ' + '\n  '.join(erros))
+
+    def _unidades_de_questoes(self, cartoes, erros):
+        """Unidades das questões de `questoes_pdf` que a cobertura não declara: cards que as citam e a
+        maior prioridade das unidades de conteúdo desses cards."""
+        declaradas = {un.get('questao') for un in self.cobertura if un.get('questao')}
+        ordem = {'alta': 2, 'media': 1}
+        prioridade = {}
+        for un in self.cobertura:
+            if un.get('p') in ordem and not un.get('questao'):
+                for k in un.get('cartoes', ()):
+                    if ordem[un['p']] > ordem.get(prioridade.get(k), 0):
+                        prioridade[k] = un['p']
+        novas = []
+        for u, (pag, ident) in self.questoes_pdf.items():
+            if ident in declaradas:
+                continue
+            lista = [k for k, x in cartoes.items() if ident in x.get('refs', ())]
+            if not lista:
+                erros.append(f'{u} ({ident}): nenhum card a cita em refs; declare-a em COBERTURA '
+                             '(p="baixa" com motivo, ou colecao=[...])')
+                continue
+            p = max((prioridade.get(k, 'media') for k in lista), key=lambda v: ordem[v])
+            novas.append(dict(u=u, pag=pag, p=p, questao=ident, conteudo=f'Questão {u.lstrip("Q")} do PDF',
+                              cartoes=lista, auto=True))
+        return novas
 
     def _tags(self, x, extra=''):
         pags = ' '.join(f'Pagina_{p:02d}' for p in sorted(self.tags_pagina.get(x['k'], ())))
@@ -249,11 +300,17 @@ class Lote:
                 q.salvar()
         ref.indexar(self.banco)
 
+    @staticmethod
+    def _subassuntos(registro) -> set[str]:
+        valor = registro.get('subassuntos') or []
+        return set(valor) if isinstance(valor, (list, tuple, set)) else set(re.split(r'[,;\s]+', str(valor))) - {''}
+
     def sugestoes_cebraspe(self) -> dict[str, list[str]]:
         """D em `inspiracao_geral` × itens Cebraspe C/E com gabarito definitivo do mesmo assunto no banco.
 
         O assunto do D vem do campo opcional `a` ('assunto' ou 'disciplina/assunto'), das questões em
-        `refs` e dos conteúdos do banco citados em `fx`. Só avisa; nunca bloqueia.
+        `refs` e dos conteúdos do banco citados em `fx`; o campo opcional `sa` (subassuntos) restringe o
+        aviso aos itens do mesmo subtema. Só avisa; nunca bloqueia.
         """
         alvos = [x for x in self.D if x.get('fid') == 'inspiracao_geral']
         if not alvos:
@@ -273,8 +330,12 @@ class Lote:
                 assuntos.add(tuple(a.split('/', 1)) if '/' in a else (None, a))
             ligados = list(x.get('refs', ())) + [self.conteudos[k] for k in x.get('fx', ()) if k in self.conteudos]
             assuntos |= {(por_id[i]['disciplina'], por_id[i]['assunto']) for i in ligados if i in por_id}
+            sub = x.get('sa')  # subassuntos do D (lista ou "a, b"): restringe o aviso ao subtema (2.29)
+            sub = {s.strip() for s in (sub.split(',') if isinstance(sub, str) else sub or ()) if s.strip()}
             ids = sorted({r['id'] for r in oficiais for d, a in assuntos
-                          if r['assunto'] == a and (d is None or r['disciplina'] == d)} - set(x.get('refs', ())))
+                          if r['assunto'] == a and (d is None or r['disciplina'] == d)
+                          and (not sub or sub & self._subassuntos(r))}
+                         - set(x.get('refs', ())))
             if ids:
                 saida[x['k']] = ids
         return saida
@@ -397,6 +458,91 @@ class Lote:
         self._json('revisao_recuperacao.json', rev)
         return rev
 
+    # ------------------------------------------------------------ relatórios .txt (2.29)
+    def _gravar_txt(self, nome, linhas):
+        """Grava o relatório gerado; não sobrescreve o que foi escrito à mão (sem a marca)."""
+        caminho = self.out / 'relatorios' / nome
+        if caminho.exists() and MARCA_GERADO not in caminho.read_text(encoding='utf-8'):
+            print(f'aviso: {nome} escrito à mão foi mantido (apague-o para gerar)')
+            return False
+        caminho.write_text('\n'.join(linhas + ['', MARCA_GERADO]) + '\n', encoding='utf-8', newline='\n')
+        return True
+
+    def _linha_de(self, k):
+        return f'CE:{self.line_of[k]}' if k in self.line_of else f'CZ:{self.cz_index[k]}'
+
+    def gravar_relatorios(self):
+        rel = self.relatorio
+        if self.cobertura is not None:
+            cont = {p: sum(un.get('p') == p for un in self.cobertura) for p in self.PRIORIDADES}
+            excl = sum(bool(un.get('excluir')) for un in self.cobertura)
+            linhas = ['TRIAGEM PRÉVIA DO PDF — inventário com prioridade para o concurso-alvo']
+            linhas += [f'{rotulo}: {rel[chave]}' for chave, rotulo in (
+                ('material', 'Material'), ('leitura', 'Leitura'), ('alvo', 'Concurso-alvo'), ('edital', 'Edital de referência'),
+                ('colecao', 'Coleção')) if rel.get(chave)]
+            linhas += ['Regra (cobertura-pdf.md): inventário de todo o PDF e de suas questões; Alta e Média com ao menos um '
+                       'card ou nota da coleção que já exija a mesma recuperação; Baixa sem card, com motivo.',
+                       f'Unidades: {cont["alta"]} Alta, {cont["media"]} Média, {cont["baixa"]} Baixa ({excl} exclusão(ões) de texto que não é conteúdo).',
+                       '', 'Unidade | página(s) | prioridade | conteúdo | cards / nota da coleção / motivo']
+            for un in self.cobertura:
+                pag = ', '.join(map(str, self.paginas(un['pag']))) if 'pag' in un else '?'
+                if un.get('excluir'):
+                    linhas.append(f'{un["u"]} | {pag} | — | {un.get("conteudo", "")} | {un["excluir"]}')
+                    continue
+                if un['p'] == 'baixa':
+                    destino = 'sem card — ' + str(un.get('motivo', ''))
+                else:
+                    destino = '; '.join(filter(None, (', '.join(un.get('cartoes', ())),
+                                                      ('coleção ' + ', '.join(un['colecao'])) if un.get('colecao') else '')))
+                q = f' [{un["questao"]}]' if un.get('questao') else ''
+                linhas.append(f'{un["u"]} | {pag} | {un["p"]} | {un.get("conteudo", "")}{q} | {destino}')
+            self._gravar_txt('triagem_previa_pdf.txt', linhas)
+        linhas = ['AUDITORIA PEDAGÓGICA POR ID — autorevisão (mesmo agente que redigiu; não é avaliação independente)',
+                  'Procedimento: cada frente foi resolvida de novo antes de reler o verso, confrontada com as fontes de '
+                  'fontes_e_referencias.txt e testada contra leitura concorrente. Detalhes em revisao_recuperacao.json '
+                  '(R/Cloze) e calibracao_cebraspe.json (D).', '', 'ID (linha) | gab. | decisão | alvo']
+        linhas += [f'{x["k"]} ({self._linha_de(x["k"])}) | {x["g"]} | APROVAR | {x["alvo"]}' for x in self.R + self.D]
+        linhas += [f'{x["k"]} ({self._linha_de(x["k"])}) | Cloze | APROVAR | {x["alvo"]} '
+                   f'(lacunas cobertas por {", ".join(sorted({k for ks in x["cob"].values() for k in ks}))})' for x in self.CZ]
+        self._gravar_txt('auditoria_pedagogica.txt', linhas)
+        n_r, n_d, n_c = len(self.R), len(self.D), len(self.CZ)
+        rc, dc = sum(x['g'] == 'C' for x in self.R), sum(x['g'] == 'C' for x in self.D)
+        total = n_r + n_d + n_c
+        linhas = ['ECONOMIA DE REVISÃO',
+                  f'Contagem: {n_r + n_d} notas C/E ({n_r} R + {n_d} D) + {n_c} notas Cloze = {total} cartões.',
+                  f'Gabaritos: R = {rc} Certo / {n_r - rc} Errado; D = {dc} Certo / {n_d - dc} Errado. Cloze fora da '
+                  'contagem. Ordem embaralhada (semente fixa).', '', 'Decisões para evitar revisões redundantes:']
+        if self.cobertura is not None:
+            baixas = [un for un in self.cobertura if un.get('p') == 'baixa']
+            notas = sorted({n for un in self.cobertura for n in un.get('colecao', ())})
+            linhas.append(f'- Prioridade Baixa sem card: {len(baixas)} unidade(s) '
+                          f'({sum(bool(un.get("questao")) for un in baixas)} delas questões do PDF), registradas na triagem.')
+            if notas:
+                linhas.append(f'- Notas da coleção que já exigem a mesma recuperação cobrem unidades: {", ".join(notas)}.')
+            qs = [un for un in self.cobertura if un.get('questao') and un.get('p') != 'baixa']
+            linhas.append(f'- Questões do PDF reaproveitam cards de conteúdo: {len(qs)} questão(ões) Alta/Média cobertas '
+                          'por cards que as citam ou por notas da coleção.')
+        linhas += ['- Cobertura = ao menos um card por unidade; nenhum fato nos três formatos; cada lacuna Cloze coberta por um D.',
+                   '', f'Carga: {total} cartões novos; a {NOVOS_POR_DIA} novos por dia, cerca de '
+                       f'{-(-total // NOVOS_POR_DIA)} dia(s) de introdução.']
+        self._gravar_txt('economia_de_revisao.txt', linhas)
+        usados = {}
+        for x in self.R + self.D + self.CZ:
+            for r in x.get('refs', ()):
+                usados.setdefault(r, []).append(x['k'])
+        com = [r for r in usados if r not in self.ids_sem_prova]
+        linhas = ['FONTES E REFERÊNCIAS DO LOTE (lista gerada; o selecao_e_fontes.txt traz pertinência, buscas e IDs criados)',
+                  '', 'Questões com prova oficial (podem sustentar fidelidade comparada):']
+        linhas += [f'- {r}: {", ".join(usados[r])}' for r in com] or ['- nenhuma']
+        linhas += ['', 'Questões sem prova oficial localizada (inspiração e outra banca):']
+        linhas += [f'- {r}: {", ".join(usados[r])}' for r in usados if r in self.ids_sem_prova] or ['- nenhuma']
+        linhas += ['', 'Fontes de conteúdo (chave: url — trecho; cards):']
+        for k, (url, trecho) in self.F.items():
+            cards = [x['k'] for x in self.R + self.D + self.CZ if k in x.get('fx', ())]
+            linhas.append(f'- {k}: {url} — {trecho}; {", ".join(cards) or "sem card"}')
+        linhas += ['', 'Desafiadores: ' + '; '.join(f'{x["k"]} {x["fid"]}' for x in self.D) if self.D else '']
+        self._gravar_txt('fontes_e_referencias.txt', linhas)
+
     # ------------------------------------------------------------ prévia (não vai para o Anki)
     def gerar_previa(self):
         cards = [(x['k'], row[0], row[1], row[2]) for (_, x), row in zip(self.ce_items, self.ce_rows)]
@@ -427,6 +573,7 @@ class Lote:
         self.registro_cobertura()
         self.registro_calibracao()
         self.registro_revisao(sinais_resolvidos or self.pasta / 'fonte' / 'sinais_resolvidos.json')
+        self.gravar_relatorios()
         self.gerar_previa()
         self.registrar_usos()
         self.sugestoes = self.sugestoes_cebraspe()

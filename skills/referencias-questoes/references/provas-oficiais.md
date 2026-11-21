@@ -20,6 +20,9 @@ uv run --no-project --with pymupdf python -X utf8 skills/referencias-questoes/sc
 - Pegue o caderno do cargo e o **gabarito definitivo** (não o preliminar). Prova em vários cadernos (blocos,
   língua estrangeira) é uma entrada por caderno.
 - Peça permissão ao usuário antes de baixar (nome, origem, tamanho) e grave só no scratchpad: PDF nunca é versionado.
+- `scripts/cebraspe_cdn.py listar <PASTA> -t "definitivo|objetiva"` lista os arquivos pela API, e
+  `baixar <PASTA>/<ARQUIVO> -o <scratchpad>/cdn` grava os PDFs (com pymupdf, mostra páginas e cargo).
+  Nunca leia PDF por leitor de página da web: ele devolve bytes, não texto.
 - Acrescente a prova em `provas` do JSON: `ano` (de aplicação), `orgao`, `pasta`, `caderno`, `url`,
   `gabarito_url`, `concurso`, `cargo`, `alvo` e `itens` (numeração do caderno, ex.: `9-120`).
 

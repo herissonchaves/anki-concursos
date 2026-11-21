@@ -46,6 +46,20 @@ seções `## `), por exemplo:
  "verificado_em": "2026-11-21", "corpo": "## Art. 67-C — tempo de direção\n\n- Caput: ..."}
 ```
 
+## Conteúdo doutrinário
+
+Para temas sem lei (atributos, classificação e espécies do ato, por exemplo), a doutrina lida também vira
+`conteudo`, para o reuso de 90 dias valer como vale para a lei:
+
+- `norma: "Doutrina — Autor, obra ou verbete, publicação"`; `dispositivos`: os tópicos cobertos (ex.:
+  `["presunção de legitimidade", "tipicidade"]`); `situacao: vigente` (posição atual da doutrina).
+- Corpo em **paráfrase com palavras próprias**, nunca cópia: doutrina tem direito autoral (ao contrário
+  da lei). Seções `## Escopo e método` (o que foi lido, e se a fonte é secundária), `## <tópico>` e
+  `## Alterações conhecidas`. Registre divergências doutrinárias quando houver.
+- Fonte secundária (resumo de curso, artigo) só quando a obra original não estiver acessível, dito no
+  escopo. Prefira obras abertas confiáveis (ex.: Enciclopédia Jurídica da PUC-SP).
+- No gerador, use `F = {'chave': 'ID#Tópico'}` como para lei.
+
 ## Regras de conteúdo
 
 - Questão: **só o item oficial** (texto-base, enunciado, alternativas, gabarito e fonte).

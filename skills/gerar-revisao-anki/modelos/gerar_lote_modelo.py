@@ -63,7 +63,9 @@ D = [  # desafiadores: caso curto com dado decisivo; 50% C / 50% E
   conc='Leitura concorrente e como a frente a fecha.', orig='O que foi reconstruído em relação às questões.',
   fx=('lei',), fid='comparada', cmp='Vínculo com a operação da questão Cebraspe.',
   # sem Cebraspe C/E com prova: fid='inspiracao_geral', lim='Buscas feitas e o que faltou.'
-  #   (a='disciplina/assunto' opcional: o montador avisa itens Cebraspe C/E do banco desse assunto)
+  #   (a='disciplina/assunto' opcional: o montador avisa itens Cebraspe C/E do banco desse assunto;
+  #    sa=['subassunto'] restringe o aviso ao subtema. Banco suficiente — item Cebraspe C/E oficial do mesmo
+  #    subassunto já no banco — dispensa a busca na internet: cite-o em refs com fid='comparada')
   # sem questão de outra banca em refs: obp=OBP
   # Rubrica curta (2.24): os 4 primeiros critérios e linguagem_didatica com evidência; autoria,
   # feedback e utilidade só com observação (autoria='...').
@@ -74,6 +76,18 @@ D = [  # desafiadores: caso curto com dado decisivo; 50% C / 50% E
 # Cobertura do PDF por prioridade para o concurso-alvo (obrigatória em revisão de PDF): inventário de
 # todo o PDF e de suas questões. Alta/Média: card do lote ou nota da coleção (colecao=[IDs]);
 # Baixa: sem card, com motivo. O montador falha se faltar card e põe as tags Pagina_NN nos cards.
+# Questões do PDF citadas em `refs` (2.29): viram unidade sozinhas, com os cards que as citam e a prioridade
+# herdada do conteúdo. Questão Baixa ou coberta só pela coleção fica declarada em COBERTURA.
+QUESTOES_PDF = {'Q02': ('17', Q_OUTRA)}
+
+# Valores comuns aos D (2.29), usados só quando o D não traz a chave; sem `regra`, vale o trecho da 1ª fonte.
+PADRAO_D = dict(orig='Caso autoral.')
+
+# Cabeçalho da triagem gerada (2.29); os relatórios triagem/auditoria/economia/fontes saem sozinhos.
+RELATORIO = dict(material='Código — título do PDF, N páginas', leitura='extrair_pdf.py, texto limpo, sem OCR',
+                 alvo='PRF (prioridade do assunto no banco: ...)', edital='PRF 2021, item ...',
+                 colecao='baralho "..." consultado em cópia somente leitura')
+
 COBERTURA = [
  dict(u='U01', pag='5', p='alta', conteudo='Regra X do art. Y', cartoes=['R01', 'C01']),
  dict(u='U02', pag='6-7', p='media', conteudo='Exceção Z', cartoes=['D01']),
@@ -85,5 +99,6 @@ COBERTURA = [
 
 if __name__ == '__main__':
     Lote(PASTA, BASE, F, HOJE, [], R, D, CZ, semente=2026, cobertura=COBERTURA,
+         questoes_pdf=QUESTOES_PDF, padrao_d=PADRAO_D, relatorio=RELATORIO,
          revisor='Claude (assistente de IA) — mesmo agente que redigiu os cartões',
          titulo_previa='Prévia dos cards — Tema').gerar()
