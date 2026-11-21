@@ -1,0 +1,599 @@
+{
+ "schema_version": 1,
+ "sha256_lote": "06642a5e5bcd2bc877058b96a154dfc6671384a002da9d124a20e285f24aed99",
+ "revisor": "Claude (assistente de IA, modelo Opus 5.5) — mesmo agente que redigiu os cartões",
+ "tipo_revisao": "autorevisao",
+ "cartoes": [
+  {
+   "id": "anki_certo_errado.tsv:18",
+   "sha256": "3b54c7c78cf343b52dcf672dd4ef21134d66aa6da0101ee76d64a3bcde2455a1",
+   "alvo": "Preferência na rotatória não sinalizada (art. 29, III, b).",
+   "solucao": "Certo: art. 29, III, b — na rotatória, preferência de quem estiver circulando por ela.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 29, III (a: rodovia; b: rotatória; c: direita do condutor), IV (faixas da direita e da esquerda) e IX (ultrapassagem pela esquerda, exceto se o da frente sinaliza entrar à esquerda); texto compilado do Planalto"
+    }
+   ],
+   "alternativa_concorrente": "Testei a regra \"quem vem pela direita\": ela é residual (alínea c) e não se aplica à rotatória, que tem alínea própria.",
+   "recuperacao": "Recupera a regra da rotatória sem que a frente mencione as outras alíneas.",
+   "feedback": "Regra das três alíneas, tabela de preferência e dica autoral da ordem das alíneas no Memorize.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:13",
+   "sha256": "4400c1153207152f7dd2e6f7a485e2dc507d1d2c114a74fcc2f9db7b25bf8a7f",
+   "alvo": "Regra residual de preferência: direita do condutor (art. 29, III, c).",
+   "solucao": "Errado: art. 29, III, c — nos demais casos, preferência do que vier pela direita do condutor (cobrado na afirmativa II da questão IDCAP 2026, item 43).",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 29, III (a: rodovia; b: rotatória; c: direita do condutor), IV (faixas da direita e da esquerda) e IX (ultrapassagem pela esquerda, exceto se o da frente sinaliza entrar à esquerda); texto compilado do Planalto"
+    }
+   ],
+   "alternativa_concorrente": "Considerei se \"ruas comuns\" poderia envolver rodovia ou rotatória: a frente exclui as duas situações; resta a alínea c.",
+   "recuperacao": "Exige recuperar o lado da preferência; a frente não sugere a resposta.",
+   "feedback": "Regra, erro localizado (lado trocado) e tabela; Memorize com a formulação correta.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:17",
+   "sha256": "f3af2de9b84d548c30c66b0d507a2cd63dd7824097786b4d363ab40ae549f6cd",
+   "alvo": "Destinação das faixas (art. 29, IV).",
+   "solucao": "Certo: art. 29, IV. Alvo cobrado nas questões do PDF (Cebraspe PRF/CFP 2015 e São Luís 2017, salvas no banco).",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 29, III (a: rodovia; b: rotatória; c: direita do condutor), IV (faixas da direita e da esquerda) e IX (ultrapassagem pela esquerda, exceto se o da frente sinaliza entrar à esquerda); texto compilado do Planalto"
+    }
+   ],
+   "alternativa_concorrente": "Considerei faixa exclusiva de ônibus na direita: a frente diz \"sem faixa especial\"; o caso da faixa exclusiva é tratado no D03.",
+   "recuperacao": "Recupera a regra-base das faixas.",
+   "feedback": "Regra com os dois lados; Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:16",
+   "sha256": "4f05b152c62e56ab4df0e879447a064e7452b7d0e22167ce1916c98a9ddd488a",
+   "alvo": "Exceção da ultrapassagem pela direita (art. 29, IX).",
+   "solucao": "Errado: art. 29, IX — exceção apenas quando o veículo a ser ultrapassado sinaliza entrar à esquerda.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 29, III (a: rodovia; b: rotatória; c: direita do condutor), IV (faixas da direita e da esquerda) e IX (ultrapassagem pela esquerda, exceto se o da frente sinaliza entrar à esquerda); texto compilado do Planalto"
+    }
+   ],
+   "alternativa_concorrente": "Considerei faixas múltiplas em que o carro da direita anda mais rápido: isso não é a exceção do inciso IX; a frente trata da sinalização de conversão.",
+   "recuperacao": "Exige lembrar o lado exato da exceção (cobrado no item IBEST 2023 do PDF e na afirmativa III da IDCAP 2026).",
+   "feedback": "Regra e erro localizado; Memorize com a formulação correta.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:15",
+   "sha256": "88f8d26a91b3320d8ddab5555ebf70e3c932a0ab880f1776cc4e304220f72d3e",
+   "alvo": "Dever de quem é ultrapassado (art. 30).",
+   "solucao": "Certo: art. 30, I. A ideia de \"acelerar quando outro sinaliza a ultrapassagem\" aparece como errada no item Cebraspe TRF1 2017 do PDF.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, arts. 30 (quem é ultrapassado vai para a direita sem acelerar), 31 (coletivo parado: reduzir e atenção redobrada ou parar), 32 (\"nos trechos em curvas e em aclives sem visibilidade suficiente\", passagens de nível, pontes e viadutos, travessias; salvo sinalização) e 33 (interseções)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei o condutor em faixa do meio: a regra seria manter a faixa; a frente fixa a faixa da esquerda.",
+   "recuperacao": "Recupera a conduta de quem é ultrapassado.",
+   "feedback": "Regra com as duas hipóteses do art. 30; Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:9",
+   "sha256": "3db5c98f304cc3961f45c4847a530478d47ee75917bd8b9e0df4bb6b4930e351",
+   "alvo": "Locais proibidos para ultrapassar e a exceção da sinalização (art. 32).",
+   "solucao": "Errado: art. 32, parte final — \"exceto quando houver sinalização permitindo a ultrapassagem\".",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, arts. 30 (quem é ultrapassado vai para a direita sem acelerar), 31 (coletivo parado: reduzir e atenção redobrada ou parar), 32 (\"nos trechos em curvas e em aclives sem visibilidade suficiente\", passagens de nível, pontes e viadutos, travessias; salvo sinalização) e 33 (interseções)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei a interseção (art. 33), que não tem essa exceção: a frente trata de pontes e viadutos, cobertos pelo art. 32.",
+   "recuperacao": "Recupera a lista de locais e sua exceção.",
+   "feedback": "Regra com a lista, erro (exceção esquecida), tabela dos locais e mnemônico autoral conferido contra o art. 32.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:32",
+   "sha256": "4b7e62075b10eedb6b4151d825db5fe9ebb77c57b8075b70861b7253080c22b7",
+   "alvo": "Identificação exigida para o livre estacionamento (art. 29, VII, f).",
+   "solucao": "Certo: art. 29, VII, f — livre estacionamento quando identificados por iluminação intermitente; a alínea e exige também o alarme sonoro para circulação e parada.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 29, VII, alíneas a–f (redação da Lei 14.071/2020; alínea c pela Lei 14.440/2022) e VIII (utilidade pública: livre parada e estacionamento no local, sinalizados)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei o art. 280, § 6º (veículos de polícia não identificados ostensivamente), discutido em doutrina: a frente trata da prerrogativa do art. 29, VII, com serviço de urgência.",
+   "recuperacao": "Exige distinguir a exigência de cada prerrogativa.",
+   "feedback": "Regra separando as prerrogativas e tabela de identificação; Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:36",
+   "sha256": "ead3bd8dfa5db38436cb5225f2b02933a5e77c529cea6e9cd75fa550fd37d9d7",
+   "alvo": "Dever dos condutores diante de veículo de emergência (art. 29, VII, a).",
+   "solucao": "Errado: art. 29, VII, a.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 29, VII, alíneas a–f (redação da Lei 14.071/2020; alínea c pela Lei 14.440/2022) e VIII (utilidade pública: livre parada e estacionamento no local, sinalizados)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei via de faixa única: a regra manda ir para a direita e parar se necessário; não muda o lado.",
+   "recuperacao": "Recupera a direção do deslocamento.",
+   "feedback": "Regra e erro localizado; Memorize com a formulação correta.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:5",
+   "sha256": "1d7dcf3a79c55fa7f8a702cf1387fb61c1f41e35fb39bfcb86c2c3e124452bea",
+   "alvo": "Prerrogativas dos veículos de utilidade pública (art. 29, VIII).",
+   "solucao": "Errado: art. 29, VIII — livre parada e estacionamento no local, desde que sinalizados.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 29, VII, alíneas a–f (redação da Lei 14.071/2020; alínea c pela Lei 14.440/2022) e VIII (utilidade pública: livre parada e estacionamento no local, sinalizados)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei batedores (inciso VI): dão prioridade de passagem ao comboio escoltado, não ao veículo de utilidade pública.",
+   "recuperacao": "Exige separar dois incisos parecidos.",
+   "feedback": "Regra, erro e tabela comparativa; Memorize com a formulação correta.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:7",
+   "sha256": "f62c7b64655f05968673c025f82fa56a342d42cc9c6a4a00b8e0ea0822a90299",
+   "alvo": "Uso da luz alta (art. 40, II).",
+   "solucao": "Certo: art. 40, II.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 40, I (luz baixa à noite e de dia em túneis, chuva, neblina, cerração), II (luz alta em via não iluminada, exceto ao cruzar ou seguir), III (troca intermitente só para ultrapassagem ou risco), § 2º (faróis de dia em rodovia de pista simples fora do perímetro urbano, sem DRL; Lei 14.071/2020)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei via iluminada: aí vale a luz baixa à noite (art. 40, I); a frente fixa via não iluminada.",
+   "recuperacao": "Recupera a regra e as duas exceções.",
+   "feedback": "Regra e tabela das luzes; Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:2",
+   "sha256": "59d6b9a139ad08108bf0b2c6931d4a41430f5f5692836faa3041cb689b18585a",
+   "alvo": "Farol aceso de dia em rodovia (art. 40, § 2º).",
+   "solucao": "Certo: art. 40, § 2º (incluído pela Lei 14.071/2020).",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 40, I (luz baixa à noite e de dia em túneis, chuva, neblina, cerração), II (luz alta em via não iluminada, exceto ao cruzar ou seguir), III (troca intermitente só para ultrapassagem ou risco), § 2º (faróis de dia em rodovia de pista simples fora do perímetro urbano, sem DRL; Lei 14.071/2020)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei a regra anterior a 2020 (farol de dia em qualquer rodovia), que o PDF menciona como atualizada: a redação vigente restringe à pista simples fora do perímetro urbano.",
+   "recuperacao": "Recupera as três condições da regra.",
+   "feedback": "Regra com as condições e a sigla explicada; tabela das luzes; Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:10",
+   "sha256": "8f47008029c8246a2e477d1e12582c51d8c6974da07908d6dceaa21e410715af",
+   "alvo": "Hipóteses de uso da buzina (art. 41).",
+   "solucao": "Certo: art. 41, II.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 41: buzina em toque breve, I (advertências para evitar sinistros, redação da Lei 14.599/2023) e II (fora das áreas urbanas, avisar que vai ultrapassar)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei o mesmo aviso dentro da cidade: não está entre as hipóteses; a frente fixa \"fora das áreas urbanas\".",
+   "recuperacao": "Recupera a hipótese do inciso II.",
+   "feedback": "Regra com as duas hipóteses; Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:3",
+   "sha256": "3fd12192da8d4d76e626d7f7abfb1abed530a0e1edab96667d051fb8d965fb59",
+   "alvo": "Conversão à direita no vermelho (art. 44-A).",
+   "solucao": "Errado: art. 44-A — livre onde houver sinalização indicativa que permita.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 44-A (Lei 14.071/2020): conversão à direita no vermelho livre onde houver sinalização indicativa que a permita, observados os arts. 44, 45 e 70"
+    }
+   ],
+   "alternativa_concorrente": "Considerei a regra norte-americana citada no PDF como curiosidade: é justamente o modelo que a frase descreve, e não vale no Brasil.",
+   "recuperacao": "Exige lembrar a condição da sinalização permissiva.",
+   "feedback": "Regra e erro com o contraste dos dois modelos; Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:25",
+   "sha256": "8874233f1071f1637c7629d62d3a5bfed711483a8dcedc0513adb5aaacfb9d52",
+   "alvo": "Lado de embarque e desembarque (art. 49, parágrafo único).",
+   "solucao": "Certo: art. 49, parágrafo único.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 49 e parágrafo único: embarque e desembarque do lado da calçada, exceto para o condutor"
+    }
+   ],
+   "alternativa_concorrente": "Considerei passageiro do banco traseiro esquerdo: a regra também o alcança; só o condutor é exceção.",
+   "recuperacao": "Recupera a regra e sua única exceção.",
+   "feedback": "Regra com o motivo da exceção; Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:20",
+   "sha256": "52736880efe975feaf388b5087d73da398e896e32f856aecee8e2632b57359b8",
+   "alvo": "Condição para o contrafluxo de bicicletas (art. 58, parágrafo único).",
+   "solucao": "Errado: art. 58, parágrafo único — \"desde que dotado o trecho com ciclofaixa\" (alternativa C, incorreta, do item Cebraspe 2020 de Barra dos Coqueiros, salvo no banco a partir do PDF).",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 57, parágrafo único (\"deverão circular pela faixa adjacente à da direita\"), art. 58, parágrafo único (contrafluxo de bicicletas só em trecho com ciclofaixa) e Anexo I (ciclomotor: até 50 cm3 ou 4 kW, até 50 km/h)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei a circulação nos passeios (art. 59), que depende de autorização e sinalização: é outra regra; a frente trata do contrafluxo na pista.",
+   "recuperacao": "Recupera a condição da ciclofaixa.",
+   "feedback": "Regra e erro localizado; Memorize com a formulação correta.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:22",
+   "sha256": "8f72caf55abf7a030a44feab07d2fb2ef086b828941bc477c00b05c147047b94",
+   "alvo": "Retorno em via com acostamento (art. 37).",
+   "solucao": "Certo: art. 37.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 37: em via com acostamento, sem local apropriado, aguardar no acostamento, à direita, para cruzar a pista"
+    }
+   ],
+   "alternativa_concorrente": "Considerei parar no centro da pista, junto à faixa divisória (distrator do item Cebraspe 2017 de São Luís, salvo no banco a partir do PDF): não é o que a lei manda.",
+   "recuperacao": "Recupera o lugar de espera.",
+   "feedback": "Regra com o motivo; Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:6",
+   "sha256": "667f0af6dc7a5444cb24d0f5c350aec7d92e4a02fbdab7b5c907a0d394961cba",
+   "alvo": "Alcance do capítulo III-A (art. 67-A).",
+   "solucao": "Errado: art. 67-A, I e II.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 67-A, I e II (Lei 13.103/2015): o capítulo vale para motoristas profissionais de transporte rodoviário coletivo de passageiros e de cargas"
+    }
+   ],
+   "alternativa_concorrente": "Considerei o motorista de ônibus urbano: discussão sobre \"rodoviário\" fica fora; a frente trata de aplicativo, claramente fora das duas categorias.",
+   "recuperacao": "Recupera as duas categorias alcançadas.",
+   "feedback": "Regra e erro; Memorize com a formulação correta.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:26",
+   "sha256": "e3098859953cc319a649b2ac9576bbf10bc3cdab2863e33723831a8880fcb1c9",
+   "alvo": "Pausa de 30 min na carga (art. 67-C, § 1º).",
+   "solucao": "Certo: art. 67-C, § 1º (sem marcação de inconstitucionalidade no Planalto; a ADI 5.322 atingiu o § 3º).",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 67-C: caput (5 h 30 ininterruptas), § 1º (30 min dentro de cada 6 h, carga, fracionável), § 1º-A (30 min a cada 4 h, passageiros), § 2º (elevação justificada e registrada até local seguro), § 3º (11 h em 24 h; \"Vide ADI 5322\"), § 8º (CONTRAN define as situações: indisponibilidade de pontos de parada e de descanso na rota ou exaurimento das vagas; Lei 14.599/2023)"
+    },
+    {
+     "url": "https://cdn.cebraspe.org.br/concursos/PETROBRAS_23_NM/arquivos/822_PETROBRAS_23_011_01.PDF",
+     "consulta": "2026-11-21",
+     "trecho": "Prova Petrobras 2023 (Cebraspe), item 43: carga, 4 h 30 + 30 min de descanso; gabarito definitivo E"
+    }
+   ],
+   "alternativa_concorrente": "Considerei a regra de passageiros (a cada 4 h): é outra categoria; a frente fixa cargas.",
+   "recuperacao": "Recupera o intervalo próprio da carga.",
+   "feedback": "Regra e tabela comparando cargas e passageiros; Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:24",
+   "sha256": "983bb4373b81d62c04d409c0306cdae97f5a8dad88bd92eb85d6a9c25f713007",
+   "alvo": "Efeito da ADI 5.322 sobre o art. 67-C, § 3º.",
+   "solucao": "Errado: o STF declarou inconstitucional a expressão do fracionamento (item k do dispositivo); restou a obrigação de 11 h em 24 h.",
+   "fontes": [
+    {
+     "url": "https://legis.senado.leg.br/norma/37370238",
+     "consulta": "2026-11-21",
+     "trecho": "Acórdão da ADI 5.322 (STF, plenário virtual concluído em 30/6/2023; ata publicada em 12/7/2023): item (k) declara inconstitucional a expressão \"que podem ser fracionadas, usufruídas no veículo e coincidir com os intervalos mencionados no § 1º, observadas no primeiro período 8 (oito) horas ininterruptas de descanso\" do § 3º do art. 67-C do CTB; embargos: efeitos ex nunc desde 12/7/2023"
+    },
+    {
+     "url": "https://noticias.stf.jus.br/?p=58525",
+     "consulta": "2026-11-21",
+     "trecho": "Notícia do STF de 5/7/2023: invalidados os dispositivos que admitiam a redução do descanso mínimo por fracionamento e sua coincidência com as paradas obrigatórias"
+    },
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 67-C: caput (5 h 30 ininterruptas), § 1º (30 min dentro de cada 6 h, carga, fracionável), § 1º-A (30 min a cada 4 h, passageiros), § 2º (elevação justificada e registrada até local seguro), § 3º (11 h em 24 h; \"Vide ADI 5322\"), § 8º (CONTRAN define as situações: indisponibilidade de pontos de parada e de descanso na rota ou exaurimento das vagas; Lei 14.599/2023)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei que o Planalto ainda mostra o texto integral do § 3º com \"Vide ADI 5322\": a redação continua publicada, mas a expressão foi invalidada; o gabarito segue a decisão.",
+   "recuperacao": "Exige saber que a regra de fracionamento caiu; a frente atribui ao STF o oposto.",
+   "feedback": "Regra do que restou, erro com a decisão e datas; Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:28",
+   "sha256": "dfe725e7e5d749bf8cc668f0c33b32a8cddadb510a07e14d2df8e63776cb4526",
+   "alvo": "Responsável pelos registros (art. 67-E, § 4º).",
+   "solucao": "Errado: art. 67-E, § 4º. Mesmo alvo do item 79 da PRF 2021 (gabarito definitivo E), com redação autoral.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 67-E: caput (motorista controla e registra o tempo), § 1º-A (sem penalidade na exceção do 67-C § 8º), § 2º (registrador, diário de bordo, papeleta ou ficha, meios eletrônicos), § 3º (funciona independente do condutor), § 4º (guarda, preservação e exatidão: responsabilidade do motorista)"
+    },
+    {
+     "url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF",
+     "consulta": "2026-11-21",
+     "trecho": "Prova PRF 2021 (Cebraspe), itens 77–79 sobre fiscalização do tempo de direção e descanso; gabarito definitivo 77 C, 78 E, 79 E"
+    }
+   ],
+   "alternativa_concorrente": "Considerei o dever do empregador de fornecer diário de bordo ou papeleta (item 77 da PRF 2021): fornecer o meio não transfere a responsabilidade pela guarda e exatidão.",
+   "recuperacao": "Recupera o titular da responsabilidade.",
+   "feedback": "Regra e erro; Memorize com a formulação correta.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:35",
+   "sha256": "2839115c7778c48ce6efb2feb6a576de855571ad2a30637b3cc4f54d3930d382",
+   "alvo": "Independência do registrador (art. 67-E, § 3º).",
+   "solucao": "Certo: art. 67-E, § 3º.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 67-E: caput (motorista controla e registra o tempo), § 1º-A (sem penalidade na exceção do 67-C § 8º), § 2º (registrador, diário de bordo, papeleta ou ficha, meios eletrônicos), § 3º (funciona independente do condutor), § 4º (guarda, preservação e exatidão: responsabilidade do motorista)"
+    },
+    {
+     "url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF",
+     "consulta": "2026-11-21",
+     "trecho": "Prova PRF 2021 (Cebraspe), itens 77–79 sobre fiscalização do tempo de direção e descanso; gabarito definitivo 77 C, 78 E, 79 E"
+    }
+   ],
+   "alternativa_concorrente": "Considerei o diário de bordo, preenchido pelo motorista: não é \"equipamento\"; a frente trata do equipamento registrador.",
+   "recuperacao": "Recupera a exigência de independência.",
+   "feedback": "Regra com os meios de registro admitidos (os mesmos do item 77 da PRF 2021); Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_certo_errado.tsv:8",
+   "sha256": "6e4958d150778f0145ba23dcc4cc5a3f3be7043c633172778af4208f4d8166a0",
+   "alvo": "Hipóteses da troca intermitente de luzes (art. 40, III).",
+   "solucao": "Errado: art. 40, III — só para indicar intenção de ultrapassar ou risco à segurança no sentido contrário.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 40, I (luz baixa à noite e de dia em túneis, chuva, neblina, cerração), II (luz alta em via não iluminada, exceto ao cruzar ou seguir), III (troca intermitente só para ultrapassagem ou risco), § 2º (faróis de dia em rodovia de pista simples fora do perímetro urbano, sem DRL; Lei 14.071/2020)"
+    }
+   ],
+   "alternativa_concorrente": "Considerei se uma blitz poderia ser vista como \"risco\": a fiscalização não ameaça a segurança do trânsito; o aviso não está entre as finalidades.",
+   "recuperacao": "Recupera as duas finalidades permitidas.",
+   "feedback": "Regra com as duas hipóteses e erro; Memorize resume.",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_cloze.tsv:1",
+   "sha256": "1540e01e1ea8601a5454dcf51f7e68dc1e87e8c86613ea08a8f1eba6fed16e0e",
+   "alvo": "Altura-limite do art. 64.",
+   "solucao": "Lacuna: 1,45 m (aceitar 1 metro e 45). Art. 64, redação da Lei 14.071/2020; cobrado na questão IGEDUC 2025, item 30.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 64 (redação da Lei 14.071/2020): menores de 10 anos que não atingiram 1,45 m no banco traseiro, em dispositivo de retenção adequado; parágrafo único: CONTRAN regula exceções"
+    }
+   ],
+   "alternativa_concorrente": "Testei 1,50 m e 1,40 m, valores próximos: o texto legal fixa 1,45 m; idade (10 anos) fica visível como contexto.",
+   "recuperacao": "O número é o dado que o aluno precisa lembrar para aplicar a regra; a idade visível não o revela.",
+   "feedback": "Extra explica as duas condições cumulativas e o dispositivo.",
+   "desafiadores_por_lacuna": {
+    "1": [
+     "anki_certo_errado.tsv:1"
+    ]
+   },
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_cloze.tsv:2",
+   "sha256": "16b2c3b58bccfea5782ff88bdaf8594df1c4760862fd083d7e3d6dc41aa5fede",
+   "alvo": "Limite de direção ininterrupta (art. 67-C, caput).",
+   "solucao": "Lacuna: 5 horas e meia (aceitar 5 h 30 min).",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 67-C: caput (5 h 30 ininterruptas), § 1º (30 min dentro de cada 6 h, carga, fracionável), § 1º-A (30 min a cada 4 h, passageiros), § 2º (elevação justificada e registrada até local seguro), § 3º (11 h em 24 h; \"Vide ADI 5322\"), § 8º (CONTRAN define as situações: indisponibilidade de pontos de parada e de descanso na rota ou exaurimento das vagas; Lei 14.599/2023)"
+    },
+    {
+     "url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF",
+     "consulta": "2026-11-21",
+     "trecho": "Prova PRF 2021 (Cebraspe), itens 77–79 sobre fiscalização do tempo de direção e descanso; gabarito definitivo 77 C, 78 E, 79 E"
+    }
+   ],
+   "alternativa_concorrente": "Testei 6 h 30 (distrator do item 78 da PRF 2021) e 6 h: não correspondem ao caput.",
+   "recuperacao": "Número central cobrado diretamente pela Cebraspe (PRF 2021, item 78; Petrobras 2023, item 43) e por outras bancas (Cesgranrio 2023, do PDF).",
+   "feedback": "Extra liga o limite às pausas de 30 min, mostra a tabela e traz a dica autoral.",
+   "desafiadores_por_lacuna": {
+    "1": [
+     "anki_certo_errado.tsv:34",
+     "anki_certo_errado.tsv:30"
+    ]
+   },
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_cloze.tsv:3",
+   "sha256": "2280a8bc32668b1cd10507953450d0251e380bb4291415c11a2b32da1daf9236",
+   "alvo": "Intervalo de descanso no coletivo de passageiros (art. 67-C, § 1º-A).",
+   "solucao": "Lacuna: 4 horas.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 67-C: caput (5 h 30 ininterruptas), § 1º (30 min dentro de cada 6 h, carga, fracionável), § 1º-A (30 min a cada 4 h, passageiros), § 2º (elevação justificada e registrada até local seguro), § 3º (11 h em 24 h; \"Vide ADI 5322\"), § 8º (CONTRAN define as situações: indisponibilidade de pontos de parada e de descanso na rota ou exaurimento das vagas; Lei 14.599/2023)"
+    }
+   ],
+   "alternativa_concorrente": "Testei 6 horas: é o intervalo da carga; \"coletivo de passageiros\" na frente determina 4 h.",
+   "recuperacao": "A categoria visível determina o número sem revelá-lo.",
+   "feedback": "Extra contrasta as duas categorias com a tabela.",
+   "desafiadores_por_lacuna": {
+    "1": [
+     "anki_certo_errado.tsv:33"
+    ]
+   },
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  },
+  {
+   "id": "anki_cloze.tsv:4",
+   "sha256": "ab98fa5140e81b56ed36fe48adcf735ca74a07507a917f01e83e0be914a3bf94",
+   "alvo": "Descanso diário mínimo (art. 67-C, § 3º, após a ADI 5.322).",
+   "solucao": "Lacuna: 11 horas.",
+   "fontes": [
+    {
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+     "consulta": "2026-11-21",
+     "trecho": "CTB, art. 67-C: caput (5 h 30 ininterruptas), § 1º (30 min dentro de cada 6 h, carga, fracionável), § 1º-A (30 min a cada 4 h, passageiros), § 2º (elevação justificada e registrada até local seguro), § 3º (11 h em 24 h; \"Vide ADI 5322\"), § 8º (CONTRAN define as situações: indisponibilidade de pontos de parada e de descanso na rota ou exaurimento das vagas; Lei 14.599/2023)"
+    },
+    {
+     "url": "https://legis.senado.leg.br/norma/37370238",
+     "consulta": "2026-11-21",
+     "trecho": "Acórdão da ADI 5.322 (STF, plenário virtual concluído em 30/6/2023; ata publicada em 12/7/2023): item (k) declara inconstitucional a expressão \"que podem ser fracionadas, usufruídas no veículo e coincidir com os intervalos mencionados no § 1º, observadas no primeiro período 8 (oito) horas ininterruptas de descanso\" do § 3º do art. 67-C do CTB; embargos: efeitos ex nunc desde 12/7/2023"
+    }
+   ],
+   "alternativa_concorrente": "Testei 8 horas (o antigo primeiro período ininterrupto): fazia parte do fracionamento derrubado; o mínimo é 11 h.",
+   "recuperacao": "Número central do descanso diário (cobrado na questão Instituto Darwin 2023 do PDF); a frente não sugere o valor.",
+   "feedback": "Extra explica o que restou após a ADI.",
+   "desafiadores_por_lacuna": {
+    "1": [
+     "anki_certo_errado.tsv:12"
+    ]
+   },
+   "segunda_conferencia": true,
+   "decisao": "APROVAR"
+  }
+ ],
+ "sinais": [
+  {
+   "sinal_id": "9eaeed39f7588840b5279aad4e75ecfe94fd00caa58f3841952caeba5d6787e7",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "D10: idade, altura, assento, ausência de dispositivo e tipo de veículo (carro de passeio comum, que afasta as exceções do CONTRAN) são todos necessários para aplicar as duas condições e as duas exigências do art. 64."
+  },
+  {
+   "sinal_id": "556bf53a02009a7e60fbc91cf4afa852072424389b909a6e691a5b84e939e92b",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "D10: 'apenas' descreve o fato (só o cinto comum, sem cadeirinha), que é o dado decisivo; não qualifica a conclusão julgada e o gabarito é Certo."
+  },
+  {
+   "sinal_id": "7ebfcb27298f2ff9025fd3471638ecca2c8cb4aa9eb773a63ea0884b3c262ca7",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R13: 'qualquer cruzamento' é o próprio erro central (modelo liberado salvo proibição × liberado só com sinalização permissiva); retirar o termo eliminaria o alvo."
+  },
+  {
+   "sinal_id": "fca4c904031926ba4d1299e0b2146950a4d156ebf3cf21d1019c33697e6db068",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R09: o exemplo (rede elétrica) explica o termo 'utilidade pública' para quem não o conhece, sem revelar a prerrogativa correta."
+  },
+  {
+   "sinal_id": "e3e256c873debcd982c89241530b51f21cbb73130d71b326d14888f8d1f5b3fe",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R05: a faixa em que o condutor está (esquerda) decide a conduta do art. 30; sem ela a regra seria outra (manter a faixa). Um único julgamento."
+  },
+  {
+   "sinal_id": "d68766dbbb548188686609257aa7cbdb1158d010b4e41a49a31d2d947810b608",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R03: a ressalva 'sem faixa especial para eles' é condição do art. 29, IV, e evita a leitura concorrente da faixa exclusiva; continua um único julgamento direto."
+  },
+  {
+   "sinal_id": "9d83fbb679b248467af57d25a2fc55fccdc217b29abf9442a7ee07fbd86a1a06",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R16: 'com acostamento' e 'sem local apropriado' são as duas condições do art. 37; sem elas a conduta seria outra."
+  },
+  {
+   "sinal_id": "0c37807c26915dd997e346c75d1a3f83b4e15d211d84c6007f416480fd9cc7ec",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R19: a frente precisa trazer a redação antiga (fracionamento com 8 h ininterruptas) para que o aluno julgue o efeito da ADI 5.322; é um único julgamento sobre a decisão."
+  },
+  {
+   "sinal_id": "387d383eca953fba82884ca0590762d318917081bb36e6d1a6367ade56ef8832",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R14: 'sempre' reproduz a regra legal do art. 49, parágrafo único, e a exceção do condutor aparece na própria frase; gabarito Certo, então o absoluto não sinaliza Errado."
+  },
+  {
+   "sinal_id": "33c56b457dbe0fad457695cf808e852bd686db71166e4cbfa32a543292068930",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "D14: cada requisito da exceção do art. 67-C, § 2º (situação excepcional, registro, tempo necessário, segurança) precisa estar na frente para o aluno conferi-los; cortar qualquer um torna o gabarito indeterminado."
+  },
+  {
+   "sinal_id": "967aea7fb2e5a55dc4c68a0b6d5def5407d46d42a0ecdabfa3045d614a8a83fd",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R07: 'apenas pela iluminação intermitente' é o dado que diferencia a alínea f (estacionamento) da alínea e (circulação e parada); gabarito Certo."
+  },
+  {
+   "sinal_id": "57b0294ede086db76b2d9443641d3581030c2243a0b26c0e236488ddc1346410",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R21: 'qualquer interferência' segue o art. 67-E, § 3º ('independente de qualquer interferência do condutor'); gabarito Certo."
+  },
+  {
+   "sinal_id": "51807ed70ec7efb0e7b709932922d938a7ce1ab31a87f0bcb92135597b4f949c",
+   "decisao": "EXCECAO_JUSTIFICADA",
+   "motivo": "R08: sirene, luz e serviço de urgência são as condições da alínea a; o alvo é a direção do deslocamento. Um único julgamento."
+  }
+ ]
+}

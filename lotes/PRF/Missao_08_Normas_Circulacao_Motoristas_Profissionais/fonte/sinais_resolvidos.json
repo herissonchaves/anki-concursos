@@ -1,0 +1,16 @@
+{
+ "_como_usar": "Chave = ID editorial do cartão + '|' + código do sinal. O gerador só aplica a justificativa se o sinal atual existir; sinal novo fica pendente e bloqueia a exportação.",
+ "D10|FRENTE_DESAFIADORA_EXTENSA": "D10: idade, altura, assento, ausência de dispositivo e tipo de veículo (carro de passeio comum, que afasta as exceções do CONTRAN) são todos necessários para aplicar as duas condições e as duas exigências do art. 64.",
+ "D10|ABSOLUTO_PISTA_POSSIVEL": "D10: 'apenas' descreve o fato (só o cinto comum, sem cadeirinha), que é o dado decisivo; não qualifica a conclusão julgada e o gabarito é Certo.",
+ "R13|ABSOLUTO_PISTA_POSSIVEL": "R13: 'qualquer cruzamento' é o próprio erro central (modelo liberado salvo proibição × liberado só com sinalização permissiva); retirar o termo eliminaria o alvo.",
+ "R14|ABSOLUTO_PISTA_POSSIVEL": "R14: 'sempre' reproduz a regra legal do art. 49, parágrafo único, e a exceção do condutor aparece na própria frase; gabarito Certo, então o absoluto não sinaliza Errado.",
+ "R07|ABSOLUTO_PISTA_POSSIVEL": "R07: 'apenas pela iluminação intermitente' é o dado que diferencia a alínea f (estacionamento) da alínea e (circulação e parada); gabarito Certo.",
+ "R21|ABSOLUTO_PISTA_POSSIVEL": "R21: 'qualquer interferência' segue o art. 67-E, § 3º ('independente de qualquer interferência do condutor'); gabarito Certo.",
+ "R03|FRENTE_RAPIDA_EXTENSA": "R03: a ressalva 'sem faixa especial para eles' é condição do art. 29, IV, e evita a leitura concorrente da faixa exclusiva; continua um único julgamento direto.",
+ "R05|FRENTE_RAPIDA_EXTENSA": "R05: a faixa em que o condutor está (esquerda) decide a conduta do art. 30; sem ela a regra seria outra (manter a faixa). Um único julgamento.",
+ "R08|FRENTE_RAPIDA_EXTENSA": "R08: sirene, luz e serviço de urgência são as condições da alínea a; o alvo é a direção do deslocamento. Um único julgamento.",
+ "R09|FRENTE_RAPIDA_EXTENSA": "R09: o exemplo (rede elétrica) explica o termo 'utilidade pública' para quem não o conhece, sem revelar a prerrogativa correta.",
+ "R16|FRENTE_RAPIDA_EXTENSA": "R16: 'com acostamento' e 'sem local apropriado' são as duas condições do art. 37; sem elas a conduta seria outra.",
+ "R19|FRENTE_RAPIDA_EXTENSA": "R19: a frente precisa trazer a redação antiga (fracionamento com 8 h ininterruptas) para que o aluno julgue o efeito da ADI 5.322; é um único julgamento sobre a decisão.",
+ "D14|FRENTE_DESAFIADORA_EXTENSA": "D14: cada requisito da exceção do art. 67-C, § 2º (situação excepcional, registro, tempo necessário, segurança) precisa estar na frente para o aluno conferi-los; cortar qualquer um torna o gabarito indeterminado."
+}

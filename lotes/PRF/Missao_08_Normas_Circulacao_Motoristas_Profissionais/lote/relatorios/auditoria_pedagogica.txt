@@ -1,0 +1,47 @@
+AUDITORIA PEDAGÓGICA POR ID — autorevisão (mesmo agente que redigiu; não é avaliação independente)
+Procedimento: cada frente foi resolvida de novo antes de reler o verso, confrontada com o CTB compilado (Planalto) ou com o acórdão da ADI 5.322 e testada contra leitura concorrente. Detalhes em revisao_recuperacao.json (R/C) e calibracao_cebraspe.json (D). Linha TSV entre parênteses.
+
+ID (linha) | gab. | decisão | observação
+R01 (CE:18) | C | APROVAR | dica autoral da ordem das alíneas no Memorize
+R02 (CE:13) | E | APROVAR | erro central: lado trocado
+R03 (CE:17) | C | APROVAR | extensão justificada (condição "sem faixa especial")
+R04 (CE:16) | E | APROVAR |
+R05 (CE:15) | C | APROVAR |
+R06 (CE:9) | E | APROVAR | mnemônico autoral conferido contra o art. 32
+R07 (CE:32) | C | APROVAR | "apenas" é o dado decisivo, não pista
+R08 (CE:36) | E | APROVAR |
+R09 (CE:5) | E | APROVAR |
+R10 (CE:7) | C | APROVAR |
+R11 (CE:2) | C | APROVAR |
+R12 (CE:10) | C | APROVAR |
+R13 (CE:3) | E | APROVAR | "qualquer" é o erro central
+R14 (CE:25) | C | APROVAR |
+R15 (CE:20) | E | APROVAR |
+R16 (CE:22) | C | APROVAR |
+R17 (CE:6) | E | APROVAR |
+R18 (CE:26) | C | APROVAR |
+R19 (CE:24) | E | APROVAR | atualiza o PDF (ADI 5.322)
+R20 (CE:28) | E | APROVAR | mesmo alvo do item 79 da PRF 2021, redação autoral
+R21 (CE:35) | C | APROVAR |
+R22 (CE:8) | E | APROVAR |
+D01 (CE:11) | E | APROVAR | erro na justificativa (regra residual aplicada à rotatória)
+D02 (CE:21) | C | APROVAR | estrada de terra ≠ rodovia (Anexo I)
+D03 (CE:14) | E | APROVAR | faixa adjacente = central
+D04 (CE:23) | E | APROVAR | sinalização permissiva fecha a leitura do art. 32
+D05 (CE:4) | C | APROVAR | julgamento restrito ao local
+D06 (CE:27) | E | APROVAR |
+D07 (CE:31) | C | APROVAR |
+D08 (CE:19) | C | APROVAR |
+D09 (CE:29) | E | APROVAR | tempo bom e sem túnel fecham as hipóteses do inciso I
+D10 (CE:1) | C | APROVAR | carro de passeio comum afasta exceções do CONTRAN
+D11 (CE:34) | C | APROVAR | comparada: Petrobras 2023 (43) e PRF 2021 (78)
+D12 (CE:33) | E | APROVAR | comparada: inverte a conclusão do item da Petrobras
+D13 (CE:12) | E | APROVAR | 8 h + 3 h: válido na regra antiga, inválido após a ADI
+D14 (CE:30) | C | APROVAR | § 8º conferido ("exaurimento das vagas")
+C01 (CZ:1) | — | APROVAR | coberto por D10
+C02 (CZ:2) | — | APROVAR | coberto por D11 e D14; dica autoral no Extra
+C03 (CZ:3) | — | APROVAR | coberto por D12
+C04 (CZ:4) | — | APROVAR | coberto por D13
+
+Sinais do lint (13): extensões e absolutos justificados em fonte/sinais_resolvidos.json; nenhum era resposta exposta.
+Limites: revisão pelo próprio agente; renderização no Anki não testada (só a prévia HTML).

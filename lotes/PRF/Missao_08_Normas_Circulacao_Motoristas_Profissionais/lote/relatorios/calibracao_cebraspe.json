@@ -1,0 +1,931 @@
+{
+ "schema_version": 2,
+ "referencias": [
+  {
+   "id": "cebraspe-2021-prf-077",
+   "banca": "Cebraspe",
+   "formato": "certo_errado",
+   "concurso": "PRF — Edital nº 1/2021 (prova objetiva de 9/5/2021)",
+   "cargo": "Policial Rodoviário Federal",
+   "ano": 2021,
+   "caderno": "578_PRF_001_01",
+   "item": "77",
+   "url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF",
+   "consulta": "2026-11-20",
+   "operacao_observada": "Meios de fiscalização do tempo de direção e descanso: diário de bordo, papeleta ou ficha fornecidos pelo empregador.",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
+  },
+  {
+   "id": "cebraspe-2021-prf-078",
+   "banca": "Cebraspe",
+   "formato": "certo_errado",
+   "concurso": "PRF — Edital nº 1/2021 (prova objetiva de 9/5/2021)",
+   "cargo": "Policial Rodoviário Federal",
+   "ano": 2021,
+   "caderno": "578_PRF_001_01",
+   "item": "78",
+   "url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF",
+   "consulta": "2026-11-20",
+   "operacao_observada": "Atribui ao motorista de carga o limite de 6 h 30 ininterruptas; o limite do art. 67-C é 5 h 30.",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
+  },
+  {
+   "id": "cebraspe-2021-prf-079",
+   "banca": "Cebraspe",
+   "formato": "certo_errado",
+   "concurso": "PRF — Edital nº 1/2021 (prova objetiva de 9/5/2021)",
+   "cargo": "Policial Rodoviário Federal",
+   "ano": 2021,
+   "caderno": "578_PRF_001_01",
+   "item": "79",
+   "url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF",
+   "consulta": "2026-11-20",
+   "operacao_observada": "Atribui ao proprietário a guarda e a precisão dos dados do registrador; a responsabilidade é do motorista (art. 67-E, § 4º).",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
+  },
+  {
+   "id": "cebraspe-2023-petrobras-043",
+   "banca": "Cebraspe",
+   "formato": "certo_errado",
+   "concurso": "Petrobras — PSP RH 2023.1 (aplicação 30/4/2023)",
+   "cargo": "Profissional Petrobras de Nível Técnico Júnior — Ênfase 11: Segurança do Trabalho",
+   "ano": 2023,
+   "caderno": "822_PETROBRAS_23_011_01",
+   "item": "43",
+   "url": "https://cdn.cebraspe.org.br/concursos/PETROBRAS_23_NM/arquivos/822_PETROBRAS_23_011_01.PDF",
+   "consulta": "2026-11-20",
+   "operacao_observada": "Situação hipotética: carga, 4 h 30 ao volante e 30 min de descanso; julgar se o descanso está em desacordo com o CTB.",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/PETROBRAS_23_NM/arquivos/GAB_DEFINITIVO_822_PETROBRAS_23_011_01.PDF"
+  },
+  {
+   "id": "idcap-2026-prefeitura-de-itupeva-sp-043",
+   "banca": "IDCAP",
+   "formato": "multipla_escolha",
+   "concurso": "Prefeitura de Itupeva/SP — Concurso Público 001/2026",
+   "cargo": "Agente de Mobilidade Urbana — Técnico de Trânsito e Transportes",
+   "ano": 2026,
+   "caderno": "nao_localizado",
+   "item": "43",
+   "url": "https://arquivos.qconcursos.com/prova/arquivo_prova/164385/idcap-2026-prefeitura-de-itupeva-sp-agente-de-mobilidade-urbana-tecnico-de-transito-e-transportes-prova.pdf",
+   "consulta": "2026-11-20",
+   "operacao_observada": "Afirmativas sobre pedestre na faixa sem semáforo, preferência de quem vem pela direita e ultrapassagem pela direita (falsa).",
+   "gabarito_status": "nao_verificado"
+  },
+  {
+   "id": "igeduc-2025-municipio-de-flores-pe-029",
+   "banca": "IGEDUC",
+   "formato": "multipla_escolha",
+   "concurso": "Município de Flores/PE — Concurso 001/2025",
+   "cargo": "Agente Municipal de Trânsito",
+   "ano": 2025,
+   "caderno": "nao_localizado",
+   "item": "29",
+   "url": "https://arquivos.qconcursos.com/prova/arquivo_prova/141924/igeduc-2025-prefeitura-de-flores-pe-agente-municipal-de-transito-prova.pdf",
+   "consulta": "2026-11-21",
+   "operacao_observada": "Prerrogativas do art. 29, VII, só em serviço de urgência com dispositivos acionados; distratores: prioridade permanente e veículos particulares.",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://arquivos.qconcursos.com/prova/arquivo_gabarito/141925/igeduc-2025-prefeitura-de-flores-pe-fisioterapeuta-gabarito.pdf"
+  },
+  {
+   "id": "igeduc-2025-municipio-de-flores-pe-030",
+   "banca": "IGEDUC",
+   "formato": "multipla_escolha",
+   "concurso": "Município de Flores/PE — Concurso 001/2025",
+   "cargo": "Agente Municipal de Trânsito",
+   "ano": 2025,
+   "caderno": "nao_localizado",
+   "item": "30",
+   "url": "https://arquivos.qconcursos.com/prova/arquivo_prova/141924/igeduc-2025-prefeitura-de-flores-pe-agente-municipal-de-transito-prova.pdf",
+   "consulta": "2026-11-21",
+   "operacao_observada": "Criança de 8 anos no banco dianteiro sem dispositivo: regra dos menores de 10 anos e 1,45 m.",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://arquivos.qconcursos.com/prova/arquivo_gabarito/141925/igeduc-2025-prefeitura-de-flores-pe-fisioterapeuta-gabarito.pdf"
+  }
+ ],
+ "cartoes": [
+  {
+   "id": "D01",
+   "linha": 11,
+   "sha256": "ed7b5c04bccc7b74de74c6c12d3b7d4c04b598890d5008edc3ab83ad064b2b79",
+   "gabarito": "E",
+   "alvo": "Escolher a regra de preferência aplicável na rotatória.",
+   "operacao_autoral": "Selecionar a alínea aplicável (rotatória × demais casos) quando duas regras parecem concorrer.",
+   "regra": "CTB art. 29, III, b e c.",
+   "dado_decisivo": "Ana já circula na rotatória; Bruno entra vindo pela direita dela.",
+   "solucao": "Rotatória tem regra própria (alínea b): preferência de Ana; a justificativa usa a alínea c, residual; logo Errado.",
+   "erro_plausivel": "Aplicar a regra da direita a toda situação sem sinalização.",
+   "leitura_concorrente": "Considerei placa \"dê a preferência\" na entrada (comum em rotatórias): a frente diz rotatória sem sinalização, eliminando essa leitura.",
+   "originalidade": "Situação autoral. A questão IDCAP 2026 (item 43) cobra a regra da direita em cruzamento não sinalizado; aqui o aluno precisa perceber que a rotatória tem regra própria que afasta a regra residual.",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [
+    "idcap-2026-prefeitura-de-itupeva-sp-043"
+   ],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no art. 29, III, b e c, do CTB (Planalto)."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "\"Sem sinalização\" e \"já circula\" fixam a alínea b; só uma conclusão."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige escolher entre duas regras do mesmo inciso a partir do dado \"já circula\"."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial; inspiração geral declarada e questão IDCAP 2026 vinculada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Personagens, posição relativa e justificativa a julgar criados para este cartão."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra das três alíneas, aplicação a Ana e Bruno, erro da justificativa e tabela; Memorize corrige."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Frases curtas e palavras comuns (rotatória, sinalização, direita); nenhum termo técnico sem explicação."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Aplica R01 e R02 a uma situação em que parecem colidir."
+    }
+   },
+   "limitacao": "Não localizei item CESPE/Cebraspe C/E oficial (caderno e gabarito) sobre preferência em rotatória; o banco referencias/ não tem item Cebraspe sobre o art. 29, III."
+  },
+  {
+   "id": "D02",
+   "linha": 21,
+   "sha256": "0ae3a8b1433a0c42764318e6a1d8f399206b73df7c516d6a46946e503e5d555b",
+   "gabarito": "C",
+   "alvo": "Preferência de quem vem de rodovia (art. 29, III, a).",
+   "operacao_autoral": "Identificar que o caso cai na alínea a e afastar a regra da direita.",
+   "regra": "CTB art. 29, III, a e c; Anexo I (estrada = via rural não pavimentada).",
+   "dado_decisivo": "Só um fluxo vem de rodovia; ele está à esquerda do outro condutor.",
+   "solucao": "Alínea a prevalece; a posição à esquerda é irrelevante; logo Certo.",
+   "erro_plausivel": "Dar a preferência a quem vem pela direita por reflexo.",
+   "leitura_concorrente": "Considerei se a estrada de terra poderia ser rodovia: pelo Anexo I, estrada é via rural não pavimentada; só um fluxo é de rodovia.",
+   "originalidade": "Situação autoral com a posição relativa invertida de propósito, para testar a escolha da alínea; IDCAP 2026 (item 43) cobra a regra da direita.",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [
+    "idcap-2026-prefeitura-de-itupeva-sp-043"
+   ],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no art. 29, III, a, e no Anexo I do CTB (definição de estrada)."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Tipo de cada via e posição relativa explícitos."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige classificar as vias e escolher a alínea antes de concluir."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário rural criado para colocar as duas regras em conflito aparente."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra, distinção rodovia × estrada, aplicação, confusão e tabela."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Termos rodovia e estrada explicados no verso; frente em linguagem cotidiana."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Complementa D01 com a outra alínea que afasta a regra da direita."
+    }
+   },
+   "limitacao": "Não localizei item CESPE/Cebraspe C/E oficial sobre preferência rodovia × outra via; o banco não tem item Cebraspe sobre o tema."
+  },
+  {
+   "id": "D03",
+   "linha": 14,
+   "sha256": "2a4eedd626645fbeb420ccae6f501f6bbfc3ae9f3c991fdbe02444e0ed884967",
+   "gabarito": "E",
+   "alvo": "Faixa do ciclomotor quando a da direita é exclusiva (art. 57, parágrafo único).",
+   "operacao_autoral": "Localizar a faixa correta a partir da configuração da via.",
+   "regra": "CTB art. 57, parágrafo único; art. 29, IV.",
+   "dado_decisivo": "Três faixas; direita exclusiva de ônibus; avenida arterial (não é via de trânsito rápido).",
+   "solucao": "Faixa adjacente à da direita = central; a frente indica a esquerda; logo Errado.",
+   "erro_plausivel": "Ir para o extremo oposto quando a faixa da direita está bloqueada.",
+   "leitura_concorrente": "Considerei via de trânsito rápido, onde o ciclomotor é proibido: a frente fixa avenida arterial, eliminando essa leitura.",
+   "originalidade": "Mesmo raciocínio do item Cebraspe MPU 2015 do PDF (cebraspe-2015-mpu-cb0105: caminhão na faixa central com faixa exclusiva de ônibus), transposto para o ciclomotor e com regra própria (art. 57).",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no art. 57, parágrafo único, e no Anexo I do CTB."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Número de faixas, faixa exclusiva e tipo de via explícitos."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige deduzir qual é a faixa adjacente numa configuração concreta."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "item Cebraspe de referência sem prova oficial localizada; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Veículo, via e regra diferentes do item que inspirou a operação."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra com a definição de ciclomotor, erro localizado e tabela das faixas."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Ciclomotor definido no verso; frente sem jargão."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre conteúdo do PDF (p. 13) sem duplicar R03."
+    }
+   },
+   "limitacao": "O item MPU 2015 está no banco (origem: PDF), mas sem caderno nem gabarito oficiais localizados, por isso não entra como referência de calibração; nenhum outro item Cebraspe C/E sobre o tema foi confirmado.",
+   "outras_bancas_pendencia": "Buscas em 20 e 21/11/2026 por questões de outras bancas sobre o mesmo alvo (rotatória, ultrapassagem, luzes, ciclomotor, coletivo parado + CTB + FGV, Vunesp, IBFC, Quadrix): qconcursos.com e questoes.grancursosonline.com.br recusaram o acesso automatizado (HTTP 403); nas provas abertas (IDCAP 2026, IGEDUC 2025) e nas questões do PDF não havia item sobre este alvo."
+  },
+  {
+   "id": "D04",
+   "linha": 23,
+   "sha256": "908db3753afff25b41acd422c48fe3341988b4da8325b9142dd41e67daf35a10",
+   "gabarito": "E",
+   "alvo": "Ultrapassagem de coletivo parado (art. 31).",
+   "operacao_autoral": "Distinguir proibição de ultrapassagem condicionada.",
+   "regra": "CTB art. 31.",
+   "dado_decisivo": "Ônibus parado embarcando; trecho com ultrapassagem permitida.",
+   "solucao": "Art. 31 exige cautela, não proíbe; logo Errado.",
+   "erro_plausivel": "Confundir dever de cautela com proibição.",
+   "leitura_concorrente": "Considerei faixa contínua ou travessia de pedestres junto ao ponto: a frente diz que a sinalização permite ultrapassar, afastando o art. 32 e a sinalização proibitiva.",
+   "originalidade": "Situação autoral a partir da regra do art. 31 explicada no PDF (p. 9).",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no art. 31 do CTB."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Sinalização permissiva e ônibus parado fixam a regra aplicável."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige separar dever de cautela de proibição, diante de um caso concreto."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial localizado; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário autoral."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra, aplicação ao caso e erro localizado; Memorize com a conduta correta."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem cotidiana (ponto, embarque); nenhum termo técnico."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre o art. 31, sem R correspondente."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre o art. 31 foi localizado nas buscas nem no banco.",
+   "outras_bancas_pendencia": "Buscas em 20 e 21/11/2026 por questões de outras bancas sobre o mesmo alvo (rotatória, ultrapassagem, luzes, ciclomotor, coletivo parado + CTB + FGV, Vunesp, IBFC, Quadrix): qconcursos.com e questoes.grancursosonline.com.br recusaram o acesso automatizado (HTTP 403); nas provas abertas (IDCAP 2026, IGEDUC 2025) e nas questões do PDF não havia item sobre este alvo."
+  },
+  {
+   "id": "D05",
+   "linha": 4,
+   "sha256": "7b7bf6420cd5f31bcad6638a3bf420d1d7ac6978841947bde5c0a5010e7cb082",
+   "gabarito": "C",
+   "alvo": "Condição \"sem visibilidade suficiente\" do aclive (art. 32).",
+   "operacao_autoral": "Verificar se o dado do caso preenche a condição da proibição.",
+   "regra": "CTB arts. 32 e 33.",
+   "dado_decisivo": "Subida com boa visibilidade; longe de curvas, pontes e cruzamentos; sem sinalização proibitiva.",
+   "solucao": "Condição da proibição ausente; nenhum outro local proibido; logo Certo quanto ao local.",
+   "erro_plausivel": "Ler \"aclive\" como proibição automática.",
+   "leitura_concorrente": "Considerei velocidade e distância de segurança: a frente restringe o julgamento ao local escolhido.",
+   "originalidade": "Situação autoral; a questão IDCAP 2026 (item 43) cobra o lado da ultrapassagem, e este cartão desloca a análise para o local.",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [
+    "idcap-2026-prefeitura-de-itupeva-sp-043"
+   ],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido nos arts. 32 e 33 do CTB."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "\"Quanto ao local\" e a lista de ausências fecham as leituras concorrentes."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige checar a condição qualificadora (visibilidade) contra o dado do caso."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário autoral."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra, aplicação, confusão provável e tabela de locais."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Aclive traduzido como subida; frente sem jargão."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Complementa R06 com a condição de visibilidade, operação distinta."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre locais proibidos de ultrapassagem foi confirmado nas buscas nem no banco."
+  },
+  {
+   "id": "D06",
+   "linha": 27,
+   "sha256": "9e7156c4553bd7a28e579d1fa50211abe1cb558ccf6093078d3d33bf56c22f65",
+   "gabarito": "E",
+   "alvo": "Condições das prerrogativas de emergência (art. 29, VII).",
+   "operacao_autoral": "Verificar se as condições da prerrogativa estão presentes no caso.",
+   "regra": "CTB art. 29, VII, caput e alíneas c e f.",
+   "dado_decisivo": "Sem serviço de urgência; luzes e sirene desligadas.",
+   "solucao": "Faltam urgência e identificação; logo Errado.",
+   "erro_plausivel": "Tratar a prerrogativa como permanente, vinculada ao tipo de veículo.",
+   "leitura_concorrente": "Considerei o art. 280, § 6º (veículos de polícia descaracterizados): a frente trata de ambulância e da prerrogativa do art. 29, VII.",
+   "originalidade": "Inspirado na questão IGEDUC 2025 (item 29), cujo distrator diz que a prioridade é permanente mesmo sem dispositivos acionados; situação e prerrogativa (estacionamento) reconstruídas.",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [
+    "igeduc-2025-municipio-de-flores-pe-029"
+   ],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no art. 29, VII, do CTB (redação da Lei 14.071/2020)."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Ausência de urgência e luzes desligadas explícitas."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige confrontar as duas condições da prerrogativa com o caso."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial válido; inspiração geral declarada e IGEDUC 2025 (gabarito definitivo C) vinculada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário (volta à base, lanche) criado para este cartão."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra, aplicação às duas condições, erro e tabela."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem cotidiana; prerrogativa explicada pelo efeito."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Aplica R07 a um caso de uso indevido."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre as prerrogativas do art. 29, VII, foi confirmado (o item 69 da PRF 2021, sobre lanternas de emergência, foi anulado)."
+  },
+  {
+   "id": "D07",
+   "linha": 31,
+   "sha256": "4cc75003ea1b41dacaa340e82a31a8a112a99ed2a7897ad6de2104c56784ec63",
+   "gabarito": "C",
+   "alvo": "Dever do pedestre diante de veículo de emergência (art. 29, VII, b).",
+   "operacao_autoral": "Resolver o conflito aparente entre semáforo verde e prioridade de emergência.",
+   "regra": "CTB art. 29, VII, caput e alínea b.",
+   "dado_decisivo": "Semáforo verde para o pedestre; bombeiros com sirene e luz.",
+   "solucao": "A alínea b manda aguardar no passeio; o verde não afasta; logo Certo.",
+   "erro_plausivel": "Supor que o semáforo prevalece sobre a prioridade do veículo de emergência.",
+   "leitura_concorrente": "Considerei pedestre já no meio da via: a frente diz \"prestes a atravessar\", ainda no passeio.",
+   "originalidade": "Inspirado na questão IGEDUC 2025 (item 29) sobre o art. 29, VII; o foco aqui é o dever do pedestre, com semáforo verde como dado de conflito.",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [
+    "igeduc-2025-municipio-de-flores-pe-029"
+   ],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no art. 29, VII, b, do CTB."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Posição do pedestre e estado do semáforo explícitos."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige decidir entre semáforo e prioridade de emergência."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial; inspiração geral declarada e IGEDUC 2025 vinculada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário autoral."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra, aplicação e confusão provável; Memorize resume."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Situação cotidiana, sem termos técnicos."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre a alínea b, sem R correspondente."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre a alínea b do art. 29, VII, foi localizado nas buscas nem no banco."
+  },
+  {
+   "id": "D08",
+   "linha": 19,
+   "sha256": "aae4740449dcb0297569628aa2cf3cf7fe04aa952eeb1ee89192b871120c4fa6",
+   "gabarito": "C",
+   "alvo": "Exceção \"ao segui-lo\" da luz alta (art. 40, II).",
+   "operacao_autoral": "Aplicar a exceção correta ao veículo do mesmo sentido.",
+   "regra": "CTB art. 40, II.",
+   "dado_decisivo": "Via não iluminada; caminhão à frente no mesmo sentido.",
+   "solucao": "Seguir outro veículo é exceção à luz alta; logo Certo.",
+   "erro_plausivel": "Limitar a exceção ao cruzamento com veículo do sentido contrário.",
+   "leitura_concorrente": "Considerei a ultrapassagem iminente com pisca-farol (art. 40, III): a frente trata de seguir o caminhão, não de sinalizar ultrapassagem.",
+   "originalidade": "Situação autoral a partir do esquema de faróis do PDF (p. 10).",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no art. 40, II, do CTB."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Via não iluminada e veículo no mesmo sentido explícitos."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige reconhecer qual exceção o caso preenche."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário autoral."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra, aplicação com o motivo (ofuscamento), confusão e tabela."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem simples; nenhum jargão."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Aplica R10 à exceção menos lembrada."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre o art. 40, II, foi localizado nas buscas nem no banco.",
+   "outras_bancas_pendencia": "Buscas em 20 e 21/11/2026 por questões de outras bancas sobre o mesmo alvo (rotatória, ultrapassagem, luzes, ciclomotor, coletivo parado + CTB + FGV, Vunesp, IBFC, Quadrix): qconcursos.com e questoes.grancursosonline.com.br recusaram o acesso automatizado (HTTP 403); nas provas abertas (IDCAP 2026, IGEDUC 2025) e nas questões do PDF não havia item sobre este alvo."
+  },
+  {
+   "id": "D09",
+   "linha": 29,
+   "sha256": "1507249f4ef9586ccf14fc935b6028b00fcead0ee2c9dad47ae7566375c5785d",
+   "gabarito": "E",
+   "alvo": "Alcance da regra do farol de dia (art. 40, I, b, e § 2º).",
+   "operacao_autoral": "Verificar se o caso preenche alguma hipótese de farol aceso de dia.",
+   "regra": "CTB art. 40, I, b, e § 2º (Lei 14.071/2020).",
+   "dado_decisivo": "Pista dupla, dia, tempo bom, sem túnel, veículo sem DRL.",
+   "solucao": "Nenhuma hipótese preenchida; não há descumprimento; logo Errado.",
+   "erro_plausivel": "Aplicar a regra antiga (farol em qualquer rodovia) ou estendê-la à pista dupla.",
+   "leitura_concorrente": "Considerei normas locais ou resoluções sobre faixas específicas: a frente pergunta pela regra do CTB sobre farol de dia.",
+   "originalidade": "Situação autoral construída sobre a mudança de 2020 que o PDF destaca (p. 11).",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no art. 40, I e § 2º, do CTB (Lei 14.071/2020)."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Tempo, túnel, tipo de pista e DRL fixados; só uma conclusão."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige testar cada hipótese da regra contra o caso."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário autoral."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra com as hipóteses, aplicação, erro e tabela."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "DRL explicada no R11 e no esquema; frente direta."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Distingue-se de R11 (memória da regra) ao exigir aplicar o limite da pista simples."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre o art. 40, § 2º, foi localizado nas buscas nem no banco.",
+   "outras_bancas_pendencia": "Buscas em 20 e 21/11/2026 por questões de outras bancas sobre o mesmo alvo (rotatória, ultrapassagem, luzes, ciclomotor, coletivo parado + CTB + FGV, Vunesp, IBFC, Quadrix): qconcursos.com e questoes.grancursosonline.com.br recusaram o acesso automatizado (HTTP 403); nas provas abertas (IDCAP 2026, IGEDUC 2025) e nas questões do PDF não havia item sobre este alvo."
+  },
+  {
+   "id": "D10",
+   "linha": 1,
+   "sha256": "3454bffd9b39c9608b7cfaec1447c5dcf6b6d8a34ed52ac6032c683e31993b88",
+   "gabarito": "C",
+   "alvo": "Exigências cumulativas do art. 64.",
+   "operacao_autoral": "Conferir idade e altura e, depois, as duas exigências (local e dispositivo).",
+   "regra": "CTB art. 64 (redação da Lei 14.071/2020).",
+   "dado_decisivo": "8 anos, 1,30 m, banco traseiro, só cinto comum.",
+   "solucao": "Condições presentes; falta dispositivo; logo Certo (irregular).",
+   "erro_plausivel": "Considerar o banco traseiro suficiente.",
+   "leitura_concorrente": "Considerei exceções por tipo de veículo reguladas pelo CONTRAN (art. 64, parágrafo único): a frente fixa carro de passeio comum.",
+   "originalidade": "Inspirado na questão IGEDUC 2025 (item 30), em que a criança está no banco dianteiro; aqui ela já está atrás e o dado decisivo é o dispositivo.",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [
+    "igeduc-2025-municipio-de-flores-pe-030"
+   ],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no art. 64 do CTB (Lei 14.071/2020)."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Idade, altura, assento, dispositivo e tipo de veículo explícitos."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige aplicar os dois limites e as duas exigências cumulativas."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial; inspiração geral declarada e IGEDUC 2025 (gabarito definitivo B) vinculada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Situação diferente da questão de inspiração (criança já no banco de trás)."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra, aplicação e confusão; Memorize resume."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem cotidiana (cadeirinha, assento de elevação)."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre a lacuna do Cloze C01 (1,45 m)."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre o art. 64 foi localizado nas buscas nem no banco."
+  },
+  {
+   "id": "D11",
+   "linha": 34,
+   "sha256": "85f3277c286fb9f693a7b50e43898172903d03d49386126442a3507d4a70a0f1",
+   "gabarito": "C",
+   "alvo": "Fracionamento da pausa de 30 min na carga.",
+   "operacao_autoral": "Somar períodos e conferir os dois limites (5 h 30 contínuas e 30 min a cada 6 h).",
+   "regra": "CTB art. 67-C, caput e § 1º.",
+   "dado_decisivo": "Trechos de 3 h e 2 h 30, pausas de 15 + 15 min.",
+   "solucao": "Nenhum trecho > 5 h 30; 30 min de pausa em 5 h 30 de direção; logo Certo.",
+   "erro_plausivel": "Exigir os 30 min de uma vez.",
+   "leitura_concorrente": "Considerei o descanso diário de 11 h: a frente limita o julgamento à direção contínua e à pausa de 30 min.",
+   "originalidade": "Mesma família do item 43 da Petrobras 2023 (carga, 4 h 30 + 30 min, julgar se o descanso está em desacordo — E) e do item 78 da PRF 2021 (limite contínuo); aqui o aluno precisa somar pausas fracionadas.",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+    "https://cdn.cebraspe.org.br/concursos/PETROBRAS_23_NM/arquivos/822_PETROBRAS_23_011_01.PDF",
+    "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF"
+   ],
+   "referencias": [
+    "cebraspe-2023-petrobras-043",
+    "cebraspe-2021-prf-078"
+   ],
+   "fidelidade": "comparada",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no art. 67-C, caput e § 1º."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "\"Quanto ao tempo de direção contínua e à pausa\" exclui o descanso diário."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige somar e comparar com dois limites."
+    },
+    "comparacao": {
+     "resultado": "PASSA",
+     "evidencia": "Compara com Petrobras 2023, item 43, e PRF 2021, item 78 (gabaritos definitivos E)."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Jornada própria com pausas divididas, diferente das referências."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra, cálculo, confusão e fluxo visual da jornada."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Números simples e frases curtas; nenhum termo jurídico."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre o Cloze C02 (5 h 30) e aplica R18."
+    }
+   },
+   "comparacao": "Mesma operação (julgar o cumprimento do art. 67-C numa jornada descrita), com o dado novo do fracionamento.",
+   "outras_bancas_pendencia": "Questões de outras bancas sobre o alvo lidas no PDF e salvas no banco (cesgranrio-2023-transpetro-3f6c19, instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab), mas sem prova oficial localizada (url nao_localizado), por isso fora da calibração; buscas por cadernos oficiais em 20 e 21/11/2026 sem sucesso e páginas do qconcursos/Gran Questões bloqueadas (HTTP 403)."
+  },
+  {
+   "id": "D12",
+   "linha": 33,
+   "sha256": "037321a2c29785bd51c49f4c3e2442ef89c575fe6dc81fb2329a03de8592db1d",
+   "gabarito": "E",
+   "alvo": "Regra própria do coletivo de passageiros (art. 67-C, § 1º-A).",
+   "operacao_autoral": "Selecionar a regra da categoria e verificar o intervalo.",
+   "regra": "CTB art. 67-C, caput e § 1º-A.",
+   "dado_decisivo": "Ônibus de linha rodoviária; 4 h 30 sem pausa.",
+   "solucao": "Passageiros exigem pausa a cada 4 h; 4 h 30 sem pausa descumpre; logo Errado.",
+   "erro_plausivel": "Aplicar ao ônibus apenas o teto de 5 h 30 ou a regra da carga.",
+   "leitura_concorrente": "Considerei pausas anteriores não mencionadas: a frente diz \"sem parar\".",
+   "originalidade": "Contraponto ao item 43 da Petrobras 2023: a mesma jornada (4 h 30 + 30 min), que é regular na carga, é irregular no coletivo de passageiros.",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+    "https://cdn.cebraspe.org.br/concursos/PETROBRAS_23_NM/arquivos/822_PETROBRAS_23_011_01.PDF"
+   ],
+   "referencias": [
+    "cebraspe-2023-petrobras-043",
+    "cebraspe-2021-prf-078"
+   ],
+   "fidelidade": "comparada",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no art. 67-C, caput e § 1º-A."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Categoria e jornada explícitas; \"sem parar\" fecha a leitura concorrente."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige escolher a regra da categoria antes de julgar."
+    },
+    "comparacao": {
+     "resultado": "PASSA",
+     "evidencia": "Compara com Petrobras 2023, item 43 (definitivo E), e PRF 2021, item 78."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Categoria trocada e justificativa própria a julgar."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra, aplicação, erro da justificativa e tabela comparativa."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem cotidiana (linha rodoviária interestadual)."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre o Cloze C03 (4 h)."
+    }
+   },
+   "comparacao": "Mesma situação numérica do item 43 (gabarito definitivo E), com a categoria trocada para passageiros, o que inverte a conclusão.",
+   "outras_bancas_pendencia": "Questões de outras bancas sobre o alvo lidas no PDF e salvas no banco (cesgranrio-2023-transpetro-3f6c19, instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab), mas sem prova oficial localizada (url nao_localizado), por isso fora da calibração; buscas por cadernos oficiais em 20 e 21/11/2026 sem sucesso e páginas do qconcursos/Gran Questões bloqueadas (HTTP 403)."
+  },
+  {
+   "id": "D13",
+   "linha": 12,
+   "sha256": "b8a02f59d9f54aac1c826017be435b075cc98087e27967b06d9cd925fc624e56",
+   "gabarito": "E",
+   "alvo": "Efeito da ADI 5.322 sobre o descanso diário.",
+   "operacao_autoral": "Distinguir a redação antiga do § 3º da regra vigente após a decisão do STF.",
+   "regra": "CTB art. 67-C, § 3º; ADI 5.322 (STF, 2023), item k do dispositivo.",
+   "dado_decisivo": "Descanso dividido em 8 h + 3 h; justificativa baseada na regra antiga.",
+   "solucao": "Fracionamento invalidado; 8 + 3 não cumpre; logo Errado.",
+   "erro_plausivel": "Aplicar a redação publicada sem considerar a declaração de inconstitucionalidade.",
+   "leitura_concorrente": "Considerei descanso anterior a 12/7/2023 (efeitos ex nunc): a frente fala da regra \"hoje aplicável\".",
+   "originalidade": "Situação autoral; o PDF (p. 16) destaca a ADI 5.322, e a questão do Instituto Darwin 2023 do PDF (salva no banco) cobra as 11 h com a redação antiga.",
+   "fontes_conteudo": [
+    "https://legis.senado.leg.br/norma/37370238",
+    "https://noticias.stf.jus.br/?p=58525",
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no acórdão da ADI 5.322 (Senado, item k) e no art. 67-C, § 3º."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "\"Hoje aplicável\" fixa o marco temporal posterior à decisão."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige confrontar a justificativa (regra antiga) com a decisão do STF."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário autoral desenhado para ser válido na regra antiga e inválido na atual."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra, aplicação, erro com o marco temporal."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Explica a decisão em palavras simples; sem latinismos (ex nunc fica só no relatório)."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre o Cloze C04 (11 h) e atualiza o PDF."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre o descanso de 11 h ou a ADI 5.322 foi localizado nas buscas nem no banco.",
+   "outras_bancas_pendencia": "Questões de outras bancas sobre o alvo lidas no PDF e salvas no banco (cesgranrio-2023-transpetro-3f6c19, instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab), mas sem prova oficial localizada (url nao_localizado), por isso fora da calibração; buscas por cadernos oficiais em 20 e 21/11/2026 sem sucesso e páginas do qconcursos/Gran Questões bloqueadas (HTTP 403)."
+  },
+  {
+   "id": "D14",
+   "linha": 30,
+   "sha256": "fe37f6b4f99b1b6fe49cad235a41b221f852aec80d0e341697861ce63c53f37e",
+   "gabarito": "C",
+   "alvo": "Exceção do art. 67-C, § 2º.",
+   "operacao_autoral": "Verificar se o caso preenche os requisitos da exceção.",
+   "regra": "CTB art. 67-C, § 2º e § 8º; art. 67-E, § 1º-A.",
+   "dado_decisivo": "Posto lotado; sem local seguro; registro feito; 30 min até local seguro; sem risco à segurança.",
+   "solucao": "Requisitos (excepcionalidade, registro, tempo necessário, segurança) presentes; logo Certo.",
+   "erro_plausivel": "Ver o limite de 5 h 30 como absoluto.",
+   "leitura_concorrente": "Considerei se o caso se encaixa nas situações do § 8º: a redação da Lei 14.599/2023 menciona o \"exaurimento das vagas de estacionamento\" nos pontos de parada; o posto lotado é exatamente essa hipótese.",
+   "originalidade": "Situação autoral; o PDF (p. 16) apresenta a exceção, e o item 78 da PRF 2021 cobra o limite que ela flexibiliza.",
+   "fontes_conteudo": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+    "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+   ],
+   "referencias": [
+    "cebraspe-2021-prf-078"
+   ],
+   "fidelidade": "inspiracao_geral",
+   "segunda_conferencia": true,
+   "decisao": "APROVAR",
+   "rubrica": {
+    "correcao": {
+     "resultado": "PASSA",
+     "evidencia": "Conferido no art. 67-C, §§ 2º e 8º, e no art. 67-E, § 1º-A."
+    },
+    "determinacao": {
+     "resultado": "PASSA",
+     "evidencia": "Todos os requisitos da exceção explicitados na frente."
+    },
+    "operacao_d": {
+     "resultado": "PASSA",
+     "evidencia": "Exige checar requisitos da exceção contra o caso."
+    },
+    "comparacao": {
+     "resultado": "PENDENTE",
+     "evidencia": "sem item Cebraspe oficial sobre a exceção; inspiração geral declarada."
+    },
+    "autoria": {
+     "resultado": "PASSA",
+     "evidencia": "Cenário autoral."
+    },
+    "feedback": {
+     "resultado": "PASSA",
+     "evidencia": "Regra com requisitos, aplicação e confusão provável."
+    },
+    "linguagem_didatica": {
+     "resultado": "PASSA",
+     "evidencia": "Linguagem cotidiana (posto lotado)."
+    },
+    "utilidade": {
+     "resultado": "PASSA",
+     "evidencia": "Cobre o Cloze C02 pelo lado da exceção."
+    }
+   },
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre a exceção do § 2º foi localizado; o item 78 da PRF 2021 trata só do limite.",
+   "outras_bancas_pendencia": "Questões de outras bancas sobre o alvo lidas no PDF e salvas no banco (cesgranrio-2023-transpetro-3f6c19, instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab), mas sem prova oficial localizada (url nao_localizado), por isso fora da calibração; buscas por cadernos oficiais em 20 e 21/11/2026 sem sucesso e páginas do qconcursos/Gran Questões bloqueadas (HTTP 403)."
+  }
+ ]
+}

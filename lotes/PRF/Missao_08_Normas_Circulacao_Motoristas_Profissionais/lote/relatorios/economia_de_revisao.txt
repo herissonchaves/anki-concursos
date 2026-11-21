@@ -1,0 +1,15 @@
+ECONOMIA DE REVISÃO
+Contagem: 36 notas C/E (22 R + 14 D) + 4 notas Cloze (1 cartão cada) = 40 notas, 40 cartões.
+Gabaritos: R = 11 Certo / 11 Errado; D = 7 Certo / 7 Errado. Cloze fora da contagem C/E. Ordem embaralhada (semente fixa), sem alternância previsível.
+Coleção consultada (cópia, leitura): nenhuma nota sobre os arts. 26–67-E; parada/estacionamento já cobertos e excluídos deste lote.
+
+Decisões para evitar revisões redundantes:
+- R01/R02 (memória das alíneas) e D01/D02 (escolher a alínea quando a regra da direita parece valer): operações distintas.
+- R06 (lista do art. 32 e exceção) e D05 (condição "sem visibilidade"): o D testa a condição qualificadora, não repete a lista.
+- R07 (identificação para estacionar) e D06 (falta de urgência): o D acrescenta a condição do serviço de urgência.
+- R10 (luz alta) e D08 (exceção ao seguir): o D cobra só a exceção menos lembrada.
+- R11 (regra do farol de dia) e D09 (pista dupla): o D cobra o limite da regra.
+- Tempos do motorista: números em Cloze (C02 5 h 30, C03 4 h, C04 11 h); R18 fica com a pausa da carga; D11, D12, D13 e D14 aplicam cada número a uma jornada, sem repetir a memória.
+- Atualização jurídica (ADI 5.322) em três operações: R19 (o que o STF decidiu), C04 (número que restou), D13 (caso válido na regra antiga e inválido na atual).
+
+Carga: sem dados de uso, não há estimativa de minutos diários. Observar o tempo real e os erros nas duas primeiras semanas.

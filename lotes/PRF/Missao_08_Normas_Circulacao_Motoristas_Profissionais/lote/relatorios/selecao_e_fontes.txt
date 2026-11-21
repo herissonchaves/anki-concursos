@@ -1,0 +1,32 @@
+SELEÇÃO E FONTES — lote Normas Gerais de Circulação e Motoristas Profissionais (PRF, Missão 08)
+Projeto Anki-Concursos 2.19. Consultas em 20 e 21/11/2026. Perfil: misto (R + D + Cloze). Teto: não informado; menor conjunto suficiente.
+
+1. PERTINÊNCIA AO CONCURSO
+- PRF 2021 — Edital nº 1 (18/01/2021), Legislação de Trânsito: "1 Lei nº 9.503/1997 (Código de Trânsito Brasileiro) e suas alterações, inclusive as da Lei nº 14.071/2020". Lido em https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/ED_1_PRF_2021_ABERTURA.PDF ; retificação (ED_2) altera só a lista de resoluções. Referência histórica.
+- Prova PRF 2021 (caderno 578_PRF_001_01): itens 77, 78 e 79 cobram tempo de direção, descanso e registro (arts. 67-C e 67-E). Demais itens de trânsito tratam de outros temas (velocidade, acidentes, resoluções).
+
+2. QUESTÕES NO BANCO referencias/ (todas salvas nesta tarefa)
+Da internet, com prova localizada (usadas na calibração):
+- cebraspe-2021-prf-077 (C), -078 (E), -079 (E) — gabarito definitivo GAB_DEFINITIVO_578_PRF_001_01. IDs: R20, R21, C02, D11, D12, D14.
+- cebraspe-2023-petrobras-043 (E, definitivo) — também está no PDF (questão 12). IDs: R18, D11, D12.
+- idcap-2026-prefeitura-de-itupeva-sp-043 (B; arquivo do qconcursos indica a resposta; gabarito oficial não conferido). IDs: R02, R04, D01, D02, D05.
+- igeduc-2025-municipio-de-flores-pe-029 (C) e -030 (B) — gabarito definitivo da IGEDUC (arquivo hospedado no qconcursos). IDs: R07, D06, D07 / C01, D10.
+Do PDF, sem prova oficial localizada (uso registrado com referencias.py usar; fora da calibração):
+- ibest-2023-…-10d3b1 (R04); cebraspe-2015-prf-f2c551 e cebraspe-2017-…-819758 (R03); cebraspe-2017-trf-1a-regiao-790cad (R05); cebraspe-2017-…-7c6eb5 (R16); cebraspe-2015-mpu-cb0105 (D03); cebraspe-2020-…-2ac49c (R15, C02); instituto-darwin-2023-…-a35fab (C04, D13); cesgranrio-2023-transpetro-3f6c19 (C02, D11, D12, D14).
+- Salvas e não usadas: ibest-2023-…-120b09, vunesp-2023-…-3a4b22, sociesc-2011-…-a6b532, vunesp-2022-…-ccc3e9, cebraspe-2017-…-960aa2 (Anexo I e parada; fora do recorte ou já cobertos na coleção).
+Item PRF 2021 nº 69 (lanternas de emergência) foi anulado: não usado.
+
+3. FONTES DE CONTEÚDO (lidas nesta tarefa)
+- CTB compilado (Planalto): https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm — arts. 29 a 67-E, Anexo I (estrada, ciclomotor; rodovia lida em resumo). Nenhuma lei de 2024–2026 altera os arts. 26–67-E; últimas alterações: Lei 14.599/2023 (arts. 41, I; 67, III; 67-C § 8º) e Lei 14.440/2022.
+- ADI 5.322: acórdão no Senado https://legis.senado.leg.br/norma/37370238 (item k: expressão do fracionamento do § 3º do art. 67-C inconstitucional; efeitos ex nunc desde 12/7/2023) e notícia do STF https://noticias.stf.jus.br/?p=58525 . IDs: R19, C04, D13.
+
+4. PESQUISA PARA RÁPIDOS E CLOZE (regra 2.18) E MNEMÔNICOS
+- O que se cobra: confirmado pelas 21 questões do banco (PDF + internet): lado da ultrapassagem, faixas, preferência, emergência, crianças, 5 h 30, pausas e 11 h, responsável pelo registro.
+- Mnemônicos: buscas por "mnemônico/macete" + art. 32 (ultrapassagem), art. 29, III (preferência) e art. 67-C (tempos) não encontraram mnemônico publicado por professor ou curso; as páginas listadas (ctbdigital, consultadeplaca, doutormultas) só explicam a regra, e uma delas (consultadeplaca, art. 67-C) ainda traz o fracionamento derrubado pela ADI 5.322. Por isso foram usadas dicas AUTORAIS, conferidas contra o CTB e identificadas como tais: "Cuidado: Aqui Pode Passar Trem" (R06, art. 32), "Rodovia, Rotatória, Direita" (R01, art. 29, III) e a frase dos tempos no Extra do C02.
+
+5. DESAFIADORES: COMPARAÇÃO
+- Comparada (Cebraspe C/E oficial): D11, D12 (Petrobras 2023 item 43; PRF 2021 item 78).
+- Inspiração geral: D01–D10, D13, D14 — sem item Cebraspe C/E oficial localizado para o alvo; outras bancas vinculadas quando lidas por inteiro (IDCAP, IGEDUC); demais com outras_bancas_pendencia (buscas e bloqueios descritos no calibracao_cebraspe.json).
+
+6. COBERTURA DO PDF
+Tópicos A cobertos: todos (ver triagem). Não convertidos (C): arts. 26–28, 42–43, 47, 50–55, 67, luzes de placa/posição/pisca-alerta e Anexo I das questões — motivos na triagem.
