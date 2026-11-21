@@ -18,7 +18,7 @@ Arquivos gerados (não editar à mão):
 Regras, formato e comandos: [skills/referencias-questoes/SKILL.md](../skills/referencias-questoes/SKILL.md).
 
 ```text
-python -X utf8 skills/referencias-questoes/scripts/referencias.py assuntos
+python -X utf8 skills/referencias-questoes/scripts/referencias.py assuntos -d transito
 python -X utf8 skills/referencias-questoes/scripts/referencias.py buscar --tipo prioridade --alvo PRF -d transito
 python -X utf8 skills/referencias-questoes/scripts/referencias.py buscar --tipo conteudo -t 67-C --recentes 90
 python -X utf8 skills/referencias-questoes/scripts/referencias.py mostrar ID --secao "Legislação de Trânsito"

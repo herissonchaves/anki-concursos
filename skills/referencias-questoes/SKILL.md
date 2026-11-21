@@ -29,7 +29,7 @@ python -X utf8 skills/referencias-questoes/scripts/referencias.py COMANDO
 
 | Comando | Uso |
 | --- | --- |
-| `assuntos` | Árvore disciplina > assunto com contagens e tipos. Leia primeiro: é curta. |
+| `assuntos [-d DISC] [--completo]` | Sem opção: só as disciplinas e contagens (curto). `-d DISC`: os assuntos, subassuntos, bancas e tipos da disciplina do pedido. `--completo` (árvore inteira, ~20 KB) só ao manter o banco. |
 | `buscar [--tipo T] -d DISC -a ASSUNTO -t TERMO [-b BANCA] [-f certo_errado] [--alvo PRF] [--nao-usadas] [--com-url] [--vigentes] [--recentes N] [--corpo] [-n 20]` | Uma linha por item. Questões: `sem prova`, `DESATUALIZADA`. Documentos: tipo, título, status/situação/prioridade e data. `--recentes N`: conteúdos verificados (e demais documentos consultados) há até N dias. |
 | `mostrar ID [ID…] [--secao NOME] [--analise] [--meta]` | Corpo do item; `--secao` imprime só a seção `## NOME…` (ex.: a disciplina do edital, um artigo do conteúdo). |
 | `fonte ID[#SEÇÃO]` | `(url, trecho)` de um conteúdo/notícia/edital para o `F = {...}` do `gerar_lote.py`. |
@@ -48,7 +48,7 @@ das prioridades do concurso: `scripts/provas_oficiais.py` (`extrair`, `revisar`,
 
 ## Fluxo em todo pedido de cartões (R, D, Cloze e caderno de erros)
 
-1. **Banco primeiro.** `assuntos`, depois, para o tema do pedido:
+1. **Banco primeiro.** `assuntos -d DISC` (só a disciplina do pedido), depois, para o tema:
    - `buscar --tipo prioridade --alvo PRF -a ASSUNTO`: a triagem começa pela prioridade salva
      e reavalia só o que for novo;
    - `buscar --tipo edital --alvo PRF` e `mostrar ID --secao "<disciplina>"`: pertinência

@@ -447,6 +447,26 @@ def arvore_assuntos(linhas) -> str:
     return '\n'.join(saida) + '\n'
 
 
+def recortar_assuntos(texto: str, disciplinas=(), completo=False) -> str:
+    """Recorte barato da árvore: sem filtro, só as disciplinas; com `disciplinas`, só os blocos delas."""
+    if completo:
+        return texto
+    linhas = texto.splitlines()
+    cabecalho = [l for l in linhas[:4] if not l.startswith('- ')]
+    if not disciplinas:
+        corpo = [l for l in linhas if l.startswith('- **')]
+        dica = 'Use `assuntos -d DISC` para ver os assuntos de uma disciplina.'
+        return '\n'.join(cabecalho + corpo + ['', dica]) + '\n'
+    alvo = {d.lower() for d in disciplinas}
+    saida, dentro = list(cabecalho), False
+    for l in linhas:
+        if l.startswith('- **'):
+            dentro = l[4:].split('**')[0].lower() in alvo
+        if dentro and l.startswith(('- **', '  - ')):
+            saida.append(l)
+    return '\n'.join(saida) + '\n'
+
+
 def ler_indice(raiz=None, reindexar=True) -> list[dict]:
     base = raiz_banco(raiz)
     indice = base / 'indice.tsv'
@@ -838,7 +858,9 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split('\n\n')[0])
     ap.add_argument('--raiz', help='pasta do banco (padrão: referencias/ na raiz do repositório)')
     sub = ap.add_subparsers(dest='cmd', required=True)
-    sub.add_parser('assuntos', help='mostra a árvore disciplina > assunto (curta)')
+    s = sub.add_parser('assuntos', help='sem opções: só disciplinas e contagens; -d DISC: assuntos da disciplina')
+    s.add_argument('-d', '--disciplina', action='append', default=[], help='repita para várias disciplinas')
+    s.add_argument('--completo', action='store_true', help='árvore inteira (cara: use só ao manter o banco)')
     b = sub.add_parser('buscar', help='filtra questões pelo índice')
     b.add_argument('-d', '--disciplina')
     b.add_argument('-a', '--assunto', help='prefixo do assunto em snake_case')
@@ -891,7 +913,8 @@ def main(argv=None) -> int:
         elif a.cmd == 'assuntos':
             ler_indice(raiz)
             caminho = raiz_banco(raiz) / 'assuntos.md'
-            print(caminho.read_text(encoding='utf-8') if caminho.exists() else 'Banco vazio.')
+            texto = caminho.read_text(encoding='utf-8') if caminho.exists() else ''
+            print(recortar_assuntos(texto, a.disciplina, a.completo) if texto else 'Banco vazio.')
         elif a.cmd == 'buscar':
             res = buscar(raiz, a.disciplina, a.assunto, a.termo, a.banca, a.formato, a.ano_min, a.alvo,
                          a.nao_usadas, a.corpo, a.vigentes, a.com_url, a.tipo, a.recentes)

@@ -18,7 +18,7 @@ PRIMEIRO identificar disciplina. Sempre que o usuário mencionar Língua Portugu
 | Analise `.colpkg` | `analisar-colecao-anki` | Diagnóstico somente leitura; sem gerar cartões |
 | Não entendi / melhore um card | `melhorar-cartoes-anki` | Reescrever -> crítica -> revalidar; + **especialização para Português** |
 | Audite cartões / ZIP | `auditar-cartoes-anki` | Analisar lote real; reprovar os que falham; + **especialização para Português** |
-| Consultar ou salvar questões de concursos de referência | `referencias-questoes` | `assuntos` -> `buscar` -> `mostrar`; salvar só o item oficial com `nova`; `indexar` sem erros |
+| Consultar ou salvar questões de concursos de referência | `referencias-questoes` | `assuntos -d DISC` -> `buscar` -> `mostrar`; salvar só o item oficial com `nova`; `indexar` sem erros |
 | Tarefa de extração, deduplicação, exportação | `automacao-anki-python` | Usar scripts somente quando disponíveis; não equivalem a validação pedagógica |
 
 ## Prioridades

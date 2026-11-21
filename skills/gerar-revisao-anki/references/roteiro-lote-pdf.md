@@ -43,7 +43,7 @@ Nunca copie nome/CPF da marca-d'água para arquivo versionado.
    confira texto e gabarito, troque todo `REVISAR` (assunto, subassuntos, palavras-chave, operação)
    e salve com `nova` **todas** as questões do PDF (viram card se o conteúdo for Alta ou Média). Regra revogada:
    `vigencia: desatualizada` + `vigencia_nota`.
-2. Banco: `assuntos` → `buscar -d DISC -t TERMO [--com-url] [--vigentes] [--nao-usadas]` → `mostrar`.
+2. Banco: `assuntos -d DISC` → `buscar -d DISC -t TERMO [--com-url] [--vigentes] [--nao-usadas]` → `mostrar`.
 3. Internet, **questões** (obrigatória para todo D; para R/Cloze, só quando o banco não tiver
    questão do assunto que mostre o que se cobra): Cebraspe C/E primeiro (caderno e gabarito
    oficiais no CDN), depois outras bancas. Salve no banco **toda questão que virar

@@ -261,3 +261,13 @@ def test_imagem_embutida_precisa_existir_em_imagens(banco):
     (banco / 'imagens' / 'fig-teste.png').write_bytes(b'\x89PNG\r\n\x1a\n')
     _, erros, _ = ref.validar(banco)
     assert erros == []
+
+
+def test_recorte_de_assuntos_e_barato():
+    arvore = ('# Assuntos\n\nGerado. Total: 3 itens.\n\n- **informatica** (2)\n  - correio (2): smtp 1\n'
+              '- **transito** (1)\n  - cargas (1): peso 1\n')
+    curto = ref.recortar_assuntos(arvore)
+    assert '- **transito** (1)' in curto and 'correio' not in curto
+    so = ref.recortar_assuntos(arvore, ['transito'])
+    assert '  - cargas (1)' in so and 'informatica' not in so
+    assert ref.recortar_assuntos(arvore, completo=True) == arvore
