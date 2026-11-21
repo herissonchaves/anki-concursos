@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PRF, PF_AGENTE]
 operacao_observada: "Hipóteses de vício no motivo do ato."
-usado_em: []
+usado_em: ["PRF_Atos_Administrativos#D07"]
 hash: 68699127a2fb7f9d
 ---
 # Cebraspe 2019 — PRF — item 92

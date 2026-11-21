@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PRF, PF_AGENTE]
 operacao_observada: "Destino do ato ilegal: anulação ou revogação."
-usado_em: []
+usado_em: ["PRF_Atos_Administrativos#D08"]
 hash: 43bdd815096d236f
 ---
 # Cebraspe 2013 — PRF — item 54

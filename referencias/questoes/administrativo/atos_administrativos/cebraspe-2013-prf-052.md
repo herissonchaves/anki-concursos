@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PRF, PF_AGENTE]
 operacao_observada: "Vedação de delegar a decisão de recurso administrativo."
-usado_em: []
+usado_em: ["PRF_Atos_Administrativos#D03"]
 hash: 61d7df6195da1f01
 ---
 # Cebraspe 2013 — PRF — item 52

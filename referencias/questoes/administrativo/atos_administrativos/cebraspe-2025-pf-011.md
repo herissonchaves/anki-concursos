@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PF_AGENTE, PRF]
 operacao_observada: "Distingue imperatividade de autoexecutoriedade."
-usado_em: []
+usado_em: ["PRF_Atos_Administrativos#D01"]
 hash: 869b572e8af024a9
 ---
 # Cebraspe 2025 — PF — item 11
