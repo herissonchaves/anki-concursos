@@ -41,14 +41,17 @@ NL = 'nao_localizado'
 CAMPOS = ('id', 'tipo', 'banca', 'formato', 'ano', 'orgao', 'concurso', 'cargo', 'caderno', 'item',
           'disciplina', 'assunto', 'subassuntos', 'palavras_chave', 'gabarito', 'gabarito_status',
           'url', 'gabarito_url', 'origem', 'fonte_descoberta', 'consulta', 'concursos_alvo',
-          'operacao_observada', 'usado_em', 'hash')
+          'operacao_observada', 'vigencia', 'vigencia_nota', 'usado_em', 'hash')
 LISTAS = {'subassuntos', 'palavras_chave', 'concursos_alvo', 'usado_em'}
+OPCIONAIS = {'vigencia', 'vigencia_nota'}  # ausente = vigencia atual
+VIGENCIAS = {'atual', 'desatualizada'}
+RASCUNHO = 'REVISAR'  # marcador deixado por `importar`; o banco recusa questão que ainda o contenha
 FORMATOS = {'certo_errado', 'multipla_escolha'}
 STATUS = {'definitivo', 'justificativa_oficial', 'nao_verificado', 'anulado'}
 ORIGENS = {'anexo_usuario', 'pesquisa_internet', 'caderno_erros'}
 GABARITOS = {'certo_errado': {'C', 'E', 'anulada'}, 'multipla_escolha': {'A', 'B', 'C', 'D', 'E', 'anulada'}}
 COLUNAS = ('id', 'disciplina', 'assunto', 'subassuntos', 'banca', 'formato', 'ano', 'gabarito', 'status',
-           'orgao', 'cargo', 'alvos', 'usos', 'palavras', 'arquivo')
+           'orgao', 'cargo', 'alvos', 'usos', 'palavras', 'arquivo', 'vigencia', 'tem_url')
 SNAKE = re.compile(r'^[a-z0-9]+(?:_[a-z0-9]+)*$')
 DATA = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 SEGURO = re.compile(r'^[A-Za-z0-9_./-]*[A-Za-z_./-][A-Za-z0-9_./-]*$')
@@ -225,6 +228,8 @@ def validar_questao(q: Questao, raiz=None) -> tuple[list[str], list[str]]:
     p = f'{q.caminho.name}'
     for campo in CAMPOS:
         valor = m.get(campo)
+        if campo in OPCIONAIS and campo not in m:
+            continue
         if campo in LISTAS:
             if not isinstance(valor, list):
                 erros.append(f'{p}: {campo} deve ser lista [..]')
@@ -245,6 +250,13 @@ def validar_questao(q: Questao, raiz=None) -> tuple[list[str], list[str]]:
         erros.append(f'{p}: formato deve ser certo_errado ou multipla_escolha')
     elif str(m['gabarito']) not in GABARITOS[m['formato']]:
         erros.append(f'{p}: gabarito {m["gabarito"]!r} inválido para {m["formato"]}')
+    if m.get('vigencia', 'atual') not in VIGENCIAS:
+        erros.append(f'{p}: vigencia deve ser atual ou desatualizada')
+    elif m.get('vigencia') == 'desatualizada' and not str(m.get('vigencia_nota', '')).strip():
+        erros.append(f'{p}: vigencia desatualizada exige vigencia_nota com o motivo (lei, decisão, data)')
+    restos = [c for c in CAMPOS if RASCUNHO in (m.get(c) if isinstance(m.get(c), list) else [str(m.get(c, ''))])]
+    if restos or RASCUNHO in q.corpo:
+        erros.append(f'{p}: rascunho não revisado (marcador {RASCUNHO} em {restos or ["corpo"]})')
     if m['gabarito_status'] not in STATUS:
         erros.append(f'{p}: gabarito_status deve ser um de {sorted(STATUS)}')
     if m['origem'] not in ORIGENS:
@@ -320,7 +332,8 @@ def linha_indice(q: Questao, raiz=None) -> dict:
             'banca': m['banca'], 'formato': m['formato'], 'ano': m['ano'], 'gabarito': m['gabarito'],
             'status': m['gabarito_status'], 'orgao': m['orgao'], 'cargo': m['cargo'],
             'alvos': m['concursos_alvo'], 'usos': len(m['usado_em']), 'palavras': m['palavras_chave'],
-            'arquivo': q.caminho.relative_to(raiz_banco(raiz)).as_posix()}
+            'arquivo': q.caminho.relative_to(raiz_banco(raiz)).as_posix(), 'vigencia': m.get('vigencia', 'atual'),
+            'tem_url': 'sim' if _url_ok(m.get('url')) else 'nao'}
 
 
 def _ordem(linha):
@@ -383,23 +396,32 @@ def ler_indice(raiz=None, reindexar=True) -> list[dict]:
     if not linhas:
         return []
     cab = linhas[0].split('\t')
+    if reindexar and tuple(cab) != COLUNAS:  # índice de versão anterior do script
+        indexar(raiz)
+        return ler_indice(raiz, reindexar=False)
     saida = []
     for linha in linhas[1:]:
         reg = dict(zip(cab, linha.split('\t')))
         for c in ('subassuntos', 'alvos', 'palavras'):
             reg[c] = [v for v in reg.get(c, '').split(';') if v]
         reg['ano'], reg['usos'] = int(reg['ano']), int(reg['usos'])
+        reg.setdefault('vigencia', 'atual')
+        reg.setdefault('tem_url', 'sim')
         saida.append(reg)
     return saida
 
 
 # ------------------------------------------------------------------ consultas
 def buscar(raiz=None, disciplina=None, assunto=None, termos=(), banca=None, formato=None, ano_min=None,
-           alvo=None, nao_usadas=False, corpo=False) -> list[dict]:
+           alvo=None, nao_usadas=False, corpo=False, vigentes=False, com_url=False) -> list[dict]:
     base = raiz_banco(raiz)
     termos = [normalizar(t) for t in termos if normalizar(t)]
     saida = []
     for reg in ler_indice(raiz):
+        if vigentes and reg['vigencia'] != 'atual':
+            continue
+        if com_url and reg['tem_url'] != 'sim':
+            continue
         if disciplina and normalizar(disciplina).replace(' ', '_') != reg['disciplina']:
             continue
         if assunto and not reg['assunto'].startswith(normalizar(assunto).replace(' ', '_')):
@@ -439,11 +461,34 @@ def localizar(ids, raiz=None) -> list[Questao]:
     return saida
 
 
+def tem_prova(ident, raiz=None) -> bool:
+    """True se a questão tem url da prova (pode entrar na calibração)."""
+    return _url_ok(localizar([ident], raiz)[0].meta.get('url'))
+
+
+def sem_prova(*ids, raiz=None) -> list[dict]:
+    """Resumo das questões sem prova oficial localizada, para `referencias_sem_prova` da calibração.
+
+    Servem de inspiração (inclusive de outra banca), mas não sustentam fidelidade comparada.
+    """
+    saida = []
+    for q in localizar(ids, raiz):
+        m = q.meta
+        saida.append({'id': q.id, 'banca': m['banca'], 'formato': m['formato'], 'ano': m['ano'],
+                      'concurso': m['concurso'], 'item': str(m['item']), 'origem': m['origem'],
+                      'fonte_descoberta': m['fonte_descoberta'], 'gabarito_status': m['gabarito_status'],
+                      'operacao_observada': m['operacao_observada'], 'vigencia': m.get('vigencia', 'atual')})
+    return saida
+
+
 def calibracao(*ids, raiz=None) -> list[dict]:
     """Referências no formato de `calibracao_cebraspe.json` (schema 2) para os IDs dados."""
     refs = []
     for q in localizar(ids, raiz):
         m = q.meta
+        if m.get('vigencia') == 'desatualizada':
+            print(f'aviso: {q.id} está desatualizada ({m.get("vigencia_nota")}); use só como modelo de forma',
+                  file=sys.stderr)
         if not _url_ok(m.get('url')):
             raise ErroBanco(f'{q.id}: sem url da prova (nao_localizado); localize a fonte oficial antes de usá-la '
                             'como referência de calibração')
@@ -490,7 +535,11 @@ def _corpo_novo(d: dict) -> str:
 def novo_id(d: dict, h: str, raiz=None) -> str:
     item = slug(d.get('item', '')) if str(d.get('item', NL)) != NL else h[:6]
     item = item.zfill(3) if item.isdigit() else item
-    base = '-'.join(filter(None, (slug(d['banca']), str(d['ano']), slug(d['orgao']), item)))
+    orgao = slug(d['orgao']) if str(d.get('orgao', NL)) != NL else ''
+    if not orgao:  # sem órgão: usa as palavras do concurso que não repetem banca nem ano
+        repetidas = set(slug(d['banca']).split('-')) | {str(d['ano'])}
+        orgao = '-'.join([w for w in slug(d.get('concurso', '')).split('-') if w and w not in repetidas][:4])
+    base = '-'.join(filter(None, (slug(d['banca']), str(d['ano']), orgao, item)))
     existentes = {p.stem for p in arquivos(raiz)}
     return base if base not in existentes else f'{base}-{h[:4]}'
 
@@ -533,14 +582,18 @@ def nova(dados: dict, raiz=None, gravar=True) -> tuple[str, Questao | None, list
 # ------------------------------------------------------------------ CLI
 def _linha_busca(r: dict) -> str:
     gab = {'certo_errado': 'CE', 'multipla_escolha': 'ME'}.get(r['formato'], r['formato'])
+    marcas = ('' if r.get('tem_url', 'sim') == 'sim' else ' | sem prova') + \
+             (' | DESATUALIZADA' if r.get('vigencia', 'atual') != 'atual' else '')
     return (f'{r["id"]} | {r["banca"]} {r["ano"]} {gab}={r["gabarito"]} | {r["disciplina"]}/{r["assunto"]} | '
-            f'{",".join(r["subassuntos"])} | usos={r["usos"]}')
+            f'{",".join(r["subassuntos"])} | usos={r["usos"]}{marcas}')
 
 
 def _imprimir_questao(q: Questao, analise=False, meta=False):
     m = q.meta
     print(f'### {q.id} — {m["banca"]} {m["ano"]}, {m["orgao"]}, {m["cargo"]}, item {m["item"]} '
           f'({m["formato"]}, gabarito {m["gabarito"]}, {m["gabarito_status"]})')
+    if m.get('vigencia') == 'desatualizada':
+        print(f'ATENÇÃO — DESATUALIZADA: {m.get("vigencia_nota")}')
     if meta:
         print(escrever_documento(m, '').strip())
     s = secoes(q.corpo)
@@ -571,6 +624,8 @@ def main(argv=None) -> int:
     b.add_argument('--alvo', help='concurso-alvo, ex.: PRF')
     b.add_argument('--nao-usadas', action='store_true')
     b.add_argument('--corpo', action='store_true', help='procura os termos também no texto das questões')
+    b.add_argument('--vigentes', action='store_true', help='omite questões marcadas como desatualizadas')
+    b.add_argument('--com-url', action='store_true', help='só questões com prova oficial (servem à calibração)')
     b.add_argument('--ids', action='store_true', help='imprime só os IDs')
     b.add_argument('-n', '--limite', type=int, default=20)
     mo = sub.add_parser('mostrar', help='imprime o texto das questões')
@@ -586,6 +641,14 @@ def main(argv=None) -> int:
     us.add_argument('--cartoes', required=True, help='IDs dos cartões, separados por vírgula')
     ca = sub.add_parser('calibracao', help='JSON das referências para calibracao_cebraspe.json')
     ca.add_argument('ids', nargs='+')
+    im = sub.add_parser('importar', help='rascunho JSON das questões de um PDF/JSON/TXT (revisar e salvar com nova)')
+    im.add_argument('arquivo', help='.pdf, .json de extrair_pdf.py ou .txt')
+    im.add_argument('-o', '--saida', required=True, help='JSON do rascunho (fora do repositório, ex.: scratchpad)')
+    im.add_argument('-p', '--paginas', help='ex.: 17-19 (só a lista de questões, sem a parte comentada)')
+    im.add_argument('-d', '--disciplina', default='REVISAR')
+    im.add_argument('-a', '--assunto', default='REVISAR')
+    im.add_argument('--alvo', default='PRF')
+    im.add_argument('--ruido', action='append', default=[], help='palavra de faixa lateral a remover (repita)')
     sub.add_parser('validar', help='confere todas as questões')
     ix = sub.add_parser('indexar', help='valida e regera indice.tsv e assuntos.md')
     ix.add_argument('--atualizar-hash', action='store_true')
@@ -599,7 +662,7 @@ def main(argv=None) -> int:
             print(caminho.read_text(encoding='utf-8') if caminho.exists() else 'Banco vazio.')
         elif a.cmd == 'buscar':
             res = buscar(raiz, a.disciplina, a.assunto, a.termo, a.banca, a.formato, a.ano_min, a.alvo,
-                         a.nao_usadas, a.corpo)
+                         a.nao_usadas, a.corpo, a.vigentes, a.com_url)
             for r in res[:a.limite]:
                 print(r['id'] if a.ids else _linha_busca(r))
             if not a.ids:
@@ -624,6 +687,16 @@ def main(argv=None) -> int:
             for i in a.ids:
                 print(f'{i}: {"registrado" if registrar_uso(i, a.lote, cartoes, raiz) else "já registrado"}')
             indexar(raiz)
+        elif a.cmd == 'importar':
+            sys.path.insert(0, str(AQUI.parent))
+            import importar_questoes
+            itens = importar_questoes.extrair(a.arquivo, a.paginas, a.ruido, a.disciplina, a.assunto, a.alvo)
+            Path(a.saida).write_text(json.dumps(itens, ensure_ascii=False, indent=1), encoding='utf-8')
+            pendentes = sum(json.dumps(i, ensure_ascii=False).count(RASCUNHO) for i in itens)
+            for i in itens:
+                print(f'{i["fonte_descoberta"].split(", ")[-1].split(";")[0]} | {i["banca"]} {i["ano"]} | {i["formato"]} | '
+                      f'gab={i["gabarito"]} | {i["enunciado"][:70]}')
+            print(f'-- {len(itens)} questão(ões) em {a.saida}; {pendentes} campo(s) {RASCUNHO} a completar')
         elif a.cmd == 'calibracao':
             print(json.dumps(calibracao(*a.ids, raiz=raiz), ensure_ascii=False, indent=1))
         elif a.cmd in ('validar', 'indexar'):

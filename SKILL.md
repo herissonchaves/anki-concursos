@@ -5,7 +5,7 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
-**Versão 2.19.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.20.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
@@ -42,8 +42,14 @@ casos de regressão do roteamento, veja
 
 Toda criação de cartões autorais (R, D, Cloze e caderno de erros) usa também
 [referencias-questoes](skills/referencias-questoes/SKILL.md): reaproveita as questões
-de concursos do arquivo enviado e do banco `referencias/`, e salva ali, em Markdown
-padronizado, toda questão lida no anexo ou na internet.
+de concursos do arquivo enviado (extraídas com `referencias.py importar`) e do banco
+`referencias/`, e salva ali, em Markdown padronizado, as questões que viram referência de
+cartão e os itens Cebraspe C/E oficiais do tema; as demais lidas são opcionais.
+
+Para lote a partir de PDF, o caminho de menor custo é o
+[roteiro curto](skills/gerar-revisao-anki/references/roteiro-lote-pdf.md): resume as regras
+obrigatórias e os comandos (texto limpo do PDF, importação das questões, modelo do gerador e
+`finalizar_lote.py`), sem precisar abrir todas as referências.
 
 Para conteúdo de PRF ou Agente da Polícia Federal, use
 [perfil-carreiras-policiais](skills/perfil-carreiras-policiais/SKILL.md) para

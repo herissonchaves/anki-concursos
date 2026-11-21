@@ -20,8 +20,9 @@ python -X utf8 skills/referencias-questoes/scripts/referencias.py COMANDO
 | Comando | Uso |
 | --- | --- |
 | `assuntos` | Árvore disciplina > assunto com contagens. Leia primeiro: é curta. |
-| `buscar -d DISC -a ASSUNTO -t TERMO [-t TERMO] [-b BANCA] [-f certo_errado] [--alvo PRF] [--nao-usadas] [--corpo] [-n 20]` | Uma linha por questão. `-t` procura em id, assunto, subassuntos, palavras-chave, órgão e cargo, sem acento; `--corpo` procura também no enunciado. |
-| `mostrar ID [ID…] [--analise] [--meta]` | Enunciado, alternativas e gabarito. |
+| `buscar -d DISC -a ASSUNTO -t TERMO [-t TERMO] [-b BANCA] [-f certo_errado] [--alvo PRF] [--nao-usadas] [--com-url] [--vigentes] [--corpo] [-n 20]` | Uma linha por questão, marcada com `sem prova` (sem url oficial) e `DESATUALIZADA` quando for o caso. `-t` procura em id, assunto, subassuntos, palavras-chave, órgão e cargo, sem acento; `--corpo` procura também no enunciado; `--com-url` só as que servem à calibração; `--vigentes` omite as desatualizadas. |
+| `mostrar ID [ID…] [--analise] [--meta]` | Enunciado, alternativas e gabarito (com aviso se desatualizada). |
+| `importar ARQ.pdf\|.json\|.txt -o TMP.json [-p 17-19] [-d DISC] [-a ASSUNTO] [--ruido PALAVRA]` | Rascunho JSON das questões do arquivo (número, banca, órgão, ano, formato, enunciado, alternativas, gabarito da tabela ou do comentário), sem marcas-d'água. Campos de julgamento vêm como `REVISAR`; `nova` recusa o que ainda tiver o marcador. |
 | `nova ARQ.json` (ou `-`) | Cria uma ou várias questões a partir de JSON; gera id e hash e recusa duplicatas, informando o id existente. `--simular` só valida. |
 | `usar ID… --lote PRF/Missao_NN_Tema --cartoes D01,D02` | Registra o uso no lote (substitui o registro anterior do mesmo lote). |
 | `calibracao ID…` | JSON das referências no formato do `calibracao_cebraspe.json` v2. |
@@ -31,28 +32,35 @@ python -X utf8 skills/referencias-questoes/scripts/referencias.py COMANDO
 
 ## Quando usar (todo cartão autoral: R, D, Cloze e caderno de erros)
 
-1. **Arquivo enviado pelo usuário.** Antes de redigir, procure questões de concursos no
-   PDF, apostila, lista ou prints (seções “questões”, “exercícios”, “gabarito”). Salve
-   cada questão pertinente com `nova` e `origem: anexo_usuario` (`caderno_erros` para
-   prints do caderno de erros), indicando em `fonte_descoberta` o arquivo e a página.
-   Procure a prova oficial para preencher `url` e confirmar o gabarito; se não achar,
-   use `nao_localizado` e `gabarito_status: nao_verificado`.
+1. **Arquivo enviado pelo usuário.** Antes de redigir, extraia as questões de concursos
+   do PDF, apostila ou lista com `importar` (prints do caderno de erros: transcreva). Revise
+   o rascunho (texto, gabarito, órgão), complete os campos `REVISAR` e salve com `nova`
+   (`origem: anexo_usuario`; `caderno_erros` para prints) as questões **do recorte do lote**;
+   as de outros temas são opcionais. Procure a prova oficial para preencher `url` e confirmar
+   o gabarito quando a questão for virar referência de D comparado; senão, mantenha
+   `nao_localizado` e `gabarito_status: nao_verificado`.
 2. **Banco.** Rode `assuntos` e depois `buscar` pela disciplina, assunto e termos dos
    alvos; leia com `mostrar` só as pertinentes. Questões do banco servem de inspiração e
    de referência de forma, como as da internet; prefira as `--nao-usadas` quando houver
-   escolha, para variar o repertório.
+   escolha, para variar o repertório, e confira o aviso de `DESATUALIZADA`.
 3. **Internet.** A pesquisa de questões anteriores continua obrigatória para todo D
    (Cebraspe C/E primeiro, depois outras bancas), conforme
-   `../gerar-revisao-anki/references/protocolo-modo-estrategico.md`. Toda questão lida
-   por inteiro e pertinente vai para o banco com `nova` e `origem: pesquisa_internet`,
-   mesmo que acabe não vinculada a um cartão. Para R e Cloze, pesquisar questões na
-   internet não é obrigatório, mas é recomendado quando ajudar a ver o que se cobra
-   (salve as lidas aqui também); a pesquisa de conteúdo continua obrigatória e, no
-   Cloze, inclui mnemônicos.
-4. **Vínculo.** No `gerar_lote.py`, passe os IDs do banco em `referencias` do
-   `Lote(...)`; o `montar_lote.py` monta as referências da calibração e registra o uso
-   (`usado_em`) ao gerar. Em entregas inline, cite os IDs na síntese de fontes.
-5. **Antes do commit:** `indexar` sem erros. Versione os `.md`, `indice.tsv` e
+   `../gerar-revisao-anki/references/protocolo-modo-estrategico.md`. Salvar no banco é
+   **obrigatório** para (a) toda questão que virar referência de algum cartão (`refs`) e
+   (b) todo item Cebraspe Certo/Errado oficial do tema com caderno e gabarito localizados,
+   mesmo que não vinculado. As demais questões lidas são **opcionais**: basta citá-las em
+   `selecao_e_fontes.txt` (banca, ano, item, URL). Para R e Cloze, pesquisar questões na
+   internet não é obrigatório, mas é recomendado quando ajudar a ver o que se cobra; a
+   pesquisa de conteúdo continua obrigatória e, no Cloze, inclui mnemônicos.
+4. **Vínculo.** No `gerar_lote.py`, cite os IDs do banco nos `refs` de cada cartão (R, D
+   ou Cloze); `referencias` do `Lote(...)` pode ficar vazio. O `montar_lote.py` monta as
+   referências da calibração com as questões que têm prova oficial, põe as sem prova em
+   `referencias_sem_prova` (inspiração e outra banca, nunca fidelidade comparada) e registra
+   o uso (`usado_em`) de todas ao gerar. Em entregas inline, cite os IDs na síntese de fontes.
+5. **Vigência.** Questão cuja regra mudou (lei alterada, decisão do STF, norma revogada)
+   recebe `vigencia: desatualizada` e `vigencia_nota` com o motivo; serve só de modelo de
+   forma, nunca de fundamento do gabarito.
+6. **Antes do commit:** `indexar` sem erros. Versione os `.md`, `indice.tsv` e
    `assuntos.md` junto com o lote.
 
 ## Formato do arquivo
@@ -61,7 +69,7 @@ Frontmatter obrigatório e completo (o script recusa campo vazio ou fora do padr
 
 | Campo | Valor |
 | --- | --- |
-| `id` | Gerado: `banca-ano-orgao-item` (sufixo de hash em colisão); igual ao nome do arquivo |
+| `id` | Gerado: `banca-ano-orgao-item` (sem órgão, palavras do concurso; sem item, hash; sufixo de hash em colisão); igual ao nome do arquivo |
 | `tipo` | `questao` |
 | `banca`, `orgao`, `concurso`, `cargo` | Como na prova; `cargo` pode ser `nao_localizado` |
 | `formato` | `certo_errado` ou `multipla_escolha` |
@@ -78,6 +86,7 @@ Frontmatter obrigatório e completo (o script recusa campo vazio ou fora do padr
 | `consulta` | AAAA-MM-DD |
 | `concursos_alvo` | Concursos para os quais é pertinente (`PRF`, `PF_AGENTE`…) |
 | `operacao_observada` | O que a questão exige (operação, dado decisivo, pegadinha), em uma frase |
+| `vigencia`, `vigencia_nota` | Opcionais. Ausente = `atual`; `desatualizada` exige a nota com o motivo (lei, decisão, data) |
 | `usado_em` | `LOTE#CARTOES`, preenchido por `usar`/`montar_lote.py` |
 | `hash` | Gerado a partir do enunciado e das alternativas (deduplicação) |
 

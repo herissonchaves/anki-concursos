@@ -22,7 +22,9 @@ fonte_descoberta: "PDF LET020002 (Projeto Missão), p. 19 e 24, questão 14; gab
 consulta: 2026-11-21
 concursos_alvo: [PRF]
 operacao_observada: "Lembrar o descanso mínimo de 11 h em 24 h."
-usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#C04,D13"]
+vigencia: desatualizada
+vigencia_nota: "As \"observações de usufruto\" (fracionamento do descanso de 11 h com 8 h ininterruptas) foram declaradas inconstitucionais pelo STF na ADI 5.322, com efeitos desde 12/7/2023; as 11 h continuam."
+usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#D13,C04"]
 hash: a35faba3f0c6cb9a
 ---
 # Instituto Darwin 2023 — Prefeitura de Lagoa de Itaenga — item nao_localizado

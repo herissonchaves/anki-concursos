@@ -6,11 +6,9 @@ Uso (na raiz do repositório):
 Material: LET020002 (Projeto Missão), CTB arts. 26 a 67-E. Este arquivo guarda só o
 conteúdo (fontes, IDs das questões do banco referencias/, esquemas e cartões); a montagem
 dos TSVs, dos registros JSON e da prévia fica em skills/gerar-revisao-anki/scripts/montar_lote.py.
-Os relatórios .txt são escritos à mão em lote/relatorios/. Projeto na versão 2.19.
-
-As questões do PDF salvas no banco sem prova oficial localizada (url nao_localizado) não
-podem entrar em REFS (calibração); o uso delas é registrado com `referencias.py usar`
-(ver USOS_SEM_URL e relatorios/selecao_e_fontes.txt).
+Os relatórios .txt são escritos à mão em lote/relatorios/. Projeto na versão 2.20: os IDs do
+banco ficam só nos `refs` dos cartões; as questões sem prova oficial (do PDF) vão para
+`referencias_sem_prova` da calibração, e o uso de todas é registrado ao gerar.
 """
 import sys
 from pathlib import Path
@@ -30,20 +28,13 @@ PRF77, PRF78, PRF79 = 'cebraspe-2021-prf-077', 'cebraspe-2021-prf-078', 'cebrasp
 PETRO = 'cebraspe-2023-petrobras-043'
 IDCAP = 'idcap-2026-prefeitura-de-itupeva-sp-043'
 IGE29, IGE30 = 'igeduc-2025-municipio-de-flores-pe-029', 'igeduc-2025-municipio-de-flores-pe-030'
-REFS = [PRF77, PRF78, PRF79, PETRO, IDCAP, IGE29, IGE30]
-
-# Questões do PDF (origem anexo_usuario) sem prova oficial localizada: uso registrado à parte.
-USOS_SEM_URL = {
- 'ibest-2023-prefeitura-de-alexania-go-10d3b1': ['R04'],
- 'cebraspe-2015-prf-f2c551': ['R03'],
- 'cebraspe-2017-trf-1a-regiao-790cad': ['R05'],
- 'cebraspe-2017-prefeitura-de-sao-luis-ma-7c6eb5': ['R16'],
- 'cebraspe-2017-prefeitura-de-sao-luis-ma-819758': ['R03'],
- 'cebraspe-2015-mpu-cb0105': ['D03'],
- 'cebraspe-2020-prefeitura-de-barra-dos-coqueiros-2ac49c': ['R15', 'C02'],
- 'instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab': ['C04', 'D13'],
- 'cesgranrio-2023-transpetro-3f6c19': ['C02', 'D11', 'D12', 'D14'],
-}
+# Questões do PDF (origem anexo_usuario) sem prova oficial localizada: inspiração, fora da comparação.
+IBEST = 'ibest-2023-prefeitura-de-alexania-go-10d3b1'
+PRF15, SLZ_FAIXA = 'cebraspe-2015-prf-f2c551', 'cebraspe-2017-prefeitura-de-sao-luis-ma-819758'
+TRF17, SLZ_RET = 'cebraspe-2017-trf-1a-regiao-790cad', 'cebraspe-2017-prefeitura-de-sao-luis-ma-7c6eb5'
+MPU15, BARRA = 'cebraspe-2015-mpu-cb0105', 'cebraspe-2020-prefeitura-de-barra-dos-coqueiros-2ac49c'
+DARWIN = 'instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab'  # marcada como desatualizada (ADI 5.322)
+CESG = 'cesgranrio-2023-transpetro-3f6c19'
 
 # ---------------------------------------------------------------- esquemas reutilizados
 T_PREF = tabela(['Local sem sinalização', 'Quem tem preferência'], [
@@ -94,8 +85,7 @@ F = {
 
 OBP_CIRC = ('Buscas em 20 e 21/11/2026 por questões de outras bancas sobre o mesmo alvo (rotatória, ultrapassagem, luzes, ciclomotor, coletivo parado + CTB + FGV, Vunesp, IBFC, Quadrix): '
             'qconcursos.com e questoes.grancursosonline.com.br recusaram o acesso automatizado (HTTP 403); nas provas abertas (IDCAP 2026, IGEDUC 2025) e nas questões do PDF não havia item sobre este alvo.')
-OBP_MOT = ('Questões de outras bancas sobre o alvo lidas no PDF e salvas no banco (cesgranrio-2023-transpetro-3f6c19, instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab), '
-           'mas sem prova oficial localizada (url nao_localizado), por isso fora da calibração; buscas por cadernos oficiais em 20 e 21/11/2026 sem sucesso e páginas do qconcursos/Gran Questões bloqueadas (HTTP 403).')
+
 
 # ---------------------------------------------------------------- rápidos (R)
 R = [
@@ -116,7 +106,7 @@ R = [
   sol='Errado: art. 29, III, c — nos demais casos, preferência do que vier pela direita do condutor (cobrado na afirmativa II da questão IDCAP 2026, item 43).',
   alt='Considerei se "ruas comuns" poderia envolver rodovia ou rotatória: a frente exclui as duas situações; resta a alínea c.',
   rec='Exige recuperar o lado da preferência; a frente não sugere a resposta.', fb='Regra, erro localizado (lado trocado) e tabela; Memorize com a formulação correta.'),
- dict(k='R03', tags='Faixas_Ultrapassagem', g='C',
+ dict(k='R03', tags='Faixas_Ultrapassagem', g='C', refs=[PRF15, SLZ_FAIXA],
   f='Em uma pista com várias faixas no mesmo sentido e sem faixa especial para eles, os veículos mais lentos e de maior porte devem usar as faixas da direita.',
   b=[regra('As faixas da <b>direita</b> são dos veículos mais lentos e de maior porte (quando não houver faixa especial para eles); as da <b>esquerda</b>, da ultrapassagem e de quem anda mais rápido.')],
   m='Direita: lentos e grandes. Esquerda: ultrapassagem e maior velocidade.',
@@ -124,7 +114,7 @@ R = [
   sol='Certo: art. 29, IV. Alvo cobrado nas questões do PDF (Cebraspe PRF/CFP 2015 e São Luís 2017, salvas no banco).',
   alt='Considerei faixa exclusiva de ônibus na direita: a frente diz "sem faixa especial"; o caso da faixa exclusiva é tratado no D03.',
   rec='Recupera a regra-base das faixas.', fb='Regra com os dois lados; Memorize resume.'),
- dict(k='R04', tags='Faixas_Ultrapassagem', g='E', refs=[IDCAP],
+ dict(k='R04', tags='Faixas_Ultrapassagem', g='E', refs=[IDCAP, IBEST],
   f='A ultrapassagem pela direita é permitida quando o veículo da frente sinaliza que vai entrar à direita.',
   b=[regra('A regra é ultrapassar pela <b>esquerda</b>. A exceção do art. 29, IX, é o veículo da frente sinalizar que vai <b>entrar à esquerda</b>: aí se passa pela direita dele.'),
      erro('A frase troca o lado da conversão: quem vai entrar à direita ocupa justamente o lado por onde se pretendia passar.')],
@@ -133,7 +123,7 @@ R = [
   sol='Errado: art. 29, IX — exceção apenas quando o veículo a ser ultrapassado sinaliza entrar à esquerda.',
   alt='Considerei faixas múltiplas em que o carro da direita anda mais rápido: isso não é a exceção do inciso IX; a frente trata da sinalização de conversão.',
   rec='Exige lembrar o lado exato da exceção (cobrado no item IBEST 2023 do PDF e na afirmativa III da IDCAP 2026).', fb='Regra e erro localizado; Memorize com a formulação correta.'),
- dict(k='R05', tags='Faixas_Ultrapassagem', g='C',
+ dict(k='R05', tags='Faixas_Ultrapassagem', g='C', refs=[TRF17],
   f='O condutor que circula pela faixa da esquerda e percebe que o veículo de trás quer ultrapassá-lo deve passar para a faixa da direita, sem acelerar.',
   b=[regra('Quem é ultrapassado: se estiver na faixa da <b>esquerda</b>, vai para a direita <b>sem acelerar</b>; se estiver em outra faixa, mantém-se nela, também sem acelerar.')],
   m='Sendo ultrapassado: na esquerda, vá para a direita; em qualquer faixa, não acelere.',
@@ -216,7 +206,7 @@ R = [
   alvo='Lado de embarque e desembarque (art. 49, parágrafo único).', fx=('ctb49',),
   sol='Certo: art. 49, parágrafo único.', alt='Considerei passageiro do banco traseiro esquerdo: a regra também o alcança; só o condutor é exceção.',
   rec='Recupera a regra e sua única exceção.', fb='Regra com o motivo da exceção; Memorize resume.'),
- dict(k='R15', tags='Bicicletas_Ciclomotores', g='E',
+ dict(k='R15', tags='Bicicletas_Ciclomotores', g='E', refs=[BARRA],
   f='A autoridade de trânsito pode autorizar bicicletas a circular no sentido contrário ao dos veículos automotores mesmo em trecho sem ciclofaixa.',
   b=[regra('A circulação de bicicletas no <b>contrafluxo</b> (sentido contrário ao dos carros) pode ser autorizada pela autoridade com circunscrição sobre a via, <b>desde que o trecho tenha ciclofaixa</b>.'),
      erro('Sem ciclofaixa não há essa autorização: a bicicleta circula no mesmo sentido da via.')],
@@ -225,7 +215,7 @@ R = [
   sol='Errado: art. 58, parágrafo único — "desde que dotado o trecho com ciclofaixa" (alternativa C, incorreta, do item Cebraspe 2020 de Barra dos Coqueiros, salvo no banco a partir do PDF).',
   alt='Considerei a circulação nos passeios (art. 59), que depende de autorização e sinalização: é outra regra; a frente trata do contrafluxo na pista.',
   rec='Recupera a condição da ciclofaixa.', fb='Regra e erro localizado; Memorize com a formulação correta.'),
- dict(k='R16', tags='Conversao_Parada', g='C',
+ dict(k='R16', tags='Conversao_Parada', g='C', refs=[SLZ_RET],
   f='Em rodovia com acostamento e sem local apropriado para retorno, o condutor que quer retornar deve aguardar no acostamento, à direita, para cruzar a pista com segurança.',
   b=[regra('Conversão à esquerda e retorno, em via com acostamento, são feitos nos locais apropriados. Onde não houver, o condutor espera <b>no acostamento, à direita</b>, e cruza a pista quando for seguro, em vez de parar no meio da pista.')],
   m='Sem retorno apropriado: espere no acostamento da direita e cruze com segurança.',
@@ -293,7 +283,7 @@ CZ = [
   alvo='Altura-limite do art. 64.', fx=('ctb64',), sol='Lacuna: 1,45 m (aceitar 1 metro e 45). Art. 64, redação da Lei 14.071/2020; cobrado na questão IGEDUC 2025, item 30.',
   alt='Testei 1,50 m e 1,40 m, valores próximos: o texto legal fixa 1,45 m; idade (10 anos) fica visível como contexto.',
   rec='O número é o dado que o aluno precisa lembrar para aplicar a regra; a idade visível não o revela.', fb='Extra explica as duas condições cumulativas e o dispositivo.', cob={'1': ['D10']}),
- dict(k='C02', tags='Motorista_Profissional', refs=[PRF78],
+ dict(k='C02', tags='Motorista_Profissional', refs=[PRF78, BARRA, CESG],
   t='É vedado ao motorista profissional de transporte rodoviário coletivo de passageiros ou de cargas dirigir por mais de {{c1::5 horas e meia}} ininterruptas.',
   b=[regra('5 h 30 min é o limite de direção <b>contínua</b> nos dois tipos de transporte. Os descansos de 30 min (dentro de cada 6 h na carga; a cada 4 h no coletivo de passageiros) podem ser fracionados, mas nunca permitem passar desse limite seguido.'), esquema(T_TEMPOS),
      certo('Dica autoral (nenhum mnemônico confiável foi encontrado nas buscas): "5 e meia no volante; caminhão para a cada 6, ônibus a cada 4; 11 para dormir".', 'Dica')],
@@ -308,7 +298,7 @@ CZ = [
   alvo='Intervalo de descanso no coletivo de passageiros (art. 67-C, § 1º-A).', fx=('ctb67c',), sol='Lacuna: 4 horas.',
   alt='Testei 6 horas: é o intervalo da carga; "coletivo de passageiros" na frente determina 4 h.',
   rec='A categoria visível determina o número sem revelá-lo.', fb='Extra contrasta as duas categorias com a tabela.', cob={'1': ['D12']}),
- dict(k='C04', tags=f'Motorista_Profissional {ADI}',
+ dict(k='C04', tags=f'Motorista_Profissional {ADI}', refs=[DARWIN],
   t='Dentro do período de 24 horas, o motorista profissional é obrigado a observar o mínimo de {{c1::11 horas}} de descanso.',
   b=[regra('É a parte do art. 67-C, § 3º, que continua válida. O STF (ADI 5.322) declarou inconstitucional o trecho que permitia fracionar esse descanso, cumpri-lo no veículo e fazê-lo coincidir com as pausas de 30 min.')],
   m='Descanso diário: no mínimo 11 h dentro de 24 h, sem fracionamento.',
@@ -371,7 +361,7 @@ D = [
   solucao='Faixa adjacente à da direita = central; a frente indica a esquerda; logo Errado.', erro='Ir para o extremo oposto quando a faixa da direita está bloqueada.',
   conc='Considerei via de trânsito rápido, onde o ciclomotor é proibido: a frente fixa avenida arterial, eliminando essa leitura.',
   orig='Mesmo raciocínio do item Cebraspe MPU 2015 do PDF (cebraspe-2015-mpu-cb0105: caminhão na faixa central com faixa exclusiva de ônibus), transposto para o ciclomotor e com regra própria (art. 57).',
-  fx=('ctb57_58', 'ctb29'), refs=[], fid='inspiracao_geral',
+  fx=('ctb57_58', 'ctb29'), refs=[MPU15], fid='inspiracao_geral',
   lim='O item MPU 2015 está no banco (origem: PDF), mas sem caderno nem gabarito oficiais localizados, por isso não entra como referência de calibração; nenhum outro item Cebraspe C/E sobre o tema foi confirmado.',
   obp=OBP_CIRC,
   rb=rub('Conferido no art. 57, parágrafo único, e no Anexo I do CTB.', 'Número de faixas, faixa exclusiva e tipo de via explícitos.',
@@ -517,8 +507,8 @@ D = [
   solucao='Nenhum trecho > 5 h 30; 30 min de pausa em 5 h 30 de direção; logo Certo.', erro='Exigir os 30 min de uma vez.',
   conc='Considerei o descanso diário de 11 h: a frente limita o julgamento à direção contínua e à pausa de 30 min.',
   orig='Mesma família do item 43 da Petrobras 2023 (carga, 4 h 30 + 30 min, julgar se o descanso está em desacordo — E) e do item 78 da PRF 2021 (limite contínuo); aqui o aluno precisa somar pausas fracionadas.',
-  fx=('ctb67c', 'petro23', 'prf21'), refs=[PETRO, PRF78], fid='comparada',
-  cmp='Mesma operação (julgar o cumprimento do art. 67-C numa jornada descrita), com o dado novo do fracionamento.', obp=OBP_MOT,
+  fx=('ctb67c', 'petro23', 'prf21'), refs=[PETRO, PRF78, CESG], fid='comparada',
+  cmp='Mesma operação (julgar o cumprimento do art. 67-C numa jornada descrita), com o dado novo do fracionamento.',
   rb=rub('Conferido no art. 67-C, caput e § 1º.', '"Quanto ao tempo de direção contínua e à pausa" exclui o descanso diário.',
          'Exige somar e comparar com dois limites.', 'Compara com Petrobras 2023, item 43, e PRF 2021, item 78 (gabaritos definitivos E).',
          'Jornada própria com pausas divididas, diferente das referências.', 'Regra, cálculo, confusão e fluxo visual da jornada.',
@@ -534,8 +524,8 @@ D = [
   solucao='Passageiros exigem pausa a cada 4 h; 4 h 30 sem pausa descumpre; logo Errado.', erro='Aplicar ao ônibus apenas o teto de 5 h 30 ou a regra da carga.',
   conc='Considerei pausas anteriores não mencionadas: a frente diz "sem parar".',
   orig='Contraponto ao item 43 da Petrobras 2023: a mesma jornada (4 h 30 + 30 min), que é regular na carga, é irregular no coletivo de passageiros.',
-  fx=('ctb67c', 'petro23'), refs=[PETRO, PRF78], fid='comparada',
-  cmp='Mesma situação numérica do item 43 (gabarito definitivo E), com a categoria trocada para passageiros, o que inverte a conclusão.', obp=OBP_MOT,
+  fx=('ctb67c', 'petro23'), refs=[PETRO, PRF78, CESG], fid='comparada',
+  cmp='Mesma situação numérica do item 43 (gabarito definitivo E), com a categoria trocada para passageiros, o que inverte a conclusão.',
   rb=rub('Conferido no art. 67-C, caput e § 1º-A.', 'Categoria e jornada explícitas; "sem parar" fecha a leitura concorrente.',
          'Exige escolher a regra da categoria antes de julgar.', 'Compara com Petrobras 2023, item 43 (definitivo E), e PRF 2021, item 78.',
          'Categoria trocada e justificativa própria a julgar.', 'Regra, aplicação, erro da justificativa e tabela comparativa.',
@@ -551,8 +541,8 @@ D = [
   solucao='Fracionamento invalidado; 8 + 3 não cumpre; logo Errado.', erro='Aplicar a redação publicada sem considerar a declaração de inconstitucionalidade.',
   conc='Considerei descanso anterior a 12/7/2023 (efeitos ex nunc): a frente fala da regra "hoje aplicável".',
   orig='Situação autoral; o PDF (p. 16) destaca a ADI 5.322, e a questão do Instituto Darwin 2023 do PDF (salva no banco) cobra as 11 h com a redação antiga.',
-  fx=('adi5322', 'stf_noticia', 'ctb67c'), refs=[], fid='inspiracao_geral',
-  lim='Nenhum item CESPE/Cebraspe C/E oficial sobre o descanso de 11 h ou a ADI 5.322 foi localizado nas buscas nem no banco.', obp=OBP_MOT,
+  fx=('adi5322', 'stf_noticia', 'ctb67c'), refs=[DARWIN], fid='inspiracao_geral',
+  lim='Nenhum item CESPE/Cebraspe C/E oficial sobre o descanso de 11 h ou a ADI 5.322 foi localizado nas buscas nem no banco; a questão do Instituto Darwin (PDF) está desatualizada e serve só de contraste.',
   rb=rub('Conferido no acórdão da ADI 5.322 (Senado, item k) e no art. 67-C, § 3º.', '"Hoje aplicável" fixa o marco temporal posterior à decisão.',
          'Exige confrontar a justificativa (regra antiga) com a decisão do STF.', 'PENDENTE: sem item Cebraspe oficial; inspiração geral declarada.',
          'Cenário autoral desenhado para ser válido na regra antiga e inválido na atual.', 'Regra, aplicação, erro com o marco temporal.',
@@ -568,8 +558,8 @@ D = [
   solucao='Requisitos (excepcionalidade, registro, tempo necessário, segurança) presentes; logo Certo.', erro='Ver o limite de 5 h 30 como absoluto.',
   conc='Considerei se o caso se encaixa nas situações do § 8º: a redação da Lei 14.599/2023 menciona o "exaurimento das vagas de estacionamento" nos pontos de parada; o posto lotado é exatamente essa hipótese.',
   orig='Situação autoral; o PDF (p. 16) apresenta a exceção, e o item 78 da PRF 2021 cobra o limite que ela flexibiliza.',
-  fx=('ctb67c', 'ctb67e'), refs=[PRF78], fid='inspiracao_geral',
-  lim='Nenhum item CESPE/Cebraspe C/E oficial sobre a exceção do § 2º foi localizado; o item 78 da PRF 2021 trata só do limite.', obp=OBP_MOT,
+  fx=('ctb67c', 'ctb67e'), refs=[PRF78, CESG], fid='inspiracao_geral',
+  lim='Nenhum item CESPE/Cebraspe C/E oficial sobre a exceção do § 2º foi localizado; o item 78 da PRF 2021 trata só do limite.',
   rb=rub('Conferido no art. 67-C, §§ 2º e 8º, e no art. 67-E, § 1º-A.', 'Todos os requisitos da exceção explicitados na frente.',
          'Exige checar requisitos da exceção contra o caso.', 'PENDENTE: sem item Cebraspe oficial sobre a exceção; inspiração geral declarada.',
          'Cenário autoral.', 'Regra com requisitos, aplicação e confusão provável.', 'Linguagem cotidiana (posto lotado).',
@@ -577,19 +567,9 @@ D = [
 ]
 
 
-def registrar_usos_sem_url():
-    """Registra no banco o uso das questões do PDF que não podem entrar na calibração (sem url)."""
-    sys.path.insert(0, str(RAIZ / 'skills' / 'referencias-questoes' / 'scripts'))
-    import referencias
-    lote = PASTA.relative_to(RAIZ / 'lotes').as_posix()
-    for ident, cartoes in USOS_SEM_URL.items():
-        referencias.registrar_uso(ident, lote, cartoes)
-    referencias.indexar()
-
 
 # ---------------------------------------------------------------- montagem
 if __name__ == '__main__':
-    Lote(PASTA, BASE, F, HOJE, REFS, R, D, CZ, semente=2026,
+    Lote(PASTA, BASE, F, HOJE, [], R, D, CZ, semente=2026,
          revisor='Claude (assistente de IA, modelo Opus 5.5) — mesmo agente que redigiu os cartões',
          titulo_previa='Prévia dos cards — Normas de Circulação e Motoristas Profissionais').gerar()
-    registrar_usos_sem_url()

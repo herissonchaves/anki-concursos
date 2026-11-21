@@ -1,0 +1,97 @@
+# Roteiro curto: lote de cartões a partir de PDF
+
+Resumo operacional das regras obrigatórias para gerar um lote exportado (R, D e Cloze) de um
+PDF. Ele **substitui a leitura integral** de `nucleo-pedagogico.md`, `triagem_previa_pdf.md`,
+`matriz_tipos_quantidades.md`, `cobertura-pdf.md`, `protocolo_cloze_cientifico.md`,
+`protocolo-modo-estrategico.md`, `avaliacao-modo-estrategico.md`, `registro-calibracao-cebraspe.md`,
+`registro-revisao-recuperacao.md` e `protocolo_visual_html_anki.md` nos casos comuns: abra o
+documento completo só em dúvida, caso especial (Português, imagens, coleção existente, caderno de
+erros) ou ao alterar o projeto. As regras continuam valendo; este roteiro não cria exceções.
+
+Comandos na raiz do repositório. Arquivos temporários (texto do PDF, rascunhos) vão para o
+scratchpad, nunca para `lotes/`.
+
+## 1. Ler o PDF com poucos tokens
+
+```text
+uv run --no-project --with pymupdf python -I -X utf8 skills/automacao-anki-python/scripts/extrair_pdf.py PDF -o TMP/pdf.json --texto TMP/pdf.txt [--ruido PALAVRA ...]
+```
+
+Leia `pdf.txt` (limpo: sem hashes de marca-d'água, CPF, "Página | N"; `--ruido` tira palavras da
+faixa lateral). Veja como imagem só as páginas com tabela, esquema ou figura que decidem conteúdo.
+Nunca copie nome/CPF da marca-d'água para arquivo versionado.
+
+## 2. Perfil, pertinência e coleção
+
+- Alvo padrão PRF (Inglês; sem Espanhol); PF = Agente. Usuário sem formação em Direito: termos
+  técnicos explicados no verso, sem colocar isso nos cartões.
+- Disciplina → especialização (`../../perfil-carreiras-policiais/references/disciplinas.json`);
+  Direito e trânsito: `../../direito-cebraspe-qualidade/SKILL.md` + skill do ramo; Português:
+  `../../portugues-cebraspe-qualidade/SKILL.md` (obrigatório).
+- Edital: item do programa (PRF 2021 é referência histórica). Coleção: buscar os termos centrais
+  (somente leitura) e excluir alvos já cobertos.
+
+## 3. Questões: anexo, banco, internet
+
+1. Questões do PDF: `referencias.py importar PDF -o TMP/rasc.json -p PAGINAS -d DISC [--ruido ...]`;
+   confira texto e gabarito, troque todo `REVISAR` (assunto, subassuntos, palavras-chave, operação)
+   e salve com `nova` as do recorte do lote. Regra revogada: `vigencia: desatualizada` + `vigencia_nota`.
+2. Banco: `assuntos` → `buscar -d DISC -t TERMO [--com-url] [--vigentes] [--nao-usadas]` → `mostrar`.
+3. Internet (obrigatória para D; recomendada para R/Cloze): Cebraspe C/E primeiro (caderno e
+   gabarito oficiais no CDN), depois outras bancas. Salve no banco **toda questão que virar
+   referência de cartão** e todo item Cebraspe C/E oficial do tema; as demais lidas podem ficar só
+   em `selecao_e_fontes.txt` (banca, ano, item, URL). Sites de questões costumam bloquear robôs:
+   prefira PDFs oficiais.
+
+## 4. Conteúdo e atualização
+
+Pesquisa real na internet para todo cartão. Direito: fonte primária vigente (Planalto, STF, STJ),
+redação atual, alterações dos últimos anos e decisões de inconstitucionalidade; `radar_juridico.txt`
+com status (vigente, vacatio, julgado, pendente). Corrija o PDF quando estiver desatualizado e
+avise no verso. Cloze: pesquise mnemônicos; sem fonte confiável, use dica **autoral identificada**.
+
+## 5. Triagem e composição
+
+- Inventário por página: ID, prioridade A/B/C, alvo, operação, formato, decisão e motivo dos
+  descartes (`triagem_previa_pdf.txt`). Conteúdo A não convertido vira pendência explícita.
+- R: um alvo, frase curta, sem pegadinha. D: caso curto com dado decisivo, uma decisão real
+  (aplicar, distinguir, exceção); definição disfarçada vira R. Cloze: uma omissão `{{c1::…}}` por
+  nota (várias só com tag `Mnemonico`), conceito/número que precisa ser lembrado; números só se
+  relevantes e verificados; cada lacuna coberta por um D (`cob`).
+- **Exatamente 50% Certo e 50% Errado em R e, separadamente, em D** (totais pares). Errados com um
+  erro central plausível; sem absolutos como pista; ordem embaralhada pelo montador.
+- Não repetir o mesmo fato nos três formatos; teto pedido conta todos os cartões.
+
+## 6. Redação (montar com `scripts/html_anki.py`)
+
+Verso C/E: `regra` → (`caso` em D) → `erro` (Errado) ou `certo` (confusão afastada) → `esquema`
+(tabela/fluxo) quando ajudar → `m` = 💡 Memorize em 1–2 frases (no Errado, a formulação correta).
+Cloze: Extra com `regra` + Memorize. Negrito só no termo-chave do verso; nada na frente que revele
+o gabarito. Frente autossuficiente, sem depender do PDF.
+
+## 7. Montagem, revisão e registros
+
+- Copie `../modelos/gerar_lote_modelo.py` para `lotes/<CONCURSO>/<Missao_NN_Tema>/fonte/gerar_lote.py`.
+  Cartões citam IDs do banco em `refs`; `referencias` pode ficar `[]`. Questão sem prova oficial
+  vai para `referencias_sem_prova` (inspiração e outra banca; nunca fidelidade comparada).
+- D: `fid='comparada'` só com Cebraspe C/E oficial em `refs`; senão `inspiracao_geral` + `lim`.
+  Sem questão de outra banca em `refs`: `obp` com as buscas. Rubrica de 8 critérios com evidência
+  própria; `comparacao` pode ser `PENDENTE: ...` só na inspiração geral.
+- Resolva cada frente de novo antes de reler o verso; procure leitura concorrente; registre
+  `alt`/`conc`. Revisão do próprio agente = autorevisão (declarar).
+- Rode o gerador; para cada sinal pendente impresso, corrija o cartão ou justifique em
+  `fonte/sinais_resolvidos.json` com motivo específico.
+
+## 8. Relatórios, exportação e commit
+
+- `lote/relatorios/`: `triagem_previa_pdf.txt`, `selecao_e_fontes.txt` (pertinência, questões do
+  banco por ID, fontes, mnemônicos, comparação dos D, cobertura), `economia_de_revisao.txt`,
+  `auditoria_pedagogica.txt` (ID, linha, gabarito, decisão) e, em Direito, `radar_juridico.txt`.
+- Exportar e revalidar em uma chamada (grava em `output/`, sem sobrescrever):
+
+```text
+uv run --no-project --with genanki python -I -X utf8 skills/automacao-anki-python/scripts/finalizar_lote.py lotes/<CONCURSO>/<Missao_NN_Tema> --baralho "Nome do baralho"
+```
+
+- `referencias.py validar` sem erros; commit só de `lotes/<...>/fonte`, `lotes/<...>/lote` e
+  `referencias/` desta tarefa (nunca `output/`, PDFs ou dados pessoais). Entregar o caminho do `.apkg`.

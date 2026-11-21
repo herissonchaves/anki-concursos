@@ -1,5 +1,5 @@
 ---
-id: sociesc-2011-nao-localizado-a6b532
+id: sociesc-2011-agente-de-transito-a6b532
 tipo: questao
 banca: SOCIESC
 formato: multipla_escolha
@@ -25,7 +25,7 @@ operacao_observada: "Identificar logradouro público pela definição do Anexo I
 usado_em: []
 hash: a6b53247e99c4239
 ---
-# SOCIESC 2011 — nao_localizado — item nao_localizado
+# SOCIESC 2011 — SOCIESC, Agente de Trânsito — item nao_localizado
 
 ## Enunciado
 

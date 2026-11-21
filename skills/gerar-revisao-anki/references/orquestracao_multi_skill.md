@@ -12,7 +12,7 @@ PRIMEIRO identificar disciplina. Sempre que o usuário mencionar Língua Portugu
 
 | Pedido | Rota principal | Portões obrigatórios |
 | --- | --- | --- |
-| Crie revisão do PDF / C/E e Cloze | `gerar-revisao-anki` | Ler -> triagem -> backup se disponível -> banco `referencias/` (questões do anexo + busca) -> gerar -> crítica -> revalidar -> exportar; + **especialização para Português** |
+| Crie revisão do PDF / C/E e Cloze | `gerar-revisao-anki` | Roteiro curto `roteiro-lote-pdf.md` -> ler (texto limpo) -> triagem -> backup se disponível -> banco `referencias/` (`importar` do anexo + busca) -> gerar -> crítica -> revalidar -> exportar; + **especialização para Português** |
 | Quais tópicos merecem Anki? | `selecionar-conteudos-pdf-anki` | Mapa A/B/C, sem inventar cartão; + **especialização para Português** |
 | Gere caderno de erros | `caderno-erros-anki` | Verificar erro marcado -> salvar a questão no banco `referencias/` -> diagnosticar -> novo item -> auditoria; + **especialização para Português** |
 | Analise `.colpkg` | `analisar-colecao-anki` | Diagnóstico somente leitura; sem gerar cartões |

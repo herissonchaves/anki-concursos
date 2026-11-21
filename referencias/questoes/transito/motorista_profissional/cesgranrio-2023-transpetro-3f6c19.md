@@ -22,7 +22,7 @@ fonte_descoberta: "PDF LET020002 (Projeto Missão), p. 19 e 25, questão 15; gab
 consulta: 2026-11-21
 concursos_alvo: [PRF]
 operacao_observada: "Lembrar o limite de direção ininterrupta (5 h 30) entre valores próximos."
-usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#C02,D11,D12,D14"]
+usado_em: ["PRF/Missao_08_Normas_Circulacao_Motoristas_Profissionais#D11,D12,D14,C02"]
 hash: 3f6c19dc51f230af
 ---
 # Cesgranrio 2023 — Transpetro — item nao_localizado

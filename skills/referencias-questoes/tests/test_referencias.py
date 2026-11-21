@@ -128,3 +128,61 @@ def test_indice_percebe_edicao_no_mesmo_instante(banco):
     ref.registrar_uso(a.id, 'PRF/Missao_10_Y', ['R01'], banco)
     os.utime(a.caminho, ns=(instante, instante))
     assert ref.buscar(banco, nao_usadas=True) == []
+
+
+def test_vigencia_desatualizada_exige_nota_e_aparece_na_busca(banco, capsys):
+    status, _, msgs = ref.nova(q(11, 'Item com regra revogada.', vigencia='desatualizada'), banco)
+    assert status == 'invalida' and any('vigencia_nota' in m for m in msgs)
+    status, questao, _ = ref.nova(q(12, 'Item com regra revogada.', vigencia='desatualizada',
+                                    vigencia_nota='Regra sintética revogada em 2025'), banco)
+    assert status == 'criada'
+    ref.nova(q(13, 'Item atual.'), banco)
+    assert [r['id'] for r in ref.buscar(banco, vigentes=True)] == ['cebraspe-2024-orgao-teste-013']
+    assert ref.main(['--raiz', str(banco), 'buscar']) == 0
+    assert 'DESATUALIZADA' in capsys.readouterr().out
+    assert ref.main(['--raiz', str(banco), 'mostrar', questao.id]) == 0
+    assert 'DESATUALIZADA: Regra sintética revogada' in capsys.readouterr().out
+
+
+def test_rascunho_com_marcador_revisar_e_recusado(banco):
+    status, _, msgs = ref.nova(q(14, 'Item importado.', operacao_observada='REVISAR', palavras_chave=['REVISAR']), banco)
+    assert status == 'invalida' and any('rascunho' in m for m in msgs)
+
+
+def test_id_usa_o_concurso_quando_falta_o_orgao(banco):
+    _, questao, msgs = ref.nova(q(15, 'Item sem órgão.', orgao='nao_localizado', banca='SOCIESC', ano=2011,
+                                  concurso='SOCIESC — Agente de Trânsito — 2011'), banco)
+    assert questao is not None, msgs
+    assert questao.id == 'sociesc-2011-agente-de-transito-015'
+
+
+def test_sem_prova_e_busca_com_url(banco):
+    _, a, _ = ref.nova(q(16, 'Item com prova.'), banco)
+    _, b, _ = ref.nova(q(17, 'Item sem prova.', url='nao_localizado', gabarito_status='nao_verificado',
+                         gabarito_url='nao_localizado', origem='anexo_usuario'), banco)
+    assert [r['id'] for r in ref.buscar(banco, com_url=True)] == [a.id]
+    assert ref.tem_prova(a.id, banco) and not ref.tem_prova(b.id, banco)
+    resumo = ref.sem_prova(b.id, raiz=banco)[0]
+    assert resumo['id'] == b.id and resumo['origem'] == 'anexo_usuario' and resumo['vigencia'] == 'atual'
+
+
+def test_importar_extrai_questoes_de_texto(tmp_path):
+    import importar_questoes as imp
+    texto = (
+        'QUESTÕES SEM COMENTÁRIOS\n'
+        '01. CEBRASPE – ÓRGÃO FICTÍCIO – 2020:\n'
+        'Julgue o item. O item sintético é verdadeiro.\n'
+        '02. BANCA X – PREFEITURA DE TESTE – 2021:\n'
+        'Assinale a opção correta.\n(A) primeira\n(B) segunda 0123456789ABCDEF0123456789ABCDEF\n(C) terceira\n'
+        'Nome Fulano CPF 123.456.789-00\n'
+        '01. Certo. 02. B\n'
+        'Página | 9\n')
+    arq = tmp_path / 'apostila.txt'
+    arq.write_text(texto, encoding='utf-8')
+    itens = imp.extrair(arq, disciplina='fisica', assunto='dinamica')
+    assert [i['formato'] for i in itens] == ['certo_errado', 'multipla_escolha']
+    assert [i['gabarito'] for i in itens] == ['C', 'B']
+    assert itens[1]['alternativas'] == {'A': 'primeira', 'B': 'segunda', 'C': 'terceira'}
+    assert itens[0]['ano'] == 2020 and itens[1]['orgao'] == 'Prefeitura de Teste'
+    assert itens[0]['operacao_observada'] == 'REVISAR' and itens[0]['origem'] == 'anexo_usuario'
+    assert 'CPF' not in json.dumps(itens, ensure_ascii=False)

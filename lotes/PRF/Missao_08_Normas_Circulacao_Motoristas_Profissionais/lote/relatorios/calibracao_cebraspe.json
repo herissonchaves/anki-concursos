@@ -2,66 +2,6 @@
  "schema_version": 2,
  "referencias": [
   {
-   "id": "cebraspe-2021-prf-077",
-   "banca": "Cebraspe",
-   "formato": "certo_errado",
-   "concurso": "PRF — Edital nº 1/2021 (prova objetiva de 9/5/2021)",
-   "cargo": "Policial Rodoviário Federal",
-   "ano": 2021,
-   "caderno": "578_PRF_001_01",
-   "item": "77",
-   "url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF",
-   "consulta": "2026-11-20",
-   "operacao_observada": "Meios de fiscalização do tempo de direção e descanso: diário de bordo, papeleta ou ficha fornecidos pelo empregador.",
-   "gabarito_status": "definitivo",
-   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
-  },
-  {
-   "id": "cebraspe-2021-prf-078",
-   "banca": "Cebraspe",
-   "formato": "certo_errado",
-   "concurso": "PRF — Edital nº 1/2021 (prova objetiva de 9/5/2021)",
-   "cargo": "Policial Rodoviário Federal",
-   "ano": 2021,
-   "caderno": "578_PRF_001_01",
-   "item": "78",
-   "url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF",
-   "consulta": "2026-11-20",
-   "operacao_observada": "Atribui ao motorista de carga o limite de 6 h 30 ininterruptas; o limite do art. 67-C é 5 h 30.",
-   "gabarito_status": "definitivo",
-   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
-  },
-  {
-   "id": "cebraspe-2021-prf-079",
-   "banca": "Cebraspe",
-   "formato": "certo_errado",
-   "concurso": "PRF — Edital nº 1/2021 (prova objetiva de 9/5/2021)",
-   "cargo": "Policial Rodoviário Federal",
-   "ano": 2021,
-   "caderno": "578_PRF_001_01",
-   "item": "79",
-   "url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF",
-   "consulta": "2026-11-20",
-   "operacao_observada": "Atribui ao proprietário a guarda e a precisão dos dados do registrador; a responsabilidade é do motorista (art. 67-E, § 4º).",
-   "gabarito_status": "definitivo",
-   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
-  },
-  {
-   "id": "cebraspe-2023-petrobras-043",
-   "banca": "Cebraspe",
-   "formato": "certo_errado",
-   "concurso": "Petrobras — PSP RH 2023.1 (aplicação 30/4/2023)",
-   "cargo": "Profissional Petrobras de Nível Técnico Júnior — Ênfase 11: Segurança do Trabalho",
-   "ano": 2023,
-   "caderno": "822_PETROBRAS_23_011_01",
-   "item": "43",
-   "url": "https://cdn.cebraspe.org.br/concursos/PETROBRAS_23_NM/arquivos/822_PETROBRAS_23_011_01.PDF",
-   "consulta": "2026-11-20",
-   "operacao_observada": "Situação hipotética: carga, 4 h 30 ao volante e 30 min de descanso; julgar se o descanso está em desacordo com o CTB.",
-   "gabarito_status": "definitivo",
-   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/PETROBRAS_23_NM/arquivos/GAB_DEFINITIVO_822_PETROBRAS_23_011_01.PDF"
-  },
-  {
    "id": "idcap-2026-prefeitura-de-itupeva-sp-043",
    "banca": "IDCAP",
    "formato": "multipla_escolha",
@@ -91,6 +31,51 @@
    "gabarito_url": "https://arquivos.qconcursos.com/prova/arquivo_gabarito/141925/igeduc-2025-prefeitura-de-flores-pe-fisioterapeuta-gabarito.pdf"
   },
   {
+   "id": "cebraspe-2023-petrobras-043",
+   "banca": "Cebraspe",
+   "formato": "certo_errado",
+   "concurso": "Petrobras — PSP RH 2023.1 (aplicação 30/4/2023)",
+   "cargo": "Profissional Petrobras de Nível Técnico Júnior — Ênfase 11: Segurança do Trabalho",
+   "ano": 2023,
+   "caderno": "822_PETROBRAS_23_011_01",
+   "item": "43",
+   "url": "https://cdn.cebraspe.org.br/concursos/PETROBRAS_23_NM/arquivos/822_PETROBRAS_23_011_01.PDF",
+   "consulta": "2026-11-20",
+   "operacao_observada": "Situação hipotética: carga, 4 h 30 ao volante e 30 min de descanso; julgar se o descanso está em desacordo com o CTB.",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/PETROBRAS_23_NM/arquivos/GAB_DEFINITIVO_822_PETROBRAS_23_011_01.PDF"
+  },
+  {
+   "id": "cebraspe-2021-prf-079",
+   "banca": "Cebraspe",
+   "formato": "certo_errado",
+   "concurso": "PRF — Edital nº 1/2021 (prova objetiva de 9/5/2021)",
+   "cargo": "Policial Rodoviário Federal",
+   "ano": 2021,
+   "caderno": "578_PRF_001_01",
+   "item": "79",
+   "url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF",
+   "consulta": "2026-11-20",
+   "operacao_observada": "Atribui ao proprietário a guarda e a precisão dos dados do registrador; a responsabilidade é do motorista (art. 67-E, § 4º).",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
+  },
+  {
+   "id": "cebraspe-2021-prf-077",
+   "banca": "Cebraspe",
+   "formato": "certo_errado",
+   "concurso": "PRF — Edital nº 1/2021 (prova objetiva de 9/5/2021)",
+   "cargo": "Policial Rodoviário Federal",
+   "ano": 2021,
+   "caderno": "578_PRF_001_01",
+   "item": "77",
+   "url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF",
+   "consulta": "2026-11-20",
+   "operacao_observada": "Meios de fiscalização do tempo de direção e descanso: diário de bordo, papeleta ou ficha fornecidos pelo empregador.",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
+  },
+  {
    "id": "igeduc-2025-municipio-de-flores-pe-030",
    "banca": "IGEDUC",
    "formato": "multipla_escolha",
@@ -104,6 +89,21 @@
    "operacao_observada": "Criança de 8 anos no banco dianteiro sem dispositivo: regra dos menores de 10 anos e 1,45 m.",
    "gabarito_status": "definitivo",
    "gabarito_url": "https://arquivos.qconcursos.com/prova/arquivo_gabarito/141925/igeduc-2025-prefeitura-de-flores-pe-fisioterapeuta-gabarito.pdf"
+  },
+  {
+   "id": "cebraspe-2021-prf-078",
+   "banca": "Cebraspe",
+   "formato": "certo_errado",
+   "concurso": "PRF — Edital nº 1/2021 (prova objetiva de 9/5/2021)",
+   "cargo": "Policial Rodoviário Federal",
+   "ano": 2021,
+   "caderno": "578_PRF_001_01",
+   "item": "78",
+   "url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/578_PRF_001_01.PDF",
+   "consulta": "2026-11-20",
+   "operacao_observada": "Atribui ao motorista de carga o limite de 6 h 30 ininterruptas; o limite do art. 67-C é 5 h 30.",
+   "gabarito_status": "definitivo",
+   "gabarito_url": "https://cdn.cebraspe.org.br/concursos/PRF_21/arquivos/GAB_DEFINITIVO_578_PRF_001_01.PDF"
   }
  ],
  "cartoes": [
@@ -279,6 +279,9 @@
      "evidencia": "Cobre conteúdo do PDF (p. 13) sem duplicar R03."
     }
    },
+   "referencias_sem_prova": [
+    "cebraspe-2015-mpu-cb0105"
+   ],
    "limitacao": "O item MPU 2015 está no banco (origem: PDF), mas sem caderno nem gabarito oficiais localizados, por isso não entra como referência de calibração; nenhum outro item Cebraspe C/E sobre o tema foi confirmado.",
    "outras_bancas_pendencia": "Buscas em 20 e 21/11/2026 por questões de outras bancas sobre o mesmo alvo (rotatória, ultrapassagem, luzes, ciclomotor, coletivo parado + CTB + FGV, Vunesp, IBFC, Quadrix): qconcursos.com e questoes.grancursosonline.com.br recusaram o acesso automatizado (HTTP 403); nas provas abertas (IDCAP 2026, IGEDUC 2025) e nas questões do PDF não havia item sobre este alvo."
   },
@@ -744,8 +747,10 @@
      "evidencia": "Cobre o Cloze C02 (5 h 30) e aplica R18."
     }
    },
-   "comparacao": "Mesma operação (julgar o cumprimento do art. 67-C numa jornada descrita), com o dado novo do fracionamento.",
-   "outras_bancas_pendencia": "Questões de outras bancas sobre o alvo lidas no PDF e salvas no banco (cesgranrio-2023-transpetro-3f6c19, instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab), mas sem prova oficial localizada (url nao_localizado), por isso fora da calibração; buscas por cadernos oficiais em 20 e 21/11/2026 sem sucesso e páginas do qconcursos/Gran Questões bloqueadas (HTTP 403)."
+   "referencias_sem_prova": [
+    "cesgranrio-2023-transpetro-3f6c19"
+   ],
+   "comparacao": "Mesma operação (julgar o cumprimento do art. 67-C numa jornada descrita), com o dado novo do fracionamento."
   },
   {
    "id": "D12",
@@ -805,8 +810,10 @@
      "evidencia": "Cobre o Cloze C03 (4 h)."
     }
    },
-   "comparacao": "Mesma situação numérica do item 43 (gabarito definitivo E), com a categoria trocada para passageiros, o que inverte a conclusão.",
-   "outras_bancas_pendencia": "Questões de outras bancas sobre o alvo lidas no PDF e salvas no banco (cesgranrio-2023-transpetro-3f6c19, instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab), mas sem prova oficial localizada (url nao_localizado), por isso fora da calibração; buscas por cadernos oficiais em 20 e 21/11/2026 sem sucesso e páginas do qconcursos/Gran Questões bloqueadas (HTTP 403)."
+   "referencias_sem_prova": [
+    "cesgranrio-2023-transpetro-3f6c19"
+   ],
+   "comparacao": "Mesma situação numérica do item 43 (gabarito definitivo E), com a categoria trocada para passageiros, o que inverte a conclusão."
   },
   {
    "id": "D13",
@@ -864,8 +871,10 @@
      "evidencia": "Cobre o Cloze C04 (11 h) e atualiza o PDF."
     }
    },
-   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre o descanso de 11 h ou a ADI 5.322 foi localizado nas buscas nem no banco.",
-   "outras_bancas_pendencia": "Questões de outras bancas sobre o alvo lidas no PDF e salvas no banco (cesgranrio-2023-transpetro-3f6c19, instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab), mas sem prova oficial localizada (url nao_localizado), por isso fora da calibração; buscas por cadernos oficiais em 20 e 21/11/2026 sem sucesso e páginas do qconcursos/Gran Questões bloqueadas (HTTP 403)."
+   "referencias_sem_prova": [
+    "instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab"
+   ],
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre o descanso de 11 h ou a ADI 5.322 foi localizado nas buscas nem no banco; a questão do Instituto Darwin (PDF) está desatualizada e serve só de contraste."
   },
   {
    "id": "D14",
@@ -924,8 +933,51 @@
      "evidencia": "Cobre o Cloze C02 pelo lado da exceção."
     }
    },
-   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre a exceção do § 2º foi localizado; o item 78 da PRF 2021 trata só do limite.",
-   "outras_bancas_pendencia": "Questões de outras bancas sobre o alvo lidas no PDF e salvas no banco (cesgranrio-2023-transpetro-3f6c19, instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab), mas sem prova oficial localizada (url nao_localizado), por isso fora da calibração; buscas por cadernos oficiais em 20 e 21/11/2026 sem sucesso e páginas do qconcursos/Gran Questões bloqueadas (HTTP 403)."
+   "referencias_sem_prova": [
+    "cesgranrio-2023-transpetro-3f6c19"
+   ],
+   "limitacao": "Nenhum item CESPE/Cebraspe C/E oficial sobre a exceção do § 2º foi localizado; o item 78 da PRF 2021 trata só do limite."
+  }
+ ],
+ "referencias_sem_prova": [
+  {
+   "id": "cebraspe-2015-mpu-cb0105",
+   "banca": "Cebraspe",
+   "formato": "certo_errado",
+   "ano": 2015,
+   "concurso": "MPU — 2015",
+   "item": "nao_localizado",
+   "origem": "anexo_usuario",
+   "fonte_descoberta": "PDF LET020002 (Projeto Missão), p. 18 e 23, questão 11; gabarito do material",
+   "gabarito_status": "nao_verificado",
+   "operacao_observada": "Com a faixa da direita exclusiva de ônibus, os veículos lentos e de maior porte usam a faixa seguinte (central).",
+   "vigencia": "atual"
+  },
+  {
+   "id": "cesgranrio-2023-transpetro-3f6c19",
+   "banca": "Cesgranrio",
+   "formato": "multipla_escolha",
+   "ano": 2023,
+   "concurso": "Transpetro — 2023",
+   "item": "nao_localizado",
+   "origem": "anexo_usuario",
+   "fonte_descoberta": "PDF LET020002 (Projeto Missão), p. 19 e 25, questão 15; gabarito do material",
+   "gabarito_status": "nao_verificado",
+   "operacao_observada": "Lembrar o limite de direção ininterrupta (5 h 30) entre valores próximos.",
+   "vigencia": "atual"
+  },
+  {
+   "id": "instituto-darwin-2023-prefeitura-de-lagoa-de-itaenga-a35fab",
+   "banca": "Instituto Darwin",
+   "formato": "multipla_escolha",
+   "ano": 2023,
+   "concurso": "Prefeitura de Lagoa de Itaenga — 2023",
+   "item": "nao_localizado",
+   "origem": "anexo_usuario",
+   "fonte_descoberta": "PDF LET020002 (Projeto Missão), p. 19 e 24, questão 14; gabarito do material",
+   "gabarito_status": "nao_verificado",
+   "operacao_observada": "Lembrar o descanso mínimo de 11 h em 24 h.",
+   "vigencia": "desatualizada"
   }
  ]
 }

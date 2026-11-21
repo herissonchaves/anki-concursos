@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Extract page-level PDF text for subsequent HUMAN/AI pedagogical selection.
 
+`--texto ARQ.txt` also writes a cleaned text (watermark hashes, CPF/e-mail lines and
+"Página | N" removed; `--ruido PALAVRA` drops side-band words) to read with fewer tokens.
+
 Do not assert scanned PDF pages were read; no OCR is performed. Image/layout
 inspection remains necessary for formulas, tables, charts and scanned pages.
 """
@@ -57,12 +60,28 @@ def main(argv=None):
     p.add_argument('pdf',type=Path)
     p.add_argument('-o','--saida',type=Path,required=True)
     p.add_argument('--min-chars',type=int,default=40)
+    p.add_argument('--texto',type=Path,help="também grava TXT limpo (sem marcas-d'água, CPF, rodapés), uma seção por página")
+    p.add_argument('--ruido',action='append',default=[],help='palavra de faixa lateral a remover no --texto (repita)')
     a=p.parse_args(argv)
     result=extract(a.pdf,a.min_chars)
     a.saida.parent.mkdir(parents=True,exist_ok=True)
     a.saida.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
-    print(json.dumps({'paginas':result['total_paginas'],'alertas_visuais':result['paginas_com_alerta'],'saida':str(a.saida)},ensure_ascii=False))
+    resumo={'paginas':result['total_paginas'],'alertas_visuais':result['paginas_com_alerta'],'saida':str(a.saida)}
+    if a.texto:
+        resumo['texto'],resumo['caracteres_texto']=str(a.texto),texto_limpo(result,a.texto,a.ruido)
+    print(json.dumps(resumo,ensure_ascii=False))
     return 0
+
+
+def texto_limpo(result, destino, ruido=()):
+    """Grava o texto de todas as páginas, limpo, para leitura com poucos tokens. Devolve o tamanho."""
+    sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'referencias-questoes'/'scripts'))
+    from importar_questoes import limpar
+    partes=[f'===== p. {p["pagina"]} =====\n{limpar(p["texto"],ruido)}' for p in result['paginas']]
+    texto='\n'.join(partes)+'\n'
+    Path(destino).parent.mkdir(parents=True,exist_ok=True)
+    Path(destino).write_text(texto,encoding='utf-8')
+    return len(texto)
 
 if __name__=='__main__':
     try: sys.exit(main())

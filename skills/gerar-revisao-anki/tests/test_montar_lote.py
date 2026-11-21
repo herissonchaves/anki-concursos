@@ -145,9 +145,9 @@ def test_referencias_do_banco_por_id_e_registro_de_uso(tmp_path):
     pasta = tmp_path / 'lote_banco'
     (pasta / 'fonte').mkdir(parents=True)
     gerado = lote(pasta, banco_referencias=banco)
-    gerado.refs = gerado._resolver_refs([ids['CEB'], ids['FGV']])
     for x in gerado.D:
         x['refs'] = [ids['CEB'], ids['FGV']]
+    gerado.refs = gerado._resolver_refs([])  # os IDs citados nos cartões bastam
     gerado.gerar(imprimir=False)
     items, calibracao, _ = ler(pasta)
     registro = json.loads(calibracao)
@@ -155,3 +155,39 @@ def test_referencias_do_banco_por_id_e_registro_de_uso(tmp_path):
     assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
     usos = banco_mod.localizar([ids['CEB']], banco)[0].meta['usado_em']
     assert usos == ['lote_banco#D01,D02']
+
+
+def test_questao_sem_prova_vai_para_referencias_sem_prova(tmp_path):
+    """Questão do PDF sem url: inspiração de outra banca, fora das referências comparadas."""
+    import sys
+    sys.path.insert(0, str(m.SCRIPTS_REFERENCIAS))
+    import referencias as banco_mod
+
+    banco = tmp_path / 'referencias'
+    dados = dict(banca='Vunesp', formato='multipla_escolha', ano=2023, orgao='Prefeitura Fictícia',
+                 concurso='Prefeitura Fictícia — 2023', disciplina='fisica', assunto='dinamica',
+                 subassuntos=['segunda_lei'], palavras_chave=['força'], gabarito='B', gabarito_status='nao_verificado',
+                 origem='anexo_usuario', fonte_descoberta='apostila sintética, p. 3, questão 01', consulta=HOJE,
+                 concursos_alvo=['PRF'], operacao_observada='Operação sintética sem prova', item='nao_localizado',
+                 enunciado='Item sintético sem prova.', alternativas={'A': 'x', 'B': 'y'})
+    status, questao, msgs = banco_mod.nova(dados, banco)
+    assert status == 'criada', msgs
+
+    pasta = tmp_path / 'lote_sem_prova'
+    (pasta / 'fonte').mkdir(parents=True)
+    gerado = lote(pasta, banco_referencias=banco)
+    gerado.D[0]['refs'] = ['CEB', questao.id]
+    gerado.D[1]['refs'] = ['CEB', questao.id]
+    gerado.R[0]['refs'] = [questao.id]
+    gerado.refs = gerado._resolver_refs([REFS[0]])
+    gerado.gerar(imprimir=False)
+    items, calibracao, _ = ler(pasta)
+    registro = json.loads(calibracao)
+    assert [r['id'] for r in registro['referencias']] == ['CEB']
+    assert [r['id'] for r in registro['referencias_sem_prova']] == [questao.id]
+    assert registro['cartoes'][0]['referencias'] == ['CEB']
+    assert registro['cartoes'][0]['referencias_sem_prova'] == [questao.id]
+    # A questão de outra banca sem prova satisfaz a exigência de outra banca; não há pendência.
+    assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
+    usos = banco_mod.localizar([questao.id], banco)[0].meta['usado_em']
+    assert usos == ['lote_sem_prova#R01,D01,D02']

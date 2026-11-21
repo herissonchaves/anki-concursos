@@ -19,10 +19,13 @@ Convenção dos dicionários de cartão (chaves curtas):
 - Cloze: `t` (texto com uma omissão {{c1::…}}; várias só com a tag Mnemonico),
   `alvo`, `sol`, `alt`, `rec`, `fb`, `cob` ({'1': ['D04']}: D que cobrem cada lacuna).
 
-`referencias`: dicts no formato da calibração ou, de preferência, IDs (str) do banco
-`referencias/` (skills/referencias-questoes), que viram dicts por `referencias.calibracao`.
-Ao gerar, o uso de cada ID do banco citado em `refs` de qualquer cartão é registrado no
-`usado_em` da questão (`registrar_uso=False` desliga).
+`referencias`: pode ficar vazio ([]): os IDs do banco `referencias/` citados em `refs` de
+qualquer cartão (R, D ou Cloze) já entram sozinhos. Questões com prova oficial (url) viram
+as referências da calibração; as sem prova (url nao_localizado, comuns no PDF enviado)
+entram em `referencias_sem_prova` (raiz e D), contam como inspiração e como questão de
+outra banca, mas não sustentam fidelidade comparada. Dicts no formato da calibração
+continuam aceitos. Ao gerar, o uso de cada ID é registrado no `usado_em` da questão
+(`registrar_uso=False` desliga). Modelo pronto: `../modelos/gerar_lote_modelo.py`.
 
 `fontes`: {chave: (url, trecho verificado)}. Os relatórios .txt continuam
 escritos à mão em `lote/relatorios/`. Revisão pelo próprio agente é autorevisão;
@@ -82,12 +85,27 @@ class Lote:
         return referencias
 
     def _resolver_refs(self, referencias):
-        """Troca IDs do banco pelos dicts da calibração; guarda os IDs para registrar o uso."""
-        self.ids_banco = [r for r in referencias if isinstance(r, str)]
+        """Monta as referências da calibração a partir dos IDs do banco.
+
+        IDs vêm de `referencias` e dos `refs` de qualquer cartão (R, D ou Cloze). Questões com
+        prova oficial (url) viram dicts completos; as sem prova (url nao_localizado, típicas do
+        PDF enviado) vão para `self.refs_sem_prova` e para `referencias_sem_prova` dos D.
+        """
+        dicts = [r for r in referencias if not isinstance(r, str)]
+        ids_dicts = {r.get('id') for r in dicts}
+        ids = [r for r in referencias if isinstance(r, str)]
+        for x in self.R + self.D + self.CZ:
+            ids += [r for r in x.get('refs', ()) if isinstance(r, str) and r not in ids_dicts]
+        self.ids_banco = list(dict.fromkeys(ids))
+        self.ids_sem_prova, self.refs_sem_prova = set(), []
         if not self.ids_banco:
-            return list(referencias)
-        do_banco = {r['id']: r for r in self._modulo_referencias().calibracao(*self.ids_banco, raiz=self.banco)}
-        return [do_banco[r] if isinstance(r, str) else r for r in referencias]
+            return dicts
+        ref = self._modulo_referencias()
+        com = [i for i in self.ids_banco if ref.tem_prova(i, self.banco)]
+        self.ids_sem_prova = set(self.ids_banco) - set(com)
+        sem_d = sorted({i for x in self.D for i in x.get('refs', ()) if i in self.ids_sem_prova})
+        self.refs_sem_prova = ref.sem_prova(*sem_d, raiz=self.banco) if sem_d else []
+        return dicts + (ref.calibracao(*com, raiz=self.banco) if com else [])
 
     def rotulo_lote(self):
         try:
@@ -155,13 +173,19 @@ class Lote:
     # ------------------------------------------------------------ registros
     def registro_calibracao(self):
         cal = {'schema_version': self.schema, 'referencias': self.refs, 'cartoes': []}
+        if self.refs_sem_prova:
+            cal['referencias_sem_prova'] = self.refs_sem_prova
         for x in self.D:
             n = self.line_of[x['k']]
+            refs = list(x.get('refs', ()))
             rec = dict(id=x['k'], linha=n, sha256=fingerprint(self.ce_rows[n - 1]), gabarito=x['g'], alvo=x['alvo'],
                        operacao_autoral=x['op'], regra=x['regra'], dado_decisivo=x['dado'], solucao=x['solucao'],
                        erro_plausivel=x['erro'], leitura_concorrente=x['conc'], originalidade=x['orig'],
-                       fontes_conteudo=self.urls(*x['fx']), referencias=x['refs'], fidelidade=x['fid'],
+                       fontes_conteudo=self.urls(*x['fx']),
+                       referencias=[r for r in refs if r not in self.ids_sem_prova], fidelidade=x['fid'],
                        segunda_conferencia=True, decisao='APROVAR', rubrica=x['rb'])
+            if any(r in self.ids_sem_prova for r in refs):
+                rec['referencias_sem_prova'] = [r for r in refs if r in self.ids_sem_prova]
             if x['fid'] == 'comparada':
                 rec['comparacao'] = x['cmp']
             else:
@@ -190,15 +214,17 @@ class Lote:
         editorial = {f'anki_certo_errado.tsv:{n}': k for k, n in self.line_of.items()}
         editorial.update({f'anki_cloze.tsv:{i}': x['k'] for i, x in enumerate(self.CZ, 1)})
         motivos = json.loads(Path(sinais_resolvidos).read_text(encoding='utf-8')) if Path(sinais_resolvidos).exists() else {}
-        self.pendentes = []
+        self.pendentes, detalhes = [], []
         for s in signals(self.items):
             chave = f"{editorial.get(s['id'], s['id'])}|{s['sinal']}"
             if chave in motivos:
                 rev['sinais'].append({'sinal_id': s['sinal_id'], 'decisao': 'EXCECAO_JUSTIFICADA', 'motivo': motivos[chave]})
             else:
                 self.pendentes.append(chave)
+                detalhes.append(f"{chave} ({s.get('detalhes', '')})")
         if self.pendentes:
-            print('SINAIS PENDENTES (corrigir ou justificar em sinais_resolvidos.json):', ', '.join(self.pendentes))
+            print('SINAIS PENDENTES — corrija o cartão ou justifique em fonte/sinais_resolvidos.json '
+                  '(chave "ID|SINAL"):\n  ' + '\n  '.join(detalhes))
         self._json('revisao_recuperacao.json', rev)
         return rev
 

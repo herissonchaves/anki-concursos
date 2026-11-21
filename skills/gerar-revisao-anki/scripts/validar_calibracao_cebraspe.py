@@ -113,6 +113,22 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
             errors.append(f'{ident}: situação do gabarito inválida')
         if status in ('definitivo', 'justificativa_oficial') and not url(ref.get('gabarito_url')):
             errors.append(f'{ident}: URL do gabarito/justificativa ausente')
+    # Questões sem prova oficial localizada (ex.: do PDF enviado): inspiração, nunca fidelidade comparada.
+    sem_prova = data.get('referencias_sem_prova', [])
+    sem_map = {}
+    if not isinstance(sem_prova, list):
+        errors.append('referencias_sem_prova deve ser lista')
+        sem_prova = []
+    for ref in sem_prova:
+        if not isinstance(ref, dict) or not filled(ref.get('id')):
+            errors.append('Referência sem prova sem id válido')
+            continue
+        for key in ('banca', 'formato', 'operacao_observada', 'fonte_descoberta'):
+            if not filled(ref.get(key)):
+                errors.append(f'{ref["id"]}: {key} ausente (referência sem prova)')
+        if ref['id'] in ref_map:
+            errors.append(f'{ref["id"]}: está em referencias e em referencias_sem_prova')
+        sem_map[ref['id']] = ref
     seen, ids = set(), set()
     for record in records:
         if not isinstance(record, dict):
@@ -154,10 +170,18 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
                 errors.append(f'{ident}: referência desconhecida {key}')
             elif ref_map[key].get('gabarito_status') == 'anulado':
                 errors.append(f'{ident}: referência anulada não sustenta aprovação; registrar fora do conjunto de apoio')
+        sem_linked = record.get('referencias_sem_prova', [])
+        if not isinstance(sem_linked, list) or not all(isinstance(x, str) for x in sem_linked):
+            errors.append(f'{ident}: referencias_sem_prova deve listar IDs')
+            sem_linked = []
+        for key in sem_linked:
+            if key not in sem_map:
+                errors.append(f'{ident}: referência sem prova desconhecida {key}')
         fidelity = record.get('fidelidade')
         known = [ref_map[key] for key in linked if key in ref_map]
+        inspiracoes = known + [sem_map[key] for key in sem_linked if key in sem_map]
         if v2:
-            if not any(not cebraspe(ref) for ref in known) and not filled(record.get('outras_bancas_pendencia')):
+            if not any(not cebraspe(ref) for ref in inspiracoes) and not filled(record.get('outras_bancas_pendencia')):
                 errors.append(f'{ident}: vincular questão de outra banca ou registrar outras_bancas_pendencia com as buscas feitas')
         if fidelity == 'comparada':
             if not linked or not filled(record.get('comparacao')):
