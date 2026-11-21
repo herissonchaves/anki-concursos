@@ -47,7 +47,7 @@ Um problema corrigido precisa desaparecer dos dados atuais; não declarar `CORRI
 python -X utf8 skills/gerar-revisao-anki/scripts/validar_revisao_pedagogica.py DIRETORIO_OU_ZIP
 ```
 
-Os exportadores textual e visual executam a barreira no diretório e no ZIP final. Falta de registro, cobertura incompleta, hash divergente ou sinal pendente bloqueia a exportação. Não há opção CLI de ignorar a revisão. No ZIP visual final, conferir novamente também a calibração quando presente. O script não consulta a internet, não resolve gabaritos, não autentica revisores e não preenche evidências automaticamente. Um registro falso completo pode passar: isso continua sendo uma falha da revisão semântica, não aprovação de conteúdo pelo script.
+O `finalizar_lote.py` executa a barreira na pasta `lote/` (os exportadores avulsos, no diretório e no ZIP). Falta de registro, cobertura incompleta, hash divergente ou sinal pendente bloqueia a exportação. Não há opção CLI de ignorar a revisão. No ZIP visual final, conferir novamente também a calibração quando presente. O script não consulta a internet, não resolve gabaritos, não autentica revisores e não preenche evidências automaticamente. Um registro falso completo pode passar: isso continua sendo uma falha da revisão semântica, não aprovação de conteúdo pelo script.
 
 Preservar 50% Certo/Errado separadamente em R/D, fontes, triagem, autoria e histórico. Conferir a cobertura de todas as lacunas c1 nos novos Clozes. Nenhuma nova proporção nasce deste registro. Não mudar notas antigas ou importar a coleção por implicação.
 

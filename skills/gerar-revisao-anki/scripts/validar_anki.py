@@ -31,6 +31,8 @@ REQUIRED = (
     'relatorios/selecao_e_fontes.txt', 'relatorios/economia_de_revisao.txt',
     'relatorios/auditoria_pedagogica.txt',
 )
+# Pasta do lote (2.30, entrega só em TSV): o LEIA-ME só existe dentro do ZIP dos exportadores avulsos.
+REQUIRED_DIR = tuple(k for k in REQUIRED if k != 'LEIA-ME.txt')
 # Um índice distinto por cartão. Vários trechos de mesmo índice: um cartão.
 CLOZE_ANY = re.compile(r'\{\{c([1-9]\d*)::([^{}]*?)\}\}')
 HTML_TAG = re.compile(r'<[^>]*>')
@@ -285,7 +287,7 @@ def main() -> int:
         errors.append('Perfil e exceções de geração requerem --new')
     items: dict[str, bytes] = {}
     if source.is_dir():
-        for k in REQUIRED:
+        for k in REQUIRED_DIR:
             f = source / k
             if not f.is_file():
                 errors.append(f'Arquivo obrigatório ausente: {k}')

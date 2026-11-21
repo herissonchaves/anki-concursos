@@ -5,7 +5,8 @@ O `gerar_lote.py` de cada lote fica só com o conteúdo: fontes, referências de
 questões, esquemas e cartões. Este módulo cuida do restante: linhas dos TSVs
 (UTF-8 sem BOM, LF), embaralhamento C/E reprodutível, `calibracao_cebraspe.json`,
 `revisao_recuperacao.json`, resolução dos sinais do lint por
-`fonte/sinais_resolvidos.json` e a prévia `previa_cards.html` (claro/escuro).
+`fonte/sinais_resolvidos.json`. Desde a 2.30 não há prévia HTML nem pacote: a entrega são os TSVs
+(`titulo_previa` continua aceito e é ignorado).
 
 Convenção dos dicionários de cartão (chaves curtas):
 
@@ -56,7 +57,6 @@ gerados não certificam conteúdo.
 """
 from __future__ import annotations
 
-import html as _html
 import json
 import random
 import re
@@ -91,11 +91,6 @@ def rubrica(correcao, determinacao, operacao_d, comparacao, autoria='', feedback
     valores = (correcao, determinacao, operacao_d, comparacao, autoria, feedback, linguagem_didatica, utilidade)
     return {chave: {'resultado': 'PENDENTE' if (chave == 'comparacao' and valor.startswith('PENDENTE')) else 'PASSA',
                     'evidencia': valor.replace('PENDENTE: ', '')} for chave, valor in zip(CRITERIOS, valores)}
-
-
-def cloze_view(texto: str, revelar: bool) -> str:
-    return re.sub(r'\{\{c1::(.*?)\}\}', (lambda m: f'<span class="cloze">{m[1]}</span>') if revelar else
-                  (lambda m: '<span class="cloze">[...]</span>'), texto)
 
 
 class Lote:
@@ -543,38 +538,15 @@ class Lote:
         linhas += ['', 'Desafiadores: ' + '; '.join(f'{x["k"]} {x["fid"]}' for x in self.D) if self.D else '']
         self._gravar_txt('fontes_e_referencias.txt', linhas)
 
-    # ------------------------------------------------------------ prévia (não vai para o Anki)
-    def gerar_previa(self):
-        cards = [(x['k'], row[0], row[1], row[2]) for (_, x), row in zip(self.ce_items, self.ce_rows)]
-        cards += [(x['k'], cloze_view(row[0], False), cloze_view(row[0], True) + '<hr id="answer">' + row[1], row[2])
-                  for x, row in zip(self.CZ, self.cz_rows)]
-        pares = ''.join(
-            f'<section><h2>{k} <small>{_html.escape(t)}</small></h2><div class="lado"><div class="card">{fr}</div>'
-            f'<div class="card">{(fr + "<hr id=answer>" + vs) if not k.startswith("C") else vs}</div></div></section>'
-            for k, fr, vs, t in cards)
-        previa = ('<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-                  f'<title>{_html.escape(self.titulo)}</title><style>'
-                  'body{font-family:system-ui,sans-serif;margin:0;padding:16px;background:#eceff1;color:#222}'
-                  'body.noite{background:#1e1e1e;color:#ddd} h1{font-size:18px} h2{font-size:14px;margin:18px 0 6px} small{opacity:.6;font-weight:normal}'
-                  '.lado{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}'
-                  '.card{font-family:arial;font-size:20px;line-height:1.5;text-align:center;background:white;color:black;padding:14px;border-radius:8px;max-width:520px}'
-                  'body.noite .card{background:#2f2f31;color:#e8e8e8} .cloze{font-weight:bold;color:blue} body.noite .cloze{color:#6ea8ff}'
-                  'button{padding:6px 12px;margin-bottom:8px}</style>'
-                  '<h1>Prévia dos cards (frente | verso) — imita o CSS padrão dos tipos de nota (estilo_anki.py: Arial 20 px)</h1>'
-                  '<button onclick="document.body.classList.toggle(\'noite\')">Alternar modo noturno</button>'
-                  + pares + '</html>')
-        (self.pasta / 'previa_cards.html').write_text(previa, encoding='utf-8')
-
     # ------------------------------------------------------------ tudo
     def gerar(self, sinais_resolvidos=None, imprimir=True):
-        """Gera TSVs, registros e prévia; devolve {ID editorial: ID no TSV}."""
+        """Gera TSVs e registros; devolve {ID editorial: ID no TSV}."""
         self.montar_linhas()
         self.gravar_tsvs()
         self.registro_cobertura()
         self.registro_calibracao()
         self.registro_revisao(sinais_resolvidos or self.pasta / 'fonte' / 'sinais_resolvidos.json')
         self.gravar_relatorios()
-        self.gerar_previa()
         self.registrar_usos()
         self.sugestoes = self.sugestoes_cebraspe()
         if self.sugestoes:

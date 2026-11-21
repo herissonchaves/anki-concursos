@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
-"""Exporta um lote para `output/` e revalida o ZIP final em uma chamada, com saída curta.
+"""Valida um lote pronto em `output/` em uma chamada, com saída curta. A entrega são os TSVs.
 
-Uso (na raiz do repositório; genanki é necessário para o .apkg):
+Uso (na raiz do repositório):
 
-  uv run --no-project --with genanki python -I -X utf8 \
-      skills/automacao-anki-python/scripts/finalizar_lote.py output/PRF_Normas_Circulacao --baralho "Legislação de Trânsito"
+  uv run --no-project python -I -X utf8 skills/automacao-anki-python/scripts/finalizar_lote.py \
+      output/PRF_Normas_Circulacao --baralho "Legislação de Trânsito"
 
-Destino: `<pasta do lote>/<nome da pasta>.zip|.apkg` (a pasta fica em `output/<CONCURSO>_<Tema>/`).
-Nunca sobrescreve entregáveis: usa sufixo `_2`, `_3`... Executa o exportador (que já roda os
-validadores no diretório e no ZIP) e, no ZIP final, `validar_anki.py --new`,
-`validar_calibracao_cebraspe.py`, `validar_revisao_pedagogica.py` e `referencias.py validar`,
-imprimindo só o resumo. Avisa, sem bloquear, frentes parecidas com notas da coleção viva
-(`duplicatas_colecao.txt` na pasta do lote) e `selecao_e_fontes.txt` sem a linha
-"Banco consultado:". Com tudo aprovado, grava (ou substitui) a linha do lote em
-`referencias/historico_lotes.tsv`. Os validadores checam estrutura e documentos; não certificam
-conteúdo.
+Desde a 2.30 não grava ZIP nem APKG: confere a pasta `<lote>/lote/` (os relatórios obrigatórios,
+`validar_anki.py --new`, `validar_calibracao_cebraspe.py`, `validar_revisao_pedagogica.py`, a cobertura
+do PDF quando houver `cobertura_pdf.json` e `referencias.py validar`) e imprime o caminho dos dois TSVs a
+importar. Avisa, sem bloquear, frentes parecidas com notas da coleção viva (`duplicatas_colecao.txt` na
+pasta do lote) e `selecao_e_fontes.txt` sem a linha "Banco consultado:". Com tudo aprovado, grava (ou
+substitui) a linha do lote em `referencias/historico_lotes.tsv`. Os validadores checam estrutura e
+documentos; não certificam conteúdo. Pacote ZIP/APKG (ex.: lote com imagens) continua possível com
+`exportar_anki.py`/`exportar_anki_visual.py`, fora deste fluxo.
 """
 from __future__ import annotations
 
@@ -33,16 +32,6 @@ REFERENCIAS = REPO / 'skills' / 'referencias-questoes' / 'scripts' / 'referencia
 HISTORICO = REPO / 'referencias' / 'historico_lotes.tsv'
 TAB = '\t'
 COLUNAS = ['data', 'lote', 'baralho', 'rapidos', 'desafiadores', 'cloze', 'ids_banco']
-
-
-def destino(lote: Path, nome: str | None) -> Path:
-    base = nome or lote.name
-    pasta = lote
-    alvo, n = pasta / base, 1
-    while alvo.with_suffix('.zip').exists() or alvo.with_suffix('.apkg').exists():
-        n += 1
-        alvo = pasta / f'{base}_{n}'
-    return alvo
 
 
 def contar(dados: Path) -> dict:
@@ -96,7 +85,7 @@ def avisos(lote: Path, dados: Path, colecao: str | None = None) -> list[str]:
                     achados = colecao_anki.duplicatas(col, dados / arq)['possiveis_duplicatas']
                     todos += [f'{arq}:{x["novo"]} ~ {x["comparado_com"]} ({x["similaridade_textual"]}%)' for x in achados]
         total, exemplos = len(todos), todos[:3]
-        if todos:  # fica na pasta do lote (fora do Git e fora do ZIP), para conferir antes de importar
+        if todos:  # fica na pasta do lote (fora do Git), para conferir antes de importar
             (lote / 'duplicatas_colecao.txt').write_text('\n'.join(todos) + '\n', encoding='utf-8')
         if total:
             saida.append(f'duplicatas: {total} frente(s) parecida(s) com notas da coleção (ex.: {"; ".join(exemplos[:3])}). '
@@ -115,12 +104,28 @@ def rodar(args: list[str]) -> tuple[int, str]:
     return r.returncode, (r.stdout + r.stderr).strip()
 
 
+IMPORTAR = ('Importe no Anki (Arquivo > Importar), um TSV por vez: separador Tabulação, "Permitir HTML" ligado, '
+            "coluna 1 e 2 nos campos e coluna 3 em Etiquetas; C/E no tipo de nota Básico (sem inverso) do projeto e "
+            "Cloze no tipo Cloze; TSV vazio não se importa. O CSS padrão (Arial 20 px) fica nos tipos de nota: "
+            "skills/gerar-revisao-anki/scripts/estilo_anki.py.")
+
+
+def relatorios_faltando(dados: Path) -> list[str]:
+    """Relatórios obrigatórios ausentes ou vazios (os mesmos que o exportador exigia)."""
+    sys.path.insert(0, str(AQUI.parent))
+    from exportar_anki import REQUIRED_REPORTS
+    rel = dados / 'relatorios'
+    faltam = [n for n in REQUIRED_REPORTS if not (rel / n).is_file() or not (rel / n).stat().st_size]
+    triagem = rel / 'triagem_previa_pdf.txt'
+    if triagem.is_file() and not triagem.stat().st_size:
+        faltam.append('triagem_previa_pdf.txt (vazio)')
+    return faltam
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split('\n\n')[0])
     ap.add_argument('lote', type=Path, help='pasta do lote (contém lote/ com os TSVs e relatorios/)')
     ap.add_argument('--baralho', required=True)
-    ap.add_argument('--nome', help='nome do arquivo final (padrão: nome da pasta do lote)')
-    ap.add_argument('--sem-apkg', action='store_true', help='gera só o ZIP (sem genanki)')
     ap.add_argument('--profile', choices=('mixed', 'focused'))
     ap.add_argument('--exception-reason')
     ap.add_argument('--max-cards')
@@ -131,31 +136,24 @@ def main(argv=None) -> int:
     if not (dados / 'anki_certo_errado.tsv').exists() or not (dados / 'anki_cloze.tsv').exists():
         print(f'ERRO: {dados} sem anki_certo_errado.tsv/anki_cloze.tsv; rode fonte/gerar_lote.py antes')
         return 1
-    alvo = destino(lote, a.nome)
-    alvo.parent.mkdir(parents=True, exist_ok=True)
+    faltam = relatorios_faltando(dados)
+    if faltam:
+        print('ERRO: relatório obrigatório ausente ou vazio (não fabricar auditoria): ' + ', '.join(faltam))
+        return 1
     perfil = []
     for opcao, valor in (('--profile', a.profile), ('--exception-reason', a.exception_reason),
                          ('--max-cards', a.max_cards)):
         if valor:
             perfil += [opcao, valor]
-    exportar = [str(AQUI.parent / 'exportar_anki.py'), '--ce', str(dados / 'anki_certo_errado.tsv'),
-                '--cloze', str(dados / 'anki_cloze.tsv'), '--relatorios', str(dados / 'relatorios'),
-                '-o', str(alvo.with_suffix('.zip')), '--baralho', a.baralho, *perfil]
-    if not a.sem_apkg:
-        exportar += ['--apkg', str(alvo.with_suffix('.apkg'))]
-    codigo, saida = rodar(exportar)
-    if codigo:
-        print('ERRO na exportação:\n' + saida[-3000:])
-        return codigo
-    zipado = str(alvo.with_suffix('.zip'))
+    alvo = str(dados)
     checagens = [
-        ('validar_anki --new', [str(GERAR / 'validar_anki.py'), '--new', zipado, *perfil]),
-        ('calibração', [str(GERAR / 'validar_calibracao_cebraspe.py'), zipado]),
-        ('revisão de recuperação', [str(GERAR / 'validar_revisao_pedagogica.py'), zipado]),
+        ('validar_anki --new', [str(GERAR / 'validar_anki.py'), '--new', alvo, *perfil]),
+        ('calibração', [str(GERAR / 'validar_calibracao_cebraspe.py'), alvo]),
+        ('revisão de recuperação', [str(GERAR / 'validar_revisao_pedagogica.py'), alvo]),
         ('banco referencias/', [str(REFERENCIAS), 'validar']),
     ]
     if (dados / 'relatorios' / 'cobertura_pdf.json').exists():
-        checagens.append(('cobertura do PDF', [str(GERAR / 'validar_cobertura_pdf.py'), zipado]))
+        checagens.append(('cobertura do PDF', [str(GERAR / 'validar_cobertura_pdf.py'), alvo]))
     falhas = 0
     for nome, args in checagens:
         codigo, saida = rodar(args)
@@ -168,12 +166,13 @@ def main(argv=None) -> int:
     for aviso in avisos(lote, dados, a.colecao):
         print(f'AVISO {aviso}')
     if not falhas:
-        h = registrar_historico(lote, a.baralho, dados)
-        print(f'Histórico: {HISTORICO.relative_to(REPO).as_posix()} ({h["rapidos"]} R, {h["desafiadores"]} D, '
+        h = registrar_historico(lote, a.baralho, dados, HISTORICO)
+        caminho = HISTORICO.relative_to(REPO).as_posix() if HISTORICO.is_relative_to(REPO) else HISTORICO
+        print(f'Histórico: {caminho} ({h["rapidos"]} R, {h["desafiadores"]} D, '
               f'{h["cloze"]} Cloze; {len(h["ids_banco"].split(";")) if h["ids_banco"] else 0} IDs do banco)')
-    print(f'ZIP:  {alvo.with_suffix(".zip")}')
-    if not a.sem_apkg:
-        print(f'APKG: {alvo.with_suffix(".apkg")}  (duplo clique com o Anki aberto)')
+        print(f'TSV C/E:   {dados / "anki_certo_errado.tsv"}')
+        print(f'TSV Cloze: {dados / "anki_cloze.tsv"}' + ('' if (dados / 'anki_cloze.tsv').stat().st_size else ' (vazio)'))
+        print(f'Baralho: {a.baralho}. {IMPORTAR}')
     return 1 if falhas else 0
 
 

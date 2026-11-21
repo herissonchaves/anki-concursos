@@ -72,7 +72,7 @@ def test_generated_batch_passes_documentary_validators(tmp_path):
     assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
     assert json.loads(calibracao)['schema_version'] == 2
     assert rev.validate(items, revisao) == []
-    assert (tmp_path / 'previa_cards.html').is_file()
+    assert not (tmp_path / 'previa_cards.html').exists()  # sem prévia desde a 2.30
 
 
 def test_metadados_curtos_2_24_passam(tmp_path, monkeypatch):

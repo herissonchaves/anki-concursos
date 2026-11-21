@@ -71,4 +71,4 @@ de Informática da coleção do usuário, aprovado por ele:
 
 ## Verificação
 
-Antes de exportar: rodar `problemas_html` (o helper já faz) e o `validar_anki.py --new`. Abrir uma prévia renderizada de alguns cartões (por exemplo, gerar um HTML de prévia e abrir no navegador, nos temas claro e escuro) para conferir contraste e quebra em tela estreita. A prévia não substitui o teste no aplicativo: declarar renderização no Anki como não testada se não for feita.
+Antes de exportar: rodar `problemas_html` (o helper já faz) e o `validar_anki.py --new`. O projeto não gera prévia HTML (2.30): a conferência visual é no próprio Anki, depois da importação, nos temas claro e escuro. Declarar renderização no Anki como não testada se não for feita.

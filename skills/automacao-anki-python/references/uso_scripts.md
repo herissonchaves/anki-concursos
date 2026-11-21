@@ -53,7 +53,7 @@ separado para conferir. Distinguir teste do backend e teste da interface desktop
 
 Python 3.10+; `genanki` somente para `.apkg`; `pymupdf`/`pypdf` e `rapidfuzz` continuam opcionais para as funções anteriores. Scripts não consultam nem baixam imagens da internet: pesquisa e verificação da licença/adequação dependem de ferramentas de navegação e fontes originais. **Não simular busca nem arquivo local.**
 
-Para texto puro, usar `scripts/exportar_anki.py --ce ... --cloze ... --relatorios ... -o saida.zip [--apkg saida.apkg]`. Para cards com imagem na frente, após pesquisa na web, obtenção dos originais licenciados e auditoria visual, organizar `midia/` com arquivos locais e relatório `relatorios/fontes_visuais.tsv`. Exemplo:
+Lote comum (2.30): a entrega são os TSVs de `lote/`, conferidos pelo `scripts/finalizar_lote.py`; os exportadores abaixo são avulsos. Para texto puro, usar `scripts/exportar_anki.py --ce ... --cloze ... --relatorios ... -o saida.zip [--apkg saida.apkg]`. Para cards com imagem na frente, após pesquisa na web, obtenção dos originais licenciados e auditoria visual, organizar `midia/` com arquivos locais e relatório `relatorios/fontes_visuais.tsv`. Exemplo:
 
 ```bash
 python3 skills/automacao-anki-python/scripts/exportar_anki_visual.py \

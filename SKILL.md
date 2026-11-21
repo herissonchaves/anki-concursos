@@ -1,11 +1,11 @@
 ---
 name: anki-concursos
-description: Skill principal do Anki-Concursos. Use para criar, selecionar, auditar ou melhorar flashcards Anki de concursos (PRF por padrão, Agente PF e outros quando pedidos) em Certo/Errado estilo Cebraspe e Cloze, exportados em APKG; para caderno de erros, consulta somente leitura da coleção do Anki (ou de backup .colpkg), saber o que revisar ou estudar agora e orientar a rotina no Anki/FSRS. Encaminha à skill especializada e diz onde ficam os arquivos e o Git.
+description: Skill principal do Anki-Concursos. Use para criar, selecionar, auditar ou melhorar flashcards Anki de concursos (PRF por padrão, Agente PF e outros quando pedidos) em Certo/Errado estilo Cebraspe e Cloze, entregues em TSV para importar no Anki; para caderno de erros, consulta somente leitura da coleção do Anki (ou de backup .colpkg), saber o que revisar ou estudar agora e orientar a rotina no Anki/FSRS. Encaminha à skill especializada e diz onde ficam os arquivos e o Git.
 ---
 
 # Anki-Concursos
 
-**Versão 2.29.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.30.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
@@ -96,8 +96,8 @@ com outro `--with-requirements`. Os testes que dependem de `zstandard` ou
 
 ## Arquivos e Git
 
-- Lote em geração e entregáveis: `output/<CONCURSO>_<Tema>/` (fora do Git; Hérisson apaga a
-  pasta depois de importar). Do lote, só `referencias/` é versionado, com a linha do lote em
+- Lote em geração e entregáveis: `output/<CONCURSO>_<Tema>/` (fora do Git; Hérisson importa os dois
+  TSVs de `lote/` e apaga a pasta). Desde a 2.30 não se gera prévia HTML, ZIP nem APKG. Do lote, só `referencias/` é versionado, com a linha do lote em
   `referencias/historico_lotes.tsv`.
 - Commits locais estão autorizados ao concluir e verificar mudanças importantes; push, remotos e
   reescrita de histórico exigem autorização própria.

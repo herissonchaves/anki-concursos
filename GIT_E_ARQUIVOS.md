@@ -14,18 +14,19 @@ questões) vão para o scratchpad da sessão.
 
 - `fonte/gerar_lote.py` (copiado de `skills/gerar-revisao-anki/modelos/gerar_lote_modelo.py`) e
   `fonte/sinais_resolvidos.json`;
-- `lote/`: `anki_certo_errado.tsv`, `anki_cloze.tsv` e `relatorios/`, gravados pelo `montar_lote.py`;
-- na raiz da pasta, o ZIP e o APKG gravados pelo `finalizar_lote.py`, além de `.colpkg` e TSVs de
-  atualização de notas existentes.
+- `lote/`: `anki_certo_errado.tsv`, `anki_cloze.tsv` e `relatorios/`, gravados pelo `montar_lote.py`
+  e conferidos pelo `finalizar_lote.py` (desde a 2.30 sem prévia HTML, ZIP ou APKG);
+- na raiz da pasta, só o que for de atualização de notas existentes (`.colpkg`, TSVs) e o
+  `duplicatas_colecao.txt` do `finalizar_lote.py`.
 
 Regras:
-- Hérisson importa o APKG e depois apaga a pasta inteira. Depois de importado, o card vive na
+- Hérisson importa os dois TSVs de `lote/` e depois apaga a pasta inteira. Depois de importado, o card vive na
   coleção do Anki: correções usam `melhorar-cartoes-anki` sobre a coleção, não o lote. Pasta
   vazia ou ausente é o estado normal; crie-a quando for gravar.
 - Enquanto a pasta existir, ela é a fonte do lote (correções antes da importação regeneram a partir
   de `fonte/`). Não apague nem sobrescreva entregáveis que ainda estejam ali: o `finalizar_lote.py`
-  usa sufixo `_2`, `_3`.
-- No fechamento, informe o caminho completo do APKG a importar.
+  não grava nada fora de `lote/` além do `duplicatas_colecao.txt`.
+- No fechamento, informe o caminho completo dos dois TSVs a importar, o baralho e o tipo de nota de cada um.
 
 **O que fica versionado de cada lote:** só o que serve a pedidos futuros, em `referencias/`:
 questões, conteúdos, notícias e prioridades novos ou atualizados, o `usado_em` gravado pelo

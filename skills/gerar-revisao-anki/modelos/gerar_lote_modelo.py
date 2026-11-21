@@ -4,7 +4,7 @@ Uso, depois de copiado (na raiz do repositório):
   uv run --no-project python -I -X utf8 output/<CONCURSO>_<Tema>/fonte/gerar_lote.py
 
 Este arquivo guarda só o conteúdo. `montar_lote.py` grava TSVs, calibracao_cebraspe.json,
-revisao_recuperacao.json e a prévia, resolve as referências do banco pelos `refs` dos
+revisao_recuperacao.json e os relatórios gerados (sem prévia, ZIP ou APKG desde a 2.30), resolve as referências do banco pelos `refs` dos
 cartões (com ou sem prova oficial) e registra o uso no banco. Sinais do lint pendentes são
 impressos com detalhes: corrija o cartão ou justifique em fonte/sinais_resolvidos.json
 ({"ID|SINAL": "motivo específico"}). Regras: references/roteiro-lote-pdf.md.
@@ -100,5 +100,4 @@ COBERTURA = [
 if __name__ == '__main__':
     Lote(PASTA, BASE, F, HOJE, [], R, D, CZ, semente=2026, cobertura=COBERTURA,
          questoes_pdf=QUESTOES_PDF, padrao_d=PADRAO_D, relatorio=RELATORIO,
-         revisor='Claude (assistente de IA) — mesmo agente que redigiu os cartões',
-         titulo_previa='Prévia dos cards — Tema').gerar()
+         revisor='Claude (assistente de IA) — mesmo agente que redigiu os cartões').gerar()

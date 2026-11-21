@@ -34,6 +34,33 @@ def test_sem_avisos_quando_banco_registrado_e_frente_nova(tmp_path, capsys):
     assert not (pasta / 'duplicatas_colecao.txt').exists()
 
 
+def test_finalizar_valida_a_pasta_e_entrega_so_tsv_2_30(tmp_path, monkeypatch, capsys):
+    """Sem ZIP, APKG nem prévia: as barreiras rodam na pasta lote/ e o histórico ganha a linha do lote."""
+    import finalizar_lote
+    from test_montar_lote import gerar_resolvido
+    pasta = tmp_path / 'PRF_Fixture'
+    gerar_resolvido(pasta)
+    (pasta / 'lote' / 'relatorios' / 'selecao_e_fontes.txt').write_text('Banco consultado: fixture\n', encoding='utf-8')
+    historico = tmp_path / 'historico_lotes.tsv'
+    monkeypatch.setattr(finalizar_lote, 'HISTORICO', historico)
+    codigo = finalizar_lote.main([str(pasta), '--baralho', 'Fixture', '--colecao', str(tmp_path / 'nao_existe.anki2')])
+    saida = capsys.readouterr().out
+    assert codigo == 0, saida
+    assert 'TSV C/E:' in saida and 'TSV Cloze:' in saida
+    assert not list(pasta.glob('*.zip')) and not list(pasta.glob('*.apkg'))
+    assert not (pasta / 'previa_cards.html').exists()
+    assert 'PRF_Fixture\tFixture\t2\t2\t1' in historico.read_text(encoding='utf-8')
+
+
+def test_finalizar_recusa_relatorio_obrigatorio_ausente(tmp_path, capsys):
+    import finalizar_lote
+    from test_montar_lote import gerar_resolvido
+    pasta = tmp_path / 'PRF_Fixture'
+    gerar_resolvido(pasta)
+    assert finalizar_lote.main([str(pasta), '--baralho', 'Fixture']) == 1
+    assert 'selecao_e_fontes.txt' in capsys.readouterr().out
+
+
 def test_colecao_ausente_so_avisa(tmp_path):
     pasta, dados = lote(tmp_path, 'Banco consultado: buscar -d transito\n', 'Frente qualquer de teste.')
     msgs = avisos(pasta, dados, str(tmp_path / 'nao_existe.anki2'))

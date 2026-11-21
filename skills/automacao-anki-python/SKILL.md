@@ -1,6 +1,6 @@
 ---
 name: automacao-anki-python
-description: Extrai PDFs, consulta a coleção viva do Anki e backups em leitura e exporta TSV ZIP APKG com validação estrutural, mídia e diagnóstico de clareza.
+description: Extrai PDFs, consulta a coleção viva do Anki e backups em leitura e valida lotes em TSV (pacote ZIP/APKG só avulso, ex.: lote com imagens), com validação estrutural, mídia e diagnóstico de clareza.
 ---
 
 # automacao-anki-python
@@ -13,7 +13,7 @@ Para melhorar e devolver uma coleção existente, siga
 em cópia temporária pela biblioteca oficial do Anki, preserva cartões/histórico
 e exporta `.colpkg`; não use o exportador de notas novas para substituir coleção.
 
-**Destino dos arquivos:** o lote inteiro (gerador, TSVs, relatórios, ZIP, APKG, `.colpkg`, TSVs
+**Destino dos arquivos:** o lote inteiro (gerador, TSVs, relatórios, `.colpkg`, TSVs
 de atualização) fica em `output/<CONCURSO>_<Tema>/` na raiz do repositório, fora do Git; o
 usuário apaga a pasta após importar. Regra completa em [GIT_E_ARQUIVOS.md](../../GIT_E_ARQUIVOS.md).
 
@@ -21,11 +21,11 @@ Leia `references/uso_scripts.md` e use scripts existentes. Extração não equiv
 
 **Coleção viva:** `scripts/colecao_anki.py` (`buscar`, `duplicatas`, `dificeis`, `desempenho`, `lacunas`) lê o perfil `concursos` deste computador em cópia temporária, sem alterar nada; detalhes em `references/uso_scripts.md`.
 
-**Atalhos de baixo custo:** `scripts/extrair_pdf.py PDF -o TMP.json --texto TMP.txt [--ruido PALAVRA]` grava também o texto limpo (sem marcas-d'água, CPF e rodapés), bem menor que o JSON; leia o TXT. Para um lote pronto, `scripts/finalizar_lote.py LOTE --baralho NOME` (com `uv run --no-project --with genanki python -I -X utf8`) exporta ZIP e APKG para `output/<CONCURSO>_<Tema>/` sem sobrescrever, revalida o ZIP final (estrutura, calibração, revisão de recuperação e, em lote de PDF, cobertura por prioridade com `../gerar-revisao-anki/scripts/validar_cobertura_pdf.py`) e imprime só o resumo; aceita `--profile`, `--exception-reason` e `--max-cards`.
+**Atalhos de baixo custo:** `scripts/extrair_pdf.py PDF -o TMP.json --texto TMP.txt [--ruido PALAVRA]` grava também o texto limpo (sem marcas-d'água, CPF e rodapés), bem menor que o JSON; leia o TXT. Para um lote pronto, `scripts/finalizar_lote.py LOTE --baralho NOME` (com `uv run --no-project python -I -X utf8`) valida a pasta `lote/` (relatórios obrigatórios, estrutura, calibração, revisão de recuperação e, em lote de PDF, cobertura por prioridade com `../gerar-revisao-anki/scripts/validar_cobertura_pdf.py`), imprime só o resumo e o caminho dos dois TSVs a importar, sem gravar ZIP nem APKG (2.30); aceita `--profile`, `--exception-reason` e `--max-cards`.
 
 Para exportação textual, use `scripts/exportar_anki.py`. Os campos chegam em HTML montado por `../gerar-revisao-anki/scripts/html_anki.py` (protocolo visual); o validador central reprova HTML inseguro e, em notas novas, tags desbalanceadas e Cloze com várias omissões sem a tag `Mnemonico`. Com imagens locais autênticas e manifesto, siga o protocolo visual e use `scripts/exportar_anki_visual.py`. Ambos executam o validador central com `--new`. A [matriz de quantidades](../gerar-revisao-anki/references/matriz_tipos_quantidades.md) define composição, paridade e parâmetros de perfil, justificativa e teto. Use os mesmos parâmetros no exportador e na revalidação. Rode o lint de clareza e revise os avisos semanticamente. Forneça um TSV vazio para cada modalidade ausente. Use caminhos completos dos scripts e inclua evidências nos relatórios.
 
-APKG depende de genanki. Os tipos de nota do pacote levam o CSS padrão de `../gerar-revisao-anki/scripts/estilo_anki.py` (Arial 20 px, igual ao Basic/Cloze da coleção); não criar outro tipo nem mudar esse CSS por lote. Inspecionar integridade ZIP, banco e mídia; declarar importação e renderização no aplicativo como não testadas se não executadas. TSV deve ser importado separadamente no modelo Básico (sem inverso) para C/E e Cloze para lacunas; mapear terceira coluna como Tags e habilitar HTML. Não importar os TSVs e o APKG do mesmo lote. Exportação não altera a coleção. Mudanças na frente podem gerar nova identidade; não prometer atualização segura de notas existentes sem conferir IDs.
+A entrega é TSV. Os exportadores `exportar_anki.py`/`exportar_anki_visual.py` (ZIP e, com genanki, APKG) ficam para uso avulso, como lote com imagens. Os tipos de nota levam o CSS padrão de `../gerar-revisao-anki/scripts/estilo_anki.py` (Arial 20 px, igual ao Basic/Cloze da coleção); não criar outro tipo nem mudar esse CSS por lote. Inspecionar integridade ZIP, banco e mídia; declarar importação e renderização no aplicativo como não testadas se não executadas. TSV deve ser importado separadamente no modelo Básico (sem inverso) para C/E e Cloze para lacunas; mapear terceira coluna como Tags e habilitar HTML. Não importar os TSVs e o APKG do mesmo lote. Exportação não altera a coleção. Mudanças na frente podem gerar nova identidade; não prometer atualização segura de notas existentes sem conferir IDs.
 
 ## Calibração documental de D novos
 

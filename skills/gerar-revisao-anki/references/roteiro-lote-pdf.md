@@ -174,13 +174,15 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
   avisa se faltar —, pertinência, buscas feitas e sem resultado, "banco suficiente", mnemônicos e
   **IDs criados ou atualizados neste pedido**) e, em Direito, `radar_juridico.txt` (status das normas e
   divergências com o PDF).
-- Exportar e revalidar em uma chamada: grava ZIP e APKG na própria pasta, sem sobrescrever; confere
-  também a cobertura do PDF e o banco (`referencias.py validar`), avisa duplicatas na coleção e a
-  falta do registro do banco, e grava a linha do lote em `referencias/historico_lotes.tsv`:
+- Validar em uma chamada (2.30: sem prévia, ZIP ou APKG; a entrega são os dois TSVs de `lote/`): confere
+  os relatórios obrigatórios, estrutura, calibração, revisão, a cobertura do PDF e o banco
+  (`referencias.py validar`), avisa duplicatas na coleção e a falta do registro do banco, grava a linha
+  do lote em `referencias/historico_lotes.tsv` e imprime os caminhos dos TSVs e como importá-los:
 
 ```text
-uv run --no-project --with genanki python -I -X utf8 skills/automacao-anki-python/scripts/finalizar_lote.py output/<CONCURSO>_<Tema> --baralho "Nome do baralho"
+uv run --no-project python -I -X utf8 skills/automacao-anki-python/scripts/finalizar_lote.py output/<CONCURSO>_<Tema> --baralho "Nome do baralho"
 ```
 
 - Commit só de `referencias/` desta tarefa (questões, documentos, `usado_em`, `historico_lotes.tsv`);
-  nunca `output/`, PDFs ou dados pessoais. Entregar o caminho do `.apkg`.
+  nunca `output/`, PDFs ou dados pessoais. Entregar o caminho dos dois TSVs, o baralho e o tipo de
+  nota de cada um (C/E no Básico do projeto, sem inverso; Cloze no Cloze).
