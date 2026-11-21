@@ -3,3 +3,5 @@ lotes/** text eol=lf
 output/** text eol=lf
 # Banco de referências: índice e hashes gerados com LF.
 referencias/** text eol=lf
+# Figuras das questões: binárias, sem conversão de fim de linha.
+referencias/imagens/** binary
