@@ -1,6 +1,6 @@
 ---
 name: anki-concursos
-description: Skill principal do Anki-Concursos. Use para criar, selecionar, auditar ou melhorar flashcards Anki de concursos (PRF por padrão, Agente PF e outros quando pedidos) em Certo/Errado estilo Cebraspe e Cloze, exportados em TSV; para caderno de erros, análise de backup .colpkg e orientação de estudo no Anki/FSRS. Encaminha à skill especializada e define o Git local e onde salvar os lotes.
+description: Skill principal do Anki-Concursos. Use para criar, selecionar, auditar ou melhorar flashcards Anki de concursos (PRF por padrão, Agente PF e outros quando pedidos) em Certo/Errado estilo Cebraspe e Cloze, exportados em APKG; para caderno de erros, consulta somente leitura da coleção do Anki (ou de backup .colpkg), saber o que revisar ou estudar agora e orientar a rotina no Anki/FSRS. Encaminha à skill especializada e diz onde ficam os arquivos e o Git.
 ---
 
 # Anki-Concursos
@@ -45,7 +45,7 @@ são relativos à raiz do projeto.
 | Inspecionar um backup | [analisar-colecao-anki](skills/analisar-colecao-anki/SKILL.md) |
 | Extrair material ou validar e exportar arquivos | [automacao-anki-python](skills/automacao-anki-python/SKILL.md) |
 | Consultar, salvar ou vincular referências (questões, editais, conteúdos verificados, notícias, prioridades) | [referencias-questoes](skills/referencias-questoes/SKILL.md) |
-| Orientar rotina, carga de revisão e FSRS | [orientar-estudo-anki](skills/orientar-estudo-anki/SKILL.md) |
+| O que revisar ou estudar agora (desempenho, lapsos, lacunas por prioridade); rotina, carga e FSRS | [orientar-estudo-anki](skills/orientar-estudo-anki/SKILL.md) |
 
 Para os portões de cada rota, o roteamento obrigatório de Língua Portuguesa e os
 casos de regressão do roteamento, veja
