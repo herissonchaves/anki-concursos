@@ -7,10 +7,10 @@ import pytest
 import referencias as ref
 
 REPO = Path(__file__).resolve().parents[3]
-DOCS = sorted([REPO / 'SKILL.md', REPO / 'instalacao' / 'anki-concursos' / 'SKILL.md',
+DOCS = sorted([REPO / 'SKILL.md', REPO / 'GIT_E_ARQUIVOS.md', REPO / 'instalacao' / 'anki-concursos' / 'SKILL.md',
                *REPO.glob('skills/*/SKILL.md'), *REPO.glob('skills/*/references/*.md'), REPO / 'referencias' / 'README.md'])
 LINK = re.compile(r'\]\(([^)#\s]+)')
-CODIGO = re.compile(r'`((?:\.\./|skills/|references/|scripts/|instalacao/|lotes/|referencias/)[^`\s*<>]+\.(?:md|py|json|txt))`')
+CODIGO = re.compile(r'`((?:\.\./|skills/|references/|scripts/|instalacao/|referencias/)[^`\s*<>]+\.(?:md|py|json|txt))`')
 
 
 def caminhos_citados(doc: Path):
@@ -22,9 +22,9 @@ def caminhos_citados(doc: Path):
 
 
 def resolver(doc: Path, alvo: str) -> list[Path]:
-    # Caminhos começando em skills/, instalacao/, lotes/ ou referencias/ podem ser relativos à raiz.
+    # Caminhos começando em skills/, instalacao/ ou referencias/ podem ser relativos à raiz.
     candidatos = [(doc.parent / alvo)]
-    if alvo.startswith(('skills/', 'instalacao/', 'lotes/', 'referencias/')):
+    if alvo.startswith(('skills/', 'instalacao/', 'referencias/')):
         candidatos.append(REPO / alvo)
     if alvo.startswith(('scripts/', 'references/')):
         # Mencionados a partir de outra skill (ex.: gerar-revisao-anki) no texto da skill atual.

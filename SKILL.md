@@ -92,34 +92,15 @@ e volta da coleção nessas versões, inclua também
 com outro `--with-requirements`. Os testes que dependem de `zstandard` ou
 `anki` são pulados quando a biblioteca correspondente está ausente.
 
-## Git local
+## Arquivos e Git
 
-- Consulte o Git local sempre que precisar recuperar decisões, comparar versões ou entender mudanças. Hérisson já autorizou consultas ao histórico, ao estado e aos diffs desse repositório.
-- Após concluir e verificar alterações importantes do projeto, salve-as em commits locais com mensagens que descrevam a mudança. A preferência vale para as tarefas futuras desse repositório, mesmo quando o pedido não mencionar commits.
-- Confira o estado e o diff antes de preparar o commit. Inclua somente mudanças da tarefa ou expressamente autorizadas. Preserve trabalho alheio e deixe backups privados do Anki, credenciais e arquivos temporários fora dos commits.
-- Confira o commit e informe seu identificador no fechamento. A autorização cobre commits locais. Envio a remotos ou reescrita de histórico exige autorização própria.
-- Rotina: `git status` antes de editar; `git log --oneline -- ARQUIVO` e `git show` para entender uma regra antes de mudá-la; `git diff` e testes depois de editar scripts ou regras cobertas pelos testes.
-- Adicione arquivos pelo nome, sem `git add -A` às cegas. Um commit por mudança coerente, com mensagem em português no imperativo que diga o quê e por quê. Não use `--no-verify`.
-- Também exigem autorização própria: `reset --hard`, `rebase`, `commit --amend` de commit existente, `checkout --`/`restore` que descarte trabalho, apagar ou trocar de branch e alterar remotos. Para mudanças grandes ou experimentais, sugira uma branch nova.
-- Versione `referencias/` (banco de referências); nas questões, só o item oficial da banca: enunciado, alternativas, gabarito, fonte e metadados. Nunca comentários ou resoluções de cursos e sites de questões, nem dados pessoais de marcas-d'água; rode `referencias.py validar` antes do commit.
-- Nunca versione PDFs ou materiais de cursos (direitos autorais e marcas-d'água com dados pessoais), `.colpkg`/`.apkg`/`collection.*`, pacotes `.zip` exportados, `.venv/`, `uv.lock` e caches. Se aparecerem no `git status`, proponha incluí-los no `.gitignore`.
-
-## Onde salvar os lotes gerados
-
-Todo arquivo gerado pelas skills fica **dentro deste repositório**, em dois lugares. Não grave lotes nem entregáveis na pasta do material de estudo, na Área de Trabalho ou em outro local.
-
-**Histórico versionado:** `lotes/<CONCURSO>/<Missao_NN_Tema>/`, por exemplo `lotes/PRF/Missao_09_Navegadores/`.
-
-- `lote/`: `anki_certo_errado.tsv`, `anki_cloze.tsv` e `relatorios/` (é o diretório passado ao exportador).
-- `fonte/`: script gerador e decisões sobre os sinais do lint, para refazer hashes após uma edição.
-- Use outro concurso no lugar de `PRF` quando o alvo for outro (por exemplo `lotes/PF_Agente/`). Antes de versionar, confira que nenhum arquivo do lote contém dados pessoais copiados do material, como nome ou CPF das marcas-d'água.
-- Versione `lote/` e `fonte/` no commit da geração, para manter o histórico dos cartões, junto com as questões novas ou o `usado_em` atualizado em `referencias/`.
-
-**Entregáveis para importar:** `output/<CONCURSO>_<Tema>/` na raiz do repositório, por exemplo `output/PRF_Navegadores/`. A pasta `output/` é ignorada pelo Git.
-
-- Recebe tudo o que Hérisson vai importar no Anki: cópias dos TSVs do lote, o ZIP/APKG do exportador (`-o output/...` e `--apkg output/...`), `.colpkg` gerados e TSVs de atualização de notas existentes. Relatórios e scripts não entram: ficam em `lotes/`.
-- Hérisson apaga os arquivos de `output/` depois de importar. Nunca use `output/` como fonte nem conte com o que estava lá: regenere a partir de `lotes/` ou do backup. Pasta vazia ou ausente é o estado normal; crie-a quando for gravar.
-- Não apague nem sobrescreva entregáveis que ainda estejam em `output/`; use subpasta ou nome novo. No fechamento, informe o caminho completo dos arquivos a importar.
+- Lote em geração e entregáveis: `output/<CONCURSO>_<Tema>/` (fora do Git; Hérisson apaga a
+  pasta depois de importar). Do lote, só `referencias/` é versionado, com a linha do lote em
+  `referencias/historico_lotes.tsv`.
+- Commits locais estão autorizados ao concluir e verificar mudanças importantes; push, remotos e
+  reescrita de histórico exigem autorização própria.
+- Regras completas (pastas, o que versionar, rotina e limites do Git): leia
+  [GIT_E_ARQUIVOS.md](GIT_E_ARQUIVOS.md) ao gravar arquivos ou preparar um commit.
 
 ## Banco de referências
 

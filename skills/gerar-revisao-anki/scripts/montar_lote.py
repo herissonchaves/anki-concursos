@@ -208,10 +208,14 @@ class Lote:
         return dicts + (ref.calibracao(*com, raiz=self.banco) if com else [])
 
     def rotulo_lote(self):
-        try:
-            return self.pasta.resolve().relative_to(Path(__file__).resolve().parents[3] / 'lotes').as_posix()
-        except ValueError:
-            return self.pasta.name
+        """Rótulo do lote no `usado_em` do banco: nome da pasta em output/ (ex.: PRF_Navegadores)."""
+        raiz = Path(__file__).resolve().parents[3]
+        for base in ('output', 'lotes'):  # lotes/: rótulos antigos (até a 2.23)
+            try:
+                return self.pasta.resolve().relative_to(raiz / base).as_posix()
+            except ValueError:
+                continue
+        return self.pasta.name
 
     def registrar_usos(self):
         if not self.registrar or (not self.ids_banco and not self.conteudos and self.banco is None):

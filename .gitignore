@@ -20,3 +20,6 @@ dist/
 
 # Assinatura local do índice do banco de referências (muda a cada máquina)
 referencias/.estado_indice
+
+# Lotes antigos (até a 2.23); a geração agora fica em output/
+lotes/

@@ -1,4 +1,5 @@
 # Lotes Anki: os hashes dos registros de revisão dependem dos bytes exatos (LF).
 lotes/** text eol=lf
+output/** text eol=lf
 # Banco de referências: índice e hashes gerados com LF.
 referencias/** text eol=lf

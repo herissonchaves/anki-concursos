@@ -9,7 +9,7 @@ documento completo só em dúvida, caso especial (Português, imagens, coleção
 erros) ou ao alterar o projeto. As regras continuam valendo; este roteiro não cria exceções.
 
 Comandos na raiz do repositório. Arquivos temporários (texto do PDF, rascunhos) vão para o
-scratchpad, nunca para `lotes/`.
+scratchpad; o lote fica em `output/<CONCURSO>_<Tema>/`.
 
 ## 1. Ler o PDF com poucos tokens
 
@@ -90,7 +90,8 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
 
 ## 7. Montagem, revisão e registros
 
-- Copie `../modelos/gerar_lote_modelo.py` para `lotes/<CONCURSO>/<Missao_NN_Tema>/fonte/gerar_lote.py`.
+- Copie `../modelos/gerar_lote_modelo.py` para `output/<CONCURSO>_<Tema>/fonte/gerar_lote.py`
+  (pasta de trabalho fora do Git; Hérisson a apaga depois de importar).
   Cartões citam IDs do banco em `refs`; `referencias` pode ficar `[]`. Preencha `COBERTURA`
   (`Lote(..., cobertura=COBERTURA)`, com `p` por unidade): o montador falha se Alta/Média ficar sem
   card nem nota da coleção ou se Baixa tiver card, e põe as tags `Pagina_NN`. Questão sem prova oficial
@@ -112,12 +113,13 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
 - `lote/relatorios/`: `triagem_previa_pdf.txt`, `selecao_e_fontes.txt` (pertinência, itens do
   banco usados e **IDs criados ou atualizados neste pedido**, fontes, mnemônicos, comparação dos D, cobertura), `economia_de_revisao.txt`,
   `auditoria_pedagogica.txt` (ID, linha, gabarito, decisão) e, em Direito, `radar_juridico.txt`.
-- Exportar e revalidar em uma chamada (grava em `output/`, sem sobrescrever; confere também a
-  cobertura do PDF com `scripts/validar_cobertura_pdf.py`):
+- Exportar e revalidar em uma chamada: grava ZIP e APKG na própria pasta, sem sobrescrever; confere
+  também a cobertura do PDF e o banco (`referencias.py validar`) e grava a linha do lote em
+  `referencias/historico_lotes.tsv`:
 
 ```text
-uv run --no-project --with genanki python -I -X utf8 skills/automacao-anki-python/scripts/finalizar_lote.py lotes/<CONCURSO>/<Missao_NN_Tema> --baralho "Nome do baralho"
+uv run --no-project --with genanki python -I -X utf8 skills/automacao-anki-python/scripts/finalizar_lote.py output/<CONCURSO>_<Tema> --baralho "Nome do baralho"
 ```
 
-- `referencias.py validar` sem erros; commit só de `lotes/<...>/fonte`, `lotes/<...>/lote` e
-  `referencias/` desta tarefa (nunca `output/`, PDFs ou dados pessoais). Entregar o caminho do `.apkg`.
+- Commit só de `referencias/` desta tarefa (questões, documentos, `usado_em`, `historico_lotes.tsv`);
+  nunca `output/`, PDFs ou dados pessoais. Entregar o caminho do `.apkg`.

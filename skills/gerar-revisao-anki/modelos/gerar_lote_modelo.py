@@ -1,7 +1,7 @@
-"""MODELO de fonte/gerar_lote.py — copie para lotes/<CONCURSO>/<Missao_NN_Tema>/fonte/ e preencha.
+"""MODELO de fonte/gerar_lote.py — copie para output/<CONCURSO>_<Tema>/fonte/ e preencha.
 
 Uso, depois de copiado (na raiz do repositório):
-  uv run --no-project python -I -X utf8 lotes/<CONCURSO>/<Missao_NN_Tema>/fonte/gerar_lote.py
+  uv run --no-project python -I -X utf8 output/<CONCURSO>_<Tema>/fonte/gerar_lote.py
 
 Este arquivo guarda só o conteúdo. `montar_lote.py` grava TSVs, calibracao_cebraspe.json,
 revisao_recuperacao.json e a prévia, resolve as referências do banco pelos `refs` dos
@@ -13,9 +13,9 @@ import sys
 from pathlib import Path
 
 PASTA = Path(__file__).resolve().parents[1]
-RAIZ = PASTA.parents[2]
-if 'lotes' not in PASTA.parts:
-    sys.exit('Copie este modelo para lotes/<CONCURSO>/<Missao_NN_Tema>/fonte/gerar_lote.py antes de rodar.')
+RAIZ = PASTA.parents[1]
+if PASTA.parent.name != 'output':
+    sys.exit('Copie este modelo para output/<CONCURSO>_<Tema>/fonte/gerar_lote.py antes de rodar.')
 sys.path.insert(0, str(RAIZ / 'skills' / 'gerar-revisao-anki' / 'scripts'))
 from html_anki import regra, caso, erro, certo, esquema, tabela, fluxo  # noqa: E402,F401
 from montar_lote import Lote, rubrica as rub  # noqa: E402

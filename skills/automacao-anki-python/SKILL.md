@@ -13,11 +13,9 @@ Para melhorar e devolver uma coleção existente, siga
 em cópia temporária pela biblioteca oficial do Anki, preserva cartões/histórico
 e exporta `.colpkg`; não use o exportador de notas novas para substituir coleção.
 
-**Destino dos arquivos:** todo arquivo que o usuário vai importar (ZIP, APKG, `.colpkg`,
-cópias dos TSVs, TSVs de atualização) é gravado em `output/<CONCURSO>_<Tema>/` na raiz do
-repositório, fora do Git; relatórios, TSVs de origem e scripts ficam em `lotes/`. O usuário
-esvazia `output/` após importar: nunca use essa pasta como fonte. Regra completa em
-"Onde salvar os lotes gerados" no `SKILL.md` da raiz.
+**Destino dos arquivos:** o lote inteiro (gerador, TSVs, relatórios, ZIP, APKG, `.colpkg`, TSVs
+de atualização) fica em `output/<CONCURSO>_<Tema>/` na raiz do repositório, fora do Git; o
+usuário apaga a pasta após importar. Regra completa em [GIT_E_ARQUIVOS.md](../../GIT_E_ARQUIVOS.md).
 
 Leia `references/uso_scripts.md` e use scripts existentes. Extração não equivale a OCR nem leitura visual; análise de backup não mede aprendizagem por si só. Similaridade textual não autoriza remoção. Gere apenas arquivos a partir de cartões semanticamente auditados conforme `../gerar-revisao-anki/references/auditoria-conteudo-gabaritos.md`; uma saída aprovada dos scripts não certifica gabarito. Não fabrique relatórios.
 

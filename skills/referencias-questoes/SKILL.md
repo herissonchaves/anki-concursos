@@ -35,7 +35,7 @@ python -X utf8 skills/referencias-questoes/scripts/referencias.py COMANDO
 | `fonte ID[#SEÇÃO]` | `(url, trecho)` de um conteúdo/notícia/edital para o `F = {...}` do `gerar_lote.py`. |
 | `importar ARQ.pdf\|.json\|.txt -o TMP.json [-p 17-19] [-d DISC] [-a ASSUNTO] [--ruido PALAVRA]` | Rascunho JSON das questões do arquivo, sem marcas-d'água; campos de julgamento como `REVISAR` (o `nova` recusa). |
 | `nova ARQ.json` (ou `-`) | Cria itens (questão ou, com `tipo`, documento); gera id e hash e recusa duplicatas. `--simular` só valida. |
-| `usar ID… --lote PRF/Missao_NN_Tema --cartoes D01,D02` | Registra o uso no lote (substitui o registro anterior do mesmo lote). |
+| `usar ID… --lote PRF_Tema --cartoes D01,D02` | Registra o uso no lote (substitui o registro anterior do mesmo lote). |
 | `calibracao ID…` | JSON das referências (só questões) no formato do `calibracao_cebraspe.json` v2. |
 | `validar` / `indexar [--atualizar-hash]` | Confere o banco / regera índice e árvore. |
 
