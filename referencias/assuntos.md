@@ -1,38 +1,51 @@
 # Assuntos do banco de referências
 
-Gerado por `referencias.py indexar`; não editar à mão. Total: 508 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
+Gerado por `referencias.py indexar`; não editar à mão. Total: 932 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
 
-- **administrativo** (41)
-  - agentes_publicos (8): independencia_das_instancias 2, mandato_eletivo 2, penalidades 2, provimento 2, reintegracao 2, regime_disciplinar 1, responsabilidades 1 · Cebraspe 7 · tipos: questao 7, prioridade 1
-  - atos_administrativos (4): anulacao_revogacao 2, delegacao 2, motivo 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
+- **administrativo** (62)
+  - agentes_publicos (11): penalidades 4, regime_disciplinar 3, independencia_das_instancias 2, mandato_eletivo 2, provimento 2, reintegracao 2, responsabilidades 1 · Cebraspe 9 · tipos: questao 9, prioridade 2
+  - atos_administrativos (6): anulacao_revogacao 2, atributos 2, delegacao 2, motivo 2 · Cebraspe 4 · tipos: questao 4, prioridade 2
   - carreira_prf (3): atribuicoes 2, promocao 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
-  - controle_administracao (4): controle_judicial 3, controle_externo 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
+  - controle_administracao (8): controle_judicial 5, autotutela 2, controle_externo 2, controle_interno 2 · Cebraspe 6 · tipos: questao 6, prioridade 2
   - improbidade (3): modalidades 2, sancoes 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
-  - licitacoes_contratos (2): contratacao_direta 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - organizacao_administrativa (3): administracao_direta 2, orgaos 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
-  - poderes_administrativos (4): abuso_de_poder 2, poder_de_policia 2, poder_disciplinar 1 · Cebraspe 3 · tipos: questao 3, prioridade 1
+  - licitacoes_contratos (4): contratacao_direta 4 · Cebraspe 2 · tipos: prioridade 2, questao 2
+  - organizacao_administrativa (7): administracao_direta 2, criterio_formal 2, descentralizacao 2, estatais 2, orgaos 2 · Cebraspe 5 · tipos: questao 5, prioridade 2
+  - poderes_administrativos (6): poder_disciplinar 3, abuso_de_poder 2, poder_de_policia 2 · Cebraspe 4 · tipos: questao 4, prioridade 2
   - prf_institucional (4): atribuicoes 2, competencias 2, historia_da_prf 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
-  - regime_juridico_principios (2): imperatividade 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - responsabilidade_civil (4): acao_de_regresso 2, concessionarias 2, responsabilidade_objetiva 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
-- **constitucional** (34)
+  - regime_juridico_principios (4): imperatividade 2, razoabilidade 2 · Cebraspe 2 · tipos: prioridade 2, questao 2
+  - responsabilidade_civil (6): acao_de_regresso 2, concessionarias 2, dupla_garantia 2, responsabilidade_objetiva 2 · Cebraspe 4 · tipos: questao 4, prioridade 2
+- **constitucional** (52)
   - aplicabilidade_normas (2): eficacia_contida 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - defesa_estado_seguranca_publica (5): estado_de_sitio 2, prf 2, seguranca_viaria 2 · Cebraspe 4 · tipos: questao 4, prioridade 1
-  - direitos_fundamentais (11): requisicao_administrativa 3, assistencia_juridica 2, confisco 2, direito_de_peticao 2, direitos_do_preso 2, escusa_de_consciencia 2, extradicao 2, liberdade_de_reuniao 2, habeas_data 1 · Cebraspe 10 · tipos: questao 10, prioridade 1
+  - defesa_estado_seguranca_publica (13): policia_federal 5, estado_de_sitio 2, prf 2, prf_e_pff 2, seguranca_viaria 2, estado_de_defesa 1, estado_de_defesa_e_sitio 1 · Cebraspe 11 · tipos: questao 11, prioridade 2
+  - direitos_fundamentais (14): requisicao_administrativa 3, assistencia_juridica 2, confisco 2, direito_de_peticao 2, direitos_do_preso 2, escusa_de_consciencia 2, extradicao 2, inafiancabilidade 2, liberdade_de_reuniao 2, sigilo_das_comunicacoes 2, habeas_data 1 · Cebraspe 12 · tipos: questao 12, prioridade 2
   - direitos_politicos (2): elegibilidade 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - nacionalidade (3): brasileiro_nato 2, perda_da_nacionalidade 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
+  - nacionalidade (5): brasileiro_nato 2, extradicao_de_naturalizado 2, perda_da_nacionalidade 2 · Cebraspe 3 · tipos: questao 3, prioridade 2
+  - ordem_social (3): indios 2, meio_ambiente 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
   - organizacao_estado (3): competencia_concorrente 2, distrito_federal 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
-  - poder_executivo (2): atribuicoes_presidente 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
+  - poder_executivo (4): atribuicoes_presidente 2, forma_e_sistema_de_governo 2 · Cebraspe 2 · tipos: prioridade 2, questao 2
   - poder_judiciario (2): competencia_originaria 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - principios_fundamentais (4): separacao_de_poderes 3, relacoes_internacionais 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
-- **direitos_humanos** (28)
+- **contabilidade** (79)
+  - balancete (5): finalidade 3, modelos 2, seis_colunas 2 · Cebraspe 4 · tipos: questao 4, prioridade 1
+  - conceitos_patrimonio (8): equacao_patrimonial 2, natureza 2, objeto 2, origens_aplicacoes 2, patrimonio 2, patrimonio_liquido 2, situacao_liquida 2 · Cebraspe 7 · tipos: questao 7, prioridade 1
+  - contas_fatos_contabeis (16): natureza_das_contas 4, classificacao_das_contas 3, fatos_mistos 3, fatos_modificativos 3, fatos_permutativos 3, lancamentos 3, equacao_patrimonial 2, contas_de_compensacao 1 · Cebraspe 15 · tipos: questao 15, prioridade 1
+  - demonstracoes_contabeis (13): dre 7, balanco_patrimonial 4, patrimonio_liquido 3, criterios_de_avaliacao 2 · Cebraspe 12 · tipos: questao 12, prioridade 1
+  - escrituracao (11): regime_de_competencia 5, livros_contabeis 4, formulas_de_lancamento 3, adiantamento_de_clientes 2 · Cebraspe 10 · tipos: questao 10, prioridade 1
+  - legislacao_normas (13): caracteristicas_qualitativas 6, bases_de_mensuracao 3, cpc_classificacao 3, definicao_de_ativo 2, lei_6404 2, objetivo_do_relatorio 2 · Cebraspe 12 · tipos: questao 12, prioridade 1
+  - operacoes_contabeis (13): depreciacao 5, perdas_estimadas 3, provisoes 3, amortizacao 2, desconto_de_duplicatas 2, despesas_antecipadas 2, resultado_com_mercadorias 2 · Cebraspe 12 · tipos: questao 12, prioridade 1
+- **direitos_humanos** (35)
   - convencao_americana (2): responsabilidade_internacional 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - direitos_humanos_cf (5): direito_de_reuniao 2, estrangeiros 2, identidade_de_genero 2, inviolabilidade_domicilio 2 · Cebraspe 4 · tipos: questao 4, prioridade 1
   - dudh (2): dignidade_humana 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - politica_nacional (2): pndh 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - sistema_global (4): carta_internacional 2, responsabilidade_internacional 2, vertentes_de_protecao 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
+  - sistema_global (11): regras_de_mandela 4, carta_internacional 2, convencao_contra_tortura 2, estatuto_dos_refugiados 2, pidcp 2, responsabilidade_internacional 2, vertentes_de_protecao 2 · Cebraspe 9 · tipos: questao 9, prioridade 2
   - teoria_geral (5): afirmacao_historica 2, fundamentacao 2, geracoes 2, universalidade 2 · Cebraspe 4 · tipos: questao 4, prioridade 1
   - tratados_cf (5): rito_de_aprovacao 3, status_normativo 3 · Cebraspe 4 · tipos: questao 4, prioridade 1
   - uso_da_forca (3): arma_de_fogo_veiculo 2, disparo_de_advertencia 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
+- **estatistica** (33)
+  - inferencia (8): intervalo_de_confianca 3, maxima_verossimilhanca 3, erro_padrao 2, estatistica_suficiente 2, minimos_quadrados 2 · Cebraspe 7 · tipos: questao 7, prioridade 1
+  - probabilidade_distribuicoes (15): soma_de_normais 4, padronizacao 3, variavel_continua 3, binomial 2, distribuicao_marginal 2, esperanca 2, funcao_densidade 2, normal 2, esperanca_condicional 1, independencia 1 · Cebraspe 14 · tipos: questao 14, prioridade 1
+  - regressao_correlacao (10): correlacao 4, reta_ajustada 3, coeficiente_angular 2, teste_t 2, variancia 2, variancia_residual 2 · Cebraspe 9 · tipos: questao 9, prioridade 1
 - **etica** (22)
   - acesso_informacao (2): pedido_de_acesso 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - cidadania (3): direitos_de_cidadania 2, pluralismo_juridico 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
@@ -54,63 +67,77 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 508 itens. Form
 - **geral** (2)
   - pf_agente (1): agente_de_policia_federal 1, programa 1 · tipos: edital 1
   - prf (1): policial_rodoviario_federal 1, programa 1 · tipos: edital 1
-- **informatica** (29)
-  - computacao_nuvem (3): modelos_de_servico 3 · Cebraspe 2 · tipos: questao 2, prioridade 1
+- **informatica** (147)
+  - banco_dados (18): modelo_er 4, sql 4, transacoes_acid 4, chaves 3, dados_estruturados 3, atributos_registros 2, metadados 2, modelo_relacional 2, integridade 1 · Cebraspe 17 · tipos: questao 17, prioridade 1
+  - ciencia_dados (11): aprendizado_de_maquina 5, big_data 3, mineracao_de_dados 3, clustering 2, entropia 2 · Cebraspe 10 · tipos: questao 10, prioridade 1
+  - computacao_nuvem (12): modelos_de_servico 9, conceito 2, elasticidade 2, migracao 2 · Cebraspe 10 · tipos: questao 10, prioridade 2
   - correio_eletronico (4): outlook 2, protocolos 2, smtp 2, assinatura_digital 1, comandos_de_mensagem 1, firewall 1, pop3 1, portas 1, seguranca 1 · Cebraspe 4 · tipos: questao 4
-  - editores_planilhas (4): writer 3, calc 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
-  - navegadores_internet (5): busca_google 2, gerenciamento_de_senhas 2, protocolos 2, chrome 1 · Cebraspe 4 · tipos: questao 4, prioridade 1
-  - redes (3): acesso_remoto 2, qualidade_de_servico 1 · Cebraspe 2 · tipos: questao 2, prioridade 1
-  - seguranca_informacao (6): malware 4, antispyware 1, firewall 1 · Cebraspe 5 · tipos: questao 5, prioridade 1
-  - sistemas_operacionais (2): windows_sincronizacao 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
+  - editores_planilhas (8): writer 3, calc 2, excel_preenchimento_relampago 2, powerpoint_impress 2, visio_draw 1 · Cebraspe 6 · tipos: questao 6, prioridade 2
+  - navegadores_internet (14): busca_google 4, chrome_senhas 2, ferramentas_de_busca 2, ferramentas_e_aplicativos 2, gerenciamento_de_senhas 2, https_cadeado 2, multimidia 2, protocolos 2, transferencia_de_arquivos 2, chrome 1, internet_intranet 1 · Cebraspe 12 · tipos: questao 12, prioridade 2
+  - programacao (12): python 6, api 4, r 4 · Cebraspe 11 · tipos: questao 11, prioridade 1
+  - redes (26): modelos_osi_tcpip 4, acesso_remoto 3, camada_de_enlace 3, camada_de_transporte 3, classificacao 3, dns 3, enderecamento_ip 3, dns_whois 2, proxy 2, camada_de_rede 1, comutacao 1, dns_udp 1, modos_de_transmissao 1, protocolo_ip 1, protocolos_de_aplicacao 1, qualidade_de_servico 1 · Cebraspe 24 · tipos: questao 24, prioridade 2
+  - seguranca_informacao (20): malware 7, autenticacao 4, biometria 3, ferramentas 3, antivirus_heuristica 2, furto_de_identidade 2, ransomware 2, sandboxing 2, antispyware 1, firewall 1 · Cebraspe 18 · tipos: questao 18, prioridade 2
+  - sistemas_informacao (13): dado_informacao_conhecimento 5, desenvolvimento_de_sistemas 5, teoria_geral_dos_sistemas 5 · Cebraspe 12 · tipos: questao 12, prioridade 1
+  - sistemas_operacionais (7): comandos_de_rede 2, linux_comandos 2, linux_permissoes 2, windows_defender 2, windows_sincronizacao 2 · Cebraspe 5 · tipos: questao 5, prioridade 2
   - transformacao_digital (2): iot_big_data 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
 - **ingles** (10)
   - interpretacao (7): compreensao_detalhe 4, comparacao 2, inferencia 2, compreensao_global 1 · Cebraspe 6 · tipos: questao 6, prioridade 1
   - vocabulario (3): conectores 2, referencia_pronominal 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
-- **legislacao_especial** (38)
+- **legislacao_especial** (63)
   - abuso_autoridade (3): elemento_subjetivo 2, sujeito_ativo 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
-  - armas (5): comercio_ilegal 2, municoes 2, porte 2, porte_funcional 2 · Cebraspe 4 · tipos: questao 4, prioridade 1
+  - armas (7): comercio_ilegal 2, municoes 2, omissao_de_comunicacao 2, porte 2, porte_funcional 2 · Cebraspe 5 · tipos: questao 5, prioridade 2
+  - atribuicoes_pf (2): repercussao_interestadual 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - contravencoes (2): uso_ilegitimo_de_uniforme 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - crimes_ambientais (3): fauna 2, flora 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
+  - crimes_ambientais (7): fauna 4, acao_penal 2, flora 2, pesca 2 · Cebraspe 5 · tipos: questao 5, prioridade 2
   - crimes_hediondos (3): furto_qualificado_explosivo 2, rol 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
-  - drogas (4): prevencao 2, usuario 2, consumo_compartilhado 1 · Cebraspe 3 · tipos: questao 3, prioridade 1
-  - eca (2): exploracao_sexual 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
+  - drogas (8): apreensao_de_bens 2, prevencao 2, trafico_interestadual 2, trafico_transnacional 2, usuario 2, consumo_compartilhado 1 · Cebraspe 6 · tipos: questao 6, prioridade 2
+  - eca (4): ato_infracional 2, exploracao_sexual 2 · Cebraspe 2 · tipos: prioridade 2, questao 2
+  - identificacao_civil (3): carteira_de_identidade 2, servico_de_identificacao 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
   - idoso (2): omissao_de_socorro 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - juizados_especiais (2): atos_processuais 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - maria_da_penha (2): relacao_intima 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
+  - migracao (4): deportacao 2, expulsao 2, extradicao_prisao_cautelar 1 · Cebraspe 3 · tipos: questao 3, prioridade 1
   - organizacoes_criminosas (2): infiltracao 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - racismo (2): lei_7716 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - tortura (3): tortura_castigo 2, vestigios 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
+  - seguranca_privada (2): autorizacao_de_funcionamento 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
+  - tortura (5): regime_inicial 2, tortura_castigo 2, vestigios 2 · Cebraspe 3 · tipos: questao 3, prioridade 2
   - trafico_pessoas (3): consentimento 2, politica_nacional 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
-- **penal** (29)
+- **logica** (34)
+  - argumentacao (6): deducao 3, validade 3, verdades_e_mentiras 2 · Cebraspe 5 · tipos: questao 5, prioridade 1
+  - conjuntos (7): diferenca 2, inclusao 2, intersecao 2, raciocinio 2, uniao 2, uniao_intersecao 2 · Cebraspe 6 · tipos: questao 6, prioridade 1
+  - contagem_probabilidade (8): combinacao 5, probabilidade 3, casa_dos_pombos 2 · Cebraspe 7 · tipos: questao 7, prioridade 1
+  - logica_proposicional (13): equivalencia 4, negacao 3, tabela_verdade 3, condicional_bicondicional 2, negacao_de_quantificadores 2, tautologia 2, valor_logico 2, proposicoes_simples_compostas 1 · Cebraspe 12 · tipos: questao 12, prioridade 1
+- **penal** (39)
   - concurso_pessoas (2): teoria_monista 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - crimes_administracao_publica (6): concussao_corrupcao 2, corrupcao_ativa 2, descaminho 2, facilitacao_descaminho 2, peculato 2 · Cebraspe 5 · tipos: questao 5, prioridade 1
+  - crimes_administracao_publica (9): descaminho 4, concussao_corrupcao 2, corrupcao_ativa 2, facilitacao_descaminho 2, peculato 2, prevaricacao 2 · Cebraspe 7 · tipos: questao 7, prioridade 2
   - crimes_fe_publica (3): adulteracao_sinal_identificador 3 · Cebraspe 2 · tipos: questao 2, prioridade 1
-  - crimes_patrimonio (3): furto_fraude_estelionato 2, roubo_consumacao 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
+  - crimes_patrimonio (7): furto_fraude_estelionato 2, furto_qualificado 2, receptacao 2, roubo_consumacao 2, roubo_majorado 2 · Cebraspe 5 · tipos: questao 5, prioridade 2
   - crimes_pessoa (2): trafico_de_pessoas 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - culpabilidade (2): embriaguez 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - principios_aplicacao (6): conflito_aparente_de_normas 2, legalidade 2, legalidade_analogia 2, legalidade_medida_provisoria 2, lei_penal_no_tempo 2 · Cebraspe 5 · tipos: questao 5, prioridade 1
+  - principios_aplicacao (9): lei_penal_no_tempo 4, conflito_aparente_de_normas 2, legalidade 2, legalidade_analogia 2, legalidade_medida_provisoria 2, lei_penal_no_espaco 2 · Cebraspe 7 · tipos: questao 7, prioridade 2
   - teoria_crime (5): consumacao_tentativa 3, crime_impossivel 2, estrutura_do_crime 2 · Cebraspe 4 · tipos: questao 4, prioridade 1
-- **portugues** (65)
-  - coesao_referenciacao (8): conectores 5, pronomes 3, referente 2 · Cebraspe 7 · tipos: questao 7, prioridade 1
+- **portugues** (134)
+  - coesao_referenciacao (15): conectores 8, pronomes 6, referente 5 · Cebraspe 13 · tipos: questao 13, prioridade 2
   - colocacao_pronominal (3): proclise 2, proclise_enclise 1 · Cebraspe 2 · tipos: questao 2, prioridade 1
-  - concordancia (2): infinitivo_flexionado 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - interpretacao (17): inferencia 10, compreensao 5, extrapolacao 3, ironia 2 · Cebraspe 16 · tipos: questao 16, prioridade 1
-  - morfossintaxe (7): artigo 2, conjuncoes 2, expressao_de_realce 2, oracao_adjetiva 2, pronome_relativo 2, sujeito 2 · Cebraspe 6 · tipos: questao 6, prioridade 1
+  - concordancia (5): infinitivo_flexionado 2, pronome_relativo 2, sujeito_composto 2 · Cebraspe 3 · tipos: questao 3, prioridade 2
+  - interpretacao (34): inferencia 17, extrapolacao 10, compreensao 9, ironia 4 · Cebraspe 32 · tipos: questao 32, prioridade 2
+  - morfossintaxe (16): pronome_relativo 4, sujeito 4, artigo 2, conjuncoes 2, elipse 2, expressao_de_realce 2, funcao_sintatica 2, oracao_adjetiva 2, oracoes_subordinadas 2, palavra_denotativa 2, particula_se 2, pronome_obliquo 2 · Cebraspe 14 · tipos: questao 14, prioridade 2
   - ortografia_acentuacao (2): regras_de_acentuacao 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - pontuacao (3): adverbio 2, oracao_adjetiva 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
-  - redacao_oficial (6): atributos 2, campo_assunto 2, correio_eletronico 2, identificacao_signatario 2, vocativo 2 · Cebraspe 5 · tipos: questao 5, prioridade 1
-  - reescrita (8): correcao_e_sentido 5, conectores 2, crase 2, voz_passiva 2 · Cebraspe 7 · tipos: questao 7, prioridade 1
-  - semantica (5): significacao_palavras 4, pronome_indefinido 2 · Cebraspe 4 · tipos: questao 4, prioridade 1
-  - tempos_modos_verbais (2): indicativo_subjuntivo 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - tipologia_textual (2): tipo_e_objetivo 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-- **processual_penal** (29)
+  - pontuacao (10): virgula 5, adverbio 2, oracao_adjetiva 2, ponto_e_virgula 2, travessao 2 · Cebraspe 8 · tipos: questao 8, prioridade 2
+  - redacao_oficial (18): correio_eletronico 4, pronomes_de_tratamento 3, atributos 2, campo_assunto 2, clareza 2, concisao 2, datas 2, enderecamento 2, exposicao_de_motivos 2, identificacao_signatario 2, padrao_culto 2, vocativo 2, impessoalidade 1, padrao_oficio 1 · Cebraspe 16 · tipos: questao 16, prioridade 2
+  - reescrita (11): correcao_e_sentido 7, conectores 2, crase 2, discurso_direto_indireto 2, voz_passiva 2 · Cebraspe 9 · tipos: questao 9, prioridade 2
+  - regencia_crase (3): crase 2, crase_facultativa 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
+  - semantica (9): significacao_palavras 7, polissemia 2, pronome_indefinido 2 · Cebraspe 7 · tipos: questao 7, prioridade 2
+  - tempos_modos_verbais (4): futuro_presente 2, indicativo_subjuntivo 2 · Cebraspe 2 · tipos: prioridade 2, questao 2
+  - tipologia_textual (4): tipo_e_objetivo 4 · Cebraspe 2 · tipos: prioridade 2, questao 2
+- **processual_penal** (39)
   - acao_penal (4): especies 2, indisponibilidade 2, procedimento_especial 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
   - aplicacao_lei_processual (2): analogia 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - competencia (2): contravencao_penal 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - identificacao_criminal (3): hipoteses 3 · Cebraspe 2 · tipos: questao 2, prioridade 1
-  - inquerito_policial (2): dispensabilidade 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - prisao (10): flagrante 5, auto_de_prisao 3, habeas_corpus 2, prisao_domiciliar 2, prisao_temporaria 2 · Cebraspe 9 · tipos: questao 9, prioridade 1
-  - prova (6): busca_domiciliar 2, busca_veicular 2, prova_testemunhal 2, provas_ilicitas 2, busca_e_apreensao 1 · Cebraspe 5 · tipos: questao 5, prioridade 1
+  - inquerito_policial (6): instauracao 3, dispensabilidade 2, natureza 2 · Cebraspe 4 · tipos: questao 4, prioridade 2
+  - prisao (13): flagrante 7, auto_de_prisao 3, flagrante_preparado 2, habeas_corpus 2, prisao_domiciliar 2, prisao_temporaria 2 · Cebraspe 11 · tipos: questao 11, prioridade 2
+  - prova (9): acareacao 2, busca_domiciliar 2, busca_veicular 2, cadeia_de_custodia 2, prova_testemunhal 2, provas_ilicitas 2, busca_e_apreensao 1 · Cebraspe 7 · tipos: questao 7, prioridade 2
 - **rlm** (30)
   - estatistica_descritiva (2): media_mediana 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - funcoes (8): funcao_quadratica 4, exponencial 3, funcao_afim 3 · Cebraspe 7 · tipos: questao 7, prioridade 1

@@ -1,0 +1,45 @@
+---
+id: cebraspe-2021-pf-084
+tipo: questao
+banca: Cebraspe
+formato: certo_errado
+ano: 2021
+orgao: PF
+concurso: "PF — Concurso 2021 (Edital nº 1/2021 – DGP/PF)"
+cargo: "Agente de Polícia Federal (cargo 2)"
+caderno: 577_PF_002_00
+item: "84"
+disciplina: informatica
+assunto: programacao
+subassuntos: [python]
+palavras_chave: [python, bool, "operadores lógicos"]
+gabarito: E
+gabarito_status: definitivo
+url: "https://cdn.cebraspe.org.br/concursos/PF_21/arquivos/CARGO_2_AGENTE_DE_POLCIA_FEDERAL.PDF"
+gabarito_url: "https://cdn.cebraspe.org.br/concursos/PF_21/arquivos/GAB_DEFINITIVO_MATRIZ_577_PF_002_00.PDF"
+origem: pesquisa_internet
+fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (página do concurso PF_21), p. 8"
+consulta: 2026-11-21
+concursos_alvo: [PF_AGENTE, PRF]
+operacao_observada: "Avaliação de bool() de números e strings em Python."
+usado_em: []
+hash: 684227ef91ee7899
+---
+# Cebraspe 2021 — PF — item 84
+
+## Enunciado
+
+> Com relação a conceitos de programação Python e R, julgue os itens que se seguem.
+
+O código Python a seguir apresenta como resultado "True".
+
+```python
+x = bool(-3)
+y = bool("True"*x)
+z = bool("False")
+print (x and y and z)
+```
+
+## Gabarito
+
+**Errado** — definitivo ([gabarito oficial](https://cdn.cebraspe.org.br/concursos/PF_21/arquivos/GAB_DEFINITIVO_MATRIZ_577_PF_002_00.PDF))
