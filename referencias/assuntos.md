@@ -1,6 +1,6 @@
 # Assuntos do banco de referências
 
-Gerado por `referencias.py indexar`; não editar à mão. Total: 932 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
+Gerado por `referencias.py indexar`; não editar à mão. Total: 933 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
 
 - **administrativo** (62)
   - agentes_publicos (11): penalidades 4, regime_disciplinar 3, independencia_das_instancias 2, mandato_eletivo 2, provimento 2, reintegracao 2, responsabilidades 1 · Cebraspe 9 · tipos: questao 9, prioridade 2
@@ -64,9 +64,9 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 932 itens. Form
   - estrutura_urbana (3): hierarquia_urbana 3 · Cebraspe 2 · tipos: questao 2, prioridade 1
   - internacionalizacao_economia (2): globalizacao 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - transportes (6): rodoviarismo 3, integracao_regional 2, modais_e_infraestrutura 2, rede_rodoviaria 2 · Cebraspe 5 · tipos: questao 5, prioridade 1
-- **geral** (2)
+- **geral** (3)
   - pf_agente (1): agente_de_policia_federal 1, programa 1 · tipos: edital 1
-  - prf (1): policial_rodoviario_federal 1, programa 1 · tipos: edital 1
+  - prf (2): edital 1, policial_rodoviario_federal 1, programa 1, situacao_concurso 1 · tipos: edital 1, noticia 1
 - **informatica** (147)
   - banco_dados (18): modelo_er 4, sql 4, transacoes_acid 4, chaves 3, dados_estruturados 3, atributos_registros 2, metadados 2, modelo_relacional 2, integridade 1 · Cebraspe 17 · tipos: questao 17, prioridade 1
   - ciencia_dados (11): aprendizado_de_maquina 5, big_data 3, mineracao_de_dados 3, clustering 2, entropia 2 · Cebraspe 10 · tipos: questao 10, prioridade 1
