@@ -31,6 +31,10 @@
       "tracks": [
         "PRF",
         "PF_AGENTE"
+      ],
+      "baralhos": [
+        "Língua Portuguesa",
+        "Português"
       ]
     },
     {
@@ -39,6 +43,11 @@
       "skill_path": "../raciocinio-logico-matematico-prf/SKILL.md",
       "tracks": [
         "PRF"
+      ],
+      "baralhos": [
+        "Raciocínio Lógico-Matemático",
+        "Matemática",
+        "Raciocínio Lógico"
       ]
     },
     {
@@ -47,6 +56,10 @@
       "skill_path": "../raciocinio-logico-pf/SKILL.md",
       "tracks": [
         "PF_AGENTE"
+      ],
+      "baralhos": [
+        "Raciocínio Lógico",
+        "Matemática"
       ]
     },
     {
@@ -56,6 +69,9 @@
       "tracks": [
         "PRF",
         "PF_AGENTE"
+      ],
+      "baralhos": [
+        "Informática"
       ]
     },
     {
@@ -64,6 +80,9 @@
       "skill_path": "../fisica-prf/SKILL.md",
       "tracks": [
         "PRF"
+      ],
+      "baralhos": [
+        "Física"
       ]
     },
     {
@@ -72,6 +91,10 @@
       "skill_path": "../etica-cidadania-prf/SKILL.md",
       "tracks": [
         "PRF"
+      ],
+      "baralhos": [
+        "Ética e Cidadania",
+        "Ética"
       ]
     },
     {
@@ -80,6 +103,9 @@
       "skill_path": "../geopolitica-prf/SKILL.md",
       "tracks": [
         "PRF"
+      ],
+      "baralhos": [
+        "Geopolítica"
       ]
     },
     {
@@ -88,6 +114,9 @@
       "skill_path": "../ingles-policiais/SKILL.md",
       "tracks": [
         "PRF"
+      ],
+      "baralhos": [
+        "Inglês"
       ]
     },
     {
@@ -96,6 +125,9 @@
       "skill_path": "../legislacao-transito-cebraspe/SKILL.md",
       "tracks": [
         "PRF"
+      ],
+      "baralhos": [
+        "Legislação de Trânsito"
       ]
     },
     {
@@ -105,6 +137,9 @@
       "tracks": [
         "PRF",
         "PF_AGENTE"
+      ],
+      "baralhos": [
+        "Direito Administrativo"
       ]
     },
     {
@@ -114,6 +149,9 @@
       "tracks": [
         "PRF",
         "PF_AGENTE"
+      ],
+      "baralhos": [
+        "Direito Constitucional"
       ]
     },
     {
@@ -123,6 +161,9 @@
       "tracks": [
         "PRF",
         "PF_AGENTE"
+      ],
+      "baralhos": [
+        "Direito Penal"
       ]
     },
     {
@@ -132,6 +173,9 @@
       "tracks": [
         "PRF",
         "PF_AGENTE"
+      ],
+      "baralhos": [
+        "Direito Processual Penal"
       ]
     },
     {
@@ -141,6 +185,9 @@
       "tracks": [
         "PRF",
         "PF_AGENTE"
+      ],
+      "baralhos": [
+        "Direitos Humanos"
       ]
     },
     {
@@ -150,6 +197,10 @@
       "tracks": [
         "PRF",
         "PF_AGENTE"
+      ],
+      "baralhos": [
+        "Legislação Especial",
+        "Legislação Penal Especial"
       ]
     },
     {
@@ -158,6 +209,9 @@
       "skill_path": "../estatistica-pf/SKILL.md",
       "tracks": [
         "PF_AGENTE"
+      ],
+      "baralhos": [
+        "Estatística"
       ]
     },
     {
@@ -166,6 +220,10 @@
       "skill_path": "../contabilidade-geral-pf/SKILL.md",
       "tracks": [
         "PF_AGENTE"
+      ],
+      "baralhos": [
+        "Contabilidade Geral",
+        "Contabilidade"
       ]
     }
   ]

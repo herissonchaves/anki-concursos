@@ -198,18 +198,45 @@ def prioridades_do_banco(alvo: str = 'PRF', raiz: Path = RAIZ):
     return sorted(saida, key=lambda p: (p['prioridade'] != 'alta', p['disciplina'], p['assunto']))
 
 
-def lacunas(col: Colecao, alvo: str = 'PRF', raiz: Path = RAIZ, min_notas: int = 3):
-    """Cruza prioridades do banco com a coleção (casamento de palavras: indício, não prova)."""
+def baralhos_por_disciplina(raiz: Path = RAIZ) -> dict[str, list[str]]:
+    """id da disciplina -> nomes de baralho aceitos (`baralhos` de disciplinas.json, ou o rótulo)."""
+    arq = Path(raiz) / 'skills' / 'perfil-carreiras-policiais' / 'references' / 'disciplinas.json'
+    if not arq.is_file():
+        return {}
+    dados = json.loads(arq.read_text(encoding='utf-8'))
+    return {s['id']: s.get('baralhos') or [s['label']] for s in dados.get('subjects', [])}
+
+
+def _tem_termo(texto: str, termo: str) -> bool:
+    return f' {termo} ' in f' {texto} '  # palavra ou expressão inteira, não pedaço de palavra
+
+
+def lacunas(col: Colecao, alvo: str = 'PRF', raiz: Path = RAIZ, min_notas: int = 3, max_freq: float = 0.3):
+    """Cruza prioridades do banco com a coleção (casamento de palavras: indício, não prova).
+
+    Cada disciplina só é comparada com o(s) próprio(s) baralho(s) (`baralhos` em disciplinas.json);
+    disciplina sem baralho na coleção fica `sem_baralho`. Termos presentes em mais de `max_freq` das
+    notas do baralho (palavras comuns como "que", "isso") são descartados.
+    """
+    mapa = baralhos_por_disciplina(raiz)
+    topo = {normalized(n.split('::')[0]) for n in col.decks.values()}
     notas = list(col.notes())
     res = []
     for p in prioridades_do_banco(alvo, raiz):
-        achadas = [n for n in notas if any(t in n['texto'] for t in p['termos'])] if p['termos'] else []
+        nomes = {normalized(b) for b in mapa.get(p['disciplina'], [])}
+        do_baralho = [n for n in notas if normalized(n['baralho'].split('::')[0]) in nomes]
+        if not (nomes & topo):
+            res.append({**p, 'notas': 0, 'lapsos': 0, 'termos': [], 'situacao': 'sem_baralho'})
+            continue
+        termos = [t for t in p['termos']
+                  if sum(_tem_termo(n['texto'], t) for n in do_baralho) <= max_freq * max(len(do_baralho), 1)]
+        achadas = [n for n in do_baralho if any(_tem_termo(n['texto'], t) for t in termos)]
         lap = sum(n['lapsos'] for n in achadas)
-        res.append({**p, 'notas': len(achadas), 'lapsos': lap, 'termos': p['termos'][:12],
-                    'situacao': 'sem_notas' if not achadas else ('poucas_notas' if len(achadas) < min_notas
-                                                                   else ('muitos_lapsos' if lap >= 2 * len(achadas) else 'coberto'))})
-    ordem = {'sem_notas': 0, 'poucas_notas': 1, 'muitos_lapsos': 2, 'coberto': 3}
-    return sorted(res, key=lambda r: (ordem[r['situacao']], r['prioridade'] != 'alta'))
+        situacao = ('sem_notas' if not achadas else 'poucas_notas' if len(achadas) < min_notas
+                    else 'muitos_lapsos' if lap >= 2 * len(achadas) else 'coberto')
+        res.append({**p, 'notas': len(achadas), 'lapsos': lap, 'termos': termos[:12], 'situacao': situacao})
+    ordem = {'sem_baralho': 0, 'sem_notas': 1, 'poucas_notas': 2, 'muitos_lapsos': 3, 'coberto': 4}
+    return sorted(res, key=lambda r: (ordem[r['situacao']], r['prioridade'] != 'alta', r['disciplina']))
 
 
 def duplicatas(col: Colecao, tsv: Path, limiar=88.0, limite=100):
@@ -296,9 +323,20 @@ def main(argv=None):
             if not res:
                 print(f'Nenhuma prioridade Alta/Média para {a.alvo} em referencias/. Rode uma triagem e salve-a como prioridade.')
             print(f'Prioridades {a.alvo} do banco × coleção (casamento de palavras: indício, confira com buscar)\n')
+            sem = {}
+            for r in res:
+                if r['situacao'] == 'sem_baralho':
+                    sem.setdefault(r['disciplina'], []).append(r)
+            if sem:
+                print('Disciplinas sem baralho na coleção (nada estudado no Anki):')
+                for disc, itens in sorted(sem.items()):
+                    altas = [r['assunto'] for r in itens if r['prioridade'] == 'alta']
+                    print(f'  {disc}: {len(itens)} assunto(s) Alta/Média; Alta: {", ".join(altas) or "-"}')
+                print()
             print('situação | prioridade | disciplina/assunto | notas | lapsos | prioridade (ID)')
             for r in res:
-                print(f'{r["situacao"]} | {r["prioridade"]} | {r["disciplina"]}/{r["assunto"]} | {r["notas"]} | {r["lapsos"]} | {r["id"]}')
+                if r['situacao'] != 'sem_baralho':
+                    print(f'{r["situacao"]} | {r["prioridade"]} | {r["disciplina"]}/{r["assunto"]} | {r["notas"]} | {r["lapsos"]} | {r["id"]}')
             print('\nAssuntos do edital sem prioridade salva não aparecem aqui: veja o edital no banco e triagens futuras.')
     return 0
 

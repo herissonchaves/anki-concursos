@@ -20,7 +20,7 @@ uv run --no-project python -I -X utf8 skills/automacao-anki-python/scripts/colec
 | `resumo` / `listar [--tag T] [--saida f.tsv]` | baralhos, novos, suspensos, lapsos, tags / despejo para auditoria |
 | `dificeis [--min-lapsos 2]` | notas com mais lapsos ou `leech` (caderno de erros, melhoria) |
 | `desempenho [--dias 30]` | por disciplina: vencidos, próximos 7 dias, acerto e segundos por revisão |
-| `lacunas [--alvo PRF]` | prioridades Alta/Média de `referencias/` × notas da coleção: `sem_notas`, `poucas_notas`, `muitos_lapsos` |
+| `lacunas [--alvo PRF]` | prioridades Alta/Média de `referencias/` × notas do baralho da disciplina (`baralhos` em `disciplinas.json`; palavras comuns descartadas): `sem_baralho`, `sem_notas`, `poucas_notas`, `muitos_lapsos` |
 
 ## Revisar e devolver coleção existente
 

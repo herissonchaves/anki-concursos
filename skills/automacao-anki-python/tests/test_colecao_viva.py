@@ -1,5 +1,6 @@
 """Leitor da coleção viva: consulta em cópia e nunca altera o arquivo original."""
 from hashlib import sha256
+import json
 import sqlite3
 import time
 
@@ -42,6 +43,12 @@ def fazer_colecao(pasta):
 
 
 def fazer_banco(raiz):
+    perfil = raiz / 'skills' / 'perfil-carreiras-policiais' / 'references'
+    perfil.mkdir(parents=True)
+    (perfil / 'disciplinas.json').write_text(json.dumps({'subjects': [
+        {'id': 'transito', 'label': 'Legislação de Trânsito'},
+        {'id': 'portugues', 'label': 'Língua Portuguesa', 'baralhos': ['Língua Portuguesa', 'Português']},
+    ]}), encoding='utf-8')
     pasta = raiz / 'referencias'
     pasta.mkdir()
     linhas = [
@@ -51,6 +58,8 @@ def fazer_banco(raiz):
          'subassuntos': '', 'status': 'vigente', 'alvos': 'PRF', 'palavras': 'embarque;imobilização'},
         {'id': 'prio-b', 'tipo': 'prioridade', 'titulo': 'Crimes', 'disciplina': 'transito', 'assunto': 'crimes',
          'subassuntos': 'homicidio_culposo', 'status': 'media', 'alvos': 'PRF', 'palavras': 'prf'},
+        {'id': 'prio-p', 'tipo': 'prioridade', 'titulo': 'Coesão', 'disciplina': 'portugues', 'assunto': 'coesao',
+         'subassuntos': 'conectores', 'status': 'alta', 'alvos': 'PRF', 'palavras': 'para;embarque'},
         {'id': 'prio-c', 'tipo': 'prioridade', 'titulo': 'Baixa', 'disciplina': 'transito', 'assunto': 'x',
          'subassuntos': 'zzzz', 'status': 'baixa', 'alvos': 'PRF', 'palavras': ''},
     ]
@@ -79,10 +88,22 @@ def test_lacunas_cruza_prioridades_com_notas(tmp_path):
     db = fazer_colecao(tmp_path)
     fazer_banco(tmp_path)
     with Colecao(db) as col:
-        res = {r['id']: r for r in lacunas(col, 'PRF', raiz=tmp_path, min_notas=1)}
-    assert set(res) == {'prio-a', 'prio-b'}
+        res = {r['id']: r for r in lacunas(col, 'PRF', raiz=tmp_path, min_notas=1, max_freq=0.6)}
+    assert set(res) == {'prio-a', 'prio-b', 'prio-p'}
     assert res['prio-a']['notas'] == 1 and res['prio-a']['situacao'] == 'coberto'
     assert res['prio-b']['situacao'] == 'sem_notas'
+    # Português não tem baralho: "embarque" do baralho de Trânsito não conta como cobertura.
+    assert res['prio-p']['situacao'] == 'sem_baralho'
+
+
+def test_lacunas_descarta_palavra_comum_do_baralho(tmp_path):
+    db = fazer_colecao(tmp_path)
+    fazer_banco(tmp_path)
+    with Colecao(db) as col:
+        res = {r['id']: r for r in lacunas(col, 'PRF', raiz=tmp_path, min_notas=1, max_freq=0.4)}
+    # "embarque" e "imobilizacao" estão em 1 das 2 notas do baralho (50% > 40%): palavras comuns, descartadas.
+    assert 'embarque' not in res['prio-a']['termos'] and 'imobilizacao' not in res['prio-a']['termos']
+    assert res['prio-a']['situacao'] == 'sem_notas'
 
 
 def test_duplicatas_e_cli(tmp_path, capsys):
