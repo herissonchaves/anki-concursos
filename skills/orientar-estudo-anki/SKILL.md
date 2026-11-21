@@ -5,7 +5,7 @@ description: Orienta rotina Anki, recuperação ativa, botões de resposta, FSRS
 
 # Estudo e manutenção no Anki
 
-Leia `../gerar-revisao-anki/references/nucleo-pedagogico.md`. Utilize dados já fornecidos; pergunte tempo disponível e clientes/versões apenas se necessários para uma recomendação específica. Para configurações, confira o manual oficial atual, pois nomes e recursos variam entre versões.
+Leia `../gerar-revisao-anki/references/nucleo-pedagogico.md`. Antes de orientar, meça na coleção viva (somente leitura): `../automacao-anki-python/scripts/colecao_anki.py desempenho` (vencidos, acerto, segundos por revisão por disciplina), `dificeis` (lapsos e leeches) e `lacunas --alvo PRF` (prioridades Alta/Média do banco `referencias/` com poucas notas ou muitos lapsos). Responda "o que revisar ou estudar agora" com esses números, priorizando acerto baixo, lapsos concentrados e lacunas Alta. Utilize também dados já fornecidos; pergunte tempo disponível e clientes/versões apenas se necessários para uma recomendação específica. Para configurações, confira o manual oficial atual, pois nomes e recursos variam entre versões.
 
 1. Estudar a explicação antes de memorizar; tentar recuperar antes de mostrar resposta. Em C/E, recuperar motivo ou correção da proposição; acertar por chute não satisfaz esse critério. Não escrever uma dissertação em cada revisão.
 2. Usar Novamente/Again para esquecimento ou erro; Difícil/Hard para lembrança correta com esforço; Bom/Good para lembrança correta normal; Fácil/Easy para lembrança imediata. Não ensinar a marcar Difícil quando esqueceu. O critério de correção deve corresponder ao alvo do cartão; exigir literalidade só quando necessária.

@@ -22,7 +22,8 @@ compreensão inicial, exercícios extensos ou trechos ilegíveis.
 - **Questões do PDF:** todas vão para o banco (`referencias.py importar` + `nova`). O conteúdo de
   cada uma recebe prioridade como qualquer unidade; a questão é evidência de cobrança, mas questão
   de outro cargo ou banca não torna Alta, sozinha, um tema periférico para o alvo.
-- **Coleção:** antes de criar, buscar na coleção (somente leitura) cada alvo Alta/Média. Nota que já
+- **Coleção:** antes de criar, buscar na coleção viva (`colecao_anki.py buscar TERMO --baralho B`,
+  cópia somente leitura; `.colpkg` só fora deste PC) cada alvo Alta/Média. Nota que já
   exige a mesma recuperação (mesmo alvo e mesma operação; palavras parecidas não bastam) cobre a
   unidade: não se cria card e a unidade registra `colecao=[IDs]`. Operação diferente (definição na
   coleção × aplicação a um caso no lote) pode ganhar card, com o motivo.

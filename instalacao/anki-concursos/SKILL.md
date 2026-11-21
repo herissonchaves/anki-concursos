@@ -1,66 +1,16 @@
 ---
 name: anki-concursos
-description: Cria, seleciona, audita e melhora flashcards Anki para concursos públicos (PRF como prioridade padrão, Agente PF e outros concursos quando pedidos), no estilo Certo/Errado Cebraspe e Cloze, exportados em TSV. Use sempre que o usuário pedir cards/cartões/flashcards de revisão para o Anki a partir de PDF, apostila, aula, questões erradas ou tema de edital; quando pedir para auditar, explicar ou reformular cartões; analisar backup .colpkg; ou orientar rotina de estudo no Anki/FSRS.
+description: Lançador do projeto Anki-Concursos. Use sempre que o usuário pedir cards, cartões ou flashcards de concurso público para o Anki (PRF, Agente PF ou outro concurso), a partir de PDF, apostila, aula, questões erradas (caderno de erros) ou tema de edital; para auditar, explicar ou reformular cartões; consultar a coleção do Anki ou um backup .colpkg; saber o que revisar ou estudar agora; ou orientar rotina, carga de revisão e FSRS.
 ---
 
-# Anki-Concursos (skill instalada)
+# Anki-Concursos (lançador)
 
-Porta de entrada do repositório **Anki-Concursos**, que guarda as regras completas,
-as referências e os scripts de validação e exportação.
+Esta skill não tem regras próprias: elas mudam com frequência e ficam só no repositório.
 
-Repositório (Windows): `C:\Users\Herisson.DESKTOP-EHB23TA\Nextcloud\IA Agents\Anki-Concursos`
+1. Leia `D:\NextCloud - Arquivos\IA Agents\Anki-Concursos\SKILL.md` e siga-o, usando esse
+   diretório como raiz para todos os caminhos relativos.
+2. Se o caminho não existir neste computador, pergunte ao usuário onde está o repositório
+   Anki-Concursos antes de qualquer trabalho. Não use regras de memória nem de outra skill.
 
-Antes de qualquer trabalho, leia `SKILL.md` na raiz do repositório e siga a skill
-especializada que ele indicar. As regras ficam no repositório (núcleo em
-`skills/gerar-revisao-anki/references/nucleo-pedagogico.md`); este arquivo não as
-repete para não divergir delas. Se o caminho não existir, pergunte ao usuário onde
-está o repositório.
-
-## Roteamento rápido (caminhos relativos ao repositório)
-
-| Pedido | Skill |
-| --- | --- |
-| Selecionar temas de um PDF | `skills/selecionar-conteudos-pdf-anki/SKILL.md` |
-| Criar cartões C/E (rápidos e desafiadores) ou Cloze | `skills/gerar-revisao-anki/SKILL.md` |
-| Caderno de erros a partir de questões | `skills/caderno-erros-anki/SKILL.md` |
-| Auditar qualidade de cartões | `skills/auditar-cartoes-anki/SKILL.md` |
-| Explicar ou reformular cartões | `skills/melhorar-cartoes-anki/SKILL.md` |
-| Inspecionar backup `.colpkg` (somente leitura) | `skills/analisar-colecao-anki/SKILL.md` |
-| Extrair PDF, validar e exportar TSV/ZIP/APKG | `skills/automacao-anki-python/SKILL.md` |
-| Questões de concursos de referência (banco `referencias/`) | `skills/referencias-questoes/SKILL.md` |
-| Rotina, carga de revisão, botões, FSRS | `skills/orientar-estudo-anki/SKILL.md` |
-
-Para PRF ou Agente PF, leia também `skills/perfil-carreiras-policiais/SKILL.md` e a
-especialização da disciplina indicada em `skills/perfil-carreiras-policiais/references/disciplinas.json`.
-
-## Perfil do usuário
-
-- Foco atual: **PRF** (Policial Rodoviário Federal). Também vai prestar outros
-  concursos: pedido explícito de outro cargo ou banca prevalece e exige conferir o
-  programa próprio. Sem alvo, PRF; PF sem cargo = Agente. Língua estrangeira: Inglês.
-- Não é formado em Direito: linguagem clara, termos técnicos explicados no verso.
-- Aprende melhor com recursos visuais: cards em HTML com blocos e esquemas, sempre
-  com o 💡 Memorize no fim do verso.
-- Antes de criar desafiadores, sempre pesquisar questões anteriores Cebraspe C/E e de
-  outras bancas e usá-las como inspiração.
-- Para rápidos e Cloze, pesquisar na internet o que é importante do tema; no Cloze,
-  pesquisar também mnemônicos e conferi-los contra a fonte primária.
-- Em todo card autoral, reaproveitar as questões de concursos do arquivo enviado e do
-  banco `referencias/` (busca por script, sem abrir arquivos) e salvar ali, em
-  Markdown padronizado, toda questão lida no anexo ou na internet.
-- Entrega preferida: **arquivos TSV** importáveis no Anki. O histórico do lote fica em
-  `lotes/` (versionado); os arquivos para importar (TSV, ZIP, APKG, `.colpkg`) vão para
-  `output/<CONCURSO>_<Tema>/` na raiz do repositório, pasta fora do Git que Hérisson
-  esvazia depois de importar. Detalhes em "Onde salvar os lotes gerados" no `SKILL.md`
-  da raiz.
-
-## Git
-
-Siga a seção "Git local" do `SKILL.md` da raiz: commits locais autorizados; push,
-remotos e reescrita de histórico exigem autorização própria.
-
-## Manutenção desta cópia
-
-A fonte desta skill é `instalacao/anki-concursos/SKILL.md` no repositório. Ao mudar o
-roteamento ou o perfil, edite a fonte e copie-a para
-`~/.claude/skills/anki-concursos/SKILL.md`.
+Fonte versionada: `instalacao/anki-concursos/SKILL.md` no repositório. Recopie para
+`~/.claude/skills/anki-concursos/SKILL.md` só quando a descrição (gatilhos) ou o caminho mudar.

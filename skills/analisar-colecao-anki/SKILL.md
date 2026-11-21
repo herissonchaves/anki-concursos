@@ -5,6 +5,8 @@ description: Analisa backups Anki somente em leitura, distingue notas e cartões
 
 # analisar-colecao-anki
 
+Neste computador, consultas rápidas (buscar, lapsos, desempenho, lacunas) usam a coleção viva por `../automacao-anki-python/scripts/colecao_anki.py`, em cópia somente leitura; o fluxo abaixo é para backup `.colpkg` e análise integral.
+
 Leia `../gerar-revisao-anki/references/nucleo-pedagogico.md` primeiro.
 
 O leitor agora aceita `collection.anki21b` com descompressão Zstandard limitada.

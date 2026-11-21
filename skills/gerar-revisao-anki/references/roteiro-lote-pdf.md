@@ -33,7 +33,9 @@ Nunca copie nome/CPF da marca-d'água para arquivo versionado.
   `buscar --tipo edital --alvo PRF` + `mostrar ID --secao "<disciplina>"` para o item do programa (PRF
   2021 é referência histórica; na internet, só busca rápida por edital novo ou retificação);
   `buscar --tipo conteudo -a ASSUNTO --recentes 90` e `buscar --tipo noticia -a ASSUNTO`.
-- Coleção: buscar os termos centrais (somente leitura) e excluir alvos já cobertos.
+- Coleção viva: `uv run --no-project python -I -X utf8 skills/automacao-anki-python/scripts/colecao_anki.py
+  buscar TERMO --baralho "B"` para os termos centrais (cópia somente leitura) e excluir alvos já
+  cobertos (`colecao=[IDs]`); antes de exportar, `colecao_anki.py duplicatas lote/anki_certo_errado.tsv -o TMP/dup.json`.
 
 ## 3. Questões: anexo, banco, internet
 

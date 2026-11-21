@@ -2,6 +2,26 @@
 
 # Scripts Anki
 
+## Coleção viva deste computador (somente leitura)
+
+`colecao_anki.py` lê o perfil `concursos` do Anki (`%APPDATA%\Anki2\concursos\collection.anki2`)
+a partir de uma cópia temporária, com o Anki aberto ou fechado, e nunca altera o original. É a
+fonte padrão para deduplicar e para saber o que revisar; o `.colpkg` fica para outro computador
+ou para análise integral de backup.
+
+```text
+uv run --no-project python -I -X utf8 skills/automacao-anki-python/scripts/colecao_anki.py COMANDO
+```
+
+| Comando | Para quê |
+| --- | --- |
+| `buscar TERMO [TERMO…] [--baralho B]` | notas com todos os termos: dedupe antes de criar card (cobertura `colecao=[IDs]`) |
+| `duplicatas ARQ.tsv -o TMP.json` | frentes do TSV parecidas com notas da coleção (indício, não prova) |
+| `resumo` / `listar [--tag T] [--saida f.tsv]` | baralhos, novos, suspensos, lapsos, tags / despejo para auditoria |
+| `dificeis [--min-lapsos 2]` | notas com mais lapsos ou `leech` (caderno de erros, melhoria) |
+| `desempenho [--dias 30]` | por disciplina: vencidos, próximos 7 dias, acerto e segundos por revisão |
+| `lacunas [--alvo PRF]` | prioridades Alta/Média de `referencias/` × notas da coleção: `sem_notas`, `poucas_notas`, `muitos_lapsos` |
+
 ## Revisar e devolver coleção existente
 
 `analisar_colpkg.py` agora lê bancos `collection.anki21b` sem usar o stub legado.

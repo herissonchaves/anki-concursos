@@ -5,18 +5,29 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
-**Versão 2.23.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.24.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
 
-O repositório de referência fica em `D:\NextCloud - Arquivos\IA Agents\Anki-Concursos`.
-Neste computador Windows, a cópia sincronizada fica em
-`C:\Users\Herisson.DESKTOP-EHB23TA\Nextcloud\IA Agents\Anki-Concursos`. A skill
-de entrada instalada no Claude (`~/.claude/skills/anki-concursos/SKILL.md`) aponta
-para este arquivo. Sua fonte versionada é
-[`instalacao/anki-concursos/SKILL.md`](instalacao/anki-concursos/SKILL.md): ao mudar
-o roteamento ou o perfil, edite a fonte e copie-a para a pasta instalada.
+O repositório fica em `D:\NextCloud - Arquivos\IA Agents\Anki-Concursos` (sincronizado
+pelo Nextcloud). A skill instalada no Claude (`~/.claude/skills/anki-concursos/SKILL.md`)
+é só um lançador que manda ler este arquivo; roteamento, perfil e regras ficam aqui. Sua
+fonte é [`instalacao/anki-concursos/SKILL.md`](instalacao/anki-concursos/SKILL.md):
+recopie-a só quando a descrição (gatilhos) ou o caminho do repositório mudar.
+
+## Perfil do usuário
+
+- Foco atual: **PRF** (Policial Rodoviário Federal). Pedido explícito de outro cargo ou
+  banca prevalece e exige conferir o programa próprio. Sem alvo, PRF; PF sem cargo =
+  Agente. Língua estrangeira: Inglês (sem Espanhol).
+- Não é formado em Direito: linguagem clara, termos técnicos explicados no verso (sem
+  escrever isso nos cartões).
+- Aprende melhor com recursos visuais: cards em HTML com blocos e esquemas, sempre com o
+  💡 Memorize no fim do verso.
+- Coleção do Anki: perfil `concursos`, lida só em cópia temporária
+  ([colecao_anki.py](skills/automacao-anki-python/scripts/colecao_anki.py)); nunca alterar,
+  importar ou sincronizar: quem importa é Hérisson.
 
 ## Escolha do fluxo
 

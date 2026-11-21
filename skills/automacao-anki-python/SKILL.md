@@ -1,6 +1,6 @@
 ---
 name: automacao-anki-python
-description: Extrai PDFs, analisa backups Anki em leitura e exporta TSV ZIP APKG com validação estrutural, mídia e diagnóstico de clareza.
+description: Extrai PDFs, consulta a coleção viva do Anki e backups em leitura e exporta TSV ZIP APKG com validação estrutural, mídia e diagnóstico de clareza.
 ---
 
 # automacao-anki-python
@@ -20,6 +20,8 @@ esvazia `output/` após importar: nunca use essa pasta como fonte. Regra complet
 "Onde salvar os lotes gerados" no `SKILL.md` da raiz.
 
 Leia `references/uso_scripts.md` e use scripts existentes. Extração não equivale a OCR nem leitura visual; análise de backup não mede aprendizagem por si só. Similaridade textual não autoriza remoção. Gere apenas arquivos a partir de cartões semanticamente auditados conforme `../gerar-revisao-anki/references/auditoria-conteudo-gabaritos.md`; uma saída aprovada dos scripts não certifica gabarito. Não fabrique relatórios.
+
+**Coleção viva:** `scripts/colecao_anki.py` (`buscar`, `duplicatas`, `dificeis`, `desempenho`, `lacunas`) lê o perfil `concursos` deste computador em cópia temporária, sem alterar nada; detalhes em `references/uso_scripts.md`.
 
 **Atalhos de baixo custo:** `scripts/extrair_pdf.py PDF -o TMP.json --texto TMP.txt [--ruido PALAVRA]` grava também o texto limpo (sem marcas-d'água, CPF e rodapés), bem menor que o JSON; leia o TXT. Para um lote pronto, `scripts/finalizar_lote.py LOTE --baralho NOME` (com `uv run --no-project --with genanki python -I -X utf8`) exporta ZIP e APKG para `output/<CONCURSO>_<Tema>/` sem sobrescrever, revalida o ZIP final (estrutura, calibração, revisão de recuperação e, em lote de PDF, cobertura por prioridade com `../gerar-revisao-anki/scripts/validar_cobertura_pdf.py`) e imprime só o resumo; aceita `--profile`, `--exception-reason` e `--max-cards`.
 
