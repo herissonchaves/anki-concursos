@@ -10,7 +10,9 @@ Destino: `<pasta do lote>/<nome da pasta>.zip|.apkg` (a pasta fica em `output/<C
 Nunca sobrescreve entregáveis: usa sufixo `_2`, `_3`... Executa o exportador (que já roda os
 validadores no diretório e no ZIP) e, no ZIP final, `validar_anki.py --new`,
 `validar_calibracao_cebraspe.py`, `validar_revisao_pedagogica.py` e `referencias.py validar`,
-imprimindo só o resumo. Com tudo aprovado, grava (ou substitui) a linha do lote em
+imprimindo só o resumo. Avisa, sem bloquear, frentes parecidas com notas da coleção viva
+(`duplicatas_colecao.txt` na pasta do lote) e `selecao_e_fontes.txt` sem a linha
+"Banco consultado:". Com tudo aprovado, grava (ou substitui) a linha do lote em
 `referencias/historico_lotes.tsv`. Os validadores checam estrutura e documentos; não certificam
 conteúdo.
 """
@@ -76,6 +78,38 @@ def registrar_historico(lote: Path, baralho: str, dados: Path, historico: Path =
     return linha
 
 
+def avisos(lote: Path, dados: Path, colecao: str | None = None) -> list[str]:
+    """Checagens que não bloqueiam: banco consultado (selecao_e_fontes.txt) e duplicatas na coleção viva."""
+    saida = []
+    selecao = dados / 'relatorios' / 'selecao_e_fontes.txt'
+    texto = selecao.read_text(encoding='utf-8') if selecao.exists() else ''
+    if not re.search(r'^\s*-?\s*Banco consultado:\s*\S', texto, flags=re.M | re.I):
+        saida.append('banco: selecao_e_fontes.txt sem a linha "Banco consultado: <comandos ou IDs>"; '
+                     'registre o que foi buscado em referencias/ antes da internet.')
+    sys.path.insert(0, str(AQUI.parent))
+    try:
+        import colecao_anki
+        with colecao_anki.Colecao(colecao_anki.find_collection(caminho=colecao)) as col:
+            todos = []
+            for arq in ('anki_certo_errado.tsv', 'anki_cloze.tsv'):
+                if (dados / arq).stat().st_size:
+                    achados = colecao_anki.duplicatas(col, dados / arq)['possiveis_duplicatas']
+                    todos += [f'{arq}:{x["novo"]} ~ {x["comparado_com"]} ({x["similaridade_textual"]}%)' for x in achados]
+        total, exemplos = len(todos), todos[:3]
+        if todos:  # fica na pasta do lote (fora do Git e fora do ZIP), para conferir antes de importar
+            (lote / 'duplicatas_colecao.txt').write_text('\n'.join(todos) + '\n', encoding='utf-8')
+        if total:
+            saida.append(f'duplicatas: {total} frente(s) parecida(s) com notas da coleção (ex.: {"; ".join(exemplos[:3])}). '
+                         f'Semelhança de texto não prova redundância: confira com colecao_anki.py buscar.')
+        else:
+            print('OK  duplicatas: nenhuma frente parecida com notas da coleção viva')
+    except SystemExit as exc:  # coleção ausente neste computador
+        saida.append(f'duplicatas: coleção não lida ({exc}); compare com a coleção antes de importar.')
+    except Exception as exc:
+        saida.append(f'duplicatas: checagem falhou ({exc}).')
+    return saida
+
+
 def rodar(args: list[str]) -> tuple[int, str]:
     r = subprocess.run([sys.executable, '-I', '-X', 'utf8', *args], capture_output=True, text=True, encoding='utf-8')
     return r.returncode, (r.stdout + r.stderr).strip()
@@ -90,6 +124,7 @@ def main(argv=None) -> int:
     ap.add_argument('--profile', choices=('mixed', 'focused'))
     ap.add_argument('--exception-reason')
     ap.add_argument('--max-cards')
+    ap.add_argument('--colecao', help='collection.anki2 para a checagem de duplicatas (padrão: perfil concursos)')
     a = ap.parse_args(argv)
     lote = (a.lote if a.lote.is_absolute() else Path.cwd() / a.lote).resolve()
     dados = lote / 'lote'
@@ -130,6 +165,8 @@ def main(argv=None) -> int:
         if codigo:
             falhas += 1
             print('\n'.join(linhas[-15:]))
+    for aviso in avisos(lote, dados, a.colecao):
+        print(f'AVISO {aviso}')
     if not falhas:
         h = registrar_historico(lote, a.baralho, dados)
         print(f'Histórico: {HISTORICO.relative_to(REPO).as_posix()} ({h["rapidos"]} R, {h["desafiadores"]} D, '

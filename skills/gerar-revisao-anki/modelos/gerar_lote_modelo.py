@@ -63,6 +63,7 @@ D = [  # desafiadores: caso curto com dado decisivo; 50% C / 50% E
   conc='Leitura concorrente e como a frente a fecha.', orig='O que foi reconstruído em relação às questões.',
   fx=('lei',), fid='comparada', cmp='Vínculo com a operação da questão Cebraspe.',
   # sem Cebraspe C/E com prova: fid='inspiracao_geral', lim='Buscas feitas e o que faltou.'
+  #   (a='disciplina/assunto' opcional: o montador avisa itens Cebraspe C/E do banco desse assunto)
   # sem questão de outra banca em refs: obp=OBP
   # Rubrica curta (2.24): os 4 primeiros critérios e linguagem_didatica com evidência; autoria,
   # feedback e utilidade só com observação (autoria='...').

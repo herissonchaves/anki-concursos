@@ -176,6 +176,31 @@ def test_referencias_do_banco_por_id_e_registro_de_uso(tmp_path):
     assert usos == ['lote_banco#D01,D02']
 
 
+def test_sugere_item_cebraspe_do_banco_para_d_em_inspiracao_geral(tmp_path, capsys):
+    import sys
+    sys.path.insert(0, str(m.SCRIPTS_REFERENCIAS))
+    import referencias as banco_mod
+
+    banco = tmp_path / 'referencias'
+    ids = {}
+    for chave, ref in (('CEB', REFS[0]), ('FGV', REFS[1])):
+        dados = {k: v for k, v in ref.items() if k != 'id'}
+        dados.update(orgao=f'Órgão {chave}', disciplina='fisica', assunto='dinamica', subassuntos=['segunda_lei'],
+                     palavras_chave=['força'], gabarito='C' if chave == 'CEB' else 'A', origem='pesquisa_internet',
+                     fonte_descoberta='Fixture sintética', concursos_alvo=['PRF'], enunciado=f'Item sintético {chave}.',
+                     alternativas={'A': 'x', 'B': 'y'} if chave == 'FGV' else None)
+        ids[chave] = banco_mod.nova(dados, banco)[1].id
+    pasta = tmp_path / 'lote_sugestao'
+    (pasta / 'fonte').mkdir(parents=True)
+    gerado = lote(pasta, banco_referencias=banco, registrar_uso=False)
+    gerado.D[0].update(refs=[ids['FGV']], fid='inspiracao_geral', lim='Limitação sintética')
+    gerado.D[1].update(refs=[], fid='inspiracao_geral', lim='Limitação sintética', a='fisica/dinamica')
+    assert gerado.sugestoes_cebraspe() == {'D01': [ids['CEB']], 'D02': [ids['CEB']]}
+    gerado.D[0]['refs'] = [ids['CEB'], ids['FGV']]
+    gerado.D[0]['fid'] = 'comparada'
+    assert gerado.sugestoes_cebraspe() == {'D02': [ids['CEB']]}
+
+
 def test_questao_sem_prova_vai_para_referencias_sem_prova(tmp_path):
     """Questão do PDF sem url: inspiração de outra banca, fora das referências comparadas."""
     import sys

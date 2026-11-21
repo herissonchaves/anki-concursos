@@ -28,14 +28,16 @@ Nunca copie nome/CPF da marca-d'água para arquivo versionado.
 - Disciplina → especialização (`../../perfil-carreiras-policiais/references/disciplinas.json`);
   Direito e trânsito: `../../direito-cebraspe-qualidade/SKILL.md` + skill do ramo; Português:
   `../../portugues-cebraspe-qualidade/SKILL.md` (obrigatório).
-- **Banco primeiro** (`../../referencias-questoes/SKILL.md`, fluxo): `referencias.py buscar --tipo
+- **Banco primeiro** (os comandos abaixo bastam; abra `../../referencias-questoes/SKILL.md` só em
+  dúvida e `../../referencias-questoes/references/formato.md` ao salvar itens): `referencias.py buscar --tipo
   prioridade --alvo PRF -a ASSUNTO` (a triagem parte da prioridade salva e reavalia só o novo);
   `buscar --tipo edital --alvo PRF` + `mostrar ID --secao "<disciplina>"` para o item do programa (PRF
   2021 é referência histórica; na internet, só busca rápida por edital novo ou retificação);
   `buscar --tipo conteudo -a ASSUNTO --recentes 90` e `buscar --tipo noticia -a ASSUNTO`.
 - Coleção viva: `uv run --no-project python -I -X utf8 skills/automacao-anki-python/scripts/colecao_anki.py
   buscar TERMO --baralho "B"` para os termos centrais (cópia somente leitura) e excluir alvos já
-  cobertos (`colecao=[IDs]`); antes de exportar, `colecao_anki.py duplicatas lote/anki_certo_errado.tsv -o TMP/dup.json`.
+  cobertos (`colecao=[IDs]`). Na exportação, o `finalizar_lote.py` compara as frentes com a coleção
+  e avisa as parecidas (lista em `duplicatas_colecao.txt` na pasta do lote).
 
 ## 3. Questões: anexo, banco, internet
 
@@ -98,7 +100,10 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
   (`Lote(..., cobertura=COBERTURA)`, com `p` por unidade): o montador falha se Alta/Média ficar sem
   card nem nota da coleção ou se Baixa tiver card, e põe as tags `Pagina_NN`. Questão sem prova oficial
   vai para `referencias_sem_prova` (inspiração e outra banca; nunca fidelidade comparada).
-- D: `fid='comparada'` só com Cebraspe C/E oficial em `refs`; senão `inspiracao_geral` + `lim`.
+- D: `fid='comparada'` só com Cebraspe C/E oficial em `refs`; senão `inspiracao_geral` + `lim`. O
+  montador avisa quando um D em inspiração geral tem item Cebraspe C/E oficial do mesmo assunto no
+  banco (pelo `a='disc/assunto'`, pelos `refs` ou pelos conteúdos em `fx`): leia-o e use-o antes de
+  aceitar a inspiração geral.
   Sem questão de outra banca em `refs`: `obp` com as buscas. Rubrica curta: correção,
   determinação, operação, comparação e `linguagem_didatica` com evidência própria; autoria, feedback
   e utilidade só com observação. `comparacao` pode ser `PENDENTE: ...` só na inspiração geral.
@@ -115,12 +120,13 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
   `edital`; fonte primária lida → `conteudo` (novo ou atualizado); alteração legal ou decisão →
   `noticia` (+ `vigencia_nota` no que ela afeta); triagem → `prioridade` (cria ou atualiza); questões
   conforme a seção 3. `nova` + `indexar`. Pesquisa feita e não salva é falha do fluxo.
-- `lote/relatorios/`: `triagem_previa_pdf.txt`, `selecao_e_fontes.txt` (pertinência, itens do
-  banco usados e **IDs criados ou atualizados neste pedido**, fontes, mnemônicos, comparação dos D, cobertura), `economia_de_revisao.txt`,
+- `lote/relatorios/`: `triagem_previa_pdf.txt`, `selecao_e_fontes.txt` (linha
+  `Banco consultado: <comandos ou IDs>` antes de qualquer fonte da internet — o `finalizar_lote.py`
+  avisa se faltar —, pertinência, itens do banco usados e **IDs criados ou atualizados neste pedido**, fontes, mnemônicos, comparação dos D, cobertura), `economia_de_revisao.txt`,
   `auditoria_pedagogica.txt` (ID, linha, gabarito, decisão) e, em Direito, `radar_juridico.txt`.
 - Exportar e revalidar em uma chamada: grava ZIP e APKG na própria pasta, sem sobrescrever; confere
-  também a cobertura do PDF e o banco (`referencias.py validar`) e grava a linha do lote em
-  `referencias/historico_lotes.tsv`:
+  também a cobertura do PDF e o banco (`referencias.py validar`), avisa duplicatas na coleção e a
+  falta do registro do banco, e grava a linha do lote em `referencias/historico_lotes.tsv`:
 
 ```text
 uv run --no-project --with genanki python -I -X utf8 skills/automacao-anki-python/scripts/finalizar_lote.py output/<CONCURSO>_<Tema> --baralho "Nome do baralho"

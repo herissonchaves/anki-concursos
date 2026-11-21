@@ -249,6 +249,36 @@ class Lote:
                 q.salvar()
         ref.indexar(self.banco)
 
+    def sugestoes_cebraspe(self) -> dict[str, list[str]]:
+        """D em `inspiracao_geral` × itens Cebraspe C/E com gabarito definitivo do mesmo assunto no banco.
+
+        O assunto do D vem do campo opcional `a` ('assunto' ou 'disciplina/assunto'), das questões em
+        `refs` e dos conteúdos do banco citados em `fx`. Só avisa; nunca bloqueia.
+        """
+        alvos = [x for x in self.D if x.get('fid') == 'inspiracao_geral']
+        if not alvos:
+            return {}
+        try:
+            indice = self._modulo_referencias().ler_indice(self.banco)
+        except Exception:  # banco ausente ou ilegível: sem sugestão
+            return {}
+        por_id = {r['id']: r for r in indice}
+        oficiais = [r for r in indice if r['tipo'] == 'questao' and r['banca'].lower() in ('cebraspe', 'cespe')
+                    and r['formato'] == 'certo_errado' and r['status'] == 'definitivo'
+                    and r.get('vigencia', 'atual') != 'desatualizada']
+        saida = {}
+        for x in alvos:
+            assuntos = set()
+            for a in ([x['a']] if x.get('a') else []):
+                assuntos.add(tuple(a.split('/', 1)) if '/' in a else (None, a))
+            ligados = list(x.get('refs', ())) + [self.conteudos[k] for k in x.get('fx', ()) if k in self.conteudos]
+            assuntos |= {(por_id[i]['disciplina'], por_id[i]['assunto']) for i in ligados if i in por_id}
+            ids = sorted({r['id'] for r in oficiais for d, a in assuntos
+                          if r['assunto'] == a and (d is None or r['disciplina'] == d)} - set(x.get('refs', ())))
+            if ids:
+                saida[x['k']] = ids
+        return saida
+
     # ------------------------------------------------------------ fontes
     def fontes(self, *keys):
         return [{'url': self.F[k][0], 'consulta': self.hoje, 'trecho': self.F[k][1]} for k in keys]
@@ -399,6 +429,12 @@ class Lote:
         self.registro_revisao(sinais_resolvidos or self.pasta / 'fonte' / 'sinais_resolvidos.json')
         self.gerar_previa()
         self.registrar_usos()
+        self.sugestoes = self.sugestoes_cebraspe()
+        if self.sugestoes:
+            print('AVISO — D em inspiracao_geral com item Cebraspe C/E oficial do mesmo assunto no banco '
+                  '(leia com `referencias.py mostrar` e, se servir de modelo, cite em refs e use fid="comparada"):')
+            for k, ids in self.sugestoes.items():
+                print(f'  {k}: {", ".join(ids[:5])}' + (f' (+{len(ids) - 5})' if len(ids) > 5 else ''))
         mapa = {x['k']: self.rid(x['k']) for x in self.R + self.D}
         mapa.update({x['k']: f'anki_cloze.tsv:{i}' for i, x in enumerate(self.CZ, 1)})
         if imprimir:
