@@ -70,7 +70,9 @@ concurso explícito prevalece e exige programa próprio.
 - Verso e Extra terminam no bloco **💡 Memorize** (no Errado, a formulação correta).
 - TSVs UTF-8 sem BOM, sem cabeçalho, três campos. C/E: exatamente uma entre `Tipo_Revisao_Rapida` e
   `Tipo_Desafiadora_Cebraspe` (D também `Estilo_Cebraspe`); Cloze sem essas tags. Sem tags de
-  prioridade.
+  prioridade. Cada D leva ainda uma tag por questão de concurso citada em `refs`, igual ao nome do
+  arquivo da questão em `referencias/questoes/` (ex.: `cebraspe-2021-prf-080`); o `montar_lote.py`
+  põe essas tags e o validador da calibração bloqueia D sem elas.
 
 ## Barreiras de exportação
 

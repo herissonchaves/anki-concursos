@@ -15,6 +15,8 @@ Contrato JSON. Lotes novos usam a **versão 2**; a versão 1 continua aceita ape
 - `segunda_conferencia: true` e `decisao: "APROVAR"` somente após revisão real.
 - `rubrica`: objeto com `correcao`, `determinacao`, `operacao_d`, `comparacao`, `autoria`, `feedback`, `linguagem_didatica`, `utilidade`. Em `linguagem_didatica`, explicar concretamente por que frente e verso são compreensíveis, preservam condições e ensinam a passagem decisiva; mencionar o termo técnico explicado quando pertinente. Cada valor é `{"resultado": "PASSA", "evidencia": "motivo específico"}`. Somente `comparacao` admite PENDENTE quando a fidelidade é `inspiracao_geral`. Não copiar o mesmo motivo genérico entre critérios.
 
+- Tags de origem (2.31, versão 2): cada ID em `referencias` e `referencias_sem_prova` de um D está também nas tags da linha do D, igual ao nome do arquivo da questão em `referencias/questoes/` (ex.: `cebraspe-2021-prf-080`). O `montar_lote.py` as põe a partir de `refs`; faltando alguma, o validador bloqueia.
+
 O SHA256 cobre frente, verso e tags exatos, unidos por TAB e sem quebra final. Exemplo de cálculo, não preenchimento de auditoria:
 
 ```python

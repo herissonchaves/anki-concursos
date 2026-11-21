@@ -141,7 +141,8 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
   Baixa e as cobertas por nota da coleção; as demais questões do PDF vão em `questoes_pdf={'Q01': ('17',
   ID), ...}` e viram unidade sozinhas (cards que as citam em `refs`, prioridade herdada). O montador
   falha se Alta/Média ficar sem card nem nota da coleção, se Baixa tiver card ou se uma questão não for
-  citada, e põe as tags `Pagina_NN`. Questão sem prova oficial vai para `referencias_sem_prova`
+  citada, e põe as tags `Pagina_NN` e, nos D, uma tag por ID de `refs` (o nome do arquivo da questão,
+  ex.: `cebraspe-2021-prf-080`). Questão sem prova oficial vai para `referencias_sem_prova`
   (inspiração e outra banca; nunca fidelidade comparada).
 - `padrao_d=dict(rb=rub(...), orig='Caso autoral.', ...)` guarda os valores comuns dos D; sem `regra`, o D
   usa o trecho da primeira fonte de `fx`. Escreva por D só o que é dele (`alvo`, `op`, `dado`, `solucao`,

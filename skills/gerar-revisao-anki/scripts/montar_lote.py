@@ -14,7 +14,8 @@ Convenção dos dicionários de cartão (chaves curtas):
   `m` (texto do 💡 Memorize), `fx` (chaves de `fontes`).
 - R: `g` ('C'/'E'), `f` (frente), `alvo`, `sol`, `alt`, `rec`, `fb`.
 - D: `g`, `f`, `alvo`, `op`, `regra`, `dado`, `solucao`, `erro`, `conc`, `orig`,
-  `refs` (IDs de `referencias`), `fid` ('comparada' com `cmp` ou 'inspiracao_geral'
+  `refs` (IDs de `referencias`; desde a 2.31 cada ID vira também tag do D, igual ao nome do
+  arquivo da questão em `referencias/questoes/`, ex.: `cebraspe-2021-prf-080`), `fid` ('comparada' com `cmp` ou 'inspiracao_geral'
   com `lim`), `rb` (use `rubrica(...)`) e, no schema 2, `refs` com questão de outra
   banca ou `obp` (outras_bancas_pendencia).
 - Cloze: `t` (texto com uma omissão {{c1::…}}; várias só com a tag Mnemonico),
@@ -346,8 +347,14 @@ class Lote:
     def row_r(self, x):
         return [x['f'], verso_ce(x['g'], x['b'], x['m']), self._tags(x, R_TAG)]
 
+    @staticmethod
+    def tags_origem(x) -> str:
+        """Questões do banco que geraram o D (`refs`), uma tag por ID = nome do arquivo .md (2.31)."""
+        return ' '.join(dict.fromkeys(r for r in x.get('refs', ()) if isinstance(r, str)))
+
     def row_d(self, x):
-        return [frente(x['f']), verso_ce(x['g'], x['b'], x['m']), self._tags(x, D_TAG)]
+        extra = ' '.join(t for t in (D_TAG, self.tags_origem(x)) if t)
+        return [frente(x['f']), verso_ce(x['g'], x['b'], x['m']), self._tags(x, extra)]
 
     def row_c(self, x):
         return [frente(x['t']), extra_cloze(x['b'], x['m']), self._tags(x)]

@@ -6,7 +6,9 @@ Não altera arquivos, coleção, gabaritos ou tags.
 
 schema_version 2 (lotes a partir da 2.16) exige `banca` e `formato` em cada
 referência, referência CESPE/Cebraspe Certo/Errado nos D comparados e, em todo
-D, uma questão de outra banca vinculada ou `outras_bancas_pendencia`.
+D, uma questão de outra banca vinculada ou `outras_bancas_pendencia`. Desde a 2.31, no
+schema 2, cada ID de `referencias` e `referencias_sem_prova` de um D precisa estar nas tags
+da linha do D (a tag é o nome do arquivo da questão em `referencias/questoes/`).
 schema_version 1 continua aceito para lotes anteriores.
 """
 from __future__ import annotations
@@ -179,6 +181,10 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
         for key in sem_linked:
             if key not in sem_map:
                 errors.append(f'{ident}: referência sem prova desconhecida {key}')
+        tags = row[2].split()  # 2.31: cada questão de origem vira tag do D (nome do arquivo no banco)
+        for key in dict.fromkeys(linked + sem_linked) if v2 else ():
+            if key not in tags:
+                errors.append(f'{ident}: tag da questão de origem {key} ausente')
         fidelity = record.get('fidelidade')
         known = [ref_map[key] for key in linked if key in ref_map]
         inspiracoes = known + [sem_map[key] for key in sem_linked if key in sem_map]

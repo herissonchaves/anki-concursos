@@ -94,6 +94,23 @@ def test_metadados_curtos_2_24_passam(tmp_path, monkeypatch):
         m.rubrica('a', 'b', 'c', 'd')
 
 
+def test_desafiador_leva_tag_da_questao_de_origem_2_31(tmp_path, monkeypatch):
+    """Cada ID de `refs` do D vira tag (o nome do arquivo .md da questão); R e Cloze não ganham."""
+    orig_r, orig_d = r, d
+    monkeypatch.setitem(globals(), 'r', lambda *a: {**orig_r(*a), 'refs': ['CEB']})
+    monkeypatch.setitem(globals(), 'd', lambda *a, **kw: orig_d(*a, **{'refs': ['CEB', 'FGV', 'CEB'], **kw}))
+    final = gerar_resolvido(tmp_path)
+    items, calibracao, _ = ler(tmp_path)
+    linhas = items['anki_certo_errado.tsv'].decode().splitlines()
+    tags = {k: linhas[n - 1].split('\t')[2].split() for k, n in final.line_of.items()}
+    for k in ('D01', 'D02'):
+        assert tags[k][-2:] == ['CEB', 'FGV'] and tags[k].count('CEB') == 1
+    assert 'CEB' not in tags['R01'] and 'CEB' not in tags['R02']
+    assert 'CEB' not in items['anki_cloze.tsv'].decode().split('\t')[2].split()
+    assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
+    assert m.Lote.tags_origem({'refs': []}) == '' and m.Lote.tags_origem({}) == ''
+
+
 def test_tsvs_are_utf8_without_bom_and_lf(tmp_path):
     gerar_resolvido(tmp_path)
     items, _, _ = ler(tmp_path)

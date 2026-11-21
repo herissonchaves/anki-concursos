@@ -24,7 +24,7 @@ check = load(ROOT / 'scripts/validar_calibracao_cebraspe.py', 'calibracao')
 def fixture():
     row = ['Considere P implica Q e Q falso. Nessas condições, P é falso.',
            '✅ Certo<br><br>Se P fosse verdadeiro, Q teria de ser verdadeiro. Isso contradiz a premissa de Q falso. 💡 Memorize: resumo sintético.',
-           'Tipo_Desafiadora_Cebraspe Estilo_Cebraspe Logica']
+           'Tipo_Desafiadora_Cebraspe Estilo_Cebraspe Logica REF-TESTE']
     ref = dict(id='REF-TESTE', concurso='FICTICIO', cargo='Teste', ano=2021,
                caderno='Fixture', item='1', url='https://example.test/prova',
                consulta='2026-11-03', operacao_observada='Contraposição sintética',
@@ -53,6 +53,8 @@ def fixture_v2():
         operacao_observada='Múltipla escolha sintética sobre contraposição', banca='FGV',
         formato='multipla_escolha', gabarito_status='definitivo', gabarito_url='https://example.test/gab-fgv'))
     data['cartoes'][0]['referencias'] = ['REF-TESTE', 'REF-FGV']
+    row[2] += ' REF-FGV'  # 2.31: questões de origem viram tags do D
+    data['cartoes'][0]['sha256'] = check.fingerprint(row)
     return row, data
 
 
@@ -233,6 +235,16 @@ class CalibrationTest(unittest.TestCase):
         card.update(fidelidade='inspiracao_geral', referencias=['REF-FGV'],
                     limitacao='Nenhum item Cebraspe C/E acessível sobre o alvo.')
         card['rubrica']['comparacao']['resultado'] = 'PENDENTE'
+        self.assertEqual(evaluate(row, data), [])
+
+    def test_v2_origin_questions_must_be_tags_2_31(self):
+        row, data = fixture_v2()
+        row[2] = row[2].replace(' REF-FGV', '')
+        data['cartoes'][0]['sha256'] = check.fingerprint(row)
+        self.assertIn('D01: tag da questão de origem REF-FGV ausente', evaluate(row, data))
+        row, data = fixture()  # schema 1 (legado) não exige a tag
+        row[2] = row[2].replace(' REF-TESTE', '')
+        data['cartoes'][0]['sha256'] = check.fingerprint(row)
         self.assertEqual(evaluate(row, data), [])
 
     def test_v1_remains_accepted_without_bank_fields(self):
