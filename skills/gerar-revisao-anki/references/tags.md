@@ -34,7 +34,11 @@ Qualquer outra tag. Em especial:
 - genéricas: `Revisao`, `Revisao_PDF`, `Mnemonico`, `PDF`, `Lote`, `Novo`, `Caderno_Erros`, prioridade.
 
 Os nomes antigos de tipo continuam reconhecidos só na leitura da coleção e de lotes antigos; nunca
-os use em card novo. A coleção atual não é retagueada por este projeto (ela é somente leitura).
+os use em card novo. A coleção viva nunca é alterada; quando Hérisson enviar um backup e pedir a
+coleção corrigida (2.34), as notas antigas são retagueadas por estas mesmas regras numa cópia, com
+`reconstruir_colpkg.py` (ver `../../automacao-anki-python/references/uso_scripts.md`). Na retag,
+`Pagina_NN` só fica onde o PDF de origem é identificável, e a tag da questão de origem do D só quando
+o verso cita um item do banco.
 
 ## Cloze mnemônico
 

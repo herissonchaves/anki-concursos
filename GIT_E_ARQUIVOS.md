@@ -18,6 +18,9 @@ questões) vão para o scratchpad da sessão.
   e conferidos pelo `finalizar_lote.py` (desde a 2.30 sem prévia HTML, ZIP ou APKG);
 - na raiz da pasta, só o que for de atualização de notas existentes (`.colpkg`, TSVs) e o
   `duplicatas_colecao.txt` do `finalizar_lote.py`.
+- Coleção reconstruída a pedido (2.34): `output/PRF_Colecao_<data>/` com `colecao_revisada.colpkg`,
+  `verificacao.json` (textos privados), `fonte/plano_colecao.json` e `relatorios/de_para_tags.tsv`;
+  tudo fora do Git.
 
 Regras:
 - Hérisson importa os dois TSVs de `lote/` e depois apaga a pasta inteira. Depois de importado, o card vive na

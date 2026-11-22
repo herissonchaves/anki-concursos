@@ -5,7 +5,7 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
-**Versão 2.33.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.34.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
@@ -27,7 +27,10 @@ recopie-a só quando a descrição (gatilhos) ou o caminho do repositório mudar
   💡 Memorize no fim do verso.
 - Coleção do Anki: perfil `concursos`, lida só em cópia temporária
   ([colecao_anki.py](skills/automacao-anki-python/scripts/colecao_anki.py)); nunca alterar,
-  importar ou sincronizar: quem importa é Hérisson.
+  importar ou sincronizar: quem importa é Hérisson. Exceção a pedido (2.34): com um backup
+  `.colpkg` enviado por ele, gerar a coleção corrigida numa cópia (tags, reformulações e cards
+  novos) com `reconstruir_colpkg.py`, sem excluir notas nem mexer no histórico
+  ([uso_scripts.md](skills/automacao-anki-python/references/uso_scripts.md)).
 
 ## Escolha do fluxo
 

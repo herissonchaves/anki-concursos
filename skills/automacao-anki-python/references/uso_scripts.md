@@ -48,6 +48,23 @@ Cloze. Nunca recebe caminho de perfil ativo. Caminhos de saída devem ser novos.
 `verificacao.json` contém textos privados: entregar só ao usuário, nunca embutir
 no plugin nem versionar. O `.colpkg` revisado vai para `output/`, fora do Git. Há API interna encapsulada na importação; falhar se versão incompatível.
 
+### Reconstrução da coleção a partir de backup (2.34, só a pedido)
+
+Quando Hérisson pedir a coleção inteira de volta com tags corrigidas, cartões reformulados e
+cartões novos já dentro (em vez dos TSVs), usar `scripts/reconstruir_colpkg.py` sobre uma cópia do
+backup que ele enviou:
+
+```text
+python reconstruir_colpkg.py backup.colpkg plano.json output/PRF_Colecao_<data>/colecao_revisada.colpkg --report verificacao.json
+```
+
+`plano.json`: `editar` com **todas** as notas do backup (id, `old_fields`, `old_tags`, `new_tags`,
+`new_fields` opcional e `reason`) e `adicionar` com os TSVs dos lotes já validados pelo
+`finalizar_lote.py` (`tsv`, `deck` e `notetype` existentes na coleção). O script nunca exclui nota
+ou cartão, não mexe em agendamento nem histórico, não renumera lacunas Cloze, exige que toda nota
+final passe nas regras de `references/tags.md` (via `regras_tags.py`), confere que os cartões novos
+entram como novos e reimporta a saída para conferir mídia. Lotes comuns continuam só em TSV.
+
 Explicar que importar `.colpkg` substitui a coleção do perfil. Recomendar perfil
 separado para conferir. Distinguir teste do backend e teste da interface desktop.
 

@@ -12,6 +12,8 @@ Para melhorar e devolver uma coleção existente, siga
 `scripts/revisar_colpkg.py` com plano integral previamente auditado. Ele opera
 em cópia temporária pela biblioteca oficial do Anki, preserva cartões/histórico
 e exporta `.colpkg`; não use o exportador de notas novas para substituir coleção.
+Para também retaguear todas as notas e acrescentar os cartões de lotes validados (2.34, só a pedido
+e a partir de backup), use `scripts/reconstruir_colpkg.py` (ver `references/uso_scripts.md`).
 
 **Destino dos arquivos:** o lote inteiro (gerador, TSVs, relatórios, `.colpkg`, TSVs
 de atualização) fica em `output/<CONCURSO>_<Tema>/` na raiz do repositório, fora do Git; o
