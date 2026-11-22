@@ -5,7 +5,7 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
-**Versão 2.31.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.32.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
@@ -99,8 +99,9 @@ com outro `--with-requirements`. Os testes que dependem de `zstandard` ou
 - Lote em geração e entregáveis: `output/<CONCURSO>_<Tema>/` (fora do Git; Hérisson importa os dois
   TSVs de `lote/` e apaga a pasta). Desde a 2.30 não se gera prévia HTML, ZIP nem APKG. Do lote, só `referencias/` é versionado, com a linha do lote em
   `referencias/historico_lotes.tsv`.
-- Commits locais estão autorizados ao concluir e verificar mudanças importantes; push, remotos e
-  reescrita de histórico exigem autorização própria.
+- Commits locais estão autorizados ao concluir e verificar mudanças importantes. Depois de cada
+  commit, faça `git push` para o GitHub (`origin`, https://github.com/herissonchaves/anki-concursos.git,
+  branch `master`). Force push, trocar remotos e reescrita de histórico exigem autorização própria.
 - Regras completas (pastas, o que versionar, rotina e limites do Git): leia
   [GIT_E_ARQUIVOS.md](GIT_E_ARQUIVOS.md) ao gravar arquivos ou preparar um commit.
 
