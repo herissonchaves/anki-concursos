@@ -67,7 +67,7 @@ def load_cards(path: Path) -> list[dict[str, str]]:
             if len(cells) != 3:
                 raise ValueError(f'{filename}:{line_no}: esperados 3 campos TSV')
             front, back, tags = cells
-            typ = ('cloze' if filename == CLOZE else 'rapida' if 'Tipo_Revisao_Rapida' in tags.split() else 'desafiadora' if 'Tipo_Desafiadora_Cebraspe' in tags.split() else 'C/E-sem-tipo')
+            typ = ('cloze' if filename == CLOZE else 'rapida' if {'Rapida', 'Tipo_Revisao_Rapida'} & set(tags.split()) else 'desafiadora' if {'Desafiadora', 'Tipo_Desafiadora_Cebraspe'} & set(tags.split()) else 'C/E-sem-tipo')
             rows.append({'id':f'{filename}:{line_no}', 'front':front, 'back':back, 'tags':tags, 'tipo':typ})
     return rows
 
@@ -96,7 +96,9 @@ def scan(rows: list[dict[str, str]]) -> list[dict[str, str]]:
         if re.search(r'\b(voce acertou|parabens pelo acerto)\b',back):
             warn(c,'ACERTO_PRESUMIDO','Exibir gabarito sem presumir resposta do aluno')
         if c['tipo']=='cloze':
-            if re.search(r'\b(mnemonico|sigla|a letra)\b',folded(c['front'])):
+            # 2.33: mnemônico no formato (título + letras visíveis + resto em c1) já recupera os termos.
+            formato = re.match(r'(?:<[^>]+>|\s)*Mnem[oô]nico\s+[^:<]{1,40}:', c['front'], re.I)
+            if not formato and re.search(r'\b(mnemonico|sigla|a letra)\b',folded(c['front'])):
                 warn(c,'MEMORIA_DE_SIGLA','Avaliar se a lacuna recupera conceito útil ou só a sigla/letra')
             # Check each view independently: other indices stay visible.
             pattern=re.compile(r'\{\{c(\d+)::([^{}]*?)(?:::[^{}]*?)?\}\}')

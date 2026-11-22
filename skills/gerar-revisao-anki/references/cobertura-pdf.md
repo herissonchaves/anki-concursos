@@ -41,7 +41,8 @@ compreensão inicial, exercícios extensos ou trechos ilegíveis.
    (ou `colecao`; ou `motivo` na Baixa); questões do PDF com `questao` = ID do banco. O
    `montar_lote.py` falha se Alta/Média ficar sem card nem nota da coleção, se Baixa tiver card ou
    se um card não cobrir unidade Alta/Média; grava `relatorios/cobertura_pdf.json` e põe em cada
-   card as tags `Pagina_NN`. `scripts/validar_cobertura_pdf.py` confere a pasta `lote/` (ou um ZIP avulso)
+   card as tags `Pagina_NN`, junto com o nome curto do PDF (`Missao_07`; regras em `references/tags.md`).
+   `scripts/validar_cobertura_pdf.py` confere a pasta `lote/` (ou um ZIP avulso)
    (o `finalizar_lote.py` já o executa).
 3. Aplicar `matriz_tipos_quantidades.md`: perfil misto, 50% C/E em R e em D, Cloze só para alvos
    adequados. Agrupar no mesmo card unidades que formam um único alvo.

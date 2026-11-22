@@ -48,8 +48,8 @@ def cards(items):
             if len(fields) != 3:
                 raise ValueError(f'{name}:{number}: requer três campos TSV')
             front, back, tags = fields
-            typ = ('cloze' if name == FILES[1] else 'rapida' if 'Tipo_Revisao_Rapida' in tags.split()
-                   else 'desafiadora' if 'Tipo_Desafiadora_Cebraspe' in tags.split() else 'C/E-sem-tipo')
+            typ = ('cloze' if name == FILES[1] else 'rapida' if {'Rapida', 'Tipo_Revisao_Rapida'} & set(tags.split())
+                   else 'desafiadora' if {'Desafiadora', 'Tipo_Desafiadora_Cebraspe'} & set(tags.split()) else 'C/E-sem-tipo')
             rows.append(dict(id=f'{name}:{number}', front=front, back=back, tags=tags, tipo=typ))
     return rows
 
@@ -123,7 +123,7 @@ def validate(items, report):
     expected = {row['id']: row for row in rows if row['tipo'] in ('rapida', 'cloze')}
     challenges = {
         row['id'] for row in rows
-        if row['tipo'] == 'desafiadora' and 'Estilo_Cebraspe' in row['tags'].split()
+        if row['tipo'] == 'desafiadora'
     }
     records = data.get('cartoes')
     if not isinstance(records, list):

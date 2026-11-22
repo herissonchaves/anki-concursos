@@ -24,7 +24,9 @@ _html_spec = importlib.util.spec_from_file_location('anki_html', Path(__file__).
 _html_module = importlib.util.module_from_spec(_html_spec)
 _html_spec.loader.exec_module(_html_module)
 problemas_html = _html_module.problemas_html
-from pathlib import Path
+_tags_spec = importlib.util.spec_from_file_location('anki_regras_tags', Path(__file__).with_name('regras_tags.py'))
+regras_tags = importlib.util.module_from_spec(_tags_spec)
+_tags_spec.loader.exec_module(regras_tags)
 
 REQUIRED = (
     'anki_certo_errado.tsv', 'anki_cloze.tsv', 'LEIA-ME.txt',
@@ -36,11 +38,8 @@ REQUIRED_DIR = tuple(k for k in REQUIRED if k != 'LEIA-ME.txt')
 # Um índice distinto por cartão. Vários trechos de mesmo índice: um cartão.
 CLOZE_ANY = re.compile(r'\{\{c([1-9]\d*)::([^{}]*?)\}\}')
 HTML_TAG = re.compile(r'<[^>]*>')
-QUICK = 'Tipo_Revisao_Rapida'
-MNEMONIC = 'Mnemonico'
 # Riscos de segurança reprovados em qualquer pacote, novo ou antigo.
 UNSAFE_HTML = re.compile(r'<\s*(?:script|iframe|object|embed)\b|\son[a-z]+\s*=|javascript\s*:', re.I)
-HARD = 'Tipo_Desafiadora_Cebraspe'
 BAD_META = [
     r'\b(?:segundo|conforme|de acordo com|como consta (?:em|no|na)|como visto (?:em|no|na))\s+'
     r'(?:(?:o|a|os|as|este|esta|esse|essa|aquele|aquela|um|uma)\s+)?'
@@ -162,7 +161,9 @@ def verify_tsvo(name: str, body: bytes, errors: list[str]) -> int:
             errors.append(f'{name}:{i}: HTML inseguro (script, iframe, evento on... ou javascript:)')
         if EXPL_LABEL_RE.search(folded(back)):
             errors.append(f'{name}:{i}: rótulo explicativo proibido')
-        if not re.fullmatch(r'[A-Za-zÀ-ÖØ-öø-ÿ0-9_ \-]+', tags):
+        # Cada tag: letras, dígitos, _ e -; níveis hierárquicos do Anki separados por :: (2.33).
+        if not re.fullmatch(r'[A-Za-zÀ-ÖØ-öø-ÿ0-9_ :\-]+', tags) or not all(
+                re.fullmatch(r'[A-Za-zÀ-ÖØ-öø-ÿ0-9_\-]+(?:::[A-Za-zÀ-ÖØ-öø-ÿ0-9_\-]+)*', t) for t in tags.split()):
             errors.append(f'{name}:{i}: tags com caracteres incompatíveis')
         sem = re.sub(r'\s+', ' ', folded(front)).strip()
         if sem in seen:
@@ -179,7 +180,7 @@ def verify_tsvo(name: str, body: bytes, errors: list[str]) -> int:
             parse_cloze(front, errors, f'{name}:{i}')
             if '{{' in back or '}}' in back:
                 errors.append(f'{name}:{i}: Extra não deve conter lacuna')
-            if QUICK in tags.split() or HARD in tags.split():
+            if regras_tags.eh_rapida(tags) or regras_tags.eh_desafiadora(tags):
                 errors.append(f'{name}:{i}: tag de C/E proibida em Cloze')
     return count
 
@@ -195,11 +196,35 @@ def validate_new_cloze(body: bytes, errors: list[str]) -> None:
         if len(fields) != 3 or not row.strip():
             continue
         matches = list(CLOZE_ANY.finditer(fields[0]))
+        mnemonico = regras_tags.sigla_mnemonico(fields[0]) is not None
         if not matches or any(match.group(1) != '1' for match in matches):
             errors.append(f'anki_cloze.tsv:{number}: nota nova requer omissão com índice c1')
-        elif len(matches) > 1 and MNEMONIC not in fields[2].split():
+        elif regras_tags.mnemonico_fora_do_formato(fields[0]):
+            errors.append(f'anki_cloze.tsv:{number}: mnemônico fora do formato: frente iniciada por "Mnemônico SIGLA:", '
+                          'letras visíveis e o resto de cada termo em c1; origem só no verso')
+        elif mnemonico:
+            errors.extend(f'anki_cloze.tsv:{number}: {e}' for e in regras_tags.problemas_mnemonico(fields[0], fields[1]))
+        elif len(matches) > 1:
             errors.append(f'anki_cloze.tsv:{number}: nota nova com {len(matches)} omissões; '
-                          f'mais de uma omissão só em mnemônico (tag {MNEMONIC})')
+                          'mais de uma omissão só em mnemônico (frente iniciada por "Mnemônico SIGLA:")')
+
+
+def validate_new_tags(items: dict[str, bytes], errors: list[str]) -> None:
+    """Notas novas: só tags de conteúdo, PDF/página, tipo e questão de origem (references/tags.md)."""
+    for name in ('anki_certo_errado.tsv', 'anki_cloze.tsv'):
+        try:
+            text = items.get(name, b'').decode('utf-8')
+        except UnicodeDecodeError:
+            continue
+        for number, row in enumerate(text.splitlines(), 1):
+            fields = row.split('\t')
+            if len(fields) != 3:
+                continue
+            if name == 'anki_cloze.tsv':
+                tipo = regras_tags.CLOZE
+            else:
+                tipo = regras_tags.DESAFIADORA if regras_tags.DESAFIADORA in fields[2].split() else regras_tags.RAPIDA
+            errors.extend(f'{name}:{number}: {e}' for e in regras_tags.problemas_tags(fields[2], tipo))
 
 
 def validate_new_html(items: dict[str, bytes], errors: list[str]) -> None:
@@ -253,11 +278,12 @@ def validate_type_distribution(body: bytes, errors: list[str], require_types: bo
     except UnicodeDecodeError:
         return {'rapidos': 0, 'desafiadores': 0, 'sem_tipo': 0}
     rows = [row.split('\t') for row in text.splitlines() if row.strip()]
-    tags_per_row = [set(row[2].split()) for row in rows if len(row) == 3]
-    rapidos = sum(QUICK in t for t in tags_per_row)
-    desafiadores = sum(HARD in t for t in tags_per_row)
-    sem_tipo = sum(QUICK not in t and HARD not in t for t in tags_per_row)
-    both = sum(QUICK in t and HARD in t for t in tags_per_row)
+    tags_per_row = [row[2] for row in rows if len(row) == 3]
+    quick = [regras_tags.eh_rapida(t) for t in tags_per_row]
+    hard = [regras_tags.eh_desafiadora(t) for t in tags_per_row]
+    rapidos, desafiadores = sum(quick), sum(hard)
+    sem_tipo = sum(not q and not h for q, h in zip(quick, hard))
+    both = sum(q and h for q, h in zip(quick, hard))
     if both:
         errors.append(f'anki_certo_errado.tsv: {both} cartões apresentam simultaneamente os dois tipos')
     if rapidos+desafiadores or require_types:
@@ -319,6 +345,7 @@ def main() -> int:
     cloze = count_cloze_cards(items.get('anki_cloze.tsv', b''))
     if args.new:
         validate_new_cloze(items.get('anki_cloze.tsv', b''), errors)
+        validate_new_tags(items, errors)
         validate_new_html(items, errors)
         validate_new_memorize(items, errors)
         _, balance_errors = contar_modos(items.get('anki_certo_errado.tsv', b''), strict_balance=True)

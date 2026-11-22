@@ -1,4 +1,4 @@
-"""Testes da distribuição 50% Certo / 50% Errado para Tipo_Revisao_Rapida."""
+"""Testes da distribuição 50% Certo / 50% Errado para Teste::Sintetico::Topico Rapida."""
 from pathlib import Path
 import importlib.util
 import unittest
@@ -10,7 +10,7 @@ SPEC.loader.exec_module(module)
 
 
 def linha(rapido: bool, certo: bool, indice: int) -> str:
-    tag = 'Tipo_Revisao_Rapida' if rapido else 'Tipo_Desafiadora_Cebraspe Estilo_Cebraspe'
+    tag = 'Teste::Sintetico::Topico Rapida' if rapido else 'Teste::Sintetico::Topico Desafiadora'
     gabarito = '✅ Certo' if certo else '❌ Errado'
     return f'Proposição nova e verificável número {indice}.\t{gabarito}<br><br>Fundamento verificável.<br><br>💡 Memorize: conceito.\t{tag}\n'
 
@@ -48,18 +48,18 @@ class QuickBalanceTests(unittest.TestCase):
         self.assertFalse(e)
 
     def test_wrong_answer_prefix_rejected(self):
-        raw = 'Uma proposição.\tErrado: exemplo.\tTipo_Revisao_Rapida\n'
+        raw = 'Uma proposição.\tErrado: exemplo.\tTeste::Sintetico::Topico Rapida\n'
         _, e = module.contar_rapidos(raw.encode())
         self.assertTrue(any('sem gabarito' in s for s in e), e)
 
     def test_text_in_head_does_not_count_as_gabarito(self):
-        raw = '✅ Certo é uma expressão textual aqui.\t❌ Errado<br><br>Motivo.\tTipo_Revisao_Rapida\n'
+        raw = '✅ Certo é uma expressão textual aqui.\t❌ Errado<br><br>Motivo.\tTeste::Sintetico::Topico Rapida\n'
         r, e = module.contar_rapidos(raw.encode())
         self.assertEqual((r['certos'], r['errados']), (0, 1))
         self.assertFalse(e)
 
     def test_mixed_tags_rejected(self):
-        raw = 'Frase.\t✅ Certo<br><br>Motivo.\tTipo_Revisao_Rapida Tipo_Desafiadora_Cebraspe\n'
+        raw = 'Frase.\t✅ Certo<br><br>Motivo.\tRapida Desafiadora\n'
         _, e = module.contar_rapidos(raw.encode())
         self.assertTrue(any('contraditórias' in s for s in e), e)
 

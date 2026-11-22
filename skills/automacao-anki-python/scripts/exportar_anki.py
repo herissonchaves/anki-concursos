@@ -173,7 +173,7 @@ def export(ce,cloze,reports_dir,output,apkg=None,deck='Anki-Concursos',profile='
         # calibração; a leitura de coleções antigas usa os fluxos de análise.
         calibration = validator.with_name('validar_calibracao_cebraspe.py')
         has_calibration = (root/'relatorios'/'calibracao_cebraspe.json').is_file()
-        has_hard = any('Tipo_Desafiadora_Cebraspe' in row[2].split() for row in tsv_rows(package_ce))
+        has_hard = any({'Desafiadora', 'Tipo_Desafiadora_Cebraspe'} & set(row[2].split()) for row in tsv_rows(package_ce))
         check_calibration = has_hard or has_calibration
         if check_calibration:
             if not calibration.is_file():

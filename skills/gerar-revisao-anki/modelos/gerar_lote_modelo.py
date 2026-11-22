@@ -21,7 +21,11 @@ from html_anki import regra, caso, erro, certo, esquema, tabela, fluxo  # noqa: 
 from montar_lote import Lote, rubrica as rub  # noqa: E402
 
 HOJE = 'AAAA-MM-DD'
-BASE = 'PRF Disciplina Missao_NN'  # tags comuns, sem espaços dentro de cada tag
+# Tags (2.33, references/tags.md): ASSUNTO::<tags do card> = Disciplina::Assunto::Topico; PDF só nos cards
+# com Pagina_NN; o tipo (Rapida/Desafiadora/Cloze) e as questões dos D entram sozinhos. Nada de concurso,
+# Estilo_Cebraspe, Revisao_PDF, Mnemonico ou outra tag genérica: o montador falha.
+ASSUNTO = 'Disciplina::Assunto'  # ex.: 'Direito_Administrativo::Atos_Administrativos'
+PDF = 'Missao_NN'                # nome curto do PDF; None em lote sem PDF (prints, caderno de erros)
 
 # IDs do banco referencias/ (referencias.py buscar/mostrar). Basta citá-los em `refs`.
 Q_CEB = 'cebraspe-AAAA-orgao-NNN'  # Cebraspe C/E com prova oficial: sustenta fidelidade comparada
@@ -45,12 +49,21 @@ R = [  # rápidos: um alvo, frase curta; 50% C / 50% E
   # rec='por que a frente exige o alvo', fb='confusão que o verso corrige'.
 ]
 
-CZ = [  # uma omissão {{c1::...}} por nota (várias só com a tag Mnemonico); cada lacuna coberta por um D
+CZ = [  # uma omissão {{c1::...}} por nota (várias só em mnemônico, com mn=); cada lacuna coberta por um D
  dict(k='C01', tags='Topico',
   t='Contexto suficiente e o termo central {{c1::omitido}}.',
   b=[regra('Extra: explica o termo omitido.')], m='Memorize do Extra.',
   alvo='Termo a recuperar.', fx=('lei',), cob={'1': ['D01']}),
   # sol é tirada das lacunas; escreva sol= só para equivalentes aceitos. alt/rec/fb: opcionais.
+  # Mnemônico (2.33): título "Mnemônico SIGLA:", letras visíveis e o resto de cada termo em c1; a origem
+  # (autoral ou link da fonte) vai só no verso, pelo mn=. Exemplo:
+  # dict(k='C02', tags='Delegacao',
+  #  t='<b>Mnemônico CE-NO-RE:</b><br>Pela Lei 9.784/1999 (art. 13), não podem ser delegados:<br>'
+  #    'a matéria de C{{c1::ompetência}} E{{c1::xclusiva}},<br>a edição de atos NO{{c1::rmativos}}<br>'
+  #    'e a decisão de RE{{c1::cursos administrativos}}.',
+  #  mn=dict(sigla='CE-NO-RE', origem='autoral'),  # ou origem=('encontrado'|'adaptado', 'https://...', 'Nome da fonte')
+  #  b=[regra('Explica cada termo da sigla.')], m='CE-NO-RE: o que não se delega.', alvo='...', fx=('lei',),
+  #  cob={'1': ['D01']}),
 ]
 
 D = [  # desafiadores: caso curto com dado decisivo; 50% C / 50% E
@@ -98,6 +111,6 @@ COBERTURA = [
 ]
 
 if __name__ == '__main__':
-    Lote(PASTA, BASE, F, HOJE, [], R, D, CZ, semente=2026, cobertura=COBERTURA,
+    Lote(PASTA, '', F, HOJE, [], R, D, CZ, semente=2026, cobertura=COBERTURA, assunto=ASSUNTO, pdf=PDF,
          questoes_pdf=QUESTOES_PDF, padrao_d=PADRAO_D, relatorio=RELATORIO,
          revisor='Claude (assistente de IA) — mesmo agente que redigiu os cartões').gerar()

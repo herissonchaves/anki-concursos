@@ -15,8 +15,10 @@ import sys
 import zipfile
 
 ARQUIVO = 'anki_certo_errado.tsv'
-TAG = 'Tipo_Revisao_Rapida'
-HARD = 'Tipo_Desafiadora_Cebraspe'
+# 2.33: tipos novos (Rapida/Desafiadora); os nomes antigos seguem aceitos na leitura de lotes antigos.
+QUICKS = {'Rapida', 'Tipo_Revisao_Rapida'}
+HARDS = {'Desafiadora', 'Tipo_Desafiadora_Cebraspe'}
+TAG, HARD = 'rapidos', 'desafiadores'  # modos de contagem
 
 
 def contar_rapidos(conteudo: bytes, strict_balance: bool = False, tag: str = TAG) -> tuple[dict, list[str]]:
@@ -36,9 +38,9 @@ def contar_rapidos(conteudo: bytes, strict_balance: bool = False, tag: str = TAG
             continue
         frente, verso, tags_texto = partes
         tags = set(tags_texto.split())
-        if tag not in tags:
+        if not tags & (QUICKS if tag == TAG else HARDS):
             continue  # contar cada modalidade separadamente
-        if HARD in tags and TAG in tags:
+        if tags & HARDS and tags & QUICKS:
             erros.append(f'Linha {i}: tags contraditórias rápida/desafiadora')
         if not frente.strip():
             erros.append(f'Linha {i}: frente vazia')

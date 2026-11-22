@@ -14,7 +14,7 @@ def write_calibration(ce, reports):
     cards = []
     for line, text in enumerate(Path(ce).read_text(encoding='utf-8').splitlines(), 1):
         row = text.split('\t')
-        if len(row) != 3 or 'Tipo_Desafiadora_Cebraspe' not in row[2].split():
+        if len(row) != 3 or 'Desafiadora' not in row[2].split():
             continue
         cards.append(dict(
             id=f'TEST-D-{line}', linha=line,

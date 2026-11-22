@@ -68,11 +68,16 @@ def test_new_cloze_single_omission_and_mnemonic_tag():
         return found
     assert errors('POP3 usa a porta {{c1::110}}.', 'Portas') == []
     assert errors('POP3 → {{c1::110}}; IMAP → {{c1::143}}.', 'Portas')
-    assert errors('S {{c1::ua}} M {{c1::ensagem}}', 'Mnemonico') == []
+    assert errors('S {{c1::ua}} M {{c1::ensagem}}', 'Portas')  # sem título "Mnemônico X:"
+    found = []
+    v.validate_new_cloze(('<b>Mnemônico SM:</b><br>Partes do protocolo: S{{c1::ua}} M{{c1::ensagem}}.\t'
+                          'Explicação de cada termo.<div>📚 Origem do mnemônico Autoral: criado para este card.</div>\t'
+                          'Redes::Email::Protocolos Cloze\n').encode(), found)
+    assert found == []
 
 
 def test_new_html_check_reports_line_and_field():
-    items = {'anki_certo_errado.tsv': 'Frente.\t✅ Certo<br><br><div>sem fechar\tTipo_Revisao_Rapida\n'.encode(),
+    items = {'anki_certo_errado.tsv': 'Frente.\t✅ Certo<br><br><div>sem fechar\tTeste::Sintetico::Topico Rapida\n'.encode(),
              'anki_cloze.tsv': b''}
     found = []
     v.validate_new_html(items, found)
@@ -86,7 +91,7 @@ def test_unsafe_html_rejected_even_outside_new_batches():
 
 
 def memorize_errors(ce_back='', cloze_extra=None):
-    items = {'anki_certo_errado.tsv': f'Frente.\t{ce_back}\tTipo_Revisao_Rapida\n'.encode() if ce_back else b'',
+    items = {'anki_certo_errado.tsv': f'Frente.\t{ce_back}\tTeste::Sintetico::Topico Rapida\n'.encode() if ce_back else b'',
              'anki_cloze.tsv': f'Texto {{{{c1::alvo}}}}.\t{cloze_extra}\tTag\n'.encode() if cloze_extra else b''}
     found = []
     v.validate_new_memorize(items, found)

@@ -12,7 +12,7 @@ SPEC.loader.exec_module(validator)
 def ce(index, kind):
     front = f'A afirmação sobre o conceito administrativo {index} é precisa.'
     back = '✅ Certo<br><br>O conceito foi corretamente descrito.<br><br>💡 Memorize: verificar o fundamento.'
-    tag = 'Tipo_Revisao_Rapida' if kind == 'R' else 'Tipo_Desafiadora_Cebraspe Estilo_Cebraspe'
+    tag = 'Teste::Sintetico::Topico Rapida' if kind == 'R' else 'Teste::Sintetico::Topico Desafiadora'
     return f'{front}\t{back}\tAdministrativo {tag}\n'
 
 
@@ -31,7 +31,7 @@ class TypeDistributionTests(unittest.TestCase):
         self.assertEqual(errors, [])
 
     def test_missing_tags_new_and_legacy_compatibility(self):
-        rows = ce(1, 'D').replace('Tipo_Desafiadora_Cebraspe', '').replace('Estilo_Cebraspe', '')
+        rows = ce(1, 'D').replace('Teste::Sintetico::Topico Desafiadora', '').replace('Estilo_Cebraspe', '')
         legacy, new = [], []
         validator.validate_type_distribution(rows.encode(), legacy)
         validator.validate_type_distribution(rows.encode(), new, True)
@@ -39,7 +39,7 @@ class TypeDistributionTests(unittest.TestCase):
         self.assertTrue(any('sem tag' in e for e in new), new)
 
     def test_dual_tag_rejected(self):
-        rows = ce(1, 'D').replace('Tipo_Desafiadora_Cebraspe', 'Tipo_Desafiadora_Cebraspe Tipo_Revisao_Rapida')
+        rows = ce(1, 'D').replace('Teste::Sintetico::Topico Desafiadora', 'Teste::Sintetico::Topico Desafiadora Teste::Sintetico::Topico Rapida')
         errors = []
         validator.validate_type_distribution(rows.encode(), errors, True)
         self.assertTrue(any('simultaneamente' in e for e in errors), errors)

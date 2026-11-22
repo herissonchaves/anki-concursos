@@ -14,7 +14,7 @@ Para cada cartão candidato, simular um aluno que **já estudou o tema**, mas ai
 - Não criar "duas perguntas em uma"; dividir apenas se ambas forem importantes e não redundantes, lembrando o custo de revisão.
 - Na frente de C/E, evitar repetições de absolutos (`sempre`, `nunca`, `jamais`, `automaticamente`, `necessariamente`, `qualquer`, `apenas`, `somente`, `em todos os casos`) que forneçam pistas para Errado. Podem ser essenciais à tese jurídica: avaliar sem proibir indiscriminadamente. **Equilibrar verdade/erro não autoriza fabricar falsidades.**
 
-## 2. Dificuldade verdadeira — obrigatória para `Tipo_Desafiadora_Cebraspe`
+## 2. Dificuldade verdadeira — obrigatória para `Desafiadora`
 
 Antes de redigir registrar, fora do cartão:
 `alvo juridico | regra aplicada | dado decisivo | inferencia exigida | erro plausivel | fonte`.

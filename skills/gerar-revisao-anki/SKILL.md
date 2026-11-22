@@ -22,7 +22,8 @@ concurso explícito prevalece e exige programa próprio.
   Sem teto fixo e sem limite pela quantidade de D.
 - **D (desafiador Cebraspe):** caso curto, didático, com dado decisivo e uma decisão real (aplicar,
   inferir, distinguir); a dificuldade está na decisão, não no juridiquês. Definição disfarçada vira R.
-- **Cloze:** uma omissão `{{c1::…}}` por nota (várias só em nota de mnemônico, tag `Mnemonico`);
+- **Cloze:** uma omissão `{{c1::…}}` por nota (várias só em mnemônico: frente `Mnemônico SIGLA:`, letras
+  visíveis e o resto de cada termo em c1, origem só no verso, `references/tags.md`);
   cada lacuna coberta por um D do mesmo lote. Antes de escolher formatos, inclusive para concluir
   zero Cloze, leia `references/protocolo_cloze_cientifico.md`.
 - 50% Certo e 50% Errado nos R e, separadamente, nos D (total ímpar: diferença de 1); composição e teto em
@@ -68,11 +69,13 @@ concurso explícito prevalece e exige programa próprio.
   📌 Regra, 🔎 No caso, ⚠️ Onde está o erro, ✔️ Por que está certo, esquemas quando ajudarem; CSS
   único de `scripts/estilo_anki.py` (Arial 20 px); nada de script, CSS externo ou mídia remota.
 - Verso e Extra terminam no bloco **💡 Memorize** (no Errado, a formulação correta).
-- TSVs UTF-8 sem BOM, sem cabeçalho, três campos. C/E: exatamente uma entre `Tipo_Revisao_Rapida` e
-  `Tipo_Desafiadora_Cebraspe` (D também `Estilo_Cebraspe`); Cloze sem essas tags. Sem tags de
-  prioridade. Cada D leva ainda uma tag por questão de concurso citada em `refs`, igual ao nome do
-  arquivo da questão em `referencias/questoes/` (ex.: `cebraspe-2021-prf-080`); o `montar_lote.py`
-  põe essas tags e o validador da calibração bloqueia D sem elas.
+- TSVs UTF-8 sem BOM, sem cabeçalho, três campos.
+- **Tags** (regra única em `references/tags.md`): só `Disciplina::Assunto::Topico`; nome curto do PDF
+  (`Missao_07`) e `Pagina_NN` apenas em card feito sobre o PDF; exatamente uma de tipo (`Rapida`,
+  `Desafiadora` ou `Cloze`); nos D, uma por questão de `refs`, igual ao nome do arquivo em
+  `referencias/questoes/` (ex.: `cebraspe-2021-prf-080`). Proibidas: concurso/cargo (`PRF`, `PF`…),
+  `Estilo_Cebraspe`, `Revisao_PDF`, `Mnemonico` e qualquer genérica. O `montar_lote.py` monta as tags e
+  falha fora da regra; `validar_anki.py --new` reprova.
 
 ## Barreiras de exportação
 

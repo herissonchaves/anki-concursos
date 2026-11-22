@@ -11,7 +11,7 @@ Usar ao avaliar ou atualizar o gerador; não impor um benchmark completo em cada
 ## Protocolo de comparação
 
 - Definir antes de gerar: versão, materiais reais, cargos/itens de edital, formatos e critérios. Incluir disciplinas quantitativas, linguísticas e normativas/técnicas conforme o escopo, sem inventar cobertura das especializações não examinadas.
-- Incluir R, D e Cloze. Preservar 50/50 em cada grupo C/E novo aprovado; controles deliberadamente errados ficam separados do baralho. Cloze usa uma única lacuna c1 por nota (várias só em mnemônico, tag `Mnemonico`), com Extra específico e cobertura por desafiadores conforme o protocolo.
+- Incluir R, D e Cloze. Preservar 50/50 em cada grupo C/E novo aprovado; controles deliberadamente errados ficam separados do baralho. Cloze usa uma única lacuna c1 por nota (várias só em mnemônico, no formato de `references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis, resto de cada termo em c1, origem só no verso), com Extra específico e cobertura por desafiadores conforme o protocolo.
 - Dividir fontes em construção e comparação reservada. Itens usados como modelos não demonstram transferência. Em gerações jurídicas, conferir fonte oficial atual na tarefa.
 - Guardar candidatos iniciais, solução, fonte/seção, decisão por critério, correção e resultado final. Não calcular média que esconda gabarito errado, ambiguidade ou falta de fundamento. Registrar aprovados, reformulados, reclassificados e rejeitados com denominadores e método de seleção.
 - Executar os controles negativos abaixo, identificando-os como material de teste. Quando possível, apresentar as frentes ao revisor antes dos versos, mas não alegar cegamento se o mesmo agente os criou ou já viu as respostas.

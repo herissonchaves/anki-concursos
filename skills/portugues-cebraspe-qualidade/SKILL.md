@@ -35,11 +35,11 @@ Não alegar leitura não realizada. Diferenciar textos de teoria, comentários e
 ## C/E rápidos e Cloze
 
 - **Rápido:** reconhecer regra linguística central de modo preciso e quase imediato (p. ex. função sintática ou contraste entre estruturas), sem transformar em pegadinha difícil por artifício.
-- **Cloze:** selecionar conceitos linguísticos importantes e manter o contexto que determina a resposta. Em notas Cloze novas, aplicar o protocolo Cloze: usar uma única marcação `{{c1::…}}` por nota; mais de uma omissão somente em nota de mnemônico, com a tag `Mnemonico`; separar alvos independentes em notas próprias e explicar a omissão no Extra. Para mnemônicos, deixar visíveis o tema e as letras ou pistas do próprio mnemônico. Associar a cada novo Cloze desafiadores C/E do mesmo lote que cubram todas as lacunas. Preservar os índices e o histórico de notas existentes. Rejeitar ambiguidades, respostas visíveis, omissões secundárias e duplicatas cognitivas.
+- **Cloze:** selecionar conceitos linguísticos importantes e manter o contexto que determina a resposta. Em notas Cloze novas, aplicar o protocolo Cloze: usar uma única marcação `{{c1::…}}` por nota; mais de uma omissão somente em nota de mnemônico, no formato de `skills/gerar-revisao-anki/references/tags.md` (título `Mnemônico SIGLA:`, letras visíveis, resto de cada termo em c1, origem só no verso); separar alvos independentes em notas próprias e explicar a omissão no Extra. Para mnemônicos, deixar visíveis o tema e as letras ou pistas do próprio mnemônico. Associar a cada novo Cloze desafiadores C/E do mesmo lote que cubram todas as lacunas. Preservar os índices e o histórico de notas existentes. Rejeitar ambiguidades, respostas visíveis, omissões secundárias e duplicatas cognitivas.
 
 ## Formato, qualidade e entrega
 
-Frente sem resposta ou metarreferência ao PDF; C/E com verso `✅ Certo<br><br>fundamento` ou `❌ Errado<br><br>fundamento e correção`; dica mnemônica opcional. Tags `Lingua_Portuguesa`, assunto e exatamente uma tag de modalidade C/E (`Tipo_Revisao_Rapida` OU `Tipo_Desafiadora_Cebraspe`), mais `Estilo_Cebraspe` nos desafiadores. Cloze sem tags C/E e com Extra útil. Sem imagens.
+Frente sem resposta ou metarreferência ao PDF; C/E com verso `✅ Certo<br><br>fundamento` ou `❌ Errado<br><br>fundamento e correção`; dica mnemônica opcional. Tags conforme `skills/gerar-revisao-anki/references/tags.md` (`Lingua_Portuguesa::Assunto::Topico`, PDF e página só em card feito sobre o PDF, uma de tipo: `Rapida`, `Desafiadora` ou `Cloze`; nos D, a questão de origem). Cloze com Extra útil. Sem imagens.
 
 ## Integração do modo estratégico
 

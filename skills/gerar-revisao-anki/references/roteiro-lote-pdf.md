@@ -105,7 +105,7 @@ redação atual, alterações dos últimos anos e decisões de inconstitucionali
 com status (vigente, vacatio, julgado, pendente). Tema só doutrinário (sem lei): `buscar --tipo conteudo
 -a ASSUNTO` acha a doutrina já salva (`norma: "Doutrina — …"`); se faltar, leia obra aberta confiável
 (ex.: Enciclopédia Jurídica da PUC-SP) e salve-a como `conteudo`. Corrija o PDF quando estiver
-desatualizado e avise no verso. Cloze: pesquise mnemônicos; sem fonte confiável, use dica **autoral identificada**.
+desatualizado e avise no verso. Cloze: pesquise mnemônicos; sem fonte confiável, crie um **autoral**. Formato e origem (só no verso, com link quando houver fonte): `references/tags.md`.
 
 ## 5. Triagem e composição
 
@@ -117,7 +117,7 @@ desatualizado e avise no verso. Cloze: pesquise mnemônicos; sem fonte confiáve
   formato e card(s) ou nota da coleção; o mesmo inventário vira o bloco `COBERTURA` do gerador.
 - R: um alvo, frase curta, sem pegadinha. D: caso curto com dado decisivo, uma decisão real
   (aplicar, distinguir, exceção); definição disfarçada vira R. Cloze: uma omissão `{{c1::…}}` por
-  nota (várias só com tag `Mnemonico`), conceito/número que precisa ser lembrado; números só se
+  nota (várias só em mnemônico, no formato de `references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis, resto de cada termo em c1, origem só no verso), conceito/número que precisa ser lembrado; números só se
   relevantes e verificados; cada lacuna coberta por um D (`cob`).
 - **50% Certo e 50% Errado em R e, separadamente, em D**; em total ímpar, diferença de 1 (não crie card só para equilibrar). Errados com um
   erro central plausível; sem absolutos como pista; ordem embaralhada pelo montador.
@@ -141,8 +141,11 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
   Baixa e as cobertas por nota da coleção; as demais questões do PDF vão em `questoes_pdf={'Q01': ('17',
   ID), ...}` e viram unidade sozinhas (cards que as citam em `refs`, prioridade herdada). O montador
   falha se Alta/Média ficar sem card nem nota da coleção, se Baixa tiver card ou se uma questão não for
-  citada, e põe as tags `Pagina_NN` e, nos D, uma tag por ID de `refs` (o nome do arquivo da questão,
-  ex.: `cebraspe-2021-prf-080`). Questão sem prova oficial vai para `referencias_sem_prova`
+  citada, e monta as tags de `references/tags.md`: `ASSUNTO::<tags do card>`
+  (`Disciplina::Assunto::Topico`), `PDF` (ex.: `Missao_07`) e `Pagina_NN` só nos cards que cobrem página,
+  o tipo (`Rapida`, `Desafiadora` ou `Cloze`) e, nos D, uma tag por ID de `refs` (o nome do arquivo da
+  questão, ex.: `cebraspe-2021-prf-080`). Tag de concurso, `Estilo_Cebraspe`, `Revisao_PDF`, `Mnemonico` ou
+  outra genérica faz o montador falhar. Questão sem prova oficial vai para `referencias_sem_prova`
   (inspiração e outra banca; nunca fidelidade comparada).
 - `padrao_d=dict(rb=rub(...), orig='Caso autoral.', ...)` guarda os valores comuns dos D; sem `regra`, o D
   usa o trecho da primeira fonte de `fx`. Escreva por D só o que é dele (`alvo`, `op`, `dado`, `solucao`,

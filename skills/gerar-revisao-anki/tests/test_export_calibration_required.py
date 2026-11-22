@@ -21,7 +21,7 @@ class ExportCalibrationRequiredTests(unittest.TestCase):
         self.ce=self.root/'ce.tsv'; self.cl=self.root/'cl.tsv'
         self.reports=self.root/'reports'; self.reports.mkdir()
         self.out=self.root/'out.zip'
-        self.ce.write_text('Condição sintética A.\t✅ Certo<br><br>Fundamento sintético A. 💡 Memorize: resumo sintético.\tTipo_Desafiadora_Cebraspe Estilo_Cebraspe\nCondição sintética B.\t❌ Errado<br><br>Correção sintética B. 💡 Memorize: resumo sintético.\tTipo_Desafiadora_Cebraspe Estilo_Cebraspe\n',encoding='utf-8')
+        self.ce.write_text('Condição sintética A.\t✅ Certo<br><br>Fundamento sintético A. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora\nCondição sintética B.\t❌ Errado<br><br>Correção sintética B. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora\n',encoding='utf-8')
         self.cl.write_text('',encoding='utf-8')
         for name in exportar_anki.REQUIRED_REPORTS:
             (self.reports/name).write_text('Fixture de teste, sem auditoria real de conteúdo.',encoding='utf-8')
@@ -69,7 +69,7 @@ class ExportCalibrationRequiredTests(unittest.TestCase):
         self.assertTrue(self.out.is_file())
 
     def test_quick_only_needs_no_hard_record(self):
-        text=self.ce.read_text(encoding='utf-8').replace('Tipo_Desafiadora_Cebraspe Estilo_Cebraspe','Tipo_Revisao_Rapida')
+        text=self.ce.read_text(encoding='utf-8').replace('Teste::Sintetico::Topico Desafiadora','Teste::Sintetico::Topico Rapida')
         self.ce.write_text(text,encoding='utf-8')
         (self.reports/'calibracao_cebraspe.json').unlink()
         self.export()

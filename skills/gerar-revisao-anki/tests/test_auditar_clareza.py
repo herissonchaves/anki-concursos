@@ -36,7 +36,7 @@ class LintTest(unittest.TestCase):
         self.assertTrue(any(x['sinal']=='REFERENCIA_EXTERNA' for x in problems))
 
     def test_zip_and_cross_modal_similarity(self):
-        ce='A tentativa perfeita esgota os atos executórios.\t✅ Certo<br><br>Todos os atos são executados.<br><br>💡 Memorize: execução completa.\tTipo_Revisao_Rapida\n'
+        ce='A tentativa perfeita esgota os atos executórios.\t✅ Certo<br><br>Todos os atos são executados.<br><br>💡 Memorize: execução completa.\tTeste::Sintetico::Topico Rapida\n'
         cl='A tentativa {{c1::perfeita}} esgota os atos executórios.\tExecução concluída.<br><br>💡 Memorize: atuação completa.\tTema_Penal\n'
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'batch.zip'

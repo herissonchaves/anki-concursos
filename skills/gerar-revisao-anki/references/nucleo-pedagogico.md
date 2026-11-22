@@ -88,7 +88,7 @@ utilidade de recuperar aquilo num cartão. Conteúdo correto e disciplina no edi
 - **D:** didático e contextualizado, com regra aplicada a dado decisivo, contraste ou exceção
   plausível; clareza e desafio são critérios separados (`protocolo-modo-estrategico.md`). Definição
   disfarçada vira R. Originalidade = reconstruir situação e raciocínio, não trocar palavras.
-- **Cloze:** uma omissão por nota (várias só em mnemônico, tag `Mnemonico`), contexto suficiente,
+- **Cloze:** uma omissão por nota (várias só em mnemônico, no formato de `references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis, resto de cada termo em c1, origem só no verso), contexto suficiente,
   cada lacuna coberta por um D do lote, índices e histórico de notas existentes preservados.
   Prazos, datas e números só após o filtro de `protocolo_cloze_cientifico.md`.
 - Paridade C/E por modo e vínculos Cloze → D são planejados na seleção e reconferidos após cortes

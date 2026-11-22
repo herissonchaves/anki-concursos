@@ -25,7 +25,7 @@ que ficou descoberto quando a composição do lote impedir uma inclusão útil.
 | --- | --- | --- |
 | Conceito nuclear para julgar rapidamente | C/E rápido | trivial, ambíguo, repetido |
 | Exceção, condição, consequência ou integração de fatos | C/E desafiador | apenas jogo de palavras, sem raciocínio real |
-| Conceito importante cujo termo, expressão ou frase curta central precisa ser memorizado | Cloze em qualquer posição; uma única lacuna c1 por nota (várias só em mnemônico, tag `Mnemonico`), com cobertura por desafiadores; dados numéricos só após filtro específico | palavra secundária, adivinhação contextual, frase vaga, redundância ou alto custo |
+| Conceito importante cujo termo, expressão ou frase curta central precisa ser memorizado | Cloze em qualquer posição; uma única lacuna c1 por nota (várias só em mnemônico, no formato de `references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis, resto de cada termo em c1, origem só no verso), com cobertura por desafiadores; dados numéricos só após filtro específico | palavra secundária, adivinhação contextual, frase vaga, redundância ou alto custo |
 
 ## Relevância para o concurso
 

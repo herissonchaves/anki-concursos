@@ -16,7 +16,9 @@ PALETA = {
     'certo': ('✔️ Por que está certo', '#43a047', 'rgba(67,160,71,0.10)'),
     'esquema': ('🗺️ Esquema', '#00897b', 'rgba(0,137,123,0.08)'),
     'memorize': ('💡 Memorize', '#ef8f00', 'rgba(249,168,37,0.16)'),
+    'origem': ('📚 Origem do mnemônico', '#757575', 'rgba(127,127,127,0.10)'),
 }
+_ORIGENS = {'encontrado': 'Encontrado em', 'adaptado': 'Adaptado de'}
 _BORDA_SUAVE = 'rgba(127,127,127,0.45)'
 PREFIXO = {'C': '✅ Certo<br><br>', 'E': '❌ Errado<br><br>'}
 
@@ -42,6 +44,23 @@ def erro(corpo: str, titulo: str | None = None) -> str: return bloco('erro', cor
 def certo(corpo: str, titulo: str | None = None) -> str: return bloco('certo', corpo, titulo)
 def esquema(corpo: str, titulo: str | None = None) -> str: return bloco('esquema', corpo, titulo)
 def memorize(corpo: str) -> str: return bloco('memorize', corpo)
+
+
+def origem_mnemonico(origem) -> str:
+    """Bloco do verso que diz de onde veio o mnemônico (2.33).
+
+    `origem`: 'autoral' ou (modo, url, nome) com modo 'encontrado' ou 'adaptado'; o link vai para a
+    fonte (página do professor/curso ou imagem da internet). Na frente nunca vai a origem.
+    """
+    if origem == 'autoral':
+        return bloco('origem', 'Autoral: criado para este card, sem fonte externa.')
+    try:
+        modo, url, nome = origem
+    except (TypeError, ValueError):
+        raise ValueError("origem do mnemônico: 'autoral' ou (\"encontrado\"|\"adaptado\", url, nome)") from None
+    if modo not in _ORIGENS or not re.match(r'https?://', str(url)) or not str(nome).strip():
+        raise ValueError('origem do mnemônico: modo encontrado/adaptado, url http(s) e nome da fonte')
+    return bloco('origem', f'{_ORIGENS[modo]} <a href="{url}">{_sem_quebras(nome)}</a>.')
 
 
 def chip(texto: str, cor: str = '#1e88e5', destaque: bool = False) -> str:
@@ -96,10 +115,12 @@ def verso_ce(gabarito: str, blocos: list[str], resumo: str) -> str:
     return texto
 
 
-def extra_cloze(blocos: list[str], resumo: str) -> str:
+def extra_cloze(blocos: list[str], resumo: str, origem=None) -> str:
+    """Extra do Cloze; `origem` (só mnemônico) põe o bloco de origem antes do Memorize."""
     if not blocos or not resumo.strip():
         raise ValueError('Extra Cloze precisa de explicação e Memorize')
-    texto = _wrapper(''.join(blocos) + memorize(resumo))
+    fim = (origem_mnemonico(origem) if origem is not None else '') + memorize(resumo)
+    texto = _wrapper(''.join(blocos) + fim)
     erros = problemas_html(texto)
     if erros:
         raise ValueError('; '.join(erros))

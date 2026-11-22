@@ -24,14 +24,14 @@ v=module('validar_anki');g=module('validar_gabaritos_rapidos')
 
 def sample(tmp_path,front='A unidade SI de força é o newton.'):
     ce=tmp_path/'ce.tsv';cl=tmp_path/'cl.tsv';rep=tmp_path/'reports';rep.mkdir()
-    ce.write_text(front+'\t✅ Certo<br><br>Força é medida em newtons no SI. 💡 Memorize: resumo sintético.\tFisica Tipo_Revisao_Rapida\n'
-        +'Um carro mantém sua massa e dobra a velocidade. Sua energia cinética também dobra.\t❌ Errado<br><br>A energia cinética depende do quadrado da velocidade; por isso quadruplica. 💡 Memorize: resumo sintético.\tFisica Tipo_Desafiadora_Cebraspe Estilo_Cebraspe\n',encoding='utf-8')
-    cl.write_text('A unidade SI de energia é o {{c1::joule}}.\tEnergia e trabalho usam a mesma unidade SI. 💡 Memorize: resumo sintético.\tFisica\n',encoding='utf-8')
+    ce.write_text(front+'\t✅ Certo<br><br>Força é medida em newtons no SI. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Rapida\n'
+        +'Um carro mantém sua massa e dobra a velocidade. Sua energia cinética também dobra.\t❌ Errado<br><br>A energia cinética depende do quadrado da velocidade; por isso quadruplica. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora\n',encoding='utf-8')
+    cl.write_text('A unidade SI de energia é o {{c1::joule}}.\tEnergia e trabalho usam a mesma unidade SI. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Cloze\n',encoding='utf-8')
     for n in ['selecao_e_fontes','economia_de_revisao','auditoria_pedagogica']:
         (rep/(n+'.txt')).write_text('Fixture sintética de teste, não auditoria de produção.',encoding='utf-8')
     lines=ce.read_text(encoding='utf-8').splitlines()
-    lines.insert(1,'O newton é unidade SI de massa.\t❌ Errado<br><br>Quilograma mede massa; newton mede força. 💡 Memorize: resumo sintético.\tFisica Tipo_Revisao_Rapida')
-    lines.append('Na mecânica clássica, um corpo de massa constante dobra a velocidade e quadruplica a energia cinética.\t✅ Certo<br><br>O quadrado da velocidade fica quatro vezes maior. 💡 Memorize: resumo sintético.\tFisica Tipo_Desafiadora_Cebraspe Estilo_Cebraspe')
+    lines.insert(1,'O newton é unidade SI de massa.\t❌ Errado<br><br>Quilograma mede massa; newton mede força. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Rapida')
+    lines.append('Na mecânica clássica, um corpo de massa constante dobra a velocidade e quadruplica a energia cinética.\t✅ Certo<br><br>O quadrado da velocidade fica quatro vezes maior. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora')
     ce.write_text('\n'.join(lines)+'\n',encoding='utf-8')
     write_calibration(ce,rep)
     write_review(ce,cl,rep)
@@ -47,13 +47,13 @@ def test_no_mnemonic_and_valid_ratio(tmp_path):
     assert not errors
 
 def test_balance_is_opt_in():
-    row='Proposição.\t✅ Certo<br><br>Fundamento. 💡 Memorize: resumo sintético.\tTipo_Revisao_Rapida\n'
+    row='Proposição.\t✅ Certo<br><br>Fundamento. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Rapida\n'
     assert not g.contar_rapidos((row*2).encode())[1]
     assert g.contar_rapidos((row*2).encode(),True)[1]
 
 def test_text_export_rejects_missing_type(tmp_path):
     ce,cl,rep=sample(tmp_path)
-    ce.write_text(ce.read_text(encoding='utf-8').replace(' Tipo_Revisao_Rapida',''),encoding='utf-8')
+    ce.write_text(ce.read_text(encoding='utf-8').replace('Topico Rapida','Topico'),encoding='utf-8')
     with pytest.raises(ValueError,match='sem tag'):
         export(ce,cl,rep,tmp_path/'out.zip')
 
@@ -72,7 +72,7 @@ def test_leading_quote_preserved(tmp_path):
 def test_deck_identity_and_apkg_counts(tmp_path):
     pytest.importorskip('genanki')
     ce,cl,rep=sample(tmp_path)
-    cl.write_text('A relação usa {{c1::massa}} e {{c2::aceleração}}.\tExemplo estrutural sintético.\tFisica\n',encoding='utf-8')
+    cl.write_text('A relação usa {{c1::massa}} e {{c2::aceleração}}.\tExemplo estrutural sintético.\tTeste::Sintetico::Topico Cloze\n',encoding='utf-8')
     assert deck_id('Anki-Concursos')==1987052180
     assert deck_id('Fisica')==deck_id('Fisica')!=deck_id('Portugues')
     package=tmp_path/'out.apkg'

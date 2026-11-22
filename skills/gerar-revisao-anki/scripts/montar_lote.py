@@ -18,8 +18,16 @@ Convenção dos dicionários de cartão (chaves curtas):
   arquivo da questão em `referencias/questoes/`, ex.: `cebraspe-2021-prf-080`), `fid` ('comparada' com `cmp` ou 'inspiracao_geral'
   com `lim`), `rb` (use `rubrica(...)`) e, no schema 2, `refs` com questão de outra
   banca ou `obp` (outras_bancas_pendencia).
-- Cloze: `t` (texto com uma omissão {{c1::…}}; várias só com a tag Mnemonico),
-  `alvo`, `sol`, `alt`, `rec`, `fb`, `cob` ({'1': ['D04']}: D que cobrem cada lacuna).
+- Cloze: `t` (texto com uma omissão {{c1::…}}), `alvo`, `sol`, `alt`, `rec`, `fb`,
+  `cob` ({'1': ['D04']}: D que cobrem cada lacuna). Mnemônico (2.33): `mn=dict(sigla='CE-NO-RE',
+  origem='autoral' | ('encontrado'|'adaptado', url, nome))`, frente iniciada por "Mnemônico SIGLA:",
+  letra(s) da sigla visíveis e o resto de cada termo em c1 (`C{{c1::ompetência}}`); a origem vai
+  só no Extra (bloco gerado), nunca na frente.
+
+Tags (2.33, references/tags.md): `assunto='Disciplina::Assunto'` + `tags` do card = tópico vira
+`Disciplina::Assunto::Topico`; `pdf='Missao_07'` entra só nos cards com `Pagina_NN`; tipo `Rapida`,
+`Desafiadora` ou `Cloze`; D com uma tag por questão de `refs`. Tag proibida (concurso, estilo,
+"revisão", "mnemônico"...) faz o montador falhar.
 
 `referencias`: pode ficar vazio ([]): os IDs do banco `referencias/` citados em `refs` de
 qualquer cartão (R, D ou Cloze) já entram sozinhos. Questões com prova oficial (url) viram
@@ -69,9 +77,10 @@ SCRIPTS_REFERENCIAS = Path(__file__).resolve().parents[2] / 'referencias-questoe
 from html_anki import extra_cloze, frente, verso_ce  # noqa: E402
 from validar_revisao_pedagogica import batch_hash, fingerprint, signals  # noqa: E402
 
-R_TAG = 'Tipo_Revisao_Rapida'
-D_TAG = 'Tipo_Desafiadora_Cebraspe Estilo_Cebraspe'
-MNEMONICO = 'Mnemonico'
+from regras_tags import (CLOZE, DESAFIADORA, RAPIDA, mnemonico_fora_do_formato, problemas_mnemonico,  # noqa: E402
+                         problemas_tags, sigla_mnemonico)
+
+R_TAG, D_TAG = RAPIDA, DESAFIADORA
 CRITERIOS = ('correcao', 'determinacao', 'operacao_d', 'comparacao', 'autoria', 'feedback',
              'linguagem_didatica', 'utilidade')
 REVISOR_PADRAO = 'Claude (assistente de IA) — mesmo agente que redigiu os cartões'
@@ -98,9 +107,10 @@ class Lote:
     def __init__(self, pasta, base_tags, fontes, hoje, referencias, R, D, CZ, semente,
                  schema_calibracao=2, revisor=REVISOR_PADRAO, titulo_previa='Prévia dos cards',
                  banco_referencias=None, registrar_uso=True, cobertura=None, questoes_pdf=None, padrao_d=None,
-                 relatorio=None):
+                 relatorio=None, assunto=None, pdf=None):
         self.pasta, self.out = Path(pasta), Path(pasta) / 'lote'
         self.base, self.F, self.hoje = base_tags, fontes, hoje
+        self.assunto, self.pdf = (assunto or '').strip(':'), pdf
         self.R, self.CZ, self.semente = R, CZ, semente
         self.schema, self.revisor, self.titulo = schema_calibracao, revisor, titulo_previa
         self.banco, self.registrar = banco_referencias, registrar_uso
@@ -213,8 +223,13 @@ class Lote:
         return novas
 
     def _tags(self, x, extra=''):
+        """base + Disciplina::Assunto::Topico + tipo/questões + PDF e páginas (só se o card cobre página)."""
         pags = ' '.join(f'Pagina_{p:02d}' for p in sorted(self.tags_pagina.get(x['k'], ())))
-        return ' '.join(t for t in (self.base, x['tags'], extra, pags) if t)
+        topicos = []
+        for t in x['tags'].split():
+            topicos.append(t if ('::' in t or not self.assunto) else f'{self.assunto}::{t}')
+        pdf = self.pdf if (pags and self.pdf) else ''
+        return ' '.join(t for t in (self.base, ' '.join(topicos), extra, pdf, pags) if t)
 
     def registro_cobertura(self):
         if self.cobertura is None:
@@ -357,15 +372,33 @@ class Lote:
         return [frente(x['f']), verso_ce(x['g'], x['b'], x['m']), self._tags(x, extra)]
 
     def row_c(self, x):
-        return [frente(x['t']), extra_cloze(x['b'], x['m']), self._tags(x)]
+        origem = x['mn'].get('origem') if x.get('mn') else None
+        return [frente(x['t']), extra_cloze(x['b'], x['m'], origem), self._tags(x, CLOZE)]
+
+    def checar_formato(self):
+        """Tags de todos os cards e formato do Cloze (uma omissão; mnemônico no formato 2.33)."""
+        erros = []
+        for (kind, x), row in zip(self.ce_items, self.ce_rows):
+            erros += [f"{x['k']}: {e}" for e in problemas_tags(row[2], RAPIDA if kind == 'R' else DESAFIADORA)]
+        for x, row in zip(self.CZ, self.cz_rows):
+            erros += [f"{x['k']}: {e}" for e in problemas_tags(row[2], CLOZE)]
+            if x.get('mn'):
+                erros += [f"{x['k']}: {e}" for e in problemas_mnemonico(x['t'], row[1])]
+                sigla = sigla_mnemonico(x['t'])
+                if sigla and sigla != str(x['mn'].get('sigla', '')).strip():
+                    erros.append(f"{x['k']}: título \"Mnemônico {sigla}:\" difere de mn['sigla']")
+            elif x['t'].count('{{c1::') != 1:
+                erros.append(f"{x['k']}: uma omissão por nota (várias só em mnemônico, com mn=dict(sigla=..., origem=...))")
+            elif sigla_mnemonico(x['t']) or mnemonico_fora_do_formato(x['t']):
+                erros.append(f"{x['k']}: mnemônico exige o formato \"Mnemônico SIGLA:\" (letras visíveis, resto em c1) "
+                             "e mn=dict(sigla=..., origem=...); a origem vai só no verso")
+        if erros:
+            raise SystemExit('TAGS OU FORMATO DO CLOZE FORA DA REGRA (references/tags.md):\n  ' + '\n  '.join(erros))
 
     def montar_linhas(self):
         if not hasattr(self, 'tags_pagina'):
             self.checar_cobertura()
         self.cz_index = {x['k']: i for i, x in enumerate(self.CZ, 1)}
-        for x in self.CZ:
-            if MNEMONICO not in x['tags'].split():
-                assert x['t'].count('{{c1::') == 1, f"{x['k']}: uma omissão por nota (várias só com a tag Mnemonico)"
         self.ce_items = [('R', x) for x in self.R] + [('D', x) for x in self.D]
         random.Random(self.semente).shuffle(self.ce_items)
         self.ce_rows, self.line_of = [], {}
@@ -373,6 +406,7 @@ class Lote:
             self.ce_rows.append(self.row_r(x) if kind == 'R' else self.row_d(x))
             self.line_of[x['k']] = n
         self.cz_rows = [self.row_c(x) for x in self.CZ]
+        self.checar_formato()
 
     def rid(self, k):
         return f'anki_certo_errado.tsv:{self.line_of[k]}'

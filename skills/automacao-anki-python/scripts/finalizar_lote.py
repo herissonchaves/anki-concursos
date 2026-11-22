@@ -42,7 +42,7 @@ def contar(dados: Path) -> dict:
                 if len(row) < 3 or row[0].strip().lower() in ('frente', 'texto'):
                     continue
                 tags = row[2].split()
-                tipos[chave or ('desafiadores' if 'Tipo_Desafiadora_Cebraspe' in tags else 'rapidos')] += 1
+                tipos[chave or ('desafiadores' if {'Desafiadora', 'Tipo_Desafiadora_Cebraspe'} & set(tags) else 'rapidos')] += 1
     return tipos
 
 

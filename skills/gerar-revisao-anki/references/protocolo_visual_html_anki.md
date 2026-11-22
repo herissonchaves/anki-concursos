@@ -51,7 +51,7 @@ de Informática da coleção do usuário, aprovado por ele:
 
 ## Estrutura do Extra (Cloze)
 
-`extra_cloze(blocos, memorize)`: `regra(...)` explicando o termo omitido (em mnemônico, cada termo), esquema opcional e `memorize(...)` no fim. O Texto do Cloze continua limpo: contexto suficiente e uma única omissão (várias só em mnemônico, com a tag `Mnemonico`).
+`extra_cloze(blocos, memorize, origem=None)`: `regra(...)` explicando o termo omitido (em mnemônico, cada termo), esquema opcional, em mnemônico o bloco 📚 Origem do mnemônico (`origem_mnemonico`, gerado pelo `mn=` do card) e `memorize(...)` no fim. O Texto do Cloze continua limpo: contexto suficiente e uma única omissão (várias só em mnemônico, no formato de `references/tags.md`).
 
 ## Rótulos e linguagem
 

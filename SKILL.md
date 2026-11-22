@@ -5,7 +5,7 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
-**Versão 2.32.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.33.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
@@ -68,10 +68,16 @@ seção 0 (economia de tokens) é obrigatória: PDF nunca por leitor de página 
 importação com `--ruido`, sem saídas grandes e com idas e voltas agrupadas. Cards de revisão de PDF anexado
 cobrem todo conteúdo de prioridade **Alta ou Média** para o concurso-alvo, do PDF e das questões
 de concursos nele, sem duplicar notas da coleção
-([cobertura-pdf.md](skills/gerar-revisao-anki/references/cobertura-pdf.md)), levam as tags
-`Pagina_NN` da página de origem e seguem a formatação única de
+([cobertura-pdf.md](skills/gerar-revisao-anki/references/cobertura-pdf.md)) e seguem a formatação única de
 [estilo_anki.py](skills/gerar-revisao-anki/scripts/estilo_anki.py) (Arial 20 px, como os cards de
 Informática).
+
+**Tags e mnemônicos** (desde a 2.33): regra única em
+[tags.md](skills/gerar-revisao-anki/references/tags.md). Só `Disciplina::Assunto::Topico`, nome curto do
+PDF e `Pagina_NN` (apenas em card feito sobre o PDF), uma tag de tipo (`Rapida`, `Desafiadora` ou `Cloze`)
+e, nos desafiadores, a questão de origem; nada de concurso, `Estilo_Cebraspe`, `Revisao_PDF` ou outra
+genérica. Cloze mnemônico: frente `Mnemônico SIGLA:` com as letras visíveis e o resto de cada termo em c1;
+a origem (autoral ou link da fonte) vai só no verso.
 
 Para conteúdo de PRF ou Agente da Polícia Federal, use
 [perfil-carreiras-policiais](skills/perfil-carreiras-policiais/SKILL.md) para

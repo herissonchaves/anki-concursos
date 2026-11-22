@@ -12,10 +12,10 @@ from html_anki import erro, regra
 HOJE = '2026-11-18'
 F = {'si': ('https://example.test/si', 'Fonte FICTÍCIA de teste sobre unidades do SI')}
 REFS = [
-    dict(id='CEB', banca='Cebraspe', formato='certo_errado', concurso='FICTICIO', cargo='Teste', ano=2024,
+    dict(id='ceb-2024-fixture-001', banca='Cebraspe', formato='certo_errado', concurso='FICTICIO', cargo='Teste', ano=2024,
          caderno='Fixture', item='1', url='https://example.test/prova', consulta=HOJE,
          operacao_observada='Operação sintética', gabarito_status='definitivo', gabarito_url='https://example.test/gab'),
-    dict(id='FGV', banca='FGV', formato='multipla_escolha', concurso='FICTICIO 2', cargo='Teste', ano=2023,
+    dict(id='fgv-2023-fixture-009', banca='FGV', formato='multipla_escolha', concurso='FICTICIO 2', cargo='Teste', ano=2023,
          caderno='Fixture B', item='9', url='https://example.test/prova-fgv', consulta=HOJE,
          operacao_observada='Alternativa sintética', gabarito_status='definitivo', gabarito_url='https://example.test/gab-fgv'),
 ]
@@ -24,14 +24,14 @@ REVISAO = dict(alvo='Alvo sintético', sol='Solução sintética', alt='Alternat
 
 
 def r(k, g, f):
-    return dict(k=k, g=g, f=f, tags='Fisica', b=[regra('A unidade SI de força é o newton.')], m='Força: newton.', **REVISAO)
+    return dict(k=k, g=g, f=f, tags='Forca', b=[regra('A unidade SI de força é o newton.')], m='Força: newton.', **REVISAO)
 
 
 def d(k, g, f, **extra):
-    base = dict(k=k, g=g, f=f, tags='Fisica', b=[regra('F = m·a.')] + ([erro('A conta foi invertida.')] if g == 'E' else []),
+    base = dict(k=k, g=g, f=f, tags='Forca', b=[regra('F = m·a.')] + ([erro('A conta foi invertida.')] if g == 'E' else []),
                 m='Aceleração = força ÷ massa.', alvo='Aplicar F = m·a', op='Calcular a aceleração', regra='F = m·a',
                 dado='6 N sobre 2 kg', solucao='6 ÷ 2 = 3 m/s²', erro='Multiplicar em vez de dividir',
-                conc='Leitura concorrente sintética', orig='Situação sintética', fx=('si',), refs=['CEB', 'FGV'],
+                conc='Leitura concorrente sintética', orig='Situação sintética', fx=('si',), refs=['ceb-2024-fixture-001', 'fgv-2023-fixture-009'],
                 fid='comparada', cmp='Mesma operação da referência sintética',
                 rb=m.rubrica(*(f'Evidência sintética {i} de {k}' for i in range(8))))
     base.update(extra)
@@ -42,9 +42,9 @@ def lote(pasta, **kw):
     R = [r('R01', 'C', 'A unidade SI de força é o newton.'), r('R02', 'E', 'A unidade SI de força é o joule.')]
     D = [d('D01', 'C', 'Uma força resultante de 6 N age sobre 2 kg. A aceleração é 3 m/s².'),
          d('D02', 'E', 'Uma força resultante de 6 N age sobre 2 kg. A aceleração é 12 m/s².')]
-    CZ = [dict(k='C01', tags='Fisica', t='A unidade SI de força é o {{c1::newton}}.', b=[regra('Newton mede força.')],
+    CZ = [dict(k='C01', tags='Forca', t='A unidade SI de força é o {{c1::newton}}.', b=[regra('Newton mede força.')],
                m='Força: newton.', cob={'1': ['D01']}, **REVISAO)]
-    return m.Lote(pasta, 'Teste Fixture', F, HOJE, REFS, R, D, CZ, semente=1, **kw)
+    return m.Lote(pasta, '', F, HOJE, REFS, R, D, CZ, semente=1, **{'assunto': 'Fisica::Dinamica', 'pdf': 'Missao_01', **kw})
 
 
 def ler(pasta):
@@ -97,16 +97,16 @@ def test_metadados_curtos_2_24_passam(tmp_path, monkeypatch):
 def test_desafiador_leva_tag_da_questao_de_origem_2_31(tmp_path, monkeypatch):
     """Cada ID de `refs` do D vira tag (o nome do arquivo .md da questão); R e Cloze não ganham."""
     orig_r, orig_d = r, d
-    monkeypatch.setitem(globals(), 'r', lambda *a: {**orig_r(*a), 'refs': ['CEB']})
-    monkeypatch.setitem(globals(), 'd', lambda *a, **kw: orig_d(*a, **{'refs': ['CEB', 'FGV', 'CEB'], **kw}))
+    monkeypatch.setitem(globals(), 'r', lambda *a: {**orig_r(*a), 'refs': ['ceb-2024-fixture-001']})
+    monkeypatch.setitem(globals(), 'd', lambda *a, **kw: orig_d(*a, **{'refs': ['ceb-2024-fixture-001', 'fgv-2023-fixture-009', 'ceb-2024-fixture-001'], **kw}))
     final = gerar_resolvido(tmp_path)
     items, calibracao, _ = ler(tmp_path)
     linhas = items['anki_certo_errado.tsv'].decode().splitlines()
     tags = {k: linhas[n - 1].split('\t')[2].split() for k, n in final.line_of.items()}
     for k in ('D01', 'D02'):
-        assert tags[k][-2:] == ['CEB', 'FGV'] and tags[k].count('CEB') == 1
-    assert 'CEB' not in tags['R01'] and 'CEB' not in tags['R02']
-    assert 'CEB' not in items['anki_cloze.tsv'].decode().split('\t')[2].split()
+        assert tags[k][-2:] == ['ceb-2024-fixture-001', 'fgv-2023-fixture-009'] and tags[k].count('ceb-2024-fixture-001') == 1
+    assert 'ceb-2024-fixture-001' not in tags['R01'] and 'ceb-2024-fixture-001' not in tags['R02']
+    assert 'ceb-2024-fixture-001' not in items['anki_cloze.tsv'].decode().split('\t')[2].split()
     assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
     assert m.Lote.tags_origem({'refs': []}) == '' and m.Lote.tags_origem({}) == ''
 
@@ -139,7 +139,7 @@ def test_other_bank_pending_goes_to_schema_2_record(tmp_path):
     pasta = tmp_path
     (pasta / 'fonte').mkdir()
     gerado = lote(pasta)
-    gerado.D[0].update(refs=['CEB'], obp='Buscas FGV/FCC sem item acessível (sintético)')
+    gerado.D[0].update(refs=['ceb-2024-fixture-001'], obp='Buscas FGV/FCC sem item acessível (sintético)')
     gerado.gerar(imprimir=False)
     registro = json.loads((pasta / 'lote' / cal.REPORT).read_text(encoding='utf-8'))
     assert registro['cartoes'][0]['outras_bancas_pendencia'].startswith('Buscas')
@@ -151,13 +151,64 @@ def test_schema_1_keeps_legacy_shape(tmp_path):
     assert registro['schema_version'] == 1 and 'outras_bancas_pendencia' not in registro['cartoes'][0]
 
 
-def test_multiple_omissions_require_mnemonic_tag(tmp_path):
+MNEMONICO_OK = ('<b>Mnemônico CE-NO-RE:</b><br>Pela Lei 9.784/1999 (art. 13), não podem ser delegados:<br>'
+                'a matéria de C{{c1::ompetência}} E{{c1::xclusiva}},<br>a edição de atos NO{{c1::rmativos}}<br>'
+                'e a decisão de RE{{c1::cursos administrativos}}.')
+
+
+def test_multiple_omissions_only_in_mnemonic_2_33(tmp_path):
     gerado = lote(tmp_path)
     gerado.CZ[0]['t'] = 'Força em {{c1::newton}}, energia em {{c1::joule}}.'
-    with pytest.raises(AssertionError):
+    with pytest.raises(SystemExit, match='uma omissão por nota'):
         gerado.montar_linhas()
-    gerado.CZ[0]['tags'] = 'Fisica Mnemonico'
+    gerado.CZ[0].update(t=MNEMONICO_OK, mn=dict(sigla='CE-NO-RE', origem='autoral'))
     gerado.montar_linhas()
+    texto, extra, tags = gerado.cz_rows[0]
+    assert 'Origem do mnemônico' in extra and 'Autoral' in extra and 'autoral' not in texto.casefold()
+    assert tags.split() == ['Fisica::Dinamica::Forca', 'Cloze']
+
+
+def test_mnemonico_com_link_da_fonte_no_verso(tmp_path):
+    gerado = lote(tmp_path)
+    gerado.CZ[0].update(t=MNEMONICO_OK, mn=dict(sigla='CE-NO-RE', origem=('encontrado', 'https://example.test/mn', 'Blog X')))
+    gerado.montar_linhas()
+    assert '<a href="https://example.test/mn">Blog X</a>' in gerado.cz_rows[0][1]
+
+
+@pytest.mark.parametrize('texto', [
+    # o caso reprovado pelo usuário: origem na frente e a lista inteira numa lacuna só
+    'Dica autoral CE-NO-RE: pela Lei 9.784/1999 (art. 13), não podem ser delegados {{c1::a matéria de Competência '
+    'Exclusiva, a edição de atos NOrmativos e a decisão de REcursos administrativos}}.',
+    # sem letra-pista visível antes da lacuna
+    '<b>Mnemônico CE-NO-RE:</b><br>não se delegam: {{c1::competência}} {{c1::exclusiva}}.',
+    # sem título
+    'Não se delegam: C{{c1::ompetência}} E{{c1::xclusiva}}.',
+])
+def test_mnemonico_fora_do_formato_reprovado(tmp_path, texto):
+    gerado = lote(tmp_path)
+    gerado.CZ[0].update(t=texto, mn=dict(sigla='CE-NO-RE', origem='autoral'))
+    with pytest.raises(SystemExit):
+        gerado.montar_linhas()
+
+
+@pytest.mark.parametrize('base, kw', [('PRF', {}), ('', {'assunto': ''}), ('Revisao_PDF', {})])
+def test_tags_proibidas_ou_sem_assunto_reprovadas_2_33(tmp_path, base, kw):
+    gerado = lote(tmp_path, **kw)
+    gerado.base = base
+    if kw:
+        gerado.assunto = ''
+    with pytest.raises(SystemExit, match='TAGS'):
+        gerado.montar_linhas()
+
+
+def test_tags_do_lote_sem_pdf_2_33(tmp_path):
+    gerado = lote(tmp_path)
+    gerado.montar_linhas()
+    r01 = gerado.ce_rows[gerado.line_of['R01'] - 1][2].split()
+    d01 = gerado.ce_rows[gerado.line_of['D01'] - 1][2].split()
+    assert r01 == ['Fisica::Dinamica::Forca', 'Rapida']
+    assert d01 == ['Fisica::Dinamica::Forca', 'Desafiadora', 'ceb-2024-fixture-001', 'fgv-2023-fixture-009']
+    assert 'Missao_01' not in ' '.join(r01 + d01)  # PDF só com Pagina_NN
 
 
 def test_referencias_do_banco_por_id_e_registro_de_uso(tmp_path):
@@ -168,12 +219,12 @@ def test_referencias_do_banco_por_id_e_registro_de_uso(tmp_path):
 
     banco = tmp_path / 'referencias'
     ids = {}
-    for chave, ref in (('CEB', REFS[0]), ('FGV', REFS[1])):
+    for chave, ref in (('ceb-2024-fixture-001', REFS[0]), ('fgv-2023-fixture-009', REFS[1])):
         dados = {k: v for k, v in ref.items() if k != 'id'}
         dados.update(orgao=f'Órgão {chave}', disciplina='fisica', assunto='dinamica', subassuntos=['segunda_lei'],
-                     palavras_chave=['força'], gabarito='C' if chave == 'CEB' else 'A', origem='pesquisa_internet',
+                     palavras_chave=['força'], gabarito='C' if chave == 'ceb-2024-fixture-001' else 'A', origem='pesquisa_internet',
                      fonte_descoberta='Fixture sintética', concursos_alvo=['PRF'], enunciado=f'Item sintético {chave}.',
-                     alternativas={'A': 'x', 'B': 'y'} if chave == 'FGV' else None)
+                     alternativas={'A': 'x', 'B': 'y'} if chave == 'fgv-2023-fixture-009' else None)
         status, questao, msgs = banco_mod.nova(dados, banco)
         assert status == 'criada', msgs
         ids[chave] = questao.id
@@ -182,14 +233,14 @@ def test_referencias_do_banco_por_id_e_registro_de_uso(tmp_path):
     (pasta / 'fonte').mkdir(parents=True)
     gerado = lote(pasta, banco_referencias=banco)
     for x in gerado.D:
-        x['refs'] = [ids['CEB'], ids['FGV']]
+        x['refs'] = [ids['ceb-2024-fixture-001'], ids['fgv-2023-fixture-009']]
     gerado.refs = gerado._resolver_refs([])  # os IDs citados nos cartões bastam
     gerado.gerar(imprimir=False)
     items, calibracao, _ = ler(pasta)
     registro = json.loads(calibracao)
-    assert [r['id'] for r in registro['referencias']] == [ids['CEB'], ids['FGV']]
+    assert [r['id'] for r in registro['referencias']] == [ids['ceb-2024-fixture-001'], ids['fgv-2023-fixture-009']]
     assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
-    usos = banco_mod.localizar([ids['CEB']], banco)[0].meta['usado_em']
+    usos = banco_mod.localizar([ids['ceb-2024-fixture-001']], banco)[0].meta['usado_em']
     assert usos == ['lote_banco#D01,D02']
 
 
@@ -200,26 +251,26 @@ def test_sugere_item_cebraspe_do_banco_para_d_em_inspiracao_geral(tmp_path, caps
 
     banco = tmp_path / 'referencias'
     ids = {}
-    for chave, ref in (('CEB', REFS[0]), ('FGV', REFS[1])):
+    for chave, ref in (('ceb-2024-fixture-001', REFS[0]), ('fgv-2023-fixture-009', REFS[1])):
         dados = {k: v for k, v in ref.items() if k != 'id'}
         dados.update(orgao=f'Órgão {chave}', disciplina='fisica', assunto='dinamica', subassuntos=['segunda_lei'],
-                     palavras_chave=['força'], gabarito='C' if chave == 'CEB' else 'A', origem='pesquisa_internet',
+                     palavras_chave=['força'], gabarito='C' if chave == 'ceb-2024-fixture-001' else 'A', origem='pesquisa_internet',
                      fonte_descoberta='Fixture sintética', concursos_alvo=['PRF'], enunciado=f'Item sintético {chave}.',
-                     alternativas={'A': 'x', 'B': 'y'} if chave == 'FGV' else None)
+                     alternativas={'A': 'x', 'B': 'y'} if chave == 'fgv-2023-fixture-009' else None)
         ids[chave] = banco_mod.nova(dados, banco)[1].id
     pasta = tmp_path / 'lote_sugestao'
     (pasta / 'fonte').mkdir(parents=True)
     gerado = lote(pasta, banco_referencias=banco, registrar_uso=False)
-    gerado.D[0].update(refs=[ids['FGV']], fid='inspiracao_geral', lim='Limitação sintética')
+    gerado.D[0].update(refs=[ids['fgv-2023-fixture-009']], fid='inspiracao_geral', lim='Limitação sintética')
     gerado.D[1].update(refs=[], fid='inspiracao_geral', lim='Limitação sintética', a='fisica/dinamica')
-    assert gerado.sugestoes_cebraspe() == {'D01': [ids['CEB']], 'D02': [ids['CEB']]}
-    gerado.D[0]['refs'] = [ids['CEB'], ids['FGV']]
+    assert gerado.sugestoes_cebraspe() == {'D01': [ids['ceb-2024-fixture-001']], 'D02': [ids['ceb-2024-fixture-001']]}
+    gerado.D[0]['refs'] = [ids['ceb-2024-fixture-001'], ids['fgv-2023-fixture-009']]
     gerado.D[0]['fid'] = 'comparada'
-    assert gerado.sugestoes_cebraspe() == {'D02': [ids['CEB']]}
+    assert gerado.sugestoes_cebraspe() == {'D02': [ids['ceb-2024-fixture-001']]}
     gerado.D[1]['sa'] = ['primeira_lei']  # subtema diferente: sem aviso (2.29)
     assert gerado.sugestoes_cebraspe() == {}
     gerado.D[1]['sa'] = 'segunda_lei, terceira_lei'
-    assert gerado.sugestoes_cebraspe() == {'D02': [ids['CEB']]}
+    assert gerado.sugestoes_cebraspe() == {'D02': [ids['ceb-2024-fixture-001']]}
 
 
 def test_questao_sem_prova_vai_para_referencias_sem_prova(tmp_path):
@@ -241,16 +292,16 @@ def test_questao_sem_prova_vai_para_referencias_sem_prova(tmp_path):
     pasta = tmp_path / 'lote_sem_prova'
     (pasta / 'fonte').mkdir(parents=True)
     gerado = lote(pasta, banco_referencias=banco)
-    gerado.D[0]['refs'] = ['CEB', questao.id]
-    gerado.D[1]['refs'] = ['CEB', questao.id]
+    gerado.D[0]['refs'] = ['ceb-2024-fixture-001', questao.id]
+    gerado.D[1]['refs'] = ['ceb-2024-fixture-001', questao.id]
     gerado.R[0]['refs'] = [questao.id]
     gerado.refs = gerado._resolver_refs([REFS[0]])
     gerado.gerar(imprimir=False)
     items, calibracao, _ = ler(pasta)
     registro = json.loads(calibracao)
-    assert [r['id'] for r in registro['referencias']] == ['CEB']
+    assert [r['id'] for r in registro['referencias']] == ['ceb-2024-fixture-001']
     assert [r['id'] for r in registro['referencias_sem_prova']] == [questao.id]
-    assert registro['cartoes'][0]['referencias'] == ['CEB']
+    assert registro['cartoes'][0]['referencias'] == ['ceb-2024-fixture-001']
     assert registro['cartoes'][0]['referencias_sem_prova'] == [questao.id]
     # A questão de outra banca sem prova satisfaz a exigência de outra banca; não há pendência.
     assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
@@ -307,14 +358,14 @@ def test_cobertura_incompleta_falha(tmp_path, mudanca, esperado):
 
 def test_questoes_do_pdf_viram_unidades_pelos_refs_2_29(tmp_path):
     import validar_cobertura_pdf as cob
-    final = gerar_resolvido(tmp_path, cobertura=COBERTURA, questoes_pdf={'Q01': ('8', 'CEB')})
+    final = gerar_resolvido(tmp_path, cobertura=COBERTURA, questoes_pdf={'Q01': ('8', 'ceb-2024-fixture-001')})
     assert final.pendentes == []
     registro = json.loads((tmp_path / 'lote' / 'relatorios' / 'cobertura_pdf.json').read_text(encoding='utf-8'))
     q01 = [u for u in registro['unidades'] if u['u'] == 'Q01'][0]
-    assert q01['p'] == 'media' and q01['questao'] == 'CEB' and sorted(q01['ids_editoriais']) == ['D01', 'D02']
+    assert q01['p'] == 'media' and q01['questao'] == 'ceb-2024-fixture-001' and sorted(q01['ids_editoriais']) == ['D01', 'D02']
     assert cob.validar(cob.ler(tmp_path / 'lote')) == []
     triagem = (tmp_path / 'lote' / 'relatorios' / 'triagem_previa_pdf.txt').read_text(encoding='utf-8')
-    assert 'Q01 | 8 | media | Questão 01 do PDF [CEB]' in triagem and m.MARCA_GERADO in triagem
+    assert 'Q01 | 8 | media | Questão 01 do PDF [ceb-2024-fixture-001]' in triagem and m.MARCA_GERADO in triagem
 
 
 def test_questao_do_pdf_sem_card_exige_unidade_declarada(tmp_path):
@@ -328,7 +379,7 @@ def test_padrao_d_completa_so_as_chaves_ausentes_e_regra_vem_da_fonte(tmp_path):
     base = lote(tmp_path)
     D = [{k: v for k, v in x.items() if k not in ('rb', 'orig', 'regra')} for x in base.D]
     D[1]['orig'] = 'Origem própria'
-    novo = m.Lote(tmp_path, 'Teste Fixture', F, HOJE, REFS, base.R, D, base.CZ, semente=1, padrao_d=padrao)
+    novo = m.Lote(tmp_path, '', F, HOJE, REFS, base.R, D, base.CZ, semente=1, padrao_d=padrao, assunto='Fisica::Dinamica')
     assert novo.D[0]['orig'] == 'Caso autoral.' and novo.D[1]['orig'] == 'Origem própria'
     assert novo.D[0]['regra'] == F['si'][1] and novo.D[0]['rb'] == padrao['rb']
 
@@ -343,7 +394,7 @@ def test_relatorios_gerados_e_manuscrito_preservado(tmp_path):
     assert 'D01 (CE:' in auditoria and 'C01 (CZ:1) | Cloze' in auditoria
     assert 'Material: Apostila sintética' in (rel / 'triagem_previa_pdf.txt').read_text(encoding='utf-8')
     fontes = (rel / 'fontes_e_referencias.txt').read_text(encoding='utf-8')
-    assert '- CEB: ' in fontes and 'si: https://example.test/si' in fontes
+    assert '- ceb-2024-fixture-001: ' in fontes and 'si: https://example.test/si' in fontes
 
 
 def test_validador_de_cobertura_aponta_tag_de_pagina_ausente(tmp_path):
@@ -411,11 +462,11 @@ def test_fontes_aceitam_id_de_conteudo_do_banco(tmp_path):
     assert status == 'criada', msgs
     gerado = lote(tmp_path / 'lote_fonte', banco_referencias=banco)
     gerado.F = {'si': q.id}
-    novo = m.Lote(tmp_path / 'lote_fonte', 'Teste', {'si': q.id}, HOJE, REFS, gerado.R, gerado.D, gerado.CZ, semente=1,
-                  banco_referencias=banco)
+    novo = m.Lote(tmp_path / 'lote_fonte', '', {'si': q.id}, HOJE, REFS, gerado.R, gerado.D, gerado.CZ, semente=1,
+                  banco_referencias=banco, assunto='Fisica::Dinamica')
     assert novo.F['si'][0] == 'https://example.test/si' and q.id in novo.F['si'][1]
-    secao = m.Lote(tmp_path / 'lote_secao', 'Teste', {'si': q.id + '#Força'}, HOJE, REFS, gerado.R, gerado.D, gerado.CZ,
-                   semente=1, banco_referencias=banco)
+    secao = m.Lote(tmp_path / 'lote_secao', '', {'si': q.id + '#Força'}, HOJE, REFS, gerado.R, gerado.D, gerado.CZ,
+                   semente=1, banco_referencias=banco, assunto='Fisica::Dinamica')
     assert 'Força' in secao.F['si'][1] and q.id in secao.F['si'][1]
     secao.gerar(imprimir=False)  # todos os cartões da fixture citam a fonte 'si'
     usos = banco_mod.localizar([q.id], banco)[0].meta['usado_em']

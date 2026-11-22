@@ -24,7 +24,7 @@ import zipfile
 
 REPORT = 'relatorios/calibracao_cebraspe.json'
 CE = 'anki_certo_errado.tsv'
-HARD = 'Tipo_Desafiadora_Cebraspe'
+HARDS = {'Desafiadora', 'Tipo_Desafiadora_Cebraspe'}  # 2.33: novo e antigo
 CRITERIA = ('correcao', 'determinacao', 'operacao_d', 'comparacao', 'autoria', 'feedback', 'linguagem_didatica', 'utilidade')
 # Desde a 2.24 (economia de tokens), estes passam com resultado PASSA mesmo sem texto de evidência.
 CRITERIA_SEM_EVIDENCIA = ('autoria', 'feedback', 'utilidade')
@@ -71,7 +71,7 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
         row = line.split('\t')
         if len(row) != 3:
             errors.append(f'linha {number}: esperados três campos')
-        elif HARD in row[2].split():
+        elif HARDS & set(row[2].split()):
             cards[number] = row
     if not cards:
         return errors  # Não impõe metadados D a rápidos/Cloze ou coleção antiga.
@@ -154,8 +154,6 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
         row = cards[line]
         if record.get('sha256') != fingerprint(row):
             errors.append(f'{ident}: SHA256 diverge; refazer revisão após alteração')
-        if 'Estilo_Cebraspe' not in row[2].split():
-            errors.append(f'{ident}: tag Estilo_Cebraspe ausente')
         answer = 'C' if row[1].startswith('✅ Certo<br><br>') else 'E' if row[1].startswith('❌ Errado<br><br>') else None
         if answer is None or record.get('gabarito') != answer:
             errors.append(f'{ident}: gabarito declarado diverge do verso')

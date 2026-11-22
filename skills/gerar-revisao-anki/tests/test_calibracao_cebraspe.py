@@ -24,8 +24,8 @@ check = load(ROOT / 'scripts/validar_calibracao_cebraspe.py', 'calibracao')
 def fixture():
     row = ['Considere P implica Q e Q falso. Nessas condições, P é falso.',
            '✅ Certo<br><br>Se P fosse verdadeiro, Q teria de ser verdadeiro. Isso contradiz a premissa de Q falso. 💡 Memorize: resumo sintético.',
-           'Tipo_Desafiadora_Cebraspe Estilo_Cebraspe Logica REF-TESTE']
-    ref = dict(id='REF-TESTE', concurso='FICTICIO', cargo='Teste', ano=2021,
+           'Teste::Sintetico::Topico Desafiadora ref-2021-teste-001']
+    ref = dict(id='ref-2021-teste-001', concurso='FICTICIO', cargo='Teste', ano=2021,
                caderno='Fixture', item='1', url='https://example.test/prova',
                consulta='2026-11-03', operacao_observada='Contraposição sintética',
                gabarito_status='definitivo', gabarito_url='https://example.test/gabarito')
@@ -35,7 +35,7 @@ def fixture():
                   erro_plausivel='Tomar Q falso como insuficiente para excluir P.',
                   leitura_concorrente='A hipótese P verdadeiro contradiz as premissas.',
                   originalidade='Formulação simbólica sintética exclusiva do teste.',
-                  fontes_conteudo=['https://example.test/logica'], referencias=['REF-TESTE'],
+                  fontes_conteudo=['https://example.test/logica'], referencias=['ref-2021-teste-001'],
                   fidelidade='comparada', comparacao='Mesma operação formal na fixture.',
                   segunda_conferencia=True, decisao='APROVAR',
                   rubrica={key: dict(resultado='PASSA', evidencia=f'Evidência sintética de {key}') for key in check.CRITERIA})
@@ -52,7 +52,7 @@ def fixture_v2():
         url='https://example.test/prova-fgv', consulta='2026-11-03',
         operacao_observada='Múltipla escolha sintética sobre contraposição', banca='FGV',
         formato='multipla_escolha', gabarito_status='definitivo', gabarito_url='https://example.test/gab-fgv'))
-    data['cartoes'][0]['referencias'] = ['REF-TESTE', 'REF-FGV']
+    data['cartoes'][0]['referencias'] = ['ref-2021-teste-001', 'REF-FGV']
     row[2] += ' REF-FGV'  # 2.31: questões de origem viram tags do D
     data['cartoes'][0]['sha256'] = check.fingerprint(row)
     return row, data
@@ -69,7 +69,7 @@ class CalibrationTest(unittest.TestCase):
     def test_missing_record_and_no_d(self):
         row, _ = fixture()
         self.assertTrue(check.validate('\t'.join(row).encode(), None))
-        row[2] = 'Tipo_Revisao_Rapida'
+        row[2] = 'Teste::Sintetico::Topico Rapida'
         self.assertEqual(check.validate('\t'.join(row).encode(), None), [])
 
     def test_stale_front_back_or_tags(self):
@@ -224,7 +224,7 @@ class CalibrationTest(unittest.TestCase):
 
     def test_v2_other_banks_linked_or_pending(self):
         row, data = fixture_v2()
-        data['cartoes'][0]['referencias'] = ['REF-TESTE']
+        data['cartoes'][0]['referencias'] = ['ref-2021-teste-001']
         self.assertTrue(any('outra banca' in e for e in evaluate(row, data)))
         data['cartoes'][0]['outras_bancas_pendencia'] = 'Buscas por FGV/FCC/Vunesp sobre o tema sem item acessível.'
         self.assertEqual(evaluate(row, data), [])
@@ -243,7 +243,7 @@ class CalibrationTest(unittest.TestCase):
         data['cartoes'][0]['sha256'] = check.fingerprint(row)
         self.assertIn('D01: tag da questão de origem REF-FGV ausente', evaluate(row, data))
         row, data = fixture()  # schema 1 (legado) não exige a tag
-        row[2] = row[2].replace(' REF-TESTE', '')
+        row[2] = row[2].replace(' ref-2021-teste-001', '')
         data['cartoes'][0]['sha256'] = check.fingerprint(row)
         self.assertEqual(evaluate(row, data), [])
 
