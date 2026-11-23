@@ -1,6 +1,6 @@
 # Assuntos do banco de referências
 
-Gerado por `referencias.py indexar`; não editar à mão. Total: 1282 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
+Gerado por `referencias.py indexar`; não editar à mão. Total: 1328 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
 
 - **administrativo** (244)
   - agentes_publicos (11): penalidades 4, regime_disciplinar 3, independencia_das_instancias 2, mandato_eletivo 2, provimento 2, reintegracao 2, responsabilidades 1 · Cebraspe 9 · tipos: questao 9, prioridade 2
@@ -15,7 +15,7 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 1282 itens. For
   - prf_institucional (4): atribuicoes 2, competencias 2, historia_da_prf 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
   - regime_juridico_principios (46): impessoalidade 8, eficiencia 5, moralidade 5, publicidade 5, seguranca_juridica 5, legalidade 4, autotutela 3, principios_implicitos 3, continuidade 2, especialidade 2, imperatividade 2, presuncao_legitimidade 2, razoabilidade 2, supraprincipios 2, supremacia 2, hierarquia 1, hierarquia_entre_principios 1, motivacao 1, proporcionalidade 1, reserva_legal 1 · Cebraspe 30, Quadrix 11, CESPE 1, FGV 1 · tipos: questao 43, prioridade 2, conteudo 1
   - responsabilidade_civil (6): acao_de_regresso 2, concessionarias 2, dupla_garantia 2, responsabilidade_objetiva 2 · Cebraspe 4 · tipos: questao 4, prioridade 2
-- **constitucional** (115)
+- **constitucional** (135)
   - aplicabilidade_normas (2): eficacia_contida 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - defesa_estado_seguranca_publica (13): policia_federal 5, estado_de_sitio 2, prf 2, prf_e_pff 2, seguranca_viaria 2, estado_de_defesa 1, estado_de_defesa_e_sitio 1 · Cebraspe 11 · tipos: questao 11, prioridade 2
   - direitos_fundamentais (32): requisicao_administrativa 6, inviolabilidade_domicilio 4, liberdade_de_reuniao 4, escusa_de_consciencia 3, liberdade_de_associacao 3, liberdade_expressao 3, sigilo_das_comunicacoes 3, assistencia_juridica 2, confisco 2, destinatarios 2, direito_de_peticao 2, direitos_do_preso 2, extradicao 2, inafiancabilidade 2, legalidade_reserva_legal 2, liberdade_religiosa 2, direito_a_vida 1, direito_de_resposta 1, direitos_diversos 1, habeas_data 1, igualdade 1, liberdade_profissional 1, propriedade 1, propriedade_intelectual 1 · Cebraspe 26, AOCP 2, Dédalus 1 · tipos: questao 29, prioridade 2, conteudo 1
@@ -27,6 +27,7 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 1282 itens. For
   - poder_executivo (4): atribuicoes_presidente 2, forma_e_sistema_de_governo 2 · Cebraspe 2 · tipos: prioridade 2, questao 2
   - poder_judiciario (2): competencia_originaria 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - principios_fundamentais (22): fundamentos 5, classificacao_constituicoes 4, objetivos 4, relacoes_internacionais 4, forma_federativa 3, separacao_de_poderes 3, forma_de_estado_e_governo 1, fundamentos_x_objetivos 1, fundamentos_x_relacoes_internacionais 1, separacao_dos_poderes 1 · CESPE 6, Cebraspe 3, Instituto Aocp 3, IADES 2, VUNESP 2, AOCP 1, IMPARH 1, Intituto Mais 1, Selecon 1 · tipos: questao 20, conteudo 1, prioridade 1
+  - remedios_constitucionais (20): habeas_corpus 6, acao_popular 3, habeas_data 3, visao_geral 3, direitos_do_preso 2, direitos_politicos 2, mandado_de_injuncao 2, mandado_de_seguranca 2 · Cebraspe 6, FGV 4, FUMARC 2, Instituto Aocp 2, VUNESP 2, FAPEC 1, Fundatec 1, IDECAN 1 · tipos: questao 19, conteudo 1
 - **contabilidade** (79)
   - balancete (5): finalidade 3, modelos 2, seis_colunas 2 · Cebraspe 4 · tipos: questao 4, prioridade 1
   - conceitos_patrimonio (8): equacao_patrimonial 2, natureza 2, objeto 2, origens_aplicacoes 2, patrimonio 2, patrimonio_liquido 2, situacao_liquida 2 · Cebraspe 7 · tipos: questao 7, prioridade 1
@@ -109,7 +110,7 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 1282 itens. For
   - conjuntos (7): diferenca 2, inclusao 2, intersecao 2, raciocinio 2, uniao 2, uniao_intersecao 2 · Cebraspe 6 · tipos: questao 6, prioridade 1
   - contagem_probabilidade (8): combinacao 5, probabilidade 3, casa_dos_pombos 2 · Cebraspe 7 · tipos: questao 7, prioridade 1
   - logica_proposicional (13): equivalencia 4, negacao 3, tabela_verdade 3, condicional_bicondicional 2, negacao_de_quantificadores 2, tautologia 2, valor_logico 2, proposicoes_simples_compostas 1 · Cebraspe 12 · tipos: questao 12, prioridade 1
-- **penal** (97)
+- **penal** (123)
   - concurso_pessoas (2): teoria_monista 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - crimes_administracao_publica (9): descaminho 4, concussao_corrupcao 2, corrupcao_ativa 2, facilitacao_descaminho 2, peculato 2, prevaricacao 2 · Cebraspe 7 · tipos: questao 7, prioridade 2
   - crimes_fe_publica (3): adulteracao_sinal_identificador 3 · Cebraspe 2 · tipos: questao 2, prioridade 1
@@ -118,6 +119,7 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 1282 itens. For
   - culpabilidade (2): embriaguez 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - principios_aplicacao (67): insignificancia 12, lei_penal_no_tempo 12, conflito_aparente_de_normas 9, contagem_de_prazo 6, legalidade 6, lei_penal_no_espaco 5, legalidade_analogia 4, legalidade_medida_provisoria 4, intranscendencia 3, sentenca_estrangeira 3, culpabilidade 2, fragmentariedade 2, humanidade 2, lugar_do_crime 2, pena_cumprida_no_estrangeiro 2, tempo_do_crime 2, adequacao_social 1, alteridade 1, extraterritorialidade 1, intervencao_minima 1, legalidade_anterioridade 1, presuncao_de_inocencia 1, principios_limitadores 1 · Cebraspe 29, Cebraspe (cespe) 15, FCC 2, IDIB 2, VUNESP 2, CCV 1, Consulplan 1, Consuplan 1, FADESP 1, FGV 1, FUNCAB 1, Gualimp 1, IBADE 1, Inaz do Pará 1, Instituo Aocp 1, Instituto Consulpam 1, MPE 1, NC 1 · tipos: questao 63, conteudo 2, prioridade 2
   - teoria_crime (5): consumacao_tentativa 3, crime_impossivel 2, estrutura_do_crime 2 · Cebraspe 4 · tipos: questao 4, prioridade 1
+  - teoria_geral_do_crime (26): conceito_de_crime 5, desistencia_voluntaria 4, tentativa 4, arrependimento_posterior 3, infracao_penal 3, iter_criminis 3, arrependimento_eficaz 2, classificacao_dos_crimes 1, crime_impossivel 1 · CESPE 9, FGV 5, Cespe (adaptada) 3, Aocp (adaptada) 1, Cebraspe 1, Cetrede 1, FAPEC 1, FCC 1, FEPESE 1, FESEPE 1, IDECAN 1, VUNESP 1 · tipos: questao 26
 - **portugues** (134)
   - coesao_referenciacao (15): conectores 8, pronomes 6, referente 5 · Cebraspe 13 · tipos: questao 13, prioridade 2
   - colocacao_pronominal (3): proclise 2, proclise_enclise 1 · Cebraspe 2 · tipos: questao 2, prioridade 1

@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PRF, PF_AGENTE]
 operacao_observada: "Direitos do preso na CF."
-usado_em: []
+usado_em: ["PRF_M06_DCO040002_Remedios_Constitucionais#D01"]
 hash: 9546578268af4524
 ---
 # Cebraspe 2019 — PRF — item 99
