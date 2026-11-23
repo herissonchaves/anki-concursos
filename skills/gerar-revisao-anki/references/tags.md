@@ -77,5 +77,7 @@ O Extra explica cada termo e traz, antes do 💡 Memorize, o bloco **📚 Origem
 
 No gerador: `mn=dict(sigla='CE-NO-RE', origem='autoral')` ou
 `mn=dict(sigla='CE-NO-RE', origem=('encontrado', 'https://...', 'Nome da fonte'))` (ou `'adaptado'`).
-O montador gera o bloco; não escreva a origem à mão. Pesquisa e conferência do mnemônico: seção
+O montador gera o bloco; não escreva a origem à mão. Cada lacuna c1 do mnemônico conta como uma lacuna
+própria em `cob`: uma chave por lacuna, na ordem do texto, por exemplo
+`cob={str(i): ['D01'] for i in range(1, 5)}` para quatro lacunas (senão a revisão de recuperação reprova). Pesquisa e conferência do mnemônico: seção
 "Mnemônicos pesquisados" de `protocolo_cloze_cientifico.md`.
