@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PRF, PF_AGENTE]
 operacao_observada: "Princípio da legalidade na criação de tipos penais."
-usado_em: []
+usado_em: ["PRF_M01_DPE010001_Principios_Penal#R01"]
 hash: a4a6be35f512d952
 ---
 # Cebraspe 2013 — PRF — item 65

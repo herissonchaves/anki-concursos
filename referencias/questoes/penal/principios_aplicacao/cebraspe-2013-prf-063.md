@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PRF, PF_AGENTE]
 operacao_observada: "Distingue subsidiariedade de alternatividade."
-usado_em: []
+usado_em: ["PRF_M01_DPE010001_Principios_Penal#D04"]
 hash: 2a4302a7a1b2bde4
 ---
 # Cebraspe 2013 — PRF — item 63

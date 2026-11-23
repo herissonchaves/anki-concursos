@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PRF, PF_AGENTE]
 operacao_observada: "Medida provisória em matéria penal."
-usado_em: []
+usado_em: ["PRF_M01_DPE010001_Principios_Penal#D01"]
 hash: 4dd5a1067b05ef00
 ---
 # Cebraspe 2019 — PRF — item 107

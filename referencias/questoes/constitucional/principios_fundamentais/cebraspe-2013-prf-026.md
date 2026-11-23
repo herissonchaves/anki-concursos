@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PRF, PF_AGENTE]
 operacao_observada: "Exemplo do sistema de freios e contrapesos."
-usado_em: []
+usado_em: ["PRF_M01_DCO010001_Principios_Fundamentais#D05"]
 hash: 7fb9dfdaf2cad877
 ---
 # Cebraspe 2013 — PRF — item 26
