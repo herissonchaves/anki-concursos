@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PF_AGENTE, PRF]
 operacao_observada: "Outorga a pessoa fora da administração direta: descentralização × desconcentração."
-usado_em: []
+usado_em: ["PRF_M05_DAD030001_Organizacao_Adm#D01"]
 hash: 4fe622ceeef8d35b
 ---
 # Cebraspe 2018 — PF — item 26

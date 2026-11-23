@@ -1,8 +1,8 @@
 # Assuntos do banco de referências
 
-Gerado por `referencias.py indexar`; não editar à mão. Total: 1219 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
+Gerado por `referencias.py indexar`; não editar à mão. Total: 1282 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
 
-- **administrativo** (194)
+- **administrativo** (244)
   - agentes_publicos (11): penalidades 4, regime_disciplinar 3, independencia_das_instancias 2, mandato_eletivo 2, provimento 2, reintegracao 2, responsabilidades 1 · Cebraspe 9 · tipos: questao 9, prioridade 2
   - atos_administrativos (61): anulacao_revogacao 14, convalidacao 7, competencia 6, cassacao 5, especies_negociais 5, motivo 5, motivos_determinantes 5, presuncao_legitimidade 5, atributos 4, autotutela 4, elementos 4, extincao 4, caducidade 3, classificacao_formacao 3, autoexecutoriedade 2, classificacao_destinatarios 2, conceito 2, decadencia 2, delegacao 2, delegacao_avocacao 2, fatos_administrativos 2, finalidade 2, forma 2, imperatividade 2, motivacao 2, poder_de_policia 2, abuso_de_poder 1, agente_de_fato 1, classificacao_conteudo 1, controle_judicial 1, efeitos 1, especies 1, invalidade 1, merito 1, tipicidade 1, vinculado_discricionario 1 · Cebraspe 24, Instituto AOCP 6, FGV 5, VUNESP 5, IDECAN 3, IBFC 2, Instituto Acesso 2, Fundatec 1 · tipos: questao 48, conteudo 11, prioridade 2
   - carreira_prf (3): atribuicoes 2, promocao 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
@@ -10,7 +10,7 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 1219 itens. For
   - improbidade (3): modalidades 2, sancoes 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
   - licitacoes_contratos (4): contratacao_direta 4 · Cebraspe 2 · tipos: prioridade 2, questao 2
   - nocoes_introdutorias (35): fontes 17, sentidos_administracao 10, atividades_tipicas 3, conceito_objeto 3, funcao_administrativa 2, governo_administracao 2, forma_de_governo 1, sumula_vinculante 1 · CESPE 29, FCC 3, Cebraspe 2 · tipos: questao 34, conteudo 1
-  - organizacao_administrativa (7): administracao_direta 2, criterio_formal 2, descentralizacao 2, estatais 2, orgaos 2 · Cebraspe 5 · tipos: questao 5, prioridade 2
+  - organizacao_administrativa (57): indireta 25, descentralizacao 19, orgaos 10, administracao_direta 2, agentes 2, criterio_formal 2, estatais 2 · Cebraspe 21, Quadrix 14, IADES 3, AOCP 2, FEPESE 2, VUNESP 2, ACAFE 1, Cebrasp 3 1, FGV 1, FUNCAB 1, FUNDEP 1, Funiversa 1, NUCEPE 1, OMN 1, PM 1, UEG 1 · tipos: questao 54, prioridade 2, conteudo 1
   - poderes_administrativos (6): poder_disciplinar 3, abuso_de_poder 2, poder_de_policia 2 · Cebraspe 4 · tipos: questao 4, prioridade 2
   - prf_institucional (4): atribuicoes 2, competencias 2, historia_da_prf 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
   - regime_juridico_principios (46): impessoalidade 8, eficiencia 5, moralidade 5, publicidade 5, seguranca_juridica 5, legalidade 4, autotutela 3, principios_implicitos 3, continuidade 2, especialidade 2, imperatividade 2, presuncao_legitimidade 2, razoabilidade 2, supraprincipios 2, supremacia 2, hierarquia 1, hierarquia_entre_principios 1, motivacao 1, proporcionalidade 1, reserva_legal 1 · Cebraspe 30, Quadrix 11, CESPE 1, FGV 1 · tipos: questao 43, prioridade 2, conteudo 1
@@ -147,11 +147,12 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 1219 itens. For
   - modelagem (5): funcao_quadratica 5, porcentagem 3, maximo 2, monotonicidade 2 · Cebraspe 4 · tipos: questao 4, prioridade 1
   - porcentagem_proporcao (4): grandezas_inversas 2, regra_de_tres_composta 2, variacao_percentual 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
   - sequencias (7): padroes 3, progressao_aritmetica 3, acumulado 2, acumulado_vs_incremento 2, funcao_afim 2, recorrencia 2, termo_geral 2 · Cebraspe 6 · tipos: questao 6, prioridade 1
-- **transito** (116)
+- **transito** (129)
   - acidentes_remocao (3): acidente_sem_vitima 2, lei_5970 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
   - campanhas_educativas (3): campanha_anual 3 · Cebraspe 2 · tipos: questao 2, prioridade 1
   - conceitos_anexo_i (6): faixa_de_dominio 3, logradouro_publico 3, parada_estacionamento 3, tara 3, ciclomotor 1, estrada_rodovia 1 · Vunesp 2, IBEST 1, SOCIESC 1 · tipos: questao 4, conteudo 1, prioridade 1
   - crimes_transito (10): racha 3, agravantes 2, direcao_sem_habilitacao 2, entregar_veiculo 2, homicidio_culposo 2, lesao_culposa 2, omissao_de_socorro 2, violacao_de_suspensao 2 · Cebraspe 9 · tipos: questao 9, prioridade 1
+  - disposicoes_preliminares (13): conceito_de_transito 4, classificacao_vias 2, velocidades 2, conceitos_anexo_i 1, disposicoes_preliminares 1, parada_estacionamento 1, responsabilidade 1, transito_seguro 1 · Cebraspe 4, VUNESP 4, CESPE 1, FURB 1, IBFC 1, Instituto Access 1, QUADRX 1 · tipos: questao 13
   - fiscalizacao_eletronica (5): medidores_de_velocidade 3, videomonitoramento 2, instalacao_de_medidores 1 · Cebraspe 4 · tipos: questao 4, prioridade 1
   - habilitacao (2): requisitos 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - infracoes_penalidades (12): alcoolemia 2, cnh_vencida 2, curso_de_reciclagem 2, emissao_de_fumaca 2, estacionamento 2, obras_na_via 2, pontuacao 2, velocidade_aglomeracoes 2, cinto_de_seguranca 1, concomitancia 1, ultrapassagem_acostamento 1 · Cebraspe 11 · tipos: questao 11, prioridade 1
