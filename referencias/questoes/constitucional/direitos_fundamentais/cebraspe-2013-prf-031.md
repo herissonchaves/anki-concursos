@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PRF, PF_AGENTE]
 operacao_observada: "Requisição administrativa em iminente perigo público."
-usado_em: []
+usado_em: ["PRF_M02_DCO030002_Direitos_Individuais#D01"]
 hash: 082e747c76951c03
 ---
 # Cebraspe 2013 — PRF — item 31

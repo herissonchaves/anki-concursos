@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PRF, PF_AGENTE]
 operacao_observada: "Escusa de consciência em relação ao dever de votar."
-usado_em: []
+usado_em: ["PRF_M02_DCO030002_Direitos_Individuais#D03"]
 hash: ba9733b01639c821
 ---
 # Cebraspe 2021 — PRF — item 96

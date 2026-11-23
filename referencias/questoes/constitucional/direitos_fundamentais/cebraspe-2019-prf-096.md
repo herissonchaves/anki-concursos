@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PRF, PF_AGENTE]
 operacao_observada: "Indenização na requisição administrativa só se houver dano."
-usado_em: []
+usado_em: ["PRF_M02_DCO030002_Direitos_Individuais#D01"]
 hash: fb0806df73465a08
 ---
 # Cebraspe 2019 — PRF — item 96

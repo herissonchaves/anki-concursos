@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PF_AGENTE, PRF]
 operacao_observada: "Dever de instaurar inquérito diante de comunicação de qualquer pessoa."
-usado_em: []
+usado_em: ["PRF_M02_DPP020002_Diligencias_CPP#R08"]
 hash: 31636f181d4224d9
 ---
 # Cebraspe 2025 — PF — item 27

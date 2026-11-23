@@ -1,6 +1,6 @@
 # Assuntos do banco de referências
 
-Gerado por `referencias.py indexar`; não editar à mão. Total: 1076 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
+Gerado por `referencias.py indexar`; não editar à mão. Total: 1126 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
 
 - **administrativo** (152)
   - agentes_publicos (11): penalidades 4, regime_disciplinar 3, independencia_das_instancias 2, mandato_eletivo 2, provimento 2, reintegracao 2, responsabilidades 1 · Cebraspe 9 · tipos: questao 9, prioridade 2
@@ -15,10 +15,11 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 1076 itens. For
   - prf_institucional (4): atribuicoes 2, competencias 2, historia_da_prf 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
   - regime_juridico_principios (4): imperatividade 2, razoabilidade 2 · Cebraspe 2 · tipos: prioridade 2, questao 2
   - responsabilidade_civil (6): acao_de_regresso 2, concessionarias 2, dupla_garantia 2, responsabilidade_objetiva 2 · Cebraspe 4 · tipos: questao 4, prioridade 2
-- **constitucional** (70)
+- **constitucional** (115)
   - aplicabilidade_normas (2): eficacia_contida 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - defesa_estado_seguranca_publica (13): policia_federal 5, estado_de_sitio 2, prf 2, prf_e_pff 2, seguranca_viaria 2, estado_de_defesa 1, estado_de_defesa_e_sitio 1 · Cebraspe 11 · tipos: questao 11, prioridade 2
-  - direitos_fundamentais (14): requisicao_administrativa 3, assistencia_juridica 2, confisco 2, direito_de_peticao 2, direitos_do_preso 2, escusa_de_consciencia 2, extradicao 2, inafiancabilidade 2, liberdade_de_reuniao 2, sigilo_das_comunicacoes 2, habeas_data 1 · Cebraspe 12 · tipos: questao 12, prioridade 2
+  - direitos_fundamentais (32): requisicao_administrativa 6, inviolabilidade_domicilio 4, liberdade_de_reuniao 4, escusa_de_consciencia 3, liberdade_de_associacao 3, liberdade_expressao 3, sigilo_das_comunicacoes 3, assistencia_juridica 2, confisco 2, destinatarios 2, direito_de_peticao 2, direitos_do_preso 2, extradicao 2, inafiancabilidade 2, legalidade_reserva_legal 2, liberdade_religiosa 2, direito_a_vida 1, direito_de_resposta 1, direitos_diversos 1, habeas_data 1, igualdade 1, liberdade_profissional 1, propriedade 1, propriedade_intelectual 1 · Cebraspe 26, AOCP 2, Dédalus 1 · tipos: questao 29, prioridade 2, conteudo 1
+  - direitos_fundamentais_teoria (27): geracoes 8, caracteristicas 7, eficacia_das_normas 7, eficacia_horizontal 3, rol_exemplificativo 3, destinatarios 2, direitos_x_garantias 2, direitos_politicos 1 · CESPE 11, Quadrix 3, AOCP 2, Cogeps Unioeste 1, Consulpan 1, Consulplan 1, FAFIPA 1, FCC 1, FGV 1, IBFC 1, IDECAN 1, INCAB 1, Instituto Referência 1 · tipos: questao 26, conteudo 1
   - direitos_politicos (2): elegibilidade 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - nacionalidade (5): brasileiro_nato 2, extradicao_de_naturalizado 2, perda_da_nacionalidade 2 · Cebraspe 3 · tipos: questao 3, prioridade 2
   - ordem_social (3): indios 2, meio_ambiente 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
@@ -131,12 +132,12 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 1076 itens. For
   - semantica (9): significacao_palavras 7, polissemia 2, pronome_indefinido 2 · Cebraspe 7 · tipos: questao 7, prioridade 2
   - tempos_modos_verbais (4): futuro_presente 2, indicativo_subjuntivo 2 · Cebraspe 2 · tipos: prioridade 2, questao 2
   - tipologia_textual (4): tipo_e_objetivo 4 · Cebraspe 2 · tipos: prioridade 2, questao 2
-- **processual_penal** (39)
+- **processual_penal** (44)
   - acao_penal (4): especies 2, indisponibilidade 2, procedimento_especial 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
   - aplicacao_lei_processual (2): analogia 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - competencia (2): contravencao_penal 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - identificacao_criminal (3): hipoteses 3 · Cebraspe 2 · tipos: questao 2, prioridade 1
-  - inquerito_policial (6): instauracao 3, dispensabilidade 2, natureza 2 · Cebraspe 4 · tipos: questao 4, prioridade 2
+  - inquerito_policial (11): instauracao 3, art_13b 2, diligencias_art_6 2, dispensabilidade 2, natureza 2, notitia_criminis 2, apreensao 1, art_13a 1, conducao_coercitiva 1, reconstituicao 1 · Cebraspe 4, CESPE 3, FCC 1 · tipos: questao 8, prioridade 2, conteudo 1
   - prisao (13): flagrante 7, auto_de_prisao 3, flagrante_preparado 2, habeas_corpus 2, prisao_domiciliar 2, prisao_temporaria 2 · Cebraspe 11 · tipos: questao 11, prioridade 2
   - prova (9): acareacao 2, busca_domiciliar 2, busca_veicular 2, cadeia_de_custodia 2, prova_testemunhal 2, provas_ilicitas 2, busca_e_apreensao 1 · Cebraspe 7 · tipos: questao 7, prioridade 2
 - **rlm** (30)

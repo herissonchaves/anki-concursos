@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PF_AGENTE, PRF]
 operacao_observada: "Finalidades que permitem quebrar o sigilo telefônico."
-usado_em: []
+usado_em: ["PRF_M02_DCO030002_Direitos_Individuais#D04"]
 hash: 983459c36590edac
 ---
 # Cebraspe 2025 — PF — item 17
