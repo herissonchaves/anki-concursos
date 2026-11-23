@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PF_AGENTE, PRF]
 operacao_observada: "Operador correto para buscar em um sítio específico."
-usado_em: []
+usado_em: ["PRF_M04_INF020004_Motores_de_Busca#D01"]
 hash: 8b6fecfd2927abcc
 ---
 # Cebraspe 2021 — PF — item 61

@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PF_AGENTE, PRF]
 operacao_observada: "Lei penal brasileira em embarcação privada em alto-mar."
-usado_em: []
+usado_em: ["PRF_M04_DPE020002_Aplicacao_Lei_Penal#D02"]
 hash: d1e6d4aff6604ce4
 ---
 # Cebraspe 2025 — PF — item 28

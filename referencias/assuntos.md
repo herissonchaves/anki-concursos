@@ -1,6 +1,6 @@
 # Assuntos do banco de referências
 
-Gerado por `referencias.py indexar`; não editar à mão. Total: 1180 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
+Gerado por `referencias.py indexar`; não editar à mão. Total: 1219 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
 
 - **administrativo** (194)
   - agentes_publicos (11): penalidades 4, regime_disciplinar 3, independencia_das_instancias 2, mandato_eletivo 2, provimento 2, reintegracao 2, responsabilidades 1 · Cebraspe 9 · tipos: questao 9, prioridade 2
@@ -69,13 +69,13 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 1180 itens. For
 - **geral** (3)
   - pf_agente (1): agente_de_policia_federal 1, programa 1 · tipos: edital 1
   - prf (2): edital 1, policial_rodoviario_federal 1, programa 1, situacao_concurso 1 · tipos: edital 1, noticia 1
-- **informatica** (159)
+- **informatica** (175)
   - banco_dados (18): modelo_er 4, sql 4, transacoes_acid 4, chaves 3, dados_estruturados 3, atributos_registros 2, metadados 2, modelo_relacional 2, integridade 1 · Cebraspe 17 · tipos: questao 17, prioridade 1
   - ciencia_dados (11): aprendizado_de_maquina 5, big_data 3, mineracao_de_dados 3, clustering 2, entropia 2 · Cebraspe 10 · tipos: questao 10, prioridade 1
   - computacao_nuvem (12): modelos_de_servico 9, conceito 2, elasticidade 2, migracao 2 · Cebraspe 10 · tipos: questao 10, prioridade 2
   - correio_eletronico (4): outlook 2, protocolos 2, smtp 2, assinatura_digital 1, comandos_de_mensagem 1, firewall 1, pop3 1, portas 1, seguranca 1 · Cebraspe 4 · tipos: questao 4
   - editores_planilhas (8): writer 3, calc 2, excel_preenchimento_relampago 2, powerpoint_impress 2, visio_draw 1 · Cebraspe 6 · tipos: questao 6, prioridade 2
-  - navegadores_internet (26): intranet_extranet 9, busca_google 4, chrome_senhas 2, conceitos_basicos 2, deep_web 2, ferramentas_de_busca 2, ferramentas_e_aplicativos 2, gerenciamento_de_senhas 2, https_cadeado 2, internet_www 2, multimidia 2, protocolos 2, transferencia_de_arquivos 2, chrome 1, internet_intranet 1, vpn 1 · Cebraspe 12, CESPE 5, IBFC 2, AOCP 1, FCC 1, IDECAN 1, VUNESP 1 · tipos: questao 23, prioridade 2, conteudo 1
+  - navegadores_internet (42): busca_google 13, intranet_extranet 9, motores_de_busca 8, chrome_senhas 2, conceitos_basicos 2, deep_web 2, ferramentas_de_busca 2, ferramentas_e_aplicativos 2, gerenciamento_de_senhas 2, https_cadeado 2, internet_www 2, multimidia 2, protocolos 2, transferencia_de_arquivos 2, chrome 1, internet_intranet 1, vpn 1 · Cebraspe 12, CESPE 6, FGV 4, IBFC 4, VUNESP 2, AOCP 1, CS 1, Cesgranrio 1, FCC 1, Fundatec 1, IBADE 1, IDECAN 1, IMPARH 1, UFPR 1, UFRRJ 1 · tipos: questao 38, conteudo 2, prioridade 2
   - programacao (12): python 6, api 4, r 4 · Cebraspe 11 · tipos: questao 11, prioridade 1
   - redes (26): modelos_osi_tcpip 4, acesso_remoto 3, camada_de_enlace 3, camada_de_transporte 3, classificacao 3, dns 3, enderecamento_ip 3, dns_whois 2, proxy 2, camada_de_rede 1, comutacao 1, dns_udp 1, modos_de_transmissao 1, protocolo_ip 1, protocolos_de_aplicacao 1, qualidade_de_servico 1 · Cebraspe 24 · tipos: questao 24, prioridade 2
   - seguranca_informacao (20): malware 7, autenticacao 4, biometria 3, ferramentas 3, antivirus_heuristica 2, furto_de_identidade 2, ransomware 2, sandboxing 2, antispyware 1, firewall 1 · Cebraspe 18 · tipos: questao 18, prioridade 2
@@ -109,14 +109,14 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 1180 itens. For
   - conjuntos (7): diferenca 2, inclusao 2, intersecao 2, raciocinio 2, uniao 2, uniao_intersecao 2 · Cebraspe 6 · tipos: questao 6, prioridade 1
   - contagem_probabilidade (8): combinacao 5, probabilidade 3, casa_dos_pombos 2 · Cebraspe 7 · tipos: questao 7, prioridade 1
   - logica_proposicional (13): equivalencia 4, negacao 3, tabela_verdade 3, condicional_bicondicional 2, negacao_de_quantificadores 2, tautologia 2, valor_logico 2, proposicoes_simples_compostas 1 · Cebraspe 12 · tipos: questao 12, prioridade 1
-- **penal** (74)
+- **penal** (97)
   - concurso_pessoas (2): teoria_monista 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - crimes_administracao_publica (9): descaminho 4, concussao_corrupcao 2, corrupcao_ativa 2, facilitacao_descaminho 2, peculato 2, prevaricacao 2 · Cebraspe 7 · tipos: questao 7, prioridade 2
   - crimes_fe_publica (3): adulteracao_sinal_identificador 3 · Cebraspe 2 · tipos: questao 2, prioridade 1
   - crimes_patrimonio (7): furto_fraude_estelionato 2, furto_qualificado 2, receptacao 2, roubo_consumacao 2, roubo_majorado 2 · Cebraspe 5 · tipos: questao 5, prioridade 2
   - crimes_pessoa (2): trafico_de_pessoas 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
   - culpabilidade (2): embriaguez 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
-  - principios_aplicacao (44): insignificancia 12, conflito_aparente_de_normas 9, legalidade 6, legalidade_analogia 4, legalidade_medida_provisoria 4, lei_penal_no_tempo 4, intranscendencia 3, culpabilidade 2, fragmentariedade 2, humanidade 2, lei_penal_no_espaco 2, adequacao_social 1, alteridade 1, intervencao_minima 1, legalidade_anterioridade 1, presuncao_de_inocencia 1, principios_limitadores 1 · Cebraspe 29, FCC 2, VUNESP 2, CCV 1, Consuplan 1, FGV 1, FUNCAB 1, Gualimp 1, Inaz do Pará 1, MPE 1, NC 1 · tipos: questao 41, prioridade 2, conteudo 1
+  - principios_aplicacao (67): insignificancia 12, lei_penal_no_tempo 12, conflito_aparente_de_normas 9, contagem_de_prazo 6, legalidade 6, lei_penal_no_espaco 5, legalidade_analogia 4, legalidade_medida_provisoria 4, intranscendencia 3, sentenca_estrangeira 3, culpabilidade 2, fragmentariedade 2, humanidade 2, lugar_do_crime 2, pena_cumprida_no_estrangeiro 2, tempo_do_crime 2, adequacao_social 1, alteridade 1, extraterritorialidade 1, intervencao_minima 1, legalidade_anterioridade 1, presuncao_de_inocencia 1, principios_limitadores 1 · Cebraspe 29, Cebraspe (cespe) 15, FCC 2, IDIB 2, VUNESP 2, CCV 1, Consulplan 1, Consuplan 1, FADESP 1, FGV 1, FUNCAB 1, Gualimp 1, IBADE 1, Inaz do Pará 1, Instituo Aocp 1, Instituto Consulpam 1, MPE 1, NC 1 · tipos: questao 63, conteudo 2, prioridade 2
   - teoria_crime (5): consumacao_tentativa 3, crime_impossivel 2, estrutura_do_crime 2 · Cebraspe 4 · tipos: questao 4, prioridade 1
 - **portugues** (134)
   - coesao_referenciacao (15): conectores 8, pronomes 6, referente 5 · Cebraspe 13 · tipos: questao 13, prioridade 2

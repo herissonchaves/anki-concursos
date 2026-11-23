@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PF_AGENTE, PRF]
 operacao_observada: "Retroatividade da lei penal mais benéfica."
-usado_em: []
+usado_em: ["PRF_M04_DPE020002_Aplicacao_Lei_Penal#D01"]
 hash: 7445b32ce6df0509
 ---
 # Cebraspe 2018 — PF — item 34
