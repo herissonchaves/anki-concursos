@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PF_AGENTE, PRF]
 operacao_observada: "Fundamento e exercício de ofício da autotutela."
-usado_em: []
+usado_em: ["PRF_M03_DAD020001_Principios_Adm#R07,D03"]
 hash: ff8fcc2abba77158
 ---
 # Cebraspe 2018 — PF — item 27

@@ -22,7 +22,7 @@ fonte_descoberta: "Caderno e gabarito definitivo oficiais no CDN do Cebraspe (p�
 consulta: 2026-11-21
 concursos_alvo: [PRF, PF_AGENTE]
 operacao_observada: "Julga restrição (intranet e HTTPS) para salvar e sincronizar senhas no navegador."
-usado_em: []
+usado_em: ["PRF_M03_INF010004_Internet_Intranet#D02"]
 hash: 4f497e6415669dea
 ---
 # Cebraspe 2021 — PRF — item 33

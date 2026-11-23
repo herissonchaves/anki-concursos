@@ -1,8 +1,8 @@
 # Assuntos do banco de referências
 
-Gerado por `referencias.py indexar`; não editar à mão. Total: 1126 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
+Gerado por `referencias.py indexar`; não editar à mão. Total: 1180 itens. Formato: assunto (n): subassuntos · bancas das questões · tipos (questao, edital, conteudo, noticia, prioridade).
 
-- **administrativo** (152)
+- **administrativo** (194)
   - agentes_publicos (11): penalidades 4, regime_disciplinar 3, independencia_das_instancias 2, mandato_eletivo 2, provimento 2, reintegracao 2, responsabilidades 1 · Cebraspe 9 · tipos: questao 9, prioridade 2
   - atos_administrativos (61): anulacao_revogacao 14, convalidacao 7, competencia 6, cassacao 5, especies_negociais 5, motivo 5, motivos_determinantes 5, presuncao_legitimidade 5, atributos 4, autotutela 4, elementos 4, extincao 4, caducidade 3, classificacao_formacao 3, autoexecutoriedade 2, classificacao_destinatarios 2, conceito 2, decadencia 2, delegacao 2, delegacao_avocacao 2, fatos_administrativos 2, finalidade 2, forma 2, imperatividade 2, motivacao 2, poder_de_policia 2, abuso_de_poder 1, agente_de_fato 1, classificacao_conteudo 1, controle_judicial 1, efeitos 1, especies 1, invalidade 1, merito 1, tipicidade 1, vinculado_discricionario 1 · Cebraspe 24, Instituto AOCP 6, FGV 5, VUNESP 5, IDECAN 3, IBFC 2, Instituto Acesso 2, Fundatec 1 · tipos: questao 48, conteudo 11, prioridade 2
   - carreira_prf (3): atribuicoes 2, promocao 2 · Cebraspe 2 · tipos: questao 2, prioridade 1
@@ -13,7 +13,7 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 1126 itens. For
   - organizacao_administrativa (7): administracao_direta 2, criterio_formal 2, descentralizacao 2, estatais 2, orgaos 2 · Cebraspe 5 · tipos: questao 5, prioridade 2
   - poderes_administrativos (6): poder_disciplinar 3, abuso_de_poder 2, poder_de_policia 2 · Cebraspe 4 · tipos: questao 4, prioridade 2
   - prf_institucional (4): atribuicoes 2, competencias 2, historia_da_prf 2 · Cebraspe 3 · tipos: questao 3, prioridade 1
-  - regime_juridico_principios (4): imperatividade 2, razoabilidade 2 · Cebraspe 2 · tipos: prioridade 2, questao 2
+  - regime_juridico_principios (46): impessoalidade 8, eficiencia 5, moralidade 5, publicidade 5, seguranca_juridica 5, legalidade 4, autotutela 3, principios_implicitos 3, continuidade 2, especialidade 2, imperatividade 2, presuncao_legitimidade 2, razoabilidade 2, supraprincipios 2, supremacia 2, hierarquia 1, hierarquia_entre_principios 1, motivacao 1, proporcionalidade 1, reserva_legal 1 · Cebraspe 30, Quadrix 11, CESPE 1, FGV 1 · tipos: questao 43, prioridade 2, conteudo 1
   - responsabilidade_civil (6): acao_de_regresso 2, concessionarias 2, dupla_garantia 2, responsabilidade_objetiva 2 · Cebraspe 4 · tipos: questao 4, prioridade 2
 - **constitucional** (115)
   - aplicabilidade_normas (2): eficacia_contida 2 · Cebraspe 1 · tipos: prioridade 1, questao 1
@@ -69,13 +69,13 @@ Gerado por `referencias.py indexar`; não editar à mão. Total: 1126 itens. For
 - **geral** (3)
   - pf_agente (1): agente_de_policia_federal 1, programa 1 · tipos: edital 1
   - prf (2): edital 1, policial_rodoviario_federal 1, programa 1, situacao_concurso 1 · tipos: edital 1, noticia 1
-- **informatica** (147)
+- **informatica** (159)
   - banco_dados (18): modelo_er 4, sql 4, transacoes_acid 4, chaves 3, dados_estruturados 3, atributos_registros 2, metadados 2, modelo_relacional 2, integridade 1 · Cebraspe 17 · tipos: questao 17, prioridade 1
   - ciencia_dados (11): aprendizado_de_maquina 5, big_data 3, mineracao_de_dados 3, clustering 2, entropia 2 · Cebraspe 10 · tipos: questao 10, prioridade 1
   - computacao_nuvem (12): modelos_de_servico 9, conceito 2, elasticidade 2, migracao 2 · Cebraspe 10 · tipos: questao 10, prioridade 2
   - correio_eletronico (4): outlook 2, protocolos 2, smtp 2, assinatura_digital 1, comandos_de_mensagem 1, firewall 1, pop3 1, portas 1, seguranca 1 · Cebraspe 4 · tipos: questao 4
   - editores_planilhas (8): writer 3, calc 2, excel_preenchimento_relampago 2, powerpoint_impress 2, visio_draw 1 · Cebraspe 6 · tipos: questao 6, prioridade 2
-  - navegadores_internet (14): busca_google 4, chrome_senhas 2, ferramentas_de_busca 2, ferramentas_e_aplicativos 2, gerenciamento_de_senhas 2, https_cadeado 2, multimidia 2, protocolos 2, transferencia_de_arquivos 2, chrome 1, internet_intranet 1 · Cebraspe 12 · tipos: questao 12, prioridade 2
+  - navegadores_internet (26): intranet_extranet 9, busca_google 4, chrome_senhas 2, conceitos_basicos 2, deep_web 2, ferramentas_de_busca 2, ferramentas_e_aplicativos 2, gerenciamento_de_senhas 2, https_cadeado 2, internet_www 2, multimidia 2, protocolos 2, transferencia_de_arquivos 2, chrome 1, internet_intranet 1, vpn 1 · Cebraspe 12, CESPE 5, IBFC 2, AOCP 1, FCC 1, IDECAN 1, VUNESP 1 · tipos: questao 23, prioridade 2, conteudo 1
   - programacao (12): python 6, api 4, r 4 · Cebraspe 11 · tipos: questao 11, prioridade 1
   - redes (26): modelos_osi_tcpip 4, acesso_remoto 3, camada_de_enlace 3, camada_de_transporte 3, classificacao 3, dns 3, enderecamento_ip 3, dns_whois 2, proxy 2, camada_de_rede 1, comutacao 1, dns_udp 1, modos_de_transmissao 1, protocolo_ip 1, protocolos_de_aplicacao 1, qualidade_de_servico 1 · Cebraspe 24 · tipos: questao 24, prioridade 2
   - seguranca_informacao (20): malware 7, autenticacao 4, biometria 3, ferramentas 3, antivirus_heuristica 2, furto_de_identidade 2, ransomware 2, sandboxing 2, antispyware 1, firewall 1 · Cebraspe 18 · tipos: questao 18, prioridade 2
