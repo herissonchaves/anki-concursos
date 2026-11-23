@@ -311,3 +311,51 @@ def test_recorte_de_assuntos_e_barato():
     so = ref.recortar_assuntos(arvore, ['transito'])
     assert '  - cargas (1)' in so and 'informatica' not in so
     assert ref.recortar_assuntos(arvore, completo=True) == arvore
+
+
+APOSTILA_2_36 = (
+    '===== p. 4 =====\n'
+    'Teoria sintética do tópico A.\n'
+    '01. CEBRASPE – ÓRGÃO A – 2019:\nO exemplo sintético do tópico A é verdadeiro.\nGabarito: Certo.\n'
+    'Teoria sintética do tópico B.\n'
+    '01. FGV – ÓRGÃO B – 2020:\nO exemplo sintético do tópico B é falso.\nGabarito: Errado.\n'
+    '01. MISSÃO – INÉDITA:\nItem criado pelo curso, sem ano.\nGabarito: Certo.\n'
+    'QUESTÕES SEM COMENTÁRIOS\n'
+    '01. CEBRASPE – ÓRGÃO C – 2021:\nA primeira questão sintética da lista é verdadeira.\n'
+    '02. CEBRASPE – ÓRGÃO D – 2022:\nA segunda questão sintética da lista é falsa.\n'
+    'GABARITO:\n01. C 02. E\n'
+    'QUESTÕES COMENTADAS\n'
+    '01. CEBRASPE – ÓRGÃO C – 2021:\nA primeira questão sintética da lista é verdadeira.\nGabarito: Correto.\n'
+    '02. CEBRASPE – ÓRGÃO D – 2022:\nA segunda questão sintética da lista é falsa.\nGabarito: Errado.\n')
+
+
+def test_importar_separa_exemplos_da_teoria_lista_e_comentadas_2_36(tmp_path):
+    """Numeração repetida na teoria não apaga a lista; inédita do curso fica de fora com aviso."""
+    import importar_questoes as imp
+    arq = tmp_path / 'apostila.txt'
+    arq.write_text(APOSTILA_2_36, encoding='utf-8')
+    avisos = []
+    itens = imp.extrair(arq, avisos=avisos)
+    assert [i['chave'] for i in itens] == ['T01', 'T02', 'Q01', 'Q02']
+    assert [i['gabarito'] for i in itens] == ['C', 'E', 'C', 'E']
+    assert itens[0]['enunciado'].startswith('O exemplo sintético do tópico A')
+    assert itens[2]['fonte_descoberta'].endswith('questão 01; gabarito do material')
+    assert 'exemplo do texto 01' in itens[0]['fonte_descoberta']
+    assert any('inédita' in a for a in avisos)
+
+
+def test_completar_aplica_meta_salva_e_devolve_mapa_2_36(tmp_path, banco):
+    import importar_questoes as imp
+    arq = tmp_path / 'apostila.txt'
+    arq.write_text(APOSTILA_2_36, encoding='utf-8')
+    rascunho = imp.extrair(arq, disciplina='informatica', assunto='REVISAR')
+    meta = {'assunto': 'correio_eletronico',
+            'itens': {'T01': ['protocolos', ['smtp'], 'julgar definição'], 'T02': 'skip',
+                      'Q01': {'subassuntos': ['smtp'], 'palavras_chave': ['envio'], 'operacao_observada': 'julgar'},
+                      'Q02': ['protocolos', ['pop'], 'julgar']}}
+    mapa, msgs = ref.completar(rascunho, meta, banco)
+    assert set(mapa) == {'T01', 'Q01', 'Q02'} and any('T02: pulada' in m for m in msgs)
+    de_novo, _ = ref.completar(rascunho, meta, banco)  # segunda vez: reconhece as já salvas
+    assert de_novo == mapa
+    with pytest.raises(ref.ErroBanco, match='faltam'):
+        ref.completar(rascunho, {'assunto': 'x', 'itens': {'T01': 'skip'}}, banco)

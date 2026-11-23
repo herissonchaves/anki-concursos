@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from difflib import SequenceMatcher
 import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # funciona também com python -I
 from anki_utils import open_colpkg,note_fronts,normalized,digest
 
 
@@ -56,14 +57,20 @@ def find_duplicates(new_cards, old_cards=(), threshold=88.0, limit=100):
 
 def main(argv=None):
     p=argparse.ArgumentParser(description='Sinalizar cartões possivelmente duplicados (sem apagar nada)')
-    p.add_argument('tsv',type=Path)
+    p.add_argument('tsv',type=Path,nargs='+',help='TSVs ou pastas (pega anki_*.tsv dentro, ex.: output/)')
     p.add_argument('--backup',type=Path)
     p.add_argument('--limiar',type=float,default=88.0)
     p.add_argument('--max-resultados',type=int,default=100)
     p.add_argument('-o','--saida',required=True,type=Path)
     a=p.parse_args(argv)
     if not (0<a.limiar<=100) or a.max_resultados<1:raise ValueError('Limiar (0,100] e limite >=1 são obrigatórios')
-    novos=list(fronts_tsv(a.tsv))
+    arquivos=[]
+    for item in a.tsv:  # 2.36: vários TSVs ou pastas, para comparar os lotes de um pedido entre si
+        arquivos+=sorted(x for x in item.rglob('anki_*.tsv') if x.stat().st_size) if item.is_dir() else [item]
+    if len(arquivos)==1:
+        novos=list(fronts_tsv(arquivos[0]))
+    else:
+        novos=[(f'{arq.parent.parent.name}/{arq.name}:{rid}',txt) for arq in arquivos for rid,txt in fronts_tsv(arq)]
     if a.backup:
         with open_colpkg(a.backup) as (db,member,has21b):
             antigos=note_fronts(db)

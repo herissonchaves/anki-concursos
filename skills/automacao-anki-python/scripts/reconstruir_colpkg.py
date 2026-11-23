@@ -10,6 +10,9 @@ Requires the official anki Python package (tested with 26.9.3). Plan JSON:
      "adicionar": [{"tsv": "lote/anki_certo_errado.tsv", "deck": "Direito Penal",
                     "notetype": "Basic"}]}
 
+Com --lotes output/PRF_M01_* (2.36), a lista `adicionar` é montada das pastas de lote: o baralho vem
+de referencias/historico_lotes.tsv e o tipo de nota é Basic (C/E) ou Cloze.
+
 Every existing note must appear exactly once in `editar`. TSV rows have three columns (front,
 back/extra, tags), as written by montar_lote.py. Each final note must pass the 2.33 tag rules
 (`regras_tags.problemas_tags`) and every Cloze mnemonic the format rules. Structural checks do
@@ -26,6 +29,7 @@ import sys
 import tempfile
 import zipfile
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # funciona também com python -I
 from anki_utils import open_colpkg
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'gerar-revisao-anki' / 'scripts'))
@@ -77,6 +81,27 @@ def problemas_nota(is_cloze, fields, tags):
     return erros
 
 
+HISTORICO = Path(__file__).resolve().parents[3] / 'referencias' / 'historico_lotes.tsv'
+
+
+def adicionar_de_lotes(pastas, historico=HISTORICO, tipo_ce='Basic', tipo_cloze='Cloze'):
+    """Entradas `adicionar` a partir das pastas de lote (2.36): o baralho vem da linha do lote em
+    historico_lotes.tsv (gravada pelo finalizar_lote.py); TSVs vazios ficam de fora."""
+    import csv
+    with Path(historico).open(encoding='utf-8', newline='') as f:
+        baralhos = {r['lote']: r['baralho'] for r in csv.DictReader(f, delimiter='	')}
+    saida = []
+    for pasta in map(Path, pastas):
+        tsvs = [(pasta / 'lote' / nome, tipo) for nome, tipo in (('anki_certo_errado.tsv', tipo_ce), ('anki_cloze.tsv', tipo_cloze))]
+        tsvs = [(t, tipo) for t, tipo in tsvs if t.is_file() and t.stat().st_size]
+        if not tsvs:  # lote sem cards novos (PDF coberto pela coleção) ou pasta sem lote
+            continue
+        if pasta.name not in baralhos:
+            raise ValueError(f'Lote {pasta.name} sem linha no histórico: rode finalizar_lote.py antes')
+        saida += [{'tsv': str(t.resolve()), 'deck': baralhos[pasta.name], 'notetype': tipo} for t, tipo in tsvs]
+    return saida
+
+
 def validate_plan(plan, original, notetypes_by_note):
     rows = plan.get('editar', [])
     ids = [r['id'] for r in rows]
@@ -109,7 +134,7 @@ def _sorted_tags(s):
     return sorted(s.split(), key=str.casefold)
 
 
-def rebuild(source, plan_path, output, report_path):
+def rebuild(source, plan_path, output, report_path, lotes=None):
     from anki.collection import Collection
     from anki._backend import RustBackend
     source, output, report_path = map(Path, (source, output, report_path))
@@ -122,6 +147,8 @@ def rebuild(source, plan_path, output, report_path):
     original = {r[0]: (r[6].split('\x1f'), r[5]) for r in before['notes']}
     is_cloze = {r[0]: before['notetypes'].get(r[2], '').casefold().startswith('cloze') for r in before['notes']}
     plan = json.loads(Path(plan_path).read_text(encoding='utf-8'))
+    if lotes:
+        plan['adicionar'] = plan.get('adicionar', []) + adicionar_de_lotes(lotes)
     validate_plan(plan, original, is_cloze)
     expected_new = []
     with tempfile.TemporaryDirectory(prefix='anki_rebuild_') as temporary:
@@ -239,5 +266,6 @@ if __name__ == '__main__':
     p.add_argument('plan', type=Path)
     p.add_argument('output', type=Path)
     p.add_argument('--report', required=True, type=Path)
+    p.add_argument('--lotes', nargs='+', type=Path, help='pastas de lote (output/<lote>) a acrescentar, com baralho do histórico')
     args = p.parse_args()
-    print(json.dumps(rebuild(args.source, args.plan, args.output, args.report), ensure_ascii=False))
+    print(json.dumps(rebuild(args.source, args.plan, args.output, args.report, args.lotes), ensure_ascii=False))

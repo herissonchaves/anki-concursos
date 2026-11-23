@@ -11,8 +11,10 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import sys
 import tempfile
 import zipfile
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # funciona também com python -I
 from anki_utils import open_colpkg
 
 

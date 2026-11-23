@@ -65,3 +65,17 @@ def test_colecao_ausente_so_avisa(tmp_path):
     pasta, dados = lote(tmp_path, 'Banco consultado: buscar -d transito\n', 'Frente qualquer de teste.')
     msgs = avisos(pasta, dados, str(tmp_path / 'nao_existe.anki2'))
     assert msgs and msgs[0].startswith('duplicatas: coleção não lida')
+
+
+def test_lote_sem_cards_exige_cobertura_e_nao_pede_importacao_2_36(tmp_path, monkeypatch, capsys):
+    import finalizar_lote
+    pasta = tmp_path / 'PRF_Coberto'
+    rel = pasta / 'lote' / 'relatorios'
+    rel.mkdir(parents=True)
+    for nome in ('anki_certo_errado.tsv', 'anki_cloze.tsv'):
+        (pasta / 'lote' / nome).write_text('', encoding='utf-8')
+    for nome in ('selecao_e_fontes.txt', 'auditoria_pedagogica.txt', 'economia_de_revisao.txt', 'triagem_previa_pdf.txt'):
+        (rel / nome).write_text('Banco consultado: fixture\n', encoding='utf-8')
+    monkeypatch.setattr(finalizar_lote, 'HISTORICO', tmp_path / 'h.tsv')
+    assert finalizar_lote.main([str(pasta), '--baralho', 'X', '--colecao', str(tmp_path / 'nao.anki2')]) == 1
+    assert 'só é aceito com a COBERTURA' in capsys.readouterr().out

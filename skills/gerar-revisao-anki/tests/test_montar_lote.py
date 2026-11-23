@@ -161,8 +161,9 @@ def test_multiple_omissions_only_in_mnemonic_2_33(tmp_path):
     gerado.CZ[0]['t'] = 'Força em {{c1::newton}}, energia em {{c1::joule}}.'
     with pytest.raises(SystemExit, match='uma omissão por nota'):
         gerado.montar_linhas()
-    gerado.CZ[0].update(t=MNEMONICO_OK, mn=dict(sigla='CE-NO-RE', origem='autoral'))
+    gerado.CZ[0].update(t=MNEMONICO_OK, mn=dict(sigla='CE-NO-RE', origem='autoral'), cob={'*': ['D01']})
     gerado.montar_linhas()
+    assert gerado.CZ[0]['cob'] == {str(i): ['D01'] for i in range(1, 5)}  # 2.36: '*' vira uma chave por lacuna
     texto, extra, tags = gerado.cz_rows[0]
     assert 'Origem do mnemônico' in extra and 'Autoral' in extra and 'autoral' not in texto.casefold()
     assert tags.split() == ['Fisica::Dinamica::Forca', 'Cloze']
@@ -170,9 +171,24 @@ def test_multiple_omissions_only_in_mnemonic_2_33(tmp_path):
 
 def test_mnemonico_com_link_da_fonte_no_verso(tmp_path):
     gerado = lote(tmp_path)
-    gerado.CZ[0].update(t=MNEMONICO_OK, mn=dict(sigla='CE-NO-RE', origem=('encontrado', 'https://example.test/mn', 'Blog X')))
+    gerado.CZ[0].update(t=MNEMONICO_OK, mn=dict(sigla='CE-NO-RE', origem=('encontrado', 'https://example.test/mn', 'Blog X')), cob={'*': ['D01']})
     gerado.montar_linhas()
     assert '<a href="https://example.test/mn">Blog X</a>' in gerado.cz_rows[0][1]
+
+
+def test_cob_de_mnemonico_exige_uma_chave_por_lacuna_2_36(tmp_path):
+    gerado = lote(tmp_path)
+    gerado.CZ[0].update(t=MNEMONICO_OK, mn=dict(sigla='CE-NO-RE', origem='autoral'), cob={'1': ['D01']})
+    with pytest.raises(SystemExit, match='uma chave por lacuna'):
+        gerado.montar_linhas()
+
+
+def test_tag_com_dois_pontos_ganha_a_disciplina_2_36(tmp_path):
+    """Tag de card com '::' que não começa pela disciplina do ASSUNTO recebe o prefixo; a completa fica como está."""
+    gerado = lote(tmp_path, assunto='Fisica')
+    gerado.tags_pagina = {}
+    assert gerado._tags({'k': 'X', 'tags': 'Dinamica::Forca'}) == 'Fisica::Dinamica::Forca'
+    assert gerado._tags({'k': 'X', 'tags': 'Fisica::Dinamica::Energia'}) == 'Fisica::Dinamica::Energia'
 
 
 @pytest.mark.parametrize('texto', [

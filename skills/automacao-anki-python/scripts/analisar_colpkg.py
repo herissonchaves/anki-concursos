@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import sqlite3
 import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # funciona também com python -I
 from anki_utils import open_colpkg,table_names,note_fronts,digest,normalized
 
 

@@ -64,6 +64,9 @@ python reconstruir_colpkg.py backup.colpkg plano.json output/PRF_Colecao_<data>/
 ou cartão, não mexe em agendamento nem histórico, não renumera lacunas Cloze, exige que toda nota
 final passe nas regras de `references/tags.md` (via `regras_tags.py`), confere que os cartões novos
 entram como novos e reimporta a saída para conferir mídia. Lotes comuns continuam só em TSV.
+Com `--lotes output/PRF_M0*` (2.36), a lista `adicionar` é montada das pastas de lote: o baralho vem da
+linha do lote em `referencias/historico_lotes.tsv` (gravada pelo `finalizar_lote.py`), o tipo de nota é
+`Basic` (C/E) ou `Cloze`, e pastas sem cards (PDF já coberto) ficam de fora.
 
 Explicar que importar `.colpkg` substitui a coleção do perfil. Recomendar perfil
 separado para conferir. Distinguir teste do backend e teste da interface desktop.

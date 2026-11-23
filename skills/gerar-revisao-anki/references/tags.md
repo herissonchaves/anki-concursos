@@ -6,7 +6,7 @@ Os outros documentos só remetem a este. Quem aplica as regras: `scripts/regras_
 
 ## Tags de um card novo
 
-Só estas, nesta ordem:
+Só estas (a ordem não importa: o Anki guarda as tags sem ordem):
 
 | Tag | Quando | Exemplo |
 | --- | --- | --- |
@@ -22,6 +22,11 @@ Só estas, nesta ordem:
 - **PDF e páginas:** entram juntos, e só no card que cobre uma página da `COBERTURA` (ou seja, feito
   sobre o PDF). Card feito de print de questão, de caderno de erros ou de pesquisa avulsa não leva
   nenhum dos dois. No gerador: `PDF = 'Missao_07'` (o montador põe o nome só onde houver `Pagina_NN`).
+  Missão com mais de um PDF (2.36): `Missao_NN_CODIGO`, com o código do arquivo (ex.: `Missao_02_DCO030002`),
+  para as páginas de PDFs diferentes não se misturarem.
+- **Prefixo da disciplina (2.36):** o montador junta `ASSUNTO` à tag do card sempre que ela não começa pela
+  disciplina do `ASSUNTO`. Com `ASSUNTO = 'Direito_Penal'`, `tags='Principios::Legalidade'` vira
+  `Direito_Penal::Principios::Legalidade`; uma tag que já começa por `Direito_Penal::` fica como está.
 - **Questão de origem (D):** nome do arquivo `.md` da questão em `referencias/questoes/` que inspirou
   o desafiador, sem a extensão. O montador tira dos `refs` do D.
 
@@ -78,6 +83,6 @@ O Extra explica cada termo e traz, antes do 💡 Memorize, o bloco **📚 Origem
 No gerador: `mn=dict(sigla='CE-NO-RE', origem='autoral')` ou
 `mn=dict(sigla='CE-NO-RE', origem=('encontrado', 'https://...', 'Nome da fonte'))` (ou `'adaptado'`).
 O montador gera o bloco; não escreva a origem à mão. Cada lacuna c1 do mnemônico conta como uma lacuna
-própria em `cob`: uma chave por lacuna, na ordem do texto, por exemplo
-`cob={str(i): ['D01'] for i in range(1, 5)}` para quatro lacunas (senão a revisão de recuperação reprova). Pesquisa e conferência do mnemônico: seção
+própria em `cob`: uma chave por lacuna, na ordem do texto. Desde a 2.36 basta `cob={'*': ['D01']}` (a
+mesma lista para todas); o montador abre uma chave por lacuna e reprova na geração se faltar alguma. Pesquisa e conferência do mnemônico: seção
 "Mnemônicos pesquisados" de `protocolo_cloze_cientifico.md`.

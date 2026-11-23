@@ -115,3 +115,10 @@ def test_duplicatas_e_cli(tmp_path, capsys):
     assert r['possiveis_duplicatas'][0]['comparado_com'] == 'anki:100'
     assert main(['--colecao', str(db), 'resumo']) == 0
     assert 'Notas: 3' in capsys.readouterr().out
+
+
+def test_tag_hierarquica_casa_filhas_2_36():
+    import colecao_anki
+    assert colecao_anki.tem_tag('Direito_Penal::Principios::Legalidade Rapida', 'Direito_Penal')
+    assert colecao_anki.tem_tag('Direito_Penal::Principios::Legalidade', 'direito_penal::principios')
+    assert not colecao_anki.tem_tag('Direito_Penal_Especial::X', 'Direito_Penal')

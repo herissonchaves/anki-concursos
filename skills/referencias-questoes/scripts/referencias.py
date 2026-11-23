@@ -707,6 +707,45 @@ def nova(dados: dict, raiz=None, gravar=True) -> tuple[str, Questao | None, list
     return 'criada', q, avisos
 
 
+CAMPOS_META = ('assunto', 'subassuntos', 'palavras_chave', 'operacao_observada', 'gabarito', 'disciplina')
+
+
+def completar(rascunho: list[dict], meta: dict, raiz=None, gravar=True) -> tuple[dict, list[str]]:
+    """Completa os campos REVISAR do rascunho de `importar` e salva cada questão com `nova` (2.36).
+
+    `meta`: {"assunto": padrão, "disciplina": opcional, "itens": {chave: valor}}, com a chave do rascunho
+    (T01, Q05…) e valor `"skip"` (repetida, já no banco ou fora do tema), uma lista
+    [subassunto ou lista, palavras_chave, operacao_observada] ou um dict com os campos de CAMPOS_META.
+    Devolve ({chave: id criado ou existente}, mensagens). Toda chave do rascunho precisa estar em `itens`.
+    """
+    itens = meta.get('itens', {})
+    faltam = [i.get('chave', '?') for i in rascunho if i.get('chave') not in itens]
+    sobram = sorted(set(itens) - {i.get('chave') for i in rascunho})
+    if faltam or sobram:
+        raise ErroBanco(f'meta não corresponde ao rascunho: faltam {faltam or "nenhuma"}; sem questão: {sobram or "nenhuma"}')
+    mapa, msgs = {}, []
+    for item in rascunho:
+        chave, valor = item['chave'], itens[item['chave']]
+        if valor == 'skip':
+            msgs.append(f'{chave}: pulada')
+            continue
+        if isinstance(valor, list):
+            sub, pal, op = valor
+            valor = {'subassuntos': [sub] if isinstance(sub, str) else sub, 'palavras_chave': pal, 'operacao_observada': op}
+        d = dict(item)
+        d.update({k: meta[k] for k in ('assunto', 'disciplina') if k in meta})
+        d.update({k: v for k, v in valor.items() if k in CAMPOS_META})
+        restos = [k for k, v in d.items() if v == RASCUNHO or (isinstance(v, list) and RASCUNHO in v)]
+        if restos:
+            raise ErroBanco(f'{chave}: ainda há {RASCUNHO} em {", ".join(restos)}')
+        status, q, m = nova(d, raiz, gravar=gravar)
+        if status == 'invalida':
+            raise ErroBanco(f'{chave}: inválida — {"; ".join(m)}')
+        mapa[chave] = q.id
+        msgs.append(f'{chave}: {status} {q.id}' + (f' — {"; ".join(m)}' if m and status != 'duplicada' else ''))
+    return mapa, msgs
+
+
 # ------------------------------------------------------------------ editais, conteúdos, notícias e prioridades
 def pasta_documento(meta: dict, raiz=None) -> Path:
     base, tipo = raiz_banco(raiz), meta['tipo']
@@ -925,6 +964,11 @@ def main(argv=None) -> int:
     im.add_argument('-a', '--assunto', default='REVISAR')
     im.add_argument('--alvo', default='PRF')
     im.add_argument('--ruido', action='append', default=[], help='palavra de faixa lateral a remover (repita)')
+    co = sub.add_parser('completar', help='completa o rascunho de importar com um JSON de metadados e salva (2.36)')
+    co.add_argument('rascunho', help='JSON gerado por importar')
+    co.add_argument('meta', help='JSON {"assunto": ..., "itens": {"Q01": [sub, [palavras], operação] | "skip"}}')
+    co.add_argument('--simular', action='store_true', help='valida sem gravar')
+    co.add_argument('--mapa', help='grava o mapa {chave: id} neste JSON (fora do repositório)')
     sub.add_parser('validar', help='confere todas as questões')
     ix = sub.add_parser('indexar', help='valida e regera indice.tsv e assuntos.md')
     ix.add_argument('--atualizar-hash', action='store_true')
@@ -981,6 +1025,17 @@ def main(argv=None) -> int:
             for msg in avisos:
                 print(f'aviso: {msg}')
             print(f'-- {len(itens)} questão(ões) em {a.saida}; {pendentes} campo(s) {RASCUNHO} a completar')
+        elif a.cmd == 'completar':
+            rascunho = json.loads(Path(a.rascunho).read_text(encoding='utf-8-sig'))
+            meta = json.loads(Path(a.meta).read_text(encoding='utf-8-sig'))
+            mapa, msgs = completar(rascunho, meta, raiz, gravar=not a.simular)
+            for msg in msgs:
+                print(msg)
+            if not a.simular:
+                indexar(raiz)
+            if a.mapa:
+                Path(a.mapa).write_text(json.dumps(mapa, ensure_ascii=False), encoding='utf-8')
+            print(json.dumps(mapa, ensure_ascii=False))
         elif a.cmd == 'calibracao':
             print(json.dumps(calibracao(*a.ids, raiz=raiz), ensure_ascii=False, indent=1))
         elif a.cmd in ('validar', 'indexar'):

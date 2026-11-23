@@ -63,7 +63,7 @@ CZ = [  # uma omissão {{c1::...}} por nota (várias só em mnemônico, com mn=)
   #    'e a decisão de RE{{c1::cursos administrativos}}.',
   #  mn=dict(sigla='CE-NO-RE', origem='autoral'),  # ou origem=('encontrado'|'adaptado', 'https://...', 'Nome da fonte')
   #  b=[regra('Explica cada termo da sigla.')], m='CE-NO-RE: o que não se delega.', alvo='...', fx=('lei',),
-  #  cob={str(i): ['D01'] for i in range(1, 5)}),  # uma chave por lacuna c1 (aqui 4), na ordem do texto
+  #  cob={'*': ['D01']}),  # '*' = a mesma lista para cada lacuna c1 (2.36); ou {'1': [...], '2': [...], ...}
 ]
 
 D = [  # desafiadores: caso curto com dado decisivo; 50% C / 50% E

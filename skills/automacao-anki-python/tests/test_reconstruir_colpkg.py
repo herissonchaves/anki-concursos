@@ -7,7 +7,7 @@ import sys
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from reconstruir_colpkg import rebuild, validate_plan, problemas_nota  # noqa: E402
+from reconstruir_colpkg import adicionar_de_lotes, rebuild, validate_plan, problemas_nota  # noqa: E402
 
 TAGS_R = 'Direito_Penal::Teoria_Geral_do_Crime::Conceito Rapida'
 MN_FRENTE = ('<b>Mnemônico FOCO:</b><br>Na convalidação, são sanáveis os vícios de<br>'
@@ -79,3 +79,30 @@ def test_reconstrucao_preserva_historico_e_adiciona(tmp_path):
     assert hashlib.sha256(source.read_bytes()).hexdigest() == before
     with pytest.raises(ValueError, match='existentes'):
         rebuild(source, plan, out, tmp_path / 'r2.json')
+
+
+def test_adicionar_de_lotes_le_baralho_do_historico_2_36(tmp_path):
+    hist = tmp_path / 'historico_lotes.tsv'
+    hist.write_text('data\tlote\tbaralho\trapidos\tdesafiadores\tcloze\tids_banco\n'
+                    '2026-11-23\tPRF_A\tDireito Penal\t1\t0\t0\t\n', encoding='utf-8')
+    for nome, ce, cz in (('PRF_A', 'f\tv\tt\n', ''), ('PRF_Vazio', '', '')):
+        (tmp_path / nome / 'lote').mkdir(parents=True)
+        (tmp_path / nome / 'lote' / 'anki_certo_errado.tsv').write_text(ce, encoding='utf-8')
+        (tmp_path / nome / 'lote' / 'anki_cloze.tsv').write_text(cz, encoding='utf-8')
+    saida = adicionar_de_lotes([tmp_path / 'PRF_A', tmp_path / 'PRF_Vazio'], hist)
+    assert [(x['deck'], x['notetype']) for x in saida] == [('Direito Penal', 'Basic')]
+    (tmp_path / 'PRF_B' / 'lote').mkdir(parents=True)
+    (tmp_path / 'PRF_B' / 'lote' / 'anki_certo_errado.tsv').write_text('f\tv\tt\n', encoding='utf-8')
+    with pytest.raises(ValueError, match='histórico'):
+        adicionar_de_lotes([tmp_path / 'PRF_B'], hist)
+
+
+@pytest.mark.parametrize('script', ['analisar_colpkg.py', 'detectar_duplicatas.py', 'revisar_colpkg.py',
+                                    'reconstruir_colpkg.py', 'colecao_anki.py', 'finalizar_lote.py'])
+def test_scripts_rodam_com_python_isolado_2_36(script):
+    """Com -I o Python não põe a pasta do script no sys.path; o script tem de fazê-lo."""
+    import subprocess
+    pasta = Path(__file__).resolve().parents[1] / 'scripts'
+    r = subprocess.run([sys.executable, '-I', str(pasta / script), '-h'], capture_output=True, text=True,
+                       cwd=Path(__file__).resolve().parents[3])
+    assert r.returncode == 0, r.stderr[-300:]

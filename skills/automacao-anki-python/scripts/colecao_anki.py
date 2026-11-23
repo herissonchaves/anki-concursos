@@ -31,7 +31,7 @@ import tempfile
 import time
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from anki_utils import normalized, plain, register_read_collations  # noqa: E402
+from anki_utils import MAX_SQLITE_UNCOMPRESSED, decompress_database, normalized, plain, register_read_collations  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parents[3]
 PERFIL_PADRAO = 'concursos'
@@ -59,6 +59,30 @@ def find_collection(perfil: str | None = PERFIL_PADRAO, caminho: str | Path | No
     return p
 
 
+def extrair_colpkg(pacote: Path, destino: Path) -> None:
+    """Grava em `destino` o banco SQLite de um backup .colpkg (anki21b descomprimido ou anki2)."""
+    import zipfile
+    with zipfile.ZipFile(pacote) as z:
+        nomes = set(z.namelist())
+        membro = next((m for m in ('collection.anki21b', 'collection.anki21', 'collection.anki2') if m in nomes), None)
+        if membro is None:
+            raise SystemExit(f'ERRO: {pacote} sem banco do Anki')
+        if z.getinfo(membro).file_size > MAX_SQLITE_UNCOMPRESSED:
+            raise SystemExit('ERRO: banco excede o limite de segurança')
+        with z.open(membro) as origem:
+            if membro.endswith('21b'):
+                decompress_database(origem, destino)
+            else:
+                with destino.open('wb') as saida:
+                    shutil.copyfileobj(origem, saida, length=1024 * 1024)
+
+
+def tem_tag(tags: str, alvo: str) -> bool:
+    """Como no Anki: a tag casa com ela mesma e com as filhas (Direito_Penal casa Direito_Penal::Principios)."""
+    alvo = alvo.casefold().rstrip(':')
+    return any(t == alvo or t.startswith(alvo + '::') for t in tags.casefold().split())
+
+
 class Colecao:
     """Cópia temporária da coleção, aberta só para consulta."""
 
@@ -66,10 +90,13 @@ class Colecao:
         self.src = Path(src)
         self.tmp = tempfile.TemporaryDirectory(prefix='anki_ro_')
         dst = Path(self.tmp.name) / 'collection.anki2'
-        shutil.copyfile(self.src, dst)
-        wal = Path(str(self.src) + '-wal')
-        if wal.is_file():
-            shutil.copyfile(wal, str(dst) + '-wal')
+        if self.src.suffix.lower() == '.colpkg':  # 2.36: backup .colpkg também serve de coleção de consulta
+            extrair_colpkg(self.src, dst)
+        else:
+            shutil.copyfile(self.src, dst)
+            wal = Path(str(self.src) + '-wal')
+            if wal.is_file():
+                shutil.copyfile(wal, str(dst) + '-wal')
         self.db = sqlite3.connect(dst)
         self.db.execute('PRAGMA query_only = ON')
         register_read_collations(self.db)
@@ -254,7 +281,7 @@ def _curto(n, campo=0, tam=300):
 def main(argv=None):
     p = argparse.ArgumentParser(description='Consulta somente leitura da coleção viva do Anki')
     p.add_argument('--perfil', default=PERFIL_PADRAO)
-    p.add_argument('--colecao', help='caminho de um collection.anki2 (padrão: perfil do Anki deste PC)')
+    p.add_argument('--colecao', help='collection.anki2 ou backup .colpkg (padrão: perfil do Anki deste PC)')
     sub = p.add_subparsers(dest='cmd', required=True)
     sub.add_parser('resumo')
     b = sub.add_parser('buscar'); b.add_argument('termos', nargs='+'); b.add_argument('--baralho'); b.add_argument('-n', '--limite', type=int, default=20)
@@ -288,7 +315,7 @@ def main(argv=None):
             if len(achados) > a.limite:
                 print(f'... +{len(achados) - a.limite} (use -n)')
         elif a.cmd == 'listar':
-            itens = [n for n in col.notes(a.baralho) if not a.tag or a.tag.casefold() in n['tags'].casefold().split()]
+            itens = [n for n in col.notes(a.baralho) if not a.tag or tem_tag(n['tags'], a.tag)]
             linhas = [f'{n["id"]}\t{n["baralho"]}\t{n["lapsos"]}\t{n["tags"]}\t' + '\t'.join(plain(c) for c in n['campos'][:2]) for n in itens]
             if a.saida:
                 a.saida.parent.mkdir(parents=True, exist_ok=True)

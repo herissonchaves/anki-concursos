@@ -129,7 +129,7 @@ def main(argv=None) -> int:
     ap.add_argument('--profile', choices=('mixed', 'focused'))
     ap.add_argument('--exception-reason')
     ap.add_argument('--max-cards')
-    ap.add_argument('--colecao', help='collection.anki2 para a checagem de duplicatas (padrão: perfil concursos)')
+    ap.add_argument('--colecao', help='collection.anki2 ou backup .colpkg para a checagem de duplicatas (padrão: perfil concursos)')
     a = ap.parse_args(argv)
     lote = (a.lote if a.lote.is_absolute() else Path.cwd() / a.lote).resolve()
     dados = lote / 'lote'
@@ -146,8 +146,15 @@ def main(argv=None) -> int:
         if valor:
             perfil += [opcao, valor]
     alvo = str(dados)
-    checagens = [
-        ('validar_anki --new', [str(GERAR / 'validar_anki.py'), '--new', alvo, *perfil]),
+    # 2.36: PDF já coberto pela coleção — lote sem cards novos, aceito só com a COBERTURA do PDF
+    vazio = not any((dados / n).stat().st_size for n in ('anki_certo_errado.tsv', 'anki_cloze.tsv'))
+    if vazio and not (dados / 'relatorios' / 'cobertura_pdf.json').exists():
+        print('ERRO: lote sem cards só é aceito com a COBERTURA do PDF (unidades e questões ligadas a notas da coleção)')
+        return 1
+    checagens = [] if vazio else [('validar_anki --new', [str(GERAR / 'validar_anki.py'), '--new', alvo, *perfil])]
+    if vazio:
+        print('OK  sem cards novos: o PDF está coberto por notas da coleção (validar_anki não se aplica)')
+    checagens += [
         ('calibração', [str(GERAR / 'validar_calibracao_cebraspe.py'), alvo]),
         ('revisão de recuperação', [str(GERAR / 'validar_revisao_pedagogica.py'), alvo]),
         ('banco referencias/', [str(REFERENCIAS), 'validar']),
@@ -170,9 +177,12 @@ def main(argv=None) -> int:
         caminho = HISTORICO.relative_to(REPO).as_posix() if HISTORICO.is_relative_to(REPO) else HISTORICO
         print(f'Histórico: {caminho} ({h["rapidos"]} R, {h["desafiadores"]} D, '
               f'{h["cloze"]} Cloze; {len(h["ids_banco"].split(";")) if h["ids_banco"] else 0} IDs do banco)')
-        print(f'TSV C/E:   {dados / "anki_certo_errado.tsv"}')
-        print(f'TSV Cloze: {dados / "anki_cloze.tsv"}' + ('' if (dados / 'anki_cloze.tsv').stat().st_size else ' (vazio)'))
-        print(f'Baralho: {a.baralho}. {IMPORTAR}')
+        if vazio:
+            print('Nada a importar: o PDF já está coberto por notas da coleção (veja relatorios/cobertura_pdf.json).')
+        else:
+            print(f'TSV C/E:   {dados / "anki_certo_errado.tsv"}')
+            print(f'TSV Cloze: {dados / "anki_cloze.tsv"}' + ('' if (dados / 'anki_cloze.tsv').stat().st_size else ' (vazio)'))
+            print(f'Baralho: {a.baralho}. {IMPORTAR}')
     return 1 if falhas else 0
 
 

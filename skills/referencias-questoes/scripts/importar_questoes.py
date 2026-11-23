@@ -13,8 +13,10 @@ Funciona com o padrão comum de apostilas e cadernos:
   01. Errado.  02. C  13-D                                 (tabela de gabarito)
   Gabarito: CERTO / Gabarito: Letra B                      (questões comentadas)
 
-Quando a mesma questão aparece duas vezes (lista sem comentários + comentadas), fica a
-primeira ocorrência; o gabarito vem da tabela ou do bloco comentado. Entrada: .pdf
+Seções (2.36): exemplos no meio da teoria (antes de "QUESTÕES SEM COMENTÁRIOS") viram itens próprios
+(chave T01, T02…), mesmo que a numeração se repita; a lista e as comentadas se casam pelo número
+(chave Q01…), com o gabarito do comentário (ou da tabela) e a página da questão comentada. Cada item
+traz a `chave`, usada por `referencias.py completar`. Entrada: .pdf
 (PyMuPDF ou pypdf), .json de `automacao-anki-python/scripts/extrair_pdf.py` ou .txt.
 Remove marcas-d'água comuns (hashes hexadecimais, linhas com CPF ou e-mail, "Página | N").
 """
@@ -42,6 +44,11 @@ FIM_DA_LISTA = re.compile(r'^\s*(?:GABARITO\s*:?\s*(?=$|\d)|(?:\d+\s*[.)]\s*)?QU
 # Blocos de texto que o PyMuPDF põe na mesma linha: um vão largo seguido de "NN. " abre uma linha nova
 VAO_ANTES_DE_NUMERO = re.compile(r'\s{4,}(?=\d{1,3}\s*[.)]\s*[A-ZÀ-Ú])')
 TRACO = re.compile(r'\s*[–—-]+\s*')
+# Títulos de seção (2.36); a linha do sumário (com pontilhado) é ignorada
+SECAO_LISTA = re.compile(r'^\s*(?:\d+\s*[.)]\s*)?QUEST[ÕO]ES\s+SEM\s+COMENT[^\n]*', re.M | re.I)
+SECAO_COMENTADAS = re.compile(r'^\s*(?:\d+\s*[.)]\s*)?QUEST[ÕO]ES\s+COMENTADAS[^\n]*', re.M | re.I)
+# Questões criadas pelo próprio curso ("01. MISSÃO – INÉDITA:"): sem banca nem ano, não entram no banco
+INEDITA = re.compile(r'^\s*(?:[A-ZÀ-Ú]{1,3}\s+)?\d{1,3}\s*[.)]\s*[^\n]{0,40}IN[ÉE]DITA', re.M | re.I)
 
 
 # ------------------------------------------------------------------ leitura
@@ -163,37 +170,67 @@ def extrair(caminho, paginas=None, ruido=(), disciplina=RASCUNHO, assunto=RASCUN
     def pagina_de(pos):
         return max((p for ini, p in marcas if ini <= pos), default=marcas[0][1] if marcas else 1)
 
-    cabecalhos = list(CABECALHO.finditer(texto))
-    questoes, comentados = {}, {}
-    for i, m in enumerate(cabecalhos):
-        fim = cabecalhos[i + 1].start() if i + 1 < len(cabecalhos) else len(texto)
-        corpo = texto[m.end():fim]
-        num = int(m['num'])
-        gab = COMENTADO.search(corpo)
+    # Seções (2.36): exemplos no meio da teoria (antes de "QUESTÕES SEM COMENTÁRIOS"), lista e comentadas.
+    # A numeração recomeça em cada seção, e os exemplos da teoria recomeçam a cada tópico; por isso os
+    # exemplos viram itens próprios (T01, T02…) e a lista e as comentadas se casam pelo número (Q01…).
+    def secao(regex):
+        return next((m.start() for m in regex.finditer(texto) if '....' not in m.group(0)), None)
+    ini_lista, ini_coment = secao(SECAO_LISTA), secao(SECAO_COMENTADAS)
+    if ini_lista is not None and ini_coment is not None and ini_coment < ini_lista:
+        ini_coment = None
+    if ini_lista is None:  # sem título da lista: tudo antes das comentadas é a lista (caso antigo)
+        faixa_texto, faixa_lista = (0, 0), (0, ini_coment if ini_coment is not None else len(texto))
+    else:
+        faixa_texto, faixa_lista = (0, ini_lista), (ini_lista, ini_coment if ini_coment is not None else len(texto))
+    faixa_coment = (ini_coment, len(texto)) if ini_coment is not None else (len(texto), len(texto))
+
+    def blocos_de(ini, fim):
+        cabs = [m for m in CABECALHO.finditer(texto, ini, fim)]
+        for i, m in enumerate(cabs):
+            corpo = texto[m.end():cabs[i + 1].start() if i + 1 < len(cabs) else fim]
+            gab = COMENTADO.search(corpo)
+            if gab:
+                corpo = corpo[:gab.start()]
+            for fim_lista in (LINHA_TABELA.search(corpo), FIM_DA_LISTA.search(corpo)):
+                if fim_lista:
+                    corpo = corpo[:fim_lista.start()]
+            yield int(m['num']), m, corpo, (_gabarito_normalizado(gab[1]) if gab else None), pagina_de(m.start())
+
+    questoes, comentados, pag_coment = {}, {}, {}
+    for n, (num, m, corpo, gab, pag) in enumerate(blocos_de(*faixa_texto), 1):
+        questoes[f'T{n:02d}'] = (num, m, corpo, pag, gab)
+    for num, m, corpo, gab, pag in blocos_de(*faixa_lista):
+        chave = f'Q{num:02d}'
+        if chave not in questoes:
+            questoes[chave] = (num, m, corpo, pag, None)
         if gab:
-            comentados.setdefault(num, _gabarito_normalizado(gab[1]))
-            corpo = corpo[:gab.start()]
-        if num in questoes:
-            continue
-        for fim_lista in (LINHA_TABELA.search(corpo), FIM_DA_LISTA.search(corpo)):
-            if fim_lista:
-                corpo = corpo[:fim_lista.start()]
-        questoes[num] = (m, corpo, pagina_de(m.start()))
+            comentados.setdefault(num, gab)
+    for num, m, corpo, gab, pag in blocos_de(*faixa_coment):
+        chave = f'Q{num:02d}'
+        if gab:
+            comentados.setdefault(num, gab)
+        pag_coment.setdefault(num, pag)
+        if chave not in questoes:  # questão só na parte comentada
+            questoes[chave] = (num, m, corpo, pag, None)
     tabela = {}
-    for linha in LINHA_TABELA.finditer(texto):  # só linhas que começam como tabela de gabarito
+    for linha in LINHA_TABELA.finditer(texto, faixa_lista[0], faixa_coment[0]):  # linhas que começam como tabela
         fim_linha = texto.find('\n', linha.start())
         for num, gab in TABELA.findall(texto[linha.start():fim_linha if fim_linha >= 0 else None]):
             tabela.setdefault(int(num), _gabarito_normalizado(gab))
 
     rascunho = []
     hoje = _dt.date.today().isoformat()
-    for num, (m, corpo, pagina) in sorted(questoes.items()):
+    for chave, (num, m, corpo, pagina, gab_texto) in sorted(questoes.items(), key=lambda kv: (kv[0][0] != 'T', kv[0])):
         enunciado, alternativas = _alternativas(' '.join(corpo.split()))
         formato = 'multipla_escolha' if len(alternativas) >= 2 else 'certo_errado'
-        gabarito = comentados.get(num) or tabela.get(num) or RASCUNHO
-        if avisos is not None and num in comentados and num in tabela and comentados[num] != tabela[num]:
-            avisos.append(f'questão {num:02d}: tabela de gabarito diz {tabela[num]}, comentário diz {comentados[num]} '
-                          '(ficou o comentário; confira)')
+        if chave.startswith('T'):
+            gabarito = gab_texto or RASCUNHO
+        else:
+            gabarito = comentados.get(num) or tabela.get(num) or RASCUNHO
+            pagina = pag_coment.get(num, pagina)
+            if avisos is not None and num in comentados and num in tabela and comentados[num] != tabela[num]:
+                avisos.append(f'questão {num:02d}: tabela de gabarito diz {tabela[num]}, comentário diz {comentados[num]} '
+                              '(ficou o comentário; confira)')
         if formato == 'certo_errado' and gabarito not in ('C', 'E'):
             gabarito = RASCUNHO
         banca, orgao, concurso = _banca_orgao(m['cab'], m['ano'])
@@ -204,11 +241,17 @@ def extrair(caminho, paginas=None, ruido=(), disciplina=RASCUNHO, assunto=RASCUN
             'concurso': concurso, 'cargo': 'nao_localizado', 'caderno': 'nao_localizado', 'item': 'nao_localizado',
             'disciplina': disciplina, 'assunto': assunto, 'subassuntos': [RASCUNHO], 'palavras_chave': [RASCUNHO],
             'gabarito': gabarito, 'gabarito_status': 'nao_verificado', 'url': 'nao_localizado',
-            'origem': 'anexo_usuario', 'fonte_descoberta': f'{caminho.name}, p. {pagina}, questão {num:02d}; gabarito do material',
+            'origem': 'anexo_usuario', 'chave': chave,
+            'fonte_descoberta': (f'{caminho.name}, p. {pagina}, '
+                                 f'{"exemplo do texto " + chave[1:] if chave.startswith("T") else f"questão {num:02d}"}; gabarito do material'),
             'consulta': hoje, 'concursos_alvo': [alvo], 'operacao_observada': RASCUNHO,
             'enunciado': enunciado or RASCUNHO,
         }
         if alternativas:
             item['alternativas'] = alternativas
         rascunho.append(item)
+    ineditas = len(INEDITA.findall(texto))
+    if avisos is not None and ineditas:
+        avisos.append(f'{ineditas} ocorrência(s) de questão inédita do curso ignorada(s) (não são de concurso); '
+                      'cubra-as como conteúdo do PDF')
     return rascunho

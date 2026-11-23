@@ -225,9 +225,10 @@ class Lote:
     def _tags(self, x, extra=''):
         """base + Disciplina::Assunto::Topico + tipo/questões + PDF e páginas (só se o card cobre página)."""
         pags = ' '.join(f'Pagina_{p:02d}' for p in sorted(self.tags_pagina.get(x['k'], ())))
-        topicos = []
+        topicos, raiz = [], self.assunto.split('::')[0]
         for t in x['tags'].split():
-            topicos.append(t if ('::' in t or not self.assunto) else f'{self.assunto}::{t}')
+            # 2.36: só não prefixa a tag que já começa pela disciplina do ASSUNTO
+            topicos.append(t if (not self.assunto or t == raiz or t.startswith(raiz + '::')) else f'{self.assunto}::{t}')
         pdf = self.pdf if (pags and self.pdf) else ''
         return ' '.join(t for t in (self.base, ' '.join(topicos), extra, pdf, pags) if t)
 
@@ -382,6 +383,12 @@ class Lote:
             erros += [f"{x['k']}: {e}" for e in problemas_tags(row[2], RAPIDA if kind == 'R' else DESAFIADORA)]
         for x, row in zip(self.CZ, self.cz_rows):
             erros += [f"{x['k']}: {e}" for e in problemas_tags(row[2], CLOZE)]
+            lacunas = len(re.findall(r'\{\{c\d+::', x['t']))
+            chaves = set(x.get('cob', {}))
+            if chaves != {str(i) for i in range(1, lacunas + 1)}:
+                erros.append(f"{x['k']}: cob precisa de uma chave por lacuna ({lacunas}: "
+                             f"{', '.join(str(i) for i in range(1, lacunas + 1))}); achou {sorted(chaves) or 'nenhuma'}. "
+                             "Use cob={'*': ['Dxx']} para a mesma lista em todas")
             if x.get('mn'):
                 erros += [f"{x['k']}: {e}" for e in problemas_mnemonico(x['t'], row[1])]
                 sigla = sigla_mnemonico(x['t'])
@@ -396,6 +403,10 @@ class Lote:
             raise SystemExit('TAGS OU FORMATO DO CLOZE FORA DA REGRA (references/tags.md):\n  ' + '\n  '.join(erros))
 
     def montar_linhas(self):
+        for x in self.CZ:  # 2.36: cob={'*': [...]} vale para todas as lacunas, na ordem do texto
+            if '*' in x.get('cob', {}):
+                n = len(re.findall(r'\{\{c\d+::', x['t']))
+                x['cob'] = {str(i): list(x['cob']['*']) for i in range(1, n + 1)}
         if not hasattr(self, 'tags_pagina'):
             self.checar_cobertura()
         self.cz_index = {x['k']: i for i, x in enumerate(self.CZ, 1)}

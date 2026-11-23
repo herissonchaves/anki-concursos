@@ -60,17 +60,28 @@ conteúdo. Nunca copie nome/CPF da marca-d'água para arquivo versionado.
 - Coleção viva: `uv run --no-project python -I -X utf8 skills/automacao-anki-python/scripts/colecao_anki.py
   buscar TERMO --baralho "B"` para os termos centrais (cópia somente leitura) e excluir alvos já
   cobertos (`colecao=[IDs]`). Na exportação, o `finalizar_lote.py` compara as frentes com a coleção
-  e avisa as parecidas (lista em `duplicatas_colecao.txt` na pasta do lote).
+  e avisa as parecidas (lista em `duplicatas_colecao.txt` na pasta do lote). Trabalhando sobre um
+  backup (2.36): `colecao_anki.py --colecao BACKUP.colpkg listar --tag Direito_Penal::Principios` (a tag
+  casa as filhas, como no Anki) e `finalizar_lote.py ... --colecao BACKUP.colpkg`. Vários lotes no mesmo
+  pedido: `detectar_duplicatas.py output --backup BACKUP.colpkg -o TMP/dups.json` compara todos entre si
+  e com a coleção numa chamada.
+- **PDF já coberto pela coleção** (feito antes por outro lote): gere o lote só com a `COBERTURA` (cada
+  unidade e questão com `colecao=[IDs]`) e `R = D = CZ = []`; o `finalizar_lote.py` aceita o lote sem
+  cards, grava a linha do histórico e avisa que não há nada a importar.
 
 ## 3. Questões: anexo, banco, internet
 
-1. Questões do PDF: `referencias.py importar TMP/pdf.json -o TMP/rasc.json -p LISTA-E-COMENTADAS -d DISC
-   --ruido PALAVRA1 --ruido PALAVRA2 ...` (as palavras da faixa lateral, ex.: `DIREITO`, `ADMINISTRATIVO`,
-   `REVISÃO`, `ESQUEMATIZADA`; e as páginas da lista **e** das comentadas, que trazem o gabarito
-   justificado). Confira os avisos (gabarito da tabela × comentário; questão que já está no banco: não
-   salve de novo, cite o ID). Troque todo `REVISAR` (assunto, subassuntos, palavras-chave, operação)
-   num script curto que leia o rascunho e grave o JSON do `nova`, e salve **todas** as questões novas do
-   PDF (viram card se o conteúdo for Alta ou Média). Regra revogada: `vigencia: desatualizada` + `vigencia_nota`.
+1. Questões do PDF: `referencias.py importar TMP/pdf.json -o TMP/rasc.json -d DISC --ruido PALAVRA1
+   --ruido PALAVRA2 ...` numa passada só, sem `-p` (as palavras da faixa lateral, ex.: `DIREITO`,
+   `ADMINISTRATIVO`, `REVISÃO`, `ESQUEMATIZADA`). Desde a 2.36 o importador separa os exemplos no meio da
+   teoria (chave `T01`…, mesmo com numeração repetida), a lista e as comentadas (chave `Q01`…, com o
+   gabarito e a página da comentada), e ignora as questões inéditas do curso, com aviso. Confira os avisos
+   (gabarito da tabela × comentário; questão que já está no banco). Complete e salve num comando:
+   `referencias.py completar TMP/rasc.json TMP/meta.json --mapa TMP/ids.json`, com o meta
+   `{"assunto": ..., "itens": {"Q01": [subassunto, [palavras], operação], "T02": "skip"}}` (toda chave do
+   rascunho precisa estar lá; `skip` para repetida ou fora do tema; a já salva é reconhecida e mapeada ao ID
+   existente). O mapa `chave → ID` vai direto para o `Q` do gerador. Salve **todas** as questões novas do PDF
+   (viram card se o conteúdo for Alta ou Média). Regra revogada: `vigencia: desatualizada` + `vigencia_nota`.
 2. Banco: `assuntos -d DISC` → `buscar -d DISC -t TERMO [--com-url] [--vigentes] [--nao-usadas]` → `mostrar`.
 3. Internet, **questões** (obrigatória para todo D, salvo **banco suficiente**: item Cebraspe C/E com
    prova oficial do mesmo subassunto já no banco, citado em `refs` com `fid='comparada'`; para R/Cloze,
