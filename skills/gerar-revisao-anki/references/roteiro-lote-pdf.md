@@ -83,10 +83,11 @@ conteúdo. Nunca copie nome/CPF da marca-d'água para arquivo versionado.
    existente). O mapa `chave → ID` vai direto para o `Q` do gerador. Salve **todas** as questões novas do PDF
    (viram card se o conteúdo for Alta ou Média). Regra revogada: `vigencia: desatualizada` + `vigencia_nota`.
 2. Banco: `assuntos -d DISC` → `buscar -d DISC -t TERMO [--com-url] [--vigentes] [--nao-usadas]` → `mostrar`.
-3. Internet, **questões** (obrigatória para todo D, salvo **banco suficiente**: item Cebraspe C/E com
-   prova oficial do mesmo subassunto já no banco, citado em `refs` com `fid='comparada'`; para R/Cloze,
-   só quando o banco não tiver questão do assunto que mostre o que se cobra): Cebraspe C/E primeiro,
-   depois outras bancas. Cadernos e gabaritos oficiais pelo `cebraspe_cdn.py` (pymupdf), sem abrir o
+3. Internet, **questões** (2.37: obrigatória para **todo card** cujo conteúdo não tenha questão real no
+   banco ou no PDF — todo card cita em `refs` ao menos uma questão que cobra o seu conteúdo; no D, salvo
+   **banco suficiente**: item Cebraspe C/E com prova oficial do mesmo subassunto já no banco, citado em
+   `refs` com `fid='comparada'`): Cebraspe C/E primeiro, depois outras bancas e outros cargos (o que se
+   cobra em concursos diversos). Uma questão sustenta vários cards só se cobrar aquele fato ou termo. Cadernos e gabaritos oficiais pelo `cebraspe_cdn.py` (pymupdf), sem abrir o
    PDF inteiro no contexto:
 
    ```text
@@ -121,15 +122,21 @@ desatualizado e avise no verso. Cloze: pesquise mnemônicos; sem fonte confiáve
 ## 5. Triagem e composição
 
 - **Cobertura por prioridade** (`cobertura-pdf.md`): inventário de todo o PDF e de todas as suas
-  questões; cada unidade é **Alta**, **Média** ou **Baixa** para o concurso-alvo (com motivo). Alta e
+  questões; cada unidade é **Alta** (questão real do cargo/banca-alvo ou núcleo do cargo), **Média**
+  (questão real de outras bancas/cargos) ou **Baixa** (sem questão localizada, com as buscas no motivo). Alta e
   Média: ao menos um card, salvo nota da coleção que já exija a mesma recuperação (busque antes, em
   leitura). Baixa: sem card. Teto menor que a cobertura Alta + Média: avisar e perguntar.
 - Inventário página por página (`triagem_previa_pdf.txt`): unidade, página, prioridade e motivo,
   formato e card(s) ou nota da coleção; o mesmo inventário vira o bloco `COBERTURA` do gerador.
-- R: um alvo, frase curta, sem pegadinha. D: caso curto com dado decisivo, uma decisão real
-  (aplicar, distinguir, exceção); definição disfarçada vira R. Cloze: uma omissão `{{c1::…}}` por
-  nota (várias só em mnemônico, no formato de `references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis, resto de cada termo em c1, origem só no verso), conceito/número que precisa ser lembrado; números só se
-  relevantes e verificados; cada lacuna coberta por um D (`cob`).
+- **Evidência (2.37):** todo card com questão real em `refs`. D sem questão não existe; núcleo do cargo
+  sem questão localizada vira só R/Cloze com `nucleo='motivo'`.
+- R: um alvo que as questões cobram, frase curta, sem pegadinha. D: caso curto com dado decisivo, uma
+  decisão real (aplicar, distinguir, exceção), reconstruído da operação de uma questão real; definição
+  disfarçada vira R. Cloze só de dois tipos (`protocolo_cloze_cientifico.md`): **mnemônico** de lista ou
+  sequência cobrada (várias c1, formato de `references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis,
+  resto de cada termo em c1, origem só no verso) ou **termo-chave** que as questões cobram ou trocam (uma
+  omissão `{{c1::…}}`); `cobra` diz como a questão o cobra; números só se cobrados e verificados; cada
+  lacuna coberta por um D (`cob`).
 - **50% Certo e 50% Errado em R e, separadamente, em D**; em total ímpar, diferença de 1 (não crie card só para equilibrar). Errados com um
   erro central plausível; sem absolutos como pista; ordem embaralhada pelo montador.
 - Não repetir o mesmo fato nos três formatos; teto pedido conta todos os cartões.
@@ -161,11 +168,13 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
 - `padrao_d=dict(rb=rub(...), orig='Caso autoral.', ...)` guarda os valores comuns dos D; sem `regra`, o D
   usa o trecho da primeira fonte de `fx`. Escreva por D só o que é dele (`alvo`, `op`, `dado`, `solucao`,
   `erro`, `conc`, `cmp`/`lim`). `sa=[subassuntos]` no D restringe o aviso de itens Cebraspe ao subtema.
-- D: `fid='comparada'` só com Cebraspe C/E oficial em `refs`; senão `inspiracao_geral` + `lim`. O
+- D: `refs` com questão real sempre (vira tag); `fid='comparada'` só com Cebraspe C/E oficial em
+  `refs`; senão (questão de outra banca ou sem prova) `inspiracao_geral` + `lim`. O
   montador avisa quando um D em inspiração geral tem item Cebraspe C/E oficial do mesmo assunto no
   banco (pelo `a='disc/assunto'`, pelos `refs` ou pelos conteúdos em `fx`): leia-o e use-o antes de
   aceitar a inspiração geral.
-  Sem questão de outra banca em `refs`: `obp` com as buscas. Rubrica curta: correção,
+  Com Cebraspe e sem questão de outra banca em `refs`: `obp` com as buscas (complemento; nunca substitui
+  a questão). Rubrica curta: correção,
   determinação, operação, comparação e `linguagem_didatica` com evidência própria; autoria, feedback
   e utilidade só com observação. `comparacao` pode ser `PENDENTE: ...` só na inspiração geral.
 - Resolva cada frente de novo antes de reler o verso e procure leitura concorrente. Registre `conc`

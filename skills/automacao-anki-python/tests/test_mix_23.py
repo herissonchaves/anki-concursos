@@ -8,7 +8,7 @@ def test_missing_format_rejected(tmp_path, missing):
     ce,cl,rep=sample(tmp_path)
     if missing=='cloze': cl.write_text('',encoding='utf-8')
     else:
-        tag='Teste::Sintetico::Topico Rapida' if missing=='quick' else 'Teste::Sintetico::Topico Desafiadora'
+        tag='Teste::Sintetico::Topico Rapida' if missing=='quick' else 'Teste::Sintetico::Topico Desafiadora ceb-2024-fixture-001'
         ce.write_text('\n'.join(x for x in ce.read_text(encoding='utf-8').splitlines() if tag not in x)+'\n',encoding='utf-8')
     with pytest.raises(ValueError,match='rápidos e desafiadores'):
         export(ce,cl,rep,tmp_path/'out.zip')

@@ -37,9 +37,9 @@ class ClozePolicyTests(unittest.TestCase):
                 (reports/name).write_text('Synthetic structural test fixture; no pedagogical approval.', encoding='utf8')
             cl.write_text('', encoding='utf8')
             quick='A unidade SI de força é o newton.\t✅ Certo<br><br>Newton mede força. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Rapida\n'
-            hard='Uma força resultante de 6 N sobre 2 kg produz 3 m/s².\t✅ Certo<br><br>A aceleração é 6 dividido por 2. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora\n'
+            hard='Uma força resultante de 6 N sobre 2 kg produz 3 m/s².\t✅ Certo<br><br>A aceleração é 6 dividido por 2. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora ceb-2024-fixture-001\n'
             quick_false='Na física clássica, o newton é unidade SI de massa.\t❌ Errado<br><br>A unidade SI de massa é o quilograma; newton mede força. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Rapida\n'
-            hard_false='Uma força resultante de 6 N sobre 2 kg produz 12 m/s².\t❌ Errado<br><br>Pela segunda lei de Newton, a aceleração é 6 dividido por 2, ou 3 m/s². 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora\n'
+            hard_false='Uma força resultante de 6 N sobre 2 kg produz 12 m/s².\t❌ Errado<br><br>Pela segunda lei de Newton, a aceleração é 6 dividido por 2, ou 3 m/s². 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora ceb-2024-fixture-001\n'
             balanced = quick + quick_false + hard + hard_false
             ce.write_text(balanced, encoding='utf8')
             write_calibration(ce,reports)

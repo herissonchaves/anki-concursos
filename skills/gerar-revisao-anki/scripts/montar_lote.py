@@ -19,10 +19,16 @@ Convenção dos dicionários de cartão (chaves curtas):
   com `lim`), `rb` (use `rubrica(...)`) e, no schema 2, `refs` com questão de outra
   banca ou `obp` (outras_bancas_pendencia).
 - Cloze: `t` (texto com uma omissão {{c1::…}}), `alvo`, `sol`, `alt`, `rec`, `fb`,
-  `cob` ({'1': ['D04']}: D que cobrem cada lacuna). Mnemônico (2.33): `mn=dict(sigla='CE-NO-RE',
+  `cob` ({'1': ['D04']}: D que cobrem cada lacuna), `cobra` (2.37, obrigatório: como a questão cobra o
+  termo omitido; no mnemônico, a lista ou sequência cobrada). Mnemônico (2.33): `mn=dict(sigla='CE-NO-RE',
   origem='autoral' | ('encontrado'|'adaptado', url, nome))`, frente iniciada por "Mnemônico SIGLA:",
   letra(s) da sigla visíveis e o resto de cada termo em c1 (`C{{c1::ompetência}}`); a origem vai
   só no Extra (bloco gerado), nunca na frente.
+
+Evidência de cobrança (2.37, references/cobertura-pdf.md): todo card cita em `refs` ao menos uma
+questão real de concurso do banco (qualquer banca ou cargo) que cobra o seu conteúdo. Sem questão
+localizada, só R e Cloze de regra central da atuação do cargo, com `nucleo='motivo'`; D nunca. O
+montador falha (`checar_evidencia`) e grava a evidência em `revisao_recuperacao.json` (schema 2).
 
 Tags (2.33, references/tags.md): `assunto='Disciplina::Assunto'` + `tags` do card = tópico vira
 `Disciplina::Assunto::Topico`; `pdf='Missao_07'` entra só nos cards com `Pagina_NN`; tipo `Rapida`,
@@ -105,7 +111,7 @@ def rubrica(correcao, determinacao, operacao_d, comparacao, autoria='', feedback
 
 class Lote:
     def __init__(self, pasta, base_tags, fontes, hoje, referencias, R, D, CZ, semente,
-                 schema_calibracao=2, revisor=REVISOR_PADRAO, titulo_previa='Prévia dos cards',
+                 schema_calibracao=3, revisor=REVISOR_PADRAO, titulo_previa='Prévia dos cards',
                  banco_referencias=None, registrar_uso=True, cobertura=None, questoes_pdf=None, padrao_d=None,
                  relatorio=None, assunto=None, pdf=None):
         self.pasta, self.out = Path(pasta), Path(pasta) / 'lote'
@@ -376,6 +382,43 @@ class Lote:
         origem = x['mn'].get('origem') if x.get('mn') else None
         return [frente(x['t']), extra_cloze(x['b'], x['m'], origem), self._tags(x, CLOZE)]
 
+    # ------------------------------------------------------------ evidência de cobrança (2.37)
+    @staticmethod
+    def questoes_de(x) -> list[str]:
+        """IDs de questão real citados no card (`refs`); `_resolver_refs` já recusou ID que não é questão."""
+        return [r for r in x.get('refs', ()) if isinstance(r, str) and r.strip()]
+
+    def checar_evidencia(self):
+        """Todo card nasce de conteúdo que cai em concurso (2.37, references/cobertura-pdf.md).
+
+        D: ao menos uma questão real em `refs` (vira tag), sem exceção. R e Cloze: questão real em `refs`
+        ou `nucleo='motivo'` (regra central da atuação do cargo sem questão localizada). Cloze: `cobra`
+        diz como as questões cobram o termo omitido (no mnemônico, a lista). Falha listando os problemas.
+        """
+        erros = []
+        for x in self.D:
+            if x.get('nucleo'):
+                erros.append(f"{x['k']}: D não aceita nucleo; sem questão real não há Desafiadora (faça R/Cloze de núcleo ou Baixa)")
+            if not self.questoes_de(x):
+                erros.append(f"{x['k']}: D precisa de ao menos uma questão real de concurso em refs (ID do banco)")
+        for x in self.R + self.CZ:
+            nucleo = str(x.get('nucleo', '')).strip()
+            if not self.questoes_de(x) and not nucleo:
+                erros.append(f"{x['k']}: sem questão real em refs; cite a questão que cobra o conteúdo ou, só para regra "
+                             "central da atuação do cargo, nucleo='motivo'")
+        for x in self.CZ:
+            if not str(x.get('cobra', '')).strip():
+                erros.append(f"{x['k']}: Cloze precisa de cobra='como a questão cobra o termo omitido' "
+                             '(no mnemônico, a lista ou sequência cobrada)')
+        if erros:
+            raise SystemExit('EVIDÊNCIA DE COBRANÇA AUSENTE (2.37) — todo card vem de conteúdo que cai em concurso:\n  '
+                             + '\n  '.join(erros))
+
+    def evidencia(self, x) -> dict:
+        """Registro da evidência de cobrança de um R/Cloze em revisao_recuperacao.json (schema 2)."""
+        questoes = self.questoes_de(x)
+        return {'questoes': questoes} if questoes else {'nucleo_cargo': str(x['nucleo']).strip()}
+
     def checar_formato(self):
         """Tags de todos os cards e formato do Cloze (uma omissão; mnemônico no formato 2.33)."""
         erros = []
@@ -407,6 +450,7 @@ class Lote:
             if '*' in x.get('cob', {}):
                 n = len(re.findall(r'\{\{c\d+::', x['t']))
                 x['cob'] = {str(i): list(x['cob']['*']) for i in range(1, n + 1)}
+        self.checar_evidencia()
         if not hasattr(self, 'tags_pagina'):
             self.checar_cobertura()
         self.cz_index = {x['k']: i for i, x in enumerate(self.CZ, 1)}
@@ -471,7 +515,7 @@ class Lote:
         return 'Lacuna: ' + '; '.join(respostas) if respostas else ''
 
     def registro_revisao(self, sinais_resolvidos):
-        rev = {'schema_version': 1, 'sha256_lote': batch_hash(self.items), 'revisor': self.revisor,
+        rev = {'schema_version': 2, 'sha256_lote': batch_hash(self.items), 'revisor': self.revisor,
                'tipo_revisao': 'autorevisao', 'cartoes': [], 'sinais': []}
         def opcionais(x):  # alt/rec/fb: só quando o autor escreveu (2.24)
             return {chave: x[curto] for curto, chave in (('alt', 'alternativa_concorrente'), ('rec', 'recuperacao'),
@@ -481,11 +525,12 @@ class Lote:
             rev['cartoes'].append(dict(
                 id=self.rid(x['k']), sha256=fingerprint(self.ce_rows[self.line_of[x['k']] - 1]), alvo=x['alvo'],
                 solucao=x['sol'], fontes=self.fontes(*x['fx']), **opcionais(x),
-                segunda_conferencia=True, decisao='APROVAR'))
+                evidencia_cobranca=self.evidencia(x), segunda_conferencia=True, decisao='APROVAR'))
         for i, x in enumerate(self.CZ, 1):
             rev['cartoes'].append(dict(
                 id=f'anki_cloze.tsv:{i}', sha256=fingerprint(self.cz_rows[i - 1]), alvo=x['alvo'],
                 solucao=x.get('sol') or self._lacunas(x['t']), fontes=self.fontes(*x['fx']), **opcionais(x),
+                evidencia_cobranca=self.evidencia(x), cobranca_do_termo=str(x['cobra']).strip(),
                 desafiadores_por_lacuna={g: [self.rid(k) for k in ks] for g, ks in x['cob'].items()},
                 segunda_conferencia=True, decisao='APROVAR'))
         editorial = {f'anki_certo_errado.tsv:{n}': k for k, n in self.line_of.items()}
@@ -520,6 +565,7 @@ class Lote:
 
     def gravar_relatorios(self):
         rel = self.relatorio
+        porid = {x['k']: x for x in self.R + self.D + self.CZ}
         if self.cobertura is not None:
             cont = {p: sum(un.get('p') == p for un in self.cobertura) for p in self.PRIORIDADES}
             excl = sum(bool(un.get('excluir')) for un in self.cobertura)
@@ -528,7 +574,8 @@ class Lote:
                 ('material', 'Material'), ('leitura', 'Leitura'), ('alvo', 'Concurso-alvo'), ('edital', 'Edital de referência'),
                 ('colecao', 'Coleção')) if rel.get(chave)]
             linhas += ['Regra (cobertura-pdf.md): inventário de todo o PDF e de suas questões; Alta e Média com ao menos um '
-                       'card ou nota da coleção que já exija a mesma recuperação; Baixa sem card, com motivo.',
+                       'card ou nota da coleção que já exija a mesma recuperação; Baixa sem card, com motivo. Desde a 2.37 '
+                       'todo card cita questão real que cobra o conteúdo (R/Cloze sem questão só no núcleo do cargo).',
                        f'Unidades: {cont["alta"]} Alta, {cont["media"]} Média, {cont["baixa"]} Baixa ({excl} exclusão(ões) de texto que não é conteúdo).',
                        '', 'Unidade | página(s) | prioridade | conteúdo | cards / nota da coleção / motivo']
             for un in self.cobertura:
@@ -541,6 +588,9 @@ class Lote:
                 else:
                     destino = '; '.join(filter(None, (', '.join(un.get('cartoes', ())),
                                                       ('coleção ' + ', '.join(un['colecao'])) if un.get('colecao') else '')))
+                cards = [porid[k] for k in un.get('cartoes', ()) if k in porid]
+                if cards and not any(self.questoes_de(x) for x in cards):
+                    destino += ' (núcleo do cargo, sem questão localizada)'
                 q = f' [{un["questao"]}]' if un.get('questao') else ''
                 linhas.append(f'{un["u"]} | {pag} | {un["p"]} | {un.get("conteudo", "")}{q} | {destino}')
             self._gravar_txt('triagem_previa_pdf.txt', linhas)
@@ -587,6 +637,10 @@ class Lote:
         for k, (url, trecho) in self.F.items():
             cards = [x['k'] for x in self.R + self.D + self.CZ if k in x.get('fx', ())]
             linhas.append(f'- {k}: {url} — {trecho}; {", ".join(cards) or "sem card"}')
+        linhas += ['', 'Evidência de cobrança dos rápidos e Cloze (2.37: questão real ou núcleo do cargo):']
+        linhas += [f'- {x["k"]}: ' + (', '.join(self.questoes_de(x)) or f'núcleo do cargo — {str(x["nucleo"]).strip()}')
+                   + (f' | termo cobrado: {str(x["cobra"]).strip()}' if x.get('cobra') else '')
+                   for x in self.R + self.CZ] or ['- nenhum']
         linhas += ['', 'Desafiadores: ' + '; '.join(f'{x["k"]} {x["fid"]}' for x in self.D) if self.D else '']
         self._gravar_txt('fontes_e_referencias.txt', linhas)
 

@@ -10,7 +10,7 @@ SPEC.loader.exec_module(module)
 
 
 def linha(rapido: bool, certo: bool, indice: int) -> str:
-    tag = 'Teste::Sintetico::Topico Rapida' if rapido else 'Teste::Sintetico::Topico Desafiadora'
+    tag = 'Teste::Sintetico::Topico Rapida' if rapido else 'Teste::Sintetico::Topico Desafiadora ceb-2024-fixture-001'
     gabarito = '✅ Certo' if certo else '❌ Errado'
     return f'Proposição nova e verificável número {indice}.\t{gabarito}<br><br>Fundamento verificável.<br><br>💡 Memorize: conceito.\t{tag}\n'
 

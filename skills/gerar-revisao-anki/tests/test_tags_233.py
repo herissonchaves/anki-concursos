@@ -36,6 +36,7 @@ def test_tags_validas(tags, tipo):
     (f'{H} Rapida Pagina_12', t.RAPIDA, 'nome curto do PDF'),
     (f'{H} Rapida Missao_07', t.RAPIDA, 'sem categoria'),
     (f'{H} Rapida cebraspe-2021-prf-080', t.RAPIDA, 'só em Desafiadora'),
+    (f'{H} Desafiadora Missao_07 Pagina_12', t.DESAFIADORA, 'questão real'),  # 2.37
 ])
 def test_tags_reprovadas(tags, tipo, trecho):
     assert any(trecho in e for e in t.problemas_tags(tags, tipo))

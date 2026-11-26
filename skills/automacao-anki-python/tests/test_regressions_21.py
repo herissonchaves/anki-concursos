@@ -25,13 +25,13 @@ v=module('validar_anki');g=module('validar_gabaritos_rapidos')
 def sample(tmp_path,front='A unidade SI de força é o newton.'):
     ce=tmp_path/'ce.tsv';cl=tmp_path/'cl.tsv';rep=tmp_path/'reports';rep.mkdir()
     ce.write_text(front+'\t✅ Certo<br><br>Força é medida em newtons no SI. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Rapida\n'
-        +'Um carro mantém sua massa e dobra a velocidade. Sua energia cinética também dobra.\t❌ Errado<br><br>A energia cinética depende do quadrado da velocidade; por isso quadruplica. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora\n',encoding='utf-8')
+        +'Um carro mantém sua massa e dobra a velocidade. Sua energia cinética também dobra.\t❌ Errado<br><br>A energia cinética depende do quadrado da velocidade; por isso quadruplica. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora ceb-2024-fixture-001\n',encoding='utf-8')
     cl.write_text('A unidade SI de energia é o {{c1::joule}}.\tEnergia e trabalho usam a mesma unidade SI. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Cloze\n',encoding='utf-8')
     for n in ['selecao_e_fontes','economia_de_revisao','auditoria_pedagogica']:
         (rep/(n+'.txt')).write_text('Fixture sintética de teste, não auditoria de produção.',encoding='utf-8')
     lines=ce.read_text(encoding='utf-8').splitlines()
     lines.insert(1,'O newton é unidade SI de massa.\t❌ Errado<br><br>Quilograma mede massa; newton mede força. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Rapida')
-    lines.append('Na mecânica clássica, um corpo de massa constante dobra a velocidade e quadruplica a energia cinética.\t✅ Certo<br><br>O quadrado da velocidade fica quatro vezes maior. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora')
+    lines.append('Na mecânica clássica, um corpo de massa constante dobra a velocidade e quadruplica a energia cinética.\t✅ Certo<br><br>O quadrado da velocidade fica quatro vezes maior. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora ceb-2024-fixture-001')
     ce.write_text('\n'.join(lines)+'\n',encoding='utf-8')
     write_calibration(ce,rep)
     write_review(ce,cl,rep)

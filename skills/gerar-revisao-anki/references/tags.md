@@ -14,7 +14,7 @@ Só estas (a ordem não importa: o Anki guarda as tags sem ordem):
 | Nome curto do PDF | só em card feito sobre o PDF | `Missao_07`, `Missao_08` |
 | Página(s) do PDF de onde saiu o conteúdo | só em card feito sobre o PDF | `Pagina_12` `Pagina_13` |
 | Tipo, exatamente uma | sempre | `Rapida`, `Desafiadora` ou `Cloze` |
-| Questão de origem, uma por questão | só em `Desafiadora` | `cebraspe-2021-prf-080` |
+| Questão de origem, uma por questão (ao menos uma) | só em `Desafiadora` | `cebraspe-2021-prf-080` |
 
 - **Conteúdo:** disciplina, assunto e tópico do card, em três níveis ou mais, sem espaço e sem
   acento obrigatório (o Anki mostra os níveis como árvore no navegador). No gerador:
@@ -28,7 +28,9 @@ Só estas (a ordem não importa: o Anki guarda as tags sem ordem):
   disciplina do `ASSUNTO`. Com `ASSUNTO = 'Direito_Penal'`, `tags='Principios::Legalidade'` vira
   `Direito_Penal::Principios::Legalidade`; uma tag que já começa por `Direito_Penal::` fica como está.
 - **Questão de origem (D):** nome do arquivo `.md` da questão em `referencias/questoes/` que inspirou
-  o desafiador, sem a extensão. O montador tira dos `refs` do D.
+  o desafiador, sem a extensão. O montador tira dos `refs` do D. Desde a 2.37 todo D tem ao menos uma
+  (D sem tag de questão é reprovado). R e Cloze também citam a questão que cobra o conteúdo em `refs`,
+  mas sem tag.
 
 ## Proibidas
 

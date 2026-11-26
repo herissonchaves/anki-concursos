@@ -27,7 +27,7 @@ class PolicyTests(unittest.TestCase):
         for i,good in enumerate(quick):
             lines.append(f'Proposição sintética {i}.\t'+('✅ Certo' if good else '❌ Errado')+'<br><br>Motivo sintético. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Rapida')
         for i in range(hard):
-            lines.append(f'Aplicação sintética {i}.\t'+('✅ Certo' if i % 2 == 0 else '❌ Errado')+'<br><br>Motivo sintético. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora')
+            lines.append(f'Aplicação sintética {i}.\t'+('✅ Certo' if i % 2 == 0 else '❌ Errado')+'<br><br>Motivo sintético. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Desafiadora ceb-2024-fixture-001')
         self.ce.write_text('\n'.join(lines)+ ('\n' if lines else ''),encoding='utf-8')
         write_calibration(self.ce,self.reports)
     def run_export(self,**kw):

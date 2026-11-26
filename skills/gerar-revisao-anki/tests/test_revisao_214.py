@@ -17,7 +17,7 @@ import exportar_anki as exporter
 
 CE = ('Uma conjunção exige duas proposições verdadeiras para ser verdadeira.\t✅ Certo<br><br>Uma conjunção só é verdadeira se ambas as proposições componentes forem verdadeiras. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Rapida\n'
       'O número inteiro 2 é ímpar.\t❌ Errado<br><br>O inteiro 2 é par, porque pode ser dividido por 2 sem deixar resto na divisão. 💡 Memorize: resumo sintético.\tTeste::Sintetico::Topico Rapida\n')
-D = CE.replace('Teste::Sintetico::Topico Rapida', 'Teste::Sintetico::Topico Desafiadora')
+D = CE.replace('Teste::Sintetico::Topico Rapida', 'Teste::Sintetico::Topico Desafiadora ceb-2024-fixture-001')
 
 
 def evaluate(items, data):

@@ -41,13 +41,16 @@ concurso explícito prevalece e exige programa próprio.
    recorrência não se presume sem contagem.
 3. **Internet.** Conteúdo: pesquisa obrigatória para todo cartão criado ou reescrito (fonte primária
    vigente em Direito, `references/radar-juridico-atualizacao.md`), salvo o reuso válido do banco.
-   Questões anteriores: obrigatórias para todo D, antes de escrevê-lo, salvo banco suficiente (item
-   Cebraspe C/E oficial do mesmo subassunto já no banco) — primeiro Cebraspe C/E
-   (modelo de forma), depois outras bancas (o que se cobra, pegadinhas); use-as como inspiração
-   para itens autorais, nunca como cópia. Para R/Cloze, questões só quando o banco não mostrar o que
-   se cobra; no Cloze, pesquise mnemônicos e confira cada pista na fonte. Sem Cebraspe acessível:
-   `inspiracao_geral` + limitação; sem outra banca: `outras_bancas_pendencia`. Sem pesquisa
-   disponível, a entrega não é final verificada.
+   Questões anteriores (2.37): **todo card** (R, D ou Cloze) cita em `refs` ao menos uma questão real
+   de concurso que cobra o seu conteúdo (qualquer banca ou cargo); busque-as antes de escrever, banco
+   primeiro, internet para o que faltar, salvo banco suficiente no D (item Cebraspe C/E oficial do
+   mesmo subassunto já no banco) — primeiro Cebraspe C/E (modelo de forma), depois outras bancas (o
+   que se cobra, pegadinhas); use-as como inspiração para itens autorais, nunca como cópia. Sem questão
+   localizada: nenhum D; R/Cloze só no núcleo do cargo (`nucleo`), o resto é Baixa
+   (`references/cobertura-pdf.md`). Cloze só de mnemônico ou de termo-chave que as questões cobram
+   (`cobra`); pesquise mnemônicos e confira cada pista na fonte. Sem Cebraspe acessível:
+   `inspiracao_geral` + limitação; com Cebraspe e sem outra banca: `outras_bancas_pendencia`. Sem
+   pesquisa disponível, a entrega não é final verificada.
 4. D: o "Resumo operacional" no topo de `references/protocolo-modo-estrategico.md`, só a seção da
    disciplina de `references/atlas-multidisciplinar-cebraspe.md` e só a "Rubrica por cartão" de
    `references/avaliacao-modo-estrategico.md` (o restante, em dúvida ou auditoria). Português: `../portugues-cebraspe-qualidade/SKILL.md`

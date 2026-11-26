@@ -16,6 +16,9 @@ Estes casos sintéticos avaliam decisões de seleção, não comprovam aprendiza
 | Texto contém muitos termos técnicos de baixo valor | Descartar os periféricos | Converter automaticamente todos os termos |
 | Converter R novo em C deixa os R restantes desequilibrados | Reavaliar seleção e restabelecer 50/50 no modo afetado (diferença máxima de 1 em total ímpar) | Inverter verdade, mudar tags ou acrescentar duplicatas |
 | Fonte necessária não pôde ser verificada | Marcar pendência e limite da entrega | Justificar zero como ausência comprovada de alvo |
+| Termo técnico bem delimitado que nenhuma questão real cobra, fora do núcleo do cargo (2.37) | Não criar Cloze; registrar a busca | Aprovar só por ser termo técnico |
+| Questão real troca um prazo ou competência por outro parecido (2.37) | Cloze termo-chave com `refs` e `cobra` citando a troca | Omitir palavra vizinha em vez do termo cobrado |
+| Lista cobrada em questão real (2.37) | Preferir mnemônico (pesquisado ou autoral) a notas soltas | Várias notas sem auxílio de memória ou a lista inteira numa lacuna |
 
 Casos adicionais:
 

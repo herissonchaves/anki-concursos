@@ -38,10 +38,13 @@ utilidade de recuperar aquilo num cartão. Conteúdo correto e disciplina no edi
 1. Edital, retificações, provas e gabaritos oficiais: primeiro os salvos em `referencias/`
    (`edital`, `prioridade`, questões); na internet, só o que faltar ou edital novo. Sem edital vigente,
    o último oficial vale como referência histórica, identificada.
-2. Vincule cada alvo a um tópico do programa e, quando houver, a uma questão oficial (concurso, ano,
-   item, link, data). Uma consulta pode sustentar vários IDs, mas cada ID tem vínculo explícito.
+2. Vincule cada alvo a um tópico do programa e a **uma questão real de concurso que o cobra**
+   (2.37: obrigatória em todo card novo, de qualquer banca ou cargo, em `refs`; sem questão
+   localizada, só R/Cloze de núcleo do cargo, `cobertura-pdf.md`). Uma consulta pode sustentar
+   vários IDs, mas cada ID tem vínculo explícito.
 3. Distinga cobrança documentada, previsão no programa, pré-requisito justificado e pertinência não
-   demonstrada. Ausência de questão não prova irrelevância; uma questão não prova recorrência. Nada
+   demonstrada. Uma questão não prova recorrência; mas, sem questão localizada após a busca, o
+   conteúdo não vira card (salvo núcleo do cargo). Nada
    de "cai muito" ou percentuais sem contagem (as prioridades do banco trazem a contagem).
 4. Decida por alvo: A/Alta (pertinência e utilidade sustentadas), B/Média (condicional), C/Baixa
    (fora do escopo, acessório ou redundante). Evidência insuficiente fica PENDENTE. Em revisão de PDF,

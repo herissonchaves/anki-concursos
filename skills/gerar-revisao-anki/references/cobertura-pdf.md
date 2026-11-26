@@ -9,19 +9,29 @@ compreensão inicial, exercícios extensos ou trechos ilegíveis.
 - **Inventário completo:** toda unidade de conteúdo do PDF (regra, conceito, definição, condição,
   exceção, prazo, número, lista, esquema ou tabela) e o conteúdo de toda questão de concurso do PDF
   (enunciado e alternativas) entram no inventário, página por página. Nada some sem registro.
+- **Só vira card o que cai em concurso (2.37).** Cada unidade é avaliada pelas questões reais
+  que a cobram (do PDF, do banco `referencias/` ou achadas na internet, de qualquer banca ou cargo;
+  simulado de curso não conta). Busca de questões obrigatória para toda unidade candidata a card:
+  banco primeiro, internet para o subassunto que o banco não cobre.
 - **Prioridade para o concurso-alvo**, com motivo por unidade (substitui A/B/C):
-  - **Alta:** cobrado em questão real (prova do cargo ou da banca, questão do PDF ou do banco
-    `referencias/`), regra central da atuação do cargo (para a PRF: ultrapassagem, velocidade,
-    preferência, veículos de emergência, faróis, cinto, crianças, motos, motorista profissional,
-    infrações e medidas) ou atualização legal que muda o gabarito.
-  - **Média:** conteúdo do programa, útil e aplicável, sem questão localizada e fora do núcleo.
-  - **Baixa:** periférico para o cargo: bom senso evidente, detalhe administrativo, estrutura do
-    código, tema raro sem questão localizada.
+  - **Alta:** cobrado em questão real do cargo-alvo ou da banca-alvo (Cebraspe), regra central
+    da atuação do cargo (**núcleo do cargo**; para a PRF: ultrapassagem, velocidade, preferência,
+    veículos de emergência, faróis, cinto, crianças, motos, motorista profissional, infrações e
+    medidas) ou atualização legal que muda o gabarito de tema cobrado.
+  - **Média:** cobrado em questão real de outras bancas ou cargos (concursos diversos), dentro do
+    programa.
+  - **Baixa:** sem questão real localizada depois da busca (o motivo registra as buscas feitas),
+    salvo núcleo do cargo; também o periférico (bom senso evidente, detalhe administrativo,
+    estrutura do código).
+- **Evidência em cada card:** todo card cita em `refs` ao menos uma questão real que cobra o seu
+  conteúdo (o D ganha uma tag por questão; R e Cloze, não). Núcleo do cargo sem questão
+  localizada: só R ou Cloze, com `nucleo='motivo'`; Desafiadora nunca sai sem questão. O
+  `montar_lote.py` falha sem essa evidência.
 - **Alta e Média: ao menos um card cada. Baixa: sem card**, com o motivo no relatório. Texto que não
   é conteúdo de estudo (capa, sumário, apresentação, avisos) fica fora do inventário de prioridade.
 - **Questões do PDF:** todas vão para o banco (`referencias.py importar` + `nova`). O conteúdo de
-  cada uma recebe prioridade como qualquer unidade; a questão é evidência de cobrança, mas questão
-  de outro cargo ou banca não torna Alta, sozinha, um tema periférico para o alvo.
+  cada uma recebe prioridade como qualquer unidade; a questão é evidência de cobrança (de outro
+  cargo ou banca, dá Média, não Alta) e vai nos `refs` dos cards do seu conteúdo.
 - **Coleção:** antes de criar, buscar na coleção viva (`colecao_anki.py buscar TERMO --baralho B`,
   cópia somente leitura; `.colpkg` só fora deste PC) cada alvo Alta/Média. Nota que já
   exige a mesma recuperação (mesmo alvo e mesma operação; palavras parecidas não bastam) cobre a

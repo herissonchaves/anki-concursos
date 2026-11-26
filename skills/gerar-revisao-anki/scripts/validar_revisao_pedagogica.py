@@ -3,6 +3,10 @@
 
 Não resolve questões, não consulta fontes e não certifica aprendizagem.
 Não cria nem preenche auditorias. Coleções existentes usam o fluxo de leitura.
+
+schema_version 2 (2.37, gravado pelo `montar_lote.py`): todo R/Cloze traz `evidencia_cobranca`
+(`{"questoes": [IDs]}` ou `{"nucleo_cargo": "motivo"}`) e todo Cloze, `cobranca_do_termo`.
+schema_version 1 continua aceito para lotes anteriores, sem essas chaves.
 """
 from __future__ import annotations
 
@@ -104,6 +108,18 @@ def validate_cloze_coverage(row, coverage, challenges, errors):
             errors.append(f'{ident}: lacuna {gap} requer IDs de C/E desafiadores do mesmo lote')
 
 
+def validate_evidence(ident, tipo, record, errors):
+    """2.37: R/Cloze só de conteúdo que cai em concurso (questão real ou núcleo do cargo)."""
+    ev = record.get('evidencia_cobranca')
+    questoes = ev.get('questoes') if isinstance(ev, dict) else None
+    ok = (isinstance(questoes, list) and bool(questoes) and all(nonblank(q) for q in questoes)) or (
+        isinstance(ev, dict) and nonblank(ev.get('nucleo_cargo')))
+    if not ok:
+        errors.append(f'{ident}: evidencia_cobranca requer questões reais (IDs do banco) ou nucleo_cargo com motivo')
+    if tipo == 'cloze' and not nonblank(record.get('cobranca_do_termo')):
+        errors.append(f'{ident}: cobranca_do_termo requer como a questão cobra o termo omitido')
+
+
 def validate(items, report):
     errors = []
     if report is None:
@@ -114,8 +130,9 @@ def validate(items, report):
         current_signals = {item['sinal_id']: item for item in signals(items)}
     except (ValueError, UnicodeError) as exc:
         return [f'Revisão de recuperação inválida: {exc}']
-    if not isinstance(data, dict) or type(data.get('schema_version')) is not int or data['schema_version'] != 1:
-        return ['Revisão de recuperação requer objeto e schema_version=1']
+    if not isinstance(data, dict) or type(data.get('schema_version')) is not int or data['schema_version'] not in (1, 2):
+        return ['Revisão de recuperação requer objeto e schema_version 1 (legado) ou 2']
+    v2 = data['schema_version'] >= 2
     if data.get('sha256_lote') != batch_hash(items):
         errors.append('SHA256 do lote divergente; refazer a revisão após alteração dos TSVs')
     if not nonblank(data.get('revisor')) or data.get('tipo_revisao') not in ('autorevisao', 'independente'):
@@ -147,6 +164,8 @@ def validate(items, report):
         for key in ('alvo', 'solucao'):
             if not nonblank(record.get(key)):
                 errors.append(f'{ident}: {key} requer evidência específica')
+        if v2:
+            validate_evidence(ident, row['tipo'], record, errors)
         # Opcionais desde a 2.24 (economia de tokens): registrados só quando houver algo a dizer.
         for key in ('alternativa_concorrente', 'recuperacao', 'feedback'):
             if key in record and not nonblank(record.get(key)):

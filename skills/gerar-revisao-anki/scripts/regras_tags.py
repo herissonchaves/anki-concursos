@@ -5,7 +5,8 @@ Tags de um card novo, nesta ordem:
 - uma hierárquica de conteúdo `Disciplina::Assunto::Topico` (três níveis ou mais);
 - o nome curto do PDF (`Missao_07`) e as `Pagina_NN`, só em card feito sobre o PDF;
 - exatamente uma de tipo: `Rapida`, `Desafiadora` ou `Cloze`;
-- no D, uma por questão do banco que o inspirou (nome do arquivo .md em referencias/questoes/).
+- no D, uma por questão do banco que o inspirou (nome do arquivo .md em referencias/questoes/);
+  desde a 2.37, ao menos uma (D sem questão real é reprovado).
 Nada mais: concurso, cargo, banca, estilo, "revisão", "mnemônico" e afins são proibidos.
 
 Os nomes antigos de tipo (`Tipo_Revisao_Rapida`, `Tipo_Desafiadora_Cebraspe`) continuam
@@ -66,6 +67,8 @@ def problemas_tags(tags: str, tipo: str) -> list[str]:
     questoes = [t for t in lista if QUESTAO.fullmatch(t)]
     if questoes and tipo != DESAFIADORA:
         erros.append(f'tag de questão ({", ".join(questoes)}) só em Desafiadora')
+    if tipo == DESAFIADORA and not questoes:  # 2.37: todo D nasce de questão real
+        erros.append('Desafiadora precisa da tag da questão real que a inspirou (ex.: cebraspe-2021-prf-080)')
     resto = [t for t in lista if t not in tipos and t not in hier and t not in paginas and t not in questoes
              and not proibida(t)]
     if paginas and len(resto) != 1:

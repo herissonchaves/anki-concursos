@@ -24,7 +24,8 @@ REVISAO = dict(alvo='Alvo sintético', sol='Solução sintética', alt='Alternat
 
 
 def r(k, g, f):
-    return dict(k=k, g=g, f=f, tags='Forca', b=[regra('A unidade SI de força é o newton.')], m='Força: newton.', **REVISAO)
+    return dict(k=k, g=g, f=f, tags='Forca', b=[regra('A unidade SI de força é o newton.')], m='Força: newton.',
+                refs=['fgv-2023-fixture-009'], **REVISAO)
 
 
 def d(k, g, f, **extra):
@@ -43,7 +44,8 @@ def lote(pasta, **kw):
     D = [d('D01', 'C', 'Uma força resultante de 6 N age sobre 2 kg. A aceleração é 3 m/s².'),
          d('D02', 'E', 'Uma força resultante de 6 N age sobre 2 kg. A aceleração é 12 m/s².')]
     CZ = [dict(k='C01', tags='Forca', t='A unidade SI de força é o {{c1::newton}}.', b=[regra('Newton mede força.')],
-               m='Força: newton.', cob={'1': ['D01']}, **REVISAO)]
+               m='Força: newton.', cob={'1': ['D01']}, refs=['fgv-2023-fixture-009'],
+               cobra='A questão sintética troca newton por joule', **REVISAO)]
     return m.Lote(pasta, '', F, HOJE, REFS, R, D, CZ, semente=1, **{'assunto': 'Fisica::Dinamica', 'pdf': 'Missao_01', **kw})
 
 
@@ -70,7 +72,8 @@ def test_generated_batch_passes_documentary_validators(tmp_path):
     assert final.pendentes == []
     items, calibracao, revisao = ler(tmp_path)
     assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
-    assert json.loads(calibracao)['schema_version'] == 2
+    assert json.loads(calibracao)['schema_version'] == 3  # 2.37
+    assert json.loads(revisao)['schema_version'] == 2
     assert rev.validate(items, revisao) == []
     assert not (tmp_path / 'previa_cards.html').exists()  # sem prévia desde a 2.30
 
@@ -250,11 +253,13 @@ def test_referencias_do_banco_por_id_e_registro_de_uso(tmp_path):
     gerado = lote(pasta, banco_referencias=banco)
     for x in gerado.D:
         x['refs'] = [ids['ceb-2024-fixture-001'], ids['fgv-2023-fixture-009']]
+    for x in gerado.R + gerado.CZ:
+        x['refs'] = [ids['fgv-2023-fixture-009']]
     gerado.refs = gerado._resolver_refs([])  # os IDs citados nos cartões bastam
     gerado.gerar(imprimir=False)
     items, calibracao, _ = ler(pasta)
     registro = json.loads(calibracao)
-    assert [r['id'] for r in registro['referencias']] == [ids['ceb-2024-fixture-001'], ids['fgv-2023-fixture-009']]
+    assert sorted(r['id'] for r in registro['referencias']) == sorted([ids['ceb-2024-fixture-001'], ids['fgv-2023-fixture-009']])
     assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
     usos = banco_mod.localizar([ids['ceb-2024-fixture-001']], banco)[0].meta['usado_em']
     assert usos == ['lote_banco#D01,D02']
@@ -310,7 +315,8 @@ def test_questao_sem_prova_vai_para_referencias_sem_prova(tmp_path):
     gerado = lote(pasta, banco_referencias=banco)
     gerado.D[0]['refs'] = ['ceb-2024-fixture-001', questao.id]
     gerado.D[1]['refs'] = ['ceb-2024-fixture-001', questao.id]
-    gerado.R[0]['refs'] = [questao.id]
+    for x in gerado.R + gerado.CZ:
+        x['refs'] = [questao.id]
     gerado.refs = gerado._resolver_refs([REFS[0]])
     gerado.gerar(imprimir=False)
     items, calibracao, _ = ler(pasta)
@@ -322,7 +328,7 @@ def test_questao_sem_prova_vai_para_referencias_sem_prova(tmp_path):
     # A questão de outra banca sem prova satisfaz a exigência de outra banca; não há pendência.
     assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
     usos = banco_mod.localizar([questao.id], banco)[0].meta['usado_em']
-    assert usos == ['lote_sem_prova#R01,D01,D02']
+    assert usos == ['lote_sem_prova#R01,R02,D01,D02,C01']
 
 
 COBERTURA = [
@@ -487,3 +493,68 @@ def test_fontes_aceitam_id_de_conteudo_do_banco(tmp_path):
     secao.gerar(imprimir=False)  # todos os cartões da fixture citam a fonte 'si'
     usos = banco_mod.localizar([q.id], banco)[0].meta['usado_em']
     assert len(usos) == 1 and usos[0].startswith('lote_secao#') and 'R01' in usos[0]
+
+
+# ------------------------------------------------------------ evidência de cobrança (2.37)
+@pytest.mark.parametrize('mudanca, esperado', [
+    (lambda g: g.D[0].update(refs=[]), 'D01: D precisa de ao menos uma questão real'),
+    (lambda g: g.D[0].update(nucleo='Regra central sintética'), 'D01: D não aceita nucleo'),
+    (lambda g: g.R[0].update(refs=[]), 'R01: sem questão real em refs'),
+    (lambda g: g.CZ[0].update(refs=[]), 'C01: sem questão real em refs'),
+    (lambda g: g.CZ[0].pop('cobra'), 'C01: Cloze precisa de cobra='),
+])
+def test_card_sem_evidencia_de_cobranca_falha_2_37(tmp_path, mudanca, esperado):
+    gerado = lote(tmp_path)
+    mudanca(gerado)
+    with pytest.raises(SystemExit) as falha:
+        gerado.montar_linhas()
+    assert 'EVIDÊNCIA DE COBRANÇA' in str(falha.value) and esperado in str(falha.value)
+
+
+def test_nucleo_do_cargo_dispensa_questao_so_em_r_e_cloze_2_37(tmp_path):
+    def nucleo(g):
+        g.R[0].update(refs=[], nucleo='Regra central sintética do cargo')
+        g.CZ[0].update(refs=[], nucleo='Regra central sintética do cargo')
+    (tmp_path / 'fonte').mkdir()
+    primeiro = lote(tmp_path, cobertura=COBERTURA)
+    nucleo(primeiro)
+    primeiro.gerar(imprimir=False)
+    motivos = {chave: 'Justificativa SINTÉTICA de teste' for chave in primeiro.pendentes}
+    (tmp_path / 'fonte' / 'sinais_resolvidos.json').write_text(json.dumps(motivos), encoding='utf-8')
+    final = lote(tmp_path, cobertura=COBERTURA)
+    nucleo(final)
+    final.gerar(imprimir=False)
+    items, calibracao, revisao = ler(tmp_path)
+    assert rev.validate(items, revisao) == [] and cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
+    registro = {x['id']: x for x in json.loads(revisao)['cartoes']}
+    r01 = registro[final.rid('R01')]
+    assert r01['evidencia_cobranca'] == {'nucleo_cargo': 'Regra central sintética do cargo'}
+    assert registro[final.rid('R02')]['evidencia_cobranca'] == {'questoes': ['fgv-2023-fixture-009']}
+    assert registro['anki_cloze.tsv:1']['cobranca_do_termo'].startswith('A questão sintética')
+    fontes = (tmp_path / 'lote' / 'relatorios' / 'fontes_e_referencias.txt').read_text(encoding='utf-8')
+    assert '- R01: núcleo do cargo — Regra central sintética do cargo' in fontes
+    assert '- R02: fgv-2023-fixture-009' in fontes and 'termo cobrado: A questão sintética' in fontes
+
+
+def test_validador_de_revisao_exige_evidencia_no_schema_2(tmp_path):
+    gerar_resolvido(tmp_path)
+    items, _, revisao = ler(tmp_path)
+    dados = json.loads(revisao)
+    for x in dados['cartoes']:
+        x.pop('evidencia_cobranca')
+        x.pop('cobranca_do_termo', None)
+    erros = rev.validate(items, json.dumps(dados).encode())
+    assert any('evidencia_cobranca' in e for e in erros) and any('cobranca_do_termo' in e for e in erros)
+    dados['schema_version'] = 1  # legado: sem a exigência
+    assert not any('evidencia' in e or 'cobranca' in e for e in rev.validate(items, json.dumps(dados).encode()))
+
+
+def test_calibracao_schema_3_reprova_d_sem_questao_real(tmp_path):
+    gerar_resolvido(tmp_path)
+    items, calibracao, _ = ler(tmp_path)
+    dados = json.loads(calibracao)
+    dados['cartoes'][0].update(referencias=[], fidelidade='inspiracao_geral', limitacao='Sintética',
+                               outras_bancas_pendencia='Buscas sintéticas sem resultado')
+    dados['cartoes'][0].pop('comparacao', None)
+    erros = cal.validate(items['anki_certo_errado.tsv'], json.dumps(dados).encode())
+    assert any('D sem questão real' in e for e in erros)

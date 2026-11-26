@@ -10,7 +10,7 @@ Em exportações, usar `relatorios/revisao_recuperacao.json` para guardar evidê
 
 ## Estrutura do arquivo
 
-Objeto JSON UTF-8, `schema_version: 1`, `sha256_lote`, `revisor`, `tipo_revisao` (`autorevisao` ou `independente`), `cartoes` e `sinais` como listas, inclusive quando vazias.
+Objeto JSON UTF-8, `schema_version: 2` (2.37; `1` só em lote legado, sem os campos de evidência), `sha256_lote`, `revisor`, `tipo_revisao` (`autorevisao` ou `independente`), `cartoes` e `sinais` como listas, inclusive quando vazias.
 
 Cada R e C tem exatamente um objeto em `cartoes`:
 
@@ -19,6 +19,8 @@ Cada R e C tem exatamente um objeto em `cartoes`:
 - `alvo`: conhecimento útil que deve ser recuperado.
 - `solucao`: resposta conferida e fundamento concreto, incluindo correção do Errado ou equivalentes da lacuna quando pertinentes.
 - `fontes`: lista não vazia de objetos com `url`, `consulta` (AAAA-MM-DD) e `trecho` (trecho breve ou seção/dispositivo/localizador efetivamente lido). Identificar versão/data decisivas. URL bem formada não comprova leitura nem confiabilidade.
+- `evidencia_cobranca` (versão 2): `{"questoes": [IDs do banco]}` com as questões reais que cobram o conteúdo, ou `{"nucleo_cargo": "motivo"}` para regra central da atuação do cargo sem questão localizada (`cobertura-pdf.md`). Gerado pelo `montar_lote.py` a partir de `refs`/`nucleo`.
+- `cobranca_do_termo` (versão 2, só C): como as questões cobram o termo omitido (no mnemônico, a lista ou sequência), a partir de `cobra`.
 - `alternativa_concorrente`: alternativa, contraexemplo ou condição testada e por que não muda a solução. Não usar “nenhuma” como aprovação genérica sem análise.
 - `recuperacao`: por que a frente exige o alvo útil sem entregá-lo; em Cloze, justificar a parte omitida e sua determinação.
 - `desafiadores_por_lacuna` (obrigatório apenas em C): objeto com uma chave por lacuna, numerada a partir de `1` pela ordem no campo Texto. Cada valor é uma lista não vazia de IDs de desafiadores do mesmo lote, por exemplo `{"1":["anki_certo_errado.tsv:2"],"2":["anki_certo_errado.tsv:2","anki_certo_errado.tsv:4"]}`. Confirmar na revisão que os itens de cada lista realmente testam a lacuna. Um D pode cobrir várias lacunas quando elas sustentam o mesmo julgamento.

@@ -9,7 +9,10 @@ referência, referência CESPE/Cebraspe Certo/Errado nos D comparados e, em todo
 D, uma questão de outra banca vinculada ou `outras_bancas_pendencia`. Desde a 2.31, no
 schema 2, cada ID de `referencias` e `referencias_sem_prova` de um D precisa estar nas tags
 da linha do D (a tag é o nome do arquivo da questão em `referencias/questoes/`).
-schema_version 1 continua aceito para lotes anteriores.
+Desde a 2.37 (schema_version 3, o que o `montar_lote.py` grava), todo D precisa de ao menos uma
+questão real de concurso em `referencias` ou `referencias_sem_prova`: `outras_bancas_pendencia` só
+complementa um D que já tem questão e nunca a substitui. schema_version 1 e 2 continuam aceitos
+para lotes anteriores, com as regras da época.
 """
 from __future__ import annotations
 import argparse
@@ -81,9 +84,10 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
         data = json.loads(report.decode('utf-8'))
     except (ValueError, UnicodeError):
         return errors + ['Registro JSON inválido']
-    if not isinstance(data, dict) or type(data.get('schema_version')) is not int or data['schema_version'] not in (1, 2):
-        return errors + ['schema_version deve ser 1 (legado) ou 2']
-    v2 = data['schema_version'] == 2
+    if not isinstance(data, dict) or type(data.get('schema_version')) is not int or data['schema_version'] not in (1, 2, 3):
+        return errors + ['schema_version deve ser 1 ou 2 (legados) ou 3']
+    v2 = data['schema_version'] >= 2
+    v3 = data['schema_version'] >= 3
     refs, records = data.get('referencias'), data.get('cartoes')
     if not isinstance(refs, list) or not isinstance(records, list):
         return errors + ['referencias e cartoes devem ser listas']
@@ -186,6 +190,9 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
         fidelity = record.get('fidelidade')
         known = [ref_map[key] for key in linked if key in ref_map]
         inspiracoes = known + [sem_map[key] for key in sem_linked if key in sem_map]
+        if v3 and not inspiracoes:
+            errors.append(f'{ident}: D sem questão real de concurso em referencias ou referencias_sem_prova (2.37); '
+                          'outras_bancas_pendencia não substitui a questão')
         if v2:
             if not any(not cebraspe(ref) for ref in inspiracoes) and not filled(record.get('outras_bancas_pendencia')):
                 errors.append(f'{ident}: vincular questão de outra banca ou registrar outras_bancas_pendencia com as buscas feitas')

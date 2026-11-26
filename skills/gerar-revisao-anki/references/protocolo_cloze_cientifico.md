@@ -3,9 +3,18 @@
 Leia `nucleo-pedagogico.md`. Uma frase gramatical com lacuna não é, por isso, um bom cartão. Cloze é condicional, sem cota mínima. Aplicar este protocolo na geração, caderno de erros, melhoria e auditoria.
 
 
+## Dois tipos de Cloze (2.37)
+
+Todo Cloze novo é de um destes dois tipos e cita em `refs` ao menos uma questão real de concurso (qualquer banca ou cargo) que cobra o que ele faz lembrar; sem questão localizada, só no núcleo do cargo (`nucleo='motivo'`, `cobertura-pdf.md`). Fora deles, o alvo vira R, D ou nenhum card.
+
+1. **Mnemônico** — formato preferido para lista, sequência, requisitos ou elementos que as provas cobram (o que não se delega, requisitos do ato, etapas de um procedimento). Pesquise antes um mnemônico já usado (seção "Mnemônicos pesquisados"); sem fonte confiável, crie um autoral. Formato em `references/tags.md`.
+2. **Termo-chave** — a lacuna é exatamente o termo, número, prazo ou competência que as questões cobram ou trocam (a pegadinha real: "delegar" × "avocar", "30 dias" × "60 dias"). Termo que nenhuma questão cobra não vira Cloze, por mais técnico que seja.
+
+No gerador, `cobra` (obrigatório) diz em uma frase como a questão cobra o termo omitido (ou a lista, no mnemônico), por exemplo `cobra='cebraspe-2021-prf-080 troca avocação por delegação'`. O montador falha sem `refs` (ou `nucleo`) e sem `cobra`.
+
 ## Cloze para memorizar conceitos importantes
 
-Todo Cloze novo deve servir à memorização de um **conceito importante para o conteúdo e o concurso estudados**. Selecionar primeiro o conceito e, depois, omitir a **palavra, expressão ou frase curta importante que precisa ser lembrada**. A lacuna recupera o núcleo do conhecimento, não uma palavra secundária escolhida só para completar a frase.
+Todo Cloze novo deve servir à memorização de um **conceito importante para o conteúdo e o concurso estudados**, cobrado em questão real. Selecionar primeiro o conceito e, depois, omitir a **palavra, expressão ou frase curta importante que precisa ser lembrada**. A lacuna recupera o núcleo do conhecimento, não uma palavra secundária escolhida só para completar a frase.
 
 Preferir definição, função, propriedade distintiva ou relação curta que permita recordar o conceito sem resolver um caso. Omitir o termo completo quando tiver várias palavras; não cortar uma expressão técnica nem impor uma palavra como tamanho máximo. Uma frase curta pode ser a resposta se expressar uma única ideia central e determinada. Manter visíveis o contexto e as condições, sem expor a resposta, iniciais reveladoras fora de um exercício mnemônico ou uma lista que permita acertar por eliminação.
 
@@ -71,7 +80,7 @@ Ao criar Cloze, pesquisar na internet mnemônicos já usados para o conteúdo (t
 
 Transformar em Cloze os prazos, datas e números importantes que passarem em TODOS os critérios abaixo, registrados no relatório. Não converter automaticamente dados numéricos do material.
 
-1. Relevância demonstrável: vínculo com edital/programa do concurso-alvo, regra central de disciplina pertinente ou erro real do aluno nesse escopo. Para PRF, não presumir que todo número de norma de trânsito é prioritário. Sem edital, declarar a limitação e usar o escopo informado; não inventar incidência ou cobrança da banca.
+1. Relevância demonstrável: questão real que cobra o número ou prazo (2.37; sem ela, só no núcleo do cargo) ou erro real do aluno nesse escopo, dentro do edital/programa do concurso-alvo. Para PRF, não presumir que todo número de norma de trânsito é prioritário. Sem edital, declarar a limitação e usar o escopo informado; não inventar incidência ou cobrança da banca.
 2. Necessidade de memória: o valor exato precisa ser necessário para distinguir regras, resolver questões ou reconhecer marco importante. Número acessório, curiosidade, estatística passageira ou dado de exemplo de cálculo não justifica Cloze. Se o alvo é calcular o resultado com dados fornecidos, usar aplicação.
 3. Benefício de recuperação: a lacuna deve exigir lembrar o dado importante, com resposta determinada, sem pistas nem duplicata. Explicar qual confusão ou esquecimento se pretende evitar. Isso é justificativa editorial, não garantia de memorização ou desempenho; avaliar benefício real com uso posterior quando houver dados.
 4. Precisão e verificação: conservar sujeito, hipótese, condições, exceções e unidades. Em prazos, explicitar termo inicial e modo de contagem quando necessários; em percentuais/limites, base e abrangência; em datas, evento e relevância do marco exato. Regras jurídicas exigem fonte primária atual e data de verificação. Valor não confirmado não é aprovado.
@@ -97,7 +106,10 @@ Avaliar se as lacunas conjuntas formam um alvo coerente. Recomendar divisão qua
 
 ## Casos editoriais sintéticos de regressão
 
-1. APROVAR: “A passagem do estado sólido diretamente ao gasoso é {{c1::sublimação}}.” Conceito delimitado e termo completo.
+1. APROVAR: “A passagem do estado sólido diretamente ao gasoso é {{c1::sublimação}}.” Conceito delimitado, termo completo e cobrado em questão real citada em `refs`.
+13. REJEITAR (2.37): termo técnico bem delimitado, mas que nenhuma questão real cobra e fora do núcleo do cargo. Sem `refs`, não há Cloze.
+14. APROVAR como termo-chave (2.37): prazo que uma questão real troca por outro (`cobra` cita a questão e a troca).
+15. PREFERIR MNEMÔNICO (2.37): lista cobrada em questão real; antes de três notas soltas, procurar ou criar um mnemônico.
 2. REFORMULAR: “Os três estados físicos clássicos da matéria são {{c1::sólido, líquido e gasoso}}.” Criar três notas com uma propriedade distintiva e um Extra específico para cada estado.
 11. REFORMULAR: “POP3 → {{c1::110}}; IMAP → {{c1::143}}.” Par sem mnemônico: criar duas notas, uma por porta.
 12. APROVAR como mnemônico: assunto visível, título `Mnemônico SIGLA:`, letras visíveis como pistas e o resto de cada termo em c1, Extra que explica cada termo e bloco 📚 Origem do mnemônico (autoral ou link).
@@ -112,4 +124,4 @@ Avaliar se as lacunas conjuntas formam um alvo coerente. Recomendar divisão qua
 
 Critérios editoriais, não prova experimental. Scripts verificam sintaxe e sinais; aprovação técnica não certifica adequação semântica nem superioridade universal de Cloze.
 
-Regressões obrigatórias: alvos independentes em notas distintas; expressão de várias palavras permitida; múltiplas lacunas c1 só em mnemônico no formato de `references/tags.md`; "Dica autoral" com a lista inteira numa lacuna reprovado; cada lacuna explicada no Extra e coberta por D; c1/c2 reprovado em nota nova; coleção antiga contada por índices distintos.
+Regressões obrigatórias: Cloze só de mnemônico ou termo-chave cobrado em questão real (`refs` + `cobra`; sem questão, só núcleo do cargo); alvos independentes em notas distintas; expressão de várias palavras permitida; múltiplas lacunas c1 só em mnemônico no formato de `references/tags.md`; "Dica autoral" com a lista inteira numa lacuna reprovado; cada lacuna explicada no Extra e coberta por D; c1/c2 reprovado em nota nova; coleção antiga contada por índices distintos.

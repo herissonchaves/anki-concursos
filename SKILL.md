@@ -5,7 +5,7 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
-**Versão 2.36.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.37.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
@@ -81,6 +81,15 @@ PDF e `Pagina_NN` (apenas em card feito sobre o PDF), uma tag de tipo (`Rapida`,
 e, nos desafiadores, a questão de origem; nada de concurso, `Estilo_Cebraspe`, `Revisao_PDF` ou outra
 genérica. Cloze mnemônico: frente `Mnemônico SIGLA:` com as letras visíveis e o resto de cada termo em c1;
 a origem (autoral ou link da fonte) vai só no verso.
+
+**Evidência de cobrança** (desde a 2.37): só vira card o que cai em concurso. Todo card (R, D ou Cloze)
+cita em `refs` ao menos uma questão real (qualquer banca ou cargo) que cobra o seu conteúdo; o
+Desafiador é reconstruído da operação dessa questão e leva uma tag por questão. Sem questão localizada
+após a busca: nenhum D, e R/Cloze só no núcleo do cargo (`nucleo='motivo'`); o resto é prioridade
+Baixa. Cloze só de mnemônico ou de termo-chave que as questões cobram (`cobra`). Regras em
+[cobertura-pdf.md](skills/gerar-revisao-anki/references/cobertura-pdf.md) e
+[protocolo_cloze_cientifico.md](skills/gerar-revisao-anki/references/protocolo_cloze_cientifico.md);
+o `montar_lote.py` falha sem a evidência.
 
 Para conteúdo de PRF ou Agente da Polícia Federal, use
 [perfil-carreiras-policiais](skills/perfil-carreiras-policiais/SKILL.md) para
