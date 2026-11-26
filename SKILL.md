@@ -5,7 +5,7 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
-**Versão 2.38.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.39.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
@@ -69,8 +69,8 @@ obrigatórias e os comandos (texto limpo do PDF, importação das questões, cad
 Cebraspe, modelo do gerador e `finalizar_lote.py`), sem precisar abrir todas as referências. Sua
 seção 0 (economia de tokens) é obrigatória: PDF nunca por leitor de página da web, PDF lido uma vez,
 importação com `--ruido`, sem saídas grandes e com idas e voltas agrupadas. Cards de revisão de PDF anexado
-cobrem todo conteúdo de prioridade **Alta ou Média** para o concurso-alvo, do PDF e das questões
-de concursos nele, sem duplicar notas da coleção
+cobrem **todo conceito** do PDF e das questões de concursos nele (desde a 2.39, também o de prioridade
+Baixa, só com R), mais os complementos da internet do mesmo assunto, sem duplicar notas da coleção
 ([cobertura-pdf.md](skills/gerar-revisao-anki/references/cobertura-pdf.md)) e seguem a formatação única de
 [estilo_anki.py](skills/gerar-revisao-anki/scripts/estilo_anki.py) (Arial 20 px, como os cards de
 Informática).
@@ -82,16 +82,29 @@ e, nos desafiadores, a questão de origem; nada de concurso, `Estilo_Cebraspe`, 
 genérica. Cloze mnemônico: frente `Mnemônico SIGLA:` com as letras visíveis e o resto de cada termo em c1;
 a origem (autoral ou link da fonte) vai só no verso.
 
-**Evidência de cobrança** (desde a 2.37): só vira card o que cai em concurso. Todo card (R, D ou Cloze)
-cita em `refs` ao menos uma questão real (qualquer banca ou cargo) que cobra o seu conteúdo; o
-Desafiador é reconstruído da operação dessa questão e leva uma tag por questão. Sem questão localizada
-após a busca: nenhum D, e R/Cloze só no núcleo do cargo (`nucleo='motivo'`); o resto é prioridade
-Baixa. Cloze só de mnemônico ou de termo-chave que as questões cobram (`cobra`). Questão de múltipla
+**Evidência de cobrança** (desde a 2.37): todo card (R, D ou Cloze) cita em `refs` ao menos uma questão
+real (qualquer banca ou cargo) que cobra o seu conteúdo; o Desafiador é reconstruído da operação dessa
+questão e leva uma tag por questão. Sem questão localizada após a busca: nenhum D; R/Cloze no núcleo
+do cargo (`nucleo='motivo'`); fora do núcleo, o conceito é prioridade Baixa e, desde a 2.39, ganha R
+mesmo assim (nunca D nem Cloze). Cloze só de mnemônico ou de termo-chave que as questões cobram (`cobra`). Questão de múltipla
 escolha num Desafiador (2.38): ao menos um card por alternativa (`alts`), salvo alternativa fora do
 programa ou sem conteúdo. Regras em
 [cobertura-pdf.md](skills/gerar-revisao-anki/references/cobertura-pdf.md) e
 [protocolo_cloze_cientifico.md](skills/gerar-revisao-anki/references/protocolo_cloze_cientifico.md);
 o `montar_lote.py` falha sem a evidência.
+
+**Modo rápido** (desde a 2.39), regras em
+[cobertura-pdf.md](skills/gerar-revisao-anki/references/cobertura-pdf.md) e no
+[roteiro curto](skills/gerar-revisao-anki/references/roteiro-lote-pdf.md):
+- **Todo conceito do material vira card:** o que tem questão real segue a regra acima; o conceito sem
+  questão localizada (Baixa) ganha ao menos um R sem `refs`. Ficam fora só capa, sumário e avisos, e o
+  que a coleção já cobre.
+- **Complementos da internet:** tópico do programa do concurso-alvo, do mesmo assunto do material,
+  cobrado em questão real e ausente do PDF, entra no inventário como unidade `X01` (`extra`, fonte em
+  `fx`, sem página) e ganha card com a questão em `refs`; a fonte é salva no banco.
+- **Escrita rápida:** frente C/E afirmativa de 8 a 15 palavras com um fato só (sem caso, exceção ou
+  negação); o Errado troca um único elemento; verso com a regra em uma frase e o 💡 Memorize; lista
+  longa vira um R por item.
 
 Para conteúdo de PRF ou Agente da Polícia Federal, use
 [perfil-carreiras-policiais](skills/perfil-carreiras-policiais/SKILL.md) para

@@ -79,8 +79,11 @@ def scan(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     for c in rows:
         front = plain(c['front']).strip()
         words = len(front.split())
-        if c['tipo'] == 'rapida' and words > 25:
-            warn(c,'FRENTE_RAPIDA_EXTENSA',f'{words} palavras; condensar sem perder contexto')
+        # 2.39 (modo rápido): frente de 8 a 15 palavras com um fato só; verso com regra em 1 frase + Memorize.
+        if c['tipo'] == 'rapida' and words > 20:
+            warn(c,'FRENTE_RAPIDA_EXTENSA',f'{words} palavras; R mira 8 a 15: um fato só, sem caso nem exceção')
+        if c['tipo'] == 'rapida' and len(plain(c['back']).split()) > 80:
+            warn(c,'VERSO_RAPIDO_EXTENSO',f'{len(plain(c["back"]).split())} palavras; R pede regra em 1 frase + Memorize')
         elif c['tipo'] == 'desafiadora' and words > 50:
             warn(c,'FRENTE_DESAFIADORA_EXTENSA',f'{words} palavras; avaliar se a extensão agrega inferência')
         if META.search(front) or META.search(plain(c['back'])):

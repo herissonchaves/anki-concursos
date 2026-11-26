@@ -19,7 +19,7 @@ Cada R e C tem exatamente um objeto em `cartoes`:
 - `alvo`: conhecimento útil que deve ser recuperado.
 - `solucao`: resposta conferida e fundamento concreto, incluindo correção do Errado ou equivalentes da lacuna quando pertinentes.
 - `fontes`: lista não vazia de objetos com `url`, `consulta` (AAAA-MM-DD) e `trecho` (trecho breve ou seção/dispositivo/localizador efetivamente lido). Identificar versão/data decisivas. URL bem formada não comprova leitura nem confiabilidade.
-- `evidencia_cobranca` (versão 2): `{"questoes": [IDs do banco]}` com as questões reais que cobram o conteúdo, ou `{"nucleo_cargo": "motivo"}` para regra central da atuação do cargo sem questão localizada (`cobertura-pdf.md`). Gerado pelo `montar_lote.py` a partir de `refs`/`nucleo`.
+- `evidencia_cobranca` (versão 2): `{"questoes": [IDs do banco]}` com as questões reais que cobram o conteúdo, ou `{"nucleo_cargo": "motivo"}` para regra central da atuação do cargo sem questão localizada, ou, só no R (2.39), `{"conceito_material": [unidades Baixa]}` para conceito do material anexado sem questão localizada (`cobertura-pdf.md`). Gerado pelo `montar_lote.py` a partir de `refs`/`nucleo`/`COBERTURA`.
 - `cobranca_do_termo` (versão 2, só C): como as questões cobram o termo omitido (no mnemônico, a lista ou sequência), a partir de `cobra`.
 - `alternativa_concorrente`: alternativa, contraexemplo ou condição testada e por que não muda a solução. Não usar “nenhuma” como aprovação genérica sem análise.
 - `recuperacao`: por que a frente exige o alvo útil sem entregá-lo; em Cloze, justificar a parte omitida e sua determinação.

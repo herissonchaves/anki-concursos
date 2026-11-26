@@ -13,7 +13,7 @@ Nenhuma nota de revisão derivada de PDF nasce antes do inventário e seleção 
 - **Economia:** redundância com a coleção viva (`colecao_anki.py buscar`; `.colpkg` só fora deste PC), outras modalidades e revisões futuras. Contar índices Cloze como cartões, não notas.
 - **Teto:** pedido explícito é máximo TOTAL de CARTÕES; sem pedido estimar `N_ideal` fundamentado.
 
-Classificar a prioridade para o concurso-alvo (`cobertura-pdf.md`): **Alta**, **Média** ou **Baixa** (substitui A/B/C), com motivo. Alta e Média ganham ao menos um card, salvo nota da coleção que já exija a mesma recuperação; Baixa não vira card. Toda questão de concurso do PDF também entra no inventário. Antes de escrever, preencher `relatorios/triagem_previa_pdf.txt`: ID, página real, prioridade e motivo, operação, formato, card(s) ou nota da coleção.
+Classificar a prioridade para o concurso-alvo (`cobertura-pdf.md`): **Alta**, **Média** ou **Baixa** (substitui A/B/C), com motivo. Toda unidade ganha ao menos um card, salvo nota da coleção que já exija a mesma recuperação; Baixa só em R (2.39). Complementos da internet do mesmo assunto, cobrados em questão real e ausentes do PDF, entram como unidades `X01`…. Toda questão de concurso do PDF também entra no inventário. Antes de escrever, preencher `relatorios/triagem_previa_pdf.txt`: ID, página real, prioridade e motivo, operação, formato, card(s) ou nota da coleção.
 
 Use os campos de alvo, valor e decisão para aplicar a comparação de recuperação
 do núcleo. Registre o candidato mantido quando houver duplicidade e o tópico

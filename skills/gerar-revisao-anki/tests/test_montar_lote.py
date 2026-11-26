@@ -338,7 +338,8 @@ COBERTURA = [
     dict(u='U01', pag='3', p='alta', conteudo='Unidade de força no SI (sintético)', cartoes=['R01', 'R02', 'C01']),
     dict(u='U02', pag='4-5', p='media', conteudo='Segunda lei de Newton (sintético)', cartoes=['D01', 'D02']),
     dict(u='U03', pag='1', conteudo='Sumário', excluir='nao_conteudo: sumário'),
-    dict(u='U04', pag='6', p='baixa', conteudo='Curiosidade histórica (sintético)', motivo='Periférico para o cargo'),
+    dict(u='U04', pag='6', p='baixa', conteudo='Curiosidade histórica (sintético)', motivo='Sem questão localizada (sintético)',
+         colecao=['9876543210']),
     dict(u='U05', pag='7', p='media', conteudo='Definição já na coleção (sintético)', colecao=['1234567890']),
 ]
 
@@ -363,15 +364,22 @@ def test_cobertura_total_gera_tags_de_pagina_e_passa_no_validador(tmp_path):
 
 @pytest.mark.parametrize('mudanca, esperado', [
     (lambda c: c[0].update(cartoes=[]), 'sem card nem nota da coleção'),
-    (lambda c: c[1].update(cartoes=['D01']), 'D02: card sem unidade Alta ou Média'),
+    (lambda c: c[1].update(cartoes=['D01']), 'D02: card sem unidade do inventário'),
     (lambda c: c[0].update(cartoes=['R01', 'R02', 'C01', 'R99']), 'R99 não existe'),
     (lambda c: c.append(dict(u='Q01', pag='9', p='alta', questao='questao-x', cartoes=['D01'])), 'questao-x precisa estar nos refs'),
     (lambda c: c[2].update(excluir='curiosidade'), 'excluir é só para texto que não é conteúdo'),
-    (lambda c: c[3].update(cartoes=['R01']), 'prioridade baixa não vira card'),
+    (lambda c: c[3].update(cartoes=['D01']), 'prioridade baixa só vira R'),
+    (lambda c: c[3].update(cartoes=['C01']), 'prioridade baixa só vira R'),
+    (lambda c: c[3].pop('colecao'), 'sem ao menos um R (2.39'),
     (lambda c: c[3].pop('motivo'), 'prioridade baixa exige motivo'),
     (lambda c: c[4].pop('colecao'), 'sem card nem nota da coleção'),
     (lambda c: c[1].pop('p'), 'p deve ser alta, media ou baixa'),
-    (lambda c: c[1].update(p='baixa', motivo='x'), 'prioridade baixa não vira card'),
+    (lambda c: c[1].update(p='baixa', motivo='x'), 'prioridade baixa só vira R'),
+    # complemento da internet (2.39)
+    (lambda c: c.append(dict(u='X01', extra='edital: item', fx=['nao'], p='media', cartoes=['R01'])), 'precisa de fx'),
+    (lambda c: c.append(dict(u='X01', extra='edital: item', fx=['si'], p='baixa', motivo='x', cartoes=['R01'])),
+     'só entra com questão real'),
+    (lambda c: c.append(dict(u='X01', extra='edital: item', fx=['si'], pag='9', p='media', cartoes=['R01'])), 'não tem pag'),
 ])
 def test_cobertura_incompleta_falha(tmp_path, mudanca, esperado):
     cobertura = [dict(u) for u in COBERTURA]
@@ -436,6 +444,108 @@ def test_lote_sem_cobertura_nao_ganha_tags_de_pagina(tmp_path):
     items, _, _ = ler(tmp_path)
     assert b'Pagina_' not in items['anki_certo_errado.tsv']
     assert not (tmp_path / 'lote' / 'relatorios' / 'cobertura_pdf.json').exists()
+
+
+# ------------------------------------------------------------ modo rápido (2.39)
+def gerar_resolvido_com(pasta, mudar, **kw):
+    """Como gerar_resolvido, aplicando `mudar` ao lote antes de cada geração."""
+    (pasta / 'fonte').mkdir(parents=True, exist_ok=True)
+    primeiro = lote(pasta, **kw)
+    mudar(primeiro)
+    primeiro.gerar(imprimir=False)
+    motivos = {chave: 'Justificativa SINTÉTICA de teste' for chave in primeiro.pendentes}
+    (pasta / 'fonte' / 'sinais_resolvidos.json').write_text(json.dumps(motivos), encoding='utf-8')
+    final = lote(pasta, **kw)
+    mudar(final)
+    final.gerar(imprimir=False)
+    return final
+
+
+def r03(g, **extra):
+    g.R.append({**r('R03', 'C', 'O newton recebeu esse nome em homenagem a Isaac Newton.'), 'refs': [], 'alts': {}, **extra})
+
+
+def cobertura_com(**mudancas):
+    cobertura = [dict(u) for u in COBERTURA]
+    for i, campos in mudancas.items():
+        if i == 'nova':
+            cobertura.append(campos)
+        else:
+            cobertura[int(i[1:])].update(campos)
+    return cobertura
+
+
+def test_r_de_conceito_do_material_dispensa_questao_2_39(tmp_path):
+    import validar_cobertura_pdf as cob
+    cobertura = cobertura_com(i3=dict(cartoes=['R03'], colecao=[]))
+    final = gerar_resolvido_com(tmp_path, r03, cobertura=cobertura)
+    assert final.pendentes == []
+    items, calibracao, revisao = ler(tmp_path)
+    assert rev.validate(items, revisao) == [] and cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
+    registro = {x['id']: x for x in json.loads(revisao)['cartoes']}
+    assert registro[final.rid('R03')]['evidencia_cobranca'] == {'conceito_material': ['U04']}
+    linha = items['anki_certo_errado.tsv'].decode().splitlines()[final.line_of['R03'] - 1]
+    assert 'Pagina_06' in linha.split('\t')[2].split()
+    assert cob.validar(cob.ler(tmp_path / 'lote')) == []
+    rel = tmp_path / 'lote' / 'relatorios'
+    assert 'U04 | 6 | baixa | Curiosidade histórica (sintético) | R03 (conceito do material' in (
+        rel / 'triagem_previa_pdf.txt').read_text(encoding='utf-8')
+    assert '- R03: conceito do material sem questão localizada — U04' in (
+        rel / 'fontes_e_referencias.txt').read_text(encoding='utf-8')
+    # Cloze não aceita a evidência de conceito do material
+    dados = json.loads(revisao)
+    cz = [x for x in dados['cartoes'] if x['id'].startswith('anki_cloze')][0]
+    cz['evidencia_cobranca'] = {'conceito_material': ['U04']}
+    assert any('conceito_material' in e for e in rev.validate(items, json.dumps(dados).encode()))
+    # validador de cobertura: Baixa apontando para um D falha
+    reg = json.loads((rel / 'cobertura_pdf.json').read_text(encoding='utf-8'))
+    reg['unidades'][3]['cartoes'] = [final.rid('D01')]
+    (rel / 'cobertura_pdf.json').write_text(json.dumps(reg), encoding='utf-8')
+    assert any('prioridade baixa só vira R' in e for e in cob.validar(cob.ler(tmp_path / 'lote')))
+
+
+def test_r_sem_questao_fora_de_unidade_baixa_falha_2_39(tmp_path):
+    cobertura = cobertura_com(i0=dict(cartoes=['R01', 'R02', 'C01', 'R03']))
+    gerado = lote(tmp_path, cobertura=cobertura)
+    r03(gerado)
+    with pytest.raises(SystemExit) as falha:
+        gerado.montar_linhas()
+    assert 'R03: sem questão real em refs' in str(falha.value) and "p='baixa'" in str(falha.value)
+
+
+def test_complemento_da_internet_entra_sem_pagina_2_39(tmp_path):
+    import validar_cobertura_pdf as cob
+    extra = dict(u='X01', extra='edital: item sintético', fx=['si'], p='media', conteudo='Tópico do edital fora do PDF',
+                 cartoes=['R03'])
+    final = gerar_resolvido_com(tmp_path, lambda g: r03(g, refs=['fgv-2023-fixture-009']),
+                                cobertura=cobertura_com(nova=extra))
+    items, _, revisao = ler(tmp_path)
+    linha = items['anki_certo_errado.tsv'].decode().splitlines()[final.line_of['R03'] - 1]
+    assert not any(t.startswith('Pagina_') for t in linha.split('\t')[2].split()) and 'Missao_01' not in linha
+    assert cob.validar(cob.ler(tmp_path / 'lote')) == [] and rev.validate(items, revisao) == []
+    registro = json.loads((tmp_path / 'lote' / 'relatorios' / 'cobertura_pdf.json').read_text(encoding='utf-8'))
+    assert registro['unidades'][-1]['pag'] == [] and registro['unidades'][-1]['extra'] == 'edital: item sintético'
+    triagem = (tmp_path / 'lote' / 'relatorios' / 'triagem_previa_pdf.txt').read_text(encoding='utf-8')
+    assert 'X01 | internet | media |' in triagem and '1 complemento(s) da internet' in triagem
+
+
+def test_complemento_da_internet_exige_questao_2_39(tmp_path):
+    extra = dict(u='X01', extra='edital: item', fx=['si'], p='media', conteudo='Tópico', cartoes=['R03'])
+    gerado = lote(tmp_path, cobertura=cobertura_com(nova=extra))
+    r03(gerado)
+    with pytest.raises(SystemExit) as falha:
+        gerado.montar_linhas()
+    assert 'R03 cobre complemento da internet e precisa de questão real' in str(falha.value)
+
+
+def test_lint_do_modo_rapido_2_39():
+    import auditar_clareza as lint
+    curta = dict(id='x:1', tipo='rapida', tags='Rapida', front='A unidade SI de força é o newton.',
+                 back='✅ Certo. ' + 'palavra ' * 20)
+    longa = dict(curta, id='x:2', front=' '.join(['palavra'] * 21), back='✅ Certo. ' + 'palavra ' * 81)
+    sinais = {(s['id'], s['sinal']) for s in lint.scan([curta, longa])}
+    assert ('x:2', 'FRENTE_RAPIDA_EXTENSA') in sinais and ('x:2', 'VERSO_RAPIDO_EXTENSO') in sinais
+    assert not {('x:1', 'FRENTE_RAPIDA_EXTENSA'), ('x:1', 'VERSO_RAPIDO_EXTENSO')} & sinais
 
 
 def test_modelos_do_exportador_usam_o_css_padrao():

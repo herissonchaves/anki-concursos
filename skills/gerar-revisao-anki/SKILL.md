@@ -18,8 +18,12 @@ concurso explícito prevalece e exige programa próprio.
 
 ## Tipos de cartão
 
-- **R (rápido):** fácil, um alvo direto, linguagem simples, sem pegadinha nem raciocínio complexo.
-  Sem teto fixo e sem limite pela quantidade de D.
+- **R (rápido, modo rápido):** memorização de conceito, fácil de responder. Frente C/E afirmativa de 8 a
+  15 palavras com um fato só, sem caso, personagem, exceção, negação ou pegadinha; o Errado troca um
+  único elemento (prazo, número, sujeito, consequência, termo) por uma confusão real; verso com a
+  regra em uma frase e o 💡 Memorize; lista longa vira um R por item. Sem teto fixo e sem limite pela
+  quantidade de D. Com material anexado, todo conceito dele ganha ao menos um R ou outro card (2.39,
+  `references/cobertura-pdf.md`).
 - **D (desafiador Cebraspe):** caso curto, didático, com dado decisivo e uma decisão real (aplicar,
   inferir, distinguir); a dificuldade está na decisão, não no juridiquês. Definição disfarçada vira R.
 - **Cloze:** uma omissão `{{c1::…}}` por nota (várias só em mnemônico: frente `Mnemônico SIGLA:`, letras
@@ -46,8 +50,10 @@ concurso explícito prevalece e exige programa próprio.
    primeiro, internet para o que faltar, salvo banco suficiente no D (item Cebraspe C/E oficial do
    mesmo subassunto já no banco) — primeiro Cebraspe C/E (modelo de forma), depois outras bancas (o
    que se cobra, pegadinhas); use-as como inspiração para itens autorais, nunca como cópia. Sem questão
-   localizada: nenhum D; R/Cloze só no núcleo do cargo (`nucleo`), o resto é Baixa
-   (`references/cobertura-pdf.md`). Cloze só de mnemônico ou de termo-chave que as questões cobram
+   localizada: nenhum D; R/Cloze no núcleo do cargo (`nucleo`); o resto é Baixa e, se for conceito do
+   material anexado, vira só R, sem `refs` (2.39, `references/cobertura-pdf.md`). **Complementos (2.39):**
+   compare o material com o item do edital do mesmo assunto e com as questões achadas; o tópico cobrado
+   em questão real e ausente do material também vira card (unidade `extra`, fonte salva no banco). Cloze só de mnemônico ou de termo-chave que as questões cobram
    (`cobra`); pesquise mnemônicos e confira cada pista na fonte. Sem Cebraspe acessível:
    `inspiracao_geral` + limitação; com Cebraspe e sem outra banca: `outras_bancas_pendencia`. Sem
    pesquisa disponível, a entrega não é final verificada.
@@ -86,7 +92,7 @@ O exportador e o `finalizar_lote.py` bloqueiam: D sem `calibracao_cebraspe.json`
 (`references/registro-calibracao-cebraspe.md`), R/Cloze sem `revisao_recuperacao.json`
 (`references/registro-revisao-recuperacao.md`), hashes divergentes, sinais do lint pendentes
 (corrija ou justifique em `fonte/sinais_resolvidos.json`), paridade 50/50 e, em PDF, cobertura
-Alta/Média incompleta (`references/cobertura-pdf.md`). As barreiras checam documentos, não a verdade
+incompleta (unidade sem card nem nota da coleção, Baixa com D/Cloze; `references/cobertura-pdf.md`). As barreiras checam documentos, não a verdade
 do gabarito nem a aprendizagem. Não use helpers de teste para preencher auditoria. Casos de
 referência sob demanda: `references/protocolo_clareza_pedagogica.md` e
 `references/testes_regressao_pedagogicos.md`. Rotina, FSRS e carga: `../orientar-estudo-anki/SKILL.md`.

@@ -81,13 +81,16 @@ conteúdo. Nunca copie nome/CPF da marca-d'água para arquivo versionado.
    `{"assunto": ..., "itens": {"Q01": [subassunto, [palavras], operação], "T02": "skip"}}` (toda chave do
    rascunho precisa estar lá; `skip` para repetida ou fora do tema; a já salva é reconhecida e mapeada ao ID
    existente). O mapa `chave → ID` vai direto para o `Q` do gerador. Salve **todas** as questões novas do PDF
-   (viram card se o conteúdo for Alta ou Média). Regra revogada: `vigencia: desatualizada` + `vigencia_nota`.
+   (o conteúdo de cada uma vira card, salvo nota da coleção). Regra revogada: `vigencia: desatualizada` + `vigencia_nota`.
 2. Banco: `assuntos -d DISC` → `buscar -d DISC -t TERMO [--com-url] [--vigentes] [--nao-usadas]` → `mostrar`.
 3. Internet, **questões** (2.37: obrigatória para **todo card** cujo conteúdo não tenha questão real no
    banco ou no PDF — todo card cita em `refs` ao menos uma questão que cobra o seu conteúdo; no D, salvo
    **banco suficiente**: item Cebraspe C/E com prova oficial do mesmo subassunto já no banco, citado em
    `refs` com `fid='comparada'`): Cebraspe C/E primeiro, depois outras bancas e outros cargos (o que se
-   cobra em concursos diversos). Uma questão sustenta vários cards só se cobrar aquele fato ou termo. Cadernos e gabaritos oficiais pelo `cebraspe_cdn.py` (pymupdf), sem abrir o
+   cobra em concursos diversos). Uma questão sustenta vários cards só se cobrar aquele fato ou termo.
+   Sem questão depois da busca, o conceito do PDF continua ganhando R (Baixa, 2.39); registre as
+   buscas no `motivo`. Anote também os tópicos que as questões do assunto cobram e o PDF não traz:
+   são os candidatos a complemento (seção 4). Cadernos e gabaritos oficiais pelo `cebraspe_cdn.py` (pymupdf), sem abrir o
    PDF inteiro no contexto:
 
    ```text
@@ -119,21 +122,32 @@ com status (vigente, vacatio, julgado, pendente). Tema só doutrinário (sem lei
 (ex.: Enciclopédia Jurídica da PUC-SP) e salve-a como `conteudo`. Corrija o PDF quando estiver
 desatualizado e avise no verso. Cloze: pesquise mnemônicos; sem fonte confiável, crie um **autoral**. Formato e origem (só no verso, com link quando houver fonte): `references/tags.md`.
 
+**Complementos da internet (2.39):** compare o inventário com o item do edital do mesmo assunto
+(`mostrar EDITAL --secao "<disciplina>"`) e com os candidatos da seção 3. Tópico do programa, cobrado
+em questão real e ausente do PDF (ou desatualizado nele de modo que muda o gabarito) entra como
+unidade `X01`… (`extra`, seção 7), com a fonte lida na pesquisa de conteúdo acima e salva no banco.
+Só o mesmo assunto do material; sem questão real, não entra.
+
 ## 5. Triagem e composição
 
-- **Cobertura por prioridade** (`cobertura-pdf.md`): inventário de todo o PDF e de todas as suas
-  questões; cada unidade é **Alta** (questão real do cargo/banca-alvo ou núcleo do cargo), **Média**
-  (questão real de outras bancas/cargos) ou **Baixa** (sem questão localizada, com as buscas no motivo). Alta e
-  Média: ao menos um card, salvo nota da coleção que já exija a mesma recuperação (busque antes, em
-  leitura). Baixa: sem card. Teto menor que a cobertura Alta + Média: avisar e perguntar.
+- **Cobertura total** (`cobertura-pdf.md`): inventário de todo o PDF e de todas as suas questões;
+  cada unidade é **Alta** (questão real do cargo/banca-alvo ou núcleo do cargo), **Média** (questão
+  real de outras bancas/cargos) ou **Baixa** (sem questão localizada, com as buscas no motivo). **Toda
+  unidade ganha ao menos um card** (2.39), salvo nota da coleção que já exija a mesma recuperação
+  (busque antes, em leitura): Alta e Média em qualquer formato, Baixa só em R. Mais os complementos
+  `X01`… (seção 4). Teto menor que a cobertura: avisar e perguntar.
 - Inventário página por página (`triagem_previa_pdf.txt`): unidade, página, prioridade e motivo,
   formato e card(s) ou nota da coleção; o mesmo inventário vira o bloco `COBERTURA` do gerador.
 - **Evidência (2.37):** todo card com questão real em `refs`. D sem questão não existe; núcleo do cargo
-  sem questão localizada vira só R/Cloze com `nucleo='motivo'`.
+  sem questão localizada vira só R/Cloze com `nucleo='motivo'`; conceito Baixa vira R sem `refs` (2.39).
 - **Alternativas (2.38):** questão de múltipla escolha nos `refs` de um D → ao menos um card por
   alternativa (R, D ou Cloze; a correta e cada distrator). Os cards entram na paridade 50/50 de R e de D
   (um distrator pode virar um Certo com a regra correta). Sem card, só fora do programa ou sem conteúdo.
-- R: um alvo que as questões cobram, frase curta, sem pegadinha. D: caso curto com dado decisivo, uma
+- **R (modo rápido, 2.39):** memorização, fácil de responder. Frente afirmativa de **8 a 15 palavras**
+  (o lint avisa acima de 20) com um fato só; sem caso, personagem, exceção, negação ou dupla negação;
+  termo técnico só se for o próprio alvo. O Errado troca **um** elemento (prazo, número, sujeito,
+  consequência, termo) por uma confusão real. Lista ou enumeração longa: um R por item (ou Cloze
+  mnemônico, se cobrada). D: caso curto com dado decisivo, uma
   decisão real (aplicar, distinguir, exceção), reconstruído da operação de uma questão real; definição
   disfarçada vira R. Cloze só de dois tipos (`protocolo_cloze_cientifico.md`): **mnemônico** de lista ou
   sequência cobrada (várias c1, formato de `references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis,
@@ -148,6 +162,9 @@ desatualizado e avise no verso. Cloze: pesquise mnemônicos; sem fonte confiáve
 
 Verso C/E: `regra` → (`caso` em D) → `erro` (Errado) ou `certo` (confusão afastada) → `esquema`
 (tabela/fluxo) quando ajudar → `m` = 💡 Memorize em 1–2 frases (no Errado, a formulação correta).
+Verso do R (2.39): `regra` em uma frase (no Errado, o elemento trocado e o correto) + `m`; `erro`/`certo`
+só se acrescentarem algo; esquema só como tabela curta que poupe cards (o lint avisa acima de 80
+palavras).
 Cloze: Extra com `regra` + Memorize. Negrito só no termo-chave do verso; nada na frente que revele
 o gabarito. Frente autossuficiente, sem depender do PDF. **Formatação única** (seção "Padrão único
 de formatação" de `protocolo_visual_html_anki.md`): só os componentes do helper sobre o CSS de
@@ -160,9 +177,12 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
   Cartões citam IDs do banco em `refs`; `referencias` pode ficar `[]`. Preencha `COBERTURA`
   (`Lote(..., cobertura=COBERTURA)`, com `p` por unidade) só com as unidades de **conteúdo**, as questões
   Baixa e as cobertas por nota da coleção; as demais questões do PDF vão em `questoes_pdf={'Q01': ('17',
-  ID), ...}` e viram unidade sozinhas (cards que as citam em `refs`, prioridade herdada). O montador
-  falha se Alta/Média ficar sem card nem nota da coleção, se Baixa tiver card ou se uma questão não for
-  citada, e monta as tags de `references/tags.md`: `ASSUNTO::<tags do card>`
+  ID), ...}` e viram unidade sozinhas (cards que as citam em `refs`, prioridade herdada). Unidade Baixa:
+  `cartoes=['R07']` (R com `refs=[]`) e `motivo` com as buscas. Complemento:
+  `dict(u='X01', extra='edital: <item>', fx=['chave'], p='media', conteudo='…', cartoes=['R08'])`, sem `pag`.
+  O montador falha se uma unidade ficar sem card nem nota da coleção, se Baixa tiver D/Cloze, se o
+  complemento não tiver `fx` ou questão nos cards ou se uma questão não for citada, e monta as tags de
+  `references/tags.md`: `ASSUNTO::<tags do card>`
   (`Disciplina::Assunto::Topico`), `PDF` (ex.: `Missao_07`) e `Pagina_NN` só nos cards que cobrem página,
   o tipo (`Rapida`, `Desafiadora` ou `Cloze`) e, nos D, uma tag por ID de `refs` (o nome do arquivo da
   questão, ex.: `cebraspe-2021-prf-080`). Tag de concurso, `Estilo_Cebraspe`, `Revisao_PDF`, `Mnemonico` ou

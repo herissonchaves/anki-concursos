@@ -10,7 +10,7 @@ Para cada cartão candidato, simular um aluno que **já estudou o tema**, mas ai
 
 - Português natural, sujeito e ação concretos; preferir termos técnicos jurídicos padronizados e necessários, explicando-os pelo contexto quando não forem o alvo testado.
 - Frente com **uma proposição julgável**, fato relevante e condição decisiva. Evitar premissa decorativa, concatenação de teses, abstração empilhada, duplas negativas, encadeamento de subordinadas e referente ambíguo.
-- Priorizar frente rápida de ~8–25 palavras e frente desafiadora normalmente de ~20–50 palavras. **Não são limites duros**: extensão justificável por cenário relevante é permitida; não reduzir até eliminar condição jurídica indispensável. Se mais de 50 palavras, justificar necessidade e tentar condensar. Rejeitar complexidade verbal que não agregue raciocínio.
+- Priorizar frente rápida de ~8–15 palavras (2.39; o lint avisa acima de 20), afirmativa e com um fato só, e frente desafiadora normalmente de ~20–50 palavras. **Não são limites duros**: extensão justificável por cenário relevante é permitida; não reduzir até eliminar condição jurídica indispensável. Se mais de 50 palavras, justificar necessidade e tentar condensar. Rejeitar complexidade verbal que não agregue raciocínio.
 - Não criar "duas perguntas em uma"; dividir apenas se ambas forem importantes e não redundantes, lembrando o custo de revisão.
 - Na frente de C/E, evitar repetições de absolutos (`sempre`, `nunca`, `jamais`, `automaticamente`, `necessariamente`, `qualquer`, `apenas`, `somente`, `em todos os casos`) que forneçam pistas para Errado. Podem ser essenciais à tese jurídica: avaliar sem proibir indiscriminadamente. **Equilibrar verdade/erro não autoriza fabricar falsidades.**
 

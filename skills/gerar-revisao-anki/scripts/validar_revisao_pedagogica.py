@@ -5,7 +5,8 @@ Não resolve questões, não consulta fontes e não certifica aprendizagem.
 Não cria nem preenche auditorias. Coleções existentes usam o fluxo de leitura.
 
 schema_version 2 (2.37, gravado pelo `montar_lote.py`): todo R/Cloze traz `evidencia_cobranca`
-(`{"questoes": [IDs]}` ou `{"nucleo_cargo": "motivo"}`) e todo Cloze, `cobranca_do_termo`.
+(`{"questoes": [IDs]}` ou `{"nucleo_cargo": "motivo"}`; no R, desde a 2.39, também
+`{"conceito_material": [unidades Baixa]}`) e todo Cloze, `cobranca_do_termo`.
 schema_version 1 continua aceito para lotes anteriores, sem essas chaves.
 """
 from __future__ import annotations
@@ -109,13 +110,18 @@ def validate_cloze_coverage(row, coverage, challenges, errors):
 
 
 def validate_evidence(ident, tipo, record, errors):
-    """2.37: R/Cloze só de conteúdo que cai em concurso (questão real ou núcleo do cargo)."""
+    """2.37: R/Cloze só de conteúdo que cai em concurso (questão real ou núcleo do cargo); 2.39: o R
+    também pode vir de conceito do material sem questão localizada (unidades Baixa da cobertura)."""
     ev = record.get('evidencia_cobranca')
-    questoes = ev.get('questoes') if isinstance(ev, dict) else None
-    ok = (isinstance(questoes, list) and bool(questoes) and all(nonblank(q) for q in questoes)) or (
-        isinstance(ev, dict) and nonblank(ev.get('nucleo_cargo')))
+
+    def lista(chave):
+        valor = ev.get(chave) if isinstance(ev, dict) else None
+        return isinstance(valor, list) and bool(valor) and all(nonblank(v) for v in valor)
+    ok = lista('questoes') or (isinstance(ev, dict) and nonblank(ev.get('nucleo_cargo'))) or (
+        tipo == 'rapida' and lista('conceito_material'))
     if not ok:
-        errors.append(f'{ident}: evidencia_cobranca requer questões reais (IDs do banco) ou nucleo_cargo com motivo')
+        errors.append(f'{ident}: evidencia_cobranca requer questões reais (IDs do banco), nucleo_cargo com motivo '
+                      'ou, só no R, conceito_material (unidades Baixa)')
     if tipo == 'cloze' and not nonblank(record.get('cobranca_do_termo')):
         errors.append(f'{ident}: cobranca_do_termo requer como a questão cobra o termo omitido')
 

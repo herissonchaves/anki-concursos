@@ -30,7 +30,8 @@ PDF = 'Missao_NN'                # nome curto do PDF; None em lote sem PDF (prin
 # IDs do banco referencias/ (referencias.py buscar/mostrar). Basta citá-los em `refs`.
 # Evidência de cobrança (2.37): TODO card cita em `refs` ao menos uma questão real que cobra o seu conteúdo
 # (qualquer banca ou cargo; o D ganha uma tag por questão). Sem questão localizada após banco + internet:
-# só R/Cloze de regra central da atuação do cargo, com nucleo='motivo'; D nunca. O resto vira Baixa.
+# só R/Cloze de regra central da atuação do cargo, com nucleo='motivo'; D nunca. O resto vira Baixa, que
+# desde a 2.39 também ganha R (todo conceito do material vira R; refs=[] e o R na unidade Baixa da COBERTURA).
 Q_CEB = 'cebraspe-AAAA-orgao-NNN'  # Cebraspe C/E com prova oficial: sustenta fidelidade comparada
 Q_OUTRA = 'banca-AAAA-orgao-NNN'   # outra banca (com ou sem prova): inspiração
 # Múltipla escolha num D (2.38): ao menos um card (R, D ou Cloze) por alternativa. Cada card diz as letras
@@ -45,12 +46,19 @@ F = {
 # (nunca substitui a questão real).
 OBP = 'Buscas em AAAA-MM-DD por ... (bancas, termos, sites): nenhuma questão de outra banca lida por inteiro.'
 
-R = [  # rápidos: um alvo, frase curta; 50% C / 50% E
+R = [  # rápidos (2.39): frente afirmativa de 8 a 15 palavras, um fato só, sem caso, exceção ou negação;
+       # o Errado troca um único elemento (prazo, número, sujeito, termo); verso = regra em 1 frase + Memorize.
+       # Lista longa: um R por item (ou Cloze mnemônico com questão). 50% C / 50% E
  dict(k='R01', tags='Topico', g='C', refs=[Q_OUTRA], alts={Q_OUTRA: 'BC'},
   f='Frente: uma afirmação direta, sem pista do gabarito.',
   b=[regra('Regra em linguagem simples, com o termo técnico explicado.')],
   m='Memorize: a ideia central em uma frase.',
   alvo='O que deve ser lembrado.', fx=('lei',), sol='Certo: fundamento conferido na fonte.'),
+ dict(k='R02', tags='Topico', g='E', refs=[],  # conceito do material sem questão localizada (unidade U04, Baixa)
+  f='Frente com um único elemento trocado em relação à regra.',
+  b=[regra('A regra correta, dizendo qual elemento foi trocado.')],
+  m='Memorize: a formulação correta.',
+  alvo='Conceito do material.', fx=('lei',), sol='Errado: o elemento X é Y.'),
   # Núcleo do cargo sem questão localizada (só R/Cloze): refs=[] e nucleo='regra central da PRF: ...'.
   # Opcionais (2.24), só quando houver algo real a registrar: alt='leitura concorrente encontrada',
   # rec='por que a frente exige o alvo', fb='confusão que o verso corrige'.
@@ -100,9 +108,12 @@ D = [  # desafiadores: caso curto com dado decisivo, inspirado em questão real 
 # Cobertura do PDF por prioridade para o concurso-alvo (obrigatória em revisão de PDF): inventário de
 # todo o PDF e de suas questões. Prioridade (2.37): Alta = questão real do cargo/banca-alvo ou núcleo do
 # cargo; Média = questão real de outras bancas/cargos; Baixa = sem questão localizada (motivo com as buscas).
-# Alta/Média: card do lote ou nota da coleção (colecao=[IDs]); Baixa: sem card, com motivo. O montador falha se faltar card e põe as tags Pagina_NN nos cards.
+# Toda unidade: card do lote ou nota da coleção (colecao=[IDs]); Baixa (2.39) só com R. O montador falha se
+# faltar card e põe as tags Pagina_NN nos cards.
+# Complemento da internet (2.39, X01…): tópico do programa do mesmo assunto, cobrado em questão real e
+# ausente do PDF; sem pag, com extra='edital: item' e fx (fonte lida e salva no banco); cards com questão.
 # Questões do PDF citadas em `refs` (2.29): viram unidade sozinhas, com os cards que as citam e a prioridade
-# herdada do conteúdo. Questão Baixa ou coberta só pela coleção fica declarada em COBERTURA.
+# herdada do conteúdo. Questão coberta só pela coleção fica declarada em COBERTURA.
 QUESTOES_PDF = {'Q02': ('17', Q_OUTRA)}
 
 # Alternativa sem card (2.38): só fora do programa ou sem conteúdo, com motivo. Nota da coleção e
@@ -121,8 +132,11 @@ COBERTURA = [
  dict(u='U01', pag='5', p='alta', conteudo='Regra X do art. Y', cartoes=['R01', 'C01']),
  dict(u='U02', pag='6-7', p='media', conteudo='Exceção Z', cartoes=['D01']),
  dict(u='U03', pag='8', p='media', conteudo='Definição W', colecao=['1792883029812']),
- dict(u='U04', pag='9', p='baixa', conteudo='Detalhe administrativo V', motivo='Sem questão localizada (banco e internet: buscas X, Y) e fora do núcleo do cargo'),
+ dict(u='U04', pag='9', p='baixa', conteudo='Detalhe administrativo V', cartoes=['R02'],
+      motivo='Sem questão localizada (banco e internet: buscas X, Y) e fora do núcleo do cargo'),
  dict(u='Q01', pag='17', p='alta', questao=Q_CEB, conteudo='Questão 01 do PDF', cartoes=['D01']),
+ # dict(u='X01', extra='edital: PRF 2021, item ...', fx=['lei2'], p='media', conteudo='Tópico T, ausente do PDF',
+ #      cartoes=['R03']),  # R03 com refs=[questão real]; sem pag, logo sem Pagina_NN
  dict(u='N01', pag='1-3', conteudo='Capa, apresentação e sumário', excluir='nao_conteudo: capa e sumário'),
 ]
 

@@ -4,10 +4,11 @@
 Uso: python validar_cobertura_pdf.py DIRETORIO_DO_LOTE_OU_ZIP
 (o diretório é a pasta `lote/`, com os TSVs e `relatorios/cobertura_pdf.json`).
 
-Cada unidade tem `p` (alta, media ou baixa). Falha se unidade Alta/Média não tiver card nem nota
-da coleção (`colecao`), se Baixa tiver card ou não tiver `motivo`, se apontar para linha
-inexistente, se algum card do lote não cobrir unidade Alta/Média, ou se faltar ao card a tag
-`Pagina_NN` de uma página que ele cobre. Texto que não é conteúdo de estudo usa
+Cada unidade tem `p` (alta, media ou baixa). Falha se unidade não tiver card nem nota da coleção
+(`colecao`), se Baixa (2.39: conceito do material sem questão localizada) tiver card que não seja R
+(tag `Rapida`) ou não tiver `motivo`, se apontar para linha inexistente, se algum card do lote não
+cobrir unidade, ou se faltar ao card a tag `Pagina_NN` de uma página que ele cobre. Complemento da
+internet (`extra`, 2.39) não tem página e não pode ser Baixa. Texto que não é conteúdo de estudo usa
 `excluir: "nao_conteudo: motivo"`. Sem `cobertura_pdf.json`, informa e retorna 0
 (lote que não veio de PDF). Retorna 0 (ok), 1 (falha) ou 2 (erro de leitura).
 """
@@ -55,28 +56,33 @@ def validar(arquivos: dict[str, bytes | None]) -> list[str]:
         if p not in ('alta', 'media', 'baixa'):
             erros.append(f'{u}: p deve ser alta, media ou baixa')
             continue
-        if p == 'baixa':
-            if cartoes:
-                erros.append(f'{u}: prioridade baixa não vira card')
-            if not str(un.get('motivo', '')).strip():
-                erros.append(f'{u}: prioridade baixa exige motivo')
-            continue
         if not cartoes and not un.get('colecao'):
             erros.append(f'{u} (p. {un.get("pag")}): sem card nem nota da coleção')
+        if p == 'baixa' and not str(un.get('motivo', '')).strip():
+            erros.append(f'{u}: prioridade baixa exige motivo')
         pags = un.get('pag') or []
-        if not pags:
+        if un.get('extra'):
+            if pags:
+                erros.append(f'{u}: complemento da internet não tem página')
+            if p == 'baixa':
+                erros.append(f'{u}: complemento da internet não pode ser Baixa (exige questão real)')
+            pags = []
+        elif not pags:
             erros.append(f'{u}: sem página')
         for ident in cartoes:
             nome, _, n = str(ident).partition(':')
             if nome not in tsv or not n.isdigit() or not 1 <= int(n) <= len(tsv[nome]):
                 erros.append(f'{u}: card {ident} inexistente')
                 continue
+            row = tsv[nome][int(n) - 1]
+            if p == 'baixa' and 'Rapida' not in (row[2].split() if len(row) == 3 else ()):
+                erros.append(f'{u}: prioridade baixa só vira R ({ident} não é Rapida)')
             cobertos.setdefault(ident, set()).update(int(p) for p in pags)
     for nome, rows in tsv.items():
         for n, row in enumerate(rows, 1):
             ident = f'{nome}:{n}'
             if ident not in cobertos:
-                erros.append(f'{ident}: card sem unidade Alta ou Média')
+                erros.append(f'{ident}: card sem unidade do inventário')
                 continue
             tags = set(row[2].split()) if len(row) == 3 else set()
             faltam = [f'Pagina_{p:02d}' for p in sorted(cobertos[ident]) if f'Pagina_{p:02d}' not in tags]
@@ -102,7 +108,8 @@ def main(argv=None) -> int:
         print('COBERTURA INCOMPLETA:\n  ' + '\n  '.join(erros))
         return 1
     n = len(json.loads(arquivos[REGISTRO].decode('utf-8'))['unidades'])
-    print(f'COBERTURA COMPLETA: {n} unidade(s) do PDF; Alta e Média com card ou nota da coleção, Baixa registrada. Não certifica a qualidade dos cards.')
+    print(f'COBERTURA COMPLETA: {n} unidade(s) do inventário com card ou nota da coleção (Baixa só com R). '
+          'Não certifica a qualidade dos cards.')
     return 0
 
 

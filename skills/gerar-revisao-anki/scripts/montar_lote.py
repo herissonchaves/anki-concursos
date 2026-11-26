@@ -27,8 +27,10 @@ Convenção dos dicionários de cartão (chaves curtas):
 
 Evidência de cobrança (2.37, references/cobertura-pdf.md): todo card cita em `refs` ao menos uma
 questão real de concurso do banco (qualquer banca ou cargo) que cobra o seu conteúdo. Sem questão
-localizada, só R e Cloze de regra central da atuação do cargo, com `nucleo='motivo'`; D nunca. O
-montador falha (`checar_evidencia`) e grava a evidência em `revisao_recuperacao.json` (schema 2).
+localizada, só R e Cloze de regra central da atuação do cargo, com `nucleo='motivo'`; D nunca. Modo
+rápido (2.39): o R que cobre unidade Baixa da `cobertura` (conceito do material sem questão localizada)
+dispensa questão e `nucleo` (evidência `conceito_material`). O montador falha (`checar_evidencia`) e
+grava a evidência em `revisao_recuperacao.json` (schema 2).
 
 Alternativas (2.38): questão de múltipla escolha nos `refs` de algum D precisa de ao menos um card (R, D
 ou Cloze) por alternativa. Cada card diz quais trabalha em `alts={'<id>': 'AC'}` (a questão também nos
@@ -51,17 +53,20 @@ continuam aceitos. Ao gerar, o uso de cada ID é registrado no `usado_em` da que
 
 `cobertura` (lote de PDF, obrigatório): inventário de todo o PDF e de todas as suas questões,
 uma unidade por conteúdo: `dict(u='U01', pag='14', p='alta', conteudo='…', cartoes=['R01'])`.
-`p` é a prioridade para o concurso-alvo: 'alta' e 'media' precisam de `cartoes` do lote ou de
-`colecao=[IDs de notas]` que já exigem a mesma recuperação; 'baixa' não tem card e exige `motivo`.
+`p` é a prioridade para o concurso-alvo: toda unidade precisa de `cartoes` do lote ou de
+`colecao=[IDs de notas]` que já exigem a mesma recuperação. 'alta' e 'media' aceitam R, D e Cloze;
+'baixa' (2.39: conceito do material sem questão localizada) só R e exige `motivo` com as buscas.
 Unidade de questão do PDF traz `questao='<id do banco>'` (nos `refs` de algum de seus cards).
-Texto que não é conteúdo de estudo usa `excluir='nao_conteudo: motivo'`. Falha se faltar card,
-se Baixa tiver card ou se um card não cobrir nenhuma unidade Alta/Média. Grava
+Complemento da internet (2.39): `dict(u='X01', extra='edital: <item do programa>', fx=['chave'],
+p='alta'|'media', conteudo='…', cartoes=['R07'])`, sem `pag`; os `fx` existem em `fontes` e todo card
+dele cita questão real. Texto que não é conteúdo de estudo usa `excluir='nao_conteudo: motivo'`. Falha
+se faltar card, se Baixa tiver D/Cloze ou se um card não cobrir nenhuma unidade. Grava
 `cobertura_pdf.json` e põe em cada card as tags `Pagina_NN` das páginas que ele cobre.
 
 `questoes_pdf` (2.29, opcional): {'Q01': ('17', '<id do banco>'), ...}. Cada questão do PDF que não
 estiver declarada à mão em `cobertura` vira unidade sozinha: cartoes = cards que a citam em `refs` e
 prioridade = a maior das unidades de conteúdo desses cards. Questão sem card citando-a precisa de
-unidade própria em `cobertura` (p='baixa' com motivo, ou colecao=[...]).
+unidade própria em `cobertura` (com `colecao=[...]` ou com cards que a citem).
 
 `padrao_d` (2.29, opcional): valores comuns aos D do lote (ex.: `rb`, `orig`, `lim`), usados só quando o
 D não traz a chave. Sem `regra`, o D usa o trecho da primeira fonte de `fx`.
@@ -157,17 +162,20 @@ class Lote:
         return sorted(saida)
 
     def checar_cobertura(self):
-        """Barreira da revisão de PDF: toda unidade Alta ou Média tem card (ou nota da coleção).
+        """Barreira da revisão de PDF: toda unidade de conteúdo tem card (ou nota da coleção).
 
-        Cada unidade do inventário traz `p` ('alta', 'media' ou 'baixa'). Baixa não tem card e
-        exige `motivo`; Alta/Média precisam de `cartoes` do lote ou de `colecao` (IDs de notas
-        que já exigem a mesma recuperação). Também calcula as tags Pagina_NN de cada card.
-        Falha (SystemExit) listando os problemas.
+        Cada unidade do inventário traz `p` ('alta', 'media' ou 'baixa') e precisa de `cartoes` do lote
+        ou de `colecao` (IDs de notas que já exigem a mesma recuperação). Baixa (2.39: conceito do
+        material sem questão localizada) só aceita R e exige `motivo`. Complemento da internet (`extra`,
+        2.39): sem `pag`, `fx` existentes, p alta/media e card com questão real. Também calcula as tags
+        Pagina_NN de cada card e `self.baixa_de` ({card: [unidades Baixa]}). Falha (SystemExit)
+        listando os problemas.
         """
-        self.tags_pagina = {}
+        self.tags_pagina, self.baixa_de = {}, {}
         if self.cobertura is None:
             return
         cartoes = {x['k']: x for x in self.R + self.D + self.CZ}
+        rapidos = {x['k'] for x in self.R}
         erros, cobertos = [], set()
         self.cobertura = list(self.cobertura) + self._unidades_de_questoes(cartoes, erros)
         for un in self.cobertura:
@@ -175,40 +183,59 @@ class Lote:
             if un.get('excluir'):
                 if not str(un['excluir']).startswith('nao_conteudo') or lista:
                     erros.append(f'{u}: excluir é só para texto que não é conteúdo de estudo '
-                                 '(excluir="nao_conteudo: motivo", sem cartoes); conteúdo periférico usa p="baixa"')
+                                 '(excluir="nao_conteudo: motivo", sem cartoes); conceito sem questão usa p="baixa" com R')
                 continue
             p = un.get('p')
             if p not in self.PRIORIDADES:
                 erros.append(f'{u}: p deve ser alta, media ou baixa')
                 continue
-            if p == 'baixa':
-                if lista:
-                    erros.append(f'{u}: prioridade baixa não vira card (tire {", ".join(lista)} ou reavalie a prioridade)')
-                if not str(un.get('motivo', '')).strip():
-                    erros.append(f'{u}: prioridade baixa exige motivo')
-                continue
             if not lista and not un.get('colecao'):
-                erros.append(f'{u} (p. {un.get("pag")}, {p}): sem card nem nota da coleção — {un.get("conteudo", "")[:70]}')
+                exige = 'ao menos um R (2.39: todo conceito do material vira R)' if p == 'baixa' else 'card'
+                erros.append(f'{u} (p. {un.get("pag", "internet")}, {p}): sem {exige} nem nota da coleção — '
+                             f'{un.get("conteudo", "")[:70]}')
             for k in lista:
                 if k not in cartoes:
                     erros.append(f'{u}: card {k} não existe no lote')
-            try:
-                pags = self.paginas(un['pag'])
-            except (KeyError, ValueError):
-                erros.append(f'{u}: pag ausente ou inválida')
-                continue
+            if p == 'baixa':
+                outros = [k for k in lista if k in cartoes and k not in rapidos]
+                if outros:
+                    erros.append(f'{u}: prioridade baixa só vira R (tire {", ".join(outros)} ou cite questão real e reavalie)')
+                if not str(un.get('motivo', '')).strip():
+                    erros.append(f'{u}: prioridade baixa exige motivo (buscas de questão feitas)')
+                for k in lista:
+                    if k in rapidos:
+                        self.baixa_de.setdefault(k, []).append(u)
+            if un.get('extra'):
+                pags = []
+                if 'pag' in un:
+                    erros.append(f'{u}: complemento da internet (extra) não tem pag; a fonte vai em fx')
+                if p == 'baixa':
+                    erros.append(f'{u}: complemento da internet (extra) só entra com questão real: p alta ou media')
+                fx = list(un.get('fx') or ())
+                if not fx or any(k not in self.F for k in fx):
+                    erros.append(f'{u}: complemento da internet (extra) precisa de fx com chaves de fontes')
+                for k in lista:
+                    if k in cartoes and not self.questoes_de(cartoes[k]):
+                        erros.append(f'{u}: {k} cobre complemento da internet e precisa de questão real em refs')
+            else:
+                try:
+                    pags = self.paginas(un['pag'])
+                except (KeyError, ValueError):
+                    erros.append(f'{u}: pag ausente ou inválida')
+                    continue
             if lista and un.get('questao') and not any(un['questao'] in cartoes[k].get('refs', ()) for k in lista if k in cartoes):
                 erros.append(f'{u}: a questão {un["questao"]} precisa estar nos refs de algum de seus cards')
             for k in lista:
                 if k in cartoes:
                     cobertos.add(k)
-                    self.tags_pagina.setdefault(k, set()).update(pags)
+                    if pags:
+                        self.tags_pagina.setdefault(k, set()).update(pags)
         for k in cartoes:
             if k not in cobertos:
-                erros.append(f'{k}: card sem unidade Alta ou Média (inclua-o em COBERTURA ou retire-o)')
+                erros.append(f'{k}: card sem unidade do inventário (inclua-o em COBERTURA ou retire-o)')
         if erros:
-            raise SystemExit('COBERTURA INCOMPLETA — o lote de PDF precisa cobrir todo conteúdo Alta ou Média '
-                             'do PDF e de suas questões:\n  ' + '\n  '.join(erros))
+            raise SystemExit('COBERTURA INCOMPLETA — o lote de PDF precisa cobrir todo conteúdo do PDF, de suas '
+                             'questões e dos complementos:\n  ' + '\n  '.join(erros))
 
     def _unidades_de_questoes(self, cartoes, erros):
         """Unidades das questões de `questoes_pdf` que a cobertura não declara: cards que as citam e a
@@ -227,8 +254,8 @@ class Lote:
                 continue
             lista = [k for k, x in cartoes.items() if ident in x.get('refs', ())]
             if not lista:
-                erros.append(f'{u} ({ident}): nenhum card a cita em refs; declare-a em COBERTURA '
-                             '(p="baixa" com motivo, ou colecao=[...])')
+                erros.append(f'{u} ({ident}): nenhum card a cita em refs; cite-a nos refs dos cards do seu conteúdo '
+                             'ou declare-a em COBERTURA com colecao=[...]')
                 continue
             p = max((prioridade.get(k, 'media') for k in lista), key=lambda v: ordem[v])
             novas.append(dict(u=u, pag=pag, p=p, questao=ident, conteudo=f'Questão {u.lstrip("Q")} do PDF',
@@ -251,7 +278,7 @@ class Lote:
         unidades = []
         for un in self.cobertura:
             reg = {k: v for k, v in un.items() if k != 'cartoes'}
-            reg['pag'] = self.paginas(un['pag'])
+            reg['pag'] = self.paginas(un['pag']) if 'pag' in un else []
             reg['cartoes'] = [self.rid(k) if k in self.line_of else f'anki_cloze.tsv:{self.cz_index[k]}'
                               for k in un.get('cartoes', ())]
             reg['ids_editoriais'] = list(un.get('cartoes', ()))
@@ -399,10 +426,11 @@ class Lote:
         """Todo card nasce de conteúdo que cai em concurso (2.37, references/cobertura-pdf.md).
 
         D: ao menos uma questão real em `refs` (vira tag), sem exceção. R e Cloze: questão real em `refs`
-        ou `nucleo='motivo'` (regra central da atuação do cargo sem questão localizada). Cloze: `cobra`
-        diz como as questões cobram o termo omitido (no mnemônico, a lista). Falha listando os problemas.
+        ou `nucleo='motivo'` (regra central da atuação do cargo sem questão localizada); o R também
+        passa cobrindo unidade Baixa da cobertura (2.39, conceito do material). Cloze: `cobra` diz como
+        as questões cobram o termo omitido (no mnemônico, a lista). Falha listando os problemas.
         """
-        erros = []
+        erros, baixa_de = [], getattr(self, 'baixa_de', {})
         for x in self.D:
             if x.get('nucleo'):
                 erros.append(f"{x['k']}: D não aceita nucleo; sem questão real não há Desafiadora (faça R/Cloze de núcleo ou Baixa)")
@@ -410,9 +438,11 @@ class Lote:
                 erros.append(f"{x['k']}: D precisa de ao menos uma questão real de concurso em refs (ID do banco)")
         for x in self.R + self.CZ:
             nucleo = str(x.get('nucleo', '')).strip()
-            if not self.questoes_de(x) and not nucleo:
-                erros.append(f"{x['k']}: sem questão real em refs; cite a questão que cobra o conteúdo ou, só para regra "
-                             "central da atuação do cargo, nucleo='motivo'")
+            if not self.questoes_de(x) and not nucleo and not baixa_de.get(x['k']):
+                erros.append(f"{x['k']}: sem questão real em refs; cite a questão que cobra o conteúdo, ou, só para regra "
+                             "central da atuação do cargo, nucleo='motivo'"
+                             + ('' if x['k'] in {c['k'] for c in self.CZ}
+                                else ", ou ponha o R numa unidade p='baixa' do material (2.39)"))
         for x in self.CZ:
             if not str(x.get('cobra', '')).strip():
                 erros.append(f"{x['k']}: Cloze precisa de cobra='como a questão cobra o termo omitido' "
@@ -490,7 +520,19 @@ class Lote:
     def evidencia(self, x) -> dict:
         """Registro da evidência de cobrança de um R/Cloze em revisao_recuperacao.json (schema 2)."""
         questoes = self.questoes_de(x)
-        return {'questoes': questoes} if questoes else {'nucleo_cargo': str(x['nucleo']).strip()}
+        if questoes:
+            return {'questoes': questoes}
+        if str(x.get('nucleo', '')).strip():
+            return {'nucleo_cargo': str(x['nucleo']).strip()}
+        return {'conceito_material': list(getattr(self, 'baixa_de', {}).get(x['k'], ()))}
+
+    def descricao_evidencia(self, x) -> str:
+        ev = self.evidencia(x)
+        if 'questoes' in ev:
+            return ', '.join(ev['questoes'])
+        if 'nucleo_cargo' in ev:
+            return f'núcleo do cargo — {ev["nucleo_cargo"]}'
+        return f'conceito do material sem questão localizada — {", ".join(ev["conceito_material"])}'
 
     def checar_formato(self):
         """Tags de todos os cards e formato do Cloze (uma omissão; mnemônico no formato 2.33)."""
@@ -523,10 +565,10 @@ class Lote:
             if '*' in x.get('cob', {}):
                 n = len(re.findall(r'\{\{c\d+::', x['t']))
                 x['cob'] = {str(i): list(x['cob']['*']) for i in range(1, n + 1)}
+        if not hasattr(self, 'tags_pagina'):
+            self.checar_cobertura()  # antes da evidência: o R de unidade Baixa dispensa questão (2.39)
         self.checar_evidencia()
         self.checar_alternativas()
-        if not hasattr(self, 'tags_pagina'):
-            self.checar_cobertura()
         self.cz_index = {x['k']: i for i, x in enumerate(self.CZ, 1)}
         self.ce_items = [('R', x) for x in self.R] + [('D', x) for x in self.D]
         random.Random(self.semente).shuffle(self.ce_items)
@@ -653,24 +695,30 @@ class Lote:
             linhas += [f'{rotulo}: {rel[chave]}' for chave, rotulo in (
                 ('material', 'Material'), ('leitura', 'Leitura'), ('alvo', 'Concurso-alvo'), ('edital', 'Edital de referência'),
                 ('colecao', 'Coleção')) if rel.get(chave)]
-            linhas += ['Regra (cobertura-pdf.md): inventário de todo o PDF e de suas questões; Alta e Média com ao menos um '
-                       'card ou nota da coleção que já exija a mesma recuperação; Baixa sem card, com motivo. Desde a 2.37 '
-                       'todo card cita questão real que cobra o conteúdo (R/Cloze sem questão só no núcleo do cargo).',
-                       f'Unidades: {cont["alta"]} Alta, {cont["media"]} Média, {cont["baixa"]} Baixa ({excl} exclusão(ões) de texto que não é conteúdo).',
+            extras = sum(bool(un.get('extra')) for un in self.cobertura)
+            linhas += ['Regra (cobertura-pdf.md): inventário de todo o PDF e de suas questões; toda unidade de conteúdo com ao '
+                       'menos um card ou nota da coleção que já exija a mesma recuperação. Desde a 2.37 todo card cita questão '
+                       'real que cobra o conteúdo (R/Cloze sem questão só no núcleo do cargo); desde a 2.39 o conceito do '
+                       'material sem questão localizada (Baixa) vira R, e o complemento da internet (programa do mesmo '
+                       'assunto, com questão real) entra como unidade extra.',
+                       f'Unidades: {cont["alta"]} Alta, {cont["media"]} Média, {cont["baixa"]} Baixa (só R), {extras} '
+                       f'complemento(s) da internet ({excl} exclusão(ões) de texto que não é conteúdo).',
                        '', 'Unidade | página(s) | prioridade | conteúdo | cards / nota da coleção / motivo']
             for un in self.cobertura:
-                pag = ', '.join(map(str, self.paginas(un['pag']))) if 'pag' in un else '?'
+                pag = ('internet' if un.get('extra') else
+                       ', '.join(map(str, self.paginas(un['pag']))) if 'pag' in un else '?')
                 if un.get('excluir'):
                     linhas.append(f'{un["u"]} | {pag} | — | {un.get("conteudo", "")} | {un["excluir"]}')
                     continue
-                if un['p'] == 'baixa':
-                    destino = 'sem card — ' + str(un.get('motivo', ''))
-                else:
-                    destino = '; '.join(filter(None, (', '.join(un.get('cartoes', ())),
-                                                      ('coleção ' + ', '.join(un['colecao'])) if un.get('colecao') else '')))
+                destino = '; '.join(filter(None, (', '.join(un.get('cartoes', ())),
+                                                  ('coleção ' + ', '.join(un['colecao'])) if un.get('colecao') else '')))
                 cards = [porid[k] for k in un.get('cartoes', ()) if k in porid]
-                if cards and not any(self.questoes_de(x) for x in cards):
+                if un['p'] == 'baixa':
+                    destino += ' (conceito do material sem questão localizada — ' + str(un.get('motivo', '')) + ')'
+                elif cards and not any(self.questoes_de(x) for x in cards):
                     destino += ' (núcleo do cargo, sem questão localizada)'
+                if un.get('extra'):
+                    destino += f' ({un["extra"]}; fontes {", ".join(un.get("fx", ()))})'
                 q = f' [{un["questao"]}]' if un.get('questao') else ''
                 linhas.append(f'{un["u"]} | {pag} | {un["p"]} | {un.get("conteudo", "")}{q} | {destino}')
             self._gravar_txt('triagem_previa_pdf.txt', linhas)
@@ -692,8 +740,8 @@ class Lote:
         if self.cobertura is not None:
             baixas = [un for un in self.cobertura if un.get('p') == 'baixa']
             notas = sorted({n for un in self.cobertura for n in un.get('colecao', ())})
-            linhas.append(f'- Prioridade Baixa sem card: {len(baixas)} unidade(s) '
-                          f'({sum(bool(un.get("questao")) for un in baixas)} delas questões do PDF), registradas na triagem.')
+            linhas.append(f'- Prioridade Baixa (conceito sem questão localizada, só R): {len(baixas)} unidade(s), '
+                          'registradas na triagem.')
             if notas:
                 linhas.append(f'- Notas da coleção que já exigem a mesma recuperação cobrem unidades: {", ".join(notas)}.')
             qs = [un for un in self.cobertura if un.get('questao') and un.get('p') != 'baixa']
@@ -717,8 +765,9 @@ class Lote:
         for k, (url, trecho) in self.F.items():
             cards = [x['k'] for x in self.R + self.D + self.CZ if k in x.get('fx', ())]
             linhas.append(f'- {k}: {url} — {trecho}; {", ".join(cards) or "sem card"}')
-        linhas += ['', 'Evidência de cobrança dos rápidos e Cloze (2.37: questão real ou núcleo do cargo):']
-        linhas += [f'- {x["k"]}: ' + (', '.join(self.questoes_de(x)) or f'núcleo do cargo — {str(x["nucleo"]).strip()}')
+        linhas += ['', 'Evidência de cobrança dos rápidos e Cloze (2.37: questão real ou núcleo do cargo; 2.39: R de '
+                       'conceito do material):']
+        linhas += [f'- {x["k"]}: ' + self.descricao_evidencia(x)
                    + (f' | termo cobrado: {str(x["cobra"]).strip()}' if x.get('cobra') else '')
                    for x in self.R + self.CZ] or ['- nenhum']
         if getattr(self, 'mapa_alternativas', None):

@@ -44,12 +44,13 @@ utilidade de recuperar aquilo num cartão. Conteúdo correto e disciplina no edi
    vários IDs, mas cada ID tem vínculo explícito.
 3. Distinga cobrança documentada, previsão no programa, pré-requisito justificado e pertinência não
    demonstrada. Uma questão não prova recorrência; mas, sem questão localizada após a busca, o
-   conteúdo não vira card (salvo núcleo do cargo). Nada
+   conteúdo não vira D nem Cloze (salvo Cloze de núcleo do cargo); conceito do material anexado vira
+   R (2.39). Nada
    de "cai muito" ou percentuais sem contagem (as prioridades do banco trazem a contagem).
 4. Decida por alvo: A/Alta (pertinência e utilidade sustentadas), B/Média (condicional), C/Baixa
    (fora do escopo, acessório ou redundante). Evidência insuficiente fica PENDENTE. Em revisão de PDF,
-   Alta e Média ganham card ou nota da coleção que já exija a mesma recuperação; Baixa não vira card
-   (`cobertura-pdf.md`). Em cartões existentes, recomende sem excluir ou suspender.
+   toda unidade ganha card ou nota da coleção que já exija a mesma recuperação; Baixa, só R (2.39,
+   `cobertura-pdf.md`). Em cartões existentes, recomende sem excluir ou suspender.
 
 ## Pesquisa na internet obrigatória
 
