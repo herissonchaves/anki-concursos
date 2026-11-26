@@ -5,7 +5,7 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
-**Versão 2.39.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.40.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
@@ -70,7 +70,7 @@ Cebraspe, modelo do gerador e `finalizar_lote.py`), sem precisar abrir todas as 
 seção 0 (economia de tokens) é obrigatória: PDF nunca por leitor de página da web, PDF lido uma vez,
 importação com `--ruido`, sem saídas grandes e com idas e voltas agrupadas. Cards de revisão de PDF anexado
 cobrem **todo conceito** do PDF e das questões de concursos nele (desde a 2.39, também o de prioridade
-Baixa, só com R), mais os complementos da internet do mesmo assunto, sem duplicar notas da coleção
+Baixa, com R ou Cloze), mais os complementos da internet do mesmo assunto, sem duplicar notas da coleção
 ([cobertura-pdf.md](skills/gerar-revisao-anki/references/cobertura-pdf.md)) e seguem a formatação única de
 [estilo_anki.py](skills/gerar-revisao-anki/scripts/estilo_anki.py) (Arial 20 px, como os cards de
 Informática).
@@ -82,11 +82,11 @@ e, nos desafiadores, a questão de origem; nada de concurso, `Estilo_Cebraspe`, 
 genérica. Cloze mnemônico: frente `Mnemônico SIGLA:` com as letras visíveis e o resto de cada termo em c1;
 a origem (autoral ou link da fonte) vai só no verso.
 
-**Evidência de cobrança** (desde a 2.37): todo card (R, D ou Cloze) cita em `refs` ao menos uma questão
-real (qualquer banca ou cargo) que cobra o seu conteúdo; o Desafiador é reconstruído da operação dessa
-questão e leva uma tag por questão. Sem questão localizada após a busca: nenhum D; R/Cloze no núcleo
-do cargo (`nucleo='motivo'`); fora do núcleo, o conceito é prioridade Baixa e, desde a 2.39, ganha R
-mesmo assim (nunca D nem Cloze). Cloze só de mnemônico ou de termo-chave que as questões cobram (`cobra`). Questão de múltipla
+**Evidência de cobrança** (desde a 2.37): R e D citam em `refs` ao menos uma questão real (qualquer
+banca ou cargo) que cobra o seu conteúdo; o Desafiador é reconstruído da operação dessa questão e leva
+uma tag por questão. Sem questão localizada após a busca: nenhum D; R no núcleo do cargo
+(`nucleo='motivo'`); fora do núcleo, o conceito é prioridade Baixa e, desde a 2.39, ganha R mesmo assim
+(ou Cloze, desde a 2.40; nunca D). O Cloze não exige questão (modo Cloze, abaixo). Questão de múltipla
 escolha num Desafiador (2.38): ao menos um card por alternativa (`alts`), salvo alternativa fora do
 programa ou sem conteúdo. Regras em
 [cobertura-pdf.md](skills/gerar-revisao-anki/references/cobertura-pdf.md) e
@@ -105,6 +105,17 @@ o `montar_lote.py` falha sem a evidência.
 - **Escrita rápida:** frente C/E afirmativa de 8 a 15 palavras com um fato só (sem caso, exceção ou
   negação); o Errado troca um único elemento; verso com a regra em uma frase e o 💡 Memorize; lista
   longa vira um R por item.
+
+**Modo Cloze** (desde a 2.40), regras em
+[protocolo_cloze_cientifico.md](skills/gerar-revisao-anki/references/protocolo_cloze_cientifico.md):
+- **Memorização sem questão:** o Cloze serve para memorizar conceitos e mnemônicos omitindo palavras.
+  Não exige questão real, `nucleo`, `cobra` nem Desafiador; questão (`refs` + `cobra`) e D que aplica a
+  lacuna (`cob`) entram só quando houver.
+- **Dois tipos:** mnemônico de lista ou sequência (formato de `tags.md`, **sem limite de palavras**) ou
+  conceito-chave do material ou do programa (a lacuna é o núcleo do conceito: termo, propriedade,
+  classificação, prazo ou número indispensável), nunca palavra secundária.
+- **Escrita fácil:** o de conceito-chave é uma frase curta com uma omissão (o lint avisa acima de 30
+  palavras); Extra com a regra em uma frase e o 💡 Memorize. Conceito Baixa pode virar R ou Cloze.
 
 Para conteúdo de PRF ou Agente da Polícia Federal, use
 [perfil-carreiras-policiais](skills/perfil-carreiras-policiais/SKILL.md) para

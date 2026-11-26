@@ -13,7 +13,7 @@ cartões. Não prometer substituir compreensão inicial, exercícios extensos ou
   questões reais que a cobram (do PDF, do banco `referencias/` ou achadas na internet, de qualquer
   banca ou cargo; simulado de curso não conta). Busca de questões obrigatória para toda unidade:
   banco primeiro, internet para o subassunto que o banco não cobre. A questão decide o **formato**
-  (D e Cloze só com questão), não se a unidade ganha card: sem questão, o conceito ganha um R.
+  (D só com questão), não se a unidade ganha card: sem questão, o conceito ganha um R ou um Cloze (2.40).
 - **Prioridade para o concurso-alvo**, com motivo por unidade (substitui A/B/C):
   - **Alta:** cobrado em questão real do cargo-alvo ou da banca-alvo (Cebraspe), regra central
     da atuação do cargo (**núcleo do cargo**; para a PRF: ultrapassagem, velocidade, preferência,
@@ -25,12 +25,13 @@ cartões. Não prometer substituir compreensão inicial, exercícios extensos ou
     salvo núcleo do cargo; também o periférico (bom senso evidente, detalhe administrativo,
     estrutura do código).
 - **Evidência em cada card:** todo card cita em `refs` ao menos uma questão real que cobra o seu
-  conteúdo (o D ganha uma tag por questão; R e Cloze, não). Núcleo do cargo sem questão
-  localizada: só R ou Cloze, com `nucleo='motivo'`; Desafiadora nunca sai sem questão. Exceção do
+  conteúdo (o D ganha uma tag por questão; R, não). Cloze (2.40) é de memorização e não exige questão:
+  cite-a em `refs` (e `cobra`) só quando houver. Núcleo do cargo sem questão localizada: R com
+  `nucleo='motivo'`; Desafiadora nunca sai sem questão. Exceção do
   modo rápido (2.39): o R de unidade Baixa dispensa `refs` (evidência `conceito_material`). O
   `montar_lote.py` falha sem essa evidência.
-- **Toda unidade: ao menos um card.** Alta e Média aceitam R, D e Cloze; **Baixa, só R** (2.39; antes
-  ficava sem card), com o motivo no relatório. A nota da coleção que já exige a mesma recuperação
+- **Toda unidade: ao menos um card.** Alta e Média aceitam R, D e Cloze; **Baixa, só R ou Cloze** (2.39/2.40;
+  antes ficava sem card), com o motivo no relatório. A nota da coleção que já exige a mesma recuperação
   dispensa o card. Texto que não é conteúdo de estudo (capa, sumário, apresentação, avisos) fica fora
   do inventário de prioridade (`excluir`).
 - **Complementos da internet (2.39):** depois do inventário, comparar o PDF com o item do edital do

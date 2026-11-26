@@ -84,6 +84,10 @@ def scan(rows: list[dict[str, str]]) -> list[dict[str, str]]:
             warn(c,'FRENTE_RAPIDA_EXTENSA',f'{words} palavras; R mira 8 a 15: um fato só, sem caso nem exceção')
         if c['tipo'] == 'rapida' and len(plain(c['back']).split()) > 80:
             warn(c,'VERSO_RAPIDO_EXTENSO',f'{len(plain(c["back"]).split())} palavras; R pede regra em 1 frase + Memorize')
+        # 2.40: Cloze de conceito-chave em uma frase curta; mnemônico ("Mnemônico SIGLA:") não tem limite.
+        mnemonico = re.match(r'(?:<[^>]+>|\s)*Mnem[oô]nico\s+[^:<]{1,40}:', c['front'], re.I)
+        if c['tipo'] == 'cloze' and not mnemonico and words > 30:
+            warn(c,'CLOZE_FRENTE_EXTENSA',f'{words} palavras; Cloze de conceito pede uma frase curta (mnemônico não tem limite)')
         elif c['tipo'] == 'desafiadora' and words > 50:
             warn(c,'FRENTE_DESAFIADORA_EXTENSA',f'{words} palavras; avaliar se a extensão agrega inferência')
         if META.search(front) or META.search(plain(c['back'])):

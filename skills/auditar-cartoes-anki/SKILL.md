@@ -22,7 +22,7 @@ Aplicar também `../gerar-revisao-anki/references/auditoria-conteudo-gabaritos.m
 ## Regras comuns
 
 - **Perfil e especializações:** quando o alvo for PRF ou PF (inclusive o foco padrão PRF), aplicar a seção “Perfil de carreira” do núcleo e `../perfil-carreiras-policiais/SKILL.md`, uma vez por tarefa, carregando só as disciplinas pertinentes. Outro cargo ou concurso explícito prevalece.
-- **Cloze:** antes de criar, reformular, aprovar ou avaliar omissões (inclusive uma conclusão de zero Cloze), ler `../gerar-revisao-anki/references/protocolo_cloze_cientifico.md`. Nota nova tem uma única omissão `{{c1::…}}` (várias só em mnemônico, no formato de `skills/gerar-revisao-anki/references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis, resto de cada termo em c1, origem só no verso), e cada lacuna é coberta por D do mesmo lote. Preservar índices e histórico de notas existentes.
+- **Cloze:** antes de criar, reformular, aprovar ou avaliar omissões (inclusive uma conclusão de zero Cloze), ler `../gerar-revisao-anki/references/protocolo_cloze_cientifico.md`. Nota nova tem uma única omissão `{{c1::…}}` (várias só em mnemônico, no formato de `skills/gerar-revisao-anki/references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis, resto de cada termo em c1, origem só no verso), sem exigir questão real nem D (2.40; `cob` só quando um D do lote aplica a lacuna). Preservar índices e histórico de notas existentes.
 - **Visual:** em lotes novos, conferir o HTML do protocolo `../gerar-revisao-anki/references/protocolo_visual_html_anki.md` e o bloco final 💡 Memorize (o validador `--new` reprova a falta, mas não julga o conteúdo do resumo).
 
 ## Auditoria do modo estratégico

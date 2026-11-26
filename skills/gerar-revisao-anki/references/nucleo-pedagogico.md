@@ -49,7 +49,7 @@ utilidade de recuperar aquilo num cartão. Conteúdo correto e disciplina no edi
    de "cai muito" ou percentuais sem contagem (as prioridades do banco trazem a contagem).
 4. Decida por alvo: A/Alta (pertinência e utilidade sustentadas), B/Média (condicional), C/Baixa
    (fora do escopo, acessório ou redundante). Evidência insuficiente fica PENDENTE. Em revisão de PDF,
-   toda unidade ganha card ou nota da coleção que já exija a mesma recuperação; Baixa, só R (2.39,
+   toda unidade ganha card ou nota da coleção que já exija a mesma recuperação; Baixa, só R ou Cloze (2.39/2.40,
    `cobertura-pdf.md`). Em cartões existentes, recomende sem excluir ou suspender.
 
 ## Pesquisa na internet obrigatória
@@ -93,9 +93,10 @@ utilidade de recuperar aquilo num cartão. Conteúdo correto e disciplina no edi
   plausível; clareza e desafio são critérios separados (`protocolo-modo-estrategico.md`). Definição
   disfarçada vira R. Originalidade = reconstruir situação e raciocínio, não trocar palavras.
 - **Cloze:** uma omissão por nota (várias só em mnemônico, no formato de `references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis, resto de cada termo em c1, origem só no verso), contexto suficiente,
-  cada lacuna coberta por um D do lote, índices e histórico de notas existentes preservados.
+  sem exigir questão real nem D (2.40; `cob` quando um D aplica a lacuna), índices e histórico de
+  notas existentes preservados. Mnemônico sem limite de palavras.
   Prazos, datas e números só após o filtro de `protocolo_cloze_cientifico.md`.
-- Paridade C/E por modo e vínculos Cloze → D são planejados na seleção e reconferidos após cortes
+- Paridade C/E por modo e vínculos Cloze → D (opcionais desde a 2.40) são planejados na seleção e reconferidos após cortes
   (`matriz_tipos_quantidades.md`). Nunca fabrique dificuldade, erro ou espelho para fechar cota: se o
   único complemento for artificial, replaneje e registre o alvo descoberto.
 - Frente autossuficiente: sem gabarito, sem depender do PDF, sem duas teses. Conserve condições e

@@ -26,10 +26,13 @@ concurso explícito prevalece e exige programa próprio.
   `references/cobertura-pdf.md`).
 - **D (desafiador Cebraspe):** caso curto, didático, com dado decisivo e uma decisão real (aplicar,
   inferir, distinguir); a dificuldade está na decisão, não no juridiquês. Definição disfarçada vira R.
-- **Cloze:** uma omissão `{{c1::…}}` por nota (várias só em mnemônico: frente `Mnemônico SIGLA:`, letras
-  visíveis e o resto de cada termo em c1, origem só no verso, `references/tags.md`);
-  cada lacuna coberta por um D do mesmo lote. Antes de escolher formatos, inclusive para concluir
-  zero Cloze, leia `references/protocolo_cloze_cientifico.md`.
+- **Cloze (modo Cloze, 2.40):** memorização de conceitos e mnemônicos por omissão de palavras, sem
+  exigir questão real nem D. Dois tipos: **mnemônico** de lista ou sequência (frente `Mnemônico SIGLA:`,
+  letras visíveis e o resto de cada termo em c1, origem só no verso, `references/tags.md`; sem limite de
+  palavras) ou **conceito-chave** (uma omissão `{{c1::…}}` no núcleo do conceito, frase curta, Extra com
+  a regra em uma frase + Memorize). Questão (`refs` + `cobra`) e D que aplica a lacuna (`cob`) só quando
+  houver. Antes de escolher formatos, inclusive para concluir zero Cloze, leia
+  `references/protocolo_cloze_cientifico.md`.
 - 50% Certo e 50% Errado nos R e, separadamente, nos D (total ímpar: diferença de 1); composição e teto em
   `references/matriz_tipos_quantidades.md`. Não repetir o mesmo fato nos três formatos.
 
@@ -45,16 +48,17 @@ concurso explícito prevalece e exige programa próprio.
    recorrência não se presume sem contagem.
 3. **Internet.** Conteúdo: pesquisa obrigatória para todo cartão criado ou reescrito (fonte primária
    vigente em Direito, `references/radar-juridico-atualizacao.md`), salvo o reuso válido do banco.
-   Questões anteriores (2.37): **todo card** (R, D ou Cloze) cita em `refs` ao menos uma questão real
+   Questões anteriores (2.37): **R e D** citam em `refs` ao menos uma questão real
    de concurso que cobra o seu conteúdo (qualquer banca ou cargo); busque-as antes de escrever, banco
    primeiro, internet para o que faltar, salvo banco suficiente no D (item Cebraspe C/E oficial do
    mesmo subassunto já no banco) — primeiro Cebraspe C/E (modelo de forma), depois outras bancas (o
    que se cobra, pegadinhas); use-as como inspiração para itens autorais, nunca como cópia. Sem questão
-   localizada: nenhum D; R/Cloze no núcleo do cargo (`nucleo`); o resto é Baixa e, se for conceito do
-   material anexado, vira só R, sem `refs` (2.39, `references/cobertura-pdf.md`). **Complementos (2.39):**
-   compare o material com o item do edital do mesmo assunto e com as questões achadas; o tópico cobrado
-   em questão real e ausente do material também vira card (unidade `extra`, fonte salva no banco). Cloze só de mnemônico ou de termo-chave que as questões cobram
-   (`cobra`); pesquise mnemônicos e confira cada pista na fonte. Sem Cebraspe acessível:
+   localizada: nenhum D; R no núcleo do cargo (`nucleo`); o resto é Baixa e, se for conceito do
+   material anexado, vira R sem `refs` ou Cloze (2.39/2.40, `references/cobertura-pdf.md`).
+   **Complementos (2.39):** compare o material com o item do edital do mesmo assunto e com as questões
+   achadas; o tópico cobrado em questão real e ausente do material também vira card (unidade `extra`,
+   fonte salva no banco). Cloze (2.40) não exige questão: cite-a em `refs` (+ `cobra`) quando houver;
+   pesquise mnemônicos e confira cada pista na fonte. Sem Cebraspe acessível:
    `inspiracao_geral` + limitação; com Cebraspe e sem outra banca: `outras_bancas_pendencia`. Sem
    pesquisa disponível, a entrega não é final verificada.
 4. D: o "Resumo operacional" no topo de `references/protocolo-modo-estrategico.md`, só a seção da

@@ -134,12 +134,13 @@ Só o mesmo assunto do material; sem questão real, não entra.
   cada unidade é **Alta** (questão real do cargo/banca-alvo ou núcleo do cargo), **Média** (questão
   real de outras bancas/cargos) ou **Baixa** (sem questão localizada, com as buscas no motivo). **Toda
   unidade ganha ao menos um card** (2.39), salvo nota da coleção que já exija a mesma recuperação
-  (busque antes, em leitura): Alta e Média em qualquer formato, Baixa só em R. Mais os complementos
+  (busque antes, em leitura): Alta e Média em qualquer formato, Baixa só em R ou Cloze. Mais os complementos
   `X01`… (seção 4). Teto menor que a cobertura: avisar e perguntar.
 - Inventário página por página (`triagem_previa_pdf.txt`): unidade, página, prioridade e motivo,
   formato e card(s) ou nota da coleção; o mesmo inventário vira o bloco `COBERTURA` do gerador.
-- **Evidência (2.37):** todo card com questão real em `refs`. D sem questão não existe; núcleo do cargo
-  sem questão localizada vira só R/Cloze com `nucleo='motivo'`; conceito Baixa vira R sem `refs` (2.39).
+- **Evidência (2.37):** R e D com questão real em `refs`. D sem questão não existe; núcleo do cargo
+  sem questão localizada vira R com `nucleo='motivo'`; conceito Baixa vira R sem `refs` (2.39). Cloze
+  (2.40) não exige questão: `refs` e `cobra` só quando houver.
 - **Alternativas (2.38):** questão de múltipla escolha nos `refs` de um D → ao menos um card por
   alternativa (R, D ou Cloze; a correta e cada distrator). Os cards entram na paridade 50/50 de R e de D
   (um distrator pode virar um Certo com a regra correta). Sem card, só fora do programa ou sem conteúdo.
@@ -149,11 +150,14 @@ Só o mesmo assunto do material; sem questão real, não entra.
   consequência, termo) por uma confusão real. Lista ou enumeração longa: um R por item (ou Cloze
   mnemônico, se cobrada). D: caso curto com dado decisivo, uma
   decisão real (aplicar, distinguir, exceção), reconstruído da operação de uma questão real; definição
-  disfarçada vira R. Cloze só de dois tipos (`protocolo_cloze_cientifico.md`): **mnemônico** de lista ou
-  sequência cobrada (várias c1, formato de `references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis,
-  resto de cada termo em c1, origem só no verso) ou **termo-chave** que as questões cobram ou trocam (uma
-  omissão `{{c1::…}}`); `cobra` diz como a questão o cobra; números só se cobrados e verificados; cada
-  lacuna coberta por um D (`cob`).
+  disfarçada vira R.
+- **Cloze (modo Cloze, 2.40):** memorização por omissão, sem exigir questão real nem D. Dois tipos
+  (`protocolo_cloze_cientifico.md`): **mnemônico** de lista ou sequência (várias c1, formato de
+  `references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis, resto de cada termo em c1, origem só no
+  verso; **sem limite de palavras**) ou **conceito-chave** do material ou do programa (uma omissão
+  `{{c1::…}}` no núcleo do conceito, frase curta; o lint avisa acima de 30 palavras). Extra: regra em uma
+  frase + Memorize. Com questão, `refs` + `cobra`; com D que aplica a lacuna, `cob` (opcionais). Números e
+  prazos só se forem núcleo de conceito do programa e estiverem verificados.
 - **50% Certo e 50% Errado em R e, separadamente, em D**; em total ímpar, diferença de 1 (não crie card só para equilibrar). Errados com um
   erro central plausível; sem absolutos como pista; ordem embaralhada pelo montador.
 - Não repetir o mesmo fato nos três formatos; teto pedido conta todos os cartões.

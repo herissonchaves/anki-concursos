@@ -180,10 +180,15 @@ def test_mnemonico_com_link_da_fonte_no_verso(tmp_path):
     assert '<a href="https://example.test/mn">Blog X</a>' in gerado.cz_rows[0][1]
 
 
-def test_cob_de_mnemonico_exige_uma_chave_por_lacuna_2_36(tmp_path):
+def test_cob_de_mnemonico_parcial_ou_ausente_passa_2_40(tmp_path):
+    """2.40: cob é opcional; pode citar só as lacunas que um D aplica, nunca lacuna inexistente."""
+    for cob in ({'1': ['D01']}, None):
+        gerado = lote(tmp_path)
+        gerado.CZ[0].update(t=MNEMONICO_OK, mn=dict(sigla='CE-NO-RE', origem='autoral'), cob=cob)
+        gerado.montar_linhas()
     gerado = lote(tmp_path)
-    gerado.CZ[0].update(t=MNEMONICO_OK, mn=dict(sigla='CE-NO-RE', origem='autoral'), cob={'1': ['D01']})
-    with pytest.raises(SystemExit, match='uma chave por lacuna'):
+    gerado.CZ[0].update(t=MNEMONICO_OK, mn=dict(sigla='CE-NO-RE', origem='autoral'), cob={'5': ['D01']})
+    with pytest.raises(SystemExit, match='cob cita a lacuna 5'):
         gerado.montar_linhas()
 
 
@@ -369,8 +374,7 @@ def test_cobertura_total_gera_tags_de_pagina_e_passa_no_validador(tmp_path):
     (lambda c: c.append(dict(u='Q01', pag='9', p='alta', questao='questao-x', cartoes=['D01'])), 'questao-x precisa estar nos refs'),
     (lambda c: c[2].update(excluir='curiosidade'), 'excluir é só para texto que não é conteúdo'),
     (lambda c: c[3].update(cartoes=['D01']), 'prioridade baixa só vira R'),
-    (lambda c: c[3].update(cartoes=['C01']), 'prioridade baixa só vira R'),
-    (lambda c: c[3].pop('colecao'), 'sem ao menos um R (2.39'),
+    (lambda c: c[3].pop('colecao'), 'sem ao menos um R ou Cloze (2.39'),
     (lambda c: c[3].pop('motivo'), 'prioridade baixa exige motivo'),
     (lambda c: c[4].pop('colecao'), 'sem card nem nota da coleção'),
     (lambda c: c[1].pop('p'), 'p deve ser alta, media ou baixa'),
@@ -492,11 +496,11 @@ def test_r_de_conceito_do_material_dispensa_questao_2_39(tmp_path):
         rel / 'triagem_previa_pdf.txt').read_text(encoding='utf-8')
     assert '- R03: conceito do material sem questão localizada — U04' in (
         rel / 'fontes_e_referencias.txt').read_text(encoding='utf-8')
-    # Cloze não aceita a evidência de conceito do material
+    # 2.40: o Cloze também aceita a evidência de conceito do material
     dados = json.loads(revisao)
     cz = [x for x in dados['cartoes'] if x['id'].startswith('anki_cloze')][0]
     cz['evidencia_cobranca'] = {'conceito_material': ['U04']}
-    assert any('conceito_material' in e for e in rev.validate(items, json.dumps(dados).encode()))
+    assert rev.validate(items, json.dumps(dados).encode()) == []
     # validador de cobertura: Baixa apontando para um D falha
     reg = json.loads((rel / 'cobertura_pdf.json').read_text(encoding='utf-8'))
     reg['unidades'][3]['cartoes'] = [final.rid('D01')]
@@ -546,6 +550,62 @@ def test_lint_do_modo_rapido_2_39():
     sinais = {(s['id'], s['sinal']) for s in lint.scan([curta, longa])}
     assert ('x:2', 'FRENTE_RAPIDA_EXTENSA') in sinais and ('x:2', 'VERSO_RAPIDO_EXTENSO') in sinais
     assert not {('x:1', 'FRENTE_RAPIDA_EXTENSA'), ('x:1', 'VERSO_RAPIDO_EXTENSO')} & sinais
+
+
+# ------------------------------------------------------------ modo Cloze (2.40)
+def cloze_livre(g):
+    """Cloze de memorização: sem questão, sem cobra e sem D associado."""
+    for chave in ('refs', 'cobra', 'cob'):
+        g.CZ[0].pop(chave, None)
+
+
+def test_cloze_de_memorizacao_dispensa_questao_cobra_e_d_2_40(tmp_path):
+    final = gerar_resolvido_com(tmp_path, cloze_livre)
+    assert final.pendentes == []
+    items, calibracao, revisao = ler(tmp_path)
+    assert rev.validate(items, revisao) == [] and cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
+    registro = json.loads(revisao)['cartoes'][-1]
+    assert registro['id'] == 'anki_cloze.tsv:1'
+    assert not {'evidencia_cobranca', 'cobranca_do_termo', 'desafiadores_por_lacuna'} & set(registro)
+    rel = tmp_path / 'lote' / 'relatorios'
+    assert 'C01 (CZ:1) | Cloze | APROVAR | Alvo sintético (memorização, sem D associado)' in (
+        rel / 'auditoria_pedagogica.txt').read_text(encoding='utf-8')
+    assert '- C01: memorização de conceito, sem questão citada (2.40)' in (
+        rel / 'fontes_e_referencias.txt').read_text(encoding='utf-8')
+
+
+def test_cloze_de_memorizacao_cobre_unidade_baixa_2_40(tmp_path):
+    import validar_cobertura_pdf as cob
+    cobertura = cobertura_com(i0=dict(cartoes=['R01', 'R02']), i3=dict(cartoes=['C01'], colecao=[]))
+    final = gerar_resolvido_com(tmp_path, cloze_livre, cobertura=cobertura)
+    items, _, revisao = ler(tmp_path)
+    assert rev.validate(items, revisao) == [] and cob.validar(cob.ler(tmp_path / 'lote')) == []
+    registro = json.loads(revisao)['cartoes'][-1]
+    assert registro['evidencia_cobranca'] == {'conceito_material': ['U04']}
+    assert 'Pagina_06' in items['anki_cloze.tsv'].decode().split('\t')[2].split()
+    assert final.baixa_de == {'C01': ['U04']}
+
+
+@pytest.mark.parametrize('cob, esperado', [
+    ({'2': ['D01']}, 'cob cita a lacuna 2'),
+    ({'1': []}, 'precisa de IDs de D do lote'),
+    ({'1': ['R01']}, 'precisa de IDs de D do lote'),
+])
+def test_cob_opcional_mas_valido_quando_presente_2_40(tmp_path, cob, esperado):
+    gerado = lote(tmp_path)
+    gerado.CZ[0]['cob'] = cob
+    with pytest.raises(SystemExit) as falha:
+        gerado.montar_linhas()
+    assert esperado in str(falha.value)
+
+
+def test_lint_do_cloze_poupa_mnemonico_2_40():
+    import auditar_clareza as lint
+    longo = ' '.join(['palavra'] * 31)
+    conceito = dict(id='c:1', tipo='cloze', tags='Cloze', front=longo + ' {{c1::termo}}.', back='Extra ' * 20)
+    mnemonico = dict(conceito, id='c:2', front='<b>Mnemônico ABC:</b><br>' + longo + ' A{{c1::lfa}}.')
+    sinais = {(s['id'], s['sinal']) for s in lint.scan([conceito, mnemonico])}
+    assert ('c:1', 'CLOZE_FRENTE_EXTENSA') in sinais and ('c:2', 'CLOZE_FRENTE_EXTENSA') not in sinais
 
 
 def test_modelos_do_exportador_usam_o_css_padrao():
@@ -613,8 +673,6 @@ def test_fontes_aceitam_id_de_conteudo_do_banco(tmp_path):
     (lambda g: g.D[0].update(refs=[]), 'D01: D precisa de ao menos uma questão real'),
     (lambda g: g.D[0].update(nucleo='Regra central sintética'), 'D01: D não aceita nucleo'),
     (lambda g: g.R[0].update(refs=[]), 'R01: sem questão real em refs'),
-    (lambda g: g.CZ[0].update(refs=[]), 'C01: sem questão real em refs'),
-    (lambda g: g.CZ[0].pop('cobra'), 'C01: Cloze precisa de cobra='),
 ])
 def test_card_sem_evidencia_de_cobranca_falha_2_37(tmp_path, mudanca, esperado):
     gerado = lote(tmp_path)
@@ -658,7 +716,9 @@ def test_validador_de_revisao_exige_evidencia_no_schema_2(tmp_path):
         x.pop('evidencia_cobranca')
         x.pop('cobranca_do_termo', None)
     erros = rev.validate(items, json.dumps(dados).encode())
-    assert any('evidencia_cobranca' in e for e in erros) and any('cobranca_do_termo' in e for e in erros)
+    # R continua exigindo evidência; no Cloze (2.40) evidência e termo cobrado são opcionais
+    assert any('evidencia_cobranca' in e and 'anki_certo_errado' in e for e in erros)
+    assert not any('anki_cloze' in e for e in erros)
     dados['schema_version'] = 1  # legado: sem a exigência
     assert not any('evidencia' in e or 'cobranca' in e for e in rev.validate(items, json.dumps(dados).encode()))
 

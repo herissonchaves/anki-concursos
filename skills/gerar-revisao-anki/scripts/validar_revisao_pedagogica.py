@@ -6,7 +6,8 @@ Não cria nem preenche auditorias. Coleções existentes usam o fluxo de leitura
 
 schema_version 2 (2.37, gravado pelo `montar_lote.py`): todo R/Cloze traz `evidencia_cobranca`
 (`{"questoes": [IDs]}` ou `{"nucleo_cargo": "motivo"}`; no R, desde a 2.39, também
-`{"conceito_material": [unidades Baixa]}`) e todo Cloze, `cobranca_do_termo`.
+`{"conceito_material": [unidades Baixa]}`). Desde a 2.40 o Cloze é de memorização: `evidencia_cobranca`,
+`cobranca_do_termo` e `desafiadores_por_lacuna` são opcionais e só validados quando presentes.
 schema_version 1 continua aceito para lotes anteriores, sem essas chaves.
 """
 from __future__ import annotations
@@ -96,11 +97,14 @@ def _unique_object(pairs):
 
 
 def validate_cloze_coverage(row, coverage, challenges, errors):
+    """2.40: opcional (Cloze de memorização vale sozinho); se presente, só lacunas existentes e D do lote."""
     ident = row['id']
+    if coverage is None:
+        return
     count = sum(1 for _ in structure.CLOZE_ANY.finditer(row['front']))
     expected = {str(number) for number in range(1, count + 1)}
-    if not expected or not isinstance(coverage, dict) or coverage.keys() != expected:
-        errors.append(f'{ident}: desafiadores_por_lacuna deve cobrir todas as lacunas na ordem do Texto')
+    if not isinstance(coverage, dict) or not coverage or not set(coverage) <= expected:
+        errors.append(f'{ident}: desafiadores_por_lacuna, quando presente, deve citar só lacunas do Texto (1 a {count})')
         return
     for gap, references in coverage.items():
         if not isinstance(references, list) or not references or any(
@@ -110,20 +114,23 @@ def validate_cloze_coverage(row, coverage, challenges, errors):
 
 
 def validate_evidence(ident, tipo, record, errors):
-    """2.37: R/Cloze só de conteúdo que cai em concurso (questão real ou núcleo do cargo); 2.39: o R
-    também pode vir de conceito do material sem questão localizada (unidades Baixa da cobertura)."""
+    """2.37: R só de conteúdo que cai em concurso (questão real ou núcleo do cargo); 2.39: o R também pode
+    vir de conceito do material sem questão localizada (unidades Baixa da cobertura); 2.40: no Cloze, a
+    evidência é opcional e só validada quando presente."""
     ev = record.get('evidencia_cobranca')
+    if tipo == 'cloze':  # 2.40: Cloze de memorização; evidência e termo cobrado só validados se presentes
+        if 'cobranca_do_termo' in record and not nonblank(record.get('cobranca_do_termo')):
+            errors.append(f'{ident}: cobranca_do_termo, quando presente, diz como a questão cobra o termo omitido')
+        if ev is None:
+            return
 
     def lista(chave):
         valor = ev.get(chave) if isinstance(ev, dict) else None
         return isinstance(valor, list) and bool(valor) and all(nonblank(v) for v in valor)
-    ok = lista('questoes') or (isinstance(ev, dict) and nonblank(ev.get('nucleo_cargo'))) or (
-        tipo == 'rapida' and lista('conceito_material'))
+    ok = lista('questoes') or (isinstance(ev, dict) and nonblank(ev.get('nucleo_cargo'))) or lista('conceito_material')
     if not ok:
         errors.append(f'{ident}: evidencia_cobranca requer questões reais (IDs do banco), nucleo_cargo com motivo '
-                      'ou, só no R, conceito_material (unidades Baixa)')
-    if tipo == 'cloze' and not nonblank(record.get('cobranca_do_termo')):
-        errors.append(f'{ident}: cobranca_do_termo requer como a questão cobra o termo omitido')
+                      'ou conceito_material (unidades Baixa)')
 
 
 def validate(items, report):

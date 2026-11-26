@@ -15,7 +15,7 @@
 | J09 | Recurso afetado como repetitivo usado como tese já decidida | Pendência; confirmação oficial do julgamento de mérito é necessária. |
 | J10 | Definição do tipo penal com nome de personagem, marcada D | Reclassificar R, caso ornamental não produz aplicação. |
 | J11 | Errados usam sempre/jamais como pista, sem falha substantiva | Reformular; C/E deve exigir conhecimento, não estratégia de chute. |
-| J12 | Cloze oculta quatro elementos independentes em uma só lacuna | Separar os alvos em notas com Extra específico e desafiadores associados. Um mnemônico coerente pode agrupar várias lacunas c1. |
+| J12 | Cloze oculta quatro elementos independentes em uma só lacuna | Separar os alvos em notas com Extra específico (desafiadores associados só quando aplicarem a lacuna). Um mnemônico coerente pode agrupar várias lacunas c1. |
 | J13 | Questão oficial antiga e norma atual divergem | Explicar regime temporal e não imputar erro à questão no seu tempo. |
 | J14 | Caso une tese de Direito Penal, Processo Penal e Trânsito sem uma decisão nuclear | Dividir alvos independentes ou escolher fato decisivo, sem múltiplas conclusões. |
 | J15 | Verso diz apenas "Errado, art. X" | Reformular: regra, fato, por que errado e correção. |

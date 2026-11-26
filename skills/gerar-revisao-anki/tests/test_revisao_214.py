@@ -171,7 +171,7 @@ def test_zero_cloze_and_cloze_with_challenges_and_d_only(package):
     do_export(package)
 
 
-def test_cloze_coverage_requires_every_gap_and_only_current_challenges():
+def test_cloze_coverage_is_optional_but_only_current_challenges_2_40():
     items = {
         check.FILES[0]: (CE + D).encode(),
         check.FILES[1]: ('Alfa {{c1::beta}} e {{c1::gama}}.\t'
@@ -180,9 +180,15 @@ def test_cloze_coverage_requires_every_gap_and_only_current_challenges():
     report = make_review(items)
     assert evaluate(items, report) == []  # O primeiro D cobre ambas as lacunas na fixture.
     record = report['cartoes'][-1]
+    # 2.40: Cloze de memorização vale sozinho; cobertura ausente ou parcial passa
+    for coverage in (None, {'1': ['anki_certo_errado.tsv:3']}):
+        record['desafiadores_por_lacuna'] = coverage
+        assert evaluate(items, report) == []
+    record.pop('desafiadores_por_lacuna')
+    assert evaluate(items, report) == []
     for coverage in (
-        None,
-        {'1': ['anki_certo_errado.tsv:3']},
+        {},
+        {'3': ['anki_certo_errado.tsv:3']},
         {'1': ['anki_certo_errado.tsv:3'], '2': []},
         {'1': ['anki_certo_errado.tsv:3'], '2': ['anki_certo_errado.tsv:1']},
         {'1': ['anki_certo_errado.tsv:3'], '2': ['anki_certo_errado.tsv:99']},

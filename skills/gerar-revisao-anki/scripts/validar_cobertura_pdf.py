@@ -5,8 +5,8 @@ Uso: python validar_cobertura_pdf.py DIRETORIO_DO_LOTE_OU_ZIP
 (o diretório é a pasta `lote/`, com os TSVs e `relatorios/cobertura_pdf.json`).
 
 Cada unidade tem `p` (alta, media ou baixa). Falha se unidade não tiver card nem nota da coleção
-(`colecao`), se Baixa (2.39: conceito do material sem questão localizada) tiver card que não seja R
-(tag `Rapida`) ou não tiver `motivo`, se apontar para linha inexistente, se algum card do lote não
+(`colecao`), se Baixa (2.39: conceito do material sem questão localizada) tiver Desafiador (só R ou,
+desde a 2.40, Cloze) ou não tiver `motivo`, se apontar para linha inexistente, se algum card do lote não
 cobrir unidade, ou se faltar ao card a tag `Pagina_NN` de uma página que ele cobre. Complemento da
 internet (`extra`, 2.39) não tem página e não pode ser Baixa. Texto que não é conteúdo de estudo usa
 `excluir: "nao_conteudo: motivo"`. Sem `cobertura_pdf.json`, informa e retorna 0
@@ -75,8 +75,8 @@ def validar(arquivos: dict[str, bytes | None]) -> list[str]:
                 erros.append(f'{u}: card {ident} inexistente')
                 continue
             row = tsv[nome][int(n) - 1]
-            if p == 'baixa' and 'Rapida' not in (row[2].split() if len(row) == 3 else ()):
-                erros.append(f'{u}: prioridade baixa só vira R ({ident} não é Rapida)')
+            if p == 'baixa' and nome != 'anki_cloze.tsv' and 'Rapida' not in (row[2].split() if len(row) == 3 else ()):
+                erros.append(f'{u}: prioridade baixa só vira R ou Cloze ({ident} é Desafiadora)')
             cobertos.setdefault(ident, set()).update(int(p) for p in pags)
     for nome, rows in tsv.items():
         for n, row in enumerate(rows, 1):
@@ -108,7 +108,7 @@ def main(argv=None) -> int:
         print('COBERTURA INCOMPLETA:\n  ' + '\n  '.join(erros))
         return 1
     n = len(json.loads(arquivos[REGISTRO].decode('utf-8'))['unidades'])
-    print(f'COBERTURA COMPLETA: {n} unidade(s) do inventário com card ou nota da coleção (Baixa só com R). '
+    print(f'COBERTURA COMPLETA: {n} unidade(s) do inventário com card ou nota da coleção (Baixa só com R ou Cloze). '
           'Não certifica a qualidade dos cards.')
     return 0
 

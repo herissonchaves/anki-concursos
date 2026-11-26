@@ -10,7 +10,7 @@ Da raiz do plugin, executar com Python em UTF-8:
 python -X utf8 -m pytest skills/gerar-revisao-anki/tests skills/automacao-anki-python/tests -q
 ```
 
-A suíte deve cobrir: bloqueio de D novos sem calibração; rubrica incompleta ou com linguagem/didática reprovada; verificação do diretório e do ZIP final; paridade separada R/D; Cloze novo com c1 único ou repetido e cobertura de cada lacuna por desafiadores; leitura de notas antigas sem reequilíbrio; contagem e mídia do APKG; preservação de coleção/histórico em cópia; ausência de biblioteca opcional e argumentos CLI no Windows.
+A suíte deve cobrir: bloqueio de D novos sem calibração; rubrica incompleta ou com linguagem/didática reprovada; verificação do diretório e do ZIP final; paridade separada R/D; Cloze novo com c1 único ou repetido e cobertura opcional por desafiadores (só lacunas existentes e D do lote); leitura de notas antigas sem reequilíbrio; contagem e mídia do APKG; preservação de coleção/histórico em cópia; ausência de biblioteca opcional e argumentos CLI no Windows.
 
 As fixtures de calibração dentro de `tests/` contêm fontes fictícias e não podem gerar relatórios de produção. Testes documentais deliberadamente aceitam exemplos semanticamente errados para demonstrar os limites do verificador. Uma suíte verde não é aprovação pedagógica.
 

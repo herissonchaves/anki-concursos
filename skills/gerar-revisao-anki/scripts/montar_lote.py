@@ -19,18 +19,20 @@ Convenção dos dicionários de cartão (chaves curtas):
   com `lim`), `rb` (use `rubrica(...)`) e, no schema 2, `refs` com questão de outra
   banca ou `obp` (outras_bancas_pendencia).
 - Cloze: `t` (texto com uma omissão {{c1::…}}), `alvo`, `sol`, `alt`, `rec`, `fb`,
-  `cob` ({'1': ['D04']}: D que cobrem cada lacuna), `cobra` (2.37, obrigatório: como a questão cobra o
-  termo omitido; no mnemônico, a lista ou sequência cobrada). Mnemônico (2.33): `mn=dict(sigla='CE-NO-RE',
+  `cob` (opcional desde a 2.40: {'1': ['D04']}, D do lote que aplicam a lacuna; pode cobrir só algumas),
+  `refs` e `cobra` (opcionais desde a 2.40: questão que cobra o termo omitido e como a cobra; no
+  mnemônico, a lista ou sequência cobrada). Mnemônico (2.33): `mn=dict(sigla='CE-NO-RE',
   origem='autoral' | ('encontrado'|'adaptado', url, nome))`, frente iniciada por "Mnemônico SIGLA:",
   letra(s) da sigla visíveis e o resto de cada termo em c1 (`C{{c1::ompetência}}`); a origem vai
   só no Extra (bloco gerado), nunca na frente.
 
-Evidência de cobrança (2.37, references/cobertura-pdf.md): todo card cita em `refs` ao menos uma
+Evidência de cobrança (2.37, references/cobertura-pdf.md): R e D citam em `refs` ao menos uma
 questão real de concurso do banco (qualquer banca ou cargo) que cobra o seu conteúdo. Sem questão
-localizada, só R e Cloze de regra central da atuação do cargo, com `nucleo='motivo'`; D nunca. Modo
-rápido (2.39): o R que cobre unidade Baixa da `cobertura` (conceito do material sem questão localizada)
-dispensa questão e `nucleo` (evidência `conceito_material`). O montador falha (`checar_evidencia`) e
-grava a evidência em `revisao_recuperacao.json` (schema 2).
+localizada, só R de regra central da atuação do cargo, com `nucleo='motivo'`; D nunca. Modo rápido
+(2.39): o R que cobre unidade Baixa da `cobertura` (conceito do material sem questão localizada)
+dispensa questão e `nucleo` (evidência `conceito_material`). Modo Cloze (2.40): o Cloze é de
+memorização e não exige questão, `nucleo`, `cobra` nem `cob`; a evidência que houver é registrada. O
+montador falha (`checar_evidencia`) e grava a evidência em `revisao_recuperacao.json` (schema 2).
 
 Alternativas (2.38): questão de múltipla escolha nos `refs` de algum D precisa de ao menos um card (R, D
 ou Cloze) por alternativa. Cada card diz quais trabalha em `alts={'<id>': 'AC'}` (a questão também nos
@@ -166,16 +168,17 @@ class Lote:
 
         Cada unidade do inventário traz `p` ('alta', 'media' ou 'baixa') e precisa de `cartoes` do lote
         ou de `colecao` (IDs de notas que já exigem a mesma recuperação). Baixa (2.39: conceito do
-        material sem questão localizada) só aceita R e exige `motivo`. Complemento da internet (`extra`,
-        2.39): sem `pag`, `fx` existentes, p alta/media e card com questão real. Também calcula as tags
-        Pagina_NN de cada card e `self.baixa_de` ({card: [unidades Baixa]}). Falha (SystemExit)
-        listando os problemas.
+        material sem questão localizada) aceita R e Cloze (2.40), nunca D, e exige `motivo`. Complemento
+        da internet (`extra`, 2.39): sem `pag`, `fx` existentes, p alta/media, R/D com questão real e ao
+        menos um card com questão. Também calcula as tags Pagina_NN de cada card e `self.baixa_de`
+        ({card: [unidades Baixa]}). Falha (SystemExit) listando os problemas.
         """
         self.tags_pagina, self.baixa_de = {}, {}
         if self.cobertura is None:
             return
         cartoes = {x['k']: x for x in self.R + self.D + self.CZ}
-        rapidos = {x['k'] for x in self.R}
+        rapidos = {x['k'] for x in self.R + self.CZ}  # 2.40: Baixa aceita R e Cloze
+        clozes = {x['k'] for x in self.CZ}
         erros, cobertos = [], set()
         self.cobertura = list(self.cobertura) + self._unidades_de_questoes(cartoes, erros)
         for un in self.cobertura:
@@ -190,7 +193,7 @@ class Lote:
                 erros.append(f'{u}: p deve ser alta, media ou baixa')
                 continue
             if not lista and not un.get('colecao'):
-                exige = 'ao menos um R (2.39: todo conceito do material vira R)' if p == 'baixa' else 'card'
+                exige = 'ao menos um R ou Cloze (2.39: todo conceito do material vira card)' if p == 'baixa' else 'card'
                 erros.append(f'{u} (p. {un.get("pag", "internet")}, {p}): sem {exige} nem nota da coleção — '
                              f'{un.get("conteudo", "")[:70]}')
             for k in lista:
@@ -199,7 +202,8 @@ class Lote:
             if p == 'baixa':
                 outros = [k for k in lista if k in cartoes and k not in rapidos]
                 if outros:
-                    erros.append(f'{u}: prioridade baixa só vira R (tire {", ".join(outros)} ou cite questão real e reavalie)')
+                    erros.append(f'{u}: prioridade baixa só vira R ou Cloze (tire {", ".join(outros)} ou cite questão real '
+                                 'e reavalie)')
                 if not str(un.get('motivo', '')).strip():
                     erros.append(f'{u}: prioridade baixa exige motivo (buscas de questão feitas)')
                 for k in lista:
@@ -215,8 +219,10 @@ class Lote:
                 if not fx or any(k not in self.F for k in fx):
                     erros.append(f'{u}: complemento da internet (extra) precisa de fx com chaves de fontes')
                 for k in lista:
-                    if k in cartoes and not self.questoes_de(cartoes[k]):
+                    if k in cartoes and k not in clozes and not self.questoes_de(cartoes[k]):
                         erros.append(f'{u}: {k} cobre complemento da internet e precisa de questão real em refs')
+                if lista and not any(self.questoes_de(cartoes[k]) for k in lista if k in cartoes):
+                    erros.append(f'{u}: complemento da internet precisa de ao menos um card com questão real em refs')
             else:
                 try:
                     pags = self.paginas(un['pag'])
@@ -423,12 +429,12 @@ class Lote:
         return [r for r in x.get('refs', ()) if isinstance(r, str) and r.strip()]
 
     def checar_evidencia(self):
-        """Todo card nasce de conteúdo que cai em concurso (2.37, references/cobertura-pdf.md).
+        """R e D nascem de conteúdo que cai em concurso (2.37, references/cobertura-pdf.md).
 
-        D: ao menos uma questão real em `refs` (vira tag), sem exceção. R e Cloze: questão real em `refs`
-        ou `nucleo='motivo'` (regra central da atuação do cargo sem questão localizada); o R também
-        passa cobrindo unidade Baixa da cobertura (2.39, conceito do material). Cloze: `cobra` diz como
-        as questões cobram o termo omitido (no mnemônico, a lista). Falha listando os problemas.
+        D: ao menos uma questão real em `refs` (vira tag), sem exceção. R: questão real em `refs` ou
+        `nucleo='motivo'` (regra central da atuação do cargo sem questão localizada), ou cobrir unidade
+        Baixa da cobertura (2.39, conceito do material). Cloze (2.40): memorização, sem exigência de
+        questão, `nucleo` ou `cobra`. Falha listando os problemas.
         """
         erros, baixa_de = [], getattr(self, 'baixa_de', {})
         for x in self.D:
@@ -436,17 +442,12 @@ class Lote:
                 erros.append(f"{x['k']}: D não aceita nucleo; sem questão real não há Desafiadora (faça R/Cloze de núcleo ou Baixa)")
             if not self.questoes_de(x):
                 erros.append(f"{x['k']}: D precisa de ao menos uma questão real de concurso em refs (ID do banco)")
-        for x in self.R + self.CZ:
+        for x in self.R:
             nucleo = str(x.get('nucleo', '')).strip()
             if not self.questoes_de(x) and not nucleo and not baixa_de.get(x['k']):
                 erros.append(f"{x['k']}: sem questão real em refs; cite a questão que cobra o conteúdo, ou, só para regra "
-                             "central da atuação do cargo, nucleo='motivo'"
-                             + ('' if x['k'] in {c['k'] for c in self.CZ}
-                                else ", ou ponha o R numa unidade p='baixa' do material (2.39)"))
-        for x in self.CZ:
-            if not str(x.get('cobra', '')).strip():
-                erros.append(f"{x['k']}: Cloze precisa de cobra='como a questão cobra o termo omitido' "
-                             '(no mnemônico, a lista ou sequência cobrada)')
+                             "central da atuação do cargo, nucleo='motivo', ou ponha o R numa unidade p='baixa' do "
+                             "material (2.39)")
         if erros:
             raise SystemExit('EVIDÊNCIA DE COBRANÇA AUSENTE (2.37) — todo card vem de conteúdo que cai em concurso:\n  '
                              + '\n  '.join(erros))
@@ -517,17 +518,23 @@ class Lote:
             raise SystemExit('ALTERNATIVAS SEM CARD (2.38) — questão de múltipla escolha de um D pede ao menos um '
                              'card por alternativa:\n  ' + '\n  '.join(erros))
 
-    def evidencia(self, x) -> dict:
-        """Registro da evidência de cobrança de um R/Cloze em revisao_recuperacao.json (schema 2)."""
+    def evidencia(self, x) -> dict | None:
+        """Registro da evidência de cobrança de um R/Cloze em revisao_recuperacao.json (schema 2).
+
+        Cloze sem questão, núcleo nem unidade Baixa (2.40, memorização) devolve None: o campo é omitido.
+        """
         questoes = self.questoes_de(x)
         if questoes:
             return {'questoes': questoes}
         if str(x.get('nucleo', '')).strip():
             return {'nucleo_cargo': str(x['nucleo']).strip()}
-        return {'conceito_material': list(getattr(self, 'baixa_de', {}).get(x['k'], ()))}
+        unidades = list(getattr(self, 'baixa_de', {}).get(x['k'], ()))
+        return {'conceito_material': unidades} if unidades or x['k'] in {r['k'] for r in self.R} else None
 
     def descricao_evidencia(self, x) -> str:
         ev = self.evidencia(x)
+        if ev is None:
+            return 'memorização de conceito, sem questão citada (2.40)'
         if 'questoes' in ev:
             return ', '.join(ev['questoes'])
         if 'nucleo_cargo' in ev:
@@ -542,11 +549,14 @@ class Lote:
         for x, row in zip(self.CZ, self.cz_rows):
             erros += [f"{x['k']}: {e}" for e in problemas_tags(row[2], CLOZE)]
             lacunas = len(re.findall(r'\{\{c\d+::', x['t']))
-            chaves = set(x.get('cob', {}))
-            if chaves != {str(i) for i in range(1, lacunas + 1)}:
-                erros.append(f"{x['k']}: cob precisa de uma chave por lacuna ({lacunas}: "
-                             f"{', '.join(str(i) for i in range(1, lacunas + 1))}); achou {sorted(chaves) or 'nenhuma'}. "
-                             "Use cob={'*': ['Dxx']} para a mesma lista em todas")
+            validas = {str(i) for i in range(1, lacunas + 1)}
+            desafiadores = {d['k'] for d in self.D}
+            for g, ks in (x.get('cob') or {}).items():  # 2.40: cob opcional; se houver, só lacunas e D do lote
+                if g not in validas:
+                    erros.append(f"{x['k']}: cob cita a lacuna {g}, mas a nota tem {lacunas} "
+                                 f"({', '.join(sorted(validas)) or 'nenhuma'}); use cob={{'*': ['Dxx']}} para todas")
+                if not ks or any(k not in desafiadores for k in ks):
+                    erros.append(f"{x['k']}: cob da lacuna {g} precisa de IDs de D do lote (achou {ks or 'nenhum'})")
             if x.get('mn'):
                 erros += [f"{x['k']}: {e}" for e in problemas_mnemonico(x['t'], row[1])]
                 sigla = sigla_mnemonico(x['t'])
@@ -562,7 +572,7 @@ class Lote:
 
     def montar_linhas(self):
         for x in self.CZ:  # 2.36: cob={'*': [...]} vale para todas as lacunas, na ordem do texto
-            if '*' in x.get('cob', {}):
+            if '*' in (x.get('cob') or {}):
                 n = len(re.findall(r'\{\{c\d+::', x['t']))
                 x['cob'] = {str(i): list(x['cob']['*']) for i in range(1, n + 1)}
         if not hasattr(self, 'tags_pagina'):
@@ -649,12 +659,18 @@ class Lote:
                 solucao=x['sol'], fontes=self.fontes(*x['fx']), **opcionais(x),
                 evidencia_cobranca=self.evidencia(x), segunda_conferencia=True, decisao='APROVAR'))
         for i, x in enumerate(self.CZ, 1):
+            # 2.40: evidência, termo cobrado e desafiadores por lacuna só quando existirem
+            extras = {}
+            if self.evidencia(x) is not None:
+                extras['evidencia_cobranca'] = self.evidencia(x)
+            if str(x.get('cobra', '')).strip():
+                extras['cobranca_do_termo'] = str(x['cobra']).strip()
+            if x.get('cob'):
+                extras['desafiadores_por_lacuna'] = {g: [self.rid(k) for k in ks] for g, ks in x['cob'].items()}
             rev['cartoes'].append(dict(
                 id=f'anki_cloze.tsv:{i}', sha256=fingerprint(self.cz_rows[i - 1]), alvo=x['alvo'],
                 solucao=x.get('sol') or self._lacunas(x['t']), fontes=self.fontes(*x['fx']), **opcionais(x),
-                evidencia_cobranca=self.evidencia(x), cobranca_do_termo=str(x['cobra']).strip(),
-                desafiadores_por_lacuna={g: [self.rid(k) for k in ks] for g, ks in x['cob'].items()},
-                segunda_conferencia=True, decisao='APROVAR'))
+                **extras, segunda_conferencia=True, decisao='APROVAR'))
         editorial = {f'anki_certo_errado.tsv:{n}': k for k, n in self.line_of.items()}
         editorial.update({f'anki_cloze.tsv:{i}': x['k'] for i, x in enumerate(self.CZ, 1)})
         motivos = json.loads(Path(sinais_resolvidos).read_text(encoding='utf-8')) if Path(sinais_resolvidos).exists() else {}
@@ -697,11 +713,12 @@ class Lote:
                 ('colecao', 'Coleção')) if rel.get(chave)]
             extras = sum(bool(un.get('extra')) for un in self.cobertura)
             linhas += ['Regra (cobertura-pdf.md): inventário de todo o PDF e de suas questões; toda unidade de conteúdo com ao '
-                       'menos um card ou nota da coleção que já exija a mesma recuperação. Desde a 2.37 todo card cita questão '
-                       'real que cobra o conteúdo (R/Cloze sem questão só no núcleo do cargo); desde a 2.39 o conceito do '
-                       'material sem questão localizada (Baixa) vira R, e o complemento da internet (programa do mesmo '
-                       'assunto, com questão real) entra como unidade extra.',
-                       f'Unidades: {cont["alta"]} Alta, {cont["media"]} Média, {cont["baixa"]} Baixa (só R), {extras} '
+                       'menos um card ou nota da coleção que já exija a mesma recuperação. Desde a 2.37 R e D citam questão '
+                       'real que cobra o conteúdo (R sem questão só no núcleo do cargo); desde a 2.39 o conceito do '
+                       'material sem questão localizada (Baixa) vira R (ou Cloze, 2.40), e o complemento da internet '
+                       '(programa do mesmo assunto, com questão real) entra como unidade extra. Desde a 2.40 o Cloze é de '
+                       'memorização e não exige questão.',
+                       f'Unidades: {cont["alta"]} Alta, {cont["media"]} Média, {cont["baixa"]} Baixa (R ou Cloze), {extras} '
                        f'complemento(s) da internet ({excl} exclusão(ões) de texto que não é conteúdo).',
                        '', 'Unidade | página(s) | prioridade | conteúdo | cards / nota da coleção / motivo']
             for un in self.cobertura:
@@ -716,7 +733,9 @@ class Lote:
                 if un['p'] == 'baixa':
                     destino += ' (conceito do material sem questão localizada — ' + str(un.get('motivo', '')) + ')'
                 elif cards and not any(self.questoes_de(x) for x in cards):
-                    destino += ' (núcleo do cargo, sem questão localizada)'
+                    nucleo = any(str(x.get('nucleo', '')).strip() for x in cards)
+                    destino += (' (núcleo do cargo, sem questão localizada)' if nucleo
+                                else ' (Cloze de memorização, sem questão citada)')
                 if un.get('extra'):
                     destino += f' ({un["extra"]}; fontes {", ".join(un.get("fx", ()))})'
                 q = f' [{un["questao"]}]' if un.get('questao') else ''
@@ -727,8 +746,9 @@ class Lote:
                   'fontes_e_referencias.txt e testada contra leitura concorrente. Detalhes em revisao_recuperacao.json '
                   '(R/Cloze) e calibracao_cebraspe.json (D).', '', 'ID (linha) | gab. | decisão | alvo']
         linhas += [f'{x["k"]} ({self._linha_de(x["k"])}) | {x["g"]} | APROVAR | {x["alvo"]}' for x in self.R + self.D]
-        linhas += [f'{x["k"]} ({self._linha_de(x["k"])}) | Cloze | APROVAR | {x["alvo"]} '
-                   f'(lacunas cobertas por {", ".join(sorted({k for ks in x["cob"].values() for k in ks}))})' for x in self.CZ]
+        linhas += [f'{x["k"]} ({self._linha_de(x["k"])}) | Cloze | APROVAR | {x["alvo"]}'
+                   + (f' (lacunas aplicadas por {", ".join(sorted({k for ks in x["cob"].values() for k in ks}))})'
+                      if x.get('cob') else ' (memorização, sem D associado)') for x in self.CZ]
         self._gravar_txt('auditoria_pedagogica.txt', linhas)
         n_r, n_d, n_c = len(self.R), len(self.D), len(self.CZ)
         rc, dc = sum(x['g'] == 'C' for x in self.R), sum(x['g'] == 'C' for x in self.D)
@@ -747,7 +767,8 @@ class Lote:
             qs = [un for un in self.cobertura if un.get('questao') and un.get('p') != 'baixa']
             linhas.append(f'- Questões do PDF reaproveitam cards de conteúdo: {len(qs)} questão(ões) Alta/Média cobertas '
                           'por cards que as citam ou por notas da coleção.')
-        linhas += ['- Cobertura = ao menos um card por unidade; nenhum fato nos três formatos; cada lacuna Cloze coberta por um D.',
+        linhas += ['- Cobertura = ao menos um card por unidade; nenhum fato nos três formatos; Cloze de memorização, ligado '
+                   'a um D só quando o D aplica a lacuna (2.40).',
                    '', f'Carga: {total} cartões novos; a {NOVOS_POR_DIA} novos por dia, cerca de '
                        f'{-(-total // NOVOS_POR_DIA)} dia(s) de introdução.']
         self._gravar_txt('economia_de_revisao.txt', linhas)
@@ -766,7 +787,7 @@ class Lote:
             cards = [x['k'] for x in self.R + self.D + self.CZ if k in x.get('fx', ())]
             linhas.append(f'- {k}: {url} — {trecho}; {", ".join(cards) or "sem card"}')
         linhas += ['', 'Evidência de cobrança dos rápidos e Cloze (2.37: questão real ou núcleo do cargo; 2.39: R de '
-                       'conceito do material):']
+                       'conceito do material; 2.40: Cloze de memorização dispensa questão):']
         linhas += [f'- {x["k"]}: ' + self.descricao_evidencia(x)
                    + (f' | termo cobrado: {str(x["cobra"]).strip()}' if x.get('cobra') else '')
                    for x in self.R + self.CZ] or ['- nenhum']

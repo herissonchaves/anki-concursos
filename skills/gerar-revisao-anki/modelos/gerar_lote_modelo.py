@@ -28,10 +28,11 @@ ASSUNTO = 'Disciplina::Assunto'  # ex.: 'Direito_Administrativo::Atos_Administra
 PDF = 'Missao_NN'                # nome curto do PDF; None em lote sem PDF (prints, caderno de erros)
 
 # IDs do banco referencias/ (referencias.py buscar/mostrar). Basta citá-los em `refs`.
-# Evidência de cobrança (2.37): TODO card cita em `refs` ao menos uma questão real que cobra o seu conteúdo
+# Evidência de cobrança (2.37): R e D citam em `refs` ao menos uma questão real que cobra o seu conteúdo
 # (qualquer banca ou cargo; o D ganha uma tag por questão). Sem questão localizada após banco + internet:
-# só R/Cloze de regra central da atuação do cargo, com nucleo='motivo'; D nunca. O resto vira Baixa, que
+# só R de regra central da atuação do cargo, com nucleo='motivo'; D nunca. O resto vira Baixa, que
 # desde a 2.39 também ganha R (todo conceito do material vira R; refs=[] e o R na unidade Baixa da COBERTURA).
+# Cloze (2.40) é de memorização e não exige questão: refs e cobra só quando houver.
 Q_CEB = 'cebraspe-AAAA-orgao-NNN'  # Cebraspe C/E com prova oficial: sustenta fidelidade comparada
 Q_OUTRA = 'banca-AAAA-orgao-NNN'   # outra banca (com ou sem prova): inspiração
 # Múltipla escolha num D (2.38): ao menos um card (R, D ou Cloze) por alternativa. Cada card diz as letras
@@ -64,12 +65,17 @@ R = [  # rápidos (2.39): frente afirmativa de 8 a 15 palavras, um fato só, sem
   # rec='por que a frente exige o alvo', fb='confusão que o verso corrige'.
 ]
 
-CZ = [  # 2.37: só mnemônico ou termo-chave que as questões cobram; uma omissão por nota (várias só em
-        # mnemônico, com mn=); cada lacuna coberta por um D
- dict(k='C01', tags='Topico', refs=[Q_CEB],
+CZ = [  # 2.40: memorização por omissão, sem exigir questão real. Dois tipos: mnemônico (lista ou sequência)
+        # ou conceito-chave (a lacuna é o núcleo do conceito: termo, propriedade, classificação, prazo/número
+        # indispensável). Conceito-chave: uma frase curta e uma omissão; mnemônico: sem limite de palavras.
+        # Opcionais: refs + cobra (questão que cobra o termo e como), cob (D do lote que aplica a lacuna).
+ dict(k='C01', tags='Topico',
   t='Contexto suficiente e o termo central {{c1::omitido}}.',
-  b=[regra('Extra: explica o termo omitido.')], m='Memorize do Extra.',
-  alvo='Termo a recuperar.', fx=('lei',), cob={'1': ['D01']},
+  b=[regra('Extra: a regra em uma frase, explicando o termo omitido.')], m='Memorize do Extra.',
+  alvo='Termo a recuperar.', fx=('lei',)),
+ dict(k='C03', tags='Topico', refs=[Q_CEB],  # com questão: cite-a e diga como cobra; com D que aplica: cob
+  t='Outro conceito com o termo {{c1::cobrado}}.',
+  b=[regra('Extra.')], m='Memorize.', alvo='Termo cobrado.', fx=('lei',), cob={'1': ['D01']},
   cobra='A questão troca o termo omitido por outro parecido (pegadinha).'),
   # sol é tirada das lacunas; escreva sol= só para equivalentes aceitos. alt/rec/fb: opcionais.
   # Mnemônico (2.33): título "Mnemônico SIGLA:", letras visíveis e o resto de cada termo em c1; a origem
@@ -80,8 +86,8 @@ CZ = [  # 2.37: só mnemônico ou termo-chave que as questões cobram; uma omiss
   #    'e a decisão de RE{{c1::cursos administrativos}}.',
   #  mn=dict(sigla='CE-NO-RE', origem='autoral'),  # ou origem=('encontrado'|'adaptado', 'https://...', 'Nome da fonte')
   #  b=[regra('Explica cada termo da sigla.')], m='CE-NO-RE: o que não se delega.', alvo='...', fx=('lei',),
-  #  refs=[Q_CEB], cobra='As questões cobram a lista do que não se delega.',
-  #  cob={'*': ['D01']}),  # '*' = a mesma lista para cada lacuna c1 (2.36); ou {'1': [...], '2': [...], ...}
+  #  refs=[Q_CEB], cobra='As questões cobram a lista do que não se delega.',  # opcionais (2.40)
+  #  cob={'*': ['D01']}),  # opcional: '*' = o mesmo D para cada lacuna c1 (2.36); ou {'1': [...], '3': [...]}
 ]
 
 D = [  # desafiadores: caso curto com dado decisivo, inspirado em questão real (refs obrigatório); 50% C / 50% E
@@ -108,7 +114,7 @@ D = [  # desafiadores: caso curto com dado decisivo, inspirado em questão real 
 # Cobertura do PDF por prioridade para o concurso-alvo (obrigatória em revisão de PDF): inventário de
 # todo o PDF e de suas questões. Prioridade (2.37): Alta = questão real do cargo/banca-alvo ou núcleo do
 # cargo; Média = questão real de outras bancas/cargos; Baixa = sem questão localizada (motivo com as buscas).
-# Toda unidade: card do lote ou nota da coleção (colecao=[IDs]); Baixa (2.39) só com R. O montador falha se
+# Toda unidade: card do lote ou nota da coleção (colecao=[IDs]); Baixa (2.39) só com R ou Cloze. O montador falha se
 # faltar card e põe as tags Pagina_NN nos cards.
 # Complemento da internet (2.39, X01…): tópico do programa do mesmo assunto, cobrado em questão real e
 # ausente do PDF; sem pag, com extra='edital: item' e fx (fonte lida e salva no banco); cards com questão.
@@ -129,7 +135,7 @@ RELATORIO = dict(material='Código — título do PDF, N páginas', leitura='ext
                  colecao='baralho "..." consultado em cópia somente leitura')
 
 COBERTURA = [
- dict(u='U01', pag='5', p='alta', conteudo='Regra X do art. Y', cartoes=['R01', 'C01']),
+ dict(u='U01', pag='5', p='alta', conteudo='Regra X do art. Y', cartoes=['R01', 'C01', 'C03']),
  dict(u='U02', pag='6-7', p='media', conteudo='Exceção Z', cartoes=['D01']),
  dict(u='U03', pag='8', p='media', conteudo='Definição W', colecao=['1792883029812']),
  dict(u='U04', pag='9', p='baixa', conteudo='Detalhe administrativo V', cartoes=['R02'],

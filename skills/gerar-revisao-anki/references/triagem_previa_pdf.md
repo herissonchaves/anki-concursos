@@ -13,7 +13,7 @@ Nenhuma nota de revisão derivada de PDF nasce antes do inventário e seleção 
 - **Economia:** redundância com a coleção viva (`colecao_anki.py buscar`; `.colpkg` só fora deste PC), outras modalidades e revisões futuras. Contar índices Cloze como cartões, não notas.
 - **Teto:** pedido explícito é máximo TOTAL de CARTÕES; sem pedido estimar `N_ideal` fundamentado.
 
-Classificar a prioridade para o concurso-alvo (`cobertura-pdf.md`): **Alta**, **Média** ou **Baixa** (substitui A/B/C), com motivo. Toda unidade ganha ao menos um card, salvo nota da coleção que já exija a mesma recuperação; Baixa só em R (2.39). Complementos da internet do mesmo assunto, cobrados em questão real e ausentes do PDF, entram como unidades `X01`…. Toda questão de concurso do PDF também entra no inventário. Antes de escrever, preencher `relatorios/triagem_previa_pdf.txt`: ID, página real, prioridade e motivo, operação, formato, card(s) ou nota da coleção.
+Classificar a prioridade para o concurso-alvo (`cobertura-pdf.md`): **Alta**, **Média** ou **Baixa** (substitui A/B/C), com motivo. Toda unidade ganha ao menos um card, salvo nota da coleção que já exija a mesma recuperação; Baixa só em R ou Cloze (2.39/2.40). Complementos da internet do mesmo assunto, cobrados em questão real e ausentes do PDF, entram como unidades `X01`…. Toda questão de concurso do PDF também entra no inventário. Antes de escrever, preencher `relatorios/triagem_previa_pdf.txt`: ID, página real, prioridade e motivo, operação, formato, card(s) ou nota da coleção.
 
 Use os campos de alvo, valor e decisão para aplicar a comparação de recuperação
 do núcleo. Registre o candidato mantido quando houver duplicidade e o tópico
@@ -25,7 +25,7 @@ que ficou descoberto quando a composição do lote impedir uma inclusão útil.
 | --- | --- | --- |
 | Conceito nuclear para julgar rapidamente | C/E rápido | trivial, ambíguo, repetido |
 | Exceção, condição, consequência ou integração de fatos | C/E desafiador | apenas jogo de palavras, sem raciocínio real |
-| Conceito importante cujo termo, expressão ou frase curta central precisa ser memorizado | Cloze em qualquer posição; uma única lacuna c1 por nota (várias só em mnemônico, no formato de `references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis, resto de cada termo em c1, origem só no verso), com cobertura por desafiadores; dados numéricos só após filtro específico | palavra secundária, adivinhação contextual, frase vaga, redundância ou alto custo |
+| Conceito importante cujo termo, expressão ou frase curta central precisa ser memorizado | Cloze em qualquer posição; uma única lacuna c1 por nota (várias só em mnemônico, no formato de `references/tags.md`: título `Mnemônico SIGLA:`, letras visíveis, resto de cada termo em c1, origem só no verso), sem exigir questão real nem D (2.40); dados numéricos só após filtro específico | palavra secundária, adivinhação contextual, frase vaga, redundância ou alto custo |
 
 ## Relevância para o concurso
 

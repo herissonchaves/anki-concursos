@@ -17,7 +17,7 @@ Ler `../direito-cebraspe-qualidade/SKILL.md` e aplicar integralmente. Trabalhar 
 
 ## Escolha de formato
 
-**R:** memorizar distinção essencial em português direto. **D:** narrar pessoa, conduta, circunstância determinante e consequência, com uma conclusão verificável; inverter um requisito ou alterar um fato com efeito jurídico pode produzir desafio autêntico. **C:** priorizar termos, elementos do tipo, condições ou consequências indispensáveis e aplicar o protocolo Cloze para agrupar lacunas e associar desafiadores.
+**R:** memorizar distinção essencial em português direto. **D:** narrar pessoa, conduta, circunstância determinante e consequência, com uma conclusão verificável; inverter um requisito ou alterar um fato com efeito jurídico pode produzir desafio autêntico. **C:** priorizar termos, elementos do tipo, condições ou consequências indispensáveis e aplicar o protocolo Cloze para agrupar lacunas (desafiadores associados só quando aplicarem a lacuna).
 
 ## Revisão de exatidão
 
