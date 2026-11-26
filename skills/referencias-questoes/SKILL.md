@@ -101,7 +101,9 @@ permissão antes de baixar (nome, origem, tamanho).
    conteúdo (`"ID#Seção"`) como valores de `F`. O `montar_lote.py` monta as referências da
    calibração (questões com prova; sem prova em `referencias_sem_prova`), converte os
    conteúdos em `(url, trecho)` e registra o uso (`usado_em`) de todos ao gerar. Nos D, cada
-   ID de `refs` vira também tag do card (o nome do arquivo `.md` da questão).
+   ID de `refs` vira também tag do card (o nome do arquivo `.md` da questão). Questão de múltipla
+   escolha num D (2.38): o montador lê as letras com `referencias.alternativas(ID)` e exige ao menos
+   um card por alternativa.
 7. **Antes do commit:** `validar` e `indexar` sem erros; versione os `.md`, `indice.tsv` e
    `assuntos.md` junto com o lote.
 

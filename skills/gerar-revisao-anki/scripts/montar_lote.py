@@ -30,6 +30,12 @@ questão real de concurso do banco (qualquer banca ou cargo) que cobra o seu con
 localizada, só R e Cloze de regra central da atuação do cargo, com `nucleo='motivo'`; D nunca. O
 montador falha (`checar_evidencia`) e grava a evidência em `revisao_recuperacao.json` (schema 2).
 
+Alternativas (2.38): questão de múltipla escolha nos `refs` de algum D precisa de ao menos um card (R, D
+ou Cloze) por alternativa. Cada card diz quais trabalha em `alts={'<id>': 'AC'}` (a questão também nos
+`refs` dele); a única dispensa é `alternativas_sem_card={'<id>': {'E': 'fora_do_programa: motivo' |
+'sem_conteudo: motivo'}}`. As letras vêm do banco (`referencias.alternativas`) ou do campo `alternativas`
+dos dicts em `referencias`. Falha (`checar_alternativas`) e grava `cobertura_alternativas` na calibração.
+
 Tags (2.33, references/tags.md): `assunto='Disciplina::Assunto'` + `tags` do card = tópico vira
 `Disciplina::Assunto::Topico`; `pdf='Missao_07'` entra só nos cards com `Pagina_NN`; tipo `Rapida`,
 `Desafiadora` ou `Cloze`; D com uma tag por questão de `refs`. Tag proibida (concurso, estilo,
@@ -113,7 +119,7 @@ class Lote:
     def __init__(self, pasta, base_tags, fontes, hoje, referencias, R, D, CZ, semente,
                  schema_calibracao=3, revisor=REVISOR_PADRAO, titulo_previa='Prévia dos cards',
                  banco_referencias=None, registrar_uso=True, cobertura=None, questoes_pdf=None, padrao_d=None,
-                 relatorio=None, assunto=None, pdf=None):
+                 relatorio=None, assunto=None, pdf=None, alternativas_sem_card=None):
         self.pasta, self.out = Path(pasta), Path(pasta) / 'lote'
         self.base, self.F, self.hoje = base_tags, fontes, hoje
         self.assunto, self.pdf = (assunto or '').strip(':'), pdf
@@ -121,6 +127,7 @@ class Lote:
         self.schema, self.revisor, self.titulo = schema_calibracao, revisor, titulo_previa
         self.banco, self.registrar = banco_referencias, registrar_uso
         self.cobertura, self.questoes_pdf, self.relatorio = cobertura, questoes_pdf or {}, relatorio or {}
+        self.alternativas_sem_card = alternativas_sem_card or {}
         # chave de fonte -> ID de conteúdo do banco ("ID" ou "ID#seção"); o uso é registrado no conteúdo
         self.conteudos = {k: v.partition('#')[0] for k, v in self.F.items() if isinstance(v, str)}
         if self.conteudos:
@@ -414,6 +421,72 @@ class Lote:
             raise SystemExit('EVIDÊNCIA DE COBRANÇA AUSENTE (2.37) — todo card vem de conteúdo que cai em concurso:\n  '
                              + '\n  '.join(erros))
 
+    # ------------------------------------------------------------ alternativas da múltipla escolha (2.38)
+    PREFIXOS_ALT = ('fora_do_programa:', 'sem_conteudo:')
+
+    @staticmethod
+    def _letras(valor) -> list[str]:
+        """'AC', ['A', 'C'] ou 'A, C' -> ['A', 'C']."""
+        texto = ''.join(valor) if isinstance(valor, (list, tuple, set)) else str(valor or '')
+        return list(dict.fromkeys(re.findall(r'[A-Z]', texto)))
+
+    def questoes_multipla(self) -> dict[str, list[str]]:
+        """{id: letras} das questões de múltipla escolha citadas nos `refs` de algum D."""
+        dados = {r.get('id'): r for r in list(self.refs) + list(self.refs_sem_prova)}
+        saida = {}
+        for ident in dict.fromkeys(i for x in self.D for i in self.questoes_de(x)):
+            r = dados.get(ident, {})
+            if r.get('formato') != 'multipla_escolha':
+                continue
+            saida[ident] = (self._letras(r['alternativas']) if 'alternativas' in r
+                            else self._modulo_referencias().alternativas(ident, self.banco))
+        return saida
+
+    def checar_alternativas(self):
+        """Ao menos um card por alternativa das questões de múltipla escolha dos D (2.38).
+
+        Monta `self.mapa_alternativas` ({id: {letra: [cards] | 'prefixo: motivo'}}); falha listando as
+        alternativas sem card nem exceção válida, letras inexistentes e `alts` fora dos `refs`.
+        """
+        self.mapa_alternativas, erros = {}, []
+        cards = self.R + self.D + self.CZ
+        for x in cards:
+            for ident in (x.get('alts') or {}):
+                if ident not in self.questoes_de(x):
+                    erros.append(f"{x['k']}: alts cita {ident}, que não está nos refs do card")
+        multipla = self.questoes_multipla()
+        for ident, letras in multipla.items():
+            if not letras:
+                erros.append(f'{ident}: múltipla escolha sem alternativas legíveis no banco (seção "## Alternativas")')
+                continue
+            mapa = {letra: [] for letra in letras}
+            for x in cards:
+                for letra in self._letras((x.get('alts') or {}).get(ident)):
+                    if letra in mapa:
+                        mapa[letra].append(x['k'])
+                    else:
+                        erros.append(f"{x['k']}: {ident} não tem a alternativa {letra}")
+            for letra, motivo in (self.alternativas_sem_card.get(ident) or {}).items():
+                motivo = str(motivo).strip()
+                if letra not in mapa:
+                    erros.append(f'alternativas_sem_card: {ident} não tem a alternativa {letra}')
+                elif not motivo.startswith(self.PREFIXOS_ALT) or not motivo.partition(':')[2].strip():
+                    erros.append(f'alternativas_sem_card: {ident} {letra} precisa de "fora_do_programa: motivo" '
+                                 'ou "sem_conteudo: motivo"')
+                elif not mapa[letra]:
+                    mapa[letra] = motivo
+            faltam = [letra for letra, v in mapa.items() if not v]
+            if faltam:
+                erros.append(f'{ident}: alternativa(s) {", ".join(faltam)} sem card; cubra cada uma com um card (R, D ou '
+                             f'Cloze) e alts={{"{ident}": "{"".join(faltam)}"}}, ou dispense só fora do programa ou sem conteúdo')
+            self.mapa_alternativas[ident] = mapa
+        for ident in self.alternativas_sem_card:
+            if ident not in multipla:
+                erros.append(f'alternativas_sem_card: {ident} não é questão de múltipla escolha citada em D')
+        if erros:
+            raise SystemExit('ALTERNATIVAS SEM CARD (2.38) — questão de múltipla escolha de um D pede ao menos um '
+                             'card por alternativa:\n  ' + '\n  '.join(erros))
+
     def evidencia(self, x) -> dict:
         """Registro da evidência de cobrança de um R/Cloze em revisao_recuperacao.json (schema 2)."""
         questoes = self.questoes_de(x)
@@ -451,6 +524,7 @@ class Lote:
                 n = len(re.findall(r'\{\{c\d+::', x['t']))
                 x['cob'] = {str(i): list(x['cob']['*']) for i in range(1, n + 1)}
         self.checar_evidencia()
+        self.checar_alternativas()
         if not hasattr(self, 'tags_pagina'):
             self.checar_cobertura()
         self.cz_index = {x['k']: i for i, x in enumerate(self.CZ, 1)}
@@ -504,6 +578,12 @@ class Lote:
             if self.schema >= 2 and x.get('obp'):
                 rec['outras_bancas_pendencia'] = x['obp']
             cal['cartoes'].append(rec)
+        if getattr(self, 'mapa_alternativas', None):
+            def onde(k):
+                return self.rid(k) if k in self.line_of else f'anki_cloze.tsv:{self.cz_index[k]}'
+            cal['cobertura_alternativas'] = {
+                ident: {letra: ([onde(k) for k in v] if isinstance(v, list) else v) for letra, v in mapa.items()}
+                for ident, mapa in self.mapa_alternativas.items()}
         if self.D:
             self._json('calibracao_cebraspe.json', cal)
         return cal
@@ -641,6 +721,11 @@ class Lote:
         linhas += [f'- {x["k"]}: ' + (', '.join(self.questoes_de(x)) or f'núcleo do cargo — {str(x["nucleo"]).strip()}')
                    + (f' | termo cobrado: {str(x["cobra"]).strip()}' if x.get('cobra') else '')
                    for x in self.R + self.CZ] or ['- nenhum']
+        if getattr(self, 'mapa_alternativas', None):
+            linhas += ['', 'Alternativas das questões de múltipla escolha dos desafiadores (2.38: ao menos um card cada):']
+            for ident, mapa in self.mapa_alternativas.items():
+                linhas.append(f'- {ident}: ' + '; '.join(
+                    f'{letra} → {", ".join(v) if isinstance(v, list) else v}' for letra, v in mapa.items()))
         linhas += ['', 'Desafiadores: ' + '; '.join(f'{x["k"]} {x["fid"]}' for x in self.D) if self.D else '']
         self._gravar_txt('fontes_e_referencias.txt', linhas)
 

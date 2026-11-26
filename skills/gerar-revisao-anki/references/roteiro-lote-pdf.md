@@ -130,6 +130,9 @@ desatualizado e avise no verso. Cloze: pesquise mnemônicos; sem fonte confiáve
   formato e card(s) ou nota da coleção; o mesmo inventário vira o bloco `COBERTURA` do gerador.
 - **Evidência (2.37):** todo card com questão real em `refs`. D sem questão não existe; núcleo do cargo
   sem questão localizada vira só R/Cloze com `nucleo='motivo'`.
+- **Alternativas (2.38):** questão de múltipla escolha nos `refs` de um D → ao menos um card por
+  alternativa (R, D ou Cloze; a correta e cada distrator). Os cards entram na paridade 50/50 de R e de D
+  (um distrator pode virar um Certo com a regra correta). Sem card, só fora do programa ou sem conteúdo.
 - R: um alvo que as questões cobram, frase curta, sem pegadinha. D: caso curto com dado decisivo, uma
   decisão real (aplicar, distinguir, exceção), reconstruído da operação de uma questão real; definição
   disfarçada vira R. Cloze só de dois tipos (`protocolo_cloze_cientifico.md`): **mnemônico** de lista ou
@@ -168,6 +171,9 @@ de formatação" de `protocolo_visual_html_anki.md`): só os componentes do help
 - `padrao_d=dict(rb=rub(...), orig='Caso autoral.', ...)` guarda os valores comuns dos D; sem `regra`, o D
   usa o trecho da primeira fonte de `fx`. Escreva por D só o que é dele (`alvo`, `op`, `dado`, `solucao`,
   `erro`, `conc`, `cmp`/`lim`). `sa=[subassuntos]` no D restringe o aviso de itens Cebraspe ao subtema.
+- Alternativas: cada card diz as letras que trabalha, `alts={ID: 'AC'}` (a questão também nos `refs`
+  dele); dispensa em `Lote(..., alternativas_sem_card={ID: {'E': 'fora_do_programa: motivo'}})` ou
+  `'sem_conteudo: motivo'`. O montador lê as letras no banco e falha com a alternativa que faltar.
 - D: `refs` com questão real sempre (vira tag); `fid='comparada'` só com Cebraspe C/E oficial em
   `refs`; senão (questão de outra banca ou sem prova) `inspiracao_geral` + `lim`. O
   montador avisa quando um D em inspiração geral tem item Cebraspe C/E oficial do mesmo assunto no

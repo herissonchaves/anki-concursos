@@ -558,6 +558,15 @@ def localizar(ids, raiz=None) -> list[Questao]:
     return saida
 
 
+def alternativas(ident, raiz=None) -> list[str]:
+    """Letras da seção `## Alternativas` (`- A) …`) de uma questão; [] em Certo/Errado (2.38)."""
+    q = localizar([ident], raiz)[0]
+    if q.tipo != 'questao':
+        raise ErroBanco(f'{ident}: é {q.tipo}, não questão')
+    texto = secoes(q.corpo).get('alternativas', '')
+    return list(dict.fromkeys(re.findall(r'^- ([A-Z])\)', texto, flags=re.M)))
+
+
 def tem_prova(ident, raiz=None) -> bool:
     """True se a questão tem url da prova (pode entrar na calibração)."""
     q = localizar([ident], raiz)[0]

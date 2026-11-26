@@ -15,6 +15,7 @@ Rodar como inspeção de linguagem e de operação mental por responsável pelo 
 9. **Direito atualizado:** validar artigo, exceções e jurisprudência conforme o tema e data. Sem acesso à norma, declarar pendência em vez de afirmar validação.
 10. **Lote grande:** piloto interno 8–12, mapa de alvos, 100% de crítica individual com segunda conferência da solução, exclusão de candidatos ruins sem repor com trivia; lint + validações; relatório real.
 11. **Card sem questão real (2.37):** D sem questão em `refs` não existe (o montador falha); R ou Cloze sem questão só no núcleo do cargo, com `nucleo` justificado. Questão de simulado de curso não conta como evidência.
+12. **Múltipla escolha num D (2.38):** questão de cinco alternativas com só a correta coberta → o montador falha listando as letras; alternativa que repete outra entra nos `alts` do mesmo card; nota da coleção não dispensa; alternativa absurda só com `sem_conteudo: motivo`.
 
 Critérios de aceite: 100% das frentes compreensíveis sem gabarito, todos D com inferência registrada, todos versos explicativos, nenhum candidato redundante sem justificativa, nem relatórios de testes fictícios. Essa verificação é humana; o script `auditar_clareza.py` apenas sinaliza riscos.
 

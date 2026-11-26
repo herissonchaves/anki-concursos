@@ -33,6 +33,8 @@ PDF = 'Missao_NN'                # nome curto do PDF; None em lote sem PDF (prin
 # só R/Cloze de regra central da atuação do cargo, com nucleo='motivo'; D nunca. O resto vira Baixa.
 Q_CEB = 'cebraspe-AAAA-orgao-NNN'  # Cebraspe C/E com prova oficial: sustenta fidelidade comparada
 Q_OUTRA = 'banca-AAAA-orgao-NNN'   # outra banca (com ou sem prova): inspiração
+# Múltipla escolha num D (2.38): ao menos um card (R, D ou Cloze) por alternativa. Cada card diz as letras
+# que trabalha em alts={Q_OUTRA: 'AC'} (a questão também nos refs dele); um card pode cobrir várias.
 
 # Fontes de conteúdo lidas nesta tarefa: chave -> (url, trecho/dispositivo verificado).
 F = {
@@ -44,7 +46,7 @@ F = {
 OBP = 'Buscas em AAAA-MM-DD por ... (bancas, termos, sites): nenhuma questão de outra banca lida por inteiro.'
 
 R = [  # rápidos: um alvo, frase curta; 50% C / 50% E
- dict(k='R01', tags='Topico', g='C', refs=[Q_OUTRA],
+ dict(k='R01', tags='Topico', g='C', refs=[Q_OUTRA], alts={Q_OUTRA: 'BC'},
   f='Frente: uma afirmação direta, sem pista do gabarito.',
   b=[regra('Regra em linguagem simples, com o termo técnico explicado.')],
   m='Memorize: a ideia central em uma frase.',
@@ -75,7 +77,7 @@ CZ = [  # 2.37: só mnemônico ou termo-chave que as questões cobram; uma omiss
 ]
 
 D = [  # desafiadores: caso curto com dado decisivo, inspirado em questão real (refs obrigatório); 50% C / 50% E
- dict(k='D01', g='E', tags='Topico', refs=[Q_CEB, Q_OUTRA],
+ dict(k='D01', g='E', tags='Topico', refs=[Q_CEB, Q_OUTRA], alts={Q_OUTRA: 'AD'},
   f='Situação curta com o dado decisivo. Conclusão a julgar.',
   b=[regra('Regra.'), caso('Como o dado decisivo leva à conclusão.'), erro('Onde está o erro.')],
   m='Memorize: a formulação correta.',
@@ -103,6 +105,10 @@ D = [  # desafiadores: caso curto com dado decisivo, inspirado em questão real 
 # herdada do conteúdo. Questão Baixa ou coberta só pela coleção fica declarada em COBERTURA.
 QUESTOES_PDF = {'Q02': ('17', Q_OUTRA)}
 
+# Alternativa sem card (2.38): só fora do programa ou sem conteúdo, com motivo. Nota da coleção e
+# alternativa repetida não dispensam (a repetida entra nos alts do mesmo card).
+ALTERNATIVAS_SEM_CARD = {Q_OUTRA: {'E': 'sem_conteudo: alternativa absurda, sem regra a estudar'}}
+
 # Valores comuns aos D (2.29), usados só quando o D não traz a chave; sem `regra`, vale o trecho da 1ª fonte.
 PADRAO_D = dict(orig='Caso autoral.')
 
@@ -123,4 +129,5 @@ COBERTURA = [
 if __name__ == '__main__':
     Lote(PASTA, '', F, HOJE, [], R, D, CZ, semente=2026, cobertura=COBERTURA, assunto=ASSUNTO, pdf=PDF,
          questoes_pdf=QUESTOES_PDF, padrao_d=PADRAO_D, relatorio=RELATORIO,
+         alternativas_sem_card=ALTERNATIVAS_SEM_CARD,
          revisor='Claude (assistente de IA) — mesmo agente que redigiu os cartões').gerar()

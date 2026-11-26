@@ -17,15 +17,16 @@ REFS = [
          operacao_observada='Operação sintética', gabarito_status='definitivo', gabarito_url='https://example.test/gab'),
     dict(id='fgv-2023-fixture-009', banca='FGV', formato='multipla_escolha', concurso='FICTICIO 2', cargo='Teste', ano=2023,
          caderno='Fixture B', item='9', url='https://example.test/prova-fgv', consulta=HOJE,
-         operacao_observada='Alternativa sintética', gabarito_status='definitivo', gabarito_url='https://example.test/gab-fgv'),
+         operacao_observada='Alternativa sintética', gabarito_status='definitivo', gabarito_url='https://example.test/gab-fgv',
+         alternativas=['A', 'B']),
 ]
 REVISAO = dict(alvo='Alvo sintético', sol='Solução sintética', alt='Alternativa sintética testada',
                rec='Recuperação sintética', fb='Feedback sintético', fx=('si',))
 
 
-def r(k, g, f):
+def r(k, g, f, letra=''):
     return dict(k=k, g=g, f=f, tags='Forca', b=[regra('A unidade SI de força é o newton.')], m='Força: newton.',
-                refs=['fgv-2023-fixture-009'], **REVISAO)
+                refs=['fgv-2023-fixture-009'], alts={'fgv-2023-fixture-009': letra} if letra else {}, **REVISAO)
 
 
 def d(k, g, f, **extra):
@@ -40,7 +41,7 @@ def d(k, g, f, **extra):
 
 
 def lote(pasta, **kw):
-    R = [r('R01', 'C', 'A unidade SI de força é o newton.'), r('R02', 'E', 'A unidade SI de força é o joule.')]
+    R = [r('R01', 'C', 'A unidade SI de força é o newton.', 'A'), r('R02', 'E', 'A unidade SI de força é o joule.', 'B')]
     D = [d('D01', 'C', 'Uma força resultante de 6 N age sobre 2 kg. A aceleração é 3 m/s².'),
          d('D02', 'E', 'Uma força resultante de 6 N age sobre 2 kg. A aceleração é 12 m/s².')]
     CZ = [dict(k='C01', tags='Forca', t='A unidade SI de força é o {{c1::newton}}.', b=[regra('Newton mede força.')],
@@ -100,7 +101,7 @@ def test_metadados_curtos_2_24_passam(tmp_path, monkeypatch):
 def test_desafiador_leva_tag_da_questao_de_origem_2_31(tmp_path, monkeypatch):
     """Cada ID de `refs` do D vira tag (o nome do arquivo .md da questão); R e Cloze não ganham."""
     orig_r, orig_d = r, d
-    monkeypatch.setitem(globals(), 'r', lambda *a: {**orig_r(*a), 'refs': ['ceb-2024-fixture-001']})
+    monkeypatch.setitem(globals(), 'r', lambda *a: {**orig_r(*a), 'refs': ['ceb-2024-fixture-001', 'fgv-2023-fixture-009']})
     monkeypatch.setitem(globals(), 'd', lambda *a, **kw: orig_d(*a, **{'refs': ['ceb-2024-fixture-001', 'fgv-2023-fixture-009', 'ceb-2024-fixture-001'], **kw}))
     final = gerar_resolvido(tmp_path)
     items, calibracao, _ = ler(tmp_path)
@@ -253,8 +254,9 @@ def test_referencias_do_banco_por_id_e_registro_de_uso(tmp_path):
     gerado = lote(pasta, banco_referencias=banco)
     for x in gerado.D:
         x['refs'] = [ids['ceb-2024-fixture-001'], ids['fgv-2023-fixture-009']]
-    for x in gerado.R + gerado.CZ:
+    for x, letra in zip(gerado.R + gerado.CZ, 'AB '):
         x['refs'] = [ids['fgv-2023-fixture-009']]
+        x['alts'] = {ids['fgv-2023-fixture-009']: letra.strip()}
     gerado.refs = gerado._resolver_refs([])  # os IDs citados nos cartões bastam
     gerado.gerar(imprimir=False)
     items, calibracao, _ = ler(pasta)
@@ -315,8 +317,9 @@ def test_questao_sem_prova_vai_para_referencias_sem_prova(tmp_path):
     gerado = lote(pasta, banco_referencias=banco)
     gerado.D[0]['refs'] = ['ceb-2024-fixture-001', questao.id]
     gerado.D[1]['refs'] = ['ceb-2024-fixture-001', questao.id]
-    for x in gerado.R + gerado.CZ:
+    for x, letra in zip(gerado.R + gerado.CZ, 'AB '):
         x['refs'] = [questao.id]
+        x['alts'] = {questao.id: letra.strip()}
     gerado.refs = gerado._resolver_refs([REFS[0]])
     gerado.gerar(imprimir=False)
     items, calibracao, _ = ler(pasta)
@@ -462,7 +465,7 @@ def test_uso_de_card_retirado_sai_do_banco(tmp_path):
     pasta = tmp_path / 'lote_uso'
     (pasta / 'fonte').mkdir(parents=True)
     primeiro = lote(pasta, banco_referencias=banco)
-    primeiro.R[0]['refs'] = [questao.id]
+    primeiro.R[0]['refs'] = [questao.id, 'fgv-2023-fixture-009']
     primeiro.refs = primeiro._resolver_refs(REFS)
     primeiro.gerar(imprimir=False)
     assert banco_mod.localizar([questao.id], banco)[0].meta['usado_em'] == ['lote_uso#R01']
@@ -513,7 +516,8 @@ def test_card_sem_evidencia_de_cobranca_falha_2_37(tmp_path, mudanca, esperado):
 
 def test_nucleo_do_cargo_dispensa_questao_so_em_r_e_cloze_2_37(tmp_path):
     def nucleo(g):
-        g.R[0].update(refs=[], nucleo='Regra central sintética do cargo')
+        g.R[0].update(refs=[], alts={}, nucleo='Regra central sintética do cargo')
+        g.D[0]['alts'] = {'fgv-2023-fixture-009': 'A'}  # 2.38: a letra A passa a ser coberta pelo D01
         g.CZ[0].update(refs=[], nucleo='Regra central sintética do cargo')
     (tmp_path / 'fonte').mkdir()
     primeiro = lote(tmp_path, cobertura=COBERTURA)
@@ -558,3 +562,81 @@ def test_calibracao_schema_3_reprova_d_sem_questao_real(tmp_path):
     dados['cartoes'][0].pop('comparacao', None)
     erros = cal.validate(items['anki_certo_errado.tsv'], json.dumps(dados).encode())
     assert any('D sem questão real' in e for e in erros)
+
+
+# ------------------------------------------------------------ alternativas da múltipla escolha (2.38)
+@pytest.mark.parametrize('mudanca, esperado', [
+    (lambda g: g.R[1].update(alts={}), 'fgv-2023-fixture-009: alternativa(s) B sem card'),
+    (lambda g: g.R[1].update(alts={'fgv-2023-fixture-009': 'BZ'}), 'R02: fgv-2023-fixture-009 não tem a alternativa Z'),
+    (lambda g: g.R[1].update(alts={'outra-2020-questao-001': 'B'}), 'R02: alts cita outra-2020-questao-001'),
+    (lambda g: (g.R[1].update(alts={}), g.alternativas_sem_card.update({'fgv-2023-fixture-009': {'B': 'coleção: nota 123'}})),
+     'precisa de "fora_do_programa: motivo"'),
+    (lambda g: g.alternativas_sem_card.update({'ceb-2024-fixture-001': {'A': 'sem_conteudo: x'}}),
+     'ceb-2024-fixture-001 não é questão de múltipla escolha citada em D'),
+])
+def test_alternativa_sem_card_falha_2_38(tmp_path, mudanca, esperado):
+    gerado = lote(tmp_path)
+    mudanca(gerado)
+    with pytest.raises(SystemExit) as falha:
+        gerado.montar_linhas()
+    assert 'ALTERNATIVAS SEM CARD' in str(falha.value) and esperado in str(falha.value)
+
+
+def test_excecao_de_alternativa_vai_para_calibracao_e_relatorio_2_38(tmp_path):
+    def sem_b(g):
+        g.R[1]['alts'] = {}
+    (tmp_path / 'fonte').mkdir()
+    kw = dict(alternativas_sem_card={'fgv-2023-fixture-009': {'B': 'sem_conteudo: alternativa absurda sintética'}})
+    primeiro = lote(tmp_path, **kw)
+    sem_b(primeiro)
+    primeiro.gerar(imprimir=False)
+    (tmp_path / 'fonte' / 'sinais_resolvidos.json').write_text(
+        json.dumps({c: 'Justificativa SINTÉTICA' for c in primeiro.pendentes}), encoding='utf-8')
+    final = lote(tmp_path, **kw)
+    sem_b(final)
+    final.gerar(imprimir=False)
+    items, calibracao, _ = ler(tmp_path)
+    assert cal.validate(items['anki_certo_errado.tsv'], calibracao) == []
+    cob = json.loads(calibracao)['cobertura_alternativas']['fgv-2023-fixture-009']
+    assert cob == {'A': [final.rid('R01')], 'B': 'sem_conteudo: alternativa absurda sintética'}
+    fontes = (tmp_path / 'lote' / 'relatorios' / 'fontes_e_referencias.txt').read_text(encoding='utf-8')
+    assert 'fgv-2023-fixture-009: A → R01; B → sem_conteudo: alternativa absurda sintética' in fontes
+    dados = json.loads(calibracao)
+    dados['cobertura_alternativas']['fgv-2023-fixture-009']['B'] = []
+    assert any('B: alternativa sem card' in e for e in cal.validate(items['anki_certo_errado.tsv'], json.dumps(dados).encode()))
+    dados['cobertura_alternativas']['fgv-2023-fixture-009']['B'] = 'coleção: 123'
+    assert any('exceção precisa' in e for e in cal.validate(items['anki_certo_errado.tsv'], json.dumps(dados).encode()))
+
+
+def test_multipla_escolha_so_em_rapido_nao_exige_alternativas_2_38(tmp_path):
+    gerado = lote(tmp_path)
+    for x in gerado.D:
+        x['refs'] = ['ceb-2024-fixture-001']  # Cebraspe C/E não dispara; a FGV fica só nos R/Cloze
+    for x in gerado.R:
+        x['alts'] = {}
+    gerado.montar_linhas()
+    assert gerado.mapa_alternativas == {}
+
+
+def test_letras_lidas_do_banco_2_38(tmp_path):
+    import sys
+    sys.path.insert(0, str(m.SCRIPTS_REFERENCIAS))
+    import referencias as banco_mod
+    banco = tmp_path / 'referencias'
+    dados = {k: v for k, v in REFS[1].items() if k not in ('id', 'alternativas')}
+    dados.update(orgao='Órgão Y', disciplina='fisica', assunto='dinamica', subassuntos=['segunda_lei'], palavras_chave=['força'],
+                 gabarito='A', origem='pesquisa_internet', fonte_descoberta='Fixture', concursos_alvo=['PRF'],
+                 enunciado='Item sintético de três alternativas.', alternativas={'A': 'x', 'B': 'y', 'C': 'z'})
+    _, questao, _ = banco_mod.nova(dados, banco)
+    gerado = lote(tmp_path / 'lote_letras', banco_referencias=banco, registrar_uso=False)
+    for x in gerado.D:
+        x['refs'] = ['ceb-2024-fixture-001', questao.id]
+    for x, letras in zip(gerado.R + gerado.CZ, ('A', 'B', '')):
+        x['refs'], x['alts'] = [questao.id], ({questao.id: letras} if letras else {})
+    gerado.refs = gerado._resolver_refs([REFS[0]])
+    with pytest.raises(SystemExit) as falha:
+        gerado.montar_linhas()
+    assert f'{questao.id}: alternativa(s) C sem card' in str(falha.value)
+    gerado.CZ[0]['alts'] = {questao.id: 'C'}
+    gerado.montar_linhas()
+    assert set(gerado.mapa_alternativas[questao.id]) == {'A', 'B', 'C'}

@@ -13,6 +13,11 @@ Desde a 2.37 (schema_version 3, o que o `montar_lote.py` grava), todo D precisa 
 questão real de concurso em `referencias` ou `referencias_sem_prova`: `outras_bancas_pendencia` só
 complementa um D que já tem questão e nunca a substitui. schema_version 1 e 2 continuam aceitos
 para lotes anteriores, com as regras da época.
+
+`cobertura_alternativas` (2.38, opcional na raiz): {id da questão de múltipla escolha: {letra: [cards
+no TSV] | "fora_do_programa: motivo" | "sem_conteudo: motivo"}}. Cada letra precisa de card existente ou
+de exceção válida, e cada questão precisa estar nas referências de algum D. Quem confere que todas as
+letras da questão estão ali é o `montar_lote.py`, que lê o banco.
 """
 from __future__ import annotations
 import argparse
@@ -137,7 +142,7 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
         if ref['id'] in ref_map:
             errors.append(f'{ref["id"]}: está em referencias e em referencias_sem_prova')
         sem_map[ref['id']] = ref
-    seen, ids = set(), set()
+    seen, ids, ligadas = set(), set(), set()
     for record in records:
         if not isinstance(record, dict):
             errors.append('Registro de cartão deve ser objeto')
@@ -180,6 +185,7 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
         if not isinstance(sem_linked, list) or not all(isinstance(x, str) for x in sem_linked):
             errors.append(f'{ident}: referencias_sem_prova deve listar IDs')
             sem_linked = []
+        ligadas.update(linked + sem_linked)
         for key in sem_linked:
             if key not in sem_map:
                 errors.append(f'{ident}: referência sem prova desconhecida {key}')
@@ -219,6 +225,38 @@ def validate(ce: bytes, report: bytes | None) -> list[str]:
                 errors.append(f'{ident}: rubrica {criterion} incompleta ou não aprovada')
     for line in sorted(set(cards) - seen):
         errors.append(f'linha {line}: D sem revisão registrada')
+    errors += validate_alternatives(data.get('cobertura_alternativas'), len(lines), ligadas)
+    return errors
+
+
+def validate_alternatives(cobertura, n_ce, ligadas) -> list[str]:
+    """2.38: cada alternativa das questões de múltipla escolha dos D tem card ou exceção com motivo."""
+    if cobertura is None:
+        return []
+    if not isinstance(cobertura, dict):
+        return ['cobertura_alternativas deve ser objeto {questão: {letra: cards ou exceção}}']
+    errors = []
+    for questao, mapa in cobertura.items():
+        if questao not in ligadas:
+            errors.append(f'cobertura_alternativas: {questao} não está nas referências de nenhum D')
+        if not isinstance(mapa, dict) or not mapa:
+            errors.append(f'cobertura_alternativas: {questao} sem letras')
+            continue
+        for letra, valor in mapa.items():
+            if isinstance(valor, str):
+                prefixo, _, motivo = valor.partition(':')
+                if prefixo not in ('fora_do_programa', 'sem_conteudo') or not motivo.strip():
+                    errors.append(f'{questao} {letra}: exceção precisa de "fora_do_programa: motivo" ou "sem_conteudo: motivo"')
+                continue
+            ok = isinstance(valor, list) and bool(valor)
+            for card in valor if isinstance(valor, list) else ():
+                arquivo, _, numero = str(card).partition(':')
+                if arquivo == CE:
+                    ok = ok and numero.isdigit() and 1 <= int(numero) <= n_ce
+                else:
+                    ok = ok and arquivo == 'anki_cloze.tsv' and numero.isdigit()
+            if not ok:
+                errors.append(f'{questao} {letra}: alternativa sem card existente no lote')
     return errors
 
 

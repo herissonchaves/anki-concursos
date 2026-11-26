@@ -5,7 +5,7 @@ description: Skill principal do Anki-Concursos. Use para criar, selecionar, audi
 
 # Anki-Concursos
 
-**Versão 2.37.** É o único número de versão do projeto: os demais `SKILL.md` e
+**Versão 2.38.** É o único número de versão do projeto: os demais `SKILL.md` e
 documentos de `references/` não levam versão no título. Ao mudar regras, scripts ou
 fluxos, suba a versão aqui no mesmo commit; o histórico de cada regra fica no Git
 (`git log -- ARQUIVO`).
@@ -86,7 +86,9 @@ a origem (autoral ou link da fonte) vai só no verso.
 cita em `refs` ao menos uma questão real (qualquer banca ou cargo) que cobra o seu conteúdo; o
 Desafiador é reconstruído da operação dessa questão e leva uma tag por questão. Sem questão localizada
 após a busca: nenhum D, e R/Cloze só no núcleo do cargo (`nucleo='motivo'`); o resto é prioridade
-Baixa. Cloze só de mnemônico ou de termo-chave que as questões cobram (`cobra`). Regras em
+Baixa. Cloze só de mnemônico ou de termo-chave que as questões cobram (`cobra`). Questão de múltipla
+escolha num Desafiador (2.38): ao menos um card por alternativa (`alts`), salvo alternativa fora do
+programa ou sem conteúdo. Regras em
 [cobertura-pdf.md](skills/gerar-revisao-anki/references/cobertura-pdf.md) e
 [protocolo_cloze_cientifico.md](skills/gerar-revisao-anki/references/protocolo_cloze_cientifico.md);
 o `montar_lote.py` falha sem a evidência.

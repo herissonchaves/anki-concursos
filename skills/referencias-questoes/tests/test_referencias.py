@@ -359,3 +359,12 @@ def test_completar_aplica_meta_salva_e_devolve_mapa_2_36(tmp_path, banco):
     assert de_novo == mapa
     with pytest.raises(ref.ErroBanco, match='faltam'):
         ref.completar(rascunho, {'assunto': 'x', 'itens': {'T01': 'skip'}}, banco)
+
+
+def test_alternativas_devolve_as_letras_da_multipla_escolha_2_38(banco):
+    _, me, msgs = ref.nova(q(8, 'Assinale a opção correta sobre protocolos.', formato='multipla_escolha', gabarito='B',
+                              alternativas={'A': 'SMTP recebe.', 'B': 'SMTP envia.', 'C': 'IMAP envia.'}), banco)
+    assert me, msgs
+    _, ce, _ = ref.nova(q(9, 'O protocolo IMAP é usado para enviar mensagens.'), banco)
+    assert ref.alternativas(me.id, banco) == ['A', 'B', 'C']
+    assert ref.alternativas(ce.id, banco) == []
